@@ -4,7 +4,13 @@
       "Bash(ls:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(./install.sh:*)"
+      "Bash(./install.sh:*)",
+      "Bash(git push:*)",
+      "Bash(bash:*)",
+      "Bash(shellcheck:*)",
+      "Bash(rm:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)"
     ],
     "deny": []
   }
