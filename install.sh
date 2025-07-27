@@ -192,13 +192,16 @@ if [ ! -d "$INSTALL_PATH/.git" ]; then
     # Enable sparse checkout
     git config core.sparseCheckout true
     
-    # Configure sparse checkout to only track commands directory
-    echo "commands/*" > .git/info/sparse-checkout
+    # Configure sparse checkout to track commands and agents directories
+    {
+        echo "commands/*"
+        echo "agents/*"
+    } > .git/info/sparse-checkout
     
     # Re-read the tree with sparse checkout
     git read-tree -m -u HEAD
     
-    # Move commands content to root and remove everything else
+    # Move commands and agents content to root and remove everything else
     if [ -d "commands" ]; then
         # Move all content from commands/ to root
         mv commands/* . 2>/dev/null || true
@@ -206,9 +209,19 @@ if [ ! -d "$INSTALL_PATH/.git" ]; then
         
         # Remove the now-empty commands directory
         rmdir commands 2>/dev/null || true
+    fi
+    
+    if [ -d "agents" ]; then
+        # Move all content from agents/ to root
+        mv agents/* . 2>/dev/null || true
+        mv agents/.[^.]* . 2>/dev/null || true
         
-        # Remove all other files/directories that shouldn't be here
-        rm -rf README.md LICENSE install.sh scripts CLAUDE.md .gitignore CHANGELOG.md 2>/dev/null || true
+        # Remove the now-empty agents directory
+        rmdir agents 2>/dev/null || true
+    fi
+    
+    # Remove all other files/directories that shouldn't be here
+    rm -rf README.md LICENSE install.sh scripts CLAUDE.md .gitignore CHANGELOG.md docs 2>/dev/null || true
         
         # Update sparse checkout to track the new structure
         {
@@ -220,8 +233,10 @@ if [ ! -d "$INSTALL_PATH/.git" ]; then
             echo "!CLAUDE.md"
             echo "!.gitignore"
             echo "!CHANGELOG.md"
-            # Important: Track commands directory to get new files on pull
+            echo "!docs"
+            # Important: Track commands and agents directories to get new files on pull
             echo "commands/**"
+            echo "agents/**"
         } > .git/info/sparse-checkout
         
         # Store the repository URL for hook usage
@@ -231,16 +246,16 @@ if [ ! -d "$INSTALL_PATH/.git" ]; then
         cat > .git/hooks/post-merge << 'HOOKEOF'
 #!/bin/bash
 # Post-merge hook to handle directory structure after pull
-# Hook version: 5
+# Hook version: 6
 
 # Function to get list of command files from git
 get_git_command_files() {
-    git ls-tree -r HEAD --name-only | grep "^commands/" | sed 's|^commands/||' | grep -v "^$"
+    git ls-tree -r HEAD --name-only | grep -E "^(commands|agents)/" | sed -E 's|^(commands|agents)/||' | grep -v "^$"
 }
 
 # Function to get list of local command files
 get_local_command_files() {
-    find . -name "*.md" -not -path "./.git/*" -not -path "./commands/*" | sed 's|^\./||'
+    find . -name "*.md" -not -path "./.git/*" -not -path "./commands/*" -not -path "./agents/*" | sed 's|^\./||'
 }
 
 # Step 1: Remove local files that no longer exist in git
@@ -257,41 +272,43 @@ for local_file in $(get_local_command_files); do
     fi
 done
 
-# Step 2: Move new/updated files from commands/ to root
-if [ -d "commands" ]; then
-    echo "Processing new/updated commands..."
-    # Use find to handle nested directories properly
-    find commands -type f -name "*.md" | while read -r file; do
-        # Get relative path from commands/
-        rel_path="${file#commands/}"
-        target_dir=$(dirname "$rel_path")
-        
-        # Create target directory if needed
-        if [ "$target_dir" != "." ]; then
-            mkdir -p "$target_dir"
-        fi
-        
-        # Move or update the file
-        if [ -f "$rel_path" ]; then
-            # File exists, check if it's newer
-            if [ "$file" -nt "$rel_path" ]; then
-                echo "Updating: $rel_path"
-                mv -f "$file" "$rel_path"
-            else
-                rm -f "$file"
+# Step 2: Move new/updated files from commands/ and agents/ to root
+for source_dir in commands agents; do
+    if [ -d "$source_dir" ]; then
+        echo "Processing new/updated files from $source_dir..."
+        # Use find to handle nested directories properly
+        find "$source_dir" -type f -name "*.md" | while read -r file; do
+            # Get relative path from source directory
+            rel_path="${file#$source_dir/}"
+            target_dir=$(dirname "$rel_path")
+            
+            # Create target directory if needed
+            if [ "$target_dir" != "." ]; then
+                mkdir -p "$target_dir"
             fi
-        else
-            echo "Adding new command: $rel_path"
-            mv "$file" "$rel_path"
-        fi
-    done
-    
-    # Clean up empty directories in commands/
-    find commands -type d -empty -delete 2>/dev/null || true
-fi
+            
+            # Move or update the file
+            if [ -f "$rel_path" ]; then
+                # File exists, check if it's newer
+                if [ "$file" -nt "$rel_path" ]; then
+                    echo "Updating: $rel_path"
+                    mv -f "$file" "$rel_path"
+                else
+                    rm -f "$file"
+                fi
+            else
+                echo "Adding new file: $rel_path"
+                mv "$file" "$rel_path"
+            fi
+        done
+        
+        # Clean up empty directories
+        find "$source_dir" -type d -empty -delete 2>/dev/null || true
+    fi
+done
 
 # Step 3: Clean up any unwanted files
-rm -rf README.md LICENSE install.sh scripts CLAUDE.md .gitignore CHANGELOG.md 2>/dev/null || true
+rm -rf README.md LICENSE install.sh scripts CLAUDE.md .gitignore CHANGELOG.md docs 2>/dev/null || true
 
 # Step 4: Ensure sparse-checkout is properly configured
 git sparse-checkout reapply 2>/dev/null || true
@@ -354,7 +371,7 @@ HOOKEOF
         cp .git/hooks/post-merge .git/hooks/post-checkout
         chmod +x .git/hooks/post-checkout
         
-        print_success "Commands installed successfully!"
+        print_success "Commands and agents installed successfully!"
     else
         print_error "No commands directory found in repository"
         cd ..
@@ -363,7 +380,7 @@ HOOKEOF
     fi
 fi
 
-# Display available commands
+# Display available commands and agents
 echo
 print_success "Installation complete!"
 echo
@@ -372,9 +389,14 @@ echo
 
 # Find all .md files in the installation directory
 if [ -d "$INSTALL_PATH" ]; then
+    # First list commands (excluding agent files)
     while IFS= read -r -d '' file; do
         # Skip hidden directories like .git
         if [[ "$file" == *"/.git/"* ]]; then
+            continue
+        fi
+        # Skip agent files (they have specific suffixes)
+        if [[ "$file" =~ -specialist\.md$|-optimizer\.md$|-engineer\.md$|-architect\.md$|-expert\.md$ ]]; then
             continue
         fi
         # Get relative path from installation directory
@@ -385,6 +407,20 @@ if [ -d "$INSTALL_PATH" ]; then
         command_name="${command_path//\//:}"
         echo "  /${PREFIX}:${command_name}"
     done < <(find "$INSTALL_PATH" -name "*.md" -type f -print0 | sort -z)
+    
+    # Now list agents if any exist
+    echo
+    agent_files=$(find "$INSTALL_PATH" -name "*-specialist.md" -o -name "*-optimizer.md" -o -name "*-engineer.md" -o -name "*-architect.md" -o -name "*-expert.md" 2>/dev/null)
+    if [ -n "$agent_files" ]; then
+        echo "Available sub-agents:"
+        echo
+        echo "$agent_files" | while read -r file; do
+            if [ -n "$file" ]; then
+                agent_name=$(basename "$file" .md)
+                echo "  - $agent_name"
+            fi
+        done
+    fi
 fi
 
 echo
