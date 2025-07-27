@@ -4,7 +4,7 @@ This guide explains how to get the new Sub-Agent Orchestration System into your 
 
 ## Quick Update for Existing Installations
 
-If you already have claude-code-slash-commands installed at `~/.claude/commands/global` (or another prefix), here's how to get the new agents:
+If you already have claude-code-toolkit installed at `~/.claude/commands/global` (or another prefix), here's how to get the new agents:
 
 ### Option 1: Manual Update (Fastest)
 
@@ -38,7 +38,7 @@ ls -la *-specialist.md *-optimizer.md *-engineer.md *-architect.md *-expert.md
 
 ```bash
 # From the feature branch
-curl -fsSL https://raw.githubusercontent.com/redpop/claude-code-slash-commands/feature/sub-agent-orchestration/install.sh | bash -s -- global
+curl -fsSL https://raw.githubusercontent.com/redpop/claude-code-toolkit/feature/sub-agent-orchestration/install.sh | bash -s -- global
 ```
 
 This will:
@@ -56,8 +56,8 @@ For a completely fresh installation with agents:
 rm -rf ~/.claude/commands/global
 
 # Install from feature branch
-export CLAUDE_COMMANDS_REPO_URL="https://github.com/redpop/claude-code-slash-commands.git"
-curl -fsSL https://raw.githubusercontent.com/redpop/claude-code-slash-commands/feature/sub-agent-orchestration/install.sh | bash -s -- global
+export CLAUDE_COMMANDS_REPO_URL="https://github.com/redpop/claude-code-toolkit.git"
+curl -fsSL https://raw.githubusercontent.com/redpop/claude-code-toolkit/feature/sub-agent-orchestration/install.sh | bash -s -- global
 ```
 
 ## Verifying Agent Installation

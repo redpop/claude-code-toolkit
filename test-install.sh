@@ -25,7 +25,7 @@ fi
 
 # Run installation from feature branch
 echo -e "${GREEN}Installing from feature branch...${NC}"
-export CLAUDE_COMMANDS_REPO_URL="https://github.com/redpop/claude-code-slash-commands.git"
+export CLAUDE_COMMANDS_REPO_URL="https://github.com/redpop/claude-code-toolkit.git"
 bash install.sh "$TEST_PREFIX"
 
 echo

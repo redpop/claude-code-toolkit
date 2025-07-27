@@ -79,7 +79,7 @@ This guide describes the new architecture for Claude Code Slash Commands, which 
   "prefix": "global",
   "source": {
     "type": "git",
-    "url": "https://github.com/redpop/claude-code-slash-commands.git",
+    "url": "https://github.com/redpop/claude-code-toolkit.git",
     "path": "/Users/user/projects/claude-commands",
     "commit": "abc123def456"
   },
@@ -136,7 +136,7 @@ This guide describes the new architecture for Claude Code Slash Commands, which 
 ### 1. Initial Installation
 ```bash
 # Clone repository
-git clone https://github.com/redpop/claude-code-slash-commands.git ~/projects/claude-commands
+git clone https://github.com/redpop/claude-code-toolkit.git ~/projects/claude-commands
 cd ~/projects/claude-commands
 
 # Install with desired prefix
@@ -257,14 +257,14 @@ cp -r ~/.claude/commands ~/.claude/commands.backup
 # 2. Identify old Git repo
 cd ~/.claude/commands/global
 git remote -v
-# -> https://github.com/redpop/claude-code-slash-commands.git
+# -> https://github.com/redpop/claude-code-toolkit.git
 
 # 3. Clone anew
 cd ~/projects
-git clone https://github.com/redpop/claude-code-slash-commands.git
+git clone https://github.com/redpop/claude-code-toolkit.git
 
 # 4. Switch branch if necessary
-cd claude-code-slash-commands
+cd claude-code-toolkit
 git checkout feature/sub-agent-orchestration
 
 # 5. Remove old installation

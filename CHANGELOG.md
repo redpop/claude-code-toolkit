@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2025-01-27
+
+### Changed
+
+- 🚀 **BREAKING**: Rebranded to "claude-code-toolkit" - now includes Commands, Agents, and Tools
+- 🔄 Updated all documentation and scripts for new repository name
+- ✨ This is now a comprehensive toolkit, not just commands
+- 📦 New repository location: github.com/redpop/claude-code-toolkit
+
+### Note
+
+This release marks the transition from a commands-only repository to a full toolkit including AI agents and tools. All existing functionality is preserved.
+
 ## [1.8.0] - 2025-01-27
 
 ### Added
@@ -122,12 +135,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - 🐛 Update instructions in README now reflect actual Git-based workflow
 
-[1.8.0]: https://github.com/redpop/claude-code-slash-commands/compare/v1.7.0...v1.8.0
-[1.7.0]: https://github.com/redpop/claude-code-slash-commands/compare/v1.6.1...v1.7.0
-[1.6.1]: https://github.com/redpop/claude-code-slash-commands/compare/v1.6.0...v1.6.1
-[1.6.0]: https://github.com/redpop/claude-code-slash-commands/compare/v1.5.0...v1.6.0
-[1.5.0]: https://github.com/redpop/claude-code-slash-commands/compare/v1.4.0...v1.5.0
-[1.4.0]: https://github.com/redpop/claude-code-slash-commands/compare/v1.3.0...v1.4.0
-[1.3.0]: https://github.com/redpop/claude-code-slash-commands/compare/v1.2.0...v1.3.0
-[1.2.0]: https://github.com/redpop/claude-code-slash-commands/compare/v1.1.0...v1.2.0
-[1.1.0]: https://github.com/redpop/claude-code-slash-commands/releases/tag/v1.1.0
+[2.0.0]: https://github.com/redpop/claude-code-toolkit/compare/v1.8.0...v2.0.0
+[1.8.0]: https://github.com/redpop/claude-code-toolkit/compare/v1.7.0...v1.8.0
+[1.7.0]: https://github.com/redpop/claude-code-toolkit/compare/v1.6.1...v1.7.0
+[1.6.1]: https://github.com/redpop/claude-code-toolkit/compare/v1.6.0...v1.6.1
+[1.6.0]: https://github.com/redpop/claude-code-toolkit/compare/v1.5.0...v1.6.0
+[1.5.0]: https://github.com/redpop/claude-code-toolkit/compare/v1.4.0...v1.5.0
+[1.4.0]: https://github.com/redpop/claude-code-toolkit/compare/v1.3.0...v1.4.0
+[1.3.0]: https://github.com/redpop/claude-code-toolkit/compare/v1.2.0...v1.3.0
+[1.2.0]: https://github.com/redpop/claude-code-toolkit/compare/v1.1.0...v1.2.0
+[1.1.0]: https://github.com/redpop/claude-code-toolkit/releases/tag/v1.1.0

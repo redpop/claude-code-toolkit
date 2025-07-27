@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Claude Code Slash Commands Installation Script
+# Claude Code Toolkit Installation Script
 # Usage: curl -fsSL <url> | bash -s -- <prefix>
 # Example: curl -fsSL <url> | bash -s -- mytools
 
@@ -83,7 +83,7 @@ elif script_url=$(get_script_repo_url); then
     REPO_SOURCE="script location"
 else
     # Fall back to default
-    REPO_URL="https://github.com/redpop/claude-code-slash-commands.git"
+    REPO_URL="https://github.com/redpop/claude-code-toolkit.git"
     REPO_SOURCE="default"
 fi
 
