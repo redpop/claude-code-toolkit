@@ -115,9 +115,44 @@ print_info "Installing commands to $COMMANDS_INSTALL_PATH..."
 mkdir -p "$COMMANDS_INSTALL_PATH"
 cp -r "$SCRIPT_DIR/commands/"* "$COMMANDS_INSTALL_PATH/" 2>/dev/null || true
 
+# Check if any agents already exist
+EXISTING_AGENTS=()
+if [ -d "$CLAUDE_AGENTS_DIR" ]; then
+    while IFS= read -r -d '' agent_file; do
+        agent_name=$(basename "$agent_file")
+        if [ -f "$SCRIPT_DIR/agents/$agent_name" ]; then
+            EXISTING_AGENTS+=("$agent_name")
+        fi
+    done < <(find "$CLAUDE_AGENTS_DIR" -name "*.md" -type f -print0 2>/dev/null)
+fi
+
+# Warn about existing agents
+if [ ${#EXISTING_AGENTS[@]} -gt 0 ]; then
+    echo -e "${YELLOW}Warning: The following agents already exist in $CLAUDE_AGENTS_DIR:${NC}"
+    for agent in "${EXISTING_AGENTS[@]}"; do
+        echo "  - $agent"
+    done
+    read -p "Replace existing agents? (y/N) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        print_info "Backing up existing agents..."
+        AGENTS_BACKUP_DIR="${CLAUDE_AGENTS_DIR}.backup.$(date +%Y%m%d_%H%M%S)"
+        mkdir -p "$AGENTS_BACKUP_DIR"
+        for agent in "${EXISTING_AGENTS[@]}"; do
+            cp "$CLAUDE_AGENTS_DIR/$agent" "$AGENTS_BACKUP_DIR/" 2>/dev/null || true
+        done
+        print_info "Existing agents backed up to: $AGENTS_BACKUP_DIR"
+    else
+        print_info "Skipping agent installation to preserve existing agents."
+        SKIP_AGENTS=true
+    fi
+fi
+
 # Copy agents
-print_info "Installing agents to $CLAUDE_AGENTS_DIR..."
-cp "$SCRIPT_DIR/agents/"*.md "$CLAUDE_AGENTS_DIR/" 2>/dev/null || true
+if [ "${SKIP_AGENTS:-false}" != "true" ]; then
+    print_info "Installing agents to $CLAUDE_AGENTS_DIR..."
+    cp "$SCRIPT_DIR/agents/"*.md "$CLAUDE_AGENTS_DIR/" 2>/dev/null || true
+fi
 
 print_success "Installation complete!"
 
