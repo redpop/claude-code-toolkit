@@ -4,28 +4,31 @@ The complete toolkit for extending Claude Code with commands, agents, and tools.
 
 ## Installation
 
-Use the installation script to set up the commands with your desired prefix:
+### Step 1: Clone the Repository
+
+```bash
+# Clone the official repository
+git clone https://github.com/redpop/claude-code-toolkit.git
+cd claude-code-toolkit
+
+# Or clone your fork
+git clone https://github.com/YourUsername/your-fork.git
+cd your-fork
+```
+
+### Step 2: Install with Your Prefix
 
 ```bash
 # Install with your chosen prefix (e.g., "myprefix", "global", etc.)
-curl -fsSL https://raw.githubusercontent.com/redpop/claude-code-toolkit/main/install.sh | bash -s -- myprefix
-
-# Or from your own fork (automatic detection)
-export CLAUDE_COMMANDS_REPO_URL="https://github.com/YourUsername/your-fork.git"
-curl -fsSL https://raw.githubusercontent.com/YourUsername/your-fork/main/install.sh | bash -s -- myprefix
-
-# Or as a one-liner
-CLAUDE_COMMANDS_REPO_URL="https://github.com/YourUsername/your-fork.git" curl -fsSL https://raw.githubusercontent.com/YourUsername/your-fork/main/install.sh | bash -s -- myprefix
+./install.sh myprefix
 ```
 
 The installation script will:
 
-- Clone the repository using Git sparse checkout
-- Set up command files in `~/.claude/commands/myprefix/`
-- Install AI agents in `~/.claude/agents/`
-- Create a Git repository structure that allows easy updates
+- Copy command files to `~/.claude/commands/myprefix/`
+- Install AI agents to `~/.claude/agents/`
 - Display all available commands and agents after installation
-- Automatically detect fork URLs and configure accordingly
+- Create backups of existing installations if needed
 
 ## Forking This Repository
 
@@ -47,24 +50,22 @@ Forking this repository allows you to:
 2. **Clone and Install Your Fork**
 
    ```bash
-   # The install script automatically detects fork URLs
-   curl -fsSL https://raw.githubusercontent.com/YourUsername/your-fork/main/install.sh | bash -s -- myprefix
-
-   # Or explicitly set the repository URL
-   CLAUDE_COMMANDS_REPO_URL="https://github.com/YourUsername/your-fork.git" \
-     curl -fsSL https://raw.githubusercontent.com/YourUsername/your-fork/main/install.sh | bash -s -- myprefix
+   # Clone your fork
+   git clone https://github.com/YourUsername/your-fork.git
+   cd your-fork
+   
+   # Install with your chosen prefix
+   ./install.sh myprefix
    ```
 
-3. **Verify Fork Configuration**
+3. **Verify Installation**
 
    ```bash
-   # Check the remote URL
-   cd ~/.claude/commands/myprefix
-   git remote -v
-
-   # Should show your fork URL:
-   # origin  https://github.com/YourUsername/your-fork.git (fetch)
-   # origin  https://github.com/YourUsername/your-fork.git (push)
+   # Check that commands are installed
+   ls ~/.claude/commands/myprefix/
+   
+   # Check that agents are installed
+   ls ~/.claude/agents/
    ```
 
 ### Benefits of Forking
@@ -74,48 +75,21 @@ Forking this repository allows you to:
 - **Experimentation**: Test new command ideas before contributing upstream
 - **Version Control**: Maintain your own release cycle and versioning
 
-## Fork Configuration
+## Custom Prefix Support
 
-Your fork can be customized using the `.claude-commands.json` configuration file in the repository root.
-
-### Configuration File Structure
-
-Create a `.claude-commands.json` file in your fork's root directory:
-
-```json
-{
-  "name": "My Team's Claude Commands",
-  "description": "Custom commands for our development workflow",
-  "defaultPrefix": "team",
-  "upstream": "https://github.com/redpop/claude-code-toolkit.git",
-  "customCommands": {
-    "categories": ["deploy", "testing", "internal"]
-  }
-}
-```
-
-### Configuration Options
-
-- **name**: Display name for your command collection
-- **description**: Brief description of your fork's purpose
-- **defaultPrefix**: Suggested prefix for installations (users can override)
-- **upstream**: Original repository URL for syncing updates
-- **customCommands**: Metadata about your custom command categories
-
-### Custom Prefix Support
-
-When installing from a fork, you can still use any prefix:
+You can install multiple command sets with different prefixes:
 
 ```bash
-# Install with default prefix from config
-curl -fsSL https://raw.githubusercontent.com/YourTeam/team-commands/main/install.sh | bash
+# Install the original toolkit
+git clone https://github.com/redpop/claude-code-toolkit.git toolkit-original
+cd toolkit-original
+./install.sh global
 
-# Override with custom prefix
-curl -fsSL https://raw.githubusercontent.com/YourTeam/team-commands/main/install.sh | bash -s -- custom
-
-# Multiple installations with different prefixes
-curl -fsSL https://raw.githubusercontent.com/redpop/claude-code-toolkit/main/install.sh | bash -s -- global
-curl -fsSL https://raw.githubusercontent.com/YourTeam/team-commands/main/install.sh | bash -s -- team
+# Install your team's fork
+cd ..
+git clone https://github.com/YourTeam/team-commands.git toolkit-team
+cd toolkit-team
+./install.sh team
 ```
 
 This allows you to have both the original commands and your fork's commands available simultaneously:
@@ -138,52 +112,22 @@ After installation, all commands are available with your chosen prefix:
 
 ## Updates
 
-Since the installation creates a Git repository, you can easily update your commands:
-
-### Method 1: Using Git (Recommended)
+To update your installation:
 
 ```bash
-cd ~/.claude/commands/myprefix
+# 1. Pull the latest changes in your cloned repository
+cd /path/to/claude-code-toolkit
 git pull
+
+# 2. Re-run the installation
+./install.sh myprefix
 ```
 
-### Method 2: Re-run Installation Script
+The installation script will:
+- Back up your existing installation (if you choose to)
+- Copy the latest versions of all commands and agents
+- Display the updated command list
 
-```bash
-# For original repository
-curl -fsSL https://raw.githubusercontent.com/redpop/claude-code-toolkit/main/install.sh | bash -s -- myprefix
-
-# For your fork
-curl -fsSL https://raw.githubusercontent.com/YourUsername/your-fork/main/install.sh | bash -s -- myprefix
-```
-
-Both methods will preserve any local changes you've made to the commands.
-
-### Hook Updates
-
-Git hooks are versioned separately from commands. After a `git pull`, you may see a notification about available hook updates:
-
-```
-⚠️  Hook Update Available!
-Your git hooks are version 2, but version 3 is available.
-```
-
-To update hooks:
-
-```bash
-# Method 1: Use the update-hooks slash command
-/myprefix:project:update-hooks
-
-# Method 2: Run the update script directly
-cd ~/.claude/commands/myprefix
-./.git/hooks/post-merge  # This will show the update command
-
-# Method 3: Update all installations at once (original repo)
-curl -fsSL https://raw.githubusercontent.com/redpop/claude-code-toolkit/main/scripts/update-hooks.sh | bash
-
-# Or from your fork
-curl -fsSL https://raw.githubusercontent.com/YourUsername/your-fork/main/scripts/update-hooks.sh | bash
-```
 
 ## Available Commands
 
@@ -191,69 +135,76 @@ curl -fsSL https://raw.githubusercontent.com/YourUsername/your-fork/main/scripts
 
 ### Ai Commands
 
-| Command              | Description                                                           | Options       |
-| -------------------- | --------------------------------------------------------------------- | ------------- |
+| Command | Description | Options |
+|---------|-------------|---------|
 | `/prefix:ai:handoff` | Documents current problem context for handoff to another AI assistant | `output-file` |
+
 
 ### Analysis Commands
 
-| Command                      | Description                                                             | Options             |
-| ---------------------------- | ----------------------------------------------------------------------- | ------------------- |
+| Command | Description | Options |
+|---------|-------------|---------|
 | `/prefix:analysis:five-whys` | Apply the Five Whys root cause analysis technique to investigate issues | `issue_description` |
+
 
 ### Code Commands
 
-| Command                   | Description                                                     | Options                                      |
-| ------------------------- | --------------------------------------------------------------- | -------------------------------------------- |
+| Command | Description | Options |
+|---------|-------------|---------|
 | `/prefix:code:shellcheck` | Automatically fix shell script issues using shellcheck analysis | `--check-only`, `--strict`, `--summary-only` |
+
 
 ### Git Commands
 
-| Command              | Description                                                               | Options                           |
-| -------------------- | ------------------------------------------------------------------------- | --------------------------------- |
+| Command | Description | Options |
+|---------|-------------|---------|
 | `/prefix:git:commit` | Creates structured Git commits with Conventional Commit format and emojis | `--no-verify`, `--fast`, `--push` |
+
 
 ### Hybrid Commands
 
-| Command                       | Description                                                                                                    | Options                        |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------ | ----------- | ------------ | ---- |
-| `/prefix:hybrid:analyze-deep` | Deep code analysis combining parallel scanning with specialized sub-agent expertise for comprehensive insights | `directory`, `--focus=security | performance | architecture | all` |
+| Command | Description | Options |
+|---------|-------------|---------|
+| `/prefix:hybrid:analyze-deep` | Deep code analysis combining parallel scanning with specialized sub-agent expertise for comprehensive insights | `directory`, `--focus=security|performance|architecture|all` |
+
 
 ### Orchestration Commands
 
-| Command                                  | Description                                                                             | Options                                  |
-| ---------------------------------------- | --------------------------------------------------------------------------------------- | ---------------------------------------- | ------ | --------- | ----------- |
-| `/prefix:orchestration:analyze-parallel` | Ultra-fast code analysis with 10 parallel agents for 10x performance                    | `directory`, `--focus=area`              |
-| `/prefix:orchestration:performance-scan` | Deep Performance Profiling with 7 Agents for Bottleneck Identification and Optimization | `directory`, `--profile=cpu              | memory | io        | all`        |
-| `/prefix:orchestration:refactor-impact`  | Analyzes the impact of refactoring changes using 6 specialized agents                   | `file-or-pattern`, `--change-type=rename | move   | signature | structure`  |
-| `/prefix:orchestration:security-audit`   | Comprehensive security audit with 8 specialized agents for critical vulnerabilities     | `directory`, `--severity=critical        | high   | all`      |
-| `/prefix:orchestration:test-coverage`    | Comprehensive test coverage analysis with 5 specialized agents for test quality         | `directory`, `--framework=jest           | pytest | go-test   | cargo-test` |
+| Command | Description | Options |
+|---------|-------------|---------|
+| `/prefix:orchestration:analyze-parallel` | Ultra-fast code analysis with 10 parallel agents for 10x performance | `directory`, `--focus=area` |
+| `/prefix:orchestration:performance-scan` | Deep Performance Profiling with 7 Agents for Bottleneck Identification and Optimization | `directory`, `--profile=cpu|memory|io|all` |
+| `/prefix:orchestration:refactor-impact` | Analyzes the impact of refactoring changes using 6 specialized agents | `file-or-pattern`, `--change-type=rename|move|signature|structure` |
+| `/prefix:orchestration:security-audit` | Comprehensive security audit with 8 specialized agents for critical vulnerabilities | `directory`, `--severity=critical|high|all` |
+| `/prefix:orchestration:test-coverage` | Comprehensive test coverage analysis with 5 specialized agents for test quality | `directory`, `--framework=jest|pytest|go-test|cargo-test` |
+
 
 ### Project Commands
 
-| Command                          | Description                                                                                 | Options                                                                  |
-| -------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `/prefix:project:changelog`      | AI-powered CHANGELOG.md management that automatically determines version based on changes   | `--analyze`, `--commit`, `--update-version`                              |
-| `/prefix:project:create-command` | Create new slash commands from natural language descriptions                                | `description`, `of`, `what`, `you`, `want`, `the`, `command`, `to`, `do` |
-| `/prefix:project:update-docs`    | Intelligently updates project documentation based on code changes and implementation status | `--scope=<type>`, `--analyze`, `--commit`                                |
-| `/prefix:project:update-hooks`   | Update git hooks to the latest version in Claude command installations                      | `--all`, `--check-only`                                                  |
+| Command | Description | Options |
+|---------|-------------|---------|
+| `/prefix:project:changelog` | AI-powered CHANGELOG.md management that automatically determines version based on changes | `--analyze`, `--commit`, `--update-version` |
+| `/prefix:project:create-command` | Create new slash commands from natural language descriptions | `description`, `of`, `what`, `you`, `want`, `the`, `command`, `to`, `do` |
+| `/prefix:project:update-docs` | Intelligently updates project documentation based on code changes and implementation status | `--scope=<type>`, `--analyze`, `--commit` |
+
 
 ### Research Commands
 
-| Command                             | Description                                                                      | Options                         |
-| ----------------------------------- | -------------------------------------------------------------------------------- | ------------------------------- | ---------------------- | --------------------------- | ------------------------ | -------- | ---- |
-| `/prefix:research:codebase-map`     | Creates a comprehensive codebase mapping with 10 agents for different aspects    | `directory`, `--format=markdown | json                   | mermaid`, `--depth=overview | detailed                 | full`    |
-| `/prefix:research:deep-dive`        | Multi-Perspective Deep Research with 8 different viewpoints on a topic           | `topic`, `--depth=surface       | medium                 | deep`, `--focus=technical   | business                 | all`     |
-| `/prefix:research:dependency-trace` | In-depth dependency analysis with 6 specialized agents for complete transparency | `package-name                   | file`, `--depth=direct | transitive                  | full`, `--check=security | licenses | all` |
+| Command | Description | Options |
+|---------|-------------|---------|
+| `/prefix:research:codebase-map` | Creates a comprehensive codebase mapping with 10 agents for different aspects | `directory`, `--format=markdown|json|mermaid`, `--depth=overview|detailed|full` |
+| `/prefix:research:deep-dive` | Multi-Perspective Deep Research with 8 different viewpoints on a topic | `topic`, `--depth=surface|medium|deep`, `--focus=technical|business|all` |
+| `/prefix:research:dependency-trace` | In-depth dependency analysis with 6 specialized agents for complete transparency | `package-name|file`, `--depth=direct|transitive|full`, `--check=security|licenses|all` |
+
 
 ### Templates Commands
 
-| Command                                | Description                                                                              | Options                          |
-| -------------------------------------- | ---------------------------------------------------------------------------------------- | -------------------------------- | --- | ---- |
-| `/prefix:templates:analysis-sub-agent` | Template für Code-Analyse Commands mit mehreren spezialisierten Agents                   | `target`, `--option=value`       |
-| `/prefix:templates:basic-sub-agent`    | [Kurze Beschreibung des Commands]                                                        | `expected-arguments`             |
-| `/prefix:templates:hybrid-sub-agent`   | [Brief description of the command]                                                       | `expected-arguments`             |
-| `/prefix:templates:research-sub-agent` | Template für Research Commands die verschiedene Informationsquellen parallel durchsuchen | `research-topic`, `--scope=local | web | all` |
+| Command | Description | Options |
+|---------|-------------|---------|
+| `/prefix:templates:analysis-sub-agent` | Template für Code-Analyse Commands mit mehreren spezialisierten Agents | `target`, `--option=value` |
+| `/prefix:templates:basic-sub-agent` | [Kurze Beschreibung des Commands] | `expected-arguments` |
+| `/prefix:templates:hybrid-sub-agent` | [Brief description of the command] | `expected-arguments` |
+| `/prefix:templates:research-sub-agent` | Template für Research Commands die verschiedene Informationsquellen parallel durchsuchen | `research-topic`, `--scope=local|web|all` |
 
 <!-- COMMANDS:END -->
 

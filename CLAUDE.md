@@ -45,7 +45,6 @@ claude-code-toolkit/
 │   └── TECHNICAL-GUIDE.md       # Technical implementation details
 ├── scripts/                 # Utility scripts
 │   ├── create-sub-agent-command.sh # Create new sub-agent commands
-│   ├── update-hooks.sh     # Update git hooks
 │   └── update-readme.sh    # Auto-generates command documentation
 ├── install.sh              # Installation script
 ├── README.md              # User documentation (partially auto-generated)
@@ -169,24 +168,19 @@ Sub-Agents are specialized AI agents defined in the `/agents/` directory:
 
 ### Installation Script Updates
 
-The `install.sh` script handles:
+The `install.sh` script is designed to be run locally from the cloned repository:
 
-- Cloning repository using Git sparse checkout to specified prefix location
-- Creating a Git repository structure that only contains command files
-- Automatically updating existing installations via `git pull`
-- Handling migration from old non-Git installations
-- Listing available commands after installation
-- Installing both commands and agents directories
+- Copies command files from `commands/` to `~/.claude/commands/PREFIX/`
+- Copies agent files from `agents/` to `~/.claude/agents/`
+- Creates backups of existing installations when needed
+- Lists all available commands and agents after installation
 
 Key features:
 
-- Uses Git sparse checkout to track command and agent files
-- Moves files from `commands/` and `agents/` to installation root
-- Creates post-merge hooks to maintain structure during updates
-- Preserves local changes during updates using git stash
-- Supports sub-agent orchestration architecture
-
-Update the `REPO_URL` variable in `install.sh` when forking or moving the repository.
+- Simple file copy installation (no git in target directories)
+- Must be run from inside the cloned repository
+- Supports multiple installations with different prefixes
+- Clean separation between repository and installation
 
 ### Utility Scripts
 
@@ -195,12 +189,6 @@ Update the `REPO_URL` variable in `install.sh` when forking or moving the reposi
 - Scaffolds new sub-agent orchestration commands
 - Generates boilerplate with proper structure
 - Ensures consistent command format
-
-**`scripts/update-hooks.sh`**
-
-- Updates git hooks for the repository
-- Ensures code quality checks
-- Maintains consistency
 
 **`scripts/update-readme.sh`**
 
