@@ -42,10 +42,42 @@ fi
 CLAUDE_COMMANDS_DIR="$HOME/.claude/commands"
 CLAUDE_AGENTS_DIR="$HOME/.claude/agents"
 
+# Function to show help
+show_help() {
+    echo "Claude Code Toolkit Installation Script"
+    echo ""
+    echo "Usage: ./install.sh <prefix>"
+    echo ""
+    echo "Arguments:"
+    echo "  <prefix>    The prefix for your commands (e.g., 'mytools', 'global', 'team')"
+    echo ""
+    echo "Options:"
+    echo "  --help, -h  Show this help message"
+    echo ""
+    echo "Examples:"
+    echo "  ./install.sh mytools    Install commands with prefix 'mytools'"
+    echo "  ./install.sh global     Install commands with prefix 'global'"
+    echo ""
+    echo "After installation, commands will be available as:"
+    echo "  /<prefix>:<category>:<command>"
+    echo ""
+    echo "For example, with prefix 'mytools':"
+    echo "  /mytools:git:commit"
+    echo "  /mytools:project:changelog"
+}
+
+# Check for help flag
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    show_help
+    exit 0
+fi
+
 # Check if prefix is provided
 if [ -z "$1" ]; then
     print_error "No prefix provided. Usage: ./install.sh <prefix>"
     echo "Example: ./install.sh mytools"
+    echo ""
+    echo "Run './install.sh --help' for more information."
     exit 1
 fi
 
