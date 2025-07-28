@@ -1,7 +1,7 @@
 ---
-allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*), Bash(time:*), Bash(prof:*)
+allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*), Bash(time:*), Bash(prof:*), Write
 description: Deep Performance Profiling with 7 Agents for Bottleneck Identification and Optimization
-argument-hint: [directory] [--profile=cpu|memory|io|all]
+argument-hint: [directory] [--profile=cpu|memory|io|all] [--export-md] [--export-json] [--export-html] [--export-all] [--export-dir=path]
 ---
 
 **IMPORTANT: This is a READ-ONLY performance analysis. Do NOT create, modify, or write any files. Only analyze and report performance findings.**

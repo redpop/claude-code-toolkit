@@ -1,7 +1,7 @@
 ---
-allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*)
+allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*), Write
 description: Ultra-fast code analysis with 10 parallel agents for 10x performance
-argument-hint: [directory] [--focus=area]
+argument-hint: [directory] [--focus=area] [--export-md] [--export-json] [--export-html] [--export-all] [--export-dir=path]
 ---
 
 **IMPORTANT: This is a READ-ONLY analysis command. Do NOT create, modify, or write any files. Only analyze and report findings.**

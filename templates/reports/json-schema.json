@@ -1,0 +1,199 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Claude Code Toolkit Analysis Report",
+  "type": "object",
+  "required": ["metadata", "summary", "findings", "metrics"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["timestamp", "command", "project", "duration_seconds", "toolkit_version"],
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when analysis was performed"
+        },
+        "command": {
+          "type": "string",
+          "description": "Command that generated this report"
+        },
+        "project": {
+          "type": "string", 
+          "description": "Project name or directory analyzed"
+        },
+        "duration_seconds": {
+          "type": "number",
+          "description": "Total analysis duration in seconds"
+        },
+        "toolkit_version": {
+          "type": "string",
+          "description": "Version of Claude Code Toolkit used"
+        },
+        "arguments": {
+          "type": "string",
+          "description": "Command line arguments used"
+        },
+        "working_directory": {
+          "type": "string",
+          "description": "Directory where analysis was run"
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["health_score", "total_issues"],
+      "properties": {
+        "health_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Overall code health score"
+        },
+        "total_issues": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total number of issues found"
+        },
+        "severity_breakdown": {
+          "type": "object",
+          "properties": {
+            "critical": {"type": "number", "minimum": 0},
+            "high": {"type": "number", "minimum": 0},
+            "medium": {"type": "number", "minimum": 0},
+            "low": {"type": "number", "minimum": 0}
+          }
+        },
+        "expert_agents_used": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["security-specialist", "performance-optimizer", "code-architect", "test-engineer", "refactoring-expert"]
+          }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "severity", "title", "description"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Z]{3,4}-[0-9]{3}$",
+            "description": "Unique finding identifier (e.g., PERF-001, SEC-042)"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["security", "performance", "architecture", "testing", "quality", "documentation"]
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["critical", "high", "medium", "low"]
+          },
+          "title": {
+            "type": "string",
+            "description": "Short, descriptive title"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the issue"
+          },
+          "file": {
+            "type": "string",
+            "description": "File path where issue was found"
+          },
+          "line": {
+            "type": "number",
+            "minimum": 1,
+            "description": "Line number where issue occurs"
+          },
+          "impact": {
+            "type": "string",
+            "description": "Business or technical impact"
+          },
+          "solution": {
+            "type": "string",
+            "description": "Recommended solution"
+          },
+          "estimated_effort": {
+            "type": "string",
+            "description": "Estimated time to fix (e.g., '2 hours', '1 day')"
+          },
+          "references": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "Links to documentation or resources"
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "security_score": {"type": "number", "minimum": 0, "maximum": 100},
+        "performance_score": {"type": "number", "minimum": 0, "maximum": 100},
+        "test_coverage": {"type": "number", "minimum": 0, "maximum": 100},
+        "code_quality": {"type": "number", "minimum": 0, "maximum": 100},
+        "architecture_score": {"type": "number", "minimum": 0, "maximum": 100},
+        "documentation_score": {"type": "number", "minimum": 0, "maximum": 100},
+        "lines_of_code": {"type": "number", "minimum": 0},
+        "files_analyzed": {"type": "number", "minimum": 0},
+        "cyclomatic_complexity": {"type": "number", "minimum": 0}
+      }
+    },
+    "recommendations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["priority", "action", "impact"],
+        "properties": {
+          "priority": {
+            "type": "string",
+            "enum": ["immediate", "short-term", "long-term"]
+          },
+          "action": {
+            "type": "string",
+            "description": "Recommended action to take"
+          },
+          "effort": {
+            "type": "string",
+            "description": "Estimated effort required"
+          },
+          "impact": {
+            "type": "string",
+            "description": "Expected impact or benefit"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["security", "performance", "architecture", "testing", "quality"]
+          }
+        }
+      }
+    },
+    "historical_data": {
+      "type": "object",
+      "properties": {
+        "previous_health_score": {"type": "number", "minimum": 0, "maximum": 100},
+        "health_score_trend": {"type": "string", "enum": ["improving", "declining", "stable"]},
+        "issues_trend": {"type": "string", "enum": ["increasing", "decreasing", "stable"]},
+        "last_analysis": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "export_info": {
+      "type": "object",
+      "properties": {
+        "format": {"type": "string"},
+        "filename": {"type": "string"},
+        "directory": {"type": "string"},
+        "generated_at": {"type": "string", "format": "date-time"}
+      }
+    }
+  }
+}

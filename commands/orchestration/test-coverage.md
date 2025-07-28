@@ -1,7 +1,7 @@
 ---
-allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*), Bash(coverage:*), Bash(jest:*), Bash(pytest:*)
+allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*), Bash(coverage:*), Bash(jest:*), Bash(pytest:*), Write
 description: Comprehensive test coverage analysis with 5 specialized agents for test quality
-argument-hint: [directory] [--framework=jest|pytest|go-test|cargo-test]
+argument-hint: [directory] [--framework=jest|pytest|go-test|cargo-test] [--export-md] [--export-json] [--export-html] [--export-all] [--export-dir=path]
 ---
 
 **IMPORTANT: This is a READ-ONLY test analysis. Do NOT create, modify, or write any test files. Only analyze and report test coverage findings.**
