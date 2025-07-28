@@ -79,21 +79,22 @@ After completion of all test agents:
    3. Implement mutation testing
    ```
 
-4. **Create Missing Test Templates**:
+4. **Suggest Test Structure (DO NOT CREATE FILES)**:
    ```javascript
-   // Generated test template for uncovered function
+   // EXAMPLE ONLY - Show this structure to developers
+   // DO NOT create any test files
    describe('PaymentProcessor', () => {
      describe('processPayment', () => {
        it('should handle successful payment', () => {
-         // TODO: Implement
+         // Developer should implement
        });
        
        it('should handle insufficient funds', () => {
-         // TODO: Implement
+         // Developer should implement
        });
        
        it('should handle network errors', () => {
-         // TODO: Implement
+         // Developer should implement
        });
      });
    });
