@@ -144,6 +144,9 @@ The installation script will:
 
 | Command | Description | Options |
 |---------|-------------|---------|
+| `/prefix:analysis:analyze-deep` | Deep code analysis combining parallel scanning with specialized sub-agent expertise for comprehensive insights | `directory`, `--focus=security|performance|architecture|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
+| `/prefix:analysis:analyze-report` | Intelligent analysis of code quality reports with trend detection, prioritization, and actionable insights | `report.json`, `--compare=other-report.json`, `--history`, `--trends`, `--quick-wins`, `--export-md` |
+| `/prefix:analysis:doc-health` | Analyze documentation health, validate code-doc synchronization, check cross-references, and identify outdated content | `directory`, `--scope=readme|api|all`, `--check-links`, `--validate-params`, `--export-report` |
 | `/prefix:analysis:five-whys` | Apply the Five Whys root cause analysis technique to investigate issues | `issue_description` |
 
 
@@ -154,6 +157,24 @@ The installation script will:
 | `/prefix:code:shellcheck` | Automatically fix shell script issues using shellcheck analysis | `--check-only`, `--strict`, `--summary-only` |
 
 
+### Fix Commands
+
+| Command | Description | Options |
+|---------|-------------|---------|
+| `/prefix:fix:documentation` | Fix documentation issues including broken links, parameter mismatches, missing cross-references, and outdated content | `report.json|directory`, `--fix-links`, `--fix-params`, `--add-deprecation`, `--dry-run`, `--interactive` |
+| `/prefix:fix:duplicates` | Remove code duplication by extracting common functions, creating shared utilities, and applying DRY principles | `report.json|directory`, `--threshold=80`, `--min-lines=5`, `--dry-run`, `--create-utils` |
+| `/prefix:fix:quick-wins` | Apply high-ROI fixes from analysis reports - quick wins with maximum impact and minimal effort | `report.json`, `--dry-run`, `--category=security|performance|quality`, `--max-effort=4h`, `--min-roi=5` |
+| `/prefix:fix:security` | Fix security vulnerabilities identified in analysis reports with automated patches and safety checks | `report.json`, `--severity=critical,high,medium`, `--dry-run`, `--interactive`, `--owasp-top10` |
+
+
+### Generate Commands
+
+| Command | Description | Options |
+|---------|-------------|---------|
+| `/prefix:generate:documentation` | Generate comprehensive documentation including API docs, README files, code comments, and architecture diagrams | `directory|file`, `--types=api,readme,comments,diagrams`, `--format=markdown,html`, `--update-existing` |
+| `/prefix:generate:tests` | Generate comprehensive test suites for uncovered code, including unit tests, integration tests, and edge cases | `report.json|file|directory`, `--coverage-target=80`, `--framework=auto`, `--types=unit,integration`, `--mock-externals` |
+
+
 ### Git Commands
 
 | Command | Description | Options |
@@ -161,22 +182,15 @@ The installation script will:
 | `/prefix:git:commit` | Creates structured Git commits with Conventional Commit format and emojis | `--no-verify`, `--fast`, `--push` |
 
 
-### Hybrid Commands
-
-| Command | Description | Options |
-|---------|-------------|---------|
-| `/prefix:hybrid:analyze-deep` | Deep code analysis combining parallel scanning with specialized sub-agent expertise for comprehensive insights | `directory`, `--focus=security|performance|architecture|all` |
-
-
 ### Orchestration Commands
 
 | Command | Description | Options |
 |---------|-------------|---------|
-| `/prefix:orchestration:analyze-parallel` | Ultra-fast code analysis with 10 parallel agents for 10x performance | `directory`, `--focus=area` |
-| `/prefix:orchestration:performance-scan` | Deep Performance Profiling with 7 Agents for Bottleneck Identification and Optimization | `directory`, `--profile=cpu|memory|io|all` |
+| `/prefix:orchestration:analyze-parallel` | Ultra-fast code analysis with 10 parallel agents for 10x performance | `directory`, `--focus=area`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
+| `/prefix:orchestration:performance-scan` | Deep Performance Profiling with 7 Agents for Bottleneck Identification and Optimization | `directory`, `--profile=cpu|memory|io|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
 | `/prefix:orchestration:refactor-impact` | Analyzes the impact of refactoring changes using 6 specialized agents | `file-or-pattern`, `--change-type=rename|move|signature|structure` |
-| `/prefix:orchestration:security-audit` | Comprehensive security audit with 8 specialized agents for critical vulnerabilities | `directory`, `--severity=critical|high|all` |
-| `/prefix:orchestration:test-coverage` | Comprehensive test coverage analysis with 5 specialized agents for test quality | `directory`, `--framework=jest|pytest|go-test|cargo-test` |
+| `/prefix:orchestration:security-audit` | Comprehensive security audit with 8 specialized agents for critical vulnerabilities | `directory`, `--severity=critical|high|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
+| `/prefix:orchestration:test-coverage` | Comprehensive test coverage analysis with 5 specialized agents for test quality | `directory`, `--framework=jest|pytest|go-test|cargo-test`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
 
 
 ### Project Commands
@@ -202,9 +216,20 @@ The installation script will:
 | Command | Description | Options |
 |---------|-------------|---------|
 | `/prefix:templates:analysis-sub-agent` | Template für Code-Analyse Commands mit mehreren spezialisierten Agents | `target`, `--option=value` |
+| `/prefix:templates:analyzer-agent` | [BRIEF_DESCRIPTION] | - |
 | `/prefix:templates:basic-sub-agent` | [Kurze Beschreibung des Commands] | `expected-arguments` |
+| `/prefix:templates:helper-agent` | [BRIEF_DESCRIPTION] | - |
 | `/prefix:templates:hybrid-sub-agent` | [Brief description of the command] | `expected-arguments` |
 | `/prefix:templates:research-sub-agent` | Template für Research Commands die verschiedene Informationsquellen parallel durchsuchen | `research-topic`, `--scope=local|web|all` |
+| `/prefix:templates:specialist-agent` | [BRIEF_DESCRIPTION] | - |
+
+
+### Workflow Commands
+
+| Command | Description | Options |
+|---------|-------------|---------|
+| `/prefix:workflow:continuous-quality` | Set up and manage continuous code quality monitoring with automated analysis, fixes, and reporting | `directory`, `--schedule=daily|weekly|commit`, `--auto-fix=safe|all|none`, `--notify=email|slack|github` |
+| `/prefix:workflow:quality-sprint` | Plan and execute a complete code quality improvement sprint with analysis, prioritization, fixes, and tracking | `directory`, `--duration=1w|2w|1m`, `--team-size=N`, `--focus=security|performance|quality|all` |
 
 <!-- COMMANDS:END -->
 
@@ -254,6 +279,12 @@ Our sub-agent system includes five core specialists that can be combined in vari
 - **Expertise**: Code smells, technical debt, maintainability improvements
 - **Focus Areas**: Duplicate code, complex methods, naming conventions, dead code
 - **Output**: Refactoring priorities, code quality metrics, improvement strategies
+
+#### 6. Documentation Health Specialist 📚
+
+- **Expertise**: Documentation quality, code-doc synchronization, technical writing best practices
+- **Focus Areas**: Parameter validation, cross-reference checking, deprecation tracking, coverage analysis
+- **Output**: Health scores, broken link reports, parameter mismatches, improvement recommendations
 
 ### Hybrid Commands: Task Tool + Sub-Agents
 
