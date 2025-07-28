@@ -1,10 +1,10 @@
 ---
-allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*), Bash(semgrep:*)
+allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*), Bash(semgrep:*), Write
 description: Comprehensive security audit with 8 specialized agents for critical vulnerabilities
-argument-hint: [directory] [--severity=critical|high|all]
+argument-hint: [directory] [--severity=critical|high|all] [--export-md] [--export-json] [--export-html] [--export-all] [--export-dir=path]
 ---
 
-**IMPORTANT: This is a READ-ONLY security audit. Do NOT create, modify, or write any files. Only analyze and report security findings.**
+**IMPORTANT: This command performs security analysis and optionally exports reports. File creation is ONLY allowed for report export when --export flags are used.**
 
 # Security Audit Command
 
