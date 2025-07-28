@@ -4,6 +4,8 @@ description: Creates a comprehensive codebase mapping with 10 agents for differe
 argument-hint: [directory] [--format=markdown|json|mermaid] [--depth=overview|detailed|full]
 ---
 
+**IMPORTANT: This is a READ-ONLY mapping command. Do NOT create, modify, or write any files. Only analyze and generate a codebase map.**
+
 # Codebase Mapping Command
 
 This command creates a comprehensive mapping of the entire codebase with 10 specialized agents that analyze different aspects in parallel.

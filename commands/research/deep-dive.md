@@ -4,6 +4,8 @@ description: Multi-Perspective Deep Research with 8 different viewpoints on a to
 argument-hint: [topic] [--depth=surface|medium|deep] [--focus=technical|business|all]
 ---
 
+**IMPORTANT: This is a READ-ONLY research command. Do NOT create, modify, or write any files. Only research and report findings.**
+
 # Deep Dive Research Command
 
 This command conducts in-depth research on a topic by having 8 specialized agents investigate different perspectives in parallel.

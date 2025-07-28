@@ -4,6 +4,8 @@ description: Comprehensive test coverage analysis with 5 specialized agents for 
 argument-hint: [directory] [--framework=jest|pytest|go-test|cargo-test]
 ---
 
+**IMPORTANT: This is a READ-ONLY test analysis. Do NOT create, modify, or write any test files. Only analyze and report test coverage findings.**
+
 # Test Coverage Analysis Command
 
 This command analyzes test coverage and test quality with 5 parallel working agents. Identifies gaps in test coverage and suggests improvements.

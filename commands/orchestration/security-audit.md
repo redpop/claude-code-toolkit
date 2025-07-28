@@ -4,6 +4,8 @@ description: Comprehensive security audit with 8 specialized agents for critical
 argument-hint: [directory] [--severity=critical|high|all]
 ---
 
+**IMPORTANT: This is a READ-ONLY security audit. Do NOT create, modify, or write any files. Only analyze and report security findings.**
+
 # Security Audit Command
 
 This command performs a deep security audit with 8 parallel-working agents. Each agent is specialized in specific security risks.

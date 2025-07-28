@@ -4,6 +4,8 @@ description: Deep Performance Profiling with 7 Agents for Bottleneck Identificat
 argument-hint: [directory] [--profile=cpu|memory|io|all]
 ---
 
+**IMPORTANT: This is a READ-ONLY performance analysis. Do NOT create, modify, or write any files. Only analyze and report performance findings.**
+
 # Performance Scan Command
 
 This command performs deep performance profiling with 7 specialized agents. Identifies performance bottlenecks and suggests concrete optimizations.

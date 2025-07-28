@@ -4,6 +4,8 @@ description: Ultra-fast code analysis with 10 parallel agents for 10x performanc
 argument-hint: [directory] [--focus=area]
 ---
 
+**IMPORTANT: This is a READ-ONLY analysis command. Do NOT create, modify, or write any files. Only analyze and report findings.**
+
 # Parallel Code Analysis Command
 
 This command performs a comprehensive code analysis with 10 specialized agents running in parallel. The analysis is typically 10x faster than a sequential investigation.
