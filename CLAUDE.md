@@ -22,9 +22,12 @@ claude-code-toolkit/
 │   ├── security-specialist.md   # Security analysis agent
 │   └── test-engineer.md    # Testing strategy agent
 ├── commands/                # All slash command definitions
+│   ├── analysis/           # Analysis commands
+│   │   ├── analyze-deep.md # Deep analysis using hybrid approach
+│   │   └── analyze-report.md # Report analysis command
+│   ├── fix/                # Fix commands (planned)
+│   ├── generate/           # Generation commands (planned)
 │   ├── git/                # Git-related commands
-│   ├── hybrid/             # Hybrid architecture commands
-│   │   └── analyze-deep.md # Deep analysis using hybrid approach
 │   ├── orchestration/      # Sub-Agent orchestration commands
 │   │   ├── analyze-parallel.md   # Parallel multi-agent analysis
 │   │   ├── performance-scan.md   # Performance analysis
@@ -35,17 +38,33 @@ claude-code-toolkit/
 │   │   ├── codebase-map.md      # Generate codebase overview
 │   │   ├── deep-dive.md         # Deep investigation
 │   │   └── dependency-trace.md  # Trace dependencies
-│   └── templates/          # Templates for new commands/agents
-│       ├── basic-sub-agent.md    # Basic sub-agent template
-│       ├── analysis-sub-agent.md # Analysis agent template
-│       └── research-sub-agent.md # Research agent template
+│   ├── templates/          # Templates for new commands/agents
+│   │   ├── basic-sub-agent.md    # Basic sub-agent template
+│   │   ├── analysis-sub-agent.md # Analysis agent template
+│   │   └── research-sub-agent.md # Research agent template
+│   └── workflow/           # Workflow commands (planned)
 ├── docs/                    # Extended documentation
-│   ├── HYBRID-ARCHITECTURE.md   # Hybrid architecture guide
-│   ├── SUB-AGENT-ORCHESTRATION.md # Sub-agent orchestration guide
-│   └── TECHNICAL-GUIDE.md       # Technical implementation details
+│   ├── README.md           # Documentation index
+│   ├── architecture/       # Architecture documentation
+│   │   ├── HYBRID-ARCHITECTURE.md   # Hybrid architecture guide
+│   │   ├── SUB-AGENT-ORCHESTRATION.md # Sub-agent orchestration guide
+│   │   └── TECHNICAL-GUIDE.md       # Technical implementation details
+│   ├── guides/             # Practical guides
+│   │   ├── COMPREHENSIVE-WORKFLOW.md # End-to-end workflow guide
+│   │   ├── REPORT-EXPORT-SYSTEM.md   # Report export documentation
+│   │   └── ...             # Other guides
+│   ├── tutorials/          # Step-by-step tutorials
+│   ├── api/                # API reference
+│   └── archive/            # Historical documentation
 ├── scripts/                 # Utility scripts
 │   ├── create-sub-agent-command.sh # Create new sub-agent commands
-│   └── update-readme.sh    # Auto-generates command documentation
+│   ├── update-readme.sh    # Auto-generates command documentation
+│   ├── report-history.js   # Report history management
+│   └── trend-analyzer.sh   # Trend analysis script
+├── templates/              # Report templates
+│   ├── reports/            # Report format templates
+│   │   ├── markdown-template.md
+│   │   └── json-schema.json
 ├── install.sh              # Installation script
 ├── README.md              # User documentation (partially auto-generated)
 ├── CLAUDE.md              # This file
@@ -157,7 +176,7 @@ Sub-Agents are specialized AI agents defined in the `/agents/` directory:
 1. Design Phase 1 parallel scanning tasks
 2. Define Phase 2 expert delegation logic
 3. Structure Phase 3 synthesis approach
-4. Place in `/commands/hybrid/`
+4. Place in `/commands/analysis/` (for analysis commands)
 5. Ensure smooth data flow between phases
 
 ### Testing Commands
@@ -241,13 +260,58 @@ Key features:
 **`/prefix:orchestration:refactor-impact`** - Refactoring impact analysis  
 **`/prefix:orchestration:test-coverage`** - Test coverage analysis using test-engineer
 
-### Hybrid Commands (`/prefix:hybrid:*`)
+### Fix Commands (`/prefix:fix:*`)
 
-**`/prefix:hybrid:analyze-deep`** - Deep analysis using hybrid architecture:
+**`/prefix:fix:quick-wins`** - Apply high-ROI fixes:
+
+- Automatic implementation of quick fixes
+- Security patches for critical issues
+- Performance optimizations
+- Code quality improvements
+
+**`/prefix:fix:security`** - Fix security vulnerabilities:
+
+- OWASP Top 10 remediation
+- Input validation additions
+- Authentication enhancements
+- Secure coding patterns
+
+**`/prefix:fix:duplicates`** - Remove code duplication:
+
+- Extract common functions
+- Create shared utilities
+- Apply DRY principles
+- Refactor similar patterns
+
+**`/prefix:fix:documentation`** - Fix documentation issues:
+
+- Synchronize parameters with code
+- Fix broken links and references
+- Add deprecation notices
+- Update outdated content
+
+### Analysis Commands (`/prefix:analysis:*`)
+
+**`/prefix:analysis:analyze-deep`** - Deep analysis using hybrid architecture:
 
 - Phase 1: Parallel scanning with Task Tool
 - Phase 2: Expert analysis with specialized Sub-Agents
 - Phase 3: Comprehensive synthesis and recommendations
+- Phase 4: Report export in multiple formats
+
+**`/prefix:analysis:analyze-report`** - Intelligent report analysis:
+
+- ROI-based prioritization
+- Quick wins identification
+- Trend detection and comparison
+- Sprint planning support
+
+**`/prefix:analysis:doc-health`** - Documentation health check:
+
+- Code-documentation synchronization validation
+- Parameter consistency checking
+- Cross-reference and link validation
+- Deprecation tracking and coverage analysis
 
 ## Important Notes
 
@@ -256,9 +320,10 @@ Key features:
 - Avoid creating example or demo commands - focus on practical, reusable tools
 - The $ARGUMENTS placeholder in commands receives user input after the command invocation
 - Extended documentation is available in the `/docs/` directory:
-  - `HYBRID-ARCHITECTURE.md` - Detailed hybrid architecture patterns
-  - `SUB-AGENT-ORCHESTRATION.md` - Sub-agent orchestration guide
-  - `TECHNICAL-GUIDE.md` - Technical implementation details
+  - `docs/README.md` - Documentation index and navigation
+  - `docs/architecture/` - Technical architecture documentation
+  - `docs/guides/` - Practical usage guides
+  - `docs/guides/COMPREHENSIVE-WORKFLOW.md` - Complete workflow guide
 - Use templates in `/commands/templates/` for creating new commands and agents
 
 ## Code Quality & Linting
