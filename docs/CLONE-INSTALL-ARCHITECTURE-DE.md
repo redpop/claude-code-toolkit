@@ -2,7 +2,20 @@
 
 ## Übersicht
 
-Diese Anleitung beschreibt die neue Architektur für Claude Code Slash Commands, die eine saubere Trennung zwischen Source-Repository und Installation ermöglicht.
+Diese Anleitung beschreibt die neue Architektur für Claude Code Slash Commands, die eine saubere Trennung zwischen Source-Repository und Installation ermöglicht. Sie ist sowohl für Entwickler gedacht, die das Toolkit erweitern möchten, als auch für Endbenutzer, die die Commands einfach nur nutzen wollen.
+
+### Für Endbenutzer
+Wenn Sie die Commands nur nutzen möchten, brauchen Sie lediglich:
+1. Das Repository klonen
+2. `./install.sh [prefix]` ausführen
+3. Commands verwenden wie `/prefix:command:name`
+
+### Für Entwickler
+Wenn Sie Commands/Agents modifizieren oder neu erstellen möchten, erklärt diese Anleitung:
+- Wie die Architektur funktioniert
+- Wie Sie Ihre Anpassungen konfigurieren
+- Wie das Agent-Orchestrierungs-System funktioniert
+- Wie Sie den Hybrid-Ansatz für maximale Performance nutzen
 
 ## Kernkonzepte
 
@@ -374,6 +387,217 @@ git pull
 ./install.sh PREFIX --update
 ```
 
+## Konfigurationsdatei: .claude-commands.json
+
+Die `.claude-commands.json` Datei ist die zentrale Konfiguration für das gesamte Toolkit. Sie steuert, wie Commands und Agents zusammenarbeiten.
+
+### Wichtige Bereiche erklärt
+
+#### 1. **Repository-Informationen**
+```json
+{
+  "repo_owner": "redpop",
+  "repo_name": "claude-code-toolkit",
+  "default_branch": "main",
+  "description": "The complete toolkit...",
+  "version": "2.0.0"
+}
+```
+- Identifiziert das Repository und die Version
+- Wird für Updates und Fork-Management verwendet
+
+#### 2. **Fork-Konfiguration**
+```json
+"fork_config": {
+  "auto_update_urls": true,
+  "preserve_original_references": false,
+  "custom_prefix_support": true
+}
+```
+- `auto_update_urls`: Aktualisiert URLs automatisch beim Forken
+- `preserve_original_references`: Ob Original-Repo-Referenzen erhalten bleiben
+- `custom_prefix_support`: Erlaubt benutzerdefinierte Präfixe bei der Installation
+
+#### 3. **Sub-Agent Orchestrierung**
+```json
+"subAgentOrchestration": {
+  "enabled": true,
+  "defaults": {
+    "tokenBudget": 3000,
+    "timeout": 30000,
+    "parallelExecution": true
+  }
+}
+```
+- Steuert, wie mehrere Agents zusammenarbeiten
+- `tokenBudget`: Max. Tokens pro Agent (beeinflusst Antwortlänge)
+- `timeout`: Max. Ausführungszeit in Millisekunden
+- `parallelExecution`: Ob Agents parallel laufen
+
+#### 4. **Performance-Modi**
+```json
+"performanceModes": {
+  "conservative": { "maxConcurrentAgents": 5 },
+  "balanced": { "maxConcurrentAgents": 10 },
+  "aggressive": { "maxConcurrentAgents": 20 }
+}
+```
+- Wählen Sie basierend auf Ihren Systemkapazitäten
+- `conservative`: Sicherer für begrenzte Ressourcen
+- `balanced`: Standard, gut für die meisten Systeme
+- `aggressive`: Maximale Parallelisierung
+
+#### 5. **Agent-Registry**
+```json
+"agentRegistry": {
+  "security-specialist": {
+    "type": "sub-agent",
+    "location": "agents/security-specialist.md",
+    "autoInvoke": ["security", "vulnerability"],
+    "priority": "high"
+  }
+}
+```
+- Definiert verfügbare Agents und ihre Trigger
+- `autoInvoke`: Schlüsselwörter, die diesen Agent auslösen
+- `priority`: Ausführungspriorität bei mehreren passenden Agents
+
+## Wie das Agent/Command-System funktioniert
+
+### Drei Arten der Ausführung
+
+#### 1. **Einfache Commands**
+Basis-Commands, die eine einzelne Aufgabe ausführen:
+```
+/prefix:git:commit
+```
+- Läuft eigenständig
+- Keine Agent-Orchestrierung
+- Schnell und einfach
+
+#### 2. **Orchestrierungs-Commands**
+Commands, die mehrere spezialisierte Agents koordinieren:
+```
+/prefix:orchestration:security-audit
+```
+- Ruft spezifische Sub-Agents auf
+- Agents arbeiten in eigenen Kontexten
+- Ergebnisse werden aggregiert
+
+#### 3. **Hybrid-Commands**
+Der mächtigste Ansatz, kombiniert paralleles Scannen mit Experten-Analyse:
+```
+/prefix:hybrid:analyze-deep
+```
+
+### Die Hybrid-Architektur im Detail
+
+Der Hybrid-Ansatz nutzt ein dreiphasiges System:
+
+#### Phase 1: Paralleles Scannen (5-8 Sekunden)
+- 10+ Scanner-Agents laufen gleichzeitig über das Task Tool
+- Jeder Scanner hat einen spezifischen Fokus (Security, Performance, etc.)
+- Produziert strukturierte JSON-Ausgabe
+- Optimiert für Geschwindigkeit und Abdeckung
+
+#### Phase 2: Experten-Analyse (10-20 Sekunden)
+- Ergebnisse aus Phase 1 werden analysiert
+- Kritische Probleme werden an spezialisierte Sub-Agents delegiert
+- Jeder Sub-Agent arbeitet isoliert für tiefe Analyse
+- Sub-Agents haben volle Claude Code Fähigkeiten
+
+#### Phase 3: Synthese (2-5 Sekunden)
+- Alle Ergebnisse werden kombiniert
+- Duplikate werden zusammengeführt
+- Priorisierter Aktionsplan wird generiert
+- Finaler Bericht mit Metriken
+
+### Beispiel-Workflow
+
+Wenn Sie `/global:hybrid:analyze-deep ./mein-projekt` ausführen:
+
+1. **Phase 1 startet**: 10 Scanner starten parallel
+   - Security-Scanner findet hardcodierte Credentials
+   - Performance-Scanner findet O(n²) Algorithmus
+   - Architektur-Scanner findet zirkuläre Abhängigkeiten
+   - Test-Scanner findet 30% Coverage
+   - Und 6 weitere Scanner...
+
+2. **Phase 2 Delegation**:
+   - Security-Findings → `security-specialist` Agent
+   - Performance-Probleme → `performance-optimizer` Agent
+   - Architektur-Probleme → `code-architect` Agent
+
+3. **Phase 3 Synthese**:
+   - Kombinierter Bericht mit allen Findings
+   - Schweregrad-basierte Priorisierung
+   - Umsetzbare Empfehlungen
+   - Gesamt-Gesundheitsscore
+
+## Für Endbenutzer: Konfigurationsoptionen
+
+### 1. **Performance-Tuning**
+Bearbeiten Sie `.claude-commands.json` zum Anpassen:
+```json
+"performanceMode": "conservative"  // Ändern von "balanced"
+```
+
+### 2. **Spezifische Features deaktivieren**
+```json
+"subAgentOrchestration": {
+  "enabled": false  // Agent-Orchestrierung deaktivieren
+}
+```
+
+### 3. **Angepasstes Command-Verhalten**
+```json
+"commandOverrides": {
+  "orchestration:security-audit": {
+    "performanceMode": "conservative",
+    "defaults": {
+      "tokenBudget": 5000  // Detailliertere Analyse
+    }
+  }
+}
+```
+
+## Für Entwickler: Das System erweitern
+
+### 1. **Neue Agents erstellen**
+1. Erstellen Sie eine Markdown-Datei in `agents/`
+2. Definieren Sie die Expertise und Persona des Agents
+3. Registrieren Sie in `.claude-commands.json`:
+```json
+"agentRegistry": {
+  "mein-neuer-agent": {
+    "type": "sub-agent",
+    "location": "agents/mein-neuer-agent.md",
+    "autoInvoke": ["schlüsselwort1", "schlüsselwort2"],
+    "priority": "medium"
+  }
+}
+```
+
+### 2. **Hybrid-Commands erstellen**
+1. Entwerfen Sie Ihre drei Phasen
+2. Erstellen Sie Command in `commands/hybrid/`
+3. Konfigurieren Sie in `.claude-commands.json`:
+```json
+"hybridCommands": {
+  "mein-hybrid-command": {
+    "phases": ["scan", "analyze", "report"],
+    "scannerCount": 12,
+    "expertDelegation": true
+  }
+}
+```
+
+### 3. **Performance-Optimierung**
+- Passen Sie `tokenBudget` für Qualität vs. Geschwindigkeit an
+- Modifizieren Sie `maxConcurrentAgents` basierend auf System
+- Nutzen Sie `caching` für wiederholte Analysen
+- Aktivieren Sie `experimental` Features für modernste Performance
+
 ## Zusammenfassung
 
 Die neue Architektur bietet:
@@ -383,5 +607,7 @@ Die neue Architektur bietet:
 3. **Transparenz**: Klares Tracking via Manifests
 4. **Skalierbarkeit**: Multi-Repo-Support
 5. **Wartbarkeit**: Einfache Updates und Verwaltung
+6. **Performance**: Hybrid-Ansatz für maximale Effizienz
+7. **Erweiterbarkeit**: Einfaches Hinzufügen neuer Commands und Agents
 
-Der Wechsel von "Git-in-place" zu "Clone+Install" macht das System robuster, verständlicher und zukunftssicher.
+Die Kombination aus einfacher Installation, mächtiger Orchestrierung und der Hybrid-Architektur macht dies zum fortschrittlichsten Command-System für Claude Code.

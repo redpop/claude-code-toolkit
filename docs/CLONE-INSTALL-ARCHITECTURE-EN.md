@@ -2,7 +2,20 @@
 
 ## Overview
 
-This guide describes the new architecture for Claude Code Slash Commands, which enables a clean separation between source repository and installation.
+This guide describes the new architecture for Claude Code Slash Commands, which enables a clean separation between source repository and installation. It's designed for both developers who want to extend the toolkit and end users who simply want to use the commands.
+
+### For End Users
+If you just want to use the commands, you only need to:
+1. Clone the repository
+2. Run `./install.sh [prefix]`
+3. Start using commands like `/prefix:command:name`
+
+### For Developers
+If you want to modify or create new commands/agents, this guide explains:
+- How the architecture works
+- How to configure your modifications
+- How the agent orchestration system functions
+- How to use the hybrid approach for maximum performance
 
 ## Core Concepts
 
@@ -355,6 +368,217 @@ git pull
 ./install.sh PREFIX --update
 ```
 
+## Configuration File: .claude-commands.json
+
+The `.claude-commands.json` file is the central configuration for the entire toolkit. It controls how commands and agents work together.
+
+### Key Sections Explained
+
+#### 1. **Repository Information**
+```json
+{
+  "repo_owner": "redpop",
+  "repo_name": "claude-code-toolkit",
+  "default_branch": "main",
+  "description": "The complete toolkit...",
+  "version": "2.0.0"
+}
+```
+- Identifies the repository and version
+- Used for updates and fork management
+
+#### 2. **Fork Configuration**
+```json
+"fork_config": {
+  "auto_update_urls": true,
+  "preserve_original_references": false,
+  "custom_prefix_support": true
+}
+```
+- `auto_update_urls`: Automatically updates URLs when forked
+- `preserve_original_references`: Whether to keep original repo references
+- `custom_prefix_support`: Allows custom prefixes during installation
+
+#### 3. **Sub-Agent Orchestration**
+```json
+"subAgentOrchestration": {
+  "enabled": true,
+  "defaults": {
+    "tokenBudget": 3000,
+    "timeout": 30000,
+    "parallelExecution": true
+  }
+}
+```
+- Controls how multiple agents work together
+- `tokenBudget`: Max tokens per agent (affects response length)
+- `timeout`: Max execution time in milliseconds
+- `parallelExecution`: Whether agents run in parallel
+
+#### 4. **Performance Modes**
+```json
+"performanceModes": {
+  "conservative": { "maxConcurrentAgents": 5 },
+  "balanced": { "maxConcurrentAgents": 10 },
+  "aggressive": { "maxConcurrentAgents": 20 }
+}
+```
+- Choose based on your system capabilities
+- `conservative`: Safer for limited resources
+- `balanced`: Default, good for most systems
+- `aggressive`: Maximum parallelization
+
+#### 5. **Agent Registry**
+```json
+"agentRegistry": {
+  "security-specialist": {
+    "type": "sub-agent",
+    "location": "agents/security-specialist.md",
+    "autoInvoke": ["security", "vulnerability"],
+    "priority": "high"
+  }
+}
+```
+- Defines available agents and their triggers
+- `autoInvoke`: Keywords that trigger this agent
+- `priority`: Execution priority when multiple agents match
+
+## How the Agent/Command System Works
+
+### Three Types of Execution
+
+#### 1. **Simple Commands**
+Basic commands that execute a single task:
+```
+/prefix:git:commit
+```
+- Runs standalone
+- No agent orchestration
+- Fast and simple
+
+#### 2. **Orchestration Commands**
+Commands that coordinate multiple specialized agents:
+```
+/prefix:orchestration:security-audit
+```
+- Invokes specific sub-agents
+- Agents work in their own contexts
+- Results are aggregated
+
+#### 3. **Hybrid Commands**
+The most powerful approach, combining parallel scanning with expert analysis:
+```
+/prefix:hybrid:analyze-deep
+```
+
+### The Hybrid Architecture in Detail
+
+The hybrid approach uses a three-phase system:
+
+#### Phase 1: Parallel Scanning (5-8 seconds)
+- 10+ scanner agents run simultaneously using the Task Tool
+- Each scanner has a specific focus (security, performance, etc.)
+- Produces structured JSON output
+- Optimized for speed and coverage
+
+#### Phase 2: Expert Analysis (10-20 seconds)
+- Results from Phase 1 are analyzed
+- Critical issues are delegated to specialized sub-agents
+- Each sub-agent works in isolation for deep analysis
+- Sub-agents have full Claude Code capabilities
+
+#### Phase 3: Synthesis (2-5 seconds)
+- All results are combined
+- Duplicate findings are merged
+- Prioritized action plan is generated
+- Final report with metrics
+
+### Example Workflow
+
+When you run `/global:hybrid:analyze-deep ./my-project`:
+
+1. **Phase 1 starts**: 10 scanners launch in parallel
+   - Security scanner finds hardcoded credentials
+   - Performance scanner finds O(n²) algorithm
+   - Architecture scanner finds circular dependencies
+   - Test scanner finds 30% coverage
+   - And 6 more scanners...
+
+2. **Phase 2 delegation**:
+   - Security findings → `security-specialist` agent
+   - Performance issues → `performance-optimizer` agent
+   - Architecture problems → `code-architect` agent
+
+3. **Phase 3 synthesis**:
+   - Combined report with all findings
+   - Severity-based prioritization
+   - Actionable recommendations
+   - Overall health score
+
+## For End Users: Configuration Options
+
+### 1. **Performance Tuning**
+Edit `.claude-commands.json` to adjust:
+```json
+"performanceMode": "conservative"  // Change from "balanced"
+```
+
+### 2. **Disable Specific Features**
+```json
+"subAgentOrchestration": {
+  "enabled": false  // Disable agent orchestration
+}
+```
+
+### 3. **Custom Command Behavior**
+```json
+"commandOverrides": {
+  "orchestration:security-audit": {
+    "performanceMode": "conservative",
+    "defaults": {
+      "tokenBudget": 5000  // More detailed analysis
+    }
+  }
+}
+```
+
+## For Developers: Extending the System
+
+### 1. **Creating New Agents**
+1. Create a markdown file in `agents/`
+2. Define the agent's expertise and persona
+3. Register in `.claude-commands.json`:
+```json
+"agentRegistry": {
+  "my-new-agent": {
+    "type": "sub-agent",
+    "location": "agents/my-new-agent.md",
+    "autoInvoke": ["keyword1", "keyword2"],
+    "priority": "medium"
+  }
+}
+```
+
+### 2. **Creating Hybrid Commands**
+1. Design your three phases
+2. Create command in `commands/hybrid/`
+3. Configure in `.claude-commands.json`:
+```json
+"hybridCommands": {
+  "my-hybrid-command": {
+    "phases": ["scan", "analyze", "report"],
+    "scannerCount": 12,
+    "expertDelegation": true
+  }
+}
+```
+
+### 3. **Performance Optimization**
+- Adjust `tokenBudget` for quality vs speed
+- Modify `maxConcurrentAgents` based on system
+- Use `caching` for repeated analyses
+- Enable `experimental` features for cutting-edge performance
+
 ## Summary
 
 The new architecture offers:
@@ -364,5 +588,7 @@ The new architecture offers:
 3. **Transparency**: Clear tracking via manifests
 4. **Scalability**: Multi-repo support
 5. **Maintainability**: Easy updates and management
+6. **Performance**: Hybrid approach for maximum efficiency
+7. **Extensibility**: Easy to add new commands and agents
 
-The switch from "Git-in-place" to "Clone+Install" makes the system more robust, understandable, and future-proof.
+The combination of simple installation, powerful orchestration, and the hybrid architecture makes this the most advanced command system for Claude Code.
