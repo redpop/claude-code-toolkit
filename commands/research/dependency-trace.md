@@ -4,6 +4,8 @@ description: In-depth dependency analysis with 6 specialized agents for complete
 argument-hint: [package-name|file] [--depth=direct|transitive|full] [--check=security|licenses|all]
 ---
 
+**IMPORTANT: This is a READ-ONLY dependency analysis. Do NOT create, modify, or write any files. Only analyze and report dependency findings.**
+
 # Dependency Trace Command
 
 This command performs a comprehensive dependency analysis, with 6 specialized agents that examine different aspects of dependencies in parallel.

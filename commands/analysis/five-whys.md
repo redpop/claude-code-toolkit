@@ -3,6 +3,8 @@ description: Apply the Five Whys root cause analysis technique to investigate is
 argument-hint: "[issue_description]"
 ---
 
+**IMPORTANT: This is a READ-ONLY analysis command. Do NOT create, modify, or write any files. Only analyze and provide root cause analysis.**
+
 # Claude Command: Five Whys Analysis
 
 Apply the Five Whys root cause analysis technique to systematically investigate issues and identify their root causes. This command helps you drill down from surface-level symptoms to the fundamental reasons behind problems.

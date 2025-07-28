@@ -4,6 +4,8 @@ description: Analyzes the impact of refactoring changes using 6 specialized agen
 argument-hint: [file-or-pattern] [--change-type=rename|move|signature|structure]
 ---
 
+**IMPORTANT: This is a READ-ONLY impact analysis. Do NOT create, modify, or write any files. Only analyze and report refactoring impacts.**
+
 # Refactor Impact Analysis Command
 
 This command analyzes the impact of planned refactoring changes through 6 parallel working agents. Ideal before major code restructuring.

@@ -4,6 +4,8 @@ description: Deep code analysis combining parallel scanning with specialized sub
 argument-hint: [directory] [--focus=security|performance|architecture|all]
 ---
 
+**IMPORTANT: This is a READ-ONLY analysis command. Do NOT create, modify, or write any files. Only analyze and report findings.**
+
 # Deep Analysis Hybrid Command
 
 This command combines the speed of parallel Task Tool agents with the expertise of specialized sub-agents to provide comprehensive code analysis with deep insights.
@@ -48,31 +50,36 @@ Based on the scan results, delegate critical findings to appropriate sub-agents:
 ```markdown
 ### If security issues found (severity >= high):
 Delegate to @security-specialist:
-"Perform deep security analysis on: [specific files/patterns]
+"READ-ONLY ANALYSIS. DO NOT MODIFY ANY FILES.
+Perform deep security analysis on: [specific files/patterns]
 Focus on: [identified vulnerabilities]
 Provide remediation strategies and secure code examples."
 
 ### If performance bottlenecks found:
 Delegate to @performance-optimizer:
-"Analyze performance issues in: [specific functions/modules]
+"READ-ONLY ANALYSIS. DO NOT MODIFY ANY FILES.
+Analyze performance issues in: [specific functions/modules]
 Focus on: [identified bottlenecks]
 Provide optimization strategies with benchmarks."
 
 ### If architectural violations found:
 Delegate to @code-architect:
-"Review architecture in: [affected components]
+"READ-ONLY ANALYSIS. DO NOT MODIFY ANY FILES.
+Review architecture in: [affected components]
 Focus on: [identified violations]
 Suggest refactoring approach and migration path."
 
 ### If test coverage gaps found:
 Delegate to @test-engineer:
-"Analyze test gaps in: [uncovered modules]
+"READ-ONLY ANALYSIS. DO NOT MODIFY ANY FILES.
+Analyze test gaps in: [uncovered modules]
 Focus on: [critical untested paths]
-Generate test templates and coverage strategy."
+Describe test strategy only - do not create test files."
 
 ### If significant code smells found:
 Delegate to @refactoring-expert:
-"Review code quality in: [problematic areas]
+"READ-ONLY ANALYSIS. DO NOT MODIFY ANY FILES.
+Review code quality in: [problematic areas]
 Focus on: [identified smells]
 Provide refactoring plan with examples."
 ```
