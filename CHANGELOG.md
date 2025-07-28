@@ -5,6 +5,48 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2025-01-28
+
+### Added
+
+- ✨ Comprehensive Documentation Health System - new agent and commands for documentation quality analysis
+  - `documentation-health-specialist` agent for doc quality assessment
+  - `/analysis/doc-health` command for documentation validation
+  - `/fix/documentation` command for automated doc fixes
+- ✨ Report Analysis System - intelligent analysis of code quality reports
+  - `report-analyzer` agent for report interpretation
+  - `/analysis/analyze-report` command with ROI prioritization
+  - Trend analysis script for historical tracking
+- ✨ Fix Commands Category - automated remediation commands
+  - `/fix/quick-wins` - Apply high-ROI fixes automatically
+  - `/fix/security` - Fix security vulnerabilities
+  - `/fix/duplicates` - Remove code duplication
+- ✨ Generate Commands Category - code and documentation generation
+  - `/generate/tests` - Generate comprehensive test suites
+  - `/generate/documentation` - Generate API docs and READMEs
+- ✨ Workflow Commands Category - complete quality improvement workflows
+  - `/workflow/quality-sprint` - Plan and execute quality sprints
+  - `/workflow/continuous-quality` - Continuous quality monitoring
+- ✨ Report Export System - export analysis results in multiple formats
+  - Support for Markdown, JSON, and HTML exports
+  - Historical tracking with `.report-history.json`
+  - Report templates for consistent formatting
+- ✨ Comprehensive Workflow Documentation - end-to-end quality improvement guide
+
+### Changed
+
+- 🔄 Major Directory Reorganization
+  - Moved `analyze-deep` from `commands/hybrid/` to `commands/analysis/`
+  - Reorganized docs into subdirectories: `architecture/`, `guides/`, `tutorials/`, `api/`, `archive/`
+  - Added documentation index at `docs/README.md`
+- 🔄 Enhanced `analyze-deep` command with report export functionality
+- 🔄 Updated all analysis commands to support multiple export formats
+- 🔄 Improved CLAUDE.md to reflect new command structure and categories
+
+### Fixed
+
+- 🐛 Documentation references updated to match new directory structure
+
 ## [2.1.1] - 2025-01-28
 
 ### Fixed
@@ -166,6 +208,7 @@ This release marks the transition from a commands-only repository to a full tool
 
 - 🐛 Update instructions in README now reflect actual Git-based workflow
 
+[2.2.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/redpop/claude-code-toolkit/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/redpop/claude-code-toolkit/compare/v2.0.0...v2.0.1
