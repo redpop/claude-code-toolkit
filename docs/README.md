@@ -1,0 +1,130 @@
+# Claude Code Toolkit Documentation
+
+Welcome to the Claude Code Toolkit documentation. This directory contains comprehensive guides, architectural documentation, and reference materials.
+
+## 📚 Documentation Structure
+
+### 🏗️ Architecture (`/architecture/`)
+Deep technical documentation about the toolkit's design and implementation:
+
+- **[HYBRID-ARCHITECTURE.md](architecture/HYBRID-ARCHITECTURE.md)** - The innovative hybrid approach combining parallel scanning with expert analysis
+- **[SUB-AGENT-ORCHESTRATION.md](architecture/SUB-AGENT-ORCHESTRATION.md)** - How specialized AI agents work together
+- **[TECHNICAL-GUIDE.md](architecture/TECHNICAL-GUIDE.md)** - Technical implementation details and patterns
+
+### 📖 Guides (`/guides/`)
+Practical guides for using the toolkit effectively:
+
+- **[COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md)** ⭐ - Complete end-to-end workflow from analysis to fixes
+- **[REPORT-EXPORT-SYSTEM.md](guides/REPORT-EXPORT-SYSTEM.md)** - How to export and use analysis reports
+- **[REPORT-ANALYZER-EXAMPLES.md](guides/REPORT-ANALYZER-EXAMPLES.md)** - Examples of report analysis and interpretation
+- **[EXPORT-EXAMPLES.md](guides/EXPORT-EXAMPLES.md)** - Sample exports in different formats
+- **[TROUBLESHOOTING-FILE-MODIFICATIONS.md](guides/TROUBLESHOOTING-FILE-MODIFICATIONS.md)** - Fixing unwanted file modifications
+
+### 🎓 Tutorials (`/tutorials/`)
+Step-by-step tutorials for common tasks:
+
+- *Coming soon: Quick Start Tutorial*
+- *Coming soon: Building Custom Commands*
+- *Coming soon: Creating Specialized Agents*
+
+### 🔧 API Reference (`/api/`)
+Technical API documentation:
+
+- *Coming soon: Command API Reference*
+- *Coming soon: Agent Interface Specification*
+- *Coming soon: Tool Integration Guide*
+
+### 🗄️ Archive (`/archive/`)
+Older documentation kept for reference:
+
+- Historical installation guides
+- Legacy architecture documents
+- Previous versions of guides
+
+## 🚀 Quick Start
+
+1. **New Users**: Start with [COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md) to understand the complete toolkit workflow.
+
+2. **Understanding the Architecture**: Read [HYBRID-ARCHITECTURE.md](architecture/HYBRID-ARCHITECTURE.md) to learn about our innovative approach.
+
+3. **Using Reports**: Check [REPORT-EXPORT-SYSTEM.md](guides/REPORT-EXPORT-SYSTEM.md) for report generation and analysis.
+
+## 📊 Key Concepts
+
+### The Hybrid Architecture
+Our unique approach combines:
+- **Phase 1**: Parallel scanning with the Task Tool for speed
+- **Phase 2**: Deep analysis with specialized Sub-Agents for expertise  
+- **Phase 3**: Intelligent synthesis for actionable insights
+
+### Sub-Agent Specialization
+Five expert agents provide focused analysis:
+- 🏗️ **Code Architect** - System design and architecture
+- ⚡ **Performance Optimizer** - Speed and efficiency
+- 🔄 **Refactoring Expert** - Code improvement strategies
+- 🔒 **Security Specialist** - Vulnerability detection
+- 🧪 **Test Engineer** - Testing strategies and coverage
+
+### Workflow Automation
+From analysis to automated fixes:
+1. **Analyze** - Comprehensive code quality assessment
+2. **Prioritize** - ROI-based issue ranking
+3. **Fix** - Automated remediation with safety checks
+4. **Verify** - Continuous quality monitoring
+
+## 📈 Command Categories
+
+### Analysis Commands
+- `/analyze-deep` - Comprehensive hybrid analysis
+- `/security-audit` - Security-focused scan
+- `/performance-scan` - Performance analysis
+- `/test-coverage` - Testing assessment
+- `/analyze-parallel` - Multi-agent parallel analysis
+
+### Report Commands  
+- `/analyze-report` - Intelligent report analysis
+- `/trend-analyzer` - Historical trending
+
+### Research Commands
+- `/codebase-map` - Generate codebase overview
+- `/deep-dive` - Focused investigation
+- `/dependency-trace` - Trace dependencies
+
+### Fix Commands (Coming Soon)
+- `/fix-quick-wins` - Apply high-ROI fixes
+- `/fix-duplicates` - Remove duplication
+- `/generate-tests` - Create missing tests
+
+## 🔍 Finding Information
+
+### By Task
+- **Starting a new project analysis**: [COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md)
+- **Understanding reports**: [REPORT-ANALYZER-EXAMPLES.md](guides/REPORT-ANALYZER-EXAMPLES.md)
+- **Fixing issues**: See Phase 3 in [COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md)
+- **CI/CD Integration**: See Phase 5 in [COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md)
+
+### By Technical Interest
+- **How agents work**: [SUB-AGENT-ORCHESTRATION.md](architecture/SUB-AGENT-ORCHESTRATION.md)
+- **Parallel processing**: [HYBRID-ARCHITECTURE.md](architecture/HYBRID-ARCHITECTURE.md)
+- **Implementation details**: [TECHNICAL-GUIDE.md](architecture/TECHNICAL-GUIDE.md)
+
+## 🤝 Contributing
+
+When adding new documentation:
+
+1. Place files in the appropriate subdirectory
+2. Update this README.md index
+3. Follow the existing format and style
+4. Include practical examples
+5. Cross-reference related documents
+
+## 📞 Getting Help
+
+- **Issues**: Check troubleshooting guides in `/guides/`
+- **Examples**: See example sections in each guide
+- **Updates**: Watch the repository for new features
+
+---
+
+*Last Updated: January 2025*
+*Documentation Version: 2.0*
