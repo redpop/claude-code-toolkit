@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.0] - 2025-07-29
+
+### Added
+
+- ✨ **Performance Fix Command** - New `/fix:performance` command for automated performance optimization
+  - Automatically identifies and fixes O(n²) algorithms with Map/Set-based lookups
+  - Memory leak fixes for React components and large object allocations
+  - Database operation batching and transaction optimization
+  - Dry-run mode and automatic backups for safe operation
+  - Integration with action plan workflow execution
+
+### Changed
+
+- 🔄 **Enhanced Analysis Commands** - Improved safety and actionability
+  - Added READ-ONLY constraints to all analysis scanners in `/analyze-deep`
+  - Enhanced `/analyze-report` with specific issue-to-command mapping
+  - Action plans now generate executable Markdown files with checkboxes
+  - Added cleanup procedures for temporary analysis files
+  - Improved next steps commands after each finding
+
+### Fixed
+
+- 🐛 Prevented creation of temporary files during analysis operations
+- 🐛 Enhanced safety measures to avoid file modifications in read-only analysis
+
 ## [3.1.0] - 2025-01-29
 
 ### Added
@@ -304,6 +329,8 @@ This release marks the transition from a commands-only repository to a full tool
 
 - 🐛 Update instructions in README now reflect actual Git-based workflow
 
+[3.2.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.1.0...v3.2.0
+[3.1.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.4.0...v3.0.0
 [2.4.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.2.0...v2.3.0
