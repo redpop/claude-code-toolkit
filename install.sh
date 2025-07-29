@@ -42,6 +42,7 @@ fi
 CLAUDE_COMMANDS_DIR="$HOME/.claude/commands"
 CLAUDE_AGENTS_DIR="$HOME/.claude/agents"
 FORCE_INSTALL=false
+INSTALL_COMPONENTS="all"
 
 # Function to show help
 show_help() {
@@ -53,12 +54,17 @@ show_help() {
     echo "  <prefix>    The prefix for your commands (e.g., 'mytools', 'global', 'team')"
     echo ""
     echo "Options:"
-    echo "  --help, -h  Show this help message"
-    echo "  --force     Force installation without creating backups"
+    echo "  --help, -h              Show this help message"
+    echo "  --force                 Force installation without creating backups"
+    echo "  --install <components>  Install specific components (comma-separated)"
+    echo "                          Available: commands, agents, all (default: all)"
     echo ""
     echo "Examples:"
-    echo "  ./install.sh mytools           Install commands with prefix 'mytools'"
-    echo "  ./install.sh global --force    Force install without backups"
+    echo "  ./install.sh mytools                     Install everything (default)"
+    echo "  ./install.sh mytools --install commands  Install only commands"
+    echo "  ./install.sh mytools --install agents    Install only agents"
+    echo "  ./install.sh mytools --install commands,agents  Install both (explicit)"
+    echo "  ./install.sh global --force              Force install without backups"
     echo ""
     echo "After installation, commands will be available as:"
     echo "  /<prefix>:<category>:<command>"
@@ -79,6 +85,14 @@ while [[ $# -gt 0 ]]; do
         --force)
             FORCE_INSTALL=true
             shift
+            ;;
+        --install)
+            if [ -z "$2" ] || [[ "$2" == --* ]]; then
+                print_error "Option --install requires a value"
+                exit 1
+            fi
+            INSTALL_COMPONENTS="$2"
+            shift 2
             ;;
         -*)
             print_error "Unknown option: $1"
@@ -105,119 +119,164 @@ if [ -z "$PREFIX" ]; then
     echo "Run './install.sh --help' for more information."
     exit 1
 fi
+
+# Parse install components
+INSTALL_COMMANDS=false
+INSTALL_AGENTS=false
+
+IFS=',' read -ra COMPONENTS <<< "$INSTALL_COMPONENTS"
+for component in "${COMPONENTS[@]}"; do
+    case "$component" in
+        all)
+            INSTALL_COMMANDS=true
+            INSTALL_AGENTS=true
+            ;;
+        commands)
+            INSTALL_COMMANDS=true
+            ;;
+        agents)
+            INSTALL_AGENTS=true
+            ;;
+        *)
+            print_error "Unknown component: $component"
+            echo "Available components: commands, agents, all"
+            exit 1
+            ;;
+    esac
+done
+
+# Check if at least one component is selected
+if [ "$INSTALL_COMMANDS" = false ] && [ "$INSTALL_AGENTS" = false ]; then
+    print_error "No components selected for installation."
+    echo "Use --install with one or more of: commands, agents, all"
+    exit 1
+fi
+
 COMMANDS_INSTALL_PATH="$CLAUDE_COMMANDS_DIR/$PREFIX"
 
 # Create Claude directories if they don't exist
-if [ ! -d "$CLAUDE_COMMANDS_DIR" ]; then
+if [ "$INSTALL_COMMANDS" = true ] && [ ! -d "$CLAUDE_COMMANDS_DIR" ]; then
     print_info "Creating Claude commands directory: $CLAUDE_COMMANDS_DIR"
     mkdir -p "$CLAUDE_COMMANDS_DIR"
 fi
 
-if [ ! -d "$CLAUDE_AGENTS_DIR" ]; then
+if [ "$INSTALL_AGENTS" = true ] && [ ! -d "$CLAUDE_AGENTS_DIR" ]; then
     print_info "Creating Claude agents directory: $CLAUDE_AGENTS_DIR"
     mkdir -p "$CLAUDE_AGENTS_DIR"
 fi
 
-# Check if prefix directory already exists
-if [ -d "$COMMANDS_INSTALL_PATH" ]; then
-    if [ "$FORCE_INSTALL" = true ]; then
-        print_info "Force mode: Removing existing installation without backup..."
-        rm -rf "$COMMANDS_INSTALL_PATH"
-    else
-        echo -e "${YELLOW}Warning: Directory $COMMANDS_INSTALL_PATH already exists.${NC}"
-        read -p "Replace existing installation? (y/N) " -n 1 -r
-        echo
-        if [[ $REPLY =~ ^[Yy]$ ]]; then
-            print_info "Backing up existing installation..."
-            mv "$COMMANDS_INSTALL_PATH" "${COMMANDS_INSTALL_PATH}.backup.$(date +%Y%m%d_%H%M%S)"
-            print_info "Old installation backed up"
+# Handle commands installation
+if [ "$INSTALL_COMMANDS" = true ]; then
+    # Check if prefix directory already exists
+    if [ -d "$COMMANDS_INSTALL_PATH" ]; then
+        if [ "$FORCE_INSTALL" = true ]; then
+            print_info "Force mode: Removing existing installation without backup..."
+            rm -rf "$COMMANDS_INSTALL_PATH"
         else
-            print_info "Installation cancelled."
-            exit 0
+            echo -e "${YELLOW}Warning: Directory $COMMANDS_INSTALL_PATH already exists.${NC}"
+            read -p "Replace existing installation? (y/N) " -n 1 -r
+            echo
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+                print_info "Backing up existing installation..."
+                mv "$COMMANDS_INSTALL_PATH" "${COMMANDS_INSTALL_PATH}.backup.$(date +%Y%m%d_%H%M%S)"
+                print_info "Old installation backed up"
+            else
+                print_info "Skipping commands installation."
+                INSTALL_COMMANDS=false
+            fi
         fi
+    fi
+
+    # Copy commands
+    if [ "$INSTALL_COMMANDS" = true ]; then
+        print_info "Installing commands to $COMMANDS_INSTALL_PATH..."
+        mkdir -p "$COMMANDS_INSTALL_PATH"
+        cp -r "$SCRIPT_DIR/commands/"* "$COMMANDS_INSTALL_PATH/" 2>/dev/null || true
     fi
 fi
 
-# Copy commands
-print_info "Installing commands to $COMMANDS_INSTALL_PATH..."
-mkdir -p "$COMMANDS_INSTALL_PATH"
-cp -r "$SCRIPT_DIR/commands/"* "$COMMANDS_INSTALL_PATH/" 2>/dev/null || true
+# Handle agents installation
+if [ "$INSTALL_AGENTS" = true ]; then
+    # Check if any agents already exist
+    EXISTING_AGENTS=()
+    if [ -d "$CLAUDE_AGENTS_DIR" ]; then
+        while IFS= read -r -d '' agent_file; do
+            agent_name=$(basename "$agent_file")
+            if [ -f "$SCRIPT_DIR/agents/$agent_name" ]; then
+                EXISTING_AGENTS+=("$agent_name")
+            fi
+        done < <(find "$CLAUDE_AGENTS_DIR" -name "*.md" -type f -print0 2>/dev/null)
+    fi
 
-# Check if any agents already exist
-EXISTING_AGENTS=()
-if [ -d "$CLAUDE_AGENTS_DIR" ]; then
-    while IFS= read -r -d '' agent_file; do
-        agent_name=$(basename "$agent_file")
-        if [ -f "$SCRIPT_DIR/agents/$agent_name" ]; then
-            EXISTING_AGENTS+=("$agent_name")
-        fi
-    done < <(find "$CLAUDE_AGENTS_DIR" -name "*.md" -type f -print0 2>/dev/null)
-fi
-
-# Warn about existing agents
-if [ ${#EXISTING_AGENTS[@]} -gt 0 ]; then
-    if [ "$FORCE_INSTALL" = true ]; then
-        print_info "Force mode: Overwriting existing agents without backup..."
-        # No backup, just let the copy command overwrite
-    else
-        echo -e "${YELLOW}Warning: The following agents already exist in $CLAUDE_AGENTS_DIR:${NC}"
-        for agent in "${EXISTING_AGENTS[@]}"; do
-            echo "  - $agent"
-        done
-        read -p "Replace existing agents? (y/N) " -n 1 -r
-        echo
-        if [[ $REPLY =~ ^[Yy]$ ]]; then
-            print_info "Backing up existing agents..."
-            AGENTS_BACKUP_DIR="${CLAUDE_AGENTS_DIR}.backup.$(date +%Y%m%d_%H%M%S)"
-            mkdir -p "$AGENTS_BACKUP_DIR"
+    # Warn about existing agents
+    if [ ${#EXISTING_AGENTS[@]} -gt 0 ]; then
+        if [ "$FORCE_INSTALL" = true ]; then
+            print_info "Force mode: Overwriting existing agents without backup..."
+            # No backup, just let the copy command overwrite
+        else
+            echo -e "${YELLOW}Warning: The following agents already exist in $CLAUDE_AGENTS_DIR:${NC}"
             for agent in "${EXISTING_AGENTS[@]}"; do
-                cp "$CLAUDE_AGENTS_DIR/$agent" "$AGENTS_BACKUP_DIR/" 2>/dev/null || true
+                echo "  - $agent"
             done
-            print_info "Existing agents backed up to: $AGENTS_BACKUP_DIR"
-        else
-            print_info "Skipping agent installation to preserve existing agents."
-            SKIP_AGENTS=true
+            read -p "Replace existing agents? (y/N) " -n 1 -r
+            echo
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+                print_info "Backing up existing agents..."
+                AGENTS_BACKUP_DIR="${CLAUDE_AGENTS_DIR}.backup.$(date +%Y%m%d_%H%M%S)"
+                mkdir -p "$AGENTS_BACKUP_DIR"
+                for agent in "${EXISTING_AGENTS[@]}"; do
+                    cp "$CLAUDE_AGENTS_DIR/$agent" "$AGENTS_BACKUP_DIR/" 2>/dev/null || true
+                done
+                print_info "Existing agents backed up to: $AGENTS_BACKUP_DIR"
+            else
+                print_info "Skipping agent installation to preserve existing agents."
+                INSTALL_AGENTS=false
+            fi
         fi
     fi
-fi
 
-# Copy agents
-if [ "${SKIP_AGENTS:-false}" != "true" ]; then
-    print_info "Installing agents to $CLAUDE_AGENTS_DIR..."
-    cp "$SCRIPT_DIR/agents/"*.md "$CLAUDE_AGENTS_DIR/" 2>/dev/null || true
+    # Copy agents
+    if [ "$INSTALL_AGENTS" = true ]; then
+        print_info "Installing agents to $CLAUDE_AGENTS_DIR..."
+        cp "$SCRIPT_DIR/agents/"*.md "$CLAUDE_AGENTS_DIR/" 2>/dev/null || true
+    fi
 fi
 
 print_success "Installation complete!"
 
 # Display available commands
-echo
-echo "Available commands:"
-echo
+if [ "$INSTALL_COMMANDS" = true ]; then
+    echo
+    echo "Available commands:"
+    echo
 
-# List all command files
-if [ -d "$COMMANDS_INSTALL_PATH" ]; then
-    while IFS= read -r -d '' file; do
-        # Get relative path from installation directory
-        relative_path="${file#"$COMMANDS_INSTALL_PATH/"}"
-        # Remove .md extension
-        command_path="${relative_path%.md}"
-        # Replace / with :
-        command_name="${command_path//\//:}"
-        echo "  /${PREFIX}:${command_name}"
-    done < <(find "$COMMANDS_INSTALL_PATH" -name "*.md" -type f -print0 | sort -z)
+    # List all command files
+    if [ -d "$COMMANDS_INSTALL_PATH" ]; then
+        while IFS= read -r -d '' file; do
+            # Get relative path from installation directory
+            relative_path="${file#"$COMMANDS_INSTALL_PATH/"}"
+            # Remove .md extension
+            command_path="${relative_path%.md}"
+            # Replace / with :
+            command_name="${command_path//\//:}"
+            echo "  /${PREFIX}:${command_name}"
+        done < <(find "$COMMANDS_INSTALL_PATH" -name "*.md" -type f -print0 | sort -z)
+    fi
 fi
 
 # List available agents
-echo
-echo "Available sub-agents:"
-echo
-if [ -d "$CLAUDE_AGENTS_DIR" ]; then
-    for agent_file in "$CLAUDE_AGENTS_DIR"/*.md; do
-        if [ -f "$agent_file" ]; then
-            agent_name=$(basename "$agent_file" .md)
-            echo "  - $agent_name"
-        fi
-    done
+if [ "$INSTALL_AGENTS" = true ]; then
+    echo
+    echo "Available sub-agents:"
+    echo
+    if [ -d "$CLAUDE_AGENTS_DIR" ]; then
+        for agent_file in "$CLAUDE_AGENTS_DIR"/*.md; do
+            if [ -f "$agent_file" ]; then
+                agent_name=$(basename "$agent_file" .md)
+                echo "  - $agent_name"
+            fi
+        done
+    fi
 fi
 
 echo
