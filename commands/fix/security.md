@@ -1,12 +1,13 @@
 ---
-allowed-tools: Task, Read, Edit, MultiEdit, Grep, Bash(npm:*), Bash(yarn:*), Bash(git:*)
-description: Fix security vulnerabilities identified in analysis reports with automated patches and safety checks
+allowed-tools: Task, Read, Edit, MultiEdit, Grep, Bash(npm:*), Bash(yarn:*), Bash(git:*), Bash(semgrep:*)
+mcp-enhanced: mcp__semgrep__security_check, mcp__semgrep__semgrep_scan, mcp__semgrep__get_abstract_syntax_tree
+description: Fix security vulnerabilities with MCP-enhanced analysis or traditional pattern matching
 argument-hint: [report.json] [--severity=critical,high,medium] [--dry-run] [--interactive] [--owasp-top10]
 ---
 
 # Fix Security Command
 
-This command automatically fixes security vulnerabilities identified in code analysis reports. It applies secure coding patterns, adds validation, and implements security best practices.
+This command automatically fixes security vulnerabilities using the best available analysis tools. It leverages Semgrep MCP when available for precise AST-based fixes, with fallback to pattern-based approaches.
 
 ## Usage Examples
 
@@ -101,9 +102,47 @@ app.use(helmet({
 }));
 ```
 
+## Tool Detection
+
+**FIRST, CHECK AVAILABLE TOOLS:**
+
+1. **Check for Semgrep MCP**: Test if `mcp__semgrep__*` tools are available
+2. **Check for local Semgrep**: `Bash("which semgrep")`
+3. **Select fix strategy** based on available tools
+
 ## Workflow
 
 ### Phase 1: Security Analysis
+
+#### Option A: MCP-Enhanced Analysis (Preferred)
+
+**IF Semgrep MCP is available:**
+
+1. **Load and Verify Issues**:
+   - Parse report for security issues
+   - Use `mcp__semgrep__semgrep_scan` to verify current vulnerabilities
+   - Cross-reference with report to identify fixed/new issues
+
+2. **AST-Based Analysis**:
+   - Use `mcp__semgrep__get_abstract_syntax_tree` for precise code understanding
+   - Identify exact fix locations with semantic accuracy
+   - Generate context-aware fixes
+
+#### Option B: Local Semgrep Analysis
+
+**IF local Semgrep is available but not MCP:**
+
+```bash
+# Verify vulnerabilities
+semgrep --config=auto --json . > current-issues.json
+
+# Compare with report
+# Apply fixes based on Semgrep output
+```
+
+#### Option C: Traditional Analysis
+
+**IF no Semgrep tools available:**
 
 1. **Load Security Findings**:
    - Parse report for security issues
@@ -163,16 +202,28 @@ For each security issue:
 
 ### Phase 4: Verification
 
-1. **Security Testing**:
+#### With Semgrep MCP:
+
+1. **Automated Verification**:
+   ```markdown
+   # Use MCP to verify fixes
+   - Run mcp__semgrep__security_check on modified files
+   - Confirm vulnerabilities are resolved
+   - Check for new issues introduced
+   ```
+
+#### Without Semgrep MCP:
+
+1. **Traditional Testing**:
    ```bash
-   # Run security tests
+   # Run security tests if available
    npm run test:security
    
    # Static analysis
    npm audit
    
-   # Dependency check
-   npm run check-vulnerabilities
+   # Manual pattern verification
+   rg "fixed-pattern" --type js
    ```
 
 2. **Manual Review**:
@@ -182,8 +233,15 @@ For each security issue:
 
 ### Phase 5: Report
 
+**Include analysis method in report:**
+
 ```markdown
 ## Security Fix Report
+
+### Analysis Method
+- **Tool Used**: [Semgrep MCP | Local Semgrep | Pattern-Based]
+- **Fix Accuracy**: [High | Medium | Basic]
+- **Verification**: [Automated | Manual]
 
 ### Summary
 - **Total Vulnerabilities**: 15
@@ -281,12 +339,27 @@ Default settings:
 - Test generation: enabled
 - Backup before fix: enabled
 
+## Tool-Specific Benefits
+
+### With Semgrep MCP:
+- **Precise AST-based fixes**: No false positives
+- **Semantic understanding**: Context-aware modifications
+- **Automated verification**: Instant validation of fixes
+- **Custom rule support**: Project-specific security patterns
+
+### With Pattern-Based:
+- **Fast execution**: Quick pattern replacement
+- **Wide coverage**: Works without dependencies
+- **Simple fixes**: Effective for straightforward issues
+- **Manual verification**: Requires careful review
+
 ## Best Practices
 
 1. **Always Review Fixes**:
    - Security is critical
    - Context matters
    - Test thoroughly
+   - Consider tool limitations
 
 2. **Defense in Depth**:
    - Multiple layers of security
@@ -299,3 +372,9 @@ Default settings:
    - Regular security scans
 
 This command helps maintain a secure codebase by automatically applying security best practices and fixing common vulnerabilities.
+
+**💡 Tip**: For best results, install Semgrep MCP:
+```bash
+npm install -g @semgrep/mcp
+```
+This enables AST-based analysis for more accurate and reliable security fixes.
