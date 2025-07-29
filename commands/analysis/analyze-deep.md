@@ -23,28 +23,28 @@ This command combines the speed of parallel Task Tool agents with the expertise 
 
 **START PARALLEL SCANNING AGENTS (adjust security scanner based on tools):**
 
-1. **Code Complexity Scanner**: Task(description="Quick complexity scan", prompt="Rapidly scan $ARGUMENTS for high complexity code. Focus on: 1) Functions with cyclomatic complexity >10, 2) Deeply nested code >4 levels, 3) Long functions >50 lines. Return top 5 most complex areas as JSON with location and complexity score.", subagent_type="general-purpose")
+1. **Code Complexity Scanner**: Task(description="Quick complexity scan", prompt="READ-ONLY ANALYSIS - DO NOT CREATE ANY FILES. Rapidly scan $ARGUMENTS for high complexity code. Focus on: 1) Functions with cyclomatic complexity >10, 2) Deeply nested code >4 levels, 3) Long functions >50 lines. Return top 5 most complex areas as JSON with location and complexity score.", subagent_type="general-purpose")
 
 2. **Security Pattern Scanner**: 
    - **IF Semgrep MCP available**: Use `mcp__semgrep__security_check` for comprehensive security scanning
    - **ELSE IF local Semgrep**: `Bash("semgrep --config=auto --json $ARGUMENTS")`
    - **ELSE**: Task(description="Security pattern detection", prompt="Quick scan $ARGUMENTS for obvious security patterns. Look for: 1) Hardcoded secrets/credentials, 2) SQL concatenation, 3) eval/exec usage, 4) Unvalidated inputs. Return top security concerns as JSON with severity.", subagent_type="general-purpose")
 
-3. **Performance Hotspot Scanner**: Task(description="Performance issue detection", prompt="Scan $ARGUMENTS for performance anti-patterns. Identify: 1) O(n²) or worse algorithms, 2) Synchronous I/O in loops, 3) Large memory allocations, 4) Blocking operations. Return hotspots as JSON.", subagent_type="general-purpose")
+3. **Performance Hotspot Scanner**: Task(description="Performance issue detection", prompt="Scan $ARGUMENTS for performance anti-patterns. READ-ONLY ANALYSIS - DO NOT CREATE ANY FILES. Identify: 1) O(n²) or worse algorithms, 2) Synchronous I/O in loops, 3) Large memory allocations, 4) Blocking operations. Return hotspots as JSON analysis only.", subagent_type="general-purpose")
 
-4. **Architecture Violation Scanner**: Task(description="Architecture check", prompt="Quick scan $ARGUMENTS for architectural issues. Check: 1) Circular dependencies, 2) Layer violations, 3) God objects/modules, 4) Tight coupling. Return violations as JSON.", subagent_type="general-purpose")
+4. **Architecture Violation Scanner**: Task(description="Architecture check", prompt="READ-ONLY ANALYSIS - DO NOT CREATE ANY FILES. Quick scan $ARGUMENTS for architectural issues. Check: 1) Circular dependencies, 2) Layer violations, 3) God objects/modules, 4) Tight coupling. Return violations as JSON.", subagent_type="general-purpose")
 
-5. **Test Coverage Scanner**: Task(description="Test coverage check", prompt="Analyze test coverage in $ARGUMENTS. Identify: 1) Untested critical functions, 2) Low coverage modules <50%, 3) Missing test files. Return coverage gaps as JSON.", subagent_type="general-purpose")
+5. **Test Coverage Scanner**: Task(description="Test coverage check", prompt="Analyze test coverage in $ARGUMENTS. Identify: 1) Untested critical functions, 2) Low coverage modules <50%, 3) Missing test files. Return coverage gaps as JSON. IMPORTANT: Do NOT create any coverage report files - only analyze existing coverage data or test-to-code ratios.", subagent_type="general-purpose")
 
-6. **Code Smell Scanner**: Task(description="Code smell detection", prompt="Detect code smells in $ARGUMENTS. Find: 1) Duplicate code blocks, 2) Long parameter lists >5, 3) Dead code, 4) Inappropriate naming. Return top smells as JSON.", subagent_type="general-purpose")
+6. **Code Smell Scanner**: Task(description="Code smell detection", prompt="READ-ONLY ANALYSIS - DO NOT CREATE ANY FILES. Detect code smells in $ARGUMENTS. Find: 1) Duplicate code blocks, 2) Long parameter lists >5, 3) Dead code, 4) Inappropriate naming. Return top smells as JSON.", subagent_type="general-purpose")
 
-7. **Documentation Scanner**: Task(description="Documentation analysis", prompt="Check documentation in $ARGUMENTS. Analyze: 1) Missing function docs, 2) Outdated comments, 3) Unclear variable names, 4) Missing README sections. Return doc issues as JSON.", subagent_type="general-purpose")
+7. **Documentation Scanner**: Task(description="Documentation analysis", prompt="READ-ONLY ANALYSIS - DO NOT CREATE ANY FILES. Check documentation in $ARGUMENTS. Analyze: 1) Missing function docs, 2) Outdated comments, 3) Unclear variable names, 4) Missing README sections. Return doc issues as JSON.", subagent_type="general-purpose")
 
-8. **Dependency Scanner**: Task(description="Dependency check", prompt="Scan dependencies in $ARGUMENTS. Check: 1) Outdated packages, 2) Security vulnerabilities, 3) Unused dependencies, 4) Version conflicts. Return dependency issues as JSON.", subagent_type="general-purpose")
+8. **Dependency Scanner**: Task(description="Dependency check", prompt="READ-ONLY ANALYSIS - DO NOT CREATE ANY FILES. Scan dependencies in $ARGUMENTS. Check: 1) Outdated packages, 2) Security vulnerabilities, 3) Unused dependencies, 4) Version conflicts. Return dependency issues as JSON.", subagent_type="general-purpose")
 
-9. **Error Handling Scanner**: Task(description="Error handling analysis", prompt="Analyze error handling in $ARGUMENTS. Check: 1) Unhandled exceptions, 2) Generic catch blocks, 3) Missing error logs, 4) Poor error messages. Return issues as JSON.", subagent_type="general-purpose")
+9. **Error Handling Scanner**: Task(description="Error handling analysis", prompt="READ-ONLY ANALYSIS - DO NOT CREATE ANY FILES. Analyze error handling in $ARGUMENTS. Check: 1) Unhandled exceptions, 2) Generic catch blocks, 3) Missing error logs, 4) Poor error messages. Return issues as JSON.", subagent_type="general-purpose")
 
-10. **Integration Point Scanner**: Task(description="Integration analysis", prompt="Scan integration points in $ARGUMENTS. Identify: 1) External API calls, 2) Database queries, 3) File I/O operations, 4) Network requests. Return integration risks as JSON.", subagent_type="general-purpose")
+10. **Integration Point Scanner**: Task(description="Integration analysis", prompt="READ-ONLY ANALYSIS - DO NOT CREATE ANY FILES. Scan integration points in $ARGUMENTS. Identify: 1) External API calls, 2) Database queries, 3) File I/O operations, 4) Network requests. Return integration risks as JSON.", subagent_type="general-purpose")
 
 ## Phase 2: Intelligent Delegation
 
@@ -104,7 +104,7 @@ Provide refactoring plan with examples."
 
 ## Phase 3: Synthesis and Reporting
 
-Combine quick scan results with deep expert analysis:
+Combine quick scan results with deep expert analysis. **IMPORTANT: Include actionable "Next Steps" commands after each finding:**
 
 ```markdown
 # Comprehensive Code Analysis Report
@@ -112,10 +112,22 @@ Combine quick scan results with deep expert analysis:
 ## Executive Summary
 
 - **Quick Scan Duration**: [X seconds]
-- **Security Analysis Method**: [Semgrep MCP | Local Semgrep | Pattern-Based]
+- **Security Analysis Method**: [Semgrep MCP | Local Semgrep | Pattern-Based]  
 - **Issues Found**: [Total count by severity]
 - **Expert Analysis Completed**: [List of delegated analyses]
 - **Overall Health Score**: [X/100]
+
+## 🚀 Quick Actions (Copy & Paste)
+```bash
+# Generate Action Plan
+/global:analysis:analyze-report reports/analyze-deep-$(date +%Y%m%d).json --generate-action-plan
+
+# Start Fixing Issues  
+/global:workflow:execute-action-plan ACTION-PLAN-$(date +%Y%m%d).md
+
+# Track Progress
+/global:analysis:analyze-deep --export-json --compare-baseline
+```
 
 ## Critical Findings (Expert-Verified)
 
@@ -123,21 +135,81 @@ Combine quick scan results with deep expert analysis:
 
 [Results from security-specialist if delegated]
 
+**→ FIX COMMANDS:**
+```bash
+# Fix XSS vulnerabilities
+/global:fix:security --target=xss --auto-sanitize
+
+# Add input validation  
+/global:fix:security --target=validation --add-schemas
+
+# Security audit
+/global:orchestration:security-audit --auto-fix
+```
+
 ### ⚡ Performance Bottlenecks
 
 [Results from performance-optimizer if delegated]
+
+**→ FIX COMMANDS:**
+```bash
+# Fix O(n²) algorithms
+/global:fix:performance --target=algorithm --auto-optimize
+
+# Optimize database queries
+/global:fix:performance --target=database --batch-operations
+
+# Memory leak fixes
+/global:fix:performance --target=memory --add-cleanup
+```
 
 ### 🏗️ Architecture Concerns
 
 [Results from code-architect if delegated]
 
+**→ FIX COMMANDS:**
+```bash
+# Break down god components
+/global:refactoring-expert 'Extract components from large files'
+
+# Fix layer violations
+/global:code-architect 'Refactor architecture violations'
+
+# Reduce coupling
+/global:code-architect 'Implement dependency injection'
+```
+
 ### 🧪 Test Coverage Gaps
 
 [Results from test-engineer if delegated]
 
+**→ FIX COMMANDS:**
+```bash
+# Generate missing tests
+/global:generate:tests --focus=critical --coverage-target=90
+
+# Add integration tests
+/global:generate:tests --type=integration --auto-create
+
+# Test coverage analysis
+/global:orchestration:test-coverage --improve
+```
+
 ### 🔧 Code Quality Issues
 
 [Results from refactoring-expert if delegated]
+
+**→ FIX COMMANDS:**
+```bash
+# Remove code duplication
+/global:fix:duplicates --extract-shared --auto-refactor
+
+# Fix code smells
+/global:fix:quick-wins --target=all --auto-apply
+
+# Add documentation
+/global:fix:documentation --add-jsdoc --update-readme
+```
 
 ## Quick Scan Findings
 
@@ -149,18 +221,39 @@ Combine quick scan results with deep expert analysis:
 
 ### Immediate (0-24 hours)
 
-1. [Critical security fixes]
-2. [Performance quick wins]
+1. **Generate Executable Action Plan**
+   ```bash
+   /global:analysis:analyze-report reports/analyze-deep-$(date +%Y%m%d).json --generate-action-plan
+   ```
+
+2. **Execute Critical Fixes**
+   ```bash
+   /global:workflow:execute-action-plan ACTION-PLAN-$(date +%Y%m%d).md --filter=critical
+   ```
 
 ### Short-term (1 week)
 
-1. [Architecture improvements]
-2. [Test coverage increases]
+1. **Continue with High-Priority Issues**
+   ```bash
+   /global:workflow:execute-action-plan ACTION-PLAN-$(date +%Y%m%d).md --filter=high
+   ```
+
+2. **Track Progress**
+   ```bash
+   /global:analysis:analyze-deep --export-json --compare-baseline
+   ```
 
 ### Long-term (1 month)
 
-1. [Major refactoring]
-2. [System redesign]
+1. **Complete All Remaining Tasks**
+   ```bash
+   /global:workflow:execute-action-plan ACTION-PLAN-$(date +%Y%m%d).md --auto-continue
+   ```
+
+2. **Final Quality Check**
+   ```bash
+   /global:analysis:analyze-deep --export-json --final-report
+   ```
 
 ## Metrics Dashboard
 
@@ -205,8 +298,8 @@ After synthesis, if export parameters are provided:
 1. **Parse Export Parameters**:
 
    - Detect export format(s) requested
-   - Generate filename with timestamp if not provided
-   - Create export directory if it doesn't exist
+   - Generate filename with timestamp if not provided: `analyze-deep-YYYYMMDD-HHMMSS.json`
+   - Create export directory if it doesn't exist: `mkdir -p reports`
 
 2. **Generate Reports**:
 
@@ -274,12 +367,19 @@ After synthesis, if export parameters are provided:
 
 3. **Write Files**:
 
-   - Create reports directory if needed
-   - Write report file(s) with proper formatting
+   - Create reports directory if needed (`mkdir -p reports`)
+   - Generate filename with timestamp if not provided
+   - Write report file(s) to reports/ directory with proper formatting
    - Display export success message with file path(s)
 
 4. **Update History**:
    - Append to .report-history.json for historical tracking
+
+5. **Cleanup Temporary Files**:
+   - Remove any temporary files created during analysis
+   - Check for and delete coverage-report.json if it exists
+   - Check for and delete performance_analysis.json if it exists
+   - Clean up any other temporary analysis artifacts
 
 ## Performance Expectations
 

@@ -73,11 +73,21 @@ Analyze the following report data:
 - Focus: [general/quick-wins/critical/trends]
 - Reports: [list of reports with metadata]
 
+**IMPORTANT: When --generate-action-plan is used, map each issue to its corresponding fix command:**
+
+Issue Type → Command Mapping:
+- "O(n²) Algorithm" → `/prefix:fix:performance --target=algorithm --file={file}`
+- "Code Duplication" → `/prefix:fix:duplicates --file={file} --extract-shared`
+- "Missing Tests" → `/prefix:generate:tests --focus={module} --coverage-target=90`
+- "God Component" → `/prefix:refactoring-expert 'Break down {file} into smaller components'`
+- "Security Issue" → `/prefix:fix:security --target={vulnerability_type} --file={file}`
+- "Documentation Gap" → `/prefix:fix:documentation --add-jsdoc --file={file}`
+
 Provide:
 1. Executive summary with key insights
-2. Prioritized action items with ROI scores
+2. Prioritized action items with ROI scores and **specific commands**
 3. Trend analysis (if multiple reports)
-4. Specific recommendations based on findings
+4. Executable action plan with command mapping
 ```
 
 ### Phase 3: Generate Insights
@@ -138,7 +148,38 @@ Generate formatted output:
 
 ### Phase 5: Action Plan Generation (if --generate-action-plan)
 
-When the `--generate-action-plan` flag is used, create an executable action plan with specific commands:
+When the `--generate-action-plan` flag is used, create an executable action plan as a Markdown file with **specific fix commands** mapped to each issue type:
+
+**Issue-to-Command Mapping:**
+```javascript
+const ISSUE_COMMAND_MAPPING = {
+  // Performance Issues
+  "O(n²) Algorithm": "/prefix:fix:performance --target=algorithm --file={file}",
+  "Memory Leak": "/prefix:fix:performance --target=memory --file={file}",
+  "Database N+1": "/prefix:fix:performance --target=database --batch-operations",
+  
+  // Code Quality Issues  
+  "Code Duplication": "/prefix:fix:duplicates --file={file} --extract-shared",
+  "God Component": "/prefix:refactoring-expert 'Break down {file} into smaller components'",
+  "Long Parameter List": "/prefix:fix:quick-wins --target=parameters --file={file}",
+  
+  // Testing Issues
+  "Missing Tests": "/prefix:generate:tests --focus={module} --coverage-target=90",
+  "Low Coverage": "/prefix:generate:tests --file={file} --increase-coverage",
+  
+  // Security Issues
+  "XSS Vulnerability": "/prefix:fix:security --target=xss --file={file}",
+  "Input Validation": "/prefix:fix:security --target=validation --file={file}",
+  
+  // Architecture Issues
+  "Tight Coupling": "/prefix:code-architect 'Reduce coupling in {file}'",
+  "Layer Violation": "/prefix:code-architect 'Fix architecture violations in {file}'",
+  
+  // Documentation Issues
+  "Missing JSDoc": "/prefix:fix:documentation --add-jsdoc --file={file}",
+  "Outdated Comments": "/prefix:fix:documentation --update-comments --file={file}"
+}
+```
 
 ```markdown
 # Action Plan Report
@@ -219,11 +260,68 @@ When the `--generate-action-plan` flag is used, create an executable action plan
 - [ ] Documentation (8h)
 ```
 
+**IMPORTANT: When --generate-action-plan is used, ALWAYS create the action plan as a Markdown file:**
+
+1. **Generate filename**: `ACTION-PLAN-{YYYYMMDD-HHMMSS}.md` 
+2. **Write to file**: Use Write tool to create the action plan file in current directory
+3. **Include checkboxes**: Use `- [ ]` for uncompleted tasks, `- [x]` for completed
+4. **Reference report**: Include source report filename in header
+
+**Example Action Plan Template:**
+```markdown
+# 🎯 Action Plan - {Project Name}
+
+**Generated**: {timestamp}  
+**Based on Report**: {report_filename}  
+**Total Effort**: {hours}h  
+**Priority**: ROI-based ordering  
+
+## 🔥 Critical Issues (Week 1)
+- [ ] **Fix O(n²) Algorithm** (2h) - ROI: 50.0
+  - **Command**: `/global:fix:performance --target=algorithm --file=src/utils/loanCalculations.ts`
+  - **Files**: `src/utils/loanCalculations.ts:168-175`
+  - **Impact**: 73% performance improvement
+  - **Validation**: `/global:orchestration:performance-scan --verify`
+  - **Auto-Execute**: ✅ Ready for workflow execution
+
+- [ ] **Add Storage Tests** (8h) - ROI: 11.3  
+  - **Command**: `/global:generate:tests --focus=storage --coverage-target=90 --files="src/services/database.ts,src/services/storageAdapter.ts"`
+  - **Files**: `src/services/database.ts, src/services/storageAdapter.ts`
+  - **Impact**: Prevent data loss
+  - **Validation**: `npm test -- --coverage src/services/`
+  - **Auto-Execute**: ✅ Ready for workflow execution
+
+## ⚡ Quick Wins (Week 2)  
+- [ ] **Remove PDF Duplication** (4h) - ROI: 20.0
+  - **Command**: `/global:fix:duplicates --file=src/utils/pdfExport.ts --extract-shared`
+  - **Files**: `src/utils/pdfExport.ts` (180+ duplicate lines)
+  - **Impact**: 50% maintenance reduction
+  - **Validation**: `npm test -- src/utils/pdfExport.test.ts`
+  - **Auto-Execute**: ✅ Ready for workflow execution
+
+## 📊 Progress Tracking
+- [ ] **Create Baseline**: `/global:security:baseline --save`
+- [ ] **Weekly Check**: `/global:analysis:analyze-deep --export-json`
+- [ ] **Compare Progress**: `/global:analysis:analyze-report latest.json --compare=baseline.json`
+
+## 📈 Success Metrics
+| Metric | Before | Target | Current |
+|--------|--------|--------|---------|
+| Health Score | 65 | 80+ | ___ |
+| Test Coverage | 53% | 75% | ___ |
+| Performance | 65 | 90+ | ___ |
+
+---
+*Next Review*: {next_review_date}  
+*Execute Plan*: `/global:workflow:execute-action-plan {this_file}`  
+*Update Progress*: `/global:analysis:analyze-report {report} --update-action-plan={this_file}`
+```
+
 The action plan includes:
 - Exact commands to run for each fix
-- Time estimates based on complexity
+- Time estimates based on complexity  
 - Clear prioritization by ROI
-- Progress tracking mechanisms
+- Progress tracking with checkboxes
 - Team allocation suggestions (if requested)
 
 ## Advanced Features
