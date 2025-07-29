@@ -26,7 +26,8 @@
       "Bash(mv:*)",
       "Bash(./scripts/update-readme.sh:*)",
       "Bash(test:*)",
-      "Bash(/commit --push)"
+      "Bash(/commit --push)",
+      "mcp__semgrep__semgrep_rule_schema"
     ],
     "deny": []
   }

@@ -1,6 +1,7 @@
 ---
 allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*), Bash(semgrep:*), Write
-description: Comprehensive security audit with 8 specialized agents for critical vulnerabilities
+mcp-enhanced: mcp__semgrep__security_check, mcp__semgrep__semgrep_scan, mcp__semgrep__semgrep_findings
+description: Comprehensive security audit with MCP-enhanced scanning or traditional fallback methods
 argument-hint: [directory] [--severity=critical|high|all] [--export-md] [--export-json] [--export-html] [--export-all] [--export-dir=path]
 ---
 
@@ -8,11 +9,57 @@ argument-hint: [directory] [--severity=critical|high|all] [--export-md] [--expor
 
 # Security Audit Command
 
-This command performs a deep security audit with 8 parallel-working agents. Each agent is specialized in specific security risks.
+This command performs a deep security audit using the best available tools, with automatic fallback to traditional methods when enhanced tools are not available.
 
-## Execution
+## Tool Detection Phase
 
-**IMMEDIATELY START 8 PARALLEL SECURITY AGENTS:**
+**FIRST, CHECK AVAILABLE SECURITY TOOLS:**
+
+1. **Check for Semgrep MCP**: Test if `mcp__semgrep__*` tools are available
+2. **Check for local Semgrep**: `Bash("which semgrep")`
+3. **Determine analysis strategy** based on available tools
+
+## Execution Strategy
+
+### Option A: MCP-Enhanced Security Audit (Preferred)
+
+**IF Semgrep MCP tools are available, USE THIS APPROACH:**
+
+1. **Comprehensive MCP Security Scan**:
+   - Use `mcp__semgrep__security_check` for fast initial security assessment
+   - If critical issues found, proceed with detailed analysis
+
+2. **Detailed Vulnerability Analysis**:
+   - Use `mcp__semgrep__semgrep_scan` with config "p/security" for comprehensive scanning
+   - Collect all code files using Read/Glob tools
+   - Submit files for analysis with proper structure
+
+3. **Check Existing Findings** (if applicable):
+   - Use `mcp__semgrep__semgrep_findings` to retrieve any existing security findings from CI/CD
+   - Filter by severity and status
+
+4. **Custom Rule Scanning** (for specific concerns):
+   - Create custom rules for project-specific security patterns
+   - Use `mcp__semgrep__semgrep_scan_with_custom_rule` for targeted analysis
+
+### Option B: Local Semgrep Fallback
+
+**IF Semgrep MCP is NOT available BUT local semgrep is installed:**
+
+```bash
+# Run comprehensive security scan
+semgrep --config=auto --json --severity=ERROR,WARNING $ARGUMENTS
+
+# Run OWASP specific checks
+semgrep --config=p/owasp-top-ten --json $ARGUMENTS
+
+# Run security audit
+semgrep --config=p/security-audit --json $ARGUMENTS
+```
+
+### Option C: Traditional Pattern-Based Audit
+
+**IF neither MCP nor local Semgrep is available, START 8 PARALLEL SECURITY AGENTS:**
 
 1. **SQL Injection Agent**: Task(description="SQL Injection Detection", prompt="Scan $ARGUMENTS for SQL injection vulnerabilities. Search for: 1) String concatenation in SQL queries, 2) Unescaped user input in queries, 3) Dynamic query building, 4) Raw SQL without prepared statements. Use rg for patterns like 'SELECT.*\\+|WHERE.*\\$|query\\(.*\\+'. Return all findings with severity and code location as JSON.", subagent_type="general-purpose")
 
@@ -32,9 +79,9 @@ This command performs a deep security audit with 8 parallel-working agents. Each
 
 ## Synthesis
 
-After completion of all security agents:
+After completion of security analysis (regardless of method used):
 
-1. **Consolidate all findings** from the 8 agent reports
+1. **Consolidate all findings** from the chosen analysis method
 2. **Classify by CVSS Score**:
    - Critical (9.0-10.0): Immediate Action Required
    - High (7.0-8.9): Fix within 24-48 hours
@@ -50,6 +97,11 @@ After completion of all security agents:
 4. **Create Security Report**:
    ```markdown
    # Security Audit Report
+   
+   ## Analysis Method
+   - **Tool Used**: [Semgrep MCP | Local Semgrep | Pattern-Based Analysis]
+   - **Accuracy Level**: [High | Medium | Basic]
+   - **Scan Duration**: X seconds
    
    ## Executive Summary
    - Total Vulnerabilities: X
@@ -74,6 +126,9 @@ After completion of all security agents:
    
    ## Security Posture Score
    [Based on findings: A-F rating]
+   
+   ## Tool Recommendations
+   [If not using MCP, include upgrade suggestion]
    ```
 
 5. **Generate Actionable Tickets**:
@@ -82,6 +137,36 @@ After completion of all security agents:
    - Remediation Steps
    - Testing Instructions
 
-**Performance expectation**: Security audit in 5-7 seconds, compared to 40-50 seconds sequentially.
+## Quality Indicators
 
-**Security notice**: This audit does not replace professional penetration testing or security reviews, but serves as a first analysis layer.
+Include in report based on analysis method:
+
+### With Semgrep MCP:
+```markdown
+✅ **High-Accuracy Analysis**: Using Semgrep's AST-based scanning
+✅ **Comprehensive Coverage**: All OWASP Top 10 categories checked
+✅ **Low False Positive Rate**: Advanced semantic analysis
+```
+
+### With Local Semgrep:
+```markdown
+⚡ **Good Analysis Quality**: Using local Semgrep installation
+⚡ **Strong Coverage**: Most security patterns detected
+⚠️ **Note**: Consider installing Semgrep MCP for faster analysis
+```
+
+### With Pattern-Based:
+```markdown
+⚠️ **Basic Analysis**: Using pattern matching (reduced accuracy)
+⚠️ **Limited Coverage**: May miss complex vulnerabilities
+💡 **Recommendation**: Install Semgrep MCP for professional-grade analysis:
+   npm install -g @semgrep/mcp
+```
+
+## Performance Expectations
+
+- **Semgrep MCP**: 3-5 seconds for comprehensive scan
+- **Local Semgrep**: 10-15 seconds depending on codebase size
+- **Pattern-based**: 5-7 seconds with parallel agents
+
+**Security notice**: This audit does not replace professional penetration testing or security reviews, but serves as a first analysis layer. Results quality depends on available tools.

@@ -28,17 +28,20 @@ This command analyzes your project and intelligently updates documentation to re
 ## What This Command Does
 
 1. **Discovers Documentation**:
+
    - Scans project for documentation files (README.md, docs/, etc.)
    - Identifies documentation patterns and structure
    - Detects documentation generation tools (JSDoc, Sphinx, etc.)
 
 2. **Analyzes Current State**:
+
    - Reviews recent code changes and commits
    - Examines function signatures, classes, and modules
    - Checks implementation status against documentation
    - Identifies outdated or missing documentation
 
 3. **Updates Documentation**:
+
    - Synchronizes docs with actual implementation
    - Refreshes examples to match current usage
    - Maintains existing formatting and style
@@ -54,6 +57,7 @@ This command analyzes your project and intelligently updates documentation to re
 ## Documentation Types Handled
 
 ### README.md
+
 - Installation instructions based on package files
 - Usage examples from actual code
 - Feature list from implemented functionality
@@ -61,6 +65,7 @@ This command analyzes your project and intelligently updates documentation to re
 - Badge updates (version, build status, etc.)
 
 ### Implementation Docs
+
 - Progress tracking against specifications
 - Task completion status
 - Architecture decisions
@@ -68,13 +73,16 @@ This command analyzes your project and intelligently updates documentation to re
 - Performance considerations
 
 ### Other Documentation
+
 - CONTRIBUTING.md - development setup
 - SECURITY.md - security policies
 - Wiki pages - detailed guides
 - Code comments - inline documentation
 
 ### Changelog (Special Handling)
+
 CHANGELOG.md always uses specialized handling:
+
 - Automatically checks if `/project:changelog` command is available
 - If available: Delegates to the specialized changelog command
 - Applies when `--scope=changelog` OR `--scope=all` (default)
@@ -84,6 +92,7 @@ CHANGELOG.md always uses specialized handling:
 ## Workflow Steps
 
 1. **Discovery Phase**:
+
    ```
    - Locate all documentation files
    - Identify documentation tools/generators
@@ -92,6 +101,7 @@ CHANGELOG.md always uses specialized handling:
    ```
 
 2. **Analysis Phase**:
+
    ```
    - Parse source code for structure
    - Extract comments and docstrings
@@ -100,6 +110,7 @@ CHANGELOG.md always uses specialized handling:
    ```
 
 3. **Update Phase**:
+
    ```
    - Update outdated information
    - Add missing documentation
@@ -108,6 +119,7 @@ CHANGELOG.md always uses specialized handling:
    ```
 
 4. **Validation Phase**:
+
    ```
    - Check markdown syntax
    - Verify internal links
@@ -125,19 +137,23 @@ CHANGELOG.md always uses specialized handling:
 ## Smart Features
 
 ### Auto-Detection
+
 The command automatically detects:
+
 - Programming language and frameworks
 - Documentation standards (JSDoc, Sphinx, etc.)
 - Project structure and conventions
 - Existing documentation style
 
 ### Incremental Updates
+
 - Only modifies sections that need updates
 - Preserves manually written content
 - Maintains custom formatting
 - Respects documentation markers
 
 ### Context Awareness
+
 - Understands different project types
 - Adapts to various documentation styles
 - Recognizes common patterns
@@ -146,6 +162,7 @@ The command automatically detects:
 ## Examples
 
 ### Example 1: Full Documentation Update
+
 ```
 /update-docs
 
@@ -162,6 +179,7 @@ All documentation successfully updated.
 ```
 
 ### Example 2: Preview Mode
+
 ```
 /update-docs --analyze
 
@@ -174,6 +192,7 @@ No changes made (preview mode)
 ```
 
 ### Example 3: Scoped Update with Commit
+
 ```
 /update-docs --scope=readme --commit
 
@@ -186,6 +205,7 @@ Committed: 📝 docs: update readme documentation
 ```
 
 ### Example 4: Changelog Delegation
+
 ```
 /update-docs --scope=changelog --commit
 
@@ -209,18 +229,24 @@ The command respects these markers in your documentation:
 
 ```markdown
 <!-- AUTO-GENERATED-START -->
+
 Content here will be updated automatically
+
 <!-- AUTO-GENERATED-END -->
 
 <!-- MANUAL-CONTENT -->
+
 Content here will never be modified
+
 <!-- END-MANUAL-CONTENT -->
 ```
 
 ## Integration with Other Commands
 
 ### Changelog Integration
+
 For CHANGELOG.md updates (both `--scope=all` and `--scope=changelog`):
+
 - Automatically detects if `/project:changelog` command exists
 - Delegates to the specialized command with all arguments
 - Example: `/update-docs --commit` → includes `/project:changelog --commit`
@@ -229,6 +255,7 @@ For CHANGELOG.md updates (both `--scope=all` and `--scope=changelog`):
 - If `/project:changelog` not found, treats as regular documentation
 
 ### Other Integrations
+
 - Can use `/git:commit` workflow when committing
 - Complements code generation commands
 - Coordinates with testing commands for examples
@@ -236,6 +263,7 @@ For CHANGELOG.md updates (both `--scope=all` and `--scope=changelog`):
 ## Error Handling
 
 The command handles:
+
 - Missing documentation files (offers to create)
 - Malformed markdown (attempts to fix)
 - Conflicting information (prompts for clarification)
@@ -245,6 +273,7 @@ The command handles:
 ## Configuration Support
 
 Respects project configuration files:
+
 - `.docsrc` or `docs.config.json`
 - `package.json` documentation scripts
 - `.gitignore` for documentation paths
@@ -253,18 +282,21 @@ Respects project configuration files:
 ## Language-Specific Features
 
 ### JavaScript/TypeScript
+
 - Parses JSDoc comments
 - Extracts TypeScript types
 - Updates from documentation patterns
 - Analyzes module structure
 
 ### Python
+
 - Processes docstrings
 - Extracts type hints
-- Updates from __all__
+- Updates from **all**
 - Generates from module structure
 
 ### Other Languages
+
 - Adapts to language conventions
 - Uses appropriate doc tools
 - Maintains idiomatic style
