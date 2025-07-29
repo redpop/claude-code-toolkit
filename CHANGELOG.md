@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [2.3.0] - 2025-01-29
+
+### Added
+
+- ✨ MCP (Model Context Protocol) Integration System - enhanced command functionality with optional MCP server support
+  - MCP-aware command template for creating MCP-enhanced commands
+  - Comprehensive MCP integration guide in `docs/guides/MCP-INTEGRATION.md`
+  - Support for Semgrep MCP, GitHub MCP, GitLab MCP, and Perplexity MCP
+  - Graceful fallback when MCP servers are not available
+- ✨ Security Commands Category - new security-focused commands
+  - `/security/baseline` - Establish and track security baseline with MCP-enhanced scanning
+  - `/security/compliance` - Compliance checking (OWASP Top 10, PCI-DSS, GDPR)
+- ✨ MCP Enhancement for Existing Commands
+  - Security-related commands now leverage Semgrep MCP when available
+  - Commands transparently report which tools were used (MCP or traditional)
+
+### Changed
+
+- 🔄 Updated multiple commands to support MCP enhancement while maintaining backward compatibility
+- 🔄 Enhanced security-specialist agent to work with MCP tools
+- 🔄 Updated CLAUDE.md with MCP integration documentation
+
 ## [2.2.0] - 2025-01-28
 
 ### Added
@@ -208,6 +232,7 @@ This release marks the transition from a commands-only repository to a full tool
 
 - 🐛 Update instructions in README now reflect actual Git-based workflow
 
+[2.3.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/redpop/claude-code-toolkit/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.0.1...v2.1.0
