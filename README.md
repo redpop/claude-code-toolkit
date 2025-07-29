@@ -164,7 +164,7 @@ The installation script will:
 | `/prefix:fix:documentation` | Fix documentation issues including broken links, parameter mismatches, missing cross-references, and outdated content | `report.json|directory`, `--fix-links`, `--fix-params`, `--add-deprecation`, `--dry-run`, `--interactive` |
 | `/prefix:fix:duplicates` | Remove code duplication by extracting common functions, creating shared utilities, and applying DRY principles | `report.json|directory`, `--threshold=80`, `--min-lines=5`, `--dry-run`, `--create-utils` |
 | `/prefix:fix:quick-wins` | Apply high-ROI fixes from analysis reports - quick wins with maximum impact and minimal effort | `report.json`, `--dry-run`, `--category=security|performance|quality`, `--max-effort=4h`, `--min-roi=5` |
-| `/prefix:fix:security` | Fix security vulnerabilities identified in analysis reports with automated patches and safety checks | `report.json`, `--severity=critical,high,medium`, `--dry-run`, `--interactive`, `--owasp-top10` |
+| `/prefix:fix:security` | Fix security vulnerabilities with MCP-enhanced analysis or traditional pattern matching | `report.json`, `--severity=critical,high,medium`, `--dry-run`, `--interactive`, `--owasp-top10` |
 
 
 ### Generate Commands
@@ -189,7 +189,7 @@ The installation script will:
 | `/prefix:orchestration:analyze-parallel` | Ultra-fast code analysis with 10 parallel agents for 10x performance | `directory`, `--focus=area`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
 | `/prefix:orchestration:performance-scan` | Deep Performance Profiling with 7 Agents for Bottleneck Identification and Optimization | `directory`, `--profile=cpu|memory|io|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
 | `/prefix:orchestration:refactor-impact` | Analyzes the impact of refactoring changes using 6 specialized agents | `file-or-pattern`, `--change-type=rename|move|signature|structure` |
-| `/prefix:orchestration:security-audit` | Comprehensive security audit with 8 specialized agents for critical vulnerabilities | `directory`, `--severity=critical|high|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
+| `/prefix:orchestration:security-audit` | Comprehensive security audit with MCP-enhanced scanning or traditional fallback methods | `directory`, `--severity=critical|high|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
 | `/prefix:orchestration:test-coverage` | Comprehensive test coverage analysis with 5 specialized agents for test quality | `directory`, `--framework=jest|pytest|go-test|cargo-test`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
 
 
@@ -211,6 +211,14 @@ The installation script will:
 | `/prefix:research:dependency-trace` | In-depth dependency analysis with 6 specialized agents for complete transparency | `package-name|file`, `--depth=direct|transitive|full`, `--check=security|licenses|all` |
 
 
+### Security Commands
+
+| Command | Description | Options |
+|---------|-------------|---------|
+| `/prefix:security:baseline` | Establish and track security baseline with MCP-enhanced scanning or traditional methods | `directory`, `--export-baseline`, `--compare=previous-baseline.json`, `--track-improvements` |
+| `/prefix:security:compliance` | Run compliance checks for OWASP, PCI-DSS, GDPR, and custom security policies | `directory`, `--standard=owasp|pci-dss|gdpr|all`, `--custom-rules=rules.yaml`, `--export-report` |
+
+
 ### Templates Commands
 
 | Command | Description | Options |
@@ -220,6 +228,7 @@ The installation script will:
 | `/prefix:templates:basic-sub-agent` | [Kurze Beschreibung des Commands] | `expected-arguments` |
 | `/prefix:templates:helper-agent` | [BRIEF_DESCRIPTION] | - |
 | `/prefix:templates:hybrid-sub-agent` | [Brief description of the command] | `expected-arguments` |
+| `/prefix:templates:mcp-aware-command` | Template for creating MCP-aware commands with graceful fallback | `arguments`, `--options` |
 | `/prefix:templates:research-sub-agent` | Template für Research Commands die verschiedene Informationsquellen parallel durchsuchen | `research-topic`, `--scope=local|web|all` |
 | `/prefix:templates:specialist-agent` | [BRIEF_DESCRIPTION] | - |
 
@@ -248,7 +257,7 @@ Each sub-agent operates independently with its own specialized focus area, then 
 
 ### Available Specialized Sub-Agents
 
-Our sub-agent system includes five core specialists that can be combined in various ways:
+Our sub-agent system includes seven core specialists that can be combined in various ways:
 
 #### 1. Security Specialist 🔒
 
@@ -285,6 +294,12 @@ Our sub-agent system includes five core specialists that can be combined in vari
 - **Expertise**: Documentation quality, code-doc synchronization, technical writing best practices
 - **Focus Areas**: Parameter validation, cross-reference checking, deprecation tracking, coverage analysis
 - **Output**: Health scores, broken link reports, parameter mismatches, improvement recommendations
+
+#### 7. Report Analyzer 📊
+
+- **Expertise**: Code quality report analysis, trend detection, prioritization strategies
+- **Focus Areas**: ROI analysis, quick wins identification, historical comparisons, sprint planning
+- **Output**: Prioritized action items, trend reports, implementation roadmaps
 
 ### Hybrid Commands: Task Tool + Sub-Agents
 

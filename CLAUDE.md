@@ -17,16 +17,18 @@ The repository is designed to be cloned and installed into `~/.claude/` with a c
 claude-code-toolkit/
 ├── agents/                  # Sub-Agent definitions
 │   ├── code-architect.md   # Architecture analysis agent
+│   ├── documentation-health-specialist.md # Documentation quality agent
 │   ├── performance-optimizer.md  # Performance optimization agent
 │   ├── refactoring-expert.md    # Code refactoring agent
+│   ├── report-analyzer.md  # Report analysis agent
 │   ├── security-specialist.md   # Security analysis agent
 │   └── test-engineer.md    # Testing strategy agent
 ├── commands/                # All slash command definitions
 │   ├── analysis/           # Analysis commands
 │   │   ├── analyze-deep.md # Deep analysis using hybrid approach
 │   │   └── analyze-report.md # Report analysis command
-│   ├── fix/                # Fix commands (planned)
-│   ├── generate/           # Generation commands (planned)
+│   ├── fix/                # Fix commands
+│   ├── generate/           # Generation commands
 │   ├── git/                # Git-related commands
 │   ├── orchestration/      # Sub-Agent orchestration commands
 │   │   ├── analyze-parallel.md   # Parallel multi-agent analysis
@@ -38,11 +40,19 @@ claude-code-toolkit/
 │   │   ├── codebase-map.md      # Generate codebase overview
 │   │   ├── deep-dive.md         # Deep investigation
 │   │   └── dependency-trace.md  # Trace dependencies
+│   ├── security/           # Security-focused commands
+│   │   ├── baseline.md          # Security baseline tracking
+│   │   └── compliance.md        # Compliance checking
 │   ├── templates/          # Templates for new commands/agents
-│   │   ├── basic-sub-agent.md    # Basic sub-agent template
 │   │   ├── analysis-sub-agent.md # Analysis agent template
-│   │   └── research-sub-agent.md # Research agent template
-│   └── workflow/           # Workflow commands (planned)
+│   │   ├── analyzer-agent.md     # Analyzer agent template
+│   │   ├── basic-sub-agent.md    # Basic sub-agent template
+│   │   ├── helper-agent.md       # Helper agent template
+│   │   ├── hybrid-sub-agent.md   # Hybrid command template
+│   │   ├── mcp-aware-command.md  # MCP-aware command template
+│   │   ├── research-sub-agent.md # Research agent template
+│   │   └── specialist-agent.md   # Specialist agent template
+│   └── workflow/           # Workflow commands
 ├── docs/                    # Extended documentation
 │   ├── README.md           # Documentation index
 │   ├── architecture/       # Architecture documentation
@@ -129,8 +139,10 @@ Sub-Agents are specialized AI agents defined in the `/agents/` directory:
 **Types of Sub-Agents:**
 
 - **code-architect**: Analyzes system architecture and design patterns
+- **documentation-health-specialist**: Analyzes documentation quality and code-doc synchronization
 - **performance-optimizer**: Identifies performance bottlenecks and optimizations
 - **refactoring-expert**: Suggests code improvements and refactoring strategies
+- **report-analyzer**: Analyzes code quality reports and provides prioritized insights
 - **security-specialist**: Performs security audits and vulnerability detection
 - **test-engineer**: Analyzes test coverage and testing strategies
 
@@ -236,6 +248,20 @@ Key features:
 - Includes emoji prefixes for change types
 - Optionally commits changes with conventional commit message
 
+**`/prefix:project:create-command`** - Create new slash commands:
+
+- Generate commands from natural language descriptions
+- Automatically determine appropriate category
+- Create properly formatted command files
+- Include all necessary metadata
+
+**`/prefix:project:update-docs`** - Update project documentation:
+
+- Synchronize documentation with code changes
+- Update README, CHANGELOG, and other docs
+- Maintain existing formatting and style
+- Optionally commit changes
+
 ### AI Commands (`/prefix:ai:*`)
 
 **`/prefix:ai:handoff`** - AI context handoff command that:
@@ -245,6 +271,15 @@ Key features:
 - Includes code snippets, directory structure, and recent changes
 - Captures context of ongoing tasks and next steps
 - Useful for switching between AI assistants or documenting work state
+
+### Code Commands (`/prefix:code:*`)
+
+**`/prefix:code:shellcheck`** - Shell script analysis and fixing:
+
+- Automatically detect and fix shell script issues
+- Uses shellcheck for comprehensive analysis
+- Supports strict mode checking
+- Provides summary reports
 
 ### Research Commands (`/prefix:research:*`)
 
@@ -259,6 +294,22 @@ Key features:
 **`/prefix:orchestration:performance-scan`** - Performance analysis using performance-optimizer  
 **`/prefix:orchestration:refactor-impact`** - Refactoring impact analysis  
 **`/prefix:orchestration:test-coverage`** - Test coverage analysis using test-engineer
+
+### Generate Commands (`/prefix:generate:*`)
+
+**`/prefix:generate:documentation`** - Generate comprehensive documentation:
+
+- Generate API documentation from code
+- Create README files with proper structure
+- Add inline code comments
+- Generate architecture diagrams
+
+**`/prefix:generate:tests`** - Generate test suites:
+
+- Create unit tests for uncovered code
+- Generate integration tests
+- Add edge case testing
+- Create test fixtures and mocks
 
 ### Fix Commands (`/prefix:fix:*`)
 
@@ -312,6 +363,45 @@ Key features:
 - Parameter consistency checking
 - Cross-reference and link validation
 - Deprecation tracking and coverage analysis
+
+**`/prefix:analysis:five-whys`** - Five Whys root cause analysis:
+
+- Apply the Five Whys technique to investigate issues
+- Drill down to root causes systematically
+- Generate actionable insights
+- Document causal chains
+
+### Security Commands (`/prefix:security:*`)
+
+**`/prefix:security:baseline`** - Security baseline tracking:
+
+- Establish security baseline for projects
+- Track security improvements over time
+- Compare against previous baselines
+- Export baseline reports
+
+**`/prefix:security:compliance`** - Compliance checking:
+
+- OWASP Top 10 compliance validation
+- PCI-DSS compliance checks
+- GDPR compliance analysis
+- Custom security policy enforcement
+
+### Workflow Commands (`/prefix:workflow:*`)
+
+**`/prefix:workflow:continuous-quality`** - Continuous code quality monitoring:
+
+- Set up automated analysis schedules
+- Configure auto-fix policies
+- Establish notification channels
+- Track quality metrics over time
+
+**`/prefix:workflow:quality-sprint`** - Code quality improvement sprint:
+
+- Plan sprints based on team size and duration
+- Prioritize tasks by ROI and effort
+- Track progress against goals
+- Generate sprint reports
 
 ## Important Notes
 
@@ -383,3 +473,38 @@ All other sections of the README can be edited normally:
 - Usage examples
 - Contributing guidelines
 - License information
+
+## MCP Integration
+
+The Claude Code Toolkit supports integration with MCP (Model Context Protocol) servers to enhance functionality. Commands can leverage MCP tools when available while gracefully falling back to traditional methods.
+
+### Key Concepts
+
+1. **Optional Enhancement**: MCP servers enhance but don't gate functionality
+2. **Graceful Degradation**: Commands work without MCP but better with it
+3. **Transparent Operation**: Users see which tools were used
+
+### Supported MCP Servers
+
+- **Semgrep MCP**: Enhanced security analysis with AST-based scanning
+- **GitHub MCP**: Repository and PR integration
+- **GitLab MCP**: GitLab-specific operations
+- **Perplexity MCP**: Web search and documentation
+
+### Command Enhancement
+
+Commands can specify MCP enhancement in frontmatter:
+
+```yaml
+mcp-enhanced: mcp__semgrep__security_check, mcp__semgrep__semgrep_scan
+```
+
+### Implementation Pattern
+
+Commands should:
+1. Check for MCP tool availability
+2. Use enhanced approach if available
+3. Fall back to traditional methods if not
+4. Report which method was used
+
+See `docs/guides/MCP-INTEGRATION.md` for detailed integration guide.
