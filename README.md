@@ -2,6 +2,26 @@
 
 The complete toolkit for extending Claude Code with commands, agents, and tools. A comprehensive collection of slash commands, AI agents, and utilities that can be installed in `~/.claude/` with a custom prefix.
 
+## 🚀 NEW: Automated Code Quality Workflow
+
+Transform your codebase quality in just 3 commands:
+
+```bash
+# 1. Analyze your code
+/prefix:analyze-deep . --export-json
+
+# 2. Generate executable action plan
+/prefix:analyze-report latest-report.json --generate-action-plan
+
+# 3. Execute fixes automatically
+/prefix:execute-action-plan action-plan-*.md --mode=auto
+
+# View what was accomplished
+/prefix:completion-report
+```
+
+This automated workflow will analyze your code, create a prioritized fix plan with exact commands, execute the fixes, and show you the results. **[See Full Guide →](docs/guides/AUTOMATED-WORKFLOW.md)**
+
 ## Installation
 
 ### Step 1: Clone the Repository
@@ -145,7 +165,7 @@ The installation script will:
 | Command | Description | Options |
 |---------|-------------|---------|
 | `/prefix:analysis:analyze-deep` | Deep code analysis combining parallel scanning with specialized sub-agent expertise for comprehensive insights | `directory`, `--focus=security|performance|architecture|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
-| `/prefix:analysis:analyze-report` | Intelligent analysis of code quality reports with trend detection, prioritization, and actionable insights | `report.json`, `--compare=other-report.json`, `--history`, `--trends`, `--quick-wins`, `--export-md` |
+| `/prefix:analysis:analyze-report` | Intelligent analysis of code quality reports with trend detection, prioritization, and actionable insights | `report.json`, `--compare=other-report.json`, `--history`, `--trends`, `--quick-wins`, `--export-md`, `--generate-action-plan` |
 | `/prefix:analysis:doc-health` | Analyze documentation health, validate code-doc synchronization, check cross-references, and identify outdated content | `directory`, `--scope=readme|api|all`, `--check-links`, `--validate-params`, `--export-report` |
 | `/prefix:analysis:five-whys` | Apply the Five Whys root cause analysis technique to investigate issues | `issue_description` |
 
@@ -223,7 +243,9 @@ The installation script will:
 
 | Command | Description | Options |
 |---------|-------------|---------|
+| `/prefix:workflow:completion-report` | Generate comprehensive completion report after action plan execution, showing results, metrics, and next steps | `--action-plan=<file>`, `--execution-log=<file>`, `--compare-baseline`, `--export-formats=md,json,html` |
 | `/prefix:workflow:continuous-quality` | Set up and manage continuous code quality monitoring with automated analysis, fixes, and reporting | `directory`, `--schedule=daily|weekly|commit`, `--auto-fix=safe|all|none`, `--notify=email|slack|github` |
+| `/prefix:workflow:execute-action-plan` | Execute an action plan systematically, running fix commands in priority order with progress tracking | `<action-plan.md>`, `--mode=supervised|auto`, `--dry-run`, `--parallel=N`, `--focus=category` |
 | `/prefix:workflow:quality-sprint` | Plan and execute a complete code quality improvement sprint with analysis, prioritization, fixes, and tracking | `directory`, `--duration=1w|2w|1m`, `--team-size=N`, `--focus=security|performance|quality|all` |
 
 <!-- COMMANDS:END -->
