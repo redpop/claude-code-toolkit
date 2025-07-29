@@ -43,15 +43,6 @@ claude-code-toolkit/
 │   ├── security/           # Security-focused commands
 │   │   ├── baseline.md          # Security baseline tracking
 │   │   └── compliance.md        # Compliance checking
-│   ├── templates/          # Templates for new commands/agents
-│   │   ├── analysis-sub-agent.md # Analysis agent template
-│   │   ├── analyzer-agent.md     # Analyzer agent template
-│   │   ├── basic-sub-agent.md    # Basic sub-agent template
-│   │   ├── helper-agent.md       # Helper agent template
-│   │   ├── hybrid-sub-agent.md   # Hybrid command template
-│   │   ├── mcp-aware-command.md  # MCP-aware command template
-│   │   ├── research-sub-agent.md # Research agent template
-│   │   └── specialist-agent.md   # Specialist agent template
 │   └── workflow/           # Workflow commands
 ├── docs/                    # Extended documentation
 │   ├── README.md           # Documentation index
@@ -71,10 +62,19 @@ claude-code-toolkit/
 │   ├── update-readme.sh    # Auto-generates command documentation
 │   ├── report-history.js   # Report history management
 │   └── trend-analyzer.sh   # Trend analysis script
-├── templates/              # Report templates
-│   ├── reports/            # Report format templates
-│   │   ├── markdown-template.md
-│   │   └── json-schema.json
+├── templates/              # Development templates
+│   ├── commands/           # Templates for new commands/agents
+│   │   ├── analysis-sub-agent.md # Analysis agent template
+│   │   ├── analyzer-agent.md     # Analyzer agent template
+│   │   ├── basic-sub-agent.md    # Basic sub-agent template
+│   │   ├── helper-agent.md       # Helper agent template
+│   │   ├── hybrid-sub-agent.md   # Hybrid command template
+│   │   ├── mcp-aware-command.md  # MCP-aware command template
+│   │   ├── research-sub-agent.md # Research agent template
+│   │   └── specialist-agent.md   # Specialist agent template
+│   └── reports/            # Report format templates
+│       ├── markdown-template.md
+│       └── json-schema.json
 ├── install.sh              # Installation script
 ├── README.md              # User documentation (partially auto-generated)
 ├── CLAUDE.md              # This file
@@ -414,7 +414,7 @@ Key features:
   - `docs/architecture/` - Technical architecture documentation
   - `docs/guides/` - Practical usage guides
   - `docs/guides/COMPREHENSIVE-WORKFLOW.md` - Complete workflow guide
-- Use templates in `/commands/templates/` for creating new commands and agents
+- Use templates in `/templates/commands/` for creating new commands and agents
 
 ## Code Quality & Linting
 

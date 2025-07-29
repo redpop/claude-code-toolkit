@@ -41,22 +41,24 @@ fi
 # Default values
 CLAUDE_COMMANDS_DIR="$HOME/.claude/commands"
 CLAUDE_AGENTS_DIR="$HOME/.claude/agents"
+FORCE_INSTALL=false
 
 # Function to show help
 show_help() {
     echo "Claude Code Toolkit Installation Script"
     echo ""
-    echo "Usage: ./install.sh <prefix>"
+    echo "Usage: ./install.sh <prefix> [options]"
     echo ""
     echo "Arguments:"
     echo "  <prefix>    The prefix for your commands (e.g., 'mytools', 'global', 'team')"
     echo ""
     echo "Options:"
     echo "  --help, -h  Show this help message"
+    echo "  --force     Force installation without creating backups"
     echo ""
     echo "Examples:"
-    echo "  ./install.sh mytools    Install commands with prefix 'mytools'"
-    echo "  ./install.sh global     Install commands with prefix 'global'"
+    echo "  ./install.sh mytools           Install commands with prefix 'mytools'"
+    echo "  ./install.sh global --force    Force install without backups"
     echo ""
     echo "After installation, commands will be available as:"
     echo "  /<prefix>:<category>:<command>"
@@ -66,22 +68,43 @@ show_help() {
     echo "  /mytools:project:changelog"
 }
 
-# Check for help flag
-if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
-    show_help
-    exit 0
-fi
+# Parse command line arguments
+PREFIX=""
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --help|-h)
+            show_help
+            exit 0
+            ;;
+        --force)
+            FORCE_INSTALL=true
+            shift
+            ;;
+        -*)
+            print_error "Unknown option: $1"
+            echo "Run './install.sh --help' for more information."
+            exit 1
+            ;;
+        *)
+            if [ -z "$PREFIX" ]; then
+                PREFIX="$1"
+            else
+                print_error "Too many arguments. Only one prefix is allowed."
+                exit 1
+            fi
+            shift
+            ;;
+    esac
+done
 
 # Check if prefix is provided
-if [ -z "$1" ]; then
-    print_error "No prefix provided. Usage: ./install.sh <prefix>"
+if [ -z "$PREFIX" ]; then
+    print_error "No prefix provided. Usage: ./install.sh <prefix> [options]"
     echo "Example: ./install.sh mytools"
     echo ""
     echo "Run './install.sh --help' for more information."
     exit 1
 fi
-
-PREFIX="$1"
 COMMANDS_INSTALL_PATH="$CLAUDE_COMMANDS_DIR/$PREFIX"
 
 # Create Claude directories if they don't exist
@@ -97,16 +120,21 @@ fi
 
 # Check if prefix directory already exists
 if [ -d "$COMMANDS_INSTALL_PATH" ]; then
-    echo -e "${YELLOW}Warning: Directory $COMMANDS_INSTALL_PATH already exists.${NC}"
-    read -p "Replace existing installation? (y/N) " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        print_info "Backing up existing installation..."
-        mv "$COMMANDS_INSTALL_PATH" "${COMMANDS_INSTALL_PATH}.backup.$(date +%Y%m%d_%H%M%S)"
-        print_info "Old installation backed up"
+    if [ "$FORCE_INSTALL" = true ]; then
+        print_info "Force mode: Removing existing installation without backup..."
+        rm -rf "$COMMANDS_INSTALL_PATH"
     else
-        print_info "Installation cancelled."
-        exit 0
+        echo -e "${YELLOW}Warning: Directory $COMMANDS_INSTALL_PATH already exists.${NC}"
+        read -p "Replace existing installation? (y/N) " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            print_info "Backing up existing installation..."
+            mv "$COMMANDS_INSTALL_PATH" "${COMMANDS_INSTALL_PATH}.backup.$(date +%Y%m%d_%H%M%S)"
+            print_info "Old installation backed up"
+        else
+            print_info "Installation cancelled."
+            exit 0
+        fi
     fi
 fi
 
@@ -128,23 +156,28 @@ fi
 
 # Warn about existing agents
 if [ ${#EXISTING_AGENTS[@]} -gt 0 ]; then
-    echo -e "${YELLOW}Warning: The following agents already exist in $CLAUDE_AGENTS_DIR:${NC}"
-    for agent in "${EXISTING_AGENTS[@]}"; do
-        echo "  - $agent"
-    done
-    read -p "Replace existing agents? (y/N) " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        print_info "Backing up existing agents..."
-        AGENTS_BACKUP_DIR="${CLAUDE_AGENTS_DIR}.backup.$(date +%Y%m%d_%H%M%S)"
-        mkdir -p "$AGENTS_BACKUP_DIR"
-        for agent in "${EXISTING_AGENTS[@]}"; do
-            cp "$CLAUDE_AGENTS_DIR/$agent" "$AGENTS_BACKUP_DIR/" 2>/dev/null || true
-        done
-        print_info "Existing agents backed up to: $AGENTS_BACKUP_DIR"
+    if [ "$FORCE_INSTALL" = true ]; then
+        print_info "Force mode: Overwriting existing agents without backup..."
+        # No backup, just let the copy command overwrite
     else
-        print_info "Skipping agent installation to preserve existing agents."
-        SKIP_AGENTS=true
+        echo -e "${YELLOW}Warning: The following agents already exist in $CLAUDE_AGENTS_DIR:${NC}"
+        for agent in "${EXISTING_AGENTS[@]}"; do
+            echo "  - $agent"
+        done
+        read -p "Replace existing agents? (y/N) " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            print_info "Backing up existing agents..."
+            AGENTS_BACKUP_DIR="${CLAUDE_AGENTS_DIR}.backup.$(date +%Y%m%d_%H%M%S)"
+            mkdir -p "$AGENTS_BACKUP_DIR"
+            for agent in "${EXISTING_AGENTS[@]}"; do
+                cp "$CLAUDE_AGENTS_DIR/$agent" "$AGENTS_BACKUP_DIR/" 2>/dev/null || true
+            done
+            print_info "Existing agents backed up to: $AGENTS_BACKUP_DIR"
+        else
+            print_info "Skipping agent installation to preserve existing agents."
+            SKIP_AGENTS=true
+        fi
     fi
 fi
 

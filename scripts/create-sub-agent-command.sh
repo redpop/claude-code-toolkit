@@ -148,16 +148,16 @@ create_command_file() {
     # Select appropriate template based on command type
     local template_file
     if [[ "$cmd_type" == "hybrid" ]]; then
-        template_file="commands/templates/hybrid-sub-agent.md"
+        template_file="templates/commands/hybrid-sub-agent.md"
     else
-        template_file="commands/templates/${template_type}-sub-agent.md"
+        template_file="templates/commands/${template_type}-sub-agent.md"
     fi
     
     # Check if template exists, fall back to basic if not
     if [[ ! -f "$template_file" ]]; then
         if [[ "$cmd_type" == "hybrid" ]]; then
             echo -e "${YELLOW}Warning: Hybrid template not found, creating from basic template${NC}"
-            template_file="commands/templates/basic-sub-agent.md"
+            template_file="templates/commands/basic-sub-agent.md"
         else
             echo -e "${RED}Error: Template file $template_file not found${NC}"
             return 1
