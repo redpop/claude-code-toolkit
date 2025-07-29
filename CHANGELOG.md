@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.0] - 2025-01-29
+
+### Added
+
+- ✨ **Revolutionary Automated Workflow** - Complete zero-friction workflow from analysis to fixes
+  - New 3-step process: analyze → generate action plan → execute → view results
+  - Action plans contain exact fix commands with time estimates
+  - ROI-based prioritization for maximum efficiency
+- ✨ **Action Plan Generation** - Enhanced `/analyze-report` command with `--generate-action-plan` flag
+  - Generates executable todo lists with exact commands
+  - Includes time estimates and impact descriptions
+  - Supports team allocation mode
+- ✨ **Workflow Automation Commands**
+  - `/workflow:execute-action-plan` - Executes action plans systematically
+  - `/workflow:completion-report` - Generates comprehensive completion reports
+- ✨ **Comprehensive Documentation Updates**
+  - New AUTOMATED-WORKFLOW.md guide for the zero-friction workflow
+  - Complete system architecture documentation (SYSTEM-ARCHITECTURE-EN.md)
+  - German technical documentation (SYSTEM-ARCHITECTURE-DE.md)
+  - Updated quick-start tutorial with automated workflow
+- ✨ **Action Plan Template** - Example template showing action plan structure
+
+### Changed
+
+- 🔄 Updated documentation to prominently feature the new automated workflow
+- 🔄 Enhanced comprehensive workflow guide with action plan execution
+- 🔄 Improved quick-start tutorial with automated vs manual options
+
+### Fixed
+
+- 🐛 Documentation inconsistencies and outdated references
+
 ## [3.0.0] - 2025-01-29
 
 ### Changed

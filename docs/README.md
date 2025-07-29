@@ -2,11 +2,33 @@
 
 Welcome to the Claude Code Toolkit documentation. This directory contains comprehensive guides, architectural documentation, and reference materials.
 
+## 🚀 NEW: Automated Code Quality Workflow
+
+Transform your codebase in just 3 commands:
+
+```bash
+# 1. Analyze
+/analyze-deep . --export-json
+
+# 2. Plan
+/analyze-report latest-report.json --generate-action-plan
+
+# 3. Execute
+/execute-action-plan action-plan-*.md --mode=auto
+
+# 4. Review
+/completion-report
+```
+
+**[→ See the Complete Automated Workflow Guide](guides/AUTOMATED-WORKFLOW.md)** 🔥
+
 ## 📚 Documentation Structure
 
 ### 🏗️ Architecture (`/architecture/`)
 Deep technical documentation about the toolkit's design and implementation:
 
+- **[SYSTEM-ARCHITECTURE-EN.md](architecture/SYSTEM-ARCHITECTURE-EN.md)** 🆕 - Complete technical architecture and workflow documentation
+- **[SYSTEM-ARCHITECTURE-DE.md](architecture/SYSTEM-ARCHITECTURE-DE.md)** 🆕 - Technische Architektur auf Deutsch
 - **[HYBRID-ARCHITECTURE.md](architecture/HYBRID-ARCHITECTURE.md)** - The innovative hybrid approach combining parallel scanning with expert analysis
 - **[SUB-AGENT-ORCHESTRATION.md](architecture/SUB-AGENT-ORCHESTRATION.md)** - How specialized AI agents work together
 - **[TECHNICAL-GUIDE.md](architecture/TECHNICAL-GUIDE.md)** - Technical implementation details and patterns
@@ -14,7 +36,8 @@ Deep technical documentation about the toolkit's design and implementation:
 ### 📖 Guides (`/guides/`)
 Practical guides for using the toolkit effectively:
 
-- **[COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md)** ⭐ - Complete end-to-end workflow from analysis to fixes
+- **[AUTOMATED-WORKFLOW.md](guides/AUTOMATED-WORKFLOW.md)** 🔥 **NEW** - Zero-friction automated workflow from analysis to fixes
+- **[COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md)** ⭐ - Complete end-to-end workflow documentation
 - **[REPORT-EXPORT-SYSTEM.md](guides/REPORT-EXPORT-SYSTEM.md)** - How to export and use analysis reports
 - **[REPORT-ANALYZER-EXAMPLES.md](guides/REPORT-ANALYZER-EXAMPLES.md)** - Examples of report analysis and interpretation
 - **[EXPORT-EXAMPLES.md](guides/EXPORT-EXAMPLES.md)** - Sample exports in different formats
@@ -43,6 +66,17 @@ Older documentation kept for reference:
 
 ## 🚀 Quick Start
 
+### Option 1: Automated Workflow (Recommended) 🔥
+Try the new zero-friction workflow that automates everything:
+```bash
+/analyze-deep . --export-json
+/analyze-report latest-report.json --generate-action-plan  
+/execute-action-plan action-plan-*.md --mode=auto
+/completion-report
+```
+**[→ Full Automated Workflow Guide](guides/AUTOMATED-WORKFLOW.md)**
+
+### Option 2: Traditional Workflow
 1. **New Users**: Start with [COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md) to understand the complete toolkit workflow.
 
 2. **Understanding the Architecture**: Read [HYBRID-ARCHITECTURE.md](architecture/HYBRID-ARCHITECTURE.md) to learn about our innovative approach.
@@ -65,12 +99,14 @@ Five expert agents provide focused analysis:
 - 🔒 **Security Specialist** - Vulnerability detection
 - 🧪 **Test Engineer** - Testing strategies and coverage
 
-### Workflow Automation
-From analysis to automated fixes:
-1. **Analyze** - Comprehensive code quality assessment
-2. **Prioritize** - ROI-based issue ranking
-3. **Fix** - Automated remediation with safety checks
-4. **Verify** - Continuous quality monitoring
+### Workflow Automation 🚀 NEW!
+Complete automated pipeline from analysis to fixes:
+1. **Analyze** - Comprehensive code quality assessment (`/analyze-deep`)
+2. **Plan** - Generate executable action plan (`/analyze-report --generate-action-plan`)  
+3. **Execute** - Run fixes automatically (`/execute-action-plan`)
+4. **Report** - View accomplishments (`/completion-report`)
+
+**[→ Try the Automated Workflow Now!](guides/AUTOMATED-WORKFLOW.md)**
 
 ## 📈 Command Categories
 

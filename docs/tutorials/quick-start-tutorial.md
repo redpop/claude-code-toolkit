@@ -1,17 +1,33 @@
 # Quick Start Tutorial: Claude Code Toolkit
 
-Welcome to the Claude Code Toolkit! This tutorial will walk you through getting started with this powerful set of tools for code analysis, security auditing, and automated improvements. By the end of this tutorial, you'll be analyzing your codebase like a pro! 🚀
+Welcome to the Claude Code Toolkit! This tutorial will walk you through getting started with this powerful set of tools for code analysis, security auditing, and automated improvements. By the end of this tutorial, you'll be analyzing and improving your codebase automatically! 🚀
+
+## 🎯 NEW: Zero-Friction Workflow
+
+The Claude Code Toolkit now features an automated workflow that takes you from analysis to completed fixes in just 3 commands:
+
+```bash
+# 1. Analyze your code
+/analyze-deep . --export-json
+
+# 2. Generate fix plan  
+/analyze-report reports/*.json --generate-action-plan
+
+# 3. Execute fixes
+/execute-action-plan reports/action-plan-*.md
+```
+
+That's it! The toolkit handles everything else. For details, see our [Automated Workflow Guide](../guides/AUTOMATED-WORKFLOW.md).
 
 ## Table of Contents
 
 1. [Prerequisites and Setup Verification](#prerequisites-and-setup-verification)
 2. [Installing the Toolkit](#installing-the-toolkit)
-3. [Running Your First Analysis](#running-your-first-analysis)
-4. [Understanding the Output](#understanding-the-output)
-5. [Using the Report Analyzer](#using-the-report-analyzer)
-6. [Finding and Fixing Quick Wins](#finding-and-fixing-quick-wins)
-7. [Troubleshooting Common Issues](#troubleshooting-common-issues)
-8. [Next Steps](#next-steps)
+3. [Option A: Automated Workflow (Recommended)](#option-a-automated-workflow-recommended)
+4. [Option B: Traditional Step-by-Step](#option-b-traditional-step-by-step)
+5. [Understanding the Output](#understanding-the-output)
+6. [Troubleshooting Common Issues](#troubleshooting-common-issues)
+7. [Next Steps](#next-steps)
 
 ## Prerequisites and Setup Verification
 
@@ -108,13 +124,49 @@ In Claude Code, test that your commands are available:
 
 > **🔧 Troubleshooting:** If commands don't appear, try refreshing Claude Code or check that the installation path `~/.claude/commands/tk/` contains the command files.
 
-## Running Your First Analysis
+## Option A: Automated Workflow (Recommended)
 
-Let's analyze a sample project to see the toolkit in action. We'll use a hypothetical Node.js project, but the toolkit works with any language.
+This is the fastest way to improve your codebase. The toolkit will analyze, prioritize, and fix issues automatically.
 
-### Step 1: Prepare Your Project
+### Step 1: Run Deep Analysis
 
-Navigate to a project you want to analyze:
+Navigate to your project and run the comprehensive analysis:
+
+```bash
+# Navigate to your project
+cd ~/my-project
+
+# Run deep analysis with all export formats
+/tk:analysis:analyze-deep . --export-all
+```
+
+This will:
+- Scan your entire codebase using 10 parallel agents
+- Analyze security, performance, architecture, testing, and more
+- Generate reports in JSON, Markdown, and HTML formats
+- Take about 30-60 seconds depending on project size
+
+**Expected Output:**
+```
+⏺ Phase 1: Quick Scan (10 agents working in parallel)...
+⏺ Phase 2: Deep Analysis with specialized agents...
+⏺ Phase 3: Synthesizing results...
+
+✅ Analysis Complete!
+📁 Generated Reports:
+- reports/analyze-deep-20250129-103000.md
+- reports/analyze-deep-20250129-103000.json
+- reports/analyze-deep-20250129-103000.html
+
+Key Findings:
+🔴 Critical Issues: 3 (Security vulnerabilities)
+🟡 High Priority: 8 (Quick wins available)
+🟢 Enhancements: 12 (Long-term improvements)
+```
+
+### Step 2: Generate Action Plan
+
+Now let's create an executable action plan from the analysis:
 
 ```bash
 cd ~/projects/my-node-app
@@ -221,11 +273,98 @@ The deep analysis produces a comprehensive report. Let's break down what you'll 
 
 > **📊 Pro Tip:** The ROI (Return on Investment) score helps prioritize which issues to tackle first. Focus on High ROI items for maximum impact with minimal effort.
 
-## Using the Report Analyzer
+# Generate an action plan with specific fix commands
+/tk:analysis:analyze-report reports/analyze-deep-*.json --generate-action-plan
+```
 
-The report analyzer helps you make sense of analysis reports and plan your improvements.
+This creates a prioritized todo list with:
+- Exact fix commands for each issue
+- Time estimates for each task
+- ROI-based prioritization
+- Clear impact descriptions
 
-### Step 1: Analyze Your Report
+**Expected Output:**
+```
+✅ Action Plan Generated!
+📄 File: reports/action-plan-20250129-103100.md
+
+Summary:
+- Total Tasks: 23
+- Estimated Effort: 32h
+- Critical Security: 3 tasks (8h)
+- Quick Wins: 8 tasks (12h)
+- Enhancements: 12 tasks (12h)
+
+Top 3 Priorities:
+1. Input Sanitization (3h) - Prevents XSS attacks
+2. JSON Validation (2h) - Stops injection attacks
+3. Remove Code Duplication (2h) - Saves 140 lines
+```
+
+### Step 3: Execute the Action Plan
+
+Now the magic happens - let the toolkit fix the issues:
+
+```bash
+# Preview what will be done (dry run)
+/tk:workflow:execute-action-plan reports/action-plan-*.md --dry-run
+
+# Execute in supervised mode (recommended for first time)
+/tk:workflow:execute-action-plan reports/action-plan-*.md --mode=supervised
+```
+
+In supervised mode, you'll see:
+```
+🔄 Executing: Input Sanitization (3h estimated)
+Command: /tk:fix:security --focus="xss,sanitization" --auto-fix
+Files to modify: 15 components
+
+Proceed? [Y/n]: Y
+
+✅ Task completed successfully!
+- Added DOMPurify to 15 components
+- All inputs now sanitized
+- XSS vulnerability eliminated
+
+Next task: JSON Validation...
+```
+
+### Step 4: View Results
+
+After execution completes, view the comprehensive report:
+
+```bash
+/tk:workflow:completion-report
+```
+
+**Expected Output:**
+```
+# Workflow Completion Report
+
+Overall Success Rate: 87%
+
+✅ Completed (20/23):
+- All security vulnerabilities fixed
+- Test coverage increased from 30% to 55%
+- Performance improved by 25%
+- Code duplication reduced by 60%
+
+⚠️ Partial (2/23):
+- Legacy migration (needs manual intervention)
+- Complex refactoring (requires architectural decision)
+
+❌ Failed (1/23):
+- Dependency upgrade (version conflict)
+
+Key Metrics:
+- Security Score: 45 → 85 (+89%)
+- Code Quality: C → A
+- Estimated hours saved per month: 15
+```
+
+## Option B: Traditional Step-by-Step
+
+If you prefer more control, you can run each phase manually:
 
 After running the deep analysis, use the report analyzer:
 
@@ -271,11 +410,28 @@ Comparing to previous report (if available):
 - Consider weekly code quality reviews
 ```
 
-## Finding and Fixing Quick Wins
+### Manual Analysis and Fixes
 
-Quick wins are the best place to start improving your codebase. They offer high value with minimal effort.
+1. **Run targeted analyses:**
+   ```bash
+   /tk:security:audit . --export-json
+   /tk:orchestration:performance-scan .
+   /tk:orchestration:test-coverage .
+   ```
 
-### Step 1: Identify Quick Wins
+2. **Analyze reports individually:**
+   ```bash
+   /tk:analysis:analyze-report security-audit.json --quick-wins
+   ```
+
+3. **Apply specific fixes:**
+   ```bash
+   /tk:fix:security --priority=critical
+   /tk:fix:duplicates --threshold=80
+   /tk:generate:tests --coverage-target=60
+   ```
+
+For detailed manual workflow, see [Comprehensive Workflow Guide](../guides/COMPREHENSIVE-WORKFLOW.md).
 
 Use the quick wins command:
 
@@ -409,9 +565,32 @@ chmod -R 755 ~/.claude/
 - Check if files are ignored by `.gitignore`
 - Try clearing Claude Code's context and rerunning
 
+## Common Questions
+
+### Q: Is it safe to run fixes automatically?
+A: Yes! The toolkit has multiple safety measures:
+- Always creates git commits before changes
+- Runs in dry-run mode by default
+- Validates changes don't break tests
+- Supports rollback if needed
+
+### Q: How long does the full workflow take?
+A: Typically:
+- Analysis: 30-60 seconds
+- Action plan generation: 5-10 seconds
+- Fix execution: 1-4 hours (depending on scope)
+- Most quick wins complete in under 5 minutes each
+
+### Q: Can I customize what gets fixed?
+A: Absolutely! You can:
+- Use `--focus=security` to fix only security issues
+- Set `--max-effort=4h` to limit scope
+- Run specific fix commands manually
+- Edit the action plan before execution
+
 ## Next Steps
 
-Congratulations! You've completed the quick start tutorial. Here's what to explore next:
+Congratulations! You've learned the automated workflow. Here's what to explore next:
 
 ### 1. Advanced Analysis Commands
 
