@@ -23,16 +23,16 @@ Practical guides for using the toolkit effectively:
 ### 🎓 Tutorials (`/tutorials/`)
 Step-by-step tutorials for common tasks:
 
-- *Coming soon: Quick Start Tutorial*
-- *Coming soon: Building Custom Commands*
-- *Coming soon: Creating Specialized Agents*
+- **[quick-start-tutorial.md](tutorials/quick-start-tutorial.md)** - Get started with the toolkit in 10 minutes
+- **[building-custom-commands.md](tutorials/building-custom-commands.md)** - Create your own powerful commands
+- **[creating-specialized-agents.md](tutorials/creating-specialized-agents.md)** - Build expert AI agents for specific tasks
 
 ### 🔧 API Reference (`/api/`)
 Technical API documentation:
 
-- *Coming soon: Command API Reference*
-- *Coming soon: Agent Interface Specification*
-- *Coming soon: Tool Integration Guide*
+- **[command-api-reference.md](api/command-api-reference.md)** - Complete command structure and API specification
+- **[agent-interface-specification.md](api/agent-interface-specification.md)** - Agent definition and integration patterns
+- **[tool-integration-guide.md](api/tool-integration-guide.md)** - MCP and tool integration best practices
 
 ### 🗄️ Archive (`/archive/`)
 Older documentation kept for reference:
@@ -90,10 +90,15 @@ From analysis to automated fixes:
 - `/deep-dive` - Focused investigation
 - `/dependency-trace` - Trace dependencies
 
-### Fix Commands (Coming Soon)
+### Fix Commands
 - `/fix-quick-wins` - Apply high-ROI fixes
 - `/fix-duplicates` - Remove duplication
+- `/fix-security` - Fix security vulnerabilities
+- `/fix-documentation` - Fix documentation issues
+
+### Generate Commands
 - `/generate-tests` - Create missing tests
+- `/generate-documentation` - Generate comprehensive documentation
 
 ## 🔍 Finding Information
 

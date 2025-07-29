@@ -27,7 +27,9 @@
       "Bash(./scripts/update-readme.sh:*)",
       "Bash(test:*)",
       "Bash(/commit --push)",
-      "mcp__semgrep__semgrep_rule_schema"
+      "mcp__semgrep__semgrep_rule_schema",
+      "WebFetch(domain:docsify.js.org)",
+      "mcp__perplexity-ask__perplexity_research"
     ],
     "deny": []
   }

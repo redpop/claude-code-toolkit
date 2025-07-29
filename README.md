@@ -219,20 +219,6 @@ The installation script will:
 | `/prefix:security:compliance` | Run compliance checks for OWASP, PCI-DSS, GDPR, and custom security policies | `directory`, `--standard=owasp|pci-dss|gdpr|all`, `--custom-rules=rules.yaml`, `--export-report` |
 
 
-### Templates Commands
-
-| Command | Description | Options |
-|---------|-------------|---------|
-| `/prefix:templates:analysis-sub-agent` | Template für Code-Analyse Commands mit mehreren spezialisierten Agents | `target`, `--option=value` |
-| `/prefix:templates:analyzer-agent` | [BRIEF_DESCRIPTION] | - |
-| `/prefix:templates:basic-sub-agent` | [Kurze Beschreibung des Commands] | `expected-arguments` |
-| `/prefix:templates:helper-agent` | [BRIEF_DESCRIPTION] | - |
-| `/prefix:templates:hybrid-sub-agent` | [Brief description of the command] | `expected-arguments` |
-| `/prefix:templates:mcp-aware-command` | Template for creating MCP-aware commands with graceful fallback | `arguments`, `--options` |
-| `/prefix:templates:research-sub-agent` | Template für Research Commands die verschiedene Informationsquellen parallel durchsuchen | `research-topic`, `--scope=local|web|all` |
-| `/prefix:templates:specialist-agent` | [BRIEF_DESCRIPTION] | - |
-
-
 ### Workflow Commands
 
 | Command | Description | Options |
