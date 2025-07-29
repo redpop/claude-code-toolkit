@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.0] - 2025-01-29
+
+### Added
+
+- ✨ Flexible Component Selection - replaced individual installation flags with unified `--install` parameter
+  - `--install commands` - Install only commands
+  - `--install agents` - Install only agents  
+  - `--install commands,agents` - Install specific components
+  - Extensible design for future component types
+- ✨ Local Project Installation Support - new `--local` flag for project-specific installations
+  - Installs to `.claude/` in current directory instead of global `~/.claude/`
+  - Enables project-specific commands and agents
+  - Supports team collaboration via version control
+  - All backup and safety mechanisms work for local installations
+
+### Changed
+
+- 🔄 Template Directory Structure - reorganized templates for better organization
+  - Moved all command templates to `templates/commands/`
+  - Cleaner separation between command and report templates
+- 🔄 Installation Script Architecture - more flexible and extensible approach
+  - Component-based installation system
+  - Better separation of concerns for commands vs agents
+  - Improved error handling and user feedback
+
 ## [2.3.0] - 2025-01-29
 
 ### Added
@@ -232,6 +257,7 @@ This release marks the transition from a commands-only repository to a full tool
 
 - 🐛 Update instructions in README now reflect actual Git-based workflow
 
+[2.4.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/redpop/claude-code-toolkit/compare/v2.1.0...v2.1.1
