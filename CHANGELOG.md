@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2025-01-29
+
+### Changed
+
+- 🔄 **BREAKING**: Local installation flag now requires explicit path argument
+  - Previous: `./install.sh mytools --local` (installed in current directory)
+  - New: `./install.sh mytools --local /path/to/project` (installs in specified directory)
+  - This provides better control and clarity over installation location
+  - Prevents accidental installations in wrong directories
+
+### Added
+
+- ✨ Path validation for local installations - checks if target directory exists
+- ✨ Improved error messages for missing path argument
+
 ## [2.4.0] - 2025-01-29
 
 ### Added
@@ -257,6 +272,7 @@ This release marks the transition from a commands-only repository to a full tool
 
 - 🐛 Update instructions in README now reflect actual Git-based workflow
 
+[3.0.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.4.0...v3.0.0
 [2.4.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.1.1...v2.2.0

@@ -43,6 +43,8 @@ CLAUDE_COMMANDS_DIR="$HOME/.claude/commands"
 CLAUDE_AGENTS_DIR="$HOME/.claude/agents"
 FORCE_INSTALL=false
 INSTALL_COMPONENTS="all"
+LOCAL_INSTALL=false
+LOCAL_PROJECT_DIR=""
 
 # Function to show help
 show_help() {
@@ -56,11 +58,14 @@ show_help() {
     echo "Options:"
     echo "  --help, -h              Show this help message"
     echo "  --force                 Force installation without creating backups"
+    echo "  --local <path>          Install in specific project directory (.claude/)"
+    echo "                          Required: path to target project directory"
     echo "  --install <components>  Install specific components (comma-separated)"
     echo "                          Available: commands, agents, all (default: all)"
     echo ""
     echo "Examples:"
-    echo "  ./install.sh mytools                     Install everything (default)"
+    echo "  ./install.sh mytools                     Install everything globally (default)"
+    echo "  ./install.sh mytools --local /path/to/project  Install in specific project"
     echo "  ./install.sh mytools --install commands  Install only commands"
     echo "  ./install.sh mytools --install agents    Install only agents"
     echo "  ./install.sh mytools --install commands,agents  Install both (explicit)"
@@ -85,6 +90,17 @@ while [[ $# -gt 0 ]]; do
         --force)
             FORCE_INSTALL=true
             shift
+            ;;
+        --local)
+            LOCAL_INSTALL=true
+            # Check if next argument is provided and is a path (not starting with --)
+            if [ -z "$2" ] || [[ "$2" == --* ]]; then
+                print_error "Option --local requires a project path"
+                echo "Example: ./install.sh mytools --local /path/to/project"
+                exit 1
+            fi
+            LOCAL_PROJECT_DIR="$2"
+            shift 2
             ;;
         --install)
             if [ -z "$2" ] || [[ "$2" == --* ]]; then
@@ -150,6 +166,26 @@ if [ "$INSTALL_COMMANDS" = false ] && [ "$INSTALL_AGENTS" = false ]; then
     print_error "No components selected for installation."
     echo "Use --install with one or more of: commands, agents, all"
     exit 1
+fi
+
+# Update paths if local installation is requested
+if [ "$LOCAL_INSTALL" = true ]; then
+    # Use specified project directory (now required)
+    if [ ! -d "$LOCAL_PROJECT_DIR" ]; then
+        print_error "Project directory does not exist: $LOCAL_PROJECT_DIR"
+        exit 1
+    fi
+    LOCAL_DIR="$(cd "$LOCAL_PROJECT_DIR" && pwd)/.claude"
+    
+    # Check if it's a git project
+    if [ ! -d "$LOCAL_PROJECT_DIR/.git" ]; then
+        print_info "Warning: $LOCAL_PROJECT_DIR is not a git repository. Installing anyway."
+    fi
+    
+    CLAUDE_COMMANDS_DIR="$LOCAL_DIR/commands"
+    CLAUDE_AGENTS_DIR="$LOCAL_DIR/agents"
+    
+    print_info "Installing locally in: $LOCAL_DIR"
 fi
 
 COMMANDS_INSTALL_PATH="$CLAUDE_COMMANDS_DIR/$PREFIX"
@@ -282,10 +318,27 @@ fi
 echo
 echo "To use these commands in Claude Code, type '/' followed by the command name."
 echo
+
+if [ "$LOCAL_INSTALL" = true ]; then
+    echo "Installation location: $LOCAL_DIR"
+    echo
+    echo "Note: These commands and agents are only available when Claude Code is"
+    echo "      running in this project directory."
+else
+    echo "Installation location: $HOME/.claude/"
+    echo
+    echo "Note: These commands and agents are available globally in all projects."
+fi
+
+echo
 echo "To update in the future:"
 echo "  1. Pull the latest changes in your cloned repository:"
 echo "     cd $SCRIPT_DIR && git pull"
 echo "  2. Re-run the installation:"
-echo "     ./install.sh $PREFIX"
+if [ "$LOCAL_INSTALL" = true ]; then
+    echo "     $SCRIPT_DIR/install.sh $PREFIX --local $LOCAL_PROJECT_DIR"
+else
+    echo "     ./install.sh $PREFIX"
+fi
 echo
 print_success "Happy coding with Claude Code! 🚀"
