@@ -30,7 +30,11 @@
       "mcp__semgrep__semgrep_rule_schema",
       "WebFetch(domain:docsify.js.org)",
       "mcp__perplexity-ask__perplexity_research",
-      "Bash(bfg:*)"
+      "Bash(bfg:*)",
+      "Bash(git gc:*)",
+      "Bash(git checkout:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)"
     ],
     "deny": []
   }
