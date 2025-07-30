@@ -3,7 +3,7 @@
   "repo_name": "claude-code-toolkit",
   "default_branch": "main",
   "description": "The complete toolkit for extending Claude Code with commands, agents, and tools",
-  "version": "2.0.0",
+  "version": "3.1.0",
   "fork_config": {
     "auto_update_urls": true,
     "preserve_original_references": false,
