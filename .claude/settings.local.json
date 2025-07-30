@@ -34,7 +34,8 @@
       "Bash(git gc:*)",
       "Bash(git checkout:*)",
       "Bash(git pull:*)",
-      "Bash(git stash:*)"
+      "Bash(git stash:*)",
+      "Bash(git restore:*)"
     ],
     "deny": []
   }

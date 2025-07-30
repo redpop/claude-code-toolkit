@@ -177,7 +177,7 @@ Update your CI/CD pipelines to use new commands:
 
 - Run any command with `--help` for usage information
 - Check `CLAUDE.md` for development guidelines
-- See `docs/guides/COMPREHENSIVE-WORKFLOW.md` for detailed workflows
+- See `docs/guides/MODERN-WORKFLOW.md` for detailed workflows
 - Report issues at the GitHub repository
 
 ## Rollback
