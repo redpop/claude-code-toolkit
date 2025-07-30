@@ -633,9 +633,9 @@ Create your own commands:
 
 ### 5. Learn More
 
-- Read the [Comprehensive Workflow Guide](../guides/COMPREHENSIVE-WORKFLOW.md)
+- Read the [Modern Workflow Guide](../guides/MODERN-WORKFLOW.md)
 - Explore [Sub-Agent Orchestration](../architecture/SUB-AGENT-ORCHESTRATION.md)
-- Check out [Security Best Practices](../guides/SECURITY-GUIDE.md)
+- Check out [Security Commands](../../commands/sec/)
 
 ### 6. Join the Community
 
@@ -658,4 +658,4 @@ Happy coding! 🚀
 
 ---
 
-> **Need Help?** Check the [FAQ](../FAQ.md) or open an issue on GitHub.
+> **Need Help?** Open an issue on GitHub.

@@ -24,7 +24,7 @@ Three powerful workflows to improve your codebase:
 /prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}" -> "scan:quality . --compare"
 ```
 
-**[See Full Workflow Guide →](docs/guides/COMPREHENSIVE-WORKFLOW.md)**
+**[See Full Workflow Guide →](docs/guides/MODERN-WORKFLOW.md)**
 
 ## Installation
 

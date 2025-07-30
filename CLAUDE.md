@@ -16,13 +16,18 @@ The repository is designed to be cloned and installed into `~/.claude/` with a c
 ```
 claude-code-toolkit/
 ├── agents/                  # Sub-Agent definitions
+│   ├── ai-specialist.md    # AI integration and prompt engineering agent
 │   ├── code-architect.md   # Architecture analysis agent
+│   ├── debugging-specialist.md # Systematic debugging and root cause analysis
+│   ├── deployment-specialist.md # CI/CD and deployment expert
 │   ├── documentation-health-specialist.md # Documentation quality agent
+│   ├── frontend-specialist.md # Frontend development and React expert
 │   ├── performance-optimizer.md  # Performance optimization agent
 │   ├── refactoring-expert.md    # Code refactoring agent
 │   ├── report-analyzer.md  # Report analysis agent
 │   ├── security-specialist.md   # Security analysis agent
-│   └── test-engineer.md    # Testing strategy agent
+│   ├── test-engineer.md    # Testing strategy agent
+│   └── workflow-optimizer.md # Developer workflow optimization agent
 ├── commands/                # All slash command definitions
 │   ├── auto/               # Automation & orchestration
 │   │   ├── execute.md      # Execute action plans
@@ -79,7 +84,7 @@ claude-code-toolkit/
 │   │   ├── SUB-AGENT-ORCHESTRATION.md # Sub-agent orchestration guide
 │   │   └── TECHNICAL-GUIDE.md       # Technical implementation details
 │   ├── guides/             # Practical guides
-│   │   ├── COMPREHENSIVE-WORKFLOW.md # End-to-end workflow guide
+│   │   ├── MODERN-WORKFLOW.md # Modern workflow guide
 │   │   ├── REPORT-EXPORT-SYSTEM.md   # Report export documentation
 │   │   └── ...             # Other guides
 │   ├── tutorials/          # Step-by-step tutorials
@@ -169,13 +174,18 @@ Sub-Agents are specialized AI agents defined in the `/agents/` directory:
 
 **Types of Sub-Agents:**
 
+- **ai-specialist**: AI integration expert specializing in prompt engineering and LLM optimization
 - **code-architect**: Analyzes system architecture and design patterns
+- **debugging-specialist**: Expert in systematic debugging, log analysis, and root cause identification
+- **deployment-specialist**: CI/CD and deployment expert for automated pipelines and production troubleshooting
 - **documentation-health-specialist**: Analyzes documentation quality and code-doc synchronization
+- **frontend-specialist**: Frontend development expert specializing in modern JavaScript frameworks
 - **performance-optimizer**: Identifies performance bottlenecks and optimizations
 - **refactoring-expert**: Suggests code improvements and refactoring strategies
 - **report-analyzer**: Analyzes code quality reports and provides prioritized insights
 - **security-specialist**: Performs security audits and vulnerability detection
 - **test-engineer**: Analyzes test coverage and testing strategies
+- **workflow-optimizer**: Developer workflow expert focused on productivity and reducing friction
 
 **Sub-Agent Structure:**
 
@@ -399,7 +409,7 @@ New integration commands enable powerful automation:
   - `docs/README.md` - Documentation index and navigation
   - `docs/architecture/` - Technical architecture documentation
   - `docs/guides/` - Practical usage guides
-  - `docs/guides/COMPREHENSIVE-WORKFLOW.md` - Complete workflow guide
+  - `docs/guides/MODERN-WORKFLOW.md` - Modern workflow guide
 - Use templates in `/templates/commands/` for creating new commands and agents
 
 ## Code Quality & Linting

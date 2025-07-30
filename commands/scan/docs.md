@@ -61,23 +61,34 @@ This command performs a comprehensive health check of your project's documentati
 
 ### Phase 3: Validation Checks
 
-Delegate to documentation-health-specialist agent for deep analysis:
+Use Task tool with subagent_type="general-purpose":
+"You are an expert in documentation quality analysis, technical writing best practices, and maintaining documentation-code synchronization. Your expertise spans across multiple documentation formats, programming languages, and project structures.
 
-```markdown
-Analyze documentation health for this project:
-- Documentation files: [list of files found]
-- Code structure: [extracted elements]
-- Focus areas: parameter validation, cross-references, deprecations
+Analyze documentation health for this project with the following documentation files found: [list of files found]
 
-Provide:
-1. Overall health score with breakdown
+Code structure extracted: [extracted elements]
+
+Focus on these areas:
+1. Parameter validation (CLI args, function params, config options)
+2. Cross-reference and link validation
+3. Deprecation tracking and outdated content
+4. Code-documentation synchronization
+5. Documentation coverage and completeness
+
+Provide a comprehensive health report including:
+1. Overall health score (0-100) with breakdown by category:
+   - Completeness (40%): Coverage of all features
+   - Accuracy (30%): Sync with current code
+   - Clarity (20%): Readability and structure
+   - Navigation (10%): Cross-references and findability
 2. Critical issues that need immediate attention
-3. Parameter mismatches between docs and code
-4. Broken cross-references and links
+3. Parameter mismatches between docs and code (with specific examples)
+4. Broken cross-references and links (internal and external)
 5. Outdated or deprecated content
-6. Coverage gaps (undocumented features)
-7. Prioritized recommendations
-```
+6. Coverage gaps (undocumented features, missing sections)
+7. Prioritized recommendations (High/Medium/Low priority)
+
+Format the output as a structured markdown report with clear sections, tables for mismatches, and actionable next steps."
 
 ### Phase 4: Specific Validations
 
