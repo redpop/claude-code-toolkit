@@ -7,6 +7,126 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.3.0] - 2025-07-30
+
+### Added
+
+- ✨ **Major Command Restructuring (Phase 1-6)** - Complete overhaul of command organization and naming
+  - New category-based structure: `scan`, `fix`, `gen`, `flow`, `auto`, `sec`, `git`, `meta`
+  - Shorter, action-oriented command names (e.g., `/scan:deep` instead of `/analyze-deep`)
+  - Maximum 2 words per command for better usability
+  
+- ✨ **Core Workflow Enhancement Commands (Phase 2)**
+  - Smart problem routing with `/flow:smart` - intelligently routes to appropriate specialists
+  - Multi-perspective code review with `/flow:review` - 5 parallel reviewers
+  - Rapid incident response with `/flow:incident`
+  
+- ✨ **Enhanced Command Syntax (Phase 3)**
+  - Clearer Task tool invocation syntax across all commands
+  - Improved error handling and user feedback
+  - Better structured command outputs
+  
+- ✨ **Specialized Development Helper Commands (Phase 4)**
+  - `/fix:shell` - Automated shell script fixing with shellcheck
+  - `/meta:create-cmd` - AI-powered command creation
+  - `/meta:health` - Comprehensive project health assessment
+  
+- ✨ **Integration & Automation Commands (Phase 5)**
+  - `/meta:chain` - Command chaining with data flow (`{output}`, `{outputs}`)
+  - `/meta:pipelines` - Pre-defined quality improvement pipelines
+  - `/auto:monitor` - Continuous quality monitoring
+  - `/auto:sprint` - Quality sprint execution
+  
+- ✨ **New Specialist Agents**
+  - `debugging-specialist` - Expert in systematic debugging and root cause analysis
+  - `deployment-specialist` - CI/CD and deployment troubleshooting expert
+  - `workflow-optimizer` - Developer productivity and workflow optimization
+
+- ✨ **Documentation Overhaul (Phase 6)**
+  - New FAQ document for common questions
+  - Comprehensive workflow guide
+  - Security guide for defensive programming
+  - Contributing guidelines
+
+### Changed
+
+- 🔄 **Command Name Migration** - All commands follow new naming convention
+  - Analysis commands moved to `scan` category
+  - Workflow commands split between `flow` and `auto`
+  - Project commands moved to `meta` category
+  - See MIGRATION-GUIDE.md for complete mapping
+  
+- 🔄 **Enhanced Existing Agents**
+  - `refactoring-expert` - Extended with performance and testing capabilities
+  - All agents improved with better analysis patterns
+  
+- 🔄 **Documentation Structure**
+  - Consolidated guides in `docs/guides/` directory
+  - Updated all command references to new naming schema
+  - Improved CLAUDE.md with current patterns
+
+### Removed
+
+- 🗑️ Internal planning documents (INTEGRATION-PLAN.md)
+- 🗑️ Accidentally committed review/ directory
+
+## [3.2.0] - 2025-07-29
+
+### Added
+
+- ✨ **Performance Fix Command** - New `/fix:performance` command for automated performance optimization
+  - Automatically identifies and fixes O(n²) algorithms with Map/Set-based lookups
+  - Memory leak fixes for React components and large object allocations
+  - Database operation batching and transaction optimization
+  - Dry-run mode and automatic backups for safe operation
+  - Integration with action plan workflow execution
+
+### Changed
+
+- 🔄 **Enhanced Analysis Commands** - Improved safety and actionability
+  - Added READ-ONLY constraints to all analysis scanners in `/analyze-deep`
+  - Enhanced `/analyze-report` with specific issue-to-command mapping
+  - Action plans now generate executable Markdown files with checkboxes
+  - Added cleanup procedures for temporary analysis files
+  - Improved next steps commands after each finding
+
+### Fixed
+
+- 🐛 Prevented creation of temporary files during analysis operations
+- 🐛 Enhanced safety measures to avoid file modifications in read-only analysis
+
+## [3.1.0] - 2025-01-29
+
+### Added
+
+- ✨ **Revolutionary Automated Workflow** - Complete zero-friction workflow from analysis to fixes
+  - New 3-step process: analyze → generate action plan → execute → view results
+  - Action plans contain exact fix commands with time estimates
+  - ROI-based prioritization for maximum efficiency
+- ✨ **Action Plan Generation** - Enhanced `/analyze-report` command with `--generate-action-plan` flag
+  - Generates executable todo lists with exact commands
+  - Includes time estimates and impact descriptions
+  - Supports team allocation mode
+- ✨ **Workflow Automation Commands**
+  - `/workflow:execute-action-plan` - Executes action plans systematically
+  - `/workflow:completion-report` - Generates comprehensive completion reports
+- ✨ **Comprehensive Documentation Updates**
+  - New AUTOMATED-WORKFLOW.md guide for the zero-friction workflow
+  - Complete system architecture documentation (SYSTEM-ARCHITECTURE-EN.md)
+  - German technical documentation (SYSTEM-ARCHITECTURE-DE.md)
+  - Updated quick-start tutorial with automated workflow
+- ✨ **Action Plan Template** - Example template showing action plan structure
+
+### Changed
+
+- 🔄 Updated documentation to prominently feature the new automated workflow
+- 🔄 Enhanced comprehensive workflow guide with action plan execution
+- 🔄 Improved quick-start tutorial with automated vs manual options
+
+### Fixed
+
+- 🐛 Documentation inconsistencies and outdated references
+
 ## [3.0.0] - 2025-01-29
 
 ### Changed
@@ -272,6 +392,9 @@ This release marks the transition from a commands-only repository to a full tool
 
 - 🐛 Update instructions in README now reflect actual Git-based workflow
 
+[3.3.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.2.0...v3.3.0
+[3.2.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.1.0...v3.2.0
+[3.1.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.4.0...v3.0.0
 [2.4.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/redpop/claude-code-toolkit/compare/v2.2.0...v2.3.0

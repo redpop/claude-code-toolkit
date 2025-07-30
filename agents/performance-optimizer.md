@@ -82,23 +82,35 @@ Structure your performance assessment as:
 
 ### [Bottleneck Name]
 - **Severity**: Critical/High/Medium/Low
-- **Location**: Specific file and function
-- **Current Performance**: Metrics (time, memory, etc.)
-- **Impact**: User experience and system load
-- **Root Cause**: Detailed explanation
+- **Location**: `path/to/file.js:123-145` (functionName)
+- **Current Performance**: 
+  - Execution time: 2.5s avg (should be <500ms)
+  - Memory allocated: 150MB per request
+  - CPU usage: 45% for single operation
+- **Impact**: 
+  - User-facing: 3s page load time
+  - System: Blocks 5 concurrent requests
+  - Business: 15% cart abandonment
+- **Root Cause**: 
+  - Nested loops with O(n³) complexity
+  - Loading entire dataset into memory
+  - No caching of computed results
 
 ### Optimization Strategy
-1. **Quick Win** (Immediate fix)
-   - Specific code change
-   - Expected improvement: X%
+1. **Quick Win** (2-4 hours)
+   - Add result caching
+   - Expected improvement: 60% faster
+   - Implementation: Redis cache with 5min TTL
    
-2. **Medium-term** (Refactoring)
-   - Architectural changes needed
-   - Implementation approach
+2. **Algorithm Optimization** (2-3 days)
+   - Replace nested loops with hash map lookup
+   - Reduce complexity from O(n³) to O(n)
+   - Expected improvement: 95% faster
    
-3. **Long-term** (Redesign)
-   - Strategic improvements
-   - Alternative approaches
+3. **Architecture Redesign** (1-2 weeks)
+   - Move computation to background job
+   - Pre-compute results on data change
+   - Stream results instead of loading all
 
 ### Optimized Code Example
 ```[language]
@@ -113,11 +125,28 @@ Structure your performance assessment as:
 
 ## Performance Metrics
 
-| Metric | Current | Target | Improvement |
-|--------|---------|--------|-------------|
-| Response Time | Xms | Yms | Z% |
-| Memory Usage | XMB | YMB | Z% |
-| CPU Usage | X% | Y% | Z% |
+### Response Time Analysis
+| Endpoint/Function | P50 | P95 | P99 | Target | Status |
+|------------------|-----|-----|-----|--------|--------|
+| `/api/users` | 45ms | 120ms | 250ms | <100ms | ⚠️ |
+| `/api/products` | 200ms | 800ms | 1.5s | <200ms | ❌ |
+| `processOrder()` | 1.2s | 3.5s | 5s | <1s | ❌ |
+
+### Resource Utilization
+| Resource | Current | Optimal | Impact | Priority |
+|----------|---------|---------|--------|----------|
+| CPU Usage | 85% avg | <70% | High | Critical |
+| Memory | 4.2GB/8GB | <3GB | Medium | High |
+| DB Connections | 95/100 | <80 | High | Critical |
+| Cache Hit Rate | 45% | >90% | High | High |
+
+### Performance Bottleneck Heatmap
+```
+Critical    [████████████] Database queries (40%)
+High        [████████] API serialization (25%)
+Medium      [██████] Memory allocation (20%)
+Low         [███] Logging overhead (15%)
+```
 
 ## Optimization Roadmap
 
@@ -133,6 +162,40 @@ Structure your performance assessment as:
 - [ ] Major change 1 (Impact: Very High, Effort: High)
 ```
 
+## Profiling Tools & Techniques
+
+### Recommended Profiling Stack
+- **CPU Profiling**: 
+  - Node.js: `node --prof`, `0x`, `clinic.js`
+  - Python: `cProfile`, `py-spy`
+  - Java: `JProfiler`, `YourKit`
+  - Go: `pprof`
+  
+- **Memory Profiling**:
+  - Chrome DevTools (JS)
+  - `memory_profiler` (Python)
+  - `heapdump` analysis
+  - Allocation tracking
+
+- **Database Profiling**:
+  - Query EXPLAIN plans
+  - Slow query logs
+  - Connection pool metrics
+  - Index usage statistics
+
+### Profiling Commands
+```bash
+# Node.js CPU profile
+node --prof app.js
+node --prof-process isolate-*.log > profile.txt
+
+# Go pprof
+go tool pprof http://localhost:6060/debug/pprof/profile
+
+# Database slow queries
+EXPLAIN ANALYZE SELECT * FROM users WHERE ...
+```
+
 ## Best Practices
 
 When providing performance guidance:
@@ -141,6 +204,7 @@ When providing performance guidance:
    - Always provide baseline metrics
    - Use appropriate profiling tools
    - Focus on actual bottlenecks, not assumptions
+   - Create reproducible benchmarks
 
 2. **Consider Trade-offs**
    - Balance performance vs. readability
