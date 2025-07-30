@@ -2,25 +2,33 @@
 
 Welcome to the Claude Code Toolkit documentation. This directory contains comprehensive guides, architectural documentation, and reference materials.
 
-## 🚀 NEW: Automated Code Quality Workflow
+## 🚀 Quick Start: Transform Your Code
 
-Transform your codebase in just 3 commands:
+Three powerful ways to improve your codebase:
 
+### 1. Smart Problem Solving
 ```bash
-# 1. Analyze
-/analyze-deep . --export-json
-
-# 2. Plan
-/analyze-report latest-report.json --generate-action-plan
-
-# 3. Execute
-/execute-action-plan action-plan-*.md --mode=auto
-
-# 4. Review
-/completion-report
+/prefix:flow:smart "My API is slow and tests are failing"
 ```
 
-**[→ See the Complete Automated Workflow Guide](guides/AUTOMATED-WORKFLOW.md)** 🔥
+### 2. Automated Quality Pipeline
+```bash
+/prefix:meta:pipelines deep-quality
+```
+
+### 3. Custom Command Chains
+```bash
+/prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}" -> "scan:quality . --compare"
+```
+
+**[→ See Complete Workflow Guide](guides/COMPREHENSIVE-WORKFLOW.md)** 🔥
+
+## 🆕 New in v3.0
+
+- **[MIGRATION-GUIDE.md](MIGRATION-GUIDE.md)** - Migrate from old command structure
+- **[INSTALLATION-GUIDE.md](INSTALLATION-GUIDE.md)** - Comprehensive installation instructions
+- **Smart Workflows** - AI-powered problem routing and multi-agent coordination
+- **Command Chaining** - Powerful automation with data flow between commands
 
 ## 📚 Documentation Structure
 
@@ -165,7 +173,41 @@ When adding new documentation:
 - **Examples**: See example sections in each guide
 - **Updates**: Watch the repository for new features
 
+## 📋 Quick Reference
+
+### Command Categories
+
+| Category | Purpose | Example Commands |
+|----------|---------|-----------------|
+| **scan** | Analysis & investigation | `deep`, `quality`, `perf`, `deps` |
+| **fix** | Direct corrections | `quick-wins`, `security`, `duplicates` |
+| **gen** | Code & doc generation | `docs`, `tests` |
+| **flow** | Multi-agent workflows | `smart`, `review`, `incident` |
+| **auto** | Automation | `execute`, `monitor`, `sprint` |
+| **sec** | Security | `audit`, `baseline`, `comply` |
+| **git** | Version control | `commit` |
+| **meta** | Project & toolkit | `health`, `chain`, `pipelines` |
+
+### Essential Commands
+
+```bash
+# Get started quickly
+/prefix:flow:smart "describe your problem"
+
+# Run a quality check
+/prefix:meta:pipelines quick-quality
+
+# Deep analysis
+/prefix:scan:deep .
+
+# Fix issues automatically
+/prefix:fix:quick-wins report.json
+
+# Check project health
+/prefix:meta:health
+```
+
 ---
 
 *Last Updated: January 2025*
-*Documentation Version: 2.0*
+*Documentation Version: 3.0*

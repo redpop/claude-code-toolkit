@@ -24,26 +24,54 @@ claude-code-toolkit/
 │   ├── security-specialist.md   # Security analysis agent
 │   └── test-engineer.md    # Testing strategy agent
 ├── commands/                # All slash command definitions
-│   ├── analysis/           # Analysis commands
-│   │   ├── analyze-deep.md # Deep analysis using hybrid approach
-│   │   └── analyze-report.md # Report analysis command
-│   ├── fix/                # Fix commands
-│   ├── generate/           # Generation commands
-│   ├── git/                # Git-related commands
-│   ├── orchestration/      # Sub-Agent orchestration commands
-│   │   ├── analyze-parallel.md   # Parallel multi-agent analysis
-│   │   ├── performance-scan.md   # Performance analysis
-│   │   ├── refactor-impact.md    # Refactoring impact analysis
-│   │   ├── security-audit.md     # Security audit
-│   │   └── test-coverage.md      # Test coverage analysis
-│   ├── research/           # Research and exploration commands
-│   │   ├── codebase-map.md      # Generate codebase overview
-│   │   ├── deep-dive.md         # Deep investigation
-│   │   └── dependency-trace.md  # Trace dependencies
-│   ├── security/           # Security-focused commands
-│   │   ├── baseline.md          # Security baseline tracking
-│   │   └── compliance.md        # Compliance checking
-│   └── workflow/           # Workflow commands
+│   ├── auto/               # Automation & orchestration
+│   │   ├── execute.md      # Execute action plans
+│   │   ├── monitor.md      # Continuous monitoring
+│   │   ├── report.md       # Completion reports
+│   │   └── sprint.md       # Quality sprints
+│   ├── fix/                # Direct corrections
+│   │   ├── documentation.md # Fix docs issues
+│   │   ├── duplicates.md   # Remove duplication
+│   │   ├── performance.md  # Performance fixes
+│   │   ├── quick-wins.md   # High-ROI fixes
+│   │   ├── security.md     # Security fixes
+│   │   └── shell.md        # Shell script fixes
+│   ├── flow/               # Multi-agent workflows
+│   │   ├── incident.md     # Incident response
+│   │   ├── parallel.md     # Parallel analysis
+│   │   ├── refactor.md     # Refactoring workflow
+│   │   ├── review.md       # Code review
+│   │   └── smart.md        # Smart routing
+│   ├── gen/                # Generation commands
+│   │   ├── docs.md         # Generate documentation
+│   │   └── tests.md        # Generate tests
+│   ├── git/                # Git operations
+│   │   └── commit.md       # Smart commits
+│   ├── meta/               # Project & toolkit
+│   │   ├── chain.md        # Command chaining
+│   │   ├── changelog.md    # Changelog management
+│   │   ├── create-cmd.md   # Create commands
+│   │   ├── export.md       # Export management
+│   │   ├── handoff.md      # AI handoff
+│   │   ├── health.md       # Project health
+│   │   ├── pipelines.md    # Pre-defined pipelines
+│   │   └── update-docs.md  # Update documentation
+│   ├── scan/               # Analysis & investigation
+│   │   ├── deep.md         # Deep analysis
+│   │   ├── deps.md         # Dependency analysis
+│   │   ├── docs.md         # Documentation health
+│   │   ├── explore.md      # Deep exploration
+│   │   ├── map.md          # Codebase mapping
+│   │   ├── perf.md         # Performance scan
+│   │   ├── quality.md      # Quality metrics
+│   │   ├── refactor.md     # Refactor analysis
+│   │   ├── report.md       # Report analysis
+│   │   ├── root-cause.md   # Root cause analysis
+│   │   └── tests.md        # Test coverage
+│   └── sec/                # Security operations
+│       ├── audit.md        # Security audit
+│       ├── baseline.md     # Security baseline
+│       └── comply.md       # Compliance checking
 ├── docs/                    # Extended documentation
 │   ├── README.md           # Documentation index
 │   ├── architecture/       # Architecture documentation
@@ -87,7 +115,10 @@ claude-code-toolkit/
 
 - Commands are organized in subdirectories under `commands/`
 - Directory structure determines command namespace: `commands/category/command.md` → `/prefix:category:command`
-- Use lowercase with hyphens for multi-word names
+- Categories follow clear purposes: `scan`, `fix`, `gen`, `flow`, `auto`, `sec`, `git`, `meta`
+- Use short, action-oriented names (e.g., `deep` not `analyze-deep`)
+- Maximum 2 words per command name
+- Use verbs for clarity
 
 ### Command Format
 
@@ -227,181 +258,136 @@ Key features:
 - Updates README.md command table
 - Preserves manual sections
 
-## Current Commands
+## Key Patterns
 
-### Git Commands (`/prefix:git:*`)
+### Explicit Task Tool Syntax
 
-**`/prefix:git:commit`** - Advanced git commit command that:
+All multi-agent commands now use explicit Task tool invocation:
 
-- Runs pre-commit checks (lint, build, docs) unless `--no-verify` is specified
-- Analyzes changes and suggests splitting into multiple commits when appropriate
-- Uses conventional commit format with emojis
-- Handles both staged and unstaged files intelligently
+```markdown
+Use Task tool with subagent_type="general-purpose":
+"Your detailed prompt here with specific instructions and expected output format."
+```
 
-### Project Commands (`/prefix:project:*`)
+This pattern ensures:
+- Clear agent invocation
+- Proper context isolation
+- Predictable behavior
+- Better error handling
 
-**`/prefix:project:changelog`** - Changelog management command that:
+### Command Chaining Architecture
 
-- Adds entries to CHANGELOG.md following Keep a Changelog format
-- Supports semantic versioning validation
-- Can automatically update version in package files
-- Includes emoji prefixes for change types
-- Optionally commits changes with conventional commit message
+Commands can be chained with automatic data flow:
 
-**`/prefix:project:create-command`** - Create new slash commands:
+```bash
+/prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}" -> "scan:quality . --compare"
+```
 
-- Generate commands from natural language descriptions
-- Automatically determine appropriate category
-- Create properly formatted command files
-- Include all necessary metadata
+Features:
+- `{output}` - Previous command's output
+- `{outputs}` - All previous outputs array
+- `->` - Sequential execution
+- `[cmd1, cmd2]` - Parallel execution
+- `?>` - Conditional execution
+- `!>` - Error fallback
 
-**`/prefix:project:update-docs`** - Update project documentation:
+### Smart Problem Routing
 
-- Synchronize documentation with code changes
-- Update README, CHANGELOG, and other docs
-- Maintain existing formatting and style
-- Optionally commit changes
+The `/flow:smart` command analyzes problems and routes to appropriate specialists:
 
-### AI Commands (`/prefix:ai:*`)
+1. Problem analysis and categorization
+2. Multi-agent task distribution
+3. Parallel execution where possible
+4. Consolidated results with action plan
 
-**`/prefix:ai:handoff`** - AI context handoff command that:
+### Compact Command Design
 
-- Analyzes current problem state and generates comprehensive documentation
-- Creates markdown file suitable for sharing with other AI assistants
-- Includes code snippets, directory structure, and recent changes
-- Captures context of ongoing tasks and next steps
-- Useful for switching between AI assistants or documenting work state
+Commands follow these principles:
+- Maximum 200-300 lines
+- Clear phase structure
+- Explicit Task syntax
+- Focused functionality
+- Reusable patterns
 
-### Code Commands (`/prefix:code:*`)
+## Current Command Categories
 
-**`/prefix:code:shellcheck`** - Shell script analysis and fixing:
+### Scan Commands (`/prefix:scan:*`)
 
-- Automatically detect and fix shell script issues
-- Uses shellcheck for comprehensive analysis
-- Supports strict mode checking
-- Provides summary reports
-
-### Research Commands (`/prefix:research:*`)
-
-**`/prefix:research:codebase-map`** - Generate comprehensive codebase overview  
-**`/prefix:research:deep-dive`** - Deep investigation into specific topics  
-**`/prefix:research:dependency-trace`** - Trace and analyze dependencies
-
-### Orchestration Commands (`/prefix:orchestration:*`)
-
-**`/prefix:orchestration:analyze-parallel`** - Multi-agent parallel analysis  
-**`/prefix:orchestration:security-audit`** - Comprehensive security audit using security-specialist  
-**`/prefix:orchestration:performance-scan`** - Performance analysis using performance-optimizer  
-**`/prefix:orchestration:refactor-impact`** - Refactoring impact analysis  
-**`/prefix:orchestration:test-coverage`** - Test coverage analysis using test-engineer
-
-### Generate Commands (`/prefix:generate:*`)
-
-**`/prefix:generate:documentation`** - Generate comprehensive documentation:
-
-- Generate API documentation from code
-- Create README files with proper structure
-- Add inline code comments
-- Generate architecture diagrams
-
-**`/prefix:generate:tests`** - Generate test suites:
-
-- Create unit tests for uncovered code
-- Generate integration tests
-- Add edge case testing
-- Create test fixtures and mocks
+Analysis and investigation commands:
+- **deep** - Comprehensive analysis with parallel scanning
+- **quality** - Code quality metrics and trends
+- **perf** - Performance profiling
+- **deps** - Dependency analysis
+- **docs** - Documentation health
+- **tests** - Test coverage analysis
 
 ### Fix Commands (`/prefix:fix:*`)
 
-**`/prefix:fix:quick-wins`** - Apply high-ROI fixes:
+Direct correction commands:
+- **quick-wins** - High-ROI fixes from reports
+- **security** - Security vulnerability fixes
+- **performance** - Performance optimizations
+- **duplicates** - Code duplication removal
+- **documentation** - Documentation fixes
 
-- Automatic implementation of quick fixes
-- Security patches for critical issues
-- Performance optimizations
-- Code quality improvements
+### Flow Commands (`/prefix:flow:*`)
 
-**`/prefix:fix:security`** - Fix security vulnerabilities:
+Multi-agent workflow commands:
+- **smart** - Intelligent problem routing
+- **review** - Multi-perspective code review
+- **incident** - Rapid incident response
+- **refactor** - Refactoring workflow
+- **parallel** - Ultra-fast parallel analysis
 
-- OWASP Top 10 remediation
-- Input validation additions
-- Authentication enhancements
-- Secure coding patterns
+### Meta Commands (`/prefix:meta:*`)
 
-**`/prefix:fix:duplicates`** - Remove code duplication:
+Project and toolkit management:
+- **health** - Project health assessment
+- **pipelines** - Pre-defined workflows
+- **chain** - Command chaining
+- **export** - Export management
+- **changelog** - Changelog updates
 
-- Extract common functions
-- Create shared utilities
-- Apply DRY principles
-- Refactor similar patterns
 
-**`/prefix:fix:documentation`** - Fix documentation issues:
+## Migration Guide
 
-- Synchronize parameters with code
-- Fix broken links and references
-- Add deprecation notices
-- Update outdated content
+### Command Name Changes
 
-### Analysis Commands (`/prefix:analysis:*`)
+The following commands have been renamed for clarity and consistency:
 
-**`/prefix:analysis:analyze-deep`** - Deep analysis using hybrid architecture:
+| Old Command | New Command | Category Change |
+|-------------|-------------|-----------------|
+| `/prefix:analyze-deep` | `/prefix:scan:deep` | analysis → scan |
+| `/prefix:analyze-report` | `/prefix:scan:report` | analysis → scan |
+| `/prefix:analyze-parallel` | `/prefix:flow:parallel` | orchestration → flow |
+| `/prefix:project:create-command` | `/prefix:meta:create-cmd` | project → meta |
+| `/prefix:ai:handoff` | `/prefix:meta:handoff` | ai → meta |
+| `/prefix:code:shellcheck` | `/prefix:fix:shell` | code → fix |
+| `/prefix:execute-action-plan` | `/prefix:auto:execute` | workflow → auto |
+| `/prefix:completion-report` | `/prefix:auto:report` | workflow → auto |
 
-- Phase 1: Parallel scanning with Task Tool
-- Phase 2: Expert analysis with specialized Sub-Agents
-- Phase 3: Comprehensive synthesis and recommendations
-- Phase 4: Report export in multiple formats
+### New Workflow Commands
 
-**`/prefix:analysis:analyze-report`** - Intelligent report analysis:
+Three powerful new commands for intelligent workflows:
 
-- ROI-based prioritization
-- Quick wins identification
-- Trend detection and comparison
-- Sprint planning support
+- `/prefix:flow:smart` - Analyzes problems and routes to appropriate specialists
+- `/prefix:flow:review` - Multi-perspective code review with 5 parallel reviewers
+- `/prefix:flow:incident` - Rapid incident response workflow
 
-**`/prefix:analysis:doc-health`** - Documentation health check:
+### Command Chaining
 
-- Code-documentation synchronization validation
-- Parameter consistency checking
-- Cross-reference and link validation
-- Deprecation tracking and coverage analysis
+New integration commands enable powerful automation:
 
-**`/prefix:analysis:five-whys`** - Five Whys root cause analysis:
+```bash
+# Simple chain
+/prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}"
 
-- Apply the Five Whys technique to investigate issues
-- Drill down to root causes systematically
-- Generate actionable insights
-- Document causal chains
+# Parallel execution
+/prefix:meta:chain ["scan:security .", "scan:quality ."] -> "meta:export {outputs}"
 
-### Security Commands (`/prefix:security:*`)
-
-**`/prefix:security:baseline`** - Security baseline tracking:
-
-- Establish security baseline for projects
-- Track security improvements over time
-- Compare against previous baselines
-- Export baseline reports
-
-**`/prefix:security:compliance`** - Compliance checking:
-
-- OWASP Top 10 compliance validation
-- PCI-DSS compliance checks
-- GDPR compliance analysis
-- Custom security policy enforcement
-
-### Workflow Commands (`/prefix:workflow:*`)
-
-**`/prefix:workflow:continuous-quality`** - Continuous code quality monitoring:
-
-- Set up automated analysis schedules
-- Configure auto-fix policies
-- Establish notification channels
-- Track quality metrics over time
-
-**`/prefix:workflow:quality-sprint`** - Code quality improvement sprint:
-
-- Plan sprints based on team size and duration
-- Prioritize tasks by ROI and effort
-- Track progress against goals
-- Generate sprint reports
+# Pre-defined pipelines
+/prefix:meta:pipelines deep-quality
+```
 
 ## Important Notes
 
