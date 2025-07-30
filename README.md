@@ -153,46 +153,41 @@ The installation script will:
 
 <!-- COMMANDS:START - DO NOT EDIT -->
 
-### Ai Commands
+### Auto Commands
 
 | Command | Description | Options |
 |---------|-------------|---------|
-| `/prefix:ai:handoff` | Documents current problem context for handoff to another AI assistant | `output-file` |
-
-
-### Analysis Commands
-
-| Command | Description | Options |
-|---------|-------------|---------|
-| `/prefix:analysis:analyze-deep` | Deep code analysis combining parallel scanning with specialized sub-agent expertise for comprehensive insights | `directory`, `--focus=security|performance|architecture|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
-| `/prefix:analysis:analyze-report` | Intelligent analysis of code quality reports with trend detection, prioritization, and actionable insights | `report.json`, `--compare=other-report.json`, `--history`, `--trends`, `--quick-wins`, `--export-md`, `--generate-action-plan` |
-| `/prefix:analysis:doc-health` | Analyze documentation health, validate code-doc synchronization, check cross-references, and identify outdated content | `directory`, `--scope=readme|api|all`, `--check-links`, `--validate-params`, `--export-report` |
-| `/prefix:analysis:five-whys` | Apply the Five Whys root cause analysis technique to investigate issues | `issue_description` |
-
-
-### Code Commands
-
-| Command | Description | Options |
-|---------|-------------|---------|
-| `/prefix:code:shellcheck` | Automatically fix shell script issues using shellcheck analysis | `--check-only`, `--strict`, `--summary-only` |
+| `/prefix:auto:execute` | Execute an action plan systematically, running fix commands in priority order with progress tracking | `<action-plan.md>`, `--mode=supervised\|auto`, `--dry-run`, `--parallel=N`, `--focus=category` |
+| `/prefix:auto:monitor` | Set up and manage continuous code quality monitoring with automated analysis, fixes, and reporting | `directory`, `--schedule=daily\|weekly\|commit`, `--auto-fix=safe\|all\|none`, `--notify=email\|slack\|github` |
+| `/prefix:auto:report` | Generate comprehensive completion report after action plan execution, showing results, metrics, and next steps | `--action-plan=<file>`, `--execution-log=<file>`, `--compare-baseline`, `--export-formats=md,json,html` |
+| `/prefix:auto:sprint` | Plan and execute a complete code quality improvement sprint with analysis, prioritization, fixes, and tracking | `directory`, `--duration=1w\|2w\|1m`, `--team-size=N`, `--focus=security\|performance\|quality\|all` |
 
 
 ### Fix Commands
 
 | Command | Description | Options |
 |---------|-------------|---------|
-| `/prefix:fix:documentation` | Fix documentation issues including broken links, parameter mismatches, missing cross-references, and outdated content | `report.json|directory`, `--fix-links`, `--fix-params`, `--add-deprecation`, `--dry-run`, `--interactive` |
-| `/prefix:fix:duplicates` | Remove code duplication by extracting common functions, creating shared utilities, and applying DRY principles | `report.json|directory`, `--threshold=80`, `--min-lines=5`, `--dry-run`, `--create-utils` |
-| `/prefix:fix:quick-wins` | Apply high-ROI fixes from analysis reports - quick wins with maximum impact and minimal effort | `report.json`, `--dry-run`, `--category=security|performance|quality`, `--max-effort=4h`, `--min-roi=5` |
+| `/prefix:fix:documentation` | Fix documentation issues including broken links, parameter mismatches, missing cross-references, and outdated content | `report.json\|directory`, `--fix-links`, `--fix-params`, `--add-deprecation`, `--dry-run`, `--interactive` |
+| `/prefix:fix:duplicates` | Remove code duplication by extracting common functions, creating shared utilities, and applying DRY principles | `report.json\|directory`, `--threshold=80`, `--min-lines=5`, `--dry-run`, `--create-utils` |
+| `/prefix:fix:performance` | Automated performance issue fixes including O(n²) algorithms, memory optimization, and database batching | `--target=algorithm\|memory\|database\|all`, `--file=path`, `--dry-run` |
+| `/prefix:fix:quick-wins` | Apply high-ROI fixes from analysis reports - quick wins with maximum impact and minimal effort | `report.json`, `--dry-run`, `--category=security\|performance\|quality`, `--max-effort=4h`, `--min-roi=5` |
 | `/prefix:fix:security` | Fix security vulnerabilities with MCP-enhanced analysis or traditional pattern matching | `report.json`, `--severity=critical,high,medium`, `--dry-run`, `--interactive`, `--owasp-top10` |
+| `/prefix:fix:shell` | Automatically fix shell script issues using shellcheck analysis | `--check-only`, `--strict`, `--summary-only` |
 
 
-### Generate Commands
+### Flow Commands
 
 | Command | Description | Options |
 |---------|-------------|---------|
-| `/prefix:generate:documentation` | Generate comprehensive documentation including API docs, README files, code comments, and architecture diagrams | `directory|file`, `--types=api,readme,comments,diagrams`, `--format=markdown,html`, `--update-existing` |
-| `/prefix:generate:tests` | Generate comprehensive test suites for uncovered code, including unit tests, integration tests, and edge cases | `report.json|file|directory`, `--coverage-target=80`, `--framework=auto`, `--types=unit,integration`, `--mock-externals` |
+| `/prefix:flow:parallel` | Ultra-fast code analysis with 10 parallel agents for 10x performance | `directory`, `--focus=area`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
+
+
+### Gen Commands
+
+| Command | Description | Options |
+|---------|-------------|---------|
+| `/prefix:gen:docs` | Generate comprehensive documentation including API docs, README files, code comments, and architecture diagrams | `directory\|file`, `--types=api,readme,comments,diagrams`, `--format=markdown,html`, `--update-existing` |
+| `/prefix:gen:tests` | Generate comprehensive test suites for uncovered code, including unit tests, integration tests, and edge cases | `report.json\|file\|directory`, `--coverage-target=80`, `--framework=auto`, `--types=unit,integration`, `--mock-externals` |
 
 
 ### Git Commands
@@ -202,51 +197,39 @@ The installation script will:
 | `/prefix:git:commit` | Creates structured Git commits with Conventional Commit format and emojis | `--no-verify`, `--fast`, `--push` |
 
 
-### Orchestration Commands
+### Meta Commands
 
 | Command | Description | Options |
 |---------|-------------|---------|
-| `/prefix:orchestration:analyze-parallel` | Ultra-fast code analysis with 10 parallel agents for 10x performance | `directory`, `--focus=area`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
-| `/prefix:orchestration:performance-scan` | Deep Performance Profiling with 7 Agents for Bottleneck Identification and Optimization | `directory`, `--profile=cpu|memory|io|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
-| `/prefix:orchestration:refactor-impact` | Analyzes the impact of refactoring changes using 6 specialized agents | `file-or-pattern`, `--change-type=rename|move|signature|structure` |
-| `/prefix:orchestration:security-audit` | Comprehensive security audit with MCP-enhanced scanning or traditional fallback methods | `directory`, `--severity=critical|high|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
-| `/prefix:orchestration:test-coverage` | Comprehensive test coverage analysis with 5 specialized agents for test quality | `directory`, `--framework=jest|pytest|go-test|cargo-test`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
+| `/prefix:meta:changelog` | AI-powered CHANGELOG.md management that automatically determines version based on changes | `--analyze`, `--commit`, `--update-version` |
+| `/prefix:meta:create-cmd` | Create new slash commands from natural language descriptions | `description`, `of`, `what`, `you`, `want`, `the`, `command`, `to`, `do` |
+| `/prefix:meta:handoff` | Documents current problem context for handoff to another AI assistant | `output-file` |
+| `/prefix:meta:update-docs` | Intelligently updates project documentation based on code changes and implementation status | `--scope=<type>`, `--analyze`, `--commit` |
 
 
-### Project Commands
-
-| Command | Description | Options |
-|---------|-------------|---------|
-| `/prefix:project:changelog` | AI-powered CHANGELOG.md management that automatically determines version based on changes | `--analyze`, `--commit`, `--update-version` |
-| `/prefix:project:create-command` | Create new slash commands from natural language descriptions | `description`, `of`, `what`, `you`, `want`, `the`, `command`, `to`, `do` |
-| `/prefix:project:update-docs` | Intelligently updates project documentation based on code changes and implementation status | `--scope=<type>`, `--analyze`, `--commit` |
-
-
-### Research Commands
+### Scan Commands
 
 | Command | Description | Options |
 |---------|-------------|---------|
-| `/prefix:research:codebase-map` | Creates a comprehensive codebase mapping with 10 agents for different aspects | `directory`, `--format=markdown|json|mermaid`, `--depth=overview|detailed|full` |
-| `/prefix:research:deep-dive` | Multi-Perspective Deep Research with 8 different viewpoints on a topic | `topic`, `--depth=surface|medium|deep`, `--focus=technical|business|all` |
-| `/prefix:research:dependency-trace` | In-depth dependency analysis with 6 specialized agents for complete transparency | `package-name|file`, `--depth=direct|transitive|full`, `--check=security|licenses|all` |
+| `/prefix:scan:deep` | Deep code analysis combining parallel scanning with specialized sub-agent expertise for comprehensive insights | `directory`, `--focus=security\|performance\|architecture\|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
+| `/prefix:scan:deps` | In-depth dependency analysis with 6 specialized agents for complete transparency | `package-name\|file`, `--depth=direct\|transitive\|full`, `--check=security\|licenses\|all` |
+| `/prefix:scan:docs` | Analyze documentation health, validate code-doc synchronization, check cross-references, and identify outdated content | `directory`, `--scope=readme\|api\|all`, `--check-links`, `--validate-params`, `--export-report` |
+| `/prefix:scan:explore` | Multi-Perspective Deep Research with 8 different viewpoints on a topic | `topic`, `--depth=surface\|medium\|deep`, `--focus=technical\|business\|all` |
+| `/prefix:scan:map` | Creates a comprehensive codebase mapping with 10 agents for different aspects | `directory`, `--format=markdown\|json\|mermaid`, `--depth=overview\|detailed\|full` |
+| `/prefix:scan:perf` | Deep Performance Profiling with 7 Agents for Bottleneck Identification and Optimization | `directory`, `--profile=cpu\|memory\|io\|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
+| `/prefix:scan:refactor` | Analyzes the impact of refactoring changes using 6 specialized agents | `file-or-pattern`, `--change-type=rename\|move\|signature\|structure` |
+| `/prefix:scan:report` | Intelligent analysis of code quality reports with trend detection, prioritization, and actionable insights | `report.json`, `--compare=other-report.json`, `--history`, `--trends`, `--quick-wins`, `--export-md`, `--generate-action-plan` |
+| `/prefix:scan:root-cause` | Apply the Five Whys root cause analysis technique to investigate issues | `issue_description` |
+| `/prefix:scan:tests` | Comprehensive test coverage analysis with 5 specialized agents for test quality | `directory`, `--framework=jest\|pytest\|go-test\|cargo-test`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
 
 
-### Security Commands
+### Sec Commands
 
 | Command | Description | Options |
 |---------|-------------|---------|
-| `/prefix:security:baseline` | Establish and track security baseline with MCP-enhanced scanning or traditional methods | `directory`, `--export-baseline`, `--compare=previous-baseline.json`, `--track-improvements` |
-| `/prefix:security:compliance` | Run compliance checks for OWASP, PCI-DSS, GDPR, and custom security policies | `directory`, `--standard=owasp|pci-dss|gdpr|all`, `--custom-rules=rules.yaml`, `--export-report` |
-
-
-### Workflow Commands
-
-| Command | Description | Options |
-|---------|-------------|---------|
-| `/prefix:workflow:completion-report` | Generate comprehensive completion report after action plan execution, showing results, metrics, and next steps | `--action-plan=<file>`, `--execution-log=<file>`, `--compare-baseline`, `--export-formats=md,json,html` |
-| `/prefix:workflow:continuous-quality` | Set up and manage continuous code quality monitoring with automated analysis, fixes, and reporting | `directory`, `--schedule=daily|weekly|commit`, `--auto-fix=safe|all|none`, `--notify=email|slack|github` |
-| `/prefix:workflow:execute-action-plan` | Execute an action plan systematically, running fix commands in priority order with progress tracking | `<action-plan.md>`, `--mode=supervised|auto`, `--dry-run`, `--parallel=N`, `--focus=category` |
-| `/prefix:workflow:quality-sprint` | Plan and execute a complete code quality improvement sprint with analysis, prioritization, fixes, and tracking | `directory`, `--duration=1w|2w|1m`, `--team-size=N`, `--focus=security|performance|quality|all` |
+| `/prefix:sec:audit` | Comprehensive security audit with MCP-enhanced scanning or traditional fallback methods | `directory`, `--severity=critical\|high\|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
+| `/prefix:sec:baseline` | Establish and track security baseline with MCP-enhanced scanning or traditional methods | `directory`, `--export-baseline`, `--compare=previous-baseline.json`, `--track-improvements` |
+| `/prefix:sec:comply` | Run compliance checks for OWASP, PCI-DSS, GDPR, and custom security policies | `directory`, `--standard=owasp\|pci-dss\|gdpr\|all`, `--custom-rules=rules.yaml`, `--export-report` |
 
 <!-- COMMANDS:END -->
 
