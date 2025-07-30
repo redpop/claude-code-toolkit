@@ -1,75 +1,117 @@
 ---
-allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*), Write
-description: Ultra-fast code analysis with 10 parallel agents for 10x performance
-argument-hint: [directory] [--focus=area] [--export-md] [--export-json] [--export-html] [--export-all] [--export-dir=path]
+allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*)
+description: Ultra-fast parallel code analysis with 10 specialized agents
+argument-hint: <directory> [--focus=area] [--export-json]
 ---
 
-**IMPORTANT: This is a READ-ONLY analysis command. Do NOT create, modify, or write any files. Only analyze and report findings.**
+# Parallel Code Analysis
 
-# Parallel Code Analysis Command
+Lightning-fast code analysis using 10 parallel agents, delivering comprehensive results in seconds instead of minutes.
 
-This command performs a comprehensive code analysis with 10 specialized agents running in parallel. The analysis is typically 10x faster than a sequential investigation.
+## How It Works
+
+All 10 agents run simultaneously, each scanning for specific issues. Results are then consolidated and prioritized.
+
+**Expected Performance**: 5-8 seconds total (vs 50-60 seconds sequential)
 
 ## Execution
 
-**IMMEDIATELY START 10 PARALLEL AGENTS:**
+**Target**: $ARGUMENTS
 
-1. **Code Complexity Agent**: Task(description="Analyse Code Complexity", prompt="Analyze code complexity in $ARGUMENTS. Search for: 1) Functions with high cyclomatic complexity (>10), 2) Deeply nested structures (>4 levels), 3) Long functions (>50 lines), 4) Too many parameters (>5). Return structured JSON with the top 10 most problematic areas.", subagent_type="general-purpose")
+### Deploying 10 Parallel Agents
 
-2. **Duplicate Code Agent**: Task(description="Detect Code Duplication", prompt="Find duplicated code in $ARGUMENTS. Use tools like rg for pattern matching. Search for: 1) Identical code blocks (>10 lines), 2) Similar structures with minor variations, 3) Copy-paste patterns. Return JSON with duplicates and their locations.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose" for ALL agents simultaneously:
 
-3. **Style Violations Agent**: Task(description="Check Code Style", prompt="Check code style violations in $ARGUMENTS. Analyze: 1) Inconsistent naming conventions, 2) Formatting issues, 3) Import organization, 4) Comment standards. Focus on the most frequent violations. Return structured JSON.", subagent_type="general-purpose")
+1. **Complexity Agent**
+   "Find functions with cyclomatic complexity >10, nesting >4 levels, length >50 lines in $ARGUMENTS. Return top 10 as JSON."
 
-4. **Documentation Coverage Agent**: Task(description="Analyze Documentation", prompt="Evaluate documentation quality in $ARGUMENTS. Check: 1) Missing function/class documentation, 2) Outdated comments, 3) README completeness, 4) API documentation. Return coverage metrics as JSON.", subagent_type="general-purpose")
+2. **Duplication Agent**  
+   "Find duplicate code blocks >10 lines in $ARGUMENTS. Use pattern matching to identify copy-paste code. Return JSON with locations."
 
-5. **Dead Code Agent**: Task(description="Find Dead Code", prompt="Identify unused code in $ARGUMENTS. Search for: 1) Unused functions/variables, 2) Unreachable code, 3) Unused imports, 4) Orphaned files. Use rg and fd for analysis. Return JSON with dead code locations.", subagent_type="general-purpose")
+3. **Style Agent**
+   "Check style violations in $ARGUMENTS: naming conventions, formatting, import order. Return most frequent issues as JSON."
 
-6. **Type Safety Agent**: Task(description="Analyze Type Safety", prompt="Check type safety in $ARGUMENTS. Analyze: 1) Missing type annotations, 2) Any-types or unclear types, 3) Type mismatches, 4) Unsafe casts. Focus on the most critical areas. Return structured JSON.", subagent_type="general-purpose")
+4. **Documentation Agent**
+   "Find missing docs in $ARGUMENTS: undocumented functions/classes, outdated comments, incomplete READMEs. Return as JSON."
 
-7. **Security Patterns Agent**: Task(description="Security Quick Scan", prompt="Perform a quick security scan in $ARGUMENTS. Search for: 1) Hardcoded secrets/credentials, 2) Unsafe functions (eval, exec), 3) SQL injection risks, 4) Path traversal possibilities. Return the top 5 findings as JSON.", subagent_type="general-purpose")
+5. **Dead Code Agent**
+   "Identify unused code in $ARGUMENTS: unused functions, variables, imports, unreachable code. Return locations as JSON."
 
-8. **Performance Profiling Agent**: Task(description="Performance Analysis", prompt="Analyze performance issues in $ARGUMENTS. Identify: 1) O(n²) or worse algorithms, 2) Unnecessary loops/recursions, 3) Memory leak potential, 4) Blocking I/O. Return the most critical performance issues as JSON.", subagent_type="general-purpose")
+6. **Type Safety Agent**
+   "Check type issues in $ARGUMENTS: missing annotations, any-types, type mismatches. Return critical type issues as JSON."
 
-9. **Test Quality Agent**: Task(description="Assess Test Quality", prompt="Evaluate test quality in $ARGUMENTS. Analyze: 1) Test coverage gaps, 2) Missing edge case tests, 3) Test code quality, 4) Flaky test patterns. Return metrics and improvement suggestions as JSON.", subagent_type="general-purpose")
+7. **Security Agent**
+   "Quick security scan of $ARGUMENTS: hardcoded secrets, unsafe functions, injection risks. Return top 5 security issues as JSON."
 
-10. **Dependency Analysis Agent**: Task(description="Analyze Dependencies", prompt="Examine dependencies in $ARGUMENTS. Check: 1) Circular dependencies, 2) Outdated packages, 3) Unnecessary dependencies, 4) License compatibility. Return structured dependency analysis as JSON.", subagent_type="general-purpose")
+8. **Performance Agent**
+   "Find performance issues in $ARGUMENTS: O(n²) algorithms, unnecessary loops, memory leaks. Return bottlenecks as JSON."
 
-## Synthesis
+9. **Test Quality Agent**
+   "Assess test quality in $ARGUMENTS: coverage gaps, missing edge cases, flaky patterns. Return test issues as JSON."
 
-After all agents complete:
+10. **Dependency Agent**
+    "Analyze dependencies in $ARGUMENTS: circular deps, outdated packages, license issues. Return dependency problems as JSON."
 
-1. **Collect all JSON outputs** from the 10 agents
-2. **Deduplicate findings** that were found by multiple agents
-3. **Prioritize by severity**:
-   - Critical: Security Issues, Memory Leaks
-   - High: Performance Problems, Dead Code
-   - Medium: Code Complexity, Duplicates
-   - Low: Style Issues, Documentation
+### Result Synthesis
 
-4. **Create Executive Summary** with:
-   - Overall code health score (0-100)
-   - Top 10 most critical issues
-   - Quick wins (easily fixable problems)
-   - Long-term improvements
+After all agents complete, consolidate findings:
 
-5. **Generate Actionable Report**:
-   ```markdown
-   # Code Analysis Report
-   
-   ## Executive Summary
-   - Health Score: X/100
-   - Critical Issues: N
-   - Total Issues: M
-   - Estimated Fix Time: X hours
-   
-   ## Critical Findings
-   [Sorted list of most important issues]
-   
-   ## Quick Wins
-   [Easily fixable problems]
-   
-   ## Detailed Analysis
-   [Categorized by agent type]
-   ```
+## Parallel Analysis Report
 
-**Performance Expectation**: This analysis should complete in 5-8 seconds, compared to 50-60 seconds for sequential execution.
+### Executive Summary
+- **Scan Duration**: [X seconds]
+- **Total Issues**: [Count by severity]  
+- **Health Score**: [0-100]
+
+### Critical Issues (Immediate Action)
+[Security vulnerabilities, memory leaks, broken functionality]
+
+### High Priority (This Sprint)
+[Performance problems, major code smells, missing tests]
+
+### Medium Priority (Next Sprint)
+[Code complexity, documentation gaps, style issues]
+
+### Quick Wins (< 1 hour each)
+[Easy fixes with high impact]
+
+## Next Steps
+
+```bash
+# Execute high-ROI fixes
+/prefix:fix:quick-wins
+
+# Deep dive into critical issues
+/prefix:scan:deep --focus=security
+
+# Generate action plan
+/prefix:scan:report parallel-results.json --generate-action-plan
+```
+
+## Usage Examples
+
+```bash
+# Quick health check
+/prefix:flow:parallel src/
+
+# Focused analysis
+/prefix:flow:parallel src/api --focus=security
+
+# Export for automation
+/prefix:flow:parallel . --export-json=health-check.json
+```
+
+## Integration Points
+
+This command is ideal for:
+- Pre-commit hooks (fast enough for real-time)
+- CI/CD pipeline quality gates
+- Daily health checks
+- Quick project assessments
+
+## Key Benefits
+
+- **10x Faster**: Parallel execution vs sequential
+- **Comprehensive**: Covers all major quality aspects
+- **Actionable**: Prioritized findings with next steps
+- **Lightweight**: No external dependencies
