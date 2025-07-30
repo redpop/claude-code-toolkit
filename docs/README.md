@@ -21,7 +21,7 @@ Three powerful ways to improve your codebase:
 /prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}" -> "scan:quality . --compare"
 ```
 
-**[→ See Complete Workflow Guide](guides/COMPREHENSIVE-WORKFLOW.md)** 🔥
+**[→ See Modern Workflow Guide](guides/MODERN-WORKFLOW.md)** 🔥
 
 ## 🆕 New in v3.0
 
@@ -44,18 +44,17 @@ Deep technical documentation about the toolkit's design and implementation:
 ### 📖 Guides (`/guides/`)
 Practical guides for using the toolkit effectively:
 
-- **[AUTOMATED-WORKFLOW.md](guides/AUTOMATED-WORKFLOW.md)** 🔥 **NEW** - Zero-friction automated workflow from analysis to fixes
-- **[COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md)** ⭐ - Complete end-to-end workflow documentation
-- **[REPORT-EXPORT-SYSTEM.md](guides/REPORT-EXPORT-SYSTEM.md)** - How to export and use analysis reports
-- **[REPORT-ANALYZER-EXAMPLES.md](guides/REPORT-ANALYZER-EXAMPLES.md)** - Examples of report analysis and interpretation
-- **[EXPORT-EXAMPLES.md](guides/EXPORT-EXAMPLES.md)** - Sample exports in different formats
-- **[TROUBLESHOOTING-FILE-MODIFICATIONS.md](guides/TROUBLESHOOTING-FILE-MODIFICATIONS.md)** - Fixing unwanted file modifications
+- **[MODERN-WORKFLOW.md](guides/MODERN-WORKFLOW.md)** 🔥 **Primary Guide** - All workflows from smart AI to manual control
+- **[AUTOMATED-WORKFLOW.md](guides/AUTOMATED-WORKFLOW.md)** ⚡ - Quick automation options
+- **[MCP-INTEGRATION.md](guides/MCP-INTEGRATION.md)** - Using MCP servers for enhanced functionality
+- **[REPORT-EXPORT-SYSTEM.md](guides/REPORT-EXPORT-SYSTEM.md)** - Export formats and templates
+- **[TROUBLESHOOTING-FILE-MODIFICATIONS.md](guides/TROUBLESHOOTING-FILE-MODIFICATIONS.md)** - Common issues and solutions
 
 ### 🎓 Tutorials (`/tutorials/`)
-Step-by-step tutorials for common tasks:
+Step-by-step tutorials for getting started:
 
-- **[quick-start-tutorial.md](tutorials/quick-start-tutorial.md)** - Get started with the toolkit in 10 minutes
-- **[building-custom-commands.md](tutorials/building-custom-commands.md)** - Create your own powerful commands
+- **[quick-start.md](tutorials/quick-start.md)** 🚀 - Get started in 5 minutes with v3.0
+- **[building-custom-commands.md](tutorials/building-custom-commands.md)** - Create your own commands
 - **[creating-specialized-agents.md](tutorials/creating-specialized-agents.md)** - Build expert AI agents for specific tasks
 
 ### 🔧 API Reference (`/api/`)
@@ -74,22 +73,21 @@ Older documentation kept for reference:
 
 ## 🚀 Quick Start
 
-### Option 1: Automated Workflow (Recommended) 🔥
-Try the new zero-friction workflow that automates everything:
+### Option 1: Smart Problem Solving (Easiest) 🤖
 ```bash
-/analyze-deep . --export-json
-/analyze-report latest-report.json --generate-action-plan  
-/execute-action-plan action-plan-*.md --mode=auto
-/completion-report
+/prefix:flow:smart "describe your problem here"
 ```
-**[→ Full Automated Workflow Guide](guides/AUTOMATED-WORKFLOW.md)**
+**[→ Modern Workflow Guide](guides/MODERN-WORKFLOW.md)**
 
-### Option 2: Traditional Workflow
-1. **New Users**: Start with [COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md) to understand the complete toolkit workflow.
+### Option 2: Pre-Built Pipelines 🚀
+```bash
+/prefix:meta:pipelines deep-quality
+```
+**[→ Quick Automation Guide](guides/AUTOMATED-WORKFLOW.md)**
 
-2. **Understanding the Architecture**: Read [HYBRID-ARCHITECTURE.md](architecture/HYBRID-ARCHITECTURE.md) to learn about our innovative approach.
-
-3. **Using Reports**: Check [REPORT-EXPORT-SYSTEM.md](guides/REPORT-EXPORT-SYSTEM.md) for report generation and analysis.
+### Option 3: Learn the Architecture
+1. **Understanding the System**: Read [HYBRID-ARCHITECTURE.md](architecture/HYBRID-ARCHITECTURE.md)
+2. **Technical Details**: Check [TECHNICAL-GUIDE.md](architecture/TECHNICAL-GUIDE.md)
 
 ## 📊 Key Concepts
 
@@ -109,48 +107,33 @@ Five expert agents provide focused analysis:
 
 ### Workflow Automation 🚀 NEW!
 Complete automated pipeline from analysis to fixes:
-1. **Analyze** - Comprehensive code quality assessment (`/analyze-deep`)
-2. **Plan** - Generate executable action plan (`/analyze-report --generate-action-plan`)  
-3. **Execute** - Run fixes automatically (`/execute-action-plan`)
-4. **Report** - View accomplishments (`/completion-report`)
+1. **Smart Analysis** - AI-powered problem routing (`/flow:smart`)
+2. **Quick Pipelines** - Pre-built workflows (`/meta:pipelines`)
+3. **Command Chains** - Custom automation (`/meta:chain`)
+4. **Direct Control** - Individual commands for specific tasks
 
 **[→ Try the Automated Workflow Now!](guides/AUTOMATED-WORKFLOW.md)**
 
 ## 📈 Command Categories
 
-### Analysis Commands
-- `/analyze-deep` - Comprehensive hybrid analysis
-- `/security-audit` - Security-focused scan
-- `/performance-scan` - Performance analysis
-- `/test-coverage` - Testing assessment
-- `/analyze-parallel` - Multi-agent parallel analysis
+Commands are organized into 8 clear categories:
 
-### Report Commands  
-- `/analyze-report` - Intelligent report analysis
-- `/trend-analyzer` - Historical trending
-
-### Research Commands
-- `/codebase-map` - Generate codebase overview
-- `/deep-dive` - Focused investigation
-- `/dependency-trace` - Trace dependencies
-
-### Fix Commands
-- `/fix-quick-wins` - Apply high-ROI fixes
-- `/fix-duplicates` - Remove duplication
-- `/fix-security` - Fix security vulnerabilities
-- `/fix-documentation` - Fix documentation issues
-
-### Generate Commands
-- `/generate-tests` - Create missing tests
-- `/generate-documentation` - Generate comprehensive documentation
+- **scan** - Analysis & investigation (`deep`, `quality`, `perf`)
+- **fix** - Direct corrections (`quick-wins`, `security`, `duplicates`)
+- **gen** - Code & doc generation (`docs`, `tests`)
+- **flow** - Multi-agent workflows (`smart`, `review`, `incident`)
+- **auto** - Automation (`execute`, `monitor`, `sprint`)
+- **sec** - Security (`audit`, `baseline`, `comply`)
+- **git** - Version control (`commit`)
+- **meta** - Project & toolkit (`health`, `chain`, `pipelines`)
 
 ## 🔍 Finding Information
 
 ### By Task
-- **Starting a new project analysis**: [COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md)
-- **Understanding reports**: [REPORT-ANALYZER-EXAMPLES.md](guides/REPORT-ANALYZER-EXAMPLES.md)
-- **Fixing issues**: See Phase 3 in [COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md)
-- **CI/CD Integration**: See Phase 5 in [COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md)
+- **Getting Started**: [quick-start.md](tutorials/quick-start.md)
+- **All Workflows**: [MODERN-WORKFLOW.md](guides/MODERN-WORKFLOW.md)
+- **Migration from v2**: [MIGRATION-GUIDE.md](MIGRATION-GUIDE.md)
+- **Installation Help**: [INSTALLATION-GUIDE.md](INSTALLATION-GUIDE.md)
 
 ### By Technical Interest
 - **How agents work**: [SUB-AGENT-ORCHESTRATION.md](architecture/SUB-AGENT-ORCHESTRATION.md)
