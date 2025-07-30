@@ -77,17 +77,51 @@ Structure your architectural assessment as:
 # Architecture Analysis Report
 
 ## Executive Summary
-- Architecture style: [Identified pattern]
-- Overall health score: X/10
-- Key strengths
-- Critical issues
+- **Architecture Style**: [Monolithic | Microservices | SOA | Serverless | Hybrid]
+- **Overall Health Score**: X/10
+- **Maturity Level**: [Initial | Managed | Defined | Quantified | Optimizing]
+- **Key Strengths**: 
+  - ✅ [Strength 1]
+  - ✅ [Strength 2]
+- **Critical Issues**:
+  - ❌ [Issue 1]
+  - ❌ [Issue 2]
 
 ## Current Architecture
 
 ### System Overview
 ```mermaid
 graph TB
-    [Architecture diagram showing main components]
+    subgraph "Frontend Layer"
+        UI[Web UI]
+        Mobile[Mobile App]
+    end
+    
+    subgraph "API Gateway"
+        GW[API Gateway]
+        Auth[Auth Service]
+    end
+    
+    subgraph "Business Logic"
+        Service1[Service A]
+        Service2[Service B]
+        Service3[Service C]
+    end
+    
+    subgraph "Data Layer"
+        DB[(Database)]
+        Cache[(Redis)]
+        Queue[Message Queue]
+    end
+    
+    UI --> GW
+    Mobile --> GW
+    GW --> Auth
+    GW --> Service1
+    GW --> Service2
+    Service1 --> DB
+    Service2 --> Cache
+    Service3 --> Queue
 ```
 
 ### Component Analysis
@@ -144,13 +178,84 @@ graph TB
 ## Dependency Graph
 ```mermaid
 graph LR
-    [Show key dependencies and their directions]
+    subgraph "Core Domain"
+        User[User Entity]
+        Order[Order Entity]
+        Product[Product Entity]
+    end
+    
+    subgraph "Application Services"
+        UserService[User Service]
+        OrderService[Order Service]
+        ProductService[Product Service]
+    end
+    
+    subgraph "Infrastructure"
+        UserRepo[User Repository]
+        OrderRepo[Order Repository]
+        ProductRepo[Product Repository]
+        EmailService[Email Service]
+    end
+    
+    UserService --> User
+    UserService --> UserRepo
+    UserService --> EmailService
+    
+    OrderService --> Order
+    OrderService --> User
+    OrderService --> Product
+    OrderService --> OrderRepo
+    
+    ProductService --> Product
+    ProductService --> ProductRepo
+    
+    style User fill:#f9f,stroke:#333,stroke-width:2px
+    style Order fill:#f9f,stroke:#333,stroke-width:2px
+    style Product fill:#f9f,stroke:#333,stroke-width:2px
 ```
 
 ## Migration Strategy
-1. Phase 1: [Description]
-2. Phase 2: [Description]
-3. Phase 3: [Description]
+
+### Migration Roadmap
+```mermaid
+gantt
+    title Architecture Migration Timeline
+    dateFormat  YYYY-MM-DD
+    section Phase 1
+    Extract Core Services    :2024-01-01, 30d
+    Add Service Registry     :30d
+    section Phase 2
+    Implement API Gateway    :2024-02-15, 45d
+    Migrate Authentication   :15d
+    section Phase 3
+    Database Separation      :2024-04-01, 60d
+    Add Message Queue        :30d
+```
+
+### Migration Steps
+1. **Phase 1: Foundation** (Month 1-2)
+   - Extract core business logic into services
+   - Establish service communication patterns
+   - Add monitoring and logging
+
+2. **Phase 2: Infrastructure** (Month 3-4)
+   - Implement API gateway
+   - Add service discovery
+   - Migrate authentication/authorization
+
+3. **Phase 3: Data Layer** (Month 5-6)
+   - Separate databases per service
+   - Implement event sourcing
+   - Add caching layer
+
+## Architecture Decision Records (ADRs)
+
+### ADR-001: [Decision Title]
+- **Status**: Accepted/Proposed/Deprecated
+- **Context**: Why this decision is needed
+- **Decision**: What we decided
+- **Consequences**: Impact of this decision
+- **Alternatives Considered**: Other options evaluated
 ```
 
 ## Best Practices
