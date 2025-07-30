@@ -1,30 +1,65 @@
 # Automated Code Quality Workflow Guide
 
-This guide shows you how to use the Claude Code Toolkit's powerful automated workflow to go from analysis to completed fixes with minimal manual intervention.
+This guide shows you three powerful ways to improve your code quality with the Claude Code Toolkit v3.0.
 
-## 🚀 Quick Start: The 3-Step Workflow
+## 🚀 Method 1: Smart Problem Solving (Recommended)
 
-Transform your codebase quality in just 3 commands:
+Let AI analyze your problem and coordinate the solution:
+
+```bash
+# Describe your problem in natural language
+/prefix:flow:smart "My API endpoints are slow and I have failing tests"
+```
+
+The toolkit will:
+- Analyze the problem type
+- Route to appropriate specialists
+- Execute fixes in parallel where possible
+- Provide consolidated results
+
+## 🏃 Method 2: Pre-Built Quality Pipeline
+
+Run a complete quality improvement pipeline with one command:
+
+```bash
+# Run deep quality analysis and fixes
+/prefix:meta:pipelines deep-quality
+```
+
+Available pipelines:
+- `quick-quality` - 30-second quality check
+- `deep-quality` - Full analysis with fixes
+- `security-hardening` - Security-focused improvements
+- `release-prep` - Prepare for production
+
+## 🔧 Method 3: Custom Workflow Chain
+
+Build your own workflow with command chaining:
+
+```bash
+# Analyze → Fix → Verify
+/prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}" -> "scan:quality . --compare"
+```
+
+Or the traditional step-by-step approach:
 
 ```bash
 # Step 1: Analyze your codebase
-/analyze-deep . --export-json
+/prefix:scan:deep . --export-json
 
 # Step 2: Generate an executable action plan
-/analyze-report latest-report.json --generate-action-plan
+/prefix:scan:report latest-report.json --generate-action-plan
 
 # Step 3: Execute the fixes automatically
-/execute-action-plan action-plan-*.md --mode=auto
+/prefix:auto:execute action-plan-*.md --mode=auto
 
-# Bonus Step 4: View what was accomplished
-/completion-report
+# Step 4: View what was accomplished
+/prefix:auto:report
 ```
-
-That's it! The toolkit will analyze your code, create a prioritized fix plan, execute the fixes, and show you the results.
 
 ## 📋 Understanding Action Plans
 
-When you run `/analyze-report --generate-action-plan`, the toolkit creates a structured todo list with:
+When you run `/prefix:scan:report --generate-action-plan`, the toolkit creates a structured todo list with:
 
 - **Exact commands** to fix each issue
 - **Time estimates** for each task
@@ -45,23 +80,23 @@ When you run `/analyze-report --generate-action-plan`, the toolkit creates a str
 
 ### 🔴 Critical Security (8h)
 - [ ] **Input Sanitization** (3h)
-  - Command: `/fix-security --focus="xss,sanitization" --auto-fix`
+  - Command: `/prefix:fix:security --focus="xss,sanitization" --auto-fix`
   - Files: src/components/*, src/utils/*
   - Impact: Prevents XSS attacks across 15 components
 
 - [ ] **JSON Validation** (2h)
-  - Command: `/fix-security --focus="validation" --library="zod"`
+  - Command: `/prefix:fix:security --focus="validation" --library="zod"`
   - Files: src/services/dataImport.ts
   - Impact: Prevents prototype pollution attacks
 
 - [ ] **Remove Sensitive Logs** (1h)
-  - Command: `/fix-security --remove-console-logs --pattern="password|token|key"`
+  - Command: `/prefix:fix:security --remove-console-logs --pattern="password|token|key"`
   - Files: 47 files with sensitive data in logs
   - Impact: Prevents credential leakage
 
 ### 🟡 Quick Wins (6h)
 - [ ] **Remove Code Duplication** (2h)
-  - Command: `/fix-duplicates --file="src/utils/pdfExport.ts"`
+  - Command: `/prefix:fix:duplicates --file="src/utils/pdfExport.ts"`
   - Lines saved: 140
   - Impact: 50% reduction in maintenance effort
 
@@ -72,7 +107,7 @@ When you run `/analyze-report --generate-action-plan`, the toolkit creates a str
 
 ### 🟢 Enhancements (10h)
 - [ ] **Increase Test Coverage** (8h)
-  - Command: `/generate-tests --coverage-target=60 --focus="critical"`
+  - Command: `/prefix:gen:tests --coverage-target=60 --focus="critical"`
   - Current: 30% → Target: 60%
   - Impact: Catch 80% more bugs before production
 
@@ -100,7 +135,7 @@ When you run `/analyze-report --generate-action-plan`, the toolkit creates a str
 ```
 📋 Task 1/15: Input Sanitization
 Estimated time: 3h
-Command: /fix-security --focus="xss,sanitization" --auto-fix
+Command: /prefix:fix:security --focus="xss,sanitization" --auto-fix
 Files affected: 15
 
 Preview changes? (y/n/skip): y
