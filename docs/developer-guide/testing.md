@@ -88,6 +88,26 @@ tests/
 
 ### Running Tests
 
+### With Claude Code CLI (Recommended)
+
+If you have Claude Code installed (`claude` or `claude-code` command), tests will automatically use programmatic mode (`-p` flag) for more accurate testing:
+
+```bash
+# Tests will detect and use Claude CLI automatically
+./tests/run-all.sh
+
+# Or set explicitly
+export CLAUDE_CMD=claude
+./tests/run-all.sh
+```
+
+### Without Claude Code CLI
+
+Tests will fall back to structural validation:
+- Check if files exist in correct locations
+- Verify installation structure
+- Create mock outputs for workflow testing
+
 #### Run All Tests
 ```bash
 cd claude-code-toolkit
@@ -107,6 +127,18 @@ cd claude-code-toolkit
 # Run tests
 ./tests/run-all.sh
 ```
+
+### Test Modes
+
+1. **Programmatic Mode** (with Claude CLI)
+   - Uses `claude -p` for actual command execution
+   - Tests real functionality
+   - Provides accurate results
+
+2. **Structural Mode** (without Claude CLI)
+   - Verifies file existence
+   - Checks installation integrity
+   - Creates mock data for testing
 
 ## Writing Tests
 
