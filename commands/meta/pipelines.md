@@ -14,7 +14,7 @@ Execute pre-defined command chains for common development workflows with a singl
 **Duration**: ~30 seconds
 
 ```bash
-/prefix:flow:parallel . --export-json=quick-check.json
+/prefix:scan:quick . --export-json=quick-check.json
 /prefix:scan:report quick-check.json --quick-wins
 ```
 

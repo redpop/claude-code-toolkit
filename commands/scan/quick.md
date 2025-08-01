@@ -1,12 +1,12 @@
 ---
 allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*)
-description: Ultra-fast parallel code analysis with 10 specialized agents
+description: Quick parallel code analysis for rapid feedback (30 seconds)
 argument-hint: <directory> [--focus=area] [--export-json]
 ---
 
-# Parallel Code Analysis
+# Quick Code Analysis
 
-Lightning-fast code analysis using 10 parallel agents, delivering comprehensive results in seconds instead of minutes.
+Lightning-fast code analysis using parallel agents, perfect for pre-commit checks and rapid feedback. Gets you 80% of insights in 20% of the time.
 
 ## How It Works
 
@@ -75,30 +75,52 @@ After all agents complete, consolidate findings:
 ### Quick Wins (< 1 hour each)
 [Easy fixes with high impact]
 
-## Next Steps
+## 🎯 Next Steps
 
+Based on the quick analysis, I recommend:
+
+### 1. **Immediate Actions** (5 min)
 ```bash
-# Execute high-ROI fixes
-/prefix:fix:quick-wins
-
-# Deep dive into critical issues
-/prefix:scan:deep --focus=security
-
-# Generate action plan
-/prefix:scan:report parallel-results.json --generate-action-plan
+# Fix the quick wins identified
+/prefix:fix:quick-wins {export-file}
 ```
+
+### 2. **Deep Analysis** (If critical issues found)
+```bash
+# Run comprehensive scan for detailed insights
+/prefix:scan:deep . --focus={critical-area}
+
+# Or generate full action plan
+/prefix:scan:report {export-file} --generate-action-plan
+```
+
+### 3. **Continuous Monitoring**
+```bash
+# Set up pre-commit hook with this command
+/prefix:meta:install-hook pre-commit "scan:quick"
+
+# Or add to CI pipeline
+/prefix:meta:pipelines quick-quality
+```
+
+## 📤 Export Information
+- **Results saved to**: `{export-file}`
+- **Scan time**: ~30 seconds
+- **Coverage**: 80% of common issues
+
+💡 **Pro tip**: Use this for rapid feedback during development. For comprehensive analysis, use `/prefix:scan:deep`.
 
 ## Usage Examples
 
 ```bash
 # Quick health check
-/prefix:flow:parallel src/
+/prefix:scan:quick src/
 
 # Focused analysis
-/prefix:flow:parallel src/api --focus=security
+/prefix:scan:quick src/api --focus=security
 
 # Export for automation
-/prefix:flow:parallel . --export-json=health-check.json
+/prefix:scan:quick . --export-json=health-check.json
 ```
 
 ## Integration Points

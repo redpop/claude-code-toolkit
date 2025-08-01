@@ -27,7 +27,7 @@ The Claude Code Toolkit has been completely reorganized for better clarity, cons
 
 | Old Command | New Command | What Changed |
 |-------------|-------------|--------------|
-| `/prefix:analyze-parallel` | `/prefix:flow:parallel` | Moved to workflow category |
+| `/prefix:analyze-parallel` | `/prefix:scan:quick` | Moved to scan category for fast analysis |
 | `/prefix:performance-scan` | `/prefix:scan:perf` | Moved to scan category |
 | `/prefix:refactor-impact` | `/prefix:scan:refactor` | Moved to scan category |
 | `/prefix:security-audit` | `/prefix:sec:audit` | Moved to security category |

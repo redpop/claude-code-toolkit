@@ -134,9 +134,52 @@ Use Task tool with subagent_type="general-purpose":
 /prefix:scan:deep . --export-md=release-report.md
 ```
 
-## Next Steps
+## 🎯 Next Steps
 
-Based on the analysis, recommended command sequence:
-1. Run suggested fix commands for critical issues
-2. Use `/prefix:flow:review` for human review of complex findings
-3. Track improvements with `/prefix:scan:report`
+Based on the analysis, I recommend:
+
+### 1. **Immediate Actions** (5-15 min)
+**Quick fixes with high impact:**
+```bash
+# Fix critical issues from this scan
+/prefix:fix:quick-wins {export-file}
+
+# Or fix specific critical security issues
+/prefix:fix:security {export-file} --severity=critical
+```
+
+### 2. **Comprehensive Improvement** (30-60 min)
+**For thorough code quality enhancement:**
+```bash
+# Generate and execute action plan
+/prefix:scan:report {export-file} --generate-action-plan
+/prefix:auto:execute action-plan-*.md
+
+# Or run quality improvement workflow
+/prefix:meta:workflow quality-sprint
+```
+
+### 3. **Focused Approach**
+**Choose based on your priorities:**
+
+- [ ] 🔒 **Security Focus**: `/prefix:sec:audit . --comprehensive`
+- [ ] ⚡ **Performance**: `/prefix:fix:performance {export-file} --target=critical`
+- [ ] 🧪 **Testing**: `/prefix:gen:tests --focus={uncovered-modules}`
+- [ ] 🏗️ **Architecture**: `/prefix:flow:refactor . --based-on={export-file}`
+- [ ] 📚 **Documentation**: `/prefix:fix:documentation {export-file}`
+
+### 4. **Track Progress**
+```bash
+# Compare with this baseline
+/prefix:scan:quality . --compare={export-file}
+
+# Review detailed findings
+/prefix:flow:review {export-file}
+```
+
+## 📤 Export Information
+- **Results saved to**: `{export-file}`
+- **Format**: JSON/Markdown
+- **Use in next commands**: Pass the export file as input to fix commands
+
+💡 **Pro tip**: Start with quick wins for immediate value, then proceed to comprehensive improvements.

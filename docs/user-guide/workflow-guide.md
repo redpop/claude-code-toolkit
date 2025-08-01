@@ -67,7 +67,7 @@ Execute individual commands for specific tasks:
 #### Or Manual Steps:
 ```bash
 # 1. Fast analysis
-/global:flow:parallel . --export-json=pre-commit.json
+/global:scan:quick . --export-json=pre-commit.json
 
 # 2. Review findings
 /global:scan:report pre-commit.json --quick-wins

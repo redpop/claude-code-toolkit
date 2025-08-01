@@ -76,7 +76,7 @@ Sub-agents are specialized AI agents that work in parallel to analyze different 
 Yes! Create a new `.md` file in the `/agents/` directory following the template structure, then use it in orchestration commands.
 
 ### Q: How many agents can run in parallel?
-The Task tool supports multiple parallel agents. Commands like `/prefix:flow:parallel` use up to 10 agents simultaneously.
+The Task tool supports multiple parallel agents. Commands like `/prefix:scan:quick` use up to 10 agents simultaneously.
 
 ## Contributing
 

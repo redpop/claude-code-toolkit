@@ -66,7 +66,7 @@ export CLAUDE_DEBUG=true
 }
 
 # Or use simpler commands
-/global:flow:parallel . # Instead of scan:deep
+/global:scan:quick . # Instead of scan:deep
 ```
 
 #### "No results returned" from analysis
@@ -91,8 +91,8 @@ ls -la .
 # Use quick mode
 /global:scan:deep . --quick
 
-# Or parallel scan
-/global:flow:parallel .
+# Or quick scan
+/global:scan:quick .
 
 # Limit scope
 /global:scan:deep src/ --exclude=node_modules

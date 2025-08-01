@@ -125,7 +125,7 @@ Repeat until condition met:
 - name: Quality Gate
   run: |
     /prefix:meta:chain \
-      "flow:parallel . --export-json" -> \
+      "scan:quick . --export-json" -> \
       "scan:report {output} --threshold=85" \
       --stop-on-error
 ```
@@ -191,7 +191,7 @@ After chain execution:
 
 ### Quick Quality Fix
 ```bash
-/prefix:meta:chain "flow:parallel ." -> "fix:quick-wins {output}"
+/prefix:meta:chain "scan:quick ." -> "fix:quick-wins {output}"
 ```
 
 ### Full Analysis Pipeline
