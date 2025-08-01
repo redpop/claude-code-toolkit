@@ -171,14 +171,14 @@ Multi-agent workflow commands for complex operations.
 - Plans safe changes
 - Validates results
 
-### flow:parallel
-**Ultra-fast parallel analysis**
+### scan:quick
+**Quick parallel code analysis**
 ```bash
-/global:flow:parallel <directory> [--agents=10] [--export-json]
+/global:scan:quick <directory> [--focus=area] [--export-json]
 ```
-- Maximum parallelism
-- Quick results
-- Broad coverage
+- 30-second analysis
+- 10 parallel agents
+- Rapid feedback
 
 ## 🤖 Auto Commands
 

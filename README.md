@@ -206,6 +206,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:fix:quick-wins` | Apply high-ROI fixes from analysis reports - quick wins with maximum impact and minimal effort | `report.json`, `--dry-run`, `--category=security\|performance\|quality`, `--max-effort=4h`, `--min-roi=5` |
 | `/prefix:fix:security` | Fix security vulnerabilities with MCP-enhanced analysis or traditional pattern matching | `report.json`, `--severity=critical,high,medium`, `--dry-run`, `--interactive`, `--owasp-top10` |
 | `/prefix:fix:shell` | Automatically fix shell script issues using shellcheck analysis | `--check-only`, `--strict`, `--summary-only` |
+| `/prefix:fix:smart` | Intelligent fix router that analyzes issues and applies appropriate fixes | `<report.json\|issue-description>`, `--mode=safe\|aggressive`, `--preview` |
 
 
 ### Flow Commands
@@ -213,7 +214,6 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | Command | Description | Options |
 |---------|-------------|---------|
 | `/prefix:flow:incident` | Rapid incident response workflow for production issues with root cause analysis | `<incident-description>`, `--severity=critical\|high\|medium`, `--system=component` |
-| `/prefix:flow:parallel` | Ultra-fast parallel code analysis with 10 specialized agents | `<directory>`, `--focus=area`, `--export-json` |
 | `/prefix:flow:refactor` | Intelligent refactoring suggestions with impact analysis and step-by-step guidance | `<file-or-pattern>`, `--type=extract\|rename\|restructure`, `--safety=conservative\|balanced\|aggressive` |
 | `/prefix:flow:review` | Comprehensive code review using multiple specialized agents for different perspectives | `<file-or-directory>`, `--focus=security\|performance\|architecture\|all` |
 | `/prefix:flow:smart` | Intelligently analyze and route problems to the most appropriate specialized agents | `<problem-description>`, `--verbose`, `--suggest-only` |
@@ -259,6 +259,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:scan:map` | Creates a comprehensive codebase mapping with 10 agents for different aspects | `directory`, `--format=markdown\|json\|mermaid`, `--depth=overview\|detailed\|full` |
 | `/prefix:scan:perf` | Deep Performance Profiling with 7 Agents for Bottleneck Identification and Optimization | `directory`, `--profile=cpu\|memory\|io\|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
 | `/prefix:scan:quality` | Comprehensive code quality metrics with trend analysis and improvement roadmap | `<directory>`, `--baseline=previous.json`, `--threshold=80`, `--export` |
+| `/prefix:scan:quick` | Quick parallel code analysis for rapid feedback (30 seconds) | `<directory>`, `--focus=area`, `--export-json` |
 | `/prefix:scan:refactor` | Analyzes the impact of refactoring changes using 6 specialized agents | `file-or-pattern`, `--change-type=rename\|move\|signature\|structure` |
 | `/prefix:scan:report` | Intelligent analysis of code quality reports with trend detection, prioritization, and actionable insights | `report.json`, `--compare=other-report.json`, `--history`, `--trends`, `--quick-wins`, `--export-md`, `--generate-action-plan` |
 | `/prefix:scan:root-cause` | Apply the Five Whys root cause analysis technique to investigate issues | `issue_description` |

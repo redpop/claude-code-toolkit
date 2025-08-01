@@ -369,7 +369,7 @@ The following commands have been renamed for clarity and consistency:
 |-------------|-------------|-----------------|
 | `/prefix:analyze-deep` | `/prefix:scan:deep` | analysis → scan |
 | `/prefix:analyze-report` | `/prefix:scan:report` | analysis → scan |
-| `/prefix:analyze-parallel` | `/prefix:flow:parallel` | orchestration → flow |
+| `/prefix:analyze-parallel` | `/prefix:scan:quick` | orchestration → scan |
 | `/prefix:project:create-command` | `/prefix:meta:create-cmd` | project → meta |
 | `/prefix:ai:handoff` | `/prefix:meta:handoff` | ai → meta |
 | `/prefix:code:shellcheck` | `/prefix:fix:shell` | code → fix |
