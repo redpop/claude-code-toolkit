@@ -71,7 +71,8 @@ Simple file-based installation:
 1. **[Architecture Guide](architecture.md)** - System design and patterns
 2. **[Configuration Guide](configuration.md)** - Settings and customization
 3. **[Extending Guide](extending.md)** - Creating commands and agents
-4. **[Internals Guide](internals.md)** - How everything works
+4. **[Testing Guide](testing.md)** - Test infrastructure and writing tests
+5. **[Internals Guide](internals.md)** - How everything works
 
 ## 🚀 Quick Links for Developers
 

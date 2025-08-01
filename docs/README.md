@@ -17,6 +17,7 @@ Welcome to the Claude Code Toolkit documentation. This directory contains compre
   - [Architecture](developer-guide/architecture.md) - System design and patterns
   - [Configuration](developer-guide/configuration.md) - Settings and customization
   - [Extending](developer-guide/extending.md) - Create commands and agents
+  - [Testing](developer-guide/testing.md) - Test infrastructure and writing tests
   - [Internals](developer-guide/internals.md) - How everything works
 
 ### Additional Resources
