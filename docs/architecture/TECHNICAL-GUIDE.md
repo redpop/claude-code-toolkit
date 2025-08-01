@@ -1,103 +1,103 @@
-# Technischer Leitfaden: Sub-Agent Orchestrierungssystem
+# Technical Guide: Sub-Agent Orchestration System
 
-## Inhaltsverzeichnis
+## Table of Contents
 
-1. [Übersicht](#übersicht)
-2. [Architektur](#architektur)
-3. [Für Repository-Maintainer](#für-repository-maintainer)
-4. [Für Endanwender](#für-endanwender)
-5. [Konfiguration im Detail](#konfiguration-im-detail)
-6. [Eigene Commands erstellen](#eigene-commands-erstellen)
-7. [Performance-Optimierung](#performance-optimierung)
-8. [Hybrid-Architektur](#hybrid-architektur)
-9. [Fehlerbehebung](#fehlerbehebung)
+1. [Overview](#overview)
+2. [Architecture](#architecture)
+3. [For Repository Maintainers](#for-repository-maintainers)
+4. [For End Users](#for-end-users)
+5. [Configuration in Detail](#configuration-in-detail)
+6. [Creating Custom Commands](#creating-custom-commands)
+7. [Performance Optimization](#performance-optimization)
+8. [Hybrid Architecture](#hybrid-architecture)
+9. [Troubleshooting](#troubleshooting)
 
-## Übersicht
+## Overview
 
-Das Sub-Agent Orchestrierungssystem ermöglicht es Claude Code, mehrere spezialisierte Agents parallel auszuführen und dabei 5-10x Performance-Verbesserungen bei komplexen Analyseaufgaben zu erzielen. Anstatt Aufgaben sequentiell zu verarbeiten, nutzt das System Claudes Task Tool, um mehrere Agents zu erzeugen, die gleichzeitig arbeiten.
+The Sub-Agent Orchestration System enables Claude Code to execute multiple specialized agents in parallel, achieving 5-10x performance improvements for complex analysis tasks. Instead of processing tasks sequentially, the system uses Claude's Task Tool to spawn multiple agents that work simultaneously.
 
-### Kernkomponenten
+### Core Components
 
-1. **Commands** (`/commands/`): Markdown-Dateien mit Agent-Orchestrierungsanweisungen
-2. **Konfiguration** (`.claude-commands.json`): Systemweite und command-spezifische Einstellungen
-3. **Hilfsskripte** (`/scripts/`): Tools zum Erstellen und Verwalten von Commands
-4. **Templates** (`/commands/templates/`): Ausgangspunkte für neue Commands
+1. **Commands** (`/commands/`): Markdown files with agent orchestration instructions
+2. **Configuration** (`.claude-commands.json`): System-wide and command-specific settings
+3. **Helper Scripts** (`/scripts/`): Tools for creating and managing commands
+4. **Templates** (`/commands/templates/`): Starting points for new commands
 
-## Architektur
+## Architecture
 
-### Funktionsweise
+### How It Works
 
 ```mermaid
 graph TD
-    A[Benutzer ruft Command auf] --> B[Claude liest Command-Datei]
-    B --> C[Parst Agent-Definitionen]
-    C --> D[Startet parallele Agents via Task Tool]
+    A[User calls command] --> B[Claude reads command file]
+    B --> C[Parses agent definitions]
+    C --> D[Starts parallel agents via Task Tool]
     D --> E1[Agent 1]
     D --> E2[Agent 2]
     D --> E3[Agent N]
-    E1 --> F[Sammle Ergebnisse]
+    E1 --> F[Collect results]
     E2 --> F
     E3 --> F
-    F --> G[Synthese-Phase]
-    G --> H[Generiere Endbericht]
+    F --> G[Synthesis phase]
+    G --> H[Generate final report]
 ```
 
-### Command-Struktur
+### Command Structure
 
-Jede Command-Datei enthält:
+Each command file contains:
 
 ```markdown
 ---
 allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*)
-description: Kurze Beschreibung für Command-Auflistung
-argument-hint: [erwartete-argumente]
+description: Brief description for command listing
+argument-hint: [expected-arguments]
 ---
 
-# Command-Ausführungsanweisungen
+# Command execution instructions
 ```
 
-Das Frontmatter definiert:
+The frontmatter defines:
 
-- `allowed-tools`: Verfügbare Tools für Agents
-- `description`: Erscheint in Command-Listen
-- `argument-hint`: Hilft bei der Auto-Vervollständigung
+- `allowed-tools`: Available tools for agents
+- `description`: Appears in command lists
+- `argument-hint`: Helps with auto-completion
 
-### Agent-Definitionsmuster
+### Agent Definition Pattern
 
 ```markdown
 1. **Agent Name**: Task(
-   description="Kurze Aufgabenbeschreibung",
-   prompt="Detaillierte Anweisungen für den Agent...",
+   description="Brief task description",
+   prompt="Detailed instructions for the agent...",
    subagent_type="general-purpose"
    )
 ```
 
-## Für Repository-Maintainer
+## For Repository Maintainers
 
-### Verzeichnisstruktur
+### Directory Structure
 
 ```text
 claude-code-toolkit/
-├── .claude-commands.json          # Globale Konfiguration
+├── .claude-commands.json          # Global configuration
 ├── commands/
-│   ├── orchestration/            # Analyse & Performance Commands
+│   ├── orchestration/            # Analysis & performance commands
 │   │   ├── analyze-parallel.md
 │   │   ├── security-audit.md
 │   │   └── ...
-│   ├── research/                 # Research & Investigation Commands
+│   ├── research/                 # Research & investigation commands
 │   │   ├── deep-dive.md
 │   │   └── ...
-│   └── templates/                # Command-Templates
+│   └── templates/                # Command templates
 │       ├── basic-sub-agent.md
 │       └── ...
 └── scripts/
-    ├── create-sub-agent-command.sh  # Command-Generator
-    └── update-readme.sh             # Dokumentations-Updater
+    ├── create-sub-agent-command.sh  # Command generator
+    └── update-readme.sh             # Documentation updater
 ```
 
-### Konfigurationsdatei: `.claude-commands.json`
+### Configuration File: `.claude-commands.json`
 
-Die Konfigurationsdatei steuert das Systemverhalten:
+The configuration file controls system behavior:
 
 ```json
 {
@@ -106,111 +106,111 @@ Die Konfigurationsdatei steuert das Systemverhalten:
     "performanceMode": "balanced", // conservative|balanced|aggressive
 
     "defaults": {
-      "tokenBudget": 3000, // Tokens pro Agent
-      "timeout": 30000, // Millisekunden
+      "tokenBudget": 3000, // Tokens per agent
+      "timeout": 30000, // Milliseconds
       "maxRetries": 2,
       "parallelExecution": true
     },
 
     "commandOverrides": {
       "orchestration:security-audit": {
-        "performanceMode": "conservative" // Überschreibung für spezifischen Command
+        "performanceMode": "conservative" // Override for specific command
       }
     }
   }
 }
 ```
 
-### Neue Commands hinzufügen
+### Adding New Commands
 
-1. **Mit dem Hilfsskript** (empfohlen):
+1. **Using the helper script** (recommended):
 
    ```bash
    ./scripts/create-sub-agent-command.sh \
-     --name "meine-analyse" \
+     --name "my-analysis" \
      --agents 8 \
      --category orchestration \
-     --description "Eigene Analyse mit 8 Agents"
+     --description "Custom analysis with 8 agents"
    ```
 
-2. **Manuelle Erstellung**:
+2. **Manual creation**:
 
-   - Template aus `/commands/templates/` kopieren
-   - Agent-Anzahl und Prompts anpassen
-   - In passenden Kategorie-Ordner speichern
+   - Copy template from `/commands/templates/`
+   - Adjust agent count and prompts
+   - Save in appropriate category folder
 
-3. **Dokumentation aktualisieren**:
+3. **Update documentation**:
 
    ```bash
    ./scripts/update-readme.sh
    ```
 
-### Performance-Modi erklärt
+### Performance Modes Explained
 
-| Modus        | Max Agents | Token Budget | Timeout | Anwendungsfall            |
-| ------------ | ---------- | ------------ | ------- | ------------------------- |
-| Conservative | 5          | 2000         | 20s     | Begrenzte Ressourcen      |
-| Balanced     | 10         | 3000         | 30s     | Standard, meiste Aufgaben |
-| Aggressive   | 20         | 4000         | 45s     | Große Codebases           |
+| Mode         | Max Agents | Token Budget | Timeout | Use Case              |
+| ------------ | ---------- | ------------ | ------- | --------------------- |
+| Conservative | 5          | 2000         | 20s     | Limited resources     |
+| Balanced     | 10         | 3000         | 30s     | Standard, most tasks  |
+| Aggressive   | 20         | 4000         | 45s     | Large codebases       |
 
-## Für Endanwender
+## For End Users
 
 ### Installation
 
 ```bash
-# Installation mit Standard "global" Prefix
+# Installation with default "global" prefix
 curl -fsSL https://raw.githubusercontent.com/username/repo/main/install.sh | bash -s -- global
 
-# Eigener Prefix
-curl -fsSL https://raw.githubusercontent.com/username/repo/main/install.sh | bash -s -- meinprefix
+# Custom prefix
+curl -fsSL https://raw.githubusercontent.com/username/repo/main/install.sh | bash -s -- myprefix
 ```
 
-### Commands verwenden
+### Using Commands
 
-Commands folgen dem Muster: `/prefix:kategorie:command`
+Commands follow the pattern: `/prefix:category:command`
 
 ```bash
-# Beispiele
+# Examples
 /global:orchestration:analyze-parallel src/
 /global:orchestration:security-audit --severity=critical
 /global:research:deep-dive "authentication patterns"
 ```
 
-### Command-Kategorien
+### Command Categories
 
-**Orchestration Commands** - Code-Analyse und Qualitätsprüfungen:
+**Orchestration Commands** - Code analysis and quality checks:
 
-- `analyze-parallel`: 10 Agents für umfassende Code-Analyse
-- `security-audit`: 8 Agents für Security-Vulnerability-Scanning
-- `refactor-impact`: 6 Agents zur Bewertung von Refactoring-Konsequenzen
-- `test-coverage`: 5 Agents für Test-Qualitätsanalyse
-- `performance-scan`: 7 Agents für Performance-Profiling
+- `analyze-parallel`: 10 agents for comprehensive code analysis
+- `security-audit`: 8 agents for security vulnerability scanning
+- `refactor-impact`: 6 agents for assessing refactoring consequences
+- `test-coverage`: 5 agents for test quality analysis
+- `performance-scan`: 7 agents for performance profiling
 
-**Research Commands** - Untersuchung und Dokumentation:
+**Research Commands** - Investigation and documentation:
 
-- `deep-dive`: 8 Agents für Multi-Perspektiven-Research
-- `codebase-map`: 10 Agents zur Kartierung der gesamten Codebase-Struktur
-- `dependency-trace`: 6 Agents für Dependency-Analyse
+- `deep-dive`: 8 agents for multi-perspective research
+- `codebase-map`: 10 agents for mapping entire codebase structure
+- `dependency-trace`: 6 agents for dependency analysis
 
-### Output verstehen
+### Understanding Output
 
-Commands produzieren typischerweise:
+Commands typically produce:
 
-1. **Executive Summary**: High-Level-Erkenntnisse
-2. **Detailanalyse**: Kategorie-spezifische Ergebnisse
-3. **Action Items**: Priorisierte nächste Schritte
-4. **Metriken**: Performance- und Qualitätswerte
+1. **Executive Summary**: High-level insights
+2. **Detailed Analysis**: Category-specific results
+3. **Action Items**: Prioritized next steps
+4. **Metrics**: Performance and quality values
 
-## Konfiguration im Detail
+## Configuration in Detail
 
-### Projekt-Level-Konfiguration
+### Project-Level Configuration
 
-Erstelle `.claude-commands.json` im Projekt-Root:
+Create `.claude-commands.json` in project root:
 
 ```json
 {
   "subAgentOrchestration": {
-    "performanceMode": "aggressive", // Überschreibt globalen Standard
+    "performanceMode": "aggressive", // Overrides global default
     "synthesis": {
       "format": "json", // json|markdown|csv
       "prioritization": "severity" // severity|impact|effort
@@ -219,7 +219,7 @@ Erstelle `.claude-commands.json` im Projekt-Root:
 }
 ```
 
-### Command-spezifische Überschreibungen
+### Command-Specific Overrides
 
 In `.claude-commands.json`:
 
@@ -236,176 +236,176 @@ In `.claude-commands.json`:
 }
 ```
 
-### Umgebungsvariablen
+### Environment Variables
 
 ```bash
-# Performance-Modus überschreiben
+# Override performance mode
 export CLAUDE_PERFORMANCE_MODE=conservative
 
-# Debug-Logging aktivieren
+# Enable debug logging
 export CLAUDE_DEBUG=true
 
-# Eigenes Cache-Verzeichnis setzen
-export CLAUDE_CACHE_DIR=~/mein-cache
+# Set custom cache directory
+export CLAUDE_CACHE_DIR=~/my-cache
 ```
 
-## Eigene Commands erstellen
+## Creating Custom Commands
 
-### Mit `create-sub-agent-command.sh`
+### Using `create-sub-agent-command.sh`
 
-Das Hilfsskript vereinfacht die Command-Erstellung:
+The helper script simplifies command creation:
 
 ```bash
-# Grundlegende Verwendung
-./scripts/create-sub-agent-command.sh --name "mein-command" --agents 6
+# Basic usage
+./scripts/create-sub-agent-command.sh --name "my-command" --agents 6
 
-# Alle Optionen
+# All options
 ./scripts/create-sub-agent-command.sh \
   --name "api-analyzer" \
   --agents 8 \
   --category orchestration \
   --template analysis \
-  --description "Analysiert API-Design-Patterns"
+  --description "Analyzes API design patterns"
 ```
 
-Optionen:
+Options:
 
-- `-n, --name`: Command-Name (erforderlich)
-- `-a, --agents`: Anzahl der Agents (2-20, Standard: 5)
+- `-n, --name`: Command name (required)
+- `-a, --agents`: Number of agents (2-20, default: 5)
 - `-c, --category`: orchestration|research|custom
 - `-t, --template`: basic|analysis|research
-- `-d, --description`: Kurze Beschreibung
+- `-d, --description`: Brief description
 
-### Manuelle Command-Erstellung
+### Manual Command Creation
 
-1. **Template wählen**:
+1. **Choose template**:
 
-   - `basic-sub-agent.md`: Allgemeiner Zweck
-   - `analysis-sub-agent.md`: Code-Analyse-Fokus
-   - `research-sub-agent.md`: Research und Dokumentation
+   - `basic-sub-agent.md`: General purpose
+   - `analysis-sub-agent.md`: Code analysis focus
+   - `research-sub-agent.md`: Research and documentation
 
-2. **Agents definieren**:
+2. **Define agents**:
 
    ```markdown
-   1. **Spezifischer Aufgaben-Agent**: Task(
-      description="Analysiere spezifischen Aspekt",
-      prompt="Detaillierte Anweisungen inklusive: 1) Was analysiert werden soll 2) Zu verwendende Tools (rg, fd, etc.) 3) Output-Format (JSON/Markdown)
-      Strukturierte Ergebnisse zurückgeben.",
+   1. **Specific Task Agent**: Task(
+      description="Analyze specific aspect",
+      prompt="Detailed instructions including: 1) What to analyze 2) Tools to use (rg, fd, etc.) 3) Output format (JSON/Markdown)
+      Return structured results.",
       subagent_type="general-purpose"
       )
    ```
 
-3. **Synthese-Logik entwerfen**:
-   - Wie Ergebnisse zusammengeführt werden
-   - Deduplizierungsstrategie
-   - Prioritätsberechnung
-   - Report-Generierung
+3. **Design synthesis logic**:
+   - How results are merged
+   - Deduplication strategy
+   - Priority calculation
+   - Report generation
 
 ### Best Practices
 
-1. **Agent-Design**:
+1. **Agent Design**:
 
-   - Agents auf einzelne Verantwortlichkeiten fokussieren
-   - Klare Output-Format-Anweisungen geben
-   - Spezifische Tool-Nutzungshinweise einschließen
-   - Vernünftige Token-Budgets setzen
+   - Focus agents on single responsibilities
+   - Give clear output format instructions
+   - Include specific tool usage hints
+   - Set reasonable token budgets
 
 2. **Performance**:
 
-   - Mit weniger Agents beginnen, bei Bedarf skalieren
-   - `conservative`-Modus für große Dateien verwenden
-   - Token-Nutzung mit Metriken überwachen
+   - Start with fewer agents, scale as needed
+   - Use `conservative` mode for large files
+   - Monitor token usage with metrics
 
-3. **Fehlerbehandlung**:
-   - Für Teilausfälle planen
-   - Fallback-Strategien einbauen
-   - Wichtige Fehler loggen
+3. **Error Handling**:
+   - Plan for partial failures
+   - Build in fallback strategies
+   - Log important errors
 
-## Performance-Optimierung
+## Performance Optimization
 
-### Agent-Anzahl optimieren
+### Optimizing Agent Count
 
 ```text
-Agents | Anwendungsfall
+Agents | Use Case
 -------|---------------
-2-4    | Einfache, fokussierte Analyse
-5-8    | Standard Code-Analyse
-9-12   | Umfassende Reviews
-13-20  | Große Codebase-Analyse
+2-4    | Simple, focused analysis
+5-8    | Standard code analysis
+9-12   | Comprehensive reviews
+13-20  | Large codebase analysis
 ```
 
-### Token-Budget-Management
+### Token Budget Management
 
 ```json
 {
   "defaults": {
-    "tokenBudget": 3000 // Pro Agent
+    "tokenBudget": 3000 // Per agent
   }
 }
 ```
 
-Richtlinien:
+Guidelines:
 
-- Einfache Analyse: 1500-2000 Tokens
-- Standard-Aufgaben: 2500-3500 Tokens
-- Komplexe Research: 3500-5000 Tokens
+- Simple analysis: 1500-2000 tokens
+- Standard tasks: 2500-3500 tokens
+- Complex research: 3500-5000 tokens
 
-### Caching-Strategie
+### Caching Strategy
 
-Caching für wiederholte Analysen aktivieren:
+Enable caching for repeated analyses:
 
 ```json
 {
   "caching": {
     "enabled": true,
-    "ttl": 3600, // 1 Stunde
+    "ttl": 3600, // 1 hour
     "cacheLocation": "~/.claude/cache/sub-agents"
   }
 }
 ```
 
-## Hybrid-Architektur
+## Hybrid Architecture
 
-### Überblick
+### Overview
 
-Die Hybrid-Architektur kombiniert die Leistungsfähigkeit des Task Tools für parallele Agent-Orchestrierung mit der Flexibilität von Claude Code Sub-Agents. Dieser Ansatz ermöglicht es, das Beste aus beiden Welten zu nutzen: die Performance-Vorteile der parallelen Ausführung und die erweiterten Fähigkeiten von Claude Code für komplexe, interaktive Aufgaben.
+The Hybrid Architecture combines the power of the Task Tool for parallel agent orchestration with the flexibility of Claude Code Sub-Agents. This approach allows leveraging the best of both worlds: the performance benefits of parallel execution and the advanced capabilities of Claude Code for complex, interactive tasks.
 
-### Der Hybrid-Ansatz
+### The Hybrid Approach
 
-#### Kombination von Task Tool und Claude Code Sub-Agents
+#### Combining Task Tool and Claude Code Sub-Agents
 
-Die Hybrid-Architektur nutzt zwei komplementäre Ansätze:
+The Hybrid Architecture uses two complementary approaches:
 
-1. **Task Tool Agents**: Für parallelisierbare, gut definierte Aufgaben
+1. **Task Tool Agents**: For parallelizable, well-defined tasks
 
-   - Schnelle, parallele Ausführung
-   - Begrenzte Tool-Palette
-   - Ideal für Analyse, Suche und strukturierte Datenverarbeitung
+   - Fast, parallel execution
+   - Limited tool palette
+   - Ideal for analysis, search, and structured data processing
 
-2. **Claude Code Sub-Agents**: Für komplexe, interaktive Aufgaben
-   - Voller Zugriff auf alle Claude Code Tools
-   - Sequentielle aber mächtige Verarbeitung
-   - Ideal für Code-Generierung, komplexe Refactorings und interaktive Workflows
+2. **Claude Code Sub-Agents**: For complex, interactive tasks
+   - Full access to all Claude Code tools
+   - Sequential but powerful processing
+   - Ideal for code generation, complex refactorings, and interactive workflows
 
 ```mermaid
 graph TD
-    A[Hybrid Command] --> B{Aufgabentyp?}
-    B -->|Parallelisierbar| C[Task Tool Agents]
-    B -->|Komplex/Interaktiv| D[Claude Code Sub-Agent]
+    A[Hybrid Command] --> B{Task Type?}
+    B -->|Parallelizable| C[Task Tool Agents]
+    B -->|Complex/Interactive| D[Claude Code Sub-Agent]
     C --> E[Agent 1]
     C --> F[Agent 2]
     C --> G[Agent N]
     D --> H[Full-Featured Agent]
-    E --> I[Ergebnisse sammeln]
+    E --> I[Collect Results]
     F --> I
     G --> I
     H --> I
-    I --> J[Hybrid-Synthese]
+    I --> J[Hybrid Synthesis]
 ```
 
-### Konfiguration für hybridMode
+### Configuration for hybridMode
 
-#### Globale Konfiguration in `.claude-commands.json`
+#### Global Configuration in `.claude-commands.json`
 
 ```json
 {
@@ -415,9 +415,9 @@ graph TD
       "enabled": true,
       "strategy": "adaptive", // adaptive|manual|threshold
       "thresholds": {
-        "complexity": 0.7, // Schwellenwert für automatische Sub-Agent-Nutzung
-        "fileCount": 50, // Dateien-Anzahl für Sub-Agent-Aktivierung
-        "codebaseSize": "10MB" // Codebase-Größe für Sub-Agent-Nutzung
+        "complexity": 0.7, // Threshold for automatic sub-agent usage
+        "fileCount": 50, // File count for sub-agent activation
+        "codebaseSize": "10MB" // Codebase size for sub-agent usage
       },
       "fallbackBehavior": "degrade-gracefully" // fail|degrade-gracefully|force-sequential
     },
@@ -430,7 +430,7 @@ graph TD
       },
       "subAgents": {
         "maxSequential": 3,
-        "allowedTools": "all", // Voller Tool-Zugriff
+        "allowedTools": "all", // Full tool access
         "tokenBudget": 8000,
         "interactionMode": "autonomous" // autonomous|guided
       }
@@ -439,7 +439,7 @@ graph TD
 }
 ```
 
-#### Command-spezifische Hybrid-Konfiguration
+#### Command-Specific Hybrid Configuration
 
 ```json
 {
@@ -448,9 +448,9 @@ graph TD
       "hybridMode": {
         "strategy": "manual",
         "agentDistribution": {
-          "analysis": "task", // Analyse-Phase mit Task Agents
-          "implementation": "sub", // Implementation mit Sub-Agents
-          "validation": "task" // Validierung wieder mit Task Agents
+          "analysis": "task", // Analysis phase with Task Agents
+          "implementation": "sub", // Implementation with Sub-Agents
+          "validation": "task" // Validation again with Task Agents
         }
       }
     }
@@ -458,52 +458,52 @@ graph TD
 }
 ```
 
-### Hybrid Commands erstellen
+### Creating Hybrid Commands
 
-#### 1. Basic Hybrid Command Struktur
+#### 1. Basic Hybrid Command Structure
 
 ```markdown
 ---
 allowed-tools: Task, Read, Grep, Bash, Edit, Write, MultiEdit
-description: Hybrid-Analyse mit automatischer Agent-Auswahl
+description: Hybrid analysis with automatic agent selection
 argument-hint: [target-directory] [options]
 hybrid-mode: true
 ---
 
 # Hybrid Command Execution
 
-## Phase 1: Parallele Analyse (Task Agents)
+## Phase 1: Parallel Analysis (Task Agents)
 
-Analysiere die Codebase mit spezialisierten Task Agents:
+Analyze the codebase with specialized Task Agents:
 
 1. **Structure Analyzer**: Task(
-   description="Analysiere Projekt-Struktur",
-   prompt="Verwende fd und rg um die Architektur zu verstehen...",
+   description="Analyze project structure",
+   prompt="Use fd and rg to understand the architecture...",
    subagent_type="general-purpose"
    )
 
 2. **Pattern Detector**: Task(
-   description="Erkenne Code-Patterns",
-   prompt="Suche nach gängigen Patterns und Anti-Patterns...",
+   description="Detect code patterns",
+   prompt="Search for common patterns and anti-patterns...",
    subagent_type="general-purpose"
    )
 
-## Phase 2: Komplexe Verarbeitung (Claude Code Sub-Agent)
+## Phase 2: Complex Processing (Claude Code Sub-Agent)
 
-Basierend auf den Analyse-Ergebnissen, führe komplexe Operationen aus:
+Based on analysis results, perform complex operations:
 
 3. **Refactoring Agent**: SubAgent(
-   description="Führe identifizierte Refactorings durch",
-   prompt="Nutze die Analyse-Ergebnisse um: 1) Code zu refaktorisieren 2) Tests anzupassen 3) Dokumentation zu aktualisieren
-   Verwende Edit/MultiEdit für Änderungen.",
+   description="Perform identified refactorings",
+   prompt="Use the analysis results to: 1) Refactor code 2) Adapt tests 3) Update documentation
+   Use Edit/MultiEdit for changes.",
    capabilities="full-claude-code"
    )
 
-## Phase 3: Validierung (Task Agents)
+## Phase 3: Validation (Task Agents)
 
 4. **Test Runner**: Task(
-   description="Führe Tests aus und validiere Änderungen",
-   prompt="Verwende Bash um Tests auszuführen...",
+   description="Run tests and validate changes",
+   prompt="Use Bash to execute tests...",
    subagent_type="general-purpose"
    )
 ```
@@ -522,87 +522,87 @@ adaptive-rules:
 
 # Adaptive Hybrid Workflow
 
-Das System wählt automatisch den optimalen Agent-Typ basierend auf:
+The system automatically selects the optimal agent type based on:
 
-- Anzahl der zu verarbeitenden Dateien
-- Komplexität der erforderlichen Operationen
-- Verfügbare System-Ressourcen
+- Number of files to process
+- Complexity of required operations
+- Available system resources
 ```
 
-### Migration von Task-basierten zu Hybrid Commands
+### Migrating from Task-based to Hybrid Commands
 
-#### Schritt 1: Bestehenden Command analysieren
+#### Step 1: Analyze Existing Command
 
 ```bash
-# Analysiere vorhandene Task-basierte Commands
+# Analyze existing task-based commands
 grep -l "Task(" commands/orchestration/*.md | while read file; do
   echo "Analyzing: $file"
-  # Prüfe auf Komplexität und mögliche Sub-Agent-Kandidaten
+  # Check for complexity and possible sub-agent candidates
 done
 ```
 
-#### Schritt 2: Hybrid-Kandidaten identifizieren
+#### Step 2: Identify Hybrid Candidates
 
-Kriterien für Hybrid-Migration:
+Criteria for hybrid migration:
 
-- Commands mit Code-Generierung oder -Modifikation
-- Workflows mit mehreren sequentiellen Phasen
-- Aufgaben, die User-Interaktion benötigen könnten
-- Commands, die von erweiterten Tool-Fähigkeiten profitieren würden
+- Commands with code generation or modification
+- Workflows with multiple sequential phases
+- Tasks that might need user interaction
+- Commands that would benefit from extended tool capabilities
 
-#### Schritt 3: Schrittweise Migration
+#### Step 3: Gradual Migration
 
 ```markdown
 <!-- Original Task-only Command -->
 
 1. **Analyzer**: Task(
-   description="Analysiere und modifiziere Code",
-   prompt="Finde Patterns und schlage Änderungen vor...",
+   description="Analyze and modify code",
+   prompt="Find patterns and suggest changes...",
    )
 
 <!-- Migrated Hybrid Version -->
 
 1. **Analyzer**: Task(
-   description="Analysiere Code-Patterns",
-   prompt="Finde Patterns und erstelle Änderungsliste...",
+   description="Analyze code patterns",
+   prompt="Find patterns and create change list...",
    )
 
 2. **Modifier**: SubAgent(
-   description="Implementiere vorgeschlagene Änderungen",
-   prompt="Nutze die Analyse-Ergebnisse um Code zu modifizieren...",
+   description="Implement suggested changes",
+   prompt="Use the analysis results to modify code...",
    capabilities="full-claude-code"
    )
 ```
 
-#### Schritt 4: Testen und Validieren
+#### Step 4: Test and Validate
 
 ```bash
-# Test-Skript für Hybrid-Migration
+# Test script for hybrid migration
 ./scripts/test-hybrid-command.sh \
   --original "commands/orchestration/old-command.md" \
   --hybrid "commands/orchestration/new-hybrid-command.md" \
   --test-cases "test/cases/hybrid-migration.json"
 ```
 
-### Best Practices für Hybrid-Entwicklung
+### Best Practices for Hybrid Development
 
-#### 1. Agent-Typ-Auswahl
+#### 1. Agent Type Selection
 
-**Verwende Task Agents für:**
+**Use Task Agents for:**
 
-- Parallele Dateisuche und -analyse
-- Pattern-Erkennung über viele Dateien
-- Metriken-Sammlung und Reporting
-- Read-only Operationen
+- Parallel file search and analysis
+- Pattern detection across many files
+- Metrics collection and reporting
+- Read-only operations
 
-**Verwende Claude Code Sub-Agents für:**
+**Use Claude Code Sub-Agents for:**
 
-- Code-Generierung und -Modifikation
-- Komplexe Multi-File-Refactorings
-- Interaktive Debugging-Sessions
-- Aufgaben mit bedingter Logik
+- Code generation and modification
+- Complex multi-file refactorings
+- Interactive debugging sessions
+- Tasks with conditional logic
 
-#### 2. Performance-Optimierung
+#### 2. Performance Optimization
 
 ```json
 {
@@ -622,22 +622,22 @@ Kriterien für Hybrid-Migration:
 }
 ```
 
-#### 3. Fehlerbehandlung in Hybrid-Umgebungen
+#### 3. Error Handling in Hybrid Environments
 
 ````markdown
-## Fehlerbehandlungs-Strategie
+## Error Handling Strategy
 
 1. **Graceful Degradation**:
 
-   - Wenn Sub-Agents fehlschlagen, auf Task Agents zurückfallen
-   - Partielle Ergebnisse akzeptieren und fortfahren
+   - If sub-agents fail, fall back to task agents
+   - Accept partial results and continue
 
-2. **Rollback-Mechanismen**:
+2. **Rollback Mechanisms**:
 
-   - Änderungen von Sub-Agents in Transaktionen kapseln
-   - Automatisches Rollback bei Validierungsfehlern
+   - Encapsulate sub-agent changes in transactions
+   - Automatic rollback on validation errors
 
-3. **Hybrid-spezifisches Logging**:
+3. **Hybrid-specific Logging**:
    ```json
    {
      "logging": {
@@ -654,32 +654,32 @@ Kriterien für Hybrid-Migration:
 
 ````
 
-#### 4. Erweiterte Hybrid-Patterns
+#### 4. Advanced Hybrid Patterns
 
-**Pattern 1: Analyse-Modifikation-Validierung**
+**Pattern 1: Analysis-Modification-Validation**
 ```markdown
-Phase 1: Parallele Analyse (Task Agents) →
-Phase 2: Gezielte Modifikation (Sub-Agent) →
-Phase 3: Parallele Validierung (Task Agents)
+Phase 1: Parallel Analysis (Task Agents) →
+Phase 2: Targeted Modification (Sub-Agent) →
+Phase 3: Parallel Validation (Task Agents)
 ````
 
 **Pattern 2: Progressive Enhancement**
 
 ```markdown
-Basis-Analyse (Task) →
-Wenn komplex: Tiefenanalyse (Sub-Agent) →
-Optimierung (Task)
+Basic Analysis (Task) →
+If complex: Deep Analysis (Sub-Agent) →
+Optimization (Task)
 ```
 
 **Pattern 3: Fail-Safe Hybrid**
 
 ```markdown
-Versuche parallele Ausführung (Task) →
-Bei Timeout/Fehler: Sequential mit Sub-Agent →
-Konsolidiere Ergebnisse
+Try parallel execution (Task) →
+On timeout/error: Sequential with Sub-Agent →
+Consolidate results
 ```
 
-#### 5. Metriken und Monitoring
+#### 5. Metrics and Monitoring
 
 ```json
 {
@@ -699,44 +699,44 @@ Konsolidiere Ergebnisse
 }
 ```
 
-### Zusammenfassung
+### Summary
 
-Die Hybrid-Architektur bietet maximale Flexibilität und Performance durch intelligente Kombination von Task Tools und Claude Code Sub-Agents. Durch sorgfältige Konfiguration und durchdachtes Command-Design können Entwickler Commands erstellen, die automatisch die optimale Ausführungsstrategie für jede Aufgabe wählen.
+The Hybrid Architecture provides maximum flexibility and performance through intelligent combination of Task Tools and Claude Code Sub-Agents. Through careful configuration and thoughtful command design, developers can create commands that automatically choose the optimal execution strategy for each task.
 
-## Fehlerbehebung
+## Troubleshooting
 
-### Häufige Probleme
+### Common Issues
 
 #### "Token limit exceeded"
 
-- `tokenBudget` in Konfiguration reduzieren
-- Weniger Agents verwenden
-- Zu `conservative` Performance-Modus wechseln
+- Reduce `tokenBudget` in configuration
+- Use fewer agents
+- Switch to `conservative` performance mode
 
 #### "Agent timeout"
 
-- Timeout in Konfiguration erhöhen
-- Aufgabenkomplexität reduzieren
-- Auf Endlosschleifen in Prompts prüfen
+- Increase timeout in configuration
+- Reduce task complexity
+- Check for infinite loops in prompts
 
 #### "Synthesis failed"
 
-- Prüfen, ob alle Agents erwartetes Format zurückgeben
-- Auf JSON-Parsing-Fehler prüfen
-- Debug-Logging aktivieren
+- Check if all agents return expected format
+- Look for JSON parsing errors
+- Enable debug logging
 
-### Debug-Modus
+### Debug Mode
 
-Detailliertes Logging aktivieren:
+Enable detailed logging:
 
 ```bash
 export CLAUDE_DEBUG=true
 export CLAUDE_LOG_LEVEL=debug
 ```
 
-### Performance-Metriken
+### Performance Metrics
 
-Command-Performance überwachen:
+Monitor command performance:
 
 ```json
 {
@@ -747,20 +747,20 @@ Command-Performance überwachen:
 }
 ```
 
-Erfasste Metriken:
+Captured metrics:
 
-- Ausführungszeit pro Agent
-- Token-Nutzung
-- Erfolgs-/Fehlerquoten
-- Speedup-Faktor vs. sequenziell
+- Execution time per agent
+- Token usage
+- Success/failure rates
+- Speedup factor vs. sequential
 
-### Hilfe erhalten
+### Getting Help
 
-1. Command-spezifische Dokumentation prüfen
-2. Agent-Outputs auf Fehler überprüfen
-3. Metrik-Logs untersuchen
-4. Issues einreichen mit:
-   - Verwendetem Command
-   - Fehlermeldungen
-   - Performance-Metriken
-   - Konfigurationseinstellungen
+1. Check command-specific documentation
+2. Review agent outputs for errors
+3. Examine metric logs
+4. Submit issues with:
+   - Command used
+   - Error messages
+   - Performance metrics
+   - Configuration settings
