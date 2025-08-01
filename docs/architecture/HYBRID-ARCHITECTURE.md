@@ -1,15 +1,15 @@
 # Hybrid Sub-Agent Architecture
 
-## Übersicht
+## Overview
 
-Die Hybrid-Architektur kombiniert das Beste aus zwei Welten: Die blitzschnelle Parallelverarbeitung des Task Tools mit der tiefen Expertise spezialisierter Claude Code Sub-Agents. Diese Architektur ermöglicht es, komplexe Analysen in Sekunden durchzuführen und dabei sowohl Breite als auch Tiefe zu erreichen.
+The Hybrid Architecture combines the best of both worlds: the lightning-fast parallel processing of the Task Tool with the deep expertise of specialized Claude Code Sub-Agents. This architecture enables complex analyses to be performed in seconds while achieving both breadth and depth.
 
-## Architektur-Diagramm
+## Architecture Diagram
 
 ```mermaid
 graph TB
     subgraph "Phase 1: Parallel Scanning"
-        User[Benutzer] --> HybridCmd[Hybrid Command]
+        User[User] --> HybridCmd[Hybrid Command]
         HybridCmd --> TaskTool[Task Tool Orchestrator]
         TaskTool --> Agent1[Scanner Agent 1]
         TaskTool --> Agent2[Scanner Agent 2]
@@ -17,10 +17,10 @@ graph TB
     end
 
     subgraph "Phase 2: Expert Analysis"
-        Agent1 --> Results[Aggregierte Ergebnisse]
+        Agent1 --> Results[Aggregated Results]
         Agent2 --> Results
         AgentN --> Results
-        Results --> Delegation[Intelligente Delegation]
+        Results --> Delegation[Intelligent Delegation]
         Delegation --> Security[security-specialist]
         Delegation --> Perf[performance-optimizer]
         Delegation --> Test[test-engineer]
@@ -29,7 +29,7 @@ graph TB
     end
 
     subgraph "Phase 3: Synthesis"
-        Security --> FinalReport[Finaler Bericht]
+        Security --> FinalReport[Final Report]
         Perf --> FinalReport
         Test --> FinalReport
         Arch --> FinalReport
@@ -38,26 +38,26 @@ graph TB
     end
 ```
 
-## Zwei Agent-Typen
+## Two Agent Types
 
 ### 1. Task Tool Agents (Parallel Scanners)
 
-**Eigenschaften:**
+**Characteristics:**
 
-- Schnelle, parallele Ausführung
-- Fokussiert auf spezifische Scan-Aufgaben
-- Teilen sich den Haupt-Context
-- Optimiert für Geschwindigkeit
-- JSON-Output für maschinelle Verarbeitung
+- Fast, parallel execution
+- Focused on specific scan tasks
+- Share the main context
+- Optimized for speed
+- JSON output for machine processing
 
-**Verwendung:**
+**Usage:**
 
-- Breite Code-Scans
-- Pattern-Erkennung
-- Metriken-Sammlung
-- Quick Checks
+- Broad code scans
+- Pattern detection
+- Metrics collection
+- Quick checks
 
-**Beispiel:**
+**Example:**
 
 ```markdown
 Task(
@@ -69,55 +69,55 @@ subagent_type="general-purpose"
 
 ### 2. Claude Code Sub-Agents (Domain Experts)
 
-**Eigenschaften:**
+**Characteristics:**
 
-- Eigene Context-Fenster
-- Tiefe Expertise in spezifischen Bereichen
-- Persistente Konfiguration
-- Detaillierte Analyse-Fähigkeiten
-- Markdown-Reports mit Empfehlungen
+- Own context windows
+- Deep expertise in specific areas
+- Persistent configuration
+- Detailed analysis capabilities
+- Markdown reports with recommendations
 
-**Verwendung:**
+**Usage:**
 
-- Tiefgehende Analyse kritischer Findings
-- Experten-Empfehlungen
-- Komplexe Problem-Lösungen
-- Detaillierte Remediation-Strategien
+- In-depth analysis of critical findings
+- Expert recommendations
+- Complex problem solutions
+- Detailed remediation strategies
 
-**Beispiel:**
+**Example:**
 
 ```yaml
 ---
 name: security-specialist
 description: Deep security analysis expert
 ---
-[Detailliertes System-Prompt für Security-Expertise]
+[Detailed system prompt for security expertise]
 ```
 
 ## Hybrid Command Workflow
 
-### Phase 1: Parallel Scanning (5-8 Sekunden)
+### Phase 1: Parallel Scanning (5-8 seconds)
 
-1. **Start**: Hybrid Command wird aufgerufen
-2. **Orchestrierung**: 10-20 Scanner Agents starten parallel
-3. **Scanning**: Jeder Agent scannt spezifische Aspekte
-4. **Sammlung**: JSON-Ergebnisse werden aggregiert
+1. **Start**: Hybrid command is invoked
+2. **Orchestration**: 10-20 scanner agents start in parallel
+3. **Scanning**: Each agent scans specific aspects
+4. **Collection**: JSON results are aggregated
 
-### Phase 2: Intelligente Delegation (10-20 Sekunden)
+### Phase 2: Intelligent Delegation (10-20 seconds)
 
-1. **Analyse**: Ergebnisse werden priorisiert
-2. **Schwellwert-Check**: Kritische Issues identifiziert
-3. **Delegation**: Relevante Sub-Agents werden aktiviert
-4. **Experten-Analyse**: Tiefgehende Untersuchung
+1. **Analysis**: Results are prioritized
+2. **Threshold Check**: Critical issues identified
+3. **Delegation**: Relevant sub-agents are activated
+4. **Expert Analysis**: In-depth investigation
 
-### Phase 3: Synthesis (2-5 Sekunden)
+### Phase 3: Synthesis (2-5 seconds)
 
-1. **Kombination**: Scanner- und Experten-Ergebnisse
-2. **Deduplication**: Redundanzen entfernen
-3. **Priorisierung**: Nach Severity ordnen
-4. **Report-Generierung**: Finaler Bericht
+1. **Combination**: Scanner and expert results
+2. **Deduplication**: Remove redundancies
+3. **Prioritization**: Order by severity
+4. **Report Generation**: Final report
 
-## Konfiguration
+## Configuration
 
 ### .claude-commands.json
 
@@ -142,90 +142,90 @@ description: Deep security analysis expert
 }
 ```
 
-### Konfigurations-Optionen
+### Configuration Options
 
-**agentRegistry**: Registrierte Sub-Agents
+**agentRegistry**: Registered sub-agents
 
-- `type`: Agent-Typ (sub-agent oder task-agent)
-- `location`: Pfad zur Agent-Definition
-- `autoInvoke`: Keywords für automatische Aktivierung
-- `priority`: Priorisierung bei mehreren Matches
+- `type`: Agent type (sub-agent or task-agent)
+- `location`: Path to agent definition
+- `autoInvoke`: Keywords for automatic activation
+- `priority`: Prioritization for multiple matches
 
-**delegationStrategy**: Delegations-Verhalten
+**delegationStrategy**: Delegation behavior
 
-- `automatic`: Automatische Delegation aktiviert
-- `thresholdScore`: Mindest-Score für Delegation (0-1)
-- `maxDelegations`: Maximale Anzahl delegierter Agents
-- `parallelDelegation`: Parallele Expert-Analyse
+- `automatic`: Automatic delegation enabled
+- `thresholdScore`: Minimum score for delegation (0-1)
+- `maxDelegations`: Maximum number of delegated agents
+- `parallelDelegation`: Parallel expert analysis
 
 ## Best Practices
 
-### Wann Hybrid Commands verwenden
+### When to Use Hybrid Commands
 
-**Ideal für:**
+**Ideal for:**
 
-- Umfassende Code-Analysen mit Tiefgang
-- Security Audits mit Remediation
-- Performance-Analysen mit Optimierungen
-- Architektur-Reviews mit Refactoring-Plänen
+- Comprehensive code analyses with depth
+- Security audits with remediation
+- Performance analyses with optimizations
+- Architecture reviews with refactoring plans
 
-**Weniger geeignet für:**
+**Less suitable for:**
 
-- Einfache, schnelle Checks
-- Single-File-Analysen
-- Reine Metriken-Sammlung
+- Simple, quick checks
+- Single-file analyses
+- Pure metrics collection
 
 ### Command Design Guidelines
 
-1. **Phase-Separation**:
+1. **Phase Separation**:
 
-   - Klare Trennung zwischen Scan und Analyse
-   - Explizite Delegation-Kriterien
-   - Strukturierte Synthesis
+   - Clear separation between scan and analysis
+   - Explicit delegation criteria
+   - Structured synthesis
 
-2. **Performance-Balance**:
+2. **Performance Balance**:
 
-   - Scanner: Viele, schnelle Agents (10-20)
-   - Experts: Wenige, gründliche Agents (1-5)
-   - Gesamtzeit: Unter 30 Sekunden anstreben
+   - Scanners: Many, fast agents (10-20)
+   - Experts: Few, thorough agents (1-5)
+   - Total time: Aim for under 30 seconds
 
-3. **Output-Konsistenz**:
-   - Scanner: JSON für Maschinen
-   - Experts: Markdown für Menschen
-   - Synthesis: Kombiniertes Format
+3. **Output Consistency**:
+   - Scanners: JSON for machines
+   - Experts: Markdown for humans
+   - Synthesis: Combined format
 
-### Agent-Entwicklung
+### Agent Development
 
-**Für Scanner Agents:**
+**For Scanner Agents:**
 
 ```markdown
-- Fokus auf Geschwindigkeit
-- Spezifische Pattern-Suche
-- Strukturierter JSON-Output
-- Minimale Token-Nutzung
+- Focus on speed
+- Specific pattern search
+- Structured JSON output
+- Minimal token usage
 ```
 
-**Für Expert Sub-Agents:**
+**For Expert Sub-Agents:**
 
 ```markdown
-- Tiefe Domain-Expertise
-- Ausführliche Analyse
-- Praktische Empfehlungen
-- Educative Erklärungen
+- Deep domain expertise
+- Detailed analysis
+- Practical recommendations
+- Educational explanations
 ```
 
-## Beispiel: analyze-deep Command
+## Example: analyze-deep Command
 
 ```markdown
-# Phase 1: 10 parallele Scanner
+# Phase 1: 10 parallel scanners
 
 - Complexity Scanner
 - Security Scanner
 - Performance Scanner
 - Architecture Scanner
-- ... (6 weitere)
+- ... (6 more)
 
-# Phase 2: Delegation basierend auf Findings
+# Phase 2: Delegation based on findings
 
 if (securityIssues.severity >= "high") {
 delegate to security-specialist
@@ -234,61 +234,61 @@ if (performanceBottlenecks.count > 3) {
 delegate to performance-optimizer
 }
 
-# Phase 3: Kombinierter Report
+# Phase 3: Combined report
 
 - Executive Summary
-- Critical Findings (von Experts verifiziert)
-- Weitere Findings (von Scannern)
-- Priorisierte Action Items
+- Critical Findings (verified by experts)
+- Additional Findings (from scanners)
+- Prioritized Action Items
 ```
 
-## Vorteile der Hybrid-Architektur
+## Advantages of Hybrid Architecture
 
-1. **Geschwindigkeit + Tiefe**: Schneller Überblick mit Expert-Insights wo nötig
-2. **Skalierbarkeit**: Flexibel anpassbar an Projekt-Größe
-3. **Context-Management**: Optimale Nutzung von Context-Fenstern
-4. **Expertise-Fokus**: Spezialisten nur wo wirklich benötigt
-5. **Kosten-Effizienz**: Minimaler Token-Verbrauch durch gezielte Delegation
+1. **Speed + Depth**: Quick overview with expert insights where needed
+2. **Scalability**: Flexibly adaptable to project size
+3. **Context Management**: Optimal use of context windows
+4. **Expertise Focus**: Specialists only where truly needed
+5. **Cost Efficiency**: Minimal token consumption through targeted delegation
 
-## Migration von bestehenden Commands
+## Migration from Existing Commands
 
-### Von reinen Task-Commands:
+### From Pure Task Commands:
 
-1. Identifiziere Bereiche die Expert-Analyse benötigen
-2. Erstelle entsprechende Sub-Agents
-3. Füge Delegation-Logic hinzu
-4. Erweitere Synthesis um Expert-Inputs
+1. Identify areas needing expert analysis
+2. Create corresponding sub-agents
+3. Add delegation logic
+4. Extend synthesis with expert inputs
 
-### Von manuellen Workflows:
+### From Manual Workflows:
 
-1. Extrahiere wiederkehrende Analyse-Pattern
-2. Erstelle Scanner für breite Abdeckung
-3. Definiere Expert-Agents für Tiefgang
-4. Automatisiere mit Hybrid Command
+1. Extract recurring analysis patterns
+2. Create scanners for broad coverage
+3. Define expert agents for depth
+4. Automate with hybrid command
 
-## Zukunft der Hybrid-Architektur
+## Future of Hybrid Architecture
 
-### Geplante Features:
+### Planned Features:
 
-- **Adaptive Agent-Anzahl**: Basierend auf Codebase-Größe
-- **Learning aus Feedback**: Verbesserte Delegation über Zeit
-- **Custom Expert-Agents**: Projekt-spezifische Experten
-- **Real-time Progress**: Live-Updates während Analyse
-- **Result Caching**: Wiederverwendung von Analysen
+- **Adaptive Agent Count**: Based on codebase size
+- **Learning from Feedback**: Improved delegation over time
+- **Custom Expert Agents**: Project-specific experts
+- **Real-time Progress**: Live updates during analysis
+- **Result Caching**: Reuse of analyses
 
 ### Community Extensions:
 
-- Weitere spezialisierte Sub-Agents
-- Branchen-spezifische Command-Sets
-- Integration mit externen Tools
-- Performance-Benchmarks
+- Additional specialized sub-agents
+- Industry-specific command sets
+- Integration with external tools
+- Performance benchmarks
 
-## Zusammenfassung
+## Summary
 
-Die Hybrid-Architektur ist die Evolution der Sub-Agent Orchestrierung. Sie kombiniert:
+The Hybrid Architecture is the evolution of sub-agent orchestration. It combines:
 
-- **Task Tool**: Für parallele, breite Analyse
-- **Sub-Agents**: Für tiefe, experten-basierte Insights
-- **Intelligente Orchestrierung**: Für optimale Ressourcen-Nutzung
+- **Task Tool**: For parallel, broad analysis
+- **Sub-Agents**: For deep, expert-based insights
+- **Intelligent Orchestration**: For optimal resource usage
 
-Das Resultat: Comprehensive Analysen in Sekunden statt Minuten, mit der Qualität von Experten-Reviews.
+The result: Comprehensive analyses in seconds instead of minutes, with the quality of expert reviews.

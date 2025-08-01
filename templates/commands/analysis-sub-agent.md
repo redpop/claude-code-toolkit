@@ -1,42 +1,42 @@
 ---
 allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*), Bash(ast-grep:*)
-description: Template für Code-Analyse Commands mit mehreren spezialisierten Agents
+description: Template for code analysis commands with multiple specialized agents
 argument-hint: [target] [--option=value]
 ---
 
 # [Analysis Command Name]
 
-Dieses Command analysiert [Beschreibung] durch [N] parallel arbeitende spezialisierte Agents.
+This command analyzes [description] using [N] specialized agents working in parallel.
 
-## Analyse-Strategie
+## Analysis Strategy
 
-Die Analyse ist in folgende Bereiche aufgeteilt:
-- **Strukturelle Analyse**: [Beschreibung]
-- **Qualitative Analyse**: [Beschreibung]
-- **Quantitative Metriken**: [Beschreibung]
+The analysis is divided into the following areas:
+- **Structural Analysis**: [Description]
+- **Qualitative Analysis**: [Description]
+- **Quantitative Metrics**: [Description]
 
-## Ausführung
+## Execution
 
-**SOFORT [N] PARALLELE ANALYSE-AGENTS STARTEN:**
+**IMMEDIATELY START [N] PARALLEL ANALYSIS AGENTS:**
 
-1. **Structure Analysis Agent**: Task(description="Analyze Code Structure", prompt="Analysiere die Struktur von $ARGUMENTS. Untersuche: 1) [Aspekt 1], 2) [Aspekt 2], 3) [Aspekt 3]. Nutze ast-grep für präzise AST-Analyse. Fokussiere auf [Hauptfokus]. Gib strukturierte Findings als JSON zurück mit Schema: {findings: [{type, location, severity, description, suggestion}]}.", subagent_type="general-purpose")
+1. **Structure Analysis Agent**: Task(description="Analyze Code Structure", prompt="Analyze the structure of $ARGUMENTS. Examine: 1) [Aspect 1], 2) [Aspect 2], 3) [Aspect 3]. Use ast-grep for precise AST analysis. Focus on [main focus]. Return structured findings as JSON with schema: {findings: [{type, location, severity, description, suggestion}]}.", subagent_type="general-purpose")
 
-2. **Pattern Detection Agent**: Task(description="Detect Code Patterns", prompt="Identifiziere Patterns in $ARGUMENTS. Suche nach: 1) [Pattern 1], 2) [Pattern 2], 3) Anti-Patterns wie [Beispiele]. Nutze rg mit erweiterten Regex-Patterns. Gib gefundene Patterns als JSON zurück mit Schema: {patterns: [{name, occurrences, locations, impact}]}.", subagent_type="general-purpose")
+2. **Pattern Detection Agent**: Task(description="Detect Code Patterns", prompt="Identify patterns in $ARGUMENTS. Search for: 1) [Pattern 1], 2) [Pattern 2], 3) Anti-patterns like [examples]. Use rg with advanced regex patterns. Return found patterns as JSON with schema: {patterns: [{name, occurrences, locations, impact}]}.", subagent_type="general-purpose")
 
-3. **Metrics Calculation Agent**: Task(description="Calculate Metrics", prompt="Berechne Metriken für $ARGUMENTS. Erfasse: 1) [Metrik 1], 2) [Metrik 2], 3) [Metrik 3]. Nutze statistische Analyse für Trends. Gib Metrics Dashboard als JSON zurück mit Schema: {metrics: {metric_name: {value, trend, benchmark}}}.", subagent_type="general-purpose")
+3. **Metrics Calculation Agent**: Task(description="Calculate Metrics", prompt="Calculate metrics for $ARGUMENTS. Capture: 1) [Metric 1], 2) [Metric 2], 3) [Metric 3]. Use statistical analysis for trends. Return metrics dashboard as JSON with schema: {metrics: {metric_name: {value, trend, benchmark}}}.", subagent_type="general-purpose")
 
-[Weitere spezialisierte Agents...]
+[Additional specialized agents...]
 
 ## Synthesis
 
-Nach Abschluss aller Analyse-Agents:
+After all analysis agents complete:
 
-1. **Konsolidiere Findings**:
-   - Dedupliziere überlappende Findings
-   - Gruppiere nach Schweregrad
-   - Identifiziere Muster über mehrere Agents
+1. **Consolidate Findings**:
+   - Deduplicate overlapping findings
+   - Group by severity
+   - Identify patterns across multiple agents
 
-2. **Erstelle Analyse-Dashboard**:
+2. **Create Analysis Dashboard**:
    ```markdown
    # [Analysis Type] Report
    
@@ -62,7 +62,7 @@ Nach Abschluss aller Analyse-Agents:
       - [Improvement 2]
    ```
 
-3. **Generiere Visualisierungen**:
+3. **Generate Visualizations**:
    ```mermaid
    pie title Issue Distribution
      "Critical" : [count]
@@ -71,14 +71,14 @@ Nach Abschluss aller Analyse-Agents:
      "Low" : [count]
    ```
 
-4. **Erstelle Fix-Prioritäten**:
-   - ROI-basierte Priorisierung
-   - Abhängigkeiten berücksichtigen
-   - Team-Kapazität einplanen
+4. **Create Fix Priorities**:
+   - ROI-based prioritization
+   - Consider dependencies
+   - Plan team capacity
 
-**Performance-Erwartung**: Analyse in [X-Y] Sekunden, [Z]x schneller als sequentiell.
+**Performance Expectation**: Analysis completed in [X-Y] seconds, [Z]x faster than sequential.
 
-**Output-Formate**: 
-- JSON für Tool-Integration
-- Markdown für Human-Readable Reports
-- CSV für Daten-Export
+**Output Formats**: 
+- JSON for tool integration
+- Markdown for human-readable reports
+- CSV for data export
