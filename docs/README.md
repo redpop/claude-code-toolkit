@@ -4,7 +4,12 @@ Welcome to the Claude Code Toolkit documentation. This directory contains compre
 
 ## 📚 Documentation Structure
 
+### 🎯 Start Here
+
+- **[QUICK START GUIDE](guides/QUICK-START.md)** - The fastest way to get productive with the toolkit
+
 ### For End Users
+
 - **[User Guide](user-guide/)** - Everything you need to use the toolkit effectively
   - [Quick Start](user-guide/README.md) - Get started in 5 minutes
   - [Workflow Guide](user-guide/workflow-guide.md) - Common workflows and patterns
@@ -12,6 +17,7 @@ Welcome to the Claude Code Toolkit documentation. This directory contains compre
   - [Troubleshooting](user-guide/troubleshooting.md) - Solve common issues
 
 ### For Developers
+
 - **[Developer Guide](developer-guide/)** - Technical documentation for extending and maintaining
   - [Overview](developer-guide/README.md) - Technical introduction
   - [Architecture](developer-guide/architecture.md) - System design and patterns
@@ -21,17 +27,20 @@ Welcome to the Claude Code Toolkit documentation. This directory contains compre
   - [Internals](developer-guide/internals.md) - How everything works
 
 ### Additional Resources
+
 - **[Tutorials](tutorials/)** - Step-by-step guides (coming soon)
 - **[Archive](archive/)** - Historical documentation
 
 ## 🚀 Quick Links
 
 ### Getting Started
+
 1. [Install the toolkit](user-guide/README.md#installation)
 2. [Run your first analysis](user-guide/README.md#your-first-analysis)
 3. [Explore workflows](user-guide/workflow-guide.md)
 
 ### Common Tasks
+
 - [Improve code quality](user-guide/workflow-guide.md#common-workflows)
 - [Fix security issues](user-guide/command-reference.md#sec-commands)
 - [Generate tests](user-guide/command-reference.md#gen-commands)
@@ -46,6 +55,7 @@ Welcome to the Claude Code Toolkit documentation. This directory contains compre
 ## 🤝 Contributing to Documentation
 
 When contributing:
+
 1. Keep language clear and concise
 2. Include practical examples
 3. Update the appropriate guide
@@ -62,5 +72,6 @@ When contributing:
 ---
 
 Choose your path:
+
 - 👤 **[I'm a user](user-guide/)** - Learn how to use the toolkit
 - 🔧 **[I'm a developer](developer-guide/)** - Understand and extend the toolkit

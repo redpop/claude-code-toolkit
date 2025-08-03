@@ -10,26 +10,31 @@ Holistic assessment of your project's health across development, operations, and
 ## Health Dimensions
 
 ### 🏗️ Development Health
+
 - Code quality and maintainability
 - Architecture soundness
 - Technical debt levels
 
-### 🧪 Testing Health  
+### 🧪 Testing Health
+
 - Test coverage and quality
 - CI/CD pipeline status
 - Bug discovery rate
 
 ### 📚 Documentation Health
+
 - README completeness
 - API documentation
 - Code comments coverage
 
 ### 🔒 Security Health
+
 - Vulnerability status
 - Dependency safety
 - Security practices
 
 ### 👥 Collaboration Health
+
 - PR review times
 - Issue resolution rate
 - Team velocity trends
@@ -63,7 +68,7 @@ Use Task tool with subagent_type="general-purpose" for each dimension:
 
 ```
 🏗️ Development:    ████████░░ 82/100 (↑ +3)
-🧪 Testing:        ██████░░░░ 64/100 (↓ -5)  
+🧪 Testing:        ██████░░░░ 64/100 (↓ -5)
 📚 Documentation:  ███████░░░ 71/100 (→ 0)
 🔒 Security:       █████████░ 89/100 (↑ +7)
 👥 Collaboration:  ███████░░░ 75/100 (↑ +2)
@@ -72,33 +77,37 @@ Use Task tool with subagent_type="general-purpose" for each dimension:
 ### 🎯 Key Insights
 
 #### What's Going Well ✅
+
 - Security posture improved significantly
 - Code complexity under control
 - Team collaboration healthy
 
 #### Needs Attention ⚠️
+
 - Test coverage declining (64% from 69%)
 - Documentation falling behind features
 - Build times increasing
 
 #### Critical Issues 🚨
+
 - 3 high-severity vulnerabilities in dependencies
 - Main branch build failing for 2 days
 - No README update in 3 months
 
 ### 📊 Vital Signs
 
-| Metric | Current | Last Month | Target | Status |
-|--------|---------|------------|--------|--------|
-| Build Success | 87% | 94% | >95% | ⚠️ |
-| Test Coverage | 64% | 69% | >80% | ❌ |
-| PR Review Time | 4.2h | 6.1h | <4h | ✅ |
-| Bug Rate | 2.3/week | 3.1/week | <2/week | ⚠️ |
-| Deploy Frequency | 8/week | 5/week | >10/week | ⚠️ |
+| Metric           | Current  | Last Month | Target   | Status |
+| ---------------- | -------- | ---------- | -------- | ------ |
+| Build Success    | 87%      | 94%        | >95%     | ⚠️     |
+| Test Coverage    | 64%      | 69%        | >80%     | ❌     |
+| PR Review Time   | 4.2h     | 6.1h       | <4h      | ✅     |
+| Bug Rate         | 2.3/week | 3.1/week   | <2/week  | ⚠️     |
+| Deploy Frequency | 8/week   | 5/week     | >10/week | ⚠️     |
 
 ### 🚀 Improvement Actions
 
 #### Immediate (This Week)
+
 ```bash
 # Fix failing builds
 /prefix:flow:incident "Main branch build failures"
@@ -111,6 +120,7 @@ Use Task tool with subagent_type="general-purpose" for each dimension:
 ```
 
 #### Short-term (This Month)
+
 ```bash
 # Documentation sprint
 /prefix:gen:docs --update-all
@@ -122,6 +132,7 @@ Use Task tool with subagent_type="general-purpose" for each dimension:
 ```
 
 #### Long-term (This Quarter)
+
 - Implement quality gates
 - Automate documentation updates
 - Achieve 90% test coverage

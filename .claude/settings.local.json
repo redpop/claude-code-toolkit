@@ -35,7 +35,18 @@
       "Bash(git checkout:*)",
       "Bash(git pull:*)",
       "Bash(git stash:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(uvx:*)",
+      "Bash(echo \"Exit code: $?\")",
+      "Bash(pip install:*)",
+      "Bash(pipx install:*)",
+      "Bash(claude mcp:*)",
+      "Bash(/Users/redpop/.local/bin/semgrep-mcp:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(pipx runpip semgrep-mcp list:*)",
+      "Bash(pipx runpip semgrep-mcp show:*)",
+      "Bash(docker:*)",
+      "Bash(semgrep:*)"
     ],
     "deny": []
   }

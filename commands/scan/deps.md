@@ -31,12 +31,14 @@ This command performs a comprehensive dependency analysis, with 6 specialized ag
 After completion of all Dependency Agents:
 
 1. **Create Dependency Health Score**:
+
    ```markdown
    # Dependency Analysis Report
-   
+
    ## Health Score: B- (72/100)
-   
+
    ### Breakdown
+
    - Security: C (65/100) - 3 high vulnerabilities
    - Maintenance: B (78/100) - 2 abandoned packages
    - License Risk: A (95/100) - All compatible
@@ -44,6 +46,7 @@ After completion of all Dependency Agents:
    ```
 
 2. **Visualize Dependency Graph**:
+
    ```mermaid
    graph LR
      App[Your App]
@@ -52,22 +55,25 @@ After completion of all Dependency Agents:
      Express --> BodyParser[body-parser@1.20.1]
      Express --> Cookie[cookie@0.5.0]
      React --> ReactDOM[react-dom@18.2.0]
-     
+
      style Express fill:#f9f,stroke:#333
      style React fill:#bbf,stroke:#333
    ```
 
 3. **Generate Security Action Plan**:
+
    ```markdown
    ## Critical Security Updates Required
-   
+
    ### High Priority (Fix within 24h)
+
    1. **lodash@4.17.20** → 4.17.21
       - CVE-2021-23337: Prototype Pollution
       - Used in: 15 places
       - Breaking changes: None
-   
+
    ### Medium Priority (Fix this week)
+
    1. **axios@0.21.1** → 0.27.2
       - Multiple security fixes
       - Used in: API client
@@ -75,40 +81,48 @@ After completion of all Dependency Agents:
    ```
 
 4. **Create License Compliance Report**:
+
    ```markdown
    ## License Summary
-   
+
    ### License Distribution
+
    - MIT: 125 packages (78%)
    - Apache-2.0: 20 packages (13%)
    - ISC: 10 packages (6%)
    - GPL-3.0: 2 packages (1.3%) ⚠️
    - Other: 3 packages (1.7%)
-   
+
    ### Compliance Issues
+
    ⚠️ GPL-3.0 packages require source disclosure:
+
    - package-xyz: Consider alternative
    - lib-abc: Required, need legal review
    ```
 
 5. **Generate Optimization Recommendations**:
+
    ```markdown
    ## Dependency Optimization
-   
+
    ### Remove Unused (Save 15MB)
+
    - moment.js → Use native Dates
    - lodash → Use ES6 methods
    - request → Use native fetch
-   
+
    ### Consolidate Duplicates
+
    - 3 different UUID libraries → standardize
    - 2 date formatting libs → pick one
-   
+
    ### Bundle Size Impact
-   | Package | Size | Alternatives |
-   |---------|------|--------------|
-   | moment | 290KB | date-fns (12KB) |
-   | lodash | 600KB | lodash-es (tree-shakeable) |
+
+   | Package | Size  | Alternatives               |
+   | ------- | ----- | -------------------------- |
+   | moment  | 290KB | date-fns (12KB)            |
+   | lodash  | 600KB | lodash-es (tree-shakeable) |
    ```
 
 **Performance Expectation**: Complete dependency analysis in 5-7 seconds, compared to 35-45 seconds sequentially.

@@ -26,15 +26,18 @@ This command performs a deep security audit using the best available tools, with
 **IF Semgrep MCP tools are available, USE THIS APPROACH:**
 
 1. **Comprehensive MCP Security Scan**:
+
    - Use `mcp__semgrep__security_check` for fast initial security assessment
    - If critical issues found, proceed with detailed analysis
 
 2. **Detailed Vulnerability Analysis**:
+
    - Use `mcp__semgrep__semgrep_scan` with config "p/security" for comprehensive scanning
    - Collect all code files using Read/Glob tools
    - Submit files for analysis with proper structure
 
 3. **Check Existing Findings** (if applicable):
+
    - Use `mcp__semgrep__semgrep_findings` to retrieve any existing security findings from CI/CD
    - Filter by severity and status
 
@@ -61,15 +64,15 @@ semgrep --config=p/security-audit --json $ARGUMENTS
 
 **IF neither MCP nor local Semgrep is available, START 8 PARALLEL SECURITY AGENTS:**
 
-1. **SQL Injection Agent**: Task(description="SQL Injection Detection", prompt="Scan $ARGUMENTS for SQL injection vulnerabilities. Search for: 1) String concatenation in SQL queries, 2) Unescaped user input in queries, 3) Dynamic query building, 4) Raw SQL without prepared statements. Use rg for patterns like 'SELECT.*\\+|WHERE.*\\$|query\\(.*\\+'. Return all findings with severity and code location as JSON.", subagent_type="general-purpose")
+1. **SQL Injection Agent**: Task(description="SQL Injection Detection", prompt="Scan $ARGUMENTS for SQL injection vulnerabilities. Search for: 1) String concatenation in SQL queries, 2) Unescaped user input in queries, 3) Dynamic query building, 4) Raw SQL without prepared statements. Use rg for patterns like 'SELECT.*\\+|WHERE.*\\$|query\\(.\*\\+'. Return all findings with severity and code location as JSON.", subagent_type="general-purpose")
 
 2. **XSS Vulnerability Agent**: Task(description="XSS Detection", prompt="Identify XSS vulnerabilities in $ARGUMENTS. Check: 1) Unescaped output in templates (innerHTML, document.write), 2) User input in HTML/JavaScript, 3) Missing Content Security Policy, 4) Unsafe eval() usage. Search in .js, .jsx, .ts, .tsx, .html files. Return structured findings with exploit examples as JSON.", subagent_type="general-purpose")
 
-3. **Authentication Weakness Agent**: Task(description="Auth Security Check", prompt="Analyze authentication/authorization weaknesses in $ARGUMENTS. Examine: 1) Hardcoded credentials, 2) Weak password policies, 3) Missing rate limiting, 4) Session management issues, 5) JWT vulnerabilities, 6) Missing CSRF protection. Focus on auth*, login*, session* patterns. Return critical findings as JSON.", subagent_type="general-purpose")
+3. **Authentication Weakness Agent**: Task(description="Auth Security Check", prompt="Analyze authentication/authorization weaknesses in $ARGUMENTS. Examine: 1) Hardcoded credentials, 2) Weak password policies, 3) Missing rate limiting, 4) Session management issues, 5) JWT vulnerabilities, 6) Missing CSRF protection. Focus on auth*, login*, session\* patterns. Return critical findings as JSON.", subagent_type="general-purpose")
 
 4. **Secret Exposure Agent**: Task(description="Secret/Credential Scanner", prompt="Find exposed secrets in $ARGUMENTS. Scan for: 1) API keys (AWS, Azure, GCP), 2) Private keys, 3) Passwords/tokens in code, 4) Database credentials, 5) .env files in Git. Use regex patterns for various secret formats. IMPORTANT: Return only secret type and location, NEVER the actual secret! JSON format.", subagent_type="general-purpose")
 
-5. **CORS Configuration Agent**: Task(description="CORS Security Analysis", prompt="Check CORS configurations in $ARGUMENTS. Analyze: 1) Wildcard origins (*), 2) Credentials with unsafe origins, 3) Missing CORS headers, 4) Overly permissive policies. Search in API routes, server configs, middleware. Return misconfigurations with risk level as JSON.", subagent_type="general-purpose")
+5. **CORS Configuration Agent**: Task(description="CORS Security Analysis", prompt="Check CORS configurations in $ARGUMENTS. Analyze: 1) Wildcard origins (\*), 2) Credentials with unsafe origins, 3) Missing CORS headers, 4) Overly permissive policies. Search in API routes, server configs, middleware. Return misconfigurations with risk level as JSON.", subagent_type="general-purpose")
 
 6. **Dependency CVE Agent**: Task(description="Vulnerable Dependencies", prompt="Scan dependencies for known CVEs in $ARGUMENTS. Check: 1) package.json, requirements.txt, go.mod, Cargo.toml, 2) Outdated packages with security issues, 3) Dependencies with critical CVEs. If possible, use local tools. Return top 10 most critical vulnerabilities with CVE IDs as JSON.", subagent_type="general-purpose")
 
@@ -83,51 +86,62 @@ After completion of security analysis (regardless of method used):
 
 1. **Consolidate all findings** from the chosen analysis method
 2. **Classify by CVSS Score**:
+
    - Critical (9.0-10.0): Immediate Action Required
    - High (7.0-8.9): Fix within 24-48 hours
    - Medium (4.0-6.9): Fix within Sprint
    - Low (0.1-3.9): Track for future fix
 
 3. **Group by exploit likelihood**:
+
    - Actively Exploited in Wild
    - Easy to Exploit
    - Requires Specific Conditions
    - Theoretical Risk
 
 4. **Create Security Report**:
+
    ```markdown
    # Security Audit Report
-   
+
    ## Analysis Method
+
    - **Tool Used**: [Semgrep MCP | Local Semgrep | Pattern-Based Analysis]
    - **Accuracy Level**: [High | Medium | Basic]
    - **Scan Duration**: X seconds
-   
+
    ## Executive Summary
+
    - Total Vulnerabilities: X
    - Critical: X | High: X | Medium: X | Low: X
    - Immediate Action Items: X
-   
+
    ## Critical Vulnerabilities
+
    [List with remediation steps]
-   
+
    ## High Priority Fixes
+
    [Sorted by exploit risk]
-   
+
    ## Compliance Issues
+
    - OWASP Top 10 Coverage
    - PCI DSS Relevant Findings
    - GDPR Implications
-   
+
    ## Remediation Roadmap
+
    1. Emergency Fixes (0-24h)
    2. Short-term (1-7 days)
    3. Long-term improvements
-   
+
    ## Security Posture Score
+
    [Based on findings: A-F rating]
-   
+
    ## Tool Recommendations
+
    [If not using MCP, include upgrade suggestion]
    ```
 
@@ -142,6 +156,7 @@ After completion of security analysis (regardless of method used):
 Include in report based on analysis method:
 
 ### With Semgrep MCP:
+
 ```markdown
 ✅ **High-Accuracy Analysis**: Using Semgrep's AST-based scanning
 ✅ **Comprehensive Coverage**: All OWASP Top 10 categories checked
@@ -149,6 +164,7 @@ Include in report based on analysis method:
 ```
 
 ### With Local Semgrep:
+
 ```markdown
 ⚡ **Good Analysis Quality**: Using local Semgrep installation
 ⚡ **Strong Coverage**: Most security patterns detected
@@ -156,11 +172,12 @@ Include in report based on analysis method:
 ```
 
 ### With Pattern-Based:
+
 ```markdown
 ⚠️ **Basic Analysis**: Using pattern matching (reduced accuracy)
 ⚠️ **Limited Coverage**: May miss complex vulnerabilities
 💡 **Recommendation**: Install Semgrep MCP for professional-grade analysis:
-   npm install -g @semgrep/mcp
+npm install -g @semgrep/mcp
 ```
 
 ## Performance Expectations

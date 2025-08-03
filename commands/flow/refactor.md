@@ -10,12 +10,15 @@ This command provides intelligent refactoring suggestions with impact analysis, 
 ## Refactoring Process
 
 ### Phase 1: Code Analysis
+
 Understand current structure and identify refactoring opportunities.
 
 ### Phase 2: Impact Assessment
+
 Analyze dependencies and potential risks of proposed changes.
 
 ### Phase 3: Step-by-Step Plan
+
 Generate detailed refactoring steps with safety checks.
 
 ## Execution
@@ -46,57 +49,67 @@ Based on analysis, create step-by-step plan:
 ### 🎯 Recommended Refactorings
 
 #### 1. Extract Method: [Method Name]
+
 **Current**: Lines X-Y in [file]
 **Reason**: Method too long (N lines), does multiple things
 **New Structure**:
+
 ```
 - extractCalculation() - Lines X1-X2
-- validateInput() - Lines X3-X4  
+- validateInput() - Lines X3-X4
 - formatOutput() - Lines X5-X6
 ```
+
 **Impact**: Used in N places, all tests pass
 **Effort**: 30 minutes
 
 #### 2. Rename Variable: [Current → Better]
+
 **Locations**: [List of files:lines]
 **Reason**: Unclear naming, doesn't express intent
 **Safe Rename**: No external API impact
 **Effort**: 10 minutes
 
 #### 3. Extract Class: [New Class Name]
+
 **From**: [Current large class]
 **Responsibilities to Extract**:
+
 - [Responsibility 1]
 - [Responsibility 2]
-**Benefits**: Better SRP, easier testing
-**Risk**: Medium - requires test updates
-**Effort**: 2 hours
+  **Benefits**: Better SRP, easier testing
+  **Risk**: Medium - requires test updates
+  **Effort**: 2 hours
 
 ### 📋 Execution Steps
 
 1. **Create Safety Net**
+
    ```bash
    # Ensure all tests pass
    /prefix:test:run
-   
+
    # Create refactoring branch
    git checkout -b refactor/[description]
    ```
 
 2. **Apply Refactorings** (in order)
+
    - Step 1: [Specific action]
    - Step 2: [Specific action]
    - Verify: Run tests after each step
 
 3. **Update Tests**
+
    - Modify test [X] for new structure
    - Add test for extracted [component]
 
 4. **Verify Integration**
+
    ```bash
    # Run full test suite
    /prefix:test:run --all
-   
+
    # Check dependent services
    /prefix:scan:deps [refactored-file]
    ```
@@ -145,6 +158,7 @@ Based on analysis, create step-by-step plan:
 ## Integration Commands
 
 After refactoring:
+
 ```bash
 # Verify no regressions
 /prefix:test:run --coverage

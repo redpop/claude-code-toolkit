@@ -216,6 +216,7 @@ Example of splitting commits:
 ### Push Mode (--push):
 
 When using `--push` option:
+
 - After successful commit creation, automatically executes `git push`
 - Works with both standard and fast mode
 - Can be combined with other options: `--fast --push` or `--no-verify --push`

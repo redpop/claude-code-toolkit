@@ -7,6 +7,7 @@ Welcome to the Claude Code Toolkit developer documentation. This guide provides 
 The Claude Code Toolkit is a sophisticated command and agent orchestration system built on top of Claude Code's capabilities. It uses a hybrid architecture combining parallel processing with specialized AI agents.
 
 ### Core Technologies
+
 - **Claude Code**: The AI-powered development environment
 - **Task Tool**: Enables parallel agent execution
 - **Sub-Agents**: Specialized AI agents with domain expertise
@@ -40,28 +41,36 @@ claude-code-toolkit/
 ## 🔧 Key Components
 
 ### 1. Command System
+
 Commands are Markdown files with:
+
 - **Frontmatter**: Metadata and tool permissions
 - **Instructions**: What the command should do
 - **Agent Definitions**: For multi-agent commands
 - **Output Format**: Expected results structure
 
 ### 2. Agent System
+
 Specialized AI agents that:
+
 - Focus on specific domains
 - Work in parallel or sequence
 - Provide expert analysis
 - Generate actionable insights
 
 ### 3. Configuration System
+
 Controls behavior through:
+
 - Global settings in `.claude-commands.json`
 - Command-specific overrides
 - Performance modes
 - Token budgets
 
 ### 4. Installation System
+
 Simple file-based installation:
+
 - Copies files to `~/.claude/`
 - Supports multiple prefixes
 - No dependencies required
@@ -77,12 +86,14 @@ Simple file-based installation:
 ## 🚀 Quick Links for Developers
 
 ### Common Tasks
+
 - [Create a new command](extending.md#creating-commands)
 - [Add a sub-agent](extending.md#creating-agents)
 - [Configure performance](configuration.md#performance-modes)
 - [Debug issues](internals.md#debugging)
 
 ### Development Workflow
+
 ```bash
 # 1. Make changes
 vim commands/my-command.md
@@ -97,6 +108,7 @@ vim commands/my-command.md
 ```
 
 ### Testing
+
 ```bash
 # Run all tests
 ./tests/run-all.sh
@@ -111,22 +123,27 @@ vim commands/my-command.md
 ## 🔑 Key Concepts
 
 ### Hybrid Architecture
+
 Combines two execution models:
+
 - **Phase 1**: Parallel scanning with Task Tool
 - **Phase 2**: Deep analysis with Sub-Agents
 - **Phase 3**: Synthesis and reporting
 
 ### Performance Modes
+
 - **Conservative**: Limited resources, 5 agents max
 - **Balanced**: Standard usage, 10 agents max
 - **Aggressive**: Maximum performance, 20 agents max
 
 ### Token Management
+
 - Budget per agent: 2000-5000 tokens
 - Automatic distribution
 - Overflow handling
 
 ### Command Categories
+
 - **scan**: Analysis and investigation
 - **fix**: Direct corrections
 - **gen**: Code generation
@@ -138,6 +155,7 @@ Combines two execution models:
 ## 📖 Understanding the Codebase
 
 ### Command Structure
+
 ```markdown
 ---
 allowed-tools: Task, Read, Grep, Bash, Write
@@ -149,6 +167,7 @@ argument-hint: <expected-args>
 ```
 
 ### Agent Structure
+
 ```markdown
 ---
 name: agent-name
@@ -159,6 +178,7 @@ You are an expert in...
 ```
 
 ### Configuration Schema
+
 ```json
 {
   "subAgentOrchestration": {
@@ -175,6 +195,7 @@ You are an expert in...
 ## 🛠️ Maintenance
 
 ### Adding Features
+
 1. Design the feature
 2. Update relevant commands/agents
 3. Test thoroughly
@@ -182,12 +203,14 @@ You are an expert in...
 5. Bump version
 
 ### Deprecating Features
+
 1. Mark as deprecated in docs
 2. Add warnings to commands
 3. Provide migration path
 4. Remove after 2 versions
 
 ### Release Process
+
 1. Update CHANGELOG.md
 2. Bump version in package.json
 3. Tag release
@@ -196,18 +219,21 @@ You are an expert in...
 ## 🤝 Contributing
 
 ### Code Style
+
 - Clear, descriptive names
 - Comprehensive comments
 - Consistent patterns
 - Test coverage
 
 ### Documentation
+
 - Keep it current
 - Include examples
 - Explain the why
 - Cross-reference
 
 ### Testing
+
 - Unit tests for utilities
 - Integration tests for commands
 - Performance benchmarks
@@ -216,12 +242,14 @@ You are an expert in...
 ## 📞 Support
 
 ### For Developers
+
 - GitHub Issues
 - Discord/Slack channel
 - Code reviews
 - Pair programming
 
 ### Resources
+
 - [Claude Code Documentation](https://docs.anthropic.com/claude-code)
 - [Task Tool Reference](https://docs.anthropic.com/task-tool)
 - [Community Forum](https://forum.example.com)

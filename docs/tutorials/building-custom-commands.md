@@ -28,12 +28,14 @@ argument-hint: [expected-arguments] [--options]
 ---
 
 # Command Content
+
 Command documentation and implementation instructions...
 ```
 
 ### Key Components
 
 1. **Frontmatter**: YAML metadata that Claude Code uses
+
    - `description`: Appears in command listings
    - `argument-hint`: Shows expected arguments for auto-completion
    - `allowed-tools`: Tools the command can use
@@ -55,6 +57,7 @@ commands/category/subcategory/command-name.md
 ```
 
 Example:
+
 ```
 commands/analysis/security-scan.md → /prefix:analysis:security-scan
 commands/git/advanced/cherry-pick.md → /prefix:git:advanced:cherry-pick
@@ -64,20 +67,20 @@ commands/git/advanced/cherry-pick.md → /prefix:git:advanced:cherry-pick
 
 ### Template Overview
 
-| Template | Use Case | Key Features |
-|----------|----------|--------------|
-| `basic-sub-agent.md` | Simple parallel tasks | Quick parallel scanning with Task Tool |
-| `mcp-aware-command.md` | Enhanced with external tools | Graceful fallback, tool detection |
-| `hybrid-sub-agent.md` | Complex multi-phase analysis | Scanning → Expert delegation → Synthesis |
-| `analysis-sub-agent.md` | Focused analysis tasks | Single-purpose deep analysis |
-| `specialist-agent.md` | Domain expert commands | Specialized knowledge application |
+| Template                | Use Case                     | Key Features                             |
+| ----------------------- | ---------------------------- | ---------------------------------------- |
+| `basic-sub-agent.md`    | Simple parallel tasks        | Quick parallel scanning with Task Tool   |
+| `mcp-aware-command.md`  | Enhanced with external tools | Graceful fallback, tool detection        |
+| `hybrid-sub-agent.md`   | Complex multi-phase analysis | Scanning → Expert delegation → Synthesis |
+| `analysis-sub-agent.md` | Focused analysis tasks       | Single-purpose deep analysis             |
+| `specialist-agent.md`   | Domain expert commands       | Specialized knowledge application        |
 
 ### Decision Tree
 
 ```
 Need parallel processing?
 ├─ Yes → Multiple related tasks?
-│   ├─ Yes → Need expert analysis? 
+│   ├─ Yes → Need expert analysis?
 │   │   ├─ Yes → hybrid-sub-agent.md
 │   │   └─ No → basic-sub-agent.md
 │   └─ No → analysis-sub-agent.md
@@ -94,7 +97,7 @@ Let's create a command that analyzes code for common anti-patterns.
 
 Create `commands/analysis/anti-patterns.md`:
 
-```markdown
+````markdown
 ---
 allowed-tools: Task, Read, Grep
 description: Detect common anti-patterns in your codebase
@@ -112,42 +115,46 @@ This command scans your codebase for common anti-patterns and provides recommend
 1. **God Object Scanner**: Task(
    description="Detect God Objects/Classes",
    prompt="Scan $ARGUMENTS for God Objects. Look for:
+
    - Classes with >20 methods
    - Classes with >500 lines
    - Classes handling multiple unrelated responsibilities
-   Return findings as JSON with: {file, class_name, method_count, line_count, responsibilities}",
-   subagent_type="general-purpose"
-)
+     Return findings as JSON with: {file, class_name, method_count, line_count, responsibilities}",
+     subagent_type="general-purpose"
+     )
 
 2. **Spaghetti Code Scanner**: Task(
    description="Detect tangled code flow",
    prompt="Scan $ARGUMENTS for spaghetti code patterns:
+
    - Functions with >5 levels of nesting
    - Goto-like patterns (multiple returns, breaks)
    - Complex conditional chains (>4 if-else)
-   Return as JSON: {file, function, nesting_level, complexity_score}",
-   subagent_type="general-purpose"
-)
+     Return as JSON: {file, function, nesting_level, complexity_score}",
+     subagent_type="general-purpose"
+     )
 
 3. **Copy-Paste Scanner**: Task(
    description="Find duplicate code blocks",
    prompt="Detect copy-paste programming in $ARGUMENTS:
+
    - Duplicate code blocks (>10 lines similar)
    - Similar function implementations
    - Repeated patterns that could be abstracted
-   Return as JSON: {original_location, duplicate_locations, similarity_percentage}",
-   subagent_type="general-purpose"
-)
+     Return as JSON: {original_location, duplicate_locations, similarity_percentage}",
+     subagent_type="general-purpose"
+     )
 
 4. **Magic Number Scanner**: Task(
    description="Find hardcoded values",
    prompt="Scan $ARGUMENTS for magic numbers and strings:
+
    - Hardcoded numeric values (not 0, 1, -1)
    - Hardcoded strings (not simple labels)
    - Configuration values in code
-   Return as JSON: {file, line, value, context, suggested_constant_name}",
-   subagent_type="general-purpose"
-)
+     Return as JSON: {file, line, value, context, suggested_constant_name}",
+     subagent_type="general-purpose"
+     )
 
 5. **Long Method Scanner**: Task(
    description="Find overly complex methods",
@@ -155,9 +162,9 @@ This command scans your codebase for common anti-patterns and provides recommend
    - Methods >50 lines
    - Methods with >10 parameters
    - Methods doing multiple unrelated things
-   Return as JSON: {file, method, line_count, parameter_count, responsibilities}",
-   subagent_type="general-purpose"
-)
+     Return as JSON: {file, method, line_count, parameter_count, responsibilities}",
+     subagent_type="general-purpose"
+     )
 
 ## Synthesis
 
@@ -171,6 +178,7 @@ After all agents complete:
 # Anti-Pattern Analysis Report
 
 ## Summary
+
 - **Files Analyzed**: [count]
 - **Anti-Patterns Found**: [total]
 - **Critical Issues**: [count]
@@ -178,31 +186,40 @@ After all agents complete:
 ## Findings by Severity
 
 ### 🔴 Critical (Immediate Action Required)
+
 [List critical anti-patterns with locations]
 
 ### 🟡 Warning (Should Be Addressed)
+
 [List warning-level anti-patterns]
 
 ### 🟢 Minor (Nice to Fix)
+
 [List minor issues]
 
 ## Recommendations
 
 ### Quick Wins (< 1 hour)
+
 1. [Specific refactoring with example]
 
 ### Medium Effort (1-4 hours)
+
 1. [Refactoring requiring more work]
 
 ### Major Refactoring (> 4 hours)
+
 1. [Significant architectural changes]
 ```
+````
 
 ## Notes
+
 - Focuses on language-agnostic patterns by default
 - Use --language flag for language-specific anti-patterns
 - Provides actionable refactoring suggestions
-```
+
+````
 
 ### Step 2: Test the Command
 
@@ -212,11 +229,12 @@ After all agents complete:
 
 # Run the command
 /test:analysis:anti-patterns ./src --language=javascript
-```
+````
 
 ### Step 3: Iterate and Improve
 
 Based on testing:
+
 1. Adjust detection patterns
 2. Refine JSON output format
 3. Improve report formatting
@@ -230,7 +248,7 @@ Let's build a documentation quality checker that uses MCP when available.
 
 Create `commands/analysis/doc-quality.md`:
 
-```markdown
+````markdown
 ---
 allowed-tools: Task, Read, Grep, Bash
 mcp-enhanced: mcp__semgrep__get_abstract_syntax_tree
@@ -264,6 +282,7 @@ else:
 
 print(f"Using {strategy} analysis strategy")
 ```
+````
 
 ## Execution Strategy
 
@@ -272,16 +291,17 @@ print(f"Using {strategy} analysis strategy")
 **IF AST tool is available:**
 
 1. **Deep Function Analysis**: For each file:
+
    ```python
    # Get AST
    ast = mcp__semgrep__get_abstract_syntax_tree(
        code=file_content,
        language=detected_language
    )
-   
+
    # Extract all functions/methods
    functions = extract_functions_from_ast(ast)
-   
+
    # Check each function for:
    # - Missing docstring/comment
    # - Parameter mismatches
@@ -326,7 +346,7 @@ python -m pydoc -w $module
 ```python
 def process_results(findings, strategy_used):
     """Normalize results from different strategies"""
-    
+
     report = {
         "summary": {
             "files_analyzed": len(findings),
@@ -337,7 +357,7 @@ def process_results(findings, strategy_used):
         "findings": normalize_findings(findings),
         "recommendations": generate_recommendations(findings)
     }
-    
+
     if strategy_used != "ast_enhanced":
         report["enhancement_note"] = (
             "Install Semgrep MCP for deeper analysis including:\n"
@@ -345,7 +365,7 @@ def process_results(findings, strategy_used):
             "- Return type checking\n"
             "- Exception documentation validation"
         )
-    
+
     return report
 ```
 
@@ -359,22 +379,25 @@ def process_results(findings, strategy_used):
 
 ## Coverage Summary
 
-| Metric | Current | Target | Status |
-|--------|---------|--------|--------|
-| Functions Documented | 75% | 90% | 🟡 |
-| Parameters Documented | 60% | 95% | 🔴 |
-| Examples Provided | 40% | 70% | 🟡 |
-| README Completeness | 85% | 100% | 🟢 |
+| Metric                | Current | Target | Status |
+| --------------------- | ------- | ------ | ------ |
+| Functions Documented  | 75%     | 90%    | 🟡     |
+| Parameters Documented | 60%     | 95%    | 🔴     |
+| Examples Provided     | 40%     | 70%    | 🟡     |
+| README Completeness   | 85%     | 100%   | 🟢     |
 
 ## Critical Issues
 
 ### Missing Documentation
+
 {list of undocumented functions with severity}
 
 ### Parameter Mismatches
+
 {list of functions where docs don't match code}
 
 ### Broken References
+
 {list of broken links and references}
 
 ## Recommendations
@@ -389,6 +412,7 @@ def process_results(findings, strategy_used):
 2. **Report enhancement opportunities**: Tell users what they're missing
 3. **Normalize output**: Same format regardless of tool used
 4. **Progressive enhancement**: Better tools = better analysis, not different analysis
+
 ```
 
 ## Building a Hybrid Command with Sub-Agents
@@ -398,12 +422,14 @@ Let's create a comprehensive code review command that combines parallel scanning
 ### Step 1: Design the Architecture
 
 ```
+
 Phase 1: Parallel Scanning (5 agents, ~5 seconds)
-    ↓
+↓
 Phase 2: Expert Delegation (2-3 specialists, ~15 seconds)
-    ↓
+↓
 Phase 3: Synthesis & Reporting (~2 seconds)
-```
+
+````
 
 ### Step 2: Create the Command
 
@@ -523,92 +549,92 @@ scanners = [
 
 # Execute all scanners in parallel
 results = execute_parallel(scanners)
-```
+````
 
 ## Phase 2: Intelligent Expert Delegation
 
 ```python
 def analyze_and_delegate(scan_results):
     """Determine which experts to consult based on findings"""
-    
+
     delegations = []
-    
+
     # Security expert for high-severity security issues
     security_issues = extract_security_issues(scan_results)
     if any(issue.severity == "high" for issue in security_issues):
         delegations.append({
             "expert": "@security-specialist",
             "prompt": f"""READ-ONLY SECURITY REVIEW
-            
+
             Critical security issues found:
             {format_issues(security_issues)}
-            
+
             Please provide:
             1. Severity assessment with CVSS scores
             2. Exploitation scenarios
             3. Specific remediation code
             4. Prevention strategies
-            
+
             Focus on: {', '.join(critical_files)}"""
         })
-    
+
     # Performance expert for significant performance issues
     perf_issues = extract_performance_issues(scan_results)
     if perf_issues.total_impact > PERF_THRESHOLD:
         delegations.append({
             "expert": "@performance-optimizer",
             "prompt": f"""READ-ONLY PERFORMANCE ANALYSIS
-            
+
             Performance bottlenecks detected:
             {format_issues(perf_issues)}
-            
+
             Please provide:
             1. Performance impact quantification
             2. Root cause analysis
             3. Optimization strategies with examples
             4. Benchmark expectations
-            
+
             Critical paths: {', '.join(hot_paths)}"""
         })
-    
+
     # Architecture expert for structural issues
     arch_issues = extract_architecture_issues(scan_results)
     if arch_issues.refactoring_needed:
         delegations.append({
             "expert": "@code-architect",
             "prompt": f"""READ-ONLY ARCHITECTURE REVIEW
-            
+
             Architectural concerns:
             {format_issues(arch_issues)}
-            
+
             Please provide:
             1. Impact on maintainability
             2. Refactoring approach
             3. Migration strategy
             4. Pattern recommendations
-            
+
             Affected components: {', '.join(components)}"""
         })
-    
+
     # Test expert if coverage is low
     test_metrics = extract_test_metrics(scan_results)
     if test_metrics.coverage < 70 or test_metrics.quality_score < 6:
         delegations.append({
             "expert": "@test-engineer",
             "prompt": f"""READ-ONLY TEST STRATEGY REVIEW
-            
+
             Test quality issues:
             {format_issues(test_metrics)}
-            
+
             Please provide:
             1. Coverage gap analysis
             2. Critical paths needing tests
             3. Test strategy recommendations
             4. Example test cases for complex logic
-            
+
             Uncovered critical paths: {', '.join(uncovered)}"""
         })
-    
+
     return delegations
 ```
 
@@ -617,7 +643,7 @@ def analyze_and_delegate(scan_results):
 ```python
 def synthesize_results(scan_results, expert_analyses):
     """Combine all findings into comprehensive report"""
-    
+
     # Calculate overall scores
     scores = {
         "security": calculate_security_score(scan_results, expert_analyses),
@@ -626,9 +652,9 @@ def synthesize_results(scan_results, expert_analyses):
         "tests": calculate_test_score(scan_results),
         "architecture": calculate_architecture_score(scan_results, expert_analyses)
     }
-    
+
     overall_score = sum(scores.values()) / len(scores)
-    
+
     # Generate report sections
     report = f"""# Comprehensive Code Review Report
 
@@ -658,7 +684,7 @@ def synthesize_results(scan_results, expert_analyses):
 ### 🔒 Security Analysis
 {expert_analyses.get('security', scan_results['security'])}
 
-### ⚡ Performance Analysis  
+### ⚡ Performance Analysis
 {expert_analyses.get('performance', scan_results['performance'])}
 
 ### 🏗️ Architecture Review
@@ -675,7 +701,7 @@ def synthesize_results(scan_results, expert_analyses):
 ### Immediate (Before Merge)
 {generate_immediate_actions(critical_issues)}
 
-### Short-term (This Sprint)  
+### Short-term (This Sprint)
 {generate_short_term_actions(major_issues)}
 
 ### Long-term (Technical Debt)
@@ -688,7 +714,7 @@ def synthesize_results(scan_results, expert_analyses):
 ---
 Generated by Claude Code Toolkit - Comprehensive Review v2.3.0
 """
-    
+
     return report
 ```
 
@@ -698,12 +724,12 @@ Generated by Claude Code Toolkit - Comprehensive Review v2.3.0
 if args.export_report:
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     filename = f"review-{timestamp}.md"
-    
+
     Write(
         file_path=f"reports/{filename}",
         content=report
     )
-    
+
     # Also generate JSON metrics
     metrics = {
         "timestamp": timestamp,
@@ -715,12 +741,12 @@ if args.export_report:
         },
         "expert_consultations": len(expert_analyses)
     }
-    
+
     Write(
         file_path=f"reports/review-{timestamp}.json",
         content=json.dumps(metrics, indent=2)
     )
-    
+
     print(f"✅ Report exported to reports/{filename}")
 ```
 
@@ -743,7 +769,8 @@ if args.export_report:
 # Focus on specific directory
 /prefix:review:comprehensive ./src/api --export-report
 ```
-```
+
+````
 
 ## Testing and Debugging Your Commands
 
@@ -787,7 +814,7 @@ echo "Testing command with known issues..."
 
 # Cleanup
 rm -rf "$TEST_DIR"
-```
+````
 
 #### 2. Integration Testing
 
@@ -797,22 +824,27 @@ Test with real-world scenarios:
 ## Test Cases
 
 ### Test Case 1: Empty Directory
+
 - Expected: Graceful handling, clear message
 - Command: `/prefix:your:command /empty/dir`
 
 ### Test Case 2: Large Codebase
+
 - Expected: Complete within timeout, handle scale
 - Command: `/prefix:your:command /large/project`
 
 ### Test Case 3: Mixed Languages
+
 - Expected: Detect and handle multiple languages
 - Command: `/prefix:your:command /polyglot/project`
 
 ### Test Case 4: No Permissions
+
 - Expected: Clear error message, graceful failure
 - Command: `/prefix:your:command /restricted/dir`
 
 ### Test Case 5: With All Options
+
 - Expected: All features work together
 - Command: `/prefix:your:command /project --option1 --option2 --export`
 ```
@@ -821,7 +853,7 @@ Test with real-world scenarios:
 
 Add debug output to your commands:
 
-```markdown
+````markdown
 ## Debug Mode
 
 When `--debug` flag is present:
@@ -830,12 +862,14 @@ When `--debug` flag is present:
 if "--debug" in args:
     print("🔍 DEBUG: Starting Phase 1")
     print(f"🔍 DEBUG: Found {len(scanners)} scanners")
-    
+
     for i, result in enumerate(results):
         print(f"🔍 DEBUG: Scanner {i} returned: {len(result)} items")
         print(f"🔍 DEBUG: Sample: {json.dumps(result[:2], indent=2)}")
 ```
-```
+````
+
+````
 
 ### Common Issues and Solutions
 
@@ -850,26 +884,28 @@ head -20 ~/.claude/commands/yourprefix/category/command.md
 
 # Test frontmatter
 grep -A3 "^---" ~/.claude/commands/yourprefix/category/command.md
-```
+````
 
 #### Issue 2: Tool Not Allowed
 
 ```markdown
 Error: Tool 'Write' not in allowed-tools
 Solution: Add to frontmatter:
+
 ---
-allowed-tools: Task, Read, Grep, Bash, Write
----
+
+## allowed-tools: Task, Read, Grep, Bash, Write
 ```
 
 #### Issue 3: Parallel Tasks Not Running
 
 ```markdown
 # Ensure proper Task Tool syntax
+
 Task(
-    description="Clear description",  # Required
-    prompt="Detailed prompt",         # Required
-    subagent_type="general-purpose"   # Required
+description="Clear description", # Required
+prompt="Detailed prompt", # Required
+subagent_type="general-purpose" # Required
 )
 ```
 
@@ -960,26 +996,33 @@ except Exception as e:
 
 #### 3. Meaningful Output Structure
 
-```markdown
+````markdown
 # ✅ Good: Structured and actionable
+
 ## Critical Security Issues (Fix Immediately)
 
 1. **SQL Injection** in `api/users.js:45`
    ```javascript
-   query = `SELECT * FROM users WHERE id=${userId}`
+   query = `SELECT * FROM users WHERE id=${userId}`;
    ```
-   **Fix**: Use parameterized queries
-   ```javascript
-   query = 'SELECT * FROM users WHERE id = ?'
-   db.query(query, [userId])
-   ```
+````
+
+**Fix**: Use parameterized queries
+
+```javascript
+query = "SELECT * FROM users WHERE id = ?";
+db.query(query, [userId]);
+```
 
 # ❌ Bad: Unstructured dump
+
 Found issues:
+
 - SQL problem in users.js
 - Some performance issues
 - Tests could be better
-```
+
+````
 
 #### 4. Progressive Enhancement
 
@@ -994,7 +1037,7 @@ if has_tool("mcp__semgrep__security_check"):
 else:
     results["quality"] = "basic"
     results["upgrade_tip"] = "Install Semgrep MCP for deeper analysis"
-```
+````
 
 #### 5. Respect User Intent
 
@@ -1087,7 +1130,7 @@ with ThreadPoolExecutor(max_workers=len(experts)) as executor:
 
 Ensure your command has:
 
-```markdown
+````markdown
 ---
 description: Clear, concise description
 argument-hint: [required] [--optional]
@@ -1098,14 +1141,18 @@ version: 1.0.0
 # Command Name
 
 ## Overview
+
 What this command does and why it's useful.
 
 ## Installation
+
 ```bash
 ./install.sh yourprefix
 ```
+````
 
 ## Usage Examples
+
 ```bash
 # Basic usage
 /yourprefix:category:command target
@@ -1115,17 +1162,20 @@ What this command does and why it's useful.
 ```
 
 ## Requirements
+
 - Required tools or dependencies
 - Minimum Claude Code version
 
 ## Changelog
+
 - v1.0.0: Initial release
-```
+
+````
 
 #### 2. Testing Checklist
 
 - [ ] Command loads without errors
-- [ ] Handles missing arguments gracefully  
+- [ ] Handles missing arguments gracefully
 - [ ] Works with minimal permissions
 - [ ] Completes within reasonable time
 - [ ] Produces helpful output
@@ -1138,24 +1188,24 @@ What this command does and why it's useful.
 # Code quality checks
 def validate_command(cmd_path):
     """Validate command meets quality standards"""
-    
+
     with open(cmd_path) as f:
         content = f.read()
-    
+
     # Check frontmatter
     assert "---" in content, "Missing frontmatter"
     assert "description:" in content, "Missing description"
-    
+
     # Check documentation
     assert "## Usage" in content, "Missing usage section"
     assert "```" in content, "Missing code examples"
-    
+
     # Check for common issues
     assert "TODO" not in content, "Contains TODO items"
     assert len(content) > 500, "Too short - add more detail"
-    
+
     print("✅ Command passes quality checks")
-```
+````
 
 ### Distribution Methods
 
@@ -1212,7 +1262,7 @@ echo "Usage: /prefix:category:command"
 
 Create a comprehensive README:
 
-```markdown
+````markdown
 # Your Command Collection
 
 A collection of powerful commands for Claude Code Toolkit.
@@ -1231,13 +1281,14 @@ git clone https://github.com/you/your-commands
 cd your-commands
 ./install.sh yourprefix
 ```
+````
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `/yourprefix:analysis:deep` | Comprehensive code analysis |
-| `/yourprefix:review:security` | Security-focused review |
+| Command                       | Description                 |
+| ----------------------------- | --------------------------- |
+| `/yourprefix:analysis:deep`   | Comprehensive code analysis |
+| `/yourprefix:review:security` | Security-focused review     |
 
 ## Examples
 
@@ -1250,7 +1301,8 @@ cd your-commands
 ## License
 
 MIT
-```
+
+````
 
 ### Sharing Best Practices
 
@@ -1262,10 +1314,10 @@ description: Your command description
 version: 1.2.0
 changelog: |
   - 1.2.0: Added MCP support
-  - 1.1.0: Improved performance  
+  - 1.1.0: Improved performance
   - 1.0.0: Initial release
 ---
-```
+````
 
 #### 2. Provide Migration Guides
 
@@ -1273,10 +1325,12 @@ changelog: |
 ## Upgrading from v1.x to v2.x
 
 ### Breaking Changes
+
 - Changed `--output` to `--export`
 - Removed deprecated `--legacy` flag
 
 ### Migration Steps
+
 1. Update your scripts to use `--export`
 2. Remove any `--legacy` flags
 ```
@@ -1289,7 +1343,7 @@ changelog: |
 Related commands for security analysis:
 
 - `/prefix:security:scan` - Quick security scan
-- `/prefix:security:audit` - Deep security audit  
+- `/prefix:security:audit` - Deep security audit
 - `/prefix:security:fix` - Apply security fixes
 - `/prefix:security:monitor` - Continuous monitoring
 

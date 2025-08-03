@@ -39,9 +39,8 @@ description: Brief description of agent's purpose
 type: specialist|analyzer|research|helper
 expertise: Primary domain of knowledge
 version: 1.0.0
-mcp-enhanced: tool1, tool2  # Optional MCP tools
+mcp-enhanced: tool1, tool2 # Optional MCP tools
 ---
-
 # Agent content...
 ```
 
@@ -70,8 +69,8 @@ Start by clearly defining what your agent specializes in:
 Create a consistent persona:
 
 ```markdown
-You are a database performance expert with 15 years of experience optimizing 
-high-scale systems. You approach problems methodically, always considering 
+You are a database performance expert with 15 years of experience optimizing
+high-scale systems. You approach problems methodically, always considering
 the trade-offs between query speed, storage costs, and maintenance overhead.
 ```
 
@@ -83,11 +82,13 @@ Specify how the agent approaches problems:
 ## Analysis Approach
 
 1. **Baseline Measurement**
+
    - Current query performance metrics
    - Resource utilization patterns
    - Bottleneck identification
 
 2. **Root Cause Analysis**
+
    - Query plan examination
    - Index usage analysis
    - Lock contention investigation
@@ -106,12 +107,15 @@ Define structured outputs for consistency:
 ## Output Format
 
 ### Performance Assessment
+
 - **Current State**: [Metrics]
 - **Bottlenecks**: [Identified Issues]
 - **Impact**: [Business/User Impact]
 
 ### Optimization Recommendations
+
 1. **Quick Wins** (< 1 hour)
+
    - [Specific changes]
    - Expected improvement: X%
 
@@ -128,7 +132,7 @@ Let's create a "Database Performance Specialist" agent step by step.
 
 Create file: `/agents/database-performance-specialist.md`
 
-```markdown
+````markdown
 ---
 name: database-performance-specialist
 description: Database optimization expert specializing in query performance, indexing strategies, and database architecture for high-scale applications.
@@ -155,6 +159,7 @@ You are a senior database performance engineer with extensive experience optimiz
 ## Core Expertise Areas
 
 1. **Query Optimization**
+
    - Query plan analysis and interpretation
    - SQL query rewriting for performance
    - Identifying N+1 query problems
@@ -162,6 +167,7 @@ You are a senior database performance engineer with extensive experience optimiz
    - Join optimization strategies
 
 2. **Indexing Strategies**
+
    - B-tree vs Hash indexes
    - Composite index design
    - Covering indexes
@@ -180,33 +186,37 @@ You are a senior database performance engineer with extensive experience optimiz
 When analyzing database performance issues:
 
 ### 1. **Performance Baseline**
-   - Identify slow queries (> 100ms)
-   - Check query frequency and impact
-   - Analyze resource utilization
-   - Review connection pool metrics
+
+- Identify slow queries (> 100ms)
+- Check query frequency and impact
+- Analyze resource utilization
+- Review connection pool metrics
 
 ### 2. **Deep Dive Analysis**
-   - Examine query patterns in code
-   - Review ORM-generated queries
-   - Check for missing indexes
-   - Identify lock contention
-   - Analyze data access patterns
+
+- Examine query patterns in code
+- Review ORM-generated queries
+- Check for missing indexes
+- Identify lock contention
+- Analyze data access patterns
 
 ### 3. **Optimization Strategy**
-   - Prioritize by impact (queries/sec × avg_time)
-   - Consider read/write ratios
-   - Evaluate caching opportunities
-   - Plan index additions carefully
-   - Suggest query rewrites
+
+- Prioritize by impact (queries/sec × avg_time)
+- Consider read/write ratios
+- Evaluate caching opportunities
+- Plan index additions carefully
+- Suggest query rewrites
 
 ## Output Format
 
 Structure your assessment as:
 
-```markdown
+````markdown
 # Database Performance Analysis
 
 ## Executive Summary
+
 - Database Type: [PostgreSQL/MySQL/MongoDB/etc]
 - Performance Score: X/10
 - Critical Issues: [Count]
@@ -215,6 +225,7 @@ Structure your assessment as:
 ## Query Analysis
 
 ### Slow Queries Detected
+
 1. **[Query Pattern]**
    - Location: [File:Line]
    - Frequency: [Calls/minute]
@@ -225,23 +236,29 @@ Structure your assessment as:
 ## Indexing Recommendations
 
 ### Missing Indexes
+
 ```sql
 -- High Impact: Reduces query time from Xms to Yms
 CREATE INDEX idx_table_columns ON table(column1, column2);
 ```
+````
+````
 
 ### Index Optimization
+
 - Remove unused index: `idx_old_unused`
 - Replace index: `idx_partial` with covering index
 
 ## Architecture Improvements
 
 ### Connection Pooling
+
 - Current: [Settings]
 - Recommended: [New settings]
 - Rationale: [Why this helps]
 
 ### Caching Strategy
+
 1. **Query Result Cache**
    - Cache key: [Pattern]
    - TTL: [Duration]
@@ -250,16 +267,20 @@ CREATE INDEX idx_table_columns ON table(column1, column2);
 ## Implementation Priority
 
 ### Immediate (< 1 hour)
+
 1. Add index on `table.column`
 2. Increase connection pool size
 
 ### Short-term (1-2 days)
+
 1. Implement query result caching
 2. Optimize N+1 queries in [module]
 
 ### Long-term (1 week+)
+
 1. Consider read replica for analytics
 2. Implement database sharding
+
 ```
 
 ## Best Practices
@@ -296,7 +317,7 @@ Analyzer agents focus on processing and interpreting data, reports, or complex s
 
 Create file: `/agents/code-complexity-analyzer.md`
 
-```markdown
+````markdown
 ---
 name: code-complexity-analyzer
 type: analyzer
@@ -322,12 +343,14 @@ You are a code complexity analysis expert, specialized in identifying maintainab
 ### Primary Analysis Types
 
 1. **Cyclomatic Complexity**
+
    - Purpose: Measure code paths and decision points
    - Methodology: Count conditional branches + 1
    - Key metrics: CC per function, per class, per module
    - Thresholds: <10 (good), 10-20 (moderate), >20 (high)
 
 2. **Cognitive Complexity**
+
    - Purpose: Measure code understandability
    - Methodology: Weight nested structures more heavily
    - Key metrics: Reading difficulty score
@@ -342,24 +365,28 @@ You are a code complexity analysis expert, specialized in identifying maintainab
 ## Analysis Framework
 
 ### Phase 1: Data Collection
+
 - Scan all source files in project
 - Extract functions, classes, modules
 - Count lines of code and comments
 - Build dependency graph
 
 ### Phase 2: Initial Analysis
+
 - Calculate complexity for each unit
 - Identify outliers (>2 std dev)
 - Map complexity to change frequency
 - Find complexity clusters
 
 ### Phase 3: Deep Analysis
+
 - Analyze nested complexity patterns
 - Check for code duplication impact
 - Evaluate test coverage correlation
 - Assess refactoring difficulty
 
 ### Phase 4: Synthesis
+
 - Rank by refactoring ROI
 - Group related complexity issues
 - Generate improvement roadmap
@@ -368,12 +395,14 @@ You are a code complexity analysis expert, specialized in identifying maintainab
 ## Output Format
 
 ### Executive Summary
+
 ```markdown
 ## Complexity Analysis Summary
 
 **Overall Health**: 72/100 (Moderate)
 
 **Key Metrics**:
+
 - Average Cyclomatic Complexity: 8.3
 - Functions >20 CC: 15 (3.2%)
 - Maintainability Index: 74
@@ -382,12 +411,15 @@ You are a code complexity analysis expert, specialized in identifying maintainab
 **Hotspots Identified**: 5 critical files
 **Quick Wins Available**: 12 methods
 ```
+````
 
 ### Detailed Analysis Report
+
 ```markdown
 ## Code Complexity Report
 
 ### 1. Overview
+
 - **Files Analyzed**: 156
 - **Total Functions**: 892
 - **Total Classes**: 134
@@ -396,6 +428,7 @@ You are a code complexity analysis expert, specialized in identifying maintainab
 ### 2. Complexity Hotspots
 
 #### Critical: user-service.ts
+
 - **Function**: `processUserData()`
 - **Cyclomatic Complexity**: 47
 - **Cognitive Complexity**: 65
@@ -412,13 +445,15 @@ You are a code complexity analysis expert, specialized in identifying maintainab
 - **Impact**: High - Core business logic
 
 ### 3. Complexity Trends
-
 ```
+
 CC Distribution:
-1-5:   ████████████ 450 functions (50%)
-6-10:  ████████ 300 functions (34%)
+1-5: ████████████ 450 functions (50%)
+6-10: ████████ 300 functions (34%)
 11-20: ███ 127 functions (14%)
->20:   ▌ 15 functions (2%)
+
+> 20: ▌ 15 functions (2%)
+
 ```
 
 ### 4. Refactoring Priorities
@@ -451,11 +486,13 @@ CC Distribution:
 ## Analysis Best Practices
 
 1. **Context Matters**
+
    - Some complex code is necessarily complex
    - Consider domain complexity
    - Factor in team expertise
 
 2. **Incremental Improvement**
+
    - Target 10-20% reduction per sprint
    - Focus on high-traffic code first
    - Maintain test coverage during refactoring
@@ -468,6 +505,7 @@ CC Distribution:
 ## Visualization Guidelines
 
 ### Complexity Heatmap
+
 ```
 High    ███ auth.ts (35)
         ███ api.ts (28)
@@ -479,7 +517,8 @@ Low     █░░ util.ts (12)
 ```
 
 Remember: The goal is not zero complexity, but manageable, testable, and understandable code.
-```
+
+````
 
 ## Integrating Agents with Orchestration
 
@@ -510,7 +549,7 @@ Run these agents simultaneously using the Task tool:
 )
 
 2. **Query Pattern Detector**: Task(
-   description="Query Pattern Analysis", 
+   description="Query Pattern Analysis",
    prompt="Search $ARGUMENTS for database queries in code. Find: 1) ORM queries (ActiveRecord, Eloquent, etc), 2) Raw SQL queries, 3) Stored procedure calls, 4) Common query patterns. Focus on SELECT, UPDATE, DELETE operations. Return as JSON with frequency estimates.",
    subagent_type="general-purpose"
 )
@@ -532,18 +571,22 @@ After collecting initial data, delegate to the specialized agent:
 - Request comprehensive analysis and recommendations
 
 Use this format:
-```
+````
+
 Based on the initial scan, we found:
-- [X] tables with [Y] total indexes
+
+- [x] tables with [Y] total indexes
 - [N] unique query patterns
 - [Performance issues detected]
 
 Please perform a deep database performance analysis focusing on:
+
 1. Index optimization opportunities
 2. Query optimization potential
 3. Architecture improvements
 4. Specific implementation recommendations
-```
+
+````
 
 ## Phase 3: Synthesis and Reporting
 
@@ -574,20 +617,23 @@ Combine all findings into a comprehensive report:
 
 ## Implementation Guide
 [Specific steps with code examples]
-```
+````
 
 ## Optional Features
 
 If `--suggest-indexes` flag is provided:
+
 - Generate CREATE INDEX statements
 - Include EXPLAIN ANALYZE predictions
 - Provide rollback commands
 
 If `--include-migrations` flag is provided:
+
 - Create migration files for suggested changes
 - Include proper up/down methods
 - Add safety checks for production
-```
+
+````
 
 ### Integration Patterns
 
@@ -607,7 +653,7 @@ Create test scenarios for your agent:
 
 ## Test 1: Simple N+1 Query Detection
 **Input**: Ruby on Rails code with obvious N+1 pattern
-**Expected Output**: 
+**Expected Output**:
 - Identifies N+1 query
 - Suggests includes() or joins()
 - Estimates performance improvement
@@ -625,7 +671,7 @@ Create test scenarios for your agent:
 - Suggests query restructuring
 - Identifies potential for CTEs
 - Recommends materialized view if appropriate
-```
+````
 
 ### Integration Testing
 
@@ -661,7 +707,7 @@ Measure agent efficiency:
 
 Enhance agents with specific tools:
 
-```markdown
+````markdown
 ---
 name: enhanced-security-specialist
 mcp-enhanced: mcp__semgrep__security_check, mcp__semgrep__semgrep_scan
@@ -675,7 +721,7 @@ mcp-enhanced: mcp__semgrep__security_check, mcp__semgrep__semgrep_scan
 if (mcp__semgrep__security_check.available) {
   // Use high-accuracy AST-based scanning
   const results = await mcp__semgrep__security_check({
-    code_files: collectedFiles
+    code_files: collectedFiles,
   });
   analyzeWithHighConfidence(results);
 } else {
@@ -684,9 +730,11 @@ if (mcp__semgrep__security_check.available) {
   analyzeWithMediumConfidence(results);
 }
 ```
+````
 
 Always report which method was used for transparency.
-```
+
+````
 
 ### Error Handling
 
@@ -707,22 +755,27 @@ try {
   const patternResults = await performPatternAnalysis();
   return basicResults(patternResults);
 }
-```
+````
 
 ### 2. Partial Results
+
 When analysis partially fails:
+
 - Report what succeeded
 - Clearly mark incomplete sections
 - Suggest manual review areas
 - Provide confidence indicators
 
 ### 3. Input Validation
+
 Always validate inputs:
+
 - Check file existence
 - Verify file types
 - Validate data formats
 - Handle empty inputs gracefully
-```
+
+````
 
 ### Context Awareness
 
@@ -744,20 +797,25 @@ switch(framework) {
   default:
     applyGenericPatterns();
 }
-```
+````
 
 ### 2. Language-Specific Handling
+
 Adjust analysis based on detected language:
+
 - Different complexity metrics for functional vs OOP
 - Language-specific security patterns
 - Framework-specific best practices
 
 ### 3. Project Size Adaptation
+
 Scale analysis approach:
+
 - Small projects: Exhaustive analysis
 - Medium projects: Focused on hotspots
 - Large projects: Statistical sampling
-```
+
+````
 
 ### Multi-Agent Collaboration
 
@@ -774,34 +832,38 @@ shared_context:
   languages: [typescript, python]
   frameworks: [react, fastapi]
   size: medium
-  
+
 # Pass to all agents
 "Analyze with context: ${shared_context}"
-```
+````
 
 ### 2. Result Aggregation
+
 ```javascript
 const aggregateResults = (agentResults) => {
   // Remove duplicates
   const unique = deduplicateFindings(agentResults);
-  
+
   // Resolve conflicts
   const resolved = resolveConflicts(unique, {
-    strategy: 'most-specific-wins'
+    strategy: "most-specific-wins",
   });
-  
+
   // Combine insights
   return mergeInsights(resolved);
 };
 ```
 
 ### 3. Feedback Loops
+
 Allow agents to refine analysis:
+
 - Agent A finds security issue
 - Agent B analyzes performance impact
 - Agent C suggests architecture change
 - Loop back to A for security validation
-```
+
+````
 
 ## Best Practices and Common Patterns
 
@@ -829,9 +891,10 @@ Allow agents to refine analysis:
 You are a [DOMAIN] expert with [YEARS] of experience...
 Your unique perspective comes from [BACKGROUND]...
 You approach problems by [METHODOLOGY]...
-```
+````
 
 **The Analyzer Pattern**
+
 ```markdown
 You systematically analyze [DATA_TYPE] to identify...
 Your analysis framework consists of [PHASES]...
@@ -839,6 +902,7 @@ You output findings as [FORMAT]...
 ```
 
 **The Investigator Pattern**
+
 ```markdown
 You investigate [PROBLEM_TYPE] by first...
 You dig deeper when you find [INDICATORS]...
@@ -861,16 +925,19 @@ Before deploying an agent:
 ### 4. Anti-Patterns to Avoid
 
 **The Know-It-All Agent**
+
 - Trying to cover too many domains
 - Providing opinions outside expertise
 - Overconfident recommendations
 
 **The Black Box Agent**
+
 - No explanation of methodology
 - Unclear confidence levels
 - Magic numbers without context
 
 **The Rigid Agent**
+
 - Cannot adapt to project context
 - Fails completely without specific tools
 - No graceful degradation
@@ -878,6 +945,7 @@ Before deploying an agent:
 ### 5. Evolution and Maintenance
 
 **Version Your Agents**
+
 ```yaml
 version: 1.0.0  # Initial release
 version: 1.1.0  # Added MCP tool support
@@ -885,15 +953,19 @@ version: 1.2.0  # Improved error handling
 ```
 
 **Document Changes**
+
 ```markdown
 ## Changelog
+
 ### 1.2.0
+
 - Added fallback for missing AST tools
 - Improved PHP framework detection
 - Fixed false positives in SQL injection detection
 ```
 
 **Collect Metrics**
+
 - Track usage frequency
 - Monitor error rates
 - Gather user feedback

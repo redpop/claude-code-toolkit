@@ -16,56 +16,56 @@ The Claude Code Toolkit has been completely reorganized for better clarity, cons
 
 ### Analysis → Scan
 
-| Old Command | New Command | What Changed |
-|-------------|-------------|--------------|
-| `/prefix:analyze-deep` | `/prefix:scan:deep` | Shorter name, clearer phases |
-| `/prefix:analyze-report` | `/prefix:scan:report` | Same functionality, new category |
-| `/prefix:doc-health` | `/prefix:scan:docs` | More concise name |
-| `/prefix:five-whys` | `/prefix:scan:root-cause` | Clearer purpose |
+| Old Command              | New Command               | What Changed                     |
+| ------------------------ | ------------------------- | -------------------------------- |
+| `/prefix:analyze-deep`   | `/prefix:scan:deep`       | Shorter name, clearer phases     |
+| `/prefix:analyze-report` | `/prefix:scan:report`     | Same functionality, new category |
+| `/prefix:doc-health`     | `/prefix:scan:docs`       | More concise name                |
+| `/prefix:five-whys`      | `/prefix:scan:root-cause` | Clearer purpose                  |
 
 ### Orchestration → Flow
 
-| Old Command | New Command | What Changed |
-|-------------|-------------|--------------|
-| `/prefix:analyze-parallel` | `/prefix:scan:quick` | Moved to scan category for fast analysis |
-| `/prefix:performance-scan` | `/prefix:scan:perf` | Moved to scan category |
-| `/prefix:refactor-impact` | `/prefix:scan:refactor` | Moved to scan category |
-| `/prefix:security-audit` | `/prefix:sec:audit` | Moved to security category |
-| `/prefix:test-coverage` | `/prefix:scan:tests` | Moved to scan category |
+| Old Command                | New Command             | What Changed                             |
+| -------------------------- | ----------------------- | ---------------------------------------- |
+| `/prefix:analyze-parallel` | `/prefix:scan:quick`    | Moved to scan category for fast analysis |
+| `/prefix:performance-scan` | `/prefix:scan:perf`     | Moved to scan category                   |
+| `/prefix:refactor-impact`  | `/prefix:scan:refactor` | Moved to scan category                   |
+| `/prefix:security-audit`   | `/prefix:sec:audit`     | Moved to security category               |
+| `/prefix:test-coverage`    | `/prefix:scan:tests`    | Moved to scan category                   |
 
 ### Project → Meta
 
-| Old Command | New Command | What Changed |
-|-------------|-------------|--------------|
-| `/prefix:project:create-command` | `/prefix:meta:create-cmd` | Shorter name |
-| `/prefix:project:changelog` | `/prefix:meta:changelog` | Category change only |
-| `/prefix:project:update-docs` | `/prefix:meta:update-docs` | Category change only |
-| `/prefix:ai:handoff` | `/prefix:meta:handoff` | Better category fit |
+| Old Command                      | New Command                | What Changed         |
+| -------------------------------- | -------------------------- | -------------------- |
+| `/prefix:project:create-command` | `/prefix:meta:create-cmd`  | Shorter name         |
+| `/prefix:project:changelog`      | `/prefix:meta:changelog`   | Category change only |
+| `/prefix:project:update-docs`    | `/prefix:meta:update-docs` | Category change only |
+| `/prefix:ai:handoff`             | `/prefix:meta:handoff`     | Better category fit  |
 
 ### Workflow → Auto
 
-| Old Command | New Command | What Changed |
-|-------------|-------------|--------------|
-| `/prefix:execute-action-plan` | `/prefix:auto:execute` | Much shorter name |
-| `/prefix:completion-report` | `/prefix:auto:report` | Clearer relationship |
-| `/prefix:continuous-quality` | `/prefix:auto:monitor` | More descriptive |
-| `/prefix:quality-sprint` | `/prefix:auto:sprint` | Shorter name |
+| Old Command                   | New Command            | What Changed         |
+| ----------------------------- | ---------------------- | -------------------- |
+| `/prefix:execute-action-plan` | `/prefix:auto:execute` | Much shorter name    |
+| `/prefix:completion-report`   | `/prefix:auto:report`  | Clearer relationship |
+| `/prefix:continuous-quality`  | `/prefix:auto:monitor` | More descriptive     |
+| `/prefix:quality-sprint`      | `/prefix:auto:sprint`  | Shorter name         |
 
 ### Research → Scan
 
-| Old Command | New Command | What Changed |
-|-------------|-------------|--------------|
-| `/prefix:codebase-map` | `/prefix:scan:map` | Shorter, clearer |
-| `/prefix:deep-dive` | `/prefix:scan:explore` | More descriptive |
-| `/prefix:dependency-trace` | `/prefix:scan:deps` | Much shorter |
+| Old Command                | New Command            | What Changed     |
+| -------------------------- | ---------------------- | ---------------- |
+| `/prefix:codebase-map`     | `/prefix:scan:map`     | Shorter, clearer |
+| `/prefix:deep-dive`        | `/prefix:scan:explore` | More descriptive |
+| `/prefix:dependency-trace` | `/prefix:scan:deps`    | Much shorter     |
 
 ### Other Changes
 
-| Old Command | New Command | What Changed |
-|-------------|-------------|--------------|
-| `/prefix:code:shellcheck` | `/prefix:fix:shell` | Better category |
-| `/prefix:generate:documentation` | `/prefix:gen:docs` | Shorter name |
-| `/prefix:generate:tests` | `/prefix:gen:tests` | Shorter name |
+| Old Command                      | New Command         | What Changed    |
+| -------------------------------- | ------------------- | --------------- |
+| `/prefix:code:shellcheck`        | `/prefix:fix:shell` | Better category |
+| `/prefix:generate:documentation` | `/prefix:gen:docs`  | Shorter name    |
+| `/prefix:generate:tests`         | `/prefix:gen:tests` | Shorter name    |
 
 ## New Commands
 

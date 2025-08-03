@@ -39,6 +39,7 @@ This command creates a comprehensive mapping of the entire codebase with 10 spec
 After completion of all mapping agents:
 
 1. **Create Visual Codebase Map**:
+
    ```mermaid
    graph TB
      subgraph "Frontend"
@@ -46,19 +47,19 @@ After completion of all mapping agents:
        State[State Management]
        Routes[Routing]
      end
-     
+
      subgraph "Backend"
        API[API Layer]
        BL[Business Logic]
        DAL[Data Access]
      end
-     
+
      subgraph "Infrastructure"
        DB[(Database)]
        Cache[(Redis)]
        Queue[Message Queue]
      end
-     
+
      UI --> API
      API --> BL
      BL --> DAL
@@ -68,25 +69,30 @@ After completion of all mapping agents:
    ```
 
 2. **Generate Codebase Overview**:
+
    ```markdown
    # Codebase Map: [Project Name]
-   
+
    ## Quick Stats
+
    - Total Files: X,XXX
    - Lines of Code: XXX,XXX
    - Primary Language: TypeScript (65%)
    - Test Coverage: 78%
    - Dependencies: 142
-   
+
    ## Architecture Overview
+
    [High-level architecture description]
-   
+
    ## Key Components
+
    1. **Frontend (React + Redux)**
+
       - Location: `/src/client`
       - Entry: `src/client/index.tsx`
       - 45k LOC, 234 components
-   
+
    2. **API Server (Node.js + Express)**
       - Location: `/src/server`
       - Entry: `src/server/app.ts`
@@ -94,20 +100,24 @@ After completion of all mapping agents:
    ```
 
 3. **Create Developer Onboarding Guide**:
+
    ```markdown
    ## Developer Quick Start
-   
+
    ### 1. Understanding the Structure
+
    - Start with: `src/server/app.ts` (main entry)
    - Core logic in: `src/core/`
    - API routes: `src/server/routes/`
-   
+
    ### 2. Key Patterns
+
    - Dependency Injection via `src/core/container`
    - Event-driven via `src/events/`
    - Repository pattern in `src/data/`
-   
+
    ### 3. Development Workflow
+
    1. Install: `npm install`
    2. Dev mode: `npm run dev`
    3. Tests: `npm test`
@@ -115,21 +125,25 @@ After completion of all mapping agents:
    ```
 
 4. **Generate Interactive Documentation**:
+
    - Clickable component map
    - Dependency explorer
    - Code navigation guide
    - Architecture decision records
 
 5. **Create Maintenance Dashboard**:
+
    ```markdown
    ## Maintenance Priorities
-   
+
    ### Technical Debt Hotspots
+
    1. Legacy API v1 (`/src/api/v1/`) - 40% of bugs
    2. User Service (`/src/services/user/`) - High complexity
    3. Database migrations - 15 pending
-   
+
    ### Refactoring Opportunities
+
    - Extract shared components (12 duplicates found)
    - Consolidate error handling (5 different patterns)
    - Update deprecated dependencies (8 packages)

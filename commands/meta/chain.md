@@ -10,19 +10,25 @@ Execute multiple commands in sequence with automatic data passing and intelligen
 ## Chaining Syntax
 
 ### Sequential Execution
+
 Commands execute one after another, passing data forward:
+
 ```bash
 /prefix:meta:chain "scan:deep ." -> "scan:report {output} --generate-action-plan" -> "auto:execute {output}"
 ```
 
 ### Parallel Groups
+
 Execute independent commands simultaneously:
+
 ```bash
 /prefix:meta:chain ["scan:security .", "scan:quality .", "scan:tests ."] -> "meta:export {outputs} --merge"
 ```
 
 ### Conditional Chains
+
 Continue based on previous results:
+
 ```bash
 /prefix:meta:chain "scan:deep . --export-json" -> "fix:quick-wins {output}" ?> "meta:health"
 ```
@@ -32,6 +38,7 @@ Continue based on previous results:
 ### Automatic Output Capture
 
 Each command's output is automatically:
+
 1. Captured and stored
 2. Made available to next command as `{output}`
 3. Accumulated in `{outputs}` array
@@ -48,16 +55,19 @@ Each command's output is automatically:
 ## Error Handling
 
 ### Default Behavior
+
 - Log error and continue to next command
 - Mark failed commands in final report
 - Return partial success status
 
 ### Stop on Error
+
 ```bash
 /prefix:meta:chain --stop-on-error "critical:command" -> "dependent:command"
 ```
 
 ### Error Recovery
+
 ```bash
 /prefix:meta:chain "risky:command" !> "fallback:command" -> "continue:normally"
 ```
@@ -65,6 +75,7 @@ Each command's output is automatically:
 ## Common Patterns
 
 ### Analysis → Fix → Verify
+
 ```bash
 /prefix:meta:chain \
   "scan:deep . --export-json" -> \
@@ -73,6 +84,7 @@ Each command's output is automatically:
 ```
 
 ### Parallel Analysis → Merge
+
 ```bash
 /prefix:meta:chain \
   ["scan:security .", "scan:quality .", "scan:perf ."] -> \
@@ -80,6 +92,7 @@ Each command's output is automatically:
 ```
 
 ### Conditional Improvement
+
 ```bash
 /prefix:meta:chain \
   "scan:quality . --export" -> \
@@ -90,7 +103,9 @@ Each command's output is automatically:
 ## Advanced Features
 
 ### Named Outputs
+
 Assign names to outputs for clarity:
+
 ```bash
 /prefix:meta:chain \
   "scan:deep . --export-json" as baseline -> \
@@ -99,7 +114,9 @@ Assign names to outputs for clarity:
 ```
 
 ### Loop Execution
+
 Repeat until condition met:
+
 ```bash
 /prefix:meta:chain \
   "scan:tests ." -> \
@@ -110,6 +127,7 @@ Repeat until condition met:
 ```
 
 ### Scheduled Chains
+
 ```bash
 /prefix:meta:chain \
   --schedule="daily@09:00" \
@@ -121,6 +139,7 @@ Repeat until condition met:
 ## Integration Examples
 
 ### CI/CD Pipeline
+
 ```yaml
 - name: Quality Gate
   run: |
@@ -131,6 +150,7 @@ Repeat until condition met:
 ```
 
 ### Git Hooks
+
 ```bash
 # pre-commit
 /prefix:meta:chain \
@@ -140,6 +160,7 @@ Repeat until condition met:
 ```
 
 ### Development Workflow
+
 ```bash
 # Before PR
 /prefix:meta:chain \
@@ -162,18 +183,19 @@ After chain execution:
 ## Command Results
 
 ✅ scan:deep . --export-json
-   Output: analysis-20240130.json
-   Duration: 45s
+Output: analysis-20240130.json
+Duration: 45s
 
 ✅ fix:quick-wins analysis-20240130.json  
-   Fixed: 23 issues
-   Duration: 2m 10s
+ Fixed: 23 issues
+Duration: 2m 10s
 
 ✅ scan:deep . --compare=analysis-20240130.json
-   Improvement: +15 quality points
-   Duration: 48s
+Improvement: +15 quality points
+Duration: 48s
 
 ## Summary
+
 - Commands executed: 3/3
 - Success rate: 100%
 - Total improvement: +15 points
@@ -190,11 +212,13 @@ After chain execution:
 ## Usage Examples
 
 ### Quick Quality Fix
+
 ```bash
 /prefix:meta:chain "scan:quick ." -> "fix:quick-wins {output}"
 ```
 
 ### Full Analysis Pipeline
+
 ```bash
 /prefix:meta:chain \
   "scan:deep . --export-all" -> \
@@ -203,6 +227,7 @@ After chain execution:
 ```
 
 ### Automated Improvement
+
 ```bash
 /prefix:meta:chain \
   "meta:health --export" as health -> \

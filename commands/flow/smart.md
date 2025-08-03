@@ -10,12 +10,14 @@ This command intelligently analyzes your problem and automatically routes it to 
 ## How It Works
 
 1. **Problem Analysis**: First, I analyze your problem description to understand:
+
    - Problem domain (code, performance, security, architecture, etc.)
    - Severity and urgency
    - Required expertise
    - Potential solution approaches
 
 2. **Agent Selection**: Based on the analysis, I select the best agents:
+
    - Single agent for focused problems
    - Multiple agents for complex, multi-faceted issues
    - Sequential agents when one solution depends on another
@@ -28,41 +30,49 @@ This command intelligently analyzes your problem and automatically routes it to 
 ## Problem Categories & Routing
 
 ### 🐛 Code Errors & Bugs
+
 **Indicators**: error messages, exceptions, crashes, unexpected behavior
 **Routes to**: @debugger
 **Example**: "TypeError in auth.js line 42"
 
 ### ⚡ Performance Issues
+
 **Indicators**: slow, latency, memory leak, high CPU, bottleneck
 **Routes to**: @performance-optimizer
 **Example**: "API endpoint taking 5 seconds to respond"
 
 ### 🔒 Security Concerns
+
 **Indicators**: vulnerability, CVE, authentication, encryption, injection
 **Routes to**: @security-specialist
 **Example**: "Possible SQL injection in user input handling"
 
 ### 🏗️ Architecture Problems
+
 **Indicators**: design pattern, coupling, scalability, microservices
 **Routes to**: @code-architect
 **Example**: "How to decouple payment service from main app"
 
 ### 🧪 Testing Gaps
+
 **Indicators**: coverage, test, TDD, unit test, integration test
 **Routes to**: @test-engineer
 **Example**: "Need tests for new authentication flow"
 
 ### 📚 Documentation Issues
+
 **Indicators**: outdated docs, missing README, API docs, comments
 **Routes to**: @documentation-health-specialist
 **Example**: "Documentation doesn't match current API"
 
 ### 🔧 Code Quality
+
 **Indicators**: refactor, code smell, duplicate, complexity, maintenance
 **Routes to**: @refactoring-expert
 **Example**: "Too much duplicate code in controllers"
 
 ### 📊 Report Analysis
+
 **Indicators**: analyze report, metrics, trends, ROI, prioritize
 **Routes to**: @report-analyzer
 **Example**: "Help me understand this code quality report"
@@ -72,6 +82,7 @@ This command intelligently analyzes your problem and automatically routes it to 
 For complex problems spanning multiple domains:
 
 ### Example: "Application is slow and possibly insecure"
+
 1. Use Task tool with subagent_type="performance-optimizer"
    - Analyze performance bottlenecks
    - Identify slow queries and algorithms
@@ -81,6 +92,7 @@ For complex problems spanning multiple domains:
 3. Synthesize findings and provide unified solution
 
 ### Example: "Refactor legacy module for better testing"
+
 1. Use Task tool with subagent_type="code-architect"
    - Analyze current architecture
    - Design testable structure
@@ -94,24 +106,28 @@ For complex problems spanning multiple domains:
 ## Usage Examples
 
 ### Simple Routing
+
 ```
 /prefix:flow:smart "Getting 'undefined is not a function' in UserService"
 → Routes to debugger agent
 ```
 
 ### Performance Analysis
+
 ```
 /prefix:flow:smart "Dashboard takes forever to load with 1000 users"
 → Routes to performance-optimizer agent
 ```
 
 ### Complex Multi-Domain
+
 ```
 /prefix:flow:smart "Need to modernize authentication system for better security and performance"
 → Routes to security-specialist + code-architect + performance-optimizer
 ```
 
 ### Exploratory Help
+
 ```
 /prefix:flow:smart "Not sure why my tests are flaky sometimes"
 → Analyzes and routes to test-engineer with focus on flaky test patterns
@@ -129,11 +145,13 @@ $ARGUMENTS
 Let me analyze this problem and route it appropriately:
 
 1. **Problem Analysis**
+
    - Understanding the core issue
    - Identifying problem domain
    - Assessing complexity
 
 2. **Agent Selection**
+
    - Choosing the most appropriate specialist(s)
    - Determining execution order
    - Preparing context for each agent

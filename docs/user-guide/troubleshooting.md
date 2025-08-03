@@ -7,6 +7,7 @@ This guide helps you resolve common issues with the Claude Code Toolkit.
 ### Installation Problems
 
 #### "Command not found" after installation
+
 ```bash
 # Verify installation
 ls ~/.claude/commands/
@@ -19,6 +20,7 @@ ls ~/.claude/commands/global/
 ```
 
 #### "Permission denied" during installation
+
 ```bash
 # Make install script executable
 chmod +x install.sh
@@ -28,6 +30,7 @@ chmod +x install.sh
 ```
 
 #### Installation fails silently
+
 ```bash
 # Enable debug mode
 export CLAUDE_DEBUG=true
@@ -39,9 +42,11 @@ export CLAUDE_DEBUG=true
 ### Command Execution Issues
 
 #### "Token limit exceeded" error
+
 **Problem**: Analysis requires more tokens than allocated
 
 **Solutions**:
+
 ```bash
 # Option 1: Use conservative mode
 /global:scan:deep . --performance-mode=conservative
@@ -54,9 +59,11 @@ export CLAUDE_DEBUG=true
 ```
 
 #### Commands timing out
+
 **Problem**: Execution exceeds timeout limit
 
 **Solutions**:
+
 ```bash
 # Increase timeout (in project .claude-commands.json)
 {
@@ -70,9 +77,11 @@ export CLAUDE_DEBUG=true
 ```
 
 #### "No results returned" from analysis
+
 **Problem**: Scanners found no issues or failed silently
 
 **Check**:
+
 ```bash
 # Verify target directory
 ls -la .
@@ -87,6 +96,7 @@ ls -la .
 ### Performance Issues
 
 #### Analysis taking too long
+
 ```bash
 # Use quick mode
 /global:scan:deep . --quick
@@ -99,6 +109,7 @@ ls -la .
 ```
 
 #### High memory usage
+
 ```bash
 # Use conservative mode
 export CLAUDE_PERFORMANCE_MODE=conservative
@@ -114,7 +125,9 @@ export CLAUDE_PERFORMANCE_MODE=conservative
 ### Export and Report Issues
 
 #### Cannot find exported files
+
 **Default locations**:
+
 ```bash
 # Check current directory
 ls -la *.json *.md
@@ -127,6 +140,7 @@ ls -la ~/reports/
 ```
 
 #### JSON parsing errors
+
 ```bash
 # Validate JSON
 cat report.json | jq .
@@ -141,12 +155,15 @@ cat report.json | jq .
 ### Fix Command Issues
 
 #### "No fixes applied" message
+
 **Possible causes**:
+
 - No issues meet threshold
 - Fixes require manual intervention
 - Dry-run mode active
 
 **Solutions**:
+
 ```bash
 # Lower threshold
 /global:fix:quick-wins report.json --threshold=5
@@ -159,6 +176,7 @@ cat report.json | jq .
 ```
 
 #### Fixes breaking code
+
 ```bash
 # Always use preview mode first
 /global:fix:quick-wins report.json --preview
@@ -173,6 +191,7 @@ git stash save "Before fixes"
 ### Multi-Agent Issues
 
 #### Some agents failing
+
 ```bash
 # Check which agents failed
 /global:scan:deep . --verbose
@@ -185,12 +204,15 @@ export CLAUDE_PARALLEL_EXECUTION=false
 ```
 
 #### Inconsistent results between runs
+
 **Causes**:
+
 - Non-deterministic analysis
 - File changes between runs
 - Cache issues
 
 **Solutions**:
+
 ```bash
 # Clear cache
 rm -rf ~/.claude/cache/
@@ -205,6 +227,7 @@ rm -rf ~/.claude/cache/
 ## 🔧 Configuration Issues
 
 ### Settings not taking effect
+
 ```bash
 # Check configuration hierarchy
 1. Check project config: ./.claude-commands.json
@@ -216,6 +239,7 @@ rm -rf ~/.claude/cache/
 ```
 
 ### Performance mode not changing
+
 ```bash
 # Set via environment
 export CLAUDE_PERFORMANCE_MODE=aggressive
@@ -232,6 +256,7 @@ export CLAUDE_PERFORMANCE_MODE=aggressive
 ## 🐛 Debugging Techniques
 
 ### Enable Debug Mode
+
 ```bash
 # Full debug output
 export CLAUDE_DEBUG=true
@@ -242,6 +267,7 @@ export CLAUDE_LOG_LEVEL=debug
 ```
 
 ### Check Logs
+
 ```bash
 # View recent logs
 tail -f ~/.claude/logs/claude-code-toolkit.log
@@ -251,6 +277,7 @@ grep ERROR ~/.claude/logs/*.log
 ```
 
 ### Validate Environment
+
 ```bash
 # Check Claude Code version
 claude --version
@@ -265,6 +292,7 @@ claude --version
 ## 📊 Error Messages
 
 ### "Insufficient permissions"
+
 ```bash
 # Check file permissions
 ls -la ~/.claude/
@@ -274,6 +302,7 @@ chmod -R 755 ~/.claude/commands/
 ```
 
 ### "Invalid command syntax"
+
 ```bash
 # Correct format
 /prefix:category:command arguments --options
@@ -284,6 +313,7 @@ chmod -R 755 ~/.claude/commands/
 ```
 
 ### "Agent initialization failed"
+
 ```bash
 # Check agent files
 ls ~/.claude/agents/
@@ -295,6 +325,7 @@ ls ~/.claude/agents/
 ## 🔄 Recovery Procedures
 
 ### Rollback Changes
+
 ```bash
 # If fixes caused issues
 git checkout .
@@ -305,6 +336,7 @@ git stash pop
 ```
 
 ### Reset Configuration
+
 ```bash
 # Backup current config
 cp .claude-commands.json .claude-commands.json.bak
@@ -317,6 +349,7 @@ rm .claude-commands.json
 ```
 
 ### Clean Installation
+
 ```bash
 # Remove existing installation
 rm -rf ~/.claude/commands/global/
@@ -329,12 +362,14 @@ rm -rf ~/.claude/agents/
 ## 💡 Prevention Tips
 
 ### Before Running Commands
+
 1. **Create backups**: `git stash` or commit changes
 2. **Use preview mode**: `--preview` or `--dry-run`
 3. **Start small**: Test on single files/directories
 4. **Check configuration**: Verify settings are correct
 
 ### Best Practices
+
 ```bash
 # Always export results
 /global:scan:deep . --export-all
@@ -349,6 +384,7 @@ git commit -m "Before toolkit analysis"
 ## 🆘 Getting Help
 
 ### Self-Help Commands
+
 ```bash
 # Command help
 /global:flow:smart "help with [command]"
@@ -361,13 +397,16 @@ git commit -m "Before toolkit analysis"
 ```
 
 ### Community Resources
+
 - GitHub Issues: Report bugs and request features
 - Discord/Slack: Real-time help from community
 - Stack Overflow: Tagged questions
 - Documentation: Always check latest docs
 
 ### Diagnostic Information
+
 When reporting issues, include:
+
 ```bash
 # Toolkit version
 /global:meta:version
@@ -386,6 +425,7 @@ claude --version
 ## 🔍 Advanced Troubleshooting
 
 ### Network Issues
+
 ```bash
 # If behind proxy
 export HTTP_PROXY=http://proxy:port
@@ -396,6 +436,7 @@ export HTTPS_PROXY=http://proxy:port
 ```
 
 ### Memory Profiling
+
 ```bash
 # Enable memory tracking
 export CLAUDE_TRACK_MEMORY=true
@@ -408,6 +449,7 @@ cat ~/.claude/logs/memory-profile.log
 ```
 
 ### Performance Profiling
+
 ```bash
 # Enable performance metrics
 /global:scan:deep . --performance-metrics
@@ -419,6 +461,7 @@ cat ~/.claude/logs/performance.log
 ---
 
 **Still having issues?** Try:
+
 ```bash
 /global:flow:smart "I'm having this specific problem: [describe issue]"
 ```

@@ -31,6 +31,7 @@ This command analyzes the impact of planned refactoring changes through 6 parall
 After completion of all Impact Agents:
 
 1. **Create Impact Summary**:
+
    - Total Files Affected
    - Breaking Changes Count
    - Test Updates Required
@@ -38,6 +39,7 @@ After completion of all Impact Agents:
    - Estimated Migration Effort
 
 2. **Generate Risk Matrix**:
+
    ```
    Risk Level | Impact Area | Mitigation
    -----------|-------------|------------
@@ -47,42 +49,50 @@ After completion of all Impact Agents:
    ```
 
 3. **Develop Refactoring Plan**:
+
    ```markdown
    # Refactoring Execution Plan
-   
+
    ## Pre-Refactoring Checklist
+
    - [ ] Backup current state
    - [ ] Notify affected teams
    - [ ] Setup feature flags
-   
+
    ## Phase 1: Preparation (Day 1)
+
    - Update deprecation warnings
    - Create compatibility layer
    - Prepare migration scripts
-   
+
    ## Phase 2: Core Changes (Day 2-3)
+
    - Execute main refactoring
    - Run migration scripts
    - Update direct dependencies
-   
+
    ## Phase 3: Propagation (Day 4-5)
+
    - Update consuming services
    - Migrate tests
    - Update documentation
-   
+
    ## Phase 4: Cleanup (Day 6)
+
    - Remove compatibility layer
    - Delete deprecated code
    - Final testing
-   
+
    ## Rollback Plan
+
    [Detailed rollback steps]
    ```
 
 4. **Create Affected Teams Matrix**:
+
    ```markdown
    | Team | Components | Action Required | Timeline |
-   |------|------------|-----------------|----------|
+   | ---- | ---------- | --------------- | -------- |
    | API  | Gateway    | Update routes   | Day 2    |
    | UI   | Dashboard  | New SDK version | Day 3    |
    ```

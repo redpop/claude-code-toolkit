@@ -20,17 +20,20 @@ The toolkit is now available in Claude Code with your chosen prefix!
 ### Your First Analysis
 
 #### Option 1: Smart Problem Solving (Recommended)
+
 ```bash
 # Let AI analyze and solve your problem
 /global:flow:smart "my application is running slow"
 ```
 
 The smart command will:
+
 - Analyze your problem
 - Route to appropriate specialists
 - Provide targeted solutions
 
 #### Option 2: Pre-Built Workflows
+
 ```bash
 # Quick quality check (30 seconds)
 /global:meta:pipelines quick-quality
@@ -60,6 +63,7 @@ Transform your code quality in three simple steps:
 ## 📊 What Can It Do?
 
 ### Code Analysis
+
 - 🔒 **Security**: Find vulnerabilities, OWASP compliance
 - ⚡ **Performance**: Identify bottlenecks, optimize algorithms
 - 🏗️ **Architecture**: Detect design issues, coupling problems
@@ -67,6 +71,7 @@ Transform your code quality in three simple steps:
 - 📚 **Documentation**: Sync issues, missing docs
 
 ### Automated Fixes
+
 - Quick wins with high ROI
 - Security vulnerability patches
 - Performance optimizations
@@ -74,6 +79,7 @@ Transform your code quality in three simple steps:
 - Documentation updates
 
 ### Intelligent Workflows
+
 - Smart problem routing
 - Multi-agent coordination
 - Progress tracking
@@ -82,21 +88,25 @@ Transform your code quality in three simple steps:
 ## 🎯 Common Use Cases
 
 ### Before Committing Code
+
 ```bash
 /global:meta:pipelines quick-quality
 ```
 
 ### After Major Feature Development
+
 ```bash
 /global:flow:smart "review my new feature implementation"
 ```
 
 ### Weekly Code Quality Check
+
 ```bash
 /global:meta:pipelines continuous-improvement
 ```
 
 ### Incident Response
+
 ```bash
 /global:flow:incident "production API returning 500 errors"
 ```
@@ -141,6 +151,7 @@ Build powerful automated workflows:
 ## 🆘 Getting Help
 
 ### Within Claude Code
+
 ```bash
 # Get command help
 /global:flow:smart "help me understand this toolkit"
@@ -150,12 +161,14 @@ Build powerful automated workflows:
 ```
 
 ### Documentation
+
 - **This Guide**: Quick start and overview
 - **[Workflow Guide](workflow-guide.md)**: Detailed workflow documentation
 - **[Command Reference](command-reference.md)**: All commands explained
 - **[Troubleshooting](troubleshooting.md)**: Common issues and solutions
 
 ### Next Steps
+
 1. Try the smart command with a real problem
 2. Run a quality check on your project
 3. Explore the [workflow guide](workflow-guide.md) for advanced usage
@@ -163,6 +176,7 @@ Build powerful automated workflows:
 ---
 
 **Ready to improve your code?** Start with:
+
 ```bash
 /global:flow:smart "analyze my project and suggest improvements"
 ```

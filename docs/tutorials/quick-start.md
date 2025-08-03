@@ -55,6 +55,7 @@ The AI will analyze your problem and coordinate the right specialists to fix it!
 ## Essential Commands
 
 ### Analysis
+
 ```bash
 /tk:scan:deep .          # Comprehensive analysis
 /tk:scan:quality .       # Code quality metrics
@@ -63,6 +64,7 @@ The AI will analyze your problem and coordinate the right specialists to fix it!
 ```
 
 ### Fixes
+
 ```bash
 /tk:fix:quick-wins report.json    # High-ROI fixes
 /tk:fix:security report.json      # Security patches
@@ -70,6 +72,7 @@ The AI will analyze your problem and coordinate the right specialists to fix it!
 ```
 
 ### Workflows
+
 ```bash
 /tk:flow:review .        # Multi-perspective code review
 /tk:flow:incident "API down"      # Emergency response
@@ -77,6 +80,7 @@ The AI will analyze your problem and coordinate the right specialists to fix it!
 ```
 
 ### Management
+
 ```bash
 /tk:meta:health          # Project health check
 /tk:auto:sprint .        # Plan improvement sprint
@@ -86,22 +90,26 @@ The AI will analyze your problem and coordinate the right specialists to fix it!
 ## Real-World Examples
 
 ### Before Committing
+
 ```bash
 /tk:meta:pipelines quick-quality
 ```
 
 ### Fix Everything Automatically
+
 ```bash
 # One command to analyze and fix
 /tk:meta:chain "scan:deep ." -> "auto:execute {output} --mode=auto"
 ```
 
 ### Weekly Maintenance
+
 ```bash
 /tk:auto:monitor . --schedule=weekly --auto-fix=safe
 ```
 
 ### Production Issue
+
 ```bash
 /tk:flow:incident "Users can't login, getting 401 errors"
 ```
@@ -109,6 +117,7 @@ The AI will analyze your problem and coordinate the right specialists to fix it!
 ## Understanding Output
 
 ### Smart Flow Results
+
 ```
 🧠 Problem Analysis:
 - Type: Performance + Testing
@@ -124,6 +133,7 @@ The AI will analyze your problem and coordinate the right specialists to fix it!
 ```
 
 ### Analysis Reports
+
 ```
 📊 Code Quality Report
 - Score: 78/100 (B+)
@@ -140,24 +150,29 @@ The AI will analyze your problem and coordinate the right specialists to fix it!
 ## Tips & Tricks
 
 ### 1. Start Smart
+
 Always try `/flow:smart` first - it's the easiest way!
 
 ### 2. Export Everything
+
 ```bash
 /tk:scan:deep . --export-all
 ```
 
 ### 3. Dry Run First
+
 ```bash
 /tk:auto:execute plan.md --dry-run
 ```
 
 ### 4. Focus Analysis
+
 ```bash
 /tk:scan:deep . --focus=security
 ```
 
 ### 5. Compare Progress
+
 ```bash
 /tk:meta:health --compare=last-week.json
 ```
@@ -165,18 +180,21 @@ Always try `/flow:smart` first - it's the easiest way!
 ## Common Issues
 
 ### Commands Not Found
+
 ```bash
 # Verify installation
 ls ~/.claude/commands/tk/
 ```
 
 ### Analysis Too Slow
+
 ```bash
 # Analyze specific directories
 /tk:scan:deep src/ --max-files=100
 ```
 
 ### Need Help?
+
 ```bash
 # Get personalized guidance
 /tk:flow:smart "help me get started with the toolkit"

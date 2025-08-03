@@ -12,11 +12,13 @@ This command provides rapid incident response for production issues, coordinatin
 ### 🚨 Phase 1: Immediate Assessment (0-5 minutes)
 
 1. **Severity Classification**
+
    - Critical: Service down, data loss risk, security breach
    - High: Major functionality impaired, performance degraded >50%
    - Medium: Minor functionality affected, performance degraded <50%
 
 2. **Impact Analysis**
+
    - Affected systems and components
    - User impact and scope
    - Business impact assessment
@@ -31,18 +33,21 @@ This command provides rapid incident response for production issues, coordinatin
 Parallel investigation by specialized agents:
 
 1. **System Diagnostics** (@ops-engineer)
+
    - Log analysis
    - Metric anomalies
    - Resource utilization
    - Network issues
 
 2. **Code Analysis** (@debugger)
+
    - Recent code changes
    - Error stack traces
    - Code path analysis
    - Bug identification
 
 3. **Performance Analysis** (@performance-optimizer)
+
    - Bottleneck identification
    - Resource contention
    - Query performance
@@ -57,11 +62,13 @@ Parallel investigation by specialized agents:
 ### 🛠️ Phase 3: Mitigation & Resolution (15-30 minutes)
 
 1. **Immediate Mitigation**
+
    - Quick fixes and workarounds
    - Service restoration steps
    - Rollback procedures if needed
 
 2. **Root Cause Fix**
+
    - Permanent solution implementation
    - Code patches
    - Configuration changes
@@ -76,6 +83,7 @@ Parallel investigation by specialized agents:
 ### 📋 Phase 4: Post-Incident (30+ minutes)
 
 1. **Documentation**
+
    - Incident timeline
    - Root cause summary
    - Actions taken
@@ -118,18 +126,21 @@ Use Task tool with subagent_type="general-purpose" for performance investigation
 Based on findings, implement appropriate fixes:
 
 1. **If Infrastructure Issue**:
+
    - Scale resources
    - Restart services
    - Fix configurations
    - Update load balancing
 
 2. **If Code Issue**:
+
    - Deploy hotfix
    - Revert problematic commit
    - Apply emergency patch
    - Update feature flags
 
 3. **If Performance Issue**:
+
    - Optimize queries
    - Add caching
    - Adjust connection pools
@@ -152,31 +163,38 @@ Based on findings, implement appropriate fixes:
 **Status**: [Resolved/Mitigated/Ongoing]
 
 ### Summary
+
 [Brief description of incident and impact]
 
 ### Timeline
+
 - T+0: Initial detection
 - T+X: Root cause identified
 - T+Y: Mitigation applied
 - T+Z: Full resolution
 
 ### Root Cause
+
 [Detailed explanation of what caused the incident]
 
 ### Resolution
+
 [Steps taken to resolve the issue]
 
 ### Impact
+
 - Users affected: [Number/Percentage]
 - Services impacted: [List]
 - Data loss: [Yes/No]
 
 ### Action Items
+
 1. [Preventive measure 1]
 2. [Monitoring improvement 2]
 3. [Process update 3]
 
 ### Lessons Learned
+
 [Key takeaways for preventing similar incidents]
 ```
 

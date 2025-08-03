@@ -7,6 +7,7 @@ Analysis commands (`/analyze-deep`, `/security-audit`, etc.) are creating or mod
 ## Root Cause
 
 Claude Code may interpret code examples, templates, or test suggestions as instructions to create files, especially when:
+
 - Commands show "test templates" or "code examples"
 - Sub-agents provide implementation suggestions
 - Analysis includes "TODO" or "FIXME" comments
@@ -32,6 +33,7 @@ git checkout -- path/to/modified/file
 ### 2. Prevention Measures
 
 All analysis commands now include explicit READ-ONLY constraints:
+
 - Commands start with `**IMPORTANT: This is a READ-ONLY analysis command**`
 - All sub-agents have `**CRITICAL: This is a READ-ONLY analysis agent**` warnings
 - Code examples are marked as `EXAMPLE ONLY - DO NOT CREATE FILES`
@@ -39,6 +41,7 @@ All analysis commands now include explicit READ-ONLY constraints:
 ### 3. If Problems Persist
 
 1. **Report the Issue**:
+
    - Note which command caused file modifications
    - List which files were created/modified
    - Create an issue at: https://github.com/redpop/claude-code-toolkit/issues
@@ -53,6 +56,7 @@ All analysis commands now include explicit READ-ONLY constraints:
 The following commands have been updated with stronger READ-ONLY constraints:
 
 ### Orchestration Commands
+
 - `/orchestration/analyze-parallel`
 - `/orchestration/security-audit`
 - `/orchestration/performance-scan`
@@ -60,18 +64,23 @@ The following commands have been updated with stronger READ-ONLY constraints:
 - `/orchestration/test-coverage`
 
 ### Research Commands
+
 - `/research/codebase-map`
 - `/research/deep-dive`
 - `/research/dependency-trace`
 
 ### Hybrid Commands
+
 - `/hybrid/analyze-deep`
 
 ### Analysis Commands
+
 - `/analysis/five-whys`
 
 ### Sub-Agents
+
 All sub-agents now have explicit READ-ONLY warnings:
+
 - `test-engineer`
 - `security-specialist`
 - `performance-optimizer`
@@ -88,11 +97,13 @@ All sub-agents now have explicit READ-ONLY warnings:
 ## Technical Details
 
 The issue occurs because:
+
 1. Claude Code's Task Tool agents operate independently
 2. Code examples in prompts can be misinterpreted as file creation instructions
 3. "Template" language suggests creating new files
 
 All commands and agents have been updated to:
+
 - Explicitly state READ-ONLY operation
 - Mark all code examples as "EXAMPLE ONLY"
 - Avoid "template" terminology

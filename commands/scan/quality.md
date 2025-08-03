@@ -61,22 +61,24 @@ Testability:     ██████░░░░ 68/100 (↑ +2)
 
 ### Key Metrics
 
-| Metric | Current | Target | Status |
-|--------|---------|--------|--------|
-| Code Coverage | 72% | 80% | ⚠️ |
-| Complexity (avg) | 8.3 | <10 | ✅ |
-| Duplication | 12% | <5% | ❌ |
-| Tech Debt | 45h | <20h | ⚠️ |
-| Doc Coverage | 68% | >80% | ⚠️ |
+| Metric           | Current | Target | Status |
+| ---------------- | ------- | ------ | ------ |
+| Code Coverage    | 72%     | 80%    | ⚠️     |
+| Complexity (avg) | 8.3     | <10    | ✅     |
+| Duplication      | 12%     | <5%    | ❌     |
+| Tech Debt        | 45h     | <20h   | ⚠️     |
+| Doc Coverage     | 68%     | >80%   | ⚠️     |
 
 ### Top Issues by Impact
 
 1. **High Complexity Functions** (Impact: High)
+
    - `processOrder()` - Complexity: 24
    - `validateUser()` - Complexity: 19
    - Action: `/prefix:flow:refactor --type=extract`
 
 2. **Low Test Coverage** (Impact: High)
+
    - `PaymentService` - Coverage: 45%
    - `AuthModule` - Coverage: 52%
    - Action: `/prefix:gen:tests --focus=critical`
@@ -89,11 +91,12 @@ Testability:     ██████░░░░ 68/100 (↑ +2)
 ### Improvement Roadmap
 
 #### Week 1: Quick Wins (8h effort, +10 quality points)
+
 ```bash
 # Fix critical complexity
 /prefix:flow:refactor src/OrderProcessor.js --type=extract
 
-# Add missing critical tests  
+# Add missing critical tests
 /prefix:gen:tests src/PaymentService.js --coverage-target=80
 
 # Remove obvious duplication
@@ -101,6 +104,7 @@ Testability:     ██████░░░░ 68/100 (↑ +2)
 ```
 
 #### Week 2-3: Major Improvements (24h effort, +15 quality points)
+
 ```bash
 # Comprehensive test coverage
 /prefix:gen:tests --coverage-target=80
@@ -113,6 +117,7 @@ Testability:     ██████░░░░ 68/100 (↑ +2)
 ```
 
 #### Month 2: Excellence (40h effort, +20 quality points)
+
 - Achieve 90% test coverage
 - Reduce complexity below 8
 - Eliminate code duplication
@@ -121,6 +126,7 @@ Testability:     ██████░░░░ 68/100 (↑ +2)
 ### Quality Gates
 
 Configure CI/CD to enforce:
+
 - No new code with complexity >15
 - Maintain test coverage >80%
 - No critical security issues

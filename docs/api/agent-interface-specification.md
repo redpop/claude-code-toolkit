@@ -55,16 +55,16 @@ mcp-enhanced: mcp__tool1, mcp__tool2 (optional)
 
 ### Frontmatter Fields
 
-| Field | Required | Type | Description |
-|-------|----------|------|-------------|
-| `name` | Yes | string | Unique identifier for the agent (lowercase, hyphenated) |
-| `description` | Yes | string | One-line description of agent's purpose |
-| `type` | No | enum | Agent classification: specialist, analyzer, helper, research |
-| `expertise` | No | string | Primary domain of expertise |
-| `version` | No | string | Semantic version number |
-| `capabilities` | No | array | List of specific capabilities |
-| `tools` | No | array | Tools the agent can use |
-| `mcp-enhanced` | No | string | Comma-separated list of MCP tools for enhancement |
+| Field          | Required | Type   | Description                                                  |
+| -------------- | -------- | ------ | ------------------------------------------------------------ |
+| `name`         | Yes      | string | Unique identifier for the agent (lowercase, hyphenated)      |
+| `description`  | Yes      | string | One-line description of agent's purpose                      |
+| `type`         | No       | enum   | Agent classification: specialist, analyzer, helper, research |
+| `expertise`    | No       | string | Primary domain of expertise                                  |
+| `version`      | No       | string | Semantic version number                                      |
+| `capabilities` | No       | array  | List of specific capabilities                                |
+| `tools`        | No       | array  | Tools the agent can use                                      |
+| `mcp-enhanced` | No       | string | Comma-separated list of MCP tools for enhancement            |
 
 ### Example Frontmatter
 
@@ -93,21 +93,25 @@ mcp-enhanced: mcp__semgrep__security_check, mcp__semgrep__semgrep_scan
 ### Structure Components
 
 1. **Critical Instructions**
+
    ```markdown
    **CRITICAL: This is a READ-ONLY analysis agent. You MUST NOT create, modify, write, or delete ANY files.**
    ```
 
 2. **Persona Introduction**
+
    ```markdown
    You are [role] with extensive experience in [domains]. Your role is to [primary purpose].
    ```
 
 3. **Core Expertise Areas**
+
    - Detailed breakdown of knowledge domains
    - Specific skills and methodologies
    - Industry standards and frameworks
 
 4. **Analysis Approach**
+
    - Step-by-step methodology
    - Specific techniques and patterns to look for
    - Prioritization criteria
@@ -125,6 +129,7 @@ You are a principal software architect with extensive experience in system desig
 ## Core Expertise Areas
 
 1. **Architectural Patterns**
+
    - Microservices vs Monolithic architecture
    - Event-driven architecture
    - Domain-driven design (DDD)
@@ -143,6 +148,7 @@ You are a principal software architect with extensive experience in system desig
 Agents receive tasks through two primary mechanisms:
 
 1. **Direct Invocation via Commands**
+
    ```markdown
    Delegate to @security-specialist:
    "READ-ONLY ANALYSIS. DO NOT MODIFY ANY FILES.
@@ -154,20 +160,22 @@ Agents receive tasks through two primary mechanisms:
 2. **Task Tool Integration**
    ```javascript
    Task(
-     description="Security analysis",
-     prompt="[Detailed task instructions]",
-     subagent_type="security-specialist"
-   )
+     (description = "Security analysis"),
+     (prompt = "[Detailed task instructions]"),
+     (subagent_type = "security-specialist")
+   );
    ```
 
 ### Context Passing
 
 1. **File References**
+
    - Absolute paths to analyze
    - Glob patterns for broader analysis
    - Specific code snippets
 
 2. **Analysis Parameters**
+
    - Focus areas
    - Severity thresholds
    - Output format preferences
@@ -180,6 +188,7 @@ Agents receive tasks through two primary mechanisms:
 ### Response Protocol
 
 Agents must:
+
 1. Acknowledge the task scope
 2. Indicate analysis method (MCP-enhanced or traditional)
 3. Provide structured findings
@@ -192,18 +201,19 @@ Agents must:
 
 ```typescript
 interface AgentInput {
-  task: string;              // Task description
+  task: string; // Task description
   context: {
-    files?: string[];        // Files to analyze
-    patterns?: string[];     // Patterns to search for
-    findings?: Finding[];    // Prior findings to investigate
-    parameters?: {           // Analysis parameters
-      severity?: 'critical' | 'high' | 'medium' | 'low';
+    files?: string[]; // Files to analyze
+    patterns?: string[]; // Patterns to search for
+    findings?: Finding[]; // Prior findings to investigate
+    parameters?: {
+      // Analysis parameters
+      severity?: "critical" | "high" | "medium" | "low";
       focus?: string[];
-      depth?: 'quick' | 'standard' | 'deep';
+      depth?: "quick" | "standard" | "deep";
     };
   };
-  constraints?: string[];    // Any specific constraints
+  constraints?: string[]; // Any specific constraints
 }
 ```
 
@@ -212,9 +222,9 @@ interface AgentInput {
 ```typescript
 interface AgentOutput {
   summary: {
-    analysisMethod: string;  // e.g., "Semgrep MCP" | "Pattern-Based"
-    confidence: number;      // 0-100
-    duration: number;        // seconds
+    analysisMethod: string; // e.g., "Semgrep MCP" | "Pattern-Based"
+    confidence: number; // 0-100
+    duration: number; // seconds
     issueCount: number;
   };
   findings: Finding[];
@@ -225,7 +235,7 @@ interface AgentOutput {
 interface Finding {
   id: string;
   category: string;
-  severity: 'critical' | 'high' | 'medium' | 'low';
+  severity: "critical" | "high" | "medium" | "low";
   title: string;
   description: string;
   location: {
@@ -240,10 +250,10 @@ interface Finding {
 }
 
 interface Recommendation {
-  priority: 'immediate' | 'short-term' | 'long-term';
+  priority: "immediate" | "short-term" | "long-term";
   title: string;
   description: string;
-  effort: string;  // e.g., "2 hours", "1 day"
+  effort: string; // e.g., "2 hours", "1 day"
   impact: string;
   implementation?: string;
 }
@@ -257,6 +267,7 @@ Agents should use consistent markdown templates:
 # [Analysis Type] Report
 
 ## Executive Summary
+
 - **Analysis Method**: [Method used]
 - **Confidence Level**: [High/Medium/Low]
 - **Key Findings**: [Count and severity]
@@ -264,6 +275,7 @@ Agents should use consistent markdown templates:
 ## Critical Findings
 
 ### [Finding Title]
+
 - **Severity**: [Level]
 - **Location**: [File:Line]
 - **Impact**: [Description]
@@ -272,9 +284,11 @@ Agents should use consistent markdown templates:
 ## Recommendations
 
 ### Immediate Actions
+
 1. [Action with effort estimate]
 
 ### Long-term Improvements
+
 1. [Strategic recommendation]
 ```
 
@@ -283,12 +297,14 @@ Agents should use consistent markdown templates:
 ### Core Capabilities
 
 1. **Analysis-Only Agents**
+
    - Read and analyze code
    - Generate reports and insights
    - Provide recommendations
    - Cannot modify files
 
 2. **Report-Generating Agents**
+
    - All analysis capabilities
    - Can write report files when explicitly requested
    - Limited to specific output directories
@@ -300,18 +316,18 @@ Agents should use consistent markdown templates:
 
 ### Capability Boundaries
 
-| Capability | Allowed | Not Allowed |
-|------------|---------|-------------|
-| Read files | ✅ | - |
-| Analyze code patterns | ✅ | - |
-| Generate insights | ✅ | - |
-| Provide recommendations | ✅ | - |
-| Export reports (when requested) | ✅ | - |
-| Modify source code | ❌ | ✅ |
-| Create source files | ❌ | ✅ |
-| Delete files | ❌ | ✅ |
-| Execute code | ❌ | ✅ |
-| Install packages | ❌ | ✅ |
+| Capability                      | Allowed | Not Allowed |
+| ------------------------------- | ------- | ----------- |
+| Read files                      | ✅      | -           |
+| Analyze code patterns           | ✅      | -           |
+| Generate insights               | ✅      | -           |
+| Provide recommendations         | ✅      | -           |
+| Export reports (when requested) | ✅      | -           |
+| Modify source code              | ❌      | ✅          |
+| Create source files             | ❌      | ✅          |
+| Delete files                    | ❌      | ✅          |
+| Execute code                    | ❌      | ✅          |
+| Install packages                | ❌      | ✅          |
 
 ### MCP Tool Integration
 
@@ -332,6 +348,7 @@ else:
 ### Command Invocation Patterns
 
 1. **Direct Sub-Agent Invocation**
+
    ```markdown
    Delegate to @agent-name:
    "[CONSTRAINTS]
@@ -340,24 +357,31 @@ else:
    ```
 
 2. **Hybrid Architecture Integration**
+
    ```markdown
    ## Phase 1: Parallel Scanning
+
    [Task Tool agents for quick scan]
-   
+
    ## Phase 2: Expert Analysis
+
    [Delegate findings to specialized sub-agents]
-   
+
    ## Phase 3: Synthesis
+
    [Combine all results]
    ```
 
 3. **Conditional Delegation**
+
    ```markdown
    ### If security issues found (severity >= high):
+
    Delegate to @security-specialist:
    "..."
-   
+
    ### If performance bottlenecks found:
+
    Delegate to @performance-optimizer:
    "..."
    ```
@@ -376,31 +400,34 @@ Commands pass parameters to agents through:
 
 ### Current Agent Roster
 
-| Agent | Type | Primary Domain | Key Capabilities |
-|-------|------|----------------|------------------|
-| `code-architect` | Specialist | Software Architecture | System design, patterns, scalability |
-| `security-specialist` | Specialist | Application Security | Vulnerability detection, OWASP compliance |
-| `performance-optimizer` | Specialist | Performance Engineering | Bottleneck identification, optimization |
-| `test-engineer` | Specialist | Testing Strategy | Coverage analysis, test design |
-| `refactoring-expert` | Specialist | Code Quality | Code smell detection, refactoring plans |
-| `documentation-health-specialist` | Analyzer | Documentation Quality | Doc-code sync, coverage analysis |
-| `report-analyzer` | Analyzer | Data Analysis | Trend detection, prioritization |
+| Agent                             | Type       | Primary Domain          | Key Capabilities                          |
+| --------------------------------- | ---------- | ----------------------- | ----------------------------------------- |
+| `code-architect`                  | Specialist | Software Architecture   | System design, patterns, scalability      |
+| `security-specialist`             | Specialist | Application Security    | Vulnerability detection, OWASP compliance |
+| `performance-optimizer`           | Specialist | Performance Engineering | Bottleneck identification, optimization   |
+| `test-engineer`                   | Specialist | Testing Strategy        | Coverage analysis, test design            |
+| `refactoring-expert`              | Specialist | Code Quality            | Code smell detection, refactoring plans   |
+| `documentation-health-specialist` | Analyzer   | Documentation Quality   | Doc-code sync, coverage analysis          |
+| `report-analyzer`                 | Analyzer   | Data Analysis           | Trend detection, prioritization           |
 
 ### Agent Type Definitions
 
 1. **Specialist Agents**
+
    - Deep expertise in specific domain
    - Provide authoritative guidance
    - Complex analysis capabilities
    - Domain-specific methodologies
 
 2. **Analyzer Agents**
+
    - Focus on data processing and insights
    - Pattern recognition and trend analysis
    - Comparative analysis capabilities
    - Metric generation
 
 3. **Helper Agents**
+
    - Task-specific assistance
    - Straightforward operations
    - Clear, focused outputs
@@ -430,6 +457,7 @@ Commands pass parameters to agents through:
 ## Core Expertise Areas
 
 1. **Primary Domain**
+
    - Specific skill 1
    - Specific skill 2
 
@@ -448,12 +476,14 @@ Commands pass parameters to agents through:
 ## Analysis Approach
 
 ### 1. **Initial Assessment**
-   - Step 1
-   - Step 2
+
+- Step 1
+- Step 2
 
 ### 2. **Deep Analysis**
-   - Methodology
-   - Techniques
+
+- Methodology
+- Techniques
 ```
 
 - Number steps clearly
@@ -462,7 +492,7 @@ Commands pass parameters to agents through:
 
 ### 4. Consistent Output
 
-```markdown
+````markdown
 ## Output Format
 
 Structure your assessment as:
@@ -471,9 +501,12 @@ Structure your assessment as:
 # [Report Type]
 
 ## Executive Summary
+
 [Template structure]
 ```
-```
+````
+
+````
 
 - Provide clear templates
 - Use consistent formatting
@@ -483,7 +516,7 @@ Structure your assessment as:
 
 ```markdown
 **TOOL AVAILABILITY NOTE**: When MCP tools are available, use them for enhanced analysis. Otherwise, use traditional methods.
-```
+````
 
 - Check tool availability first
 - Provide fallback methods
@@ -516,19 +549,22 @@ Structure your assessment as:
 ### Example 1: Security Analysis Task
 
 **Command invokes agent:**
+
 ```markdown
 Delegate to @security-specialist:
 "READ-ONLY ANALYSIS. DO NOT MODIFY ANY FILES.
-Perform deep security analysis on: src/api/auth/*
+Perform deep security analysis on: src/api/auth/\*
 Focus on: Authentication bypass vulnerabilities
 Provide remediation strategies with secure code examples."
 ```
 
 **Agent processes and responds:**
-```markdown
+
+````markdown
 # Security Assessment Report
 
 ## Executive Summary
+
 - **Analysis Method**: Semgrep MCP (High Accuracy)
 - **Files Analyzed**: 5 files in src/api/auth/
 - **Critical Findings**: 2
@@ -537,18 +573,21 @@ Provide remediation strategies with secure code examples."
 ## Critical Vulnerabilities
 
 ### 1. Insufficient Session Validation
+
 - **Severity**: Critical
 - **CWE**: CWE-287
 - **Location**: src/api/auth/session.js:45
 - **Impact**: Authentication bypass possible
-- **Remediation**: 
+- **Remediation**:
   ```javascript
   // Secure implementation
   if (!session || !session.userId || !session.isValid()) {
-    return res.status(401).json({ error: 'Unauthorized' });
+    return res.status(401).json({ error: "Unauthorized" });
   }
   ```
-```
+````
+
+````
 
 ### Example 2: Hybrid Command Integration
 
@@ -565,9 +604,10 @@ Provide remediation strategies with secure code examples."
     }
   ]
 }
-```
+````
 
 **Command delegates to expert:**
+
 ```markdown
 Delegate to @performance-optimizer:
 "READ-ONLY ANALYSIS. DO NOT MODIFY ANY FILES.
@@ -577,30 +617,36 @@ Provide optimization strategies with benchmarks."
 ```
 
 **Agent provides deep analysis:**
-```markdown
+
+````markdown
 # Performance Analysis Report
 
 ## Algorithm Optimization Opportunity
 
 ### Current Implementation Analysis
+
 - **Complexity**: O(n²) due to nested loops
 - **Performance Impact**: 2.5s for 1000 items, 25s for 10000 items
 - **Memory Usage**: Excessive due to intermediate arrays
 
 ### Recommended Optimization
+
 ```javascript
 // O(n log n) solution using divide-and-conquer
 function optimizedSearch(items, criteria) {
   // Implementation details...
 }
 ```
+````
 
 ### Performance Comparison
+
 | Input Size | Current | Optimized | Improvement |
-|------------|---------|-----------|-------------|
+| ---------- | ------- | --------- | ----------- |
 | 1,000      | 2.5s    | 0.05s     | 50x         |
 | 10,000     | 25s     | 0.7s      | 35x         |
-```
+
+````
 
 ### Example 3: Report Analysis Flow
 
@@ -612,13 +658,15 @@ Delegate to @report-analyzer:
 - Previous report: analyze-deep-20250115.json
 Focus on: Trend analysis and ROI-based prioritization
 Generate: Sprint planning recommendations"
-```
+````
 
 **Agent analyzes and responds:**
+
 ```markdown
 # Report Analysis Summary
 
 ## Trend Analysis
+
 - **Period**: Jan 15 - Jan 29, 2025
 - **Overall Improvement**: +12% health score
 - **Issues Resolved**: 23
@@ -628,17 +676,20 @@ Generate: Sprint planning recommendations"
 ## Sprint Planning (2-week sprint, 3 developers)
 
 ### Week 1 - Quick Wins (ROI > 8.0)
+
 1. **Fix SQL Injection in UserAPI**
+
    - Effort: 2 hours
    - Impact: Critical security fix
    - Assigned to: Senior Dev
 
 2. **Optimize SearchAlgorithm**
-   - Effort: 4 hours  
+   - Effort: 4 hours
    - Impact: 50x performance gain
    - Assigned to: Dev 2
 
 ### Week 2 - Strategic Improvements
+
 1. **Refactor Authentication Module**
    - Effort: 3 days
    - Impact: Resolves 5 security issues
@@ -650,6 +701,7 @@ Generate: Sprint planning recommendations"
 The Claude Code Toolkit Agent Interface provides a robust framework for creating specialized AI agents that enhance code analysis capabilities. By following these specifications, developers can create consistent, reliable agents that integrate seamlessly with the toolkit's command system while maintaining clear boundaries and providing high-quality insights.
 
 Key success factors:
+
 1. Clear role definition and boundaries
 2. Structured input/output formats
 3. Consistent communication protocols

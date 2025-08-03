@@ -29,10 +29,11 @@ This command performs a comprehensive health check of your project's documentati
 ### Phase 1: Documentation Discovery
 
 1. **Scan for Documentation**:
+
    ```bash
    # Find all documentation files
    - README.md, CLAUDE.md, CONTRIBUTING.md
-   - docs/, documentation/ directories  
+   - docs/, documentation/ directories
    - *.md, *.rst, *.txt files
    - Package documentation (package.json, pyproject.toml)
    ```
@@ -46,6 +47,7 @@ This command performs a comprehensive health check of your project's documentati
 ### Phase 2: Code Analysis
 
 1. **Extract Code Elements**:
+
    - Function signatures and parameters
    - CLI commands and arguments
    - Configuration options
@@ -69,6 +71,7 @@ Analyze documentation health for this project with the following documentation f
 Code structure extracted: [extracted elements]
 
 Focus on these areas:
+
 1. Parameter validation (CLI args, function params, config options)
 2. Cross-reference and link validation
 3. Deprecation tracking and outdated content
@@ -76,6 +79,7 @@ Focus on these areas:
 5. Documentation coverage and completeness
 
 Provide a comprehensive health report including:
+
 1. Overall health score (0-100) with breakdown by category:
    - Completeness (40%): Coverage of all features
    - Accuracy (30%): Sync with current code
@@ -93,12 +97,13 @@ Format the output as a structured markdown report with clear sections, tables fo
 ### Phase 4: Specific Validations
 
 #### Parameter Validation
+
 ```javascript
 // Check CLI arguments
 // Code: command --verbose --output=file
 // Docs: command --debug --out=file  ❌ Mismatch
 
-// Check function parameters  
+// Check function parameters
 // Code: function process(data, options = {})
 // Docs: function process(data)  ❌ Missing parameter
 
@@ -108,6 +113,7 @@ Format the output as a structured markdown report with clear sections, tables fo
 ```
 
 #### Cross-Reference Validation
+
 ```markdown
 // Check internal links
 [Installation Guide](./docs/install.md) → Verify file exists
@@ -119,11 +125,12 @@ Format the output as a structured markdown report with clear sections, tables fo
 ```
 
 #### Deprecation Detection
+
 ```javascript
 // Code: @deprecated since 2.0, use newMethod instead
 // Docs: Should mention deprecation
 
-// Code: // TODO: Remove in v3.0  
+// Code: // TODO: Remove in v3.0
 // Docs: Should have migration guide
 ```
 
@@ -131,30 +138,33 @@ Format the output as a structured markdown report with clear sections, tables fo
 
 Generate comprehensive health report:
 
-```markdown
+````markdown
 # Documentation Health Report
 
 Generated: 2024-01-28
 Project: claude-code-toolkit
 
 ## Executive Summary
+
 - **Overall Health Score**: 82/100 🟢
 - **Critical Issues**: 2 🔴
-- **Warnings**: 8 🟡  
+- **Warnings**: 8 🟡
 - **Suggestions**: 15 💡
 - **Coverage**: 78% of features documented
 
 ## Health Breakdown
-| Category | Score | Status |
-|----------|-------|--------|
-| Completeness | 85/100 | 🟢 Good |
-| Accuracy | 72/100 | 🟡 Fair |
-| Structure | 90/100 | 🟢 Excellent |
-| Navigation | 81/100 | 🟢 Good |
+
+| Category     | Score  | Status       |
+| ------------ | ------ | ------------ |
+| Completeness | 85/100 | 🟢 Good      |
+| Accuracy     | 72/100 | 🟡 Fair      |
+| Structure    | 90/100 | 🟢 Excellent |
+| Navigation   | 81/100 | 🟢 Good      |
 
 ## Critical Issues
 
 ### 1. Security Documentation Missing
+
 **Severity**: 🔴 Critical
 **File**: SECURITY.md (not found)
 **Impact**: No clear vulnerability reporting process
@@ -162,6 +172,7 @@ Project: claude-code-toolkit
 **Command**: `/generate-documentation . --types=security`
 
 ### 2. Major Parameter Mismatch
+
 **Severity**: 🔴 Critical  
 **File**: README.md:156
 **Issue**: CLI command `/analyze-deep` documented with wrong parameters
@@ -172,43 +183,50 @@ Project: claude-code-toolkit
 ## Parameter Validation Results
 
 ### CLI Arguments
-| Command | Documented | Actual | Status | File |
-|---------|-----------|--------|--------|------|
-| `/analyze-deep` | `--output-format` | `--export-*` | ❌ | README.md:156 |
-| `/fix-security` | `--level` | `--severity` | ❌ | docs/security.md:34 |
 
-### Function Parameters  
-| Function | Documented | Actual | Status | Location |
-|----------|-----------|--------|--------|----------|
-| `analyzeCode()` | 2 params | 3 params | ❌ | api-reference.md:78 |
-| `generateReport()` | `(data)` | `(data, options)` | ❌ | api-reference.md:95 |
+| Command         | Documented        | Actual       | Status | File                |
+| --------------- | ----------------- | ------------ | ------ | ------------------- |
+| `/analyze-deep` | `--output-format` | `--export-*` | ❌     | README.md:156       |
+| `/fix-security` | `--level`         | `--severity` | ❌     | docs/security.md:34 |
+
+### Function Parameters
+
+| Function           | Documented | Actual            | Status | Location            |
+| ------------------ | ---------- | ----------------- | ------ | ------------------- |
+| `analyzeCode()`    | 2 params   | 3 params          | ❌     | api-reference.md:78 |
+| `generateReport()` | `(data)`   | `(data, options)` | ❌     | api-reference.md:95 |
 
 ## Cross-Reference Validation
 
 ### Broken Internal Links
-| Source | Target | Issue |
-|--------|--------|-------|
-| README.md:45 | `./docs/install.md` | File not found |
-| CONTRIBUTING.md:78 | `#testing-guidelines` | Anchor missing |
-| docs/api.md:123 | `../examples/basic.js` | Path incorrect |
+
+| Source             | Target                 | Issue          |
+| ------------------ | ---------------------- | -------------- |
+| README.md:45       | `./docs/install.md`    | File not found |
+| CONTRIBUTING.md:78 | `#testing-guidelines`  | Anchor missing |
+| docs/api.md:123    | `../examples/basic.js` | Path incorrect |
 
 ### Invalid Cross-References
-| Document | Reference | Issue |
-|----------|----------|-------|
-| README.md | "See Configuration Guide" | No link provided |
-| API.md | "As mentioned above" | Unclear reference |
+
+| Document  | Reference                 | Issue             |
+| --------- | ------------------------- | ----------------- |
+| README.md | "See Configuration Guide" | No link provided  |
+| API.md    | "As mentioned above"      | Unclear reference |
 
 ## Coverage Analysis
 
 ### Documented: 45/58 features (78%)
 
 ### Missing Documentation
+
 1. **Functions** (5 undocumented):
+
    - `utils.parseArguments()`
    - `helpers.validateInput()`
    - `core.processResults()`
 
 2. **CLI Options** (4 undocumented):
+
    - `--experimental-mode`
    - `--skip-validation`
    - `--parallel-workers`
@@ -220,27 +238,32 @@ Project: claude-code-toolkit
 ## Deprecation Status
 
 ### Properly Marked
+
 ✅ `oldAnalyze()` - Marked as deprecated with migration guide
 
-### Missing Deprecation Notices  
+### Missing Deprecation Notices
+
 ❌ `legacyFormat` option - Used in code with TODO for removal
 ❌ `/old-command` - Still documented but removed from code
 
 ## Quality Recommendations
 
 ### 🔴 High Priority (Fix immediately)
+
 1. Create SECURITY.md file
 2. Fix CLI parameter documentation for `/analyze-deep`
 3. Update function signatures in API reference
 4. Fix broken links to installation guide
 
 ### 🟡 Medium Priority (Next sprint)
+
 1. Document missing CLI options
 2. Add examples for complex functions
 3. Create migration guide for deprecated features
 4. Improve cross-reference clarity
 
 ### 💡 Low Priority (Continuous improvement)
+
 1. Enhance README structure with TOC
 2. Add more code examples
 3. Create troubleshooting guide
@@ -252,8 +275,10 @@ Project: claude-code-toolkit
    ```bash
    /fix-documentation . --fix-params --fix-links
    ```
+````
 
 2. **Generate Missing Docs** (2-4 hours):
+
    ```bash
    /generate-documentation . --types=security,api --missing-only
    ```
@@ -266,8 +291,9 @@ Project: claude-code-toolkit
 ## Documentation Standards Compliance
 
 ### README.md Checklist
+
 - [x] Title and description
-- [x] Installation instructions  
+- [x] Installation instructions
 - [ ] Complete usage examples
 - [x] Basic API reference
 - [ ] Troubleshooting section
@@ -275,6 +301,7 @@ Project: claude-code-toolkit
 - [x] License information
 
 ### Best Practices Score: 7/10
+
 - ✅ Clear headings structure
 - ✅ Code examples included
 - ❌ Examples not tested
@@ -282,7 +309,8 @@ Project: claude-code-toolkit
 - ❌ Some broken links
 - ✅ Version information
 - ❌ Search optimization missing
-```
+
+````
 
 ## Implementation Details
 
@@ -302,9 +330,10 @@ if (link.includes('#')) {
 if (options.checkExternalLinks) {
   validateHttpLink(url);
 }
-```
+````
 
 ### Parameter Extraction
+
 ```javascript
 // CLI argument patterns
 --flag, -f
@@ -323,6 +352,7 @@ ENV_VARIABLE
 ```
 
 ### Scoring Algorithm
+
 ```
 Health Score = (
   Completeness * 0.4 +
@@ -334,7 +364,7 @@ Health Score = (
 Where:
 - Completeness = documented_features / total_features
 - Accuracy = correct_params / total_params
-- Structure = sections_present / required_sections  
+- Structure = sections_present / required_sections
 - Navigation = valid_links / total_links
 ```
 
@@ -354,16 +384,16 @@ validation:
   check_external_links: false
   validate_code_examples: true
   strict_parameter_matching: true
-  
+
 thresholds:
   health_score_minimum: 80
   critical_if_below: 60
-  
+
 ignore:
   - "vendor/**"
   - "node_modules/**"
   - "*.min.js"
-  
+
 custom_checks:
   - pattern: "TODO|FIXME"
     severity: "warning"

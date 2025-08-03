@@ -12,7 +12,7 @@ The Claude Code Toolkit provides a powerful **3-step automated workflow** that t
 # Step 1: Deep analysis
 /analyze-deep . --export-json
 
-# Step 2: Generate executable action plan  
+# Step 2: Generate executable action plan
 /analyze-report latest-report.json --generate-action-plan
 
 # Step 3: Execute fixes automatically
@@ -33,7 +33,7 @@ graph TD
     E --> F[Verification]
     F --> G[Continuous Monitoring]
     G --> A
-    
+
     style C fill:#f9f,stroke:#333,stroke-width:4px
     style D fill:#f9f,stroke:#333,stroke-width:4px
 ```
@@ -153,6 +153,7 @@ The toolkit now provides a complete automated workflow from analysis to fixes:
 ```
 
 **What the Action Plan Contains:**
+
 - Prioritized todo list with exact fix commands
 - Time estimates for each task
 - ROI-based ordering (critical → quick wins → enhancements)
@@ -160,17 +161,19 @@ The toolkit now provides a complete automated workflow from analysis to fixes:
 - Team allocation suggestions (with --team-mode)
 
 **Example Action Plan Output:**
+
 ```markdown
 ### 🔴 Critical Security (8h total)
+
 - [ ] **Input Sanitization** (3h)
   - Command: `/fix-security --focus="xss,sanitization" --auto-fix`
   - Impact: Prevents XSS attacks
-  
 - [ ] **JSON Validation** (2h)
   - Command: `/fix-security --focus="validation" --library="zod"`
   - Impact: Prevents prototype pollution
 
-### 🟡 Quick Wins (6h total)  
+### 🟡 Quick Wins (6h total)
+
 - [ ] **Remove Code Duplication** (2h)
   - Command: `/fix-duplicates --file="src/utils/pdfExport.ts"`
   - Impact: 140 lines removed, 50% maintenance reduction
@@ -273,15 +276,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Run Analysis
         run: |
           /analyze-deep . --export-json=report.json
-          
+
       - name: Check Regression
         run: |
           /analyze-report report.json --compare=baseline.json --fail-on-regression
-          
+
       - name: Fix Quick Wins
         if: github.event_name == 'push'
         run: |
@@ -400,7 +403,7 @@ For team-based development with the new automated workflow:
 
 # 2. Review assignments (team-plan.md will show):
 # Senior Dev: Security fixes (8h)
-# Mid-level: Performance & tests (16h)  
+# Mid-level: Performance & tests (16h)
 # Junior: Documentation & quick wins (8h)
 
 # 3. Execute by team member
@@ -425,7 +428,7 @@ For team-based development with the new automated workflow:
 Here's a complete example from an actual e-commerce platform improvement:
 
 ```bash
-# Initial State: 
+# Initial State:
 # - Security score: 42/100
 # - Performance issues causing cart abandonment
 # - 23% test coverage
@@ -483,26 +486,31 @@ $ /completion-report --baseline=ecommerce-analysis.json
 ## Best Practices
 
 ### 1. Start Small
+
 - Begin with quick wins to build momentum
 - Focus on one area at a time (security, performance, etc.)
 - Celebrate improvements to maintain team motivation
 
 ### 2. Automate Gradually
+
 - Start with dry-run mode for all fixes
 - Review and approve changes before applying
 - Gradually increase automation as confidence grows
 
 ### 3. Track Progress
+
 - Maintain baseline reports for comparison
 - Use historical tracking for trend analysis
 - Set realistic improvement targets
 
 ### 4. Integrate with Existing Tools
+
 - Connect to issue tracking systems
 - Integrate with CI/CD pipelines
 - Link to code review processes
 
 ### 5. Customize for Your Needs
+
 - Adjust ROI thresholds based on team capacity
 - Configure severity levels for your context
 - Create custom workflows for your process
@@ -510,6 +518,7 @@ $ /completion-report --baseline=ecommerce-analysis.json
 ## Command Reference
 
 ### Analysis Commands
+
 - `/analyze-deep` - Comprehensive multi-perspective analysis
 - `/security-audit` - Focused security analysis
 - `/performance-scan` - Performance bottleneck detection
@@ -517,10 +526,12 @@ $ /completion-report --baseline=ecommerce-analysis.json
 - `/analyze-parallel` - Parallel multi-agent analysis
 
 ### Report Commands
+
 - `/analyze-report` - Intelligent report analysis
 - `/trend-analyzer` - Historical trend analysis
 
 ### Fix Commands (Planned)
+
 - `/fix-quick-wins` - Apply high-ROI fixes
 - `/fix-duplicates` - Remove code duplication
 - `/fix-security` - Fix security vulnerabilities
@@ -528,6 +539,7 @@ $ /completion-report --baseline=ecommerce-analysis.json
 - `/optimize-performance` - Apply performance optimizations
 
 ### Workflow Commands (Planned)
+
 - `/plan-sprint` - Generate sprint plan from reports
 - `/track-progress` - Monitor improvement progress
 - `/generate-dashboard` - Create status dashboards
@@ -537,16 +549,19 @@ $ /completion-report --baseline=ecommerce-analysis.json
 ### Common Issues
 
 1. **Analysis takes too long**
+
    - Use `--quick` mode for faster results
    - Focus on specific directories
    - Run analyses in parallel
 
 2. **Too many issues reported**
+
    - Use ROI-based prioritization
    - Focus on quick wins first
    - Set realistic sprint goals
 
 3. **Fixes cause test failures**
+
    - Always use dry-run mode first
    - Run tests before applying fixes
    - Use incremental fix approach
@@ -561,16 +576,19 @@ $ /completion-report --baseline=ecommerce-analysis.json
 The workflow will continue to evolve with:
 
 1. **AI-Powered Fix Generation**
+
    - Smarter fix suggestions
    - Context-aware refactoring
    - Learning from past fixes
 
 2. **Advanced Metrics**
+
    - Productivity impact measurement
    - Technical debt quantification
    - Quality prediction models
 
 3. **Integration Ecosystem**
+
    - More CI/CD platform support
    - Issue tracker integrations
    - IDE plugin development
