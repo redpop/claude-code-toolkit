@@ -147,11 +147,11 @@ The configuration file controls system behavior:
 
 ### Performance Modes Explained
 
-| Mode         | Max Agents | Token Budget | Timeout | Use Case              |
-| ------------ | ---------- | ------------ | ------- | --------------------- |
-| Conservative | 5          | 2000         | 20s     | Limited resources     |
-| Balanced     | 10         | 3000         | 30s     | Standard, most tasks  |
-| Aggressive   | 20         | 4000         | 45s     | Large codebases       |
+| Mode         | Max Agents | Token Budget | Timeout | Use Case             |
+| ------------ | ---------- | ------------ | ------- | -------------------- |
+| Conservative | 5          | 2000         | 20s     | Limited resources    |
+| Balanced     | 10         | 3000         | 30s     | Standard, most tasks |
+| Aggressive   | 20         | 4000         | 45s     | Large codebases      |
 
 ## For End Users
 

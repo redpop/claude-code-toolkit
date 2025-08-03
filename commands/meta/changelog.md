@@ -35,12 +35,14 @@ This command intelligently manages your project's CHANGELOG.md file by analyzing
 ## What This Command Does
 
 1. **Analyzes Your Changes**:
+
    - Reviews git history since last version/tag
    - Examines uncommitted changes and staged files
    - Identifies breaking changes, new features, and bug fixes
    - Categorizes changes by type (added, changed, deprecated, removed, fixed, security)
 
 2. **Determines Version Automatically**:
+
    - **Major bump (X.0.0)**: Breaking changes, removed features, API changes
    - **Minor bump (0.X.0)**: New features, added functionality
    - **Patch bump (0.0.X)**: Bug fixes, documentation, refactoring
@@ -48,6 +50,7 @@ This command intelligently manages your project's CHANGELOG.md file by analyzing
    - Calculates next version based on change severity
 
 3. **Manages Changelog**:
+
    - Creates CHANGELOG.md if it doesn't exist with proper header
    - Adds new version section with today's date
    - Groups changes by type with emoji prefixes
@@ -87,27 +90,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.2.0] - 2024-01-15
 
 ### Added
+
 - ✨ New feature description
 
 ### Changed
+
 - 🔄 Modified functionality description
 
 ### Fixed
+
 - 🐛 Bug fix description
 
 ## [1.1.0] - 2024-01-01
+
 ...
 ```
 
 ## Workflow Steps
 
 1. **Analyze Repository State**:
+
    - Get current version from CHANGELOG.md or package files
    - List all commits since last version tag
    - Examine uncommitted and staged changes
    - Parse commit messages for conventional commit types
 
 2. **Determine Version Bump**:
+
    - Scan for breaking change indicators:
      - Commit messages with "BREAKING:", "BREAKING CHANGE:"
      - Major API changes or removed features
@@ -116,18 +125,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
    - Choose highest severity change for version bump
 
 3. **Generate Changelog Entries**:
+
    - Group commits and changes by type
    - Extract meaningful descriptions from commit messages
    - Format entries with appropriate emoji prefixes
    - Organize by category (Added, Changed, Fixed, etc.)
 
 4. **Update CHANGELOG.md**:
+
    - Create file with Keep a Changelog header if missing
    - Add new version section with current date
    - Insert categorized entries
    - Maintain proper formatting and structure
 
 5. **Update Version Files** (if --update-version):
+
    - Detect all package files in project
    - Update version fields to new version
    - Validate file syntax after updates
@@ -145,18 +157,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 The AI analyzes your codebase to determine the appropriate version bump:
 
 ### Breaking Changes (Major Version X.0.0)
+
 - Commits containing "BREAKING:", "BREAKING CHANGE:"
 - Removed public APIs or features
 - Incompatible changes to existing functionality
 - Major architectural changes
 
 ### New Features (Minor Version 0.X.0)
+
 - Commits with type `feat:`
 - New functionality added
 - New public APIs
 - Backward-compatible enhancements
 
 ### Bug Fixes (Patch Version 0.0.X)
+
 - Commits with type `fix:`
 - Documentation updates
 - Performance improvements
@@ -168,7 +183,6 @@ The AI analyzes your codebase to determine the appropriate version bump:
   - `feat:` for new features
   - `fix:` for bug fixes
   - `BREAKING CHANGE:` for breaking changes
-  
 - **Review Before Committing**: Use `--analyze` to preview changes first
 
 - **Full Release Workflow**: Use `--commit --update-version` for complete automation
@@ -180,6 +194,7 @@ The AI analyzes your codebase to determine the appropriate version bump:
 The command intelligently updates version in:
 
 ### Node.js (package.json)
+
 ```json
 {
   "version": "1.2.0"
@@ -187,6 +202,7 @@ The command intelligently updates version in:
 ```
 
 ### Python (pyproject.toml)
+
 ```toml
 [tool.poetry]
 version = "1.2.0"
@@ -198,6 +214,7 @@ version = "1.2.0"
 ```
 
 ### Python (setup.py)
+
 ```python
 setup(
     version="1.2.0",
@@ -205,18 +222,21 @@ setup(
 )
 ```
 
-### Python (__init__.py)
+### Python (**init**.py)
+
 ```python
 __version__ = "1.2.0"
 ```
 
 ### Rust (Cargo.toml)
+
 ```toml
 [package]
 version = "1.2.0"
 ```
 
 ### Java (pom.xml)
+
 ```xml
 <version>1.2.0</version>
 ```
@@ -224,6 +244,7 @@ version = "1.2.0"
 ## Error Handling
 
 The command handles:
+
 - Missing CHANGELOG.md (creates new with proper format)
 - No previous version found (starts from 0.1.0)
 - Conflicting changes (prompts for clarification)
@@ -247,6 +268,7 @@ The command handles:
 ## Integration with Git Commit Command
 
 When using `--commit`:
+
 - First checks if `/commands/git/commit.md` exists in the project
 - If the git commit command exists:
   - Runs pre-commit checks (lint, build, generate:docs)
@@ -262,30 +284,38 @@ When using `--commit`:
 ## Examples of AI-Generated Changelog
 
 ### Example 1: Feature Release
+
 After commits:
+
 - `feat: add user authentication system`
 - `feat: implement OAuth2 integration`
 - `fix: resolve login timeout issue`
 
 Running `/changelog --commit` generates:
+
 ```markdown
 ## [1.2.0] - 2024-01-26
 
 ### Added
+
 - ✨ User authentication system
 - ✨ OAuth2 integration
 
 ### Fixed
+
 - 🐛 Resolve login timeout issue
 ```
 
 ### Example 2: Breaking Change
+
 After commits:
+
 - `feat!: redesign API endpoints`
 - `BREAKING CHANGE: remove deprecated v1 endpoints`
 - `fix: update error handling`
 
 Running `/changelog --analyze` shows:
+
 ```
 Version bump: 1.1.0 → 2.0.0 (MAJOR - breaking changes detected)
 Changes to be added:
@@ -294,19 +324,24 @@ Changes to be added:
 ```
 
 ### Example 3: Patch Release
+
 After commits:
+
 - `fix: memory leak in cache layer`
 - `docs: update API documentation`
 - `chore: update dependencies`
 
 Running `/changelog --commit --update-version`:
+
 - Determines version: 1.1.1 (patch bump)
 - Updates CHANGELOG.md
 - Updates version in package.json
 - Commits with: `📝 docs: update changelog for v1.1.1`
 
 ### Example 4: Preview Mode
+
 Running `/changelog --analyze` without making changes:
+
 ```
 Current version: 1.0.0
 Analyzing changes since last release...

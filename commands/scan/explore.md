@@ -35,13 +35,16 @@ This command conducts in-depth research on a topic by having 8 specialized agent
 After completion of all Research Agents:
 
 1. **Create Executive Summary**:
+
    ```markdown
    # Deep Dive: [Topic]
-   
+
    ## Executive Summary
+
    [2-3 paragraph overview of the most important findings]
-   
+
    ## Key Insights
+
    - Technical: [Most important technical insight]
    - Best Practice: [Most important best practice]
    - Performance: [Most important performance insight]
@@ -49,54 +52,68 @@ After completion of all Research Agents:
    ```
 
 2. **Structure Findings by Categories**:
+
    ```markdown
    ## Technical Architecture
+
    [Summary of Architecture Findings]
-   
+
    ## Implementation Guide
+
    ### Best Practices
+
    [Consolidated Best Practices]
-   
+
    ### Code Examples
+
    [Best code examples with explanations]
-   
+
    ### Common Pitfalls
+
    [Most common errors and how to avoid them]
    ```
 
 3. **Create Decision Matrix**:
+
    ```markdown
    ## Decision Guide
-   
+
    ### When to Use [Topic]
+
    - Scenario 1: [Description]
    - Scenario 2: [Description]
-   
+
    ### When NOT to Use
+
    - Scenario 1: [Description]
    - Alternative: [Better option]
-   
+
    ### Trade-offs
-   | Aspect | Pros | Cons |
-   |--------|------|------|
-   | Performance | ... | ... |
-   | Complexity | ... | ... |
-   | Maintenance | ... | ... |
+
+   | Aspect      | Pros | Cons |
+   | ----------- | ---- | ---- |
+   | Performance | ...  | ...  |
+   | Complexity  | ...  | ...  |
+   | Maintenance | ...  | ...  |
    ```
 
 4. **Generate Action Items**:
+
    ```markdown
    ## Recommended Actions
-   
+
    ### Immediate (This Sprint)
+
    1. [Specific action based on findings]
    2. [Additional action]
-   
+
    ### Short-term (Next Month)
+
    1. [Major improvement]
    2. [Refactoring suggestion]
-   
+
    ### Long-term (Quarterly)
+
    1. [Strategic change]
    2. [Architecture Evolution]
    ```

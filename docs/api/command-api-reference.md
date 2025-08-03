@@ -39,6 +39,7 @@ commands/
 ```
 
 The directory structure determines the command namespace:
+
 - File path: `commands/git/commit.md`
 - Command invocation: `/prefix:git:commit`
 
@@ -71,6 +72,7 @@ argument-hint: [directory] [--focus=security|performance|all] [--export-md]
 ```
 
 Common patterns:
+
 - `[optional-arg]` - Optional positional argument
 - `<required-arg>` - Required positional argument
 - `[--flag]` - Optional flag
@@ -86,6 +88,7 @@ allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*), Bash(semgrep:*), Write
 ```
 
 Tool specifications:
+
 - `Task` - Parallel task execution
 - `Read` - File reading
 - `Write` - File writing (use sparingly)
@@ -102,6 +105,7 @@ mcp-enhanced: mcp__semgrep__security_check, mcp__semgrep__semgrep_scan
 ```
 
 Commands should:
+
 1. Check if these tools are available
 2. Use enhanced functionality if present
 3. Fall back to traditional methods if not
@@ -133,7 +137,7 @@ Brief description of what this command does and its primary use case.
 
 #### 2. Usage Examples
 
-```markdown
+````markdown
 ## Usage
 
 ```bash
@@ -141,13 +145,15 @@ Brief description of what this command does and its primary use case.
 /command with --options
 /command complex example --option1=value --option2
 ```
+````
 
 ## What This Command Does
 
 1. **Step 1**: Clear description
 2. **Step 2**: What happens next
 3. **Step 3**: Final outcome
-```
+
+````
 
 #### 3. Detailed Workflow
 
@@ -168,7 +174,7 @@ Brief description of what this command does and its primary use case.
 - Generate output
 - Provide recommendations
 - Suggest next steps
-```
+````
 
 #### 4. Configuration Options
 
@@ -176,11 +182,13 @@ Brief description of what this command does and its primary use case.
 ## Configuration Options
 
 ### Focus Parameters
+
 - `--focus=security`: Prioritize security analysis
 - `--focus=performance`: Prioritize performance analysis
 - `--focus=all`: Comprehensive analysis (default)
 
 ### Export Parameters
+
 - `--export-md[=filename]`: Export markdown report
 - `--export-json[=filename]`: Export JSON data
 - `--export-dir=path`: Custom export directory
@@ -249,6 +257,7 @@ If no directory is provided, use the current directory (.).
 
 ```markdown
 Check if $ARGUMENTS contains:
+
 - `--no-verify`: Skip verification steps
 - `--fast`: Use quick mode
 - `--push`: Push after completion
@@ -258,6 +267,7 @@ Check if $ARGUMENTS contains:
 
 ```markdown
 Extract options from $ARGUMENTS:
+
 - `--focus=<value>`: Extract focus area (security|performance|all)
 - `--export-dir=<path>`: Extract custom export directory
 - `--severity=<level>`: Extract severity filter
@@ -267,6 +277,7 @@ Extract options from $ARGUMENTS:
 
 ```markdown
 Process all files/directories provided in $ARGUMENTS:
+
 - If single path: analyze that path
 - If multiple paths: process each separately
 - If glob pattern: expand and process matches
@@ -274,7 +285,7 @@ Process all files/directories provided in $ARGUMENTS:
 
 ### Validation Patterns
 
-```markdown
+````markdown
 ## Parameter Validation
 
 1. **Validate directory exists**:
@@ -284,12 +295,14 @@ Process all files/directories provided in $ARGUMENTS:
      exit 1
    fi
    ```
+````
 
 2. **Validate option values**:
    - Ensure --focus is one of: security, performance, architecture, all
    - Verify --duration matches pattern: 1w, 2w, 1m
    - Check --team-size is a positive integer
-```
+
+````
 
 ## Output Specifications
 
@@ -326,7 +339,7 @@ Commands should produce structured, actionable output following these patterns:
 ### Short-term (1 week)
 1. Improve test coverage
 2. Refactor complex functions
-```
+````
 
 ### 2. Progress Indicators
 
@@ -334,15 +347,15 @@ Commands should produce structured, actionable output following these patterns:
 ## Progress
 
 Analyzing security patterns... ████████░░ 80%
-Scanning dependencies...      ██████████ 100%
-Generating report...          ████░░░░░░ 40%
+Scanning dependencies... ██████████ 100%
+Generating report... ████░░░░░░ 40%
 
 Overall Progress: ████████░░ 75%
 ```
 
 ### 3. JSON Output Format
 
-```markdown
+````markdown
 When --export-json is specified, structure data as:
 
 ```json
@@ -373,7 +386,9 @@ When --export-json is specified, structure data as:
   ]
 }
 ```
-```
+````
+
+````
 
 ### 4. Export Handling
 
@@ -391,17 +406,18 @@ After analysis, if export parameters are provided:
    ```bash
    # Create reports directory
    mkdir -p reports/
-   
+
    # Write report with timestamp
    FILENAME="analyze-deep-$(date +%Y%m%d-%H%M%S).md"
    Write("reports/$FILENAME", reportContent)
-   ```
+````
 
 3. **Success Message**:
    ```
    ✓ Report exported to: reports/analyze-deep-20240115-103000.md
    ```
-```
+
+````
 
 ## Integration with Claude Code
 
@@ -419,16 +435,18 @@ Claude Code discovers commands through the filesystem structure:
 │           └── command.md
 └── agents/
     └── agent-name.md
-```
+````
 
 ### 2. Command Invocation
 
 Users invoke commands using the pattern:
+
 ```
 /prefix:category:command [arguments]
 ```
 
 Claude Code:
+
 1. Parses the command path
 2. Loads the corresponding `.md` file
 3. Extracts frontmatter metadata
@@ -444,6 +462,7 @@ allowed-tools: Task, Read, Grep, Bash(git:*), Write
 ```
 
 This enables:
+
 - `Task()` for parallel execution
 - `Read()` for file access
 - `Grep()` for searching
@@ -460,6 +479,7 @@ Delegate to @security-specialist:
 ```
 
 Sub-agents:
+
 - Run in isolated contexts
 - Have specialized knowledge
 - Return structured results
@@ -471,6 +491,7 @@ When MCP tools are available, commands can leverage enhanced functionality:
 
 ```markdown
 **Check for MCP availability:**
+
 1. Test if `mcp__semgrep__security_check` is available
 2. If yes: Use enhanced AST-based analysis
 3. If no: Fall back to pattern-based scanning
@@ -491,13 +512,15 @@ When MCP tools are available, commands can leverage enhanced functionality:
 ## Error Handling
 
 The command handles these scenarios:
+
 - Missing required arguments
-- Invalid option values  
+- Invalid option values
 - Tool unavailability
 - File access errors
 - Network failures
 
 For each error:
+
 1. Provide clear error message
 2. Suggest corrective action
 3. Exit gracefully
@@ -514,6 +537,7 @@ For each error:
 - Total: ~30 seconds for comprehensive analysis
 
 For large codebases:
+
 - Use incremental analysis
 - Implement progress indicators
 - Consider sampling strategies
@@ -529,6 +553,7 @@ For large codebases:
 ### 5. Documentation Standards
 
 Every command should include:
+
 - Clear usage examples
 - Complete parameter documentation
 - Expected output format
@@ -543,10 +568,8 @@ Every command should include:
 
 1. **Basic Invocation**:
    /your-command
-   
 2. **With Parameters**:
    /your-command src/ --option=value
-   
 3. **Edge Cases**:
    - Empty directory
    - Missing tools
@@ -558,7 +581,7 @@ Every command should include:
 
 ### Example 1: Simple Analysis Command
 
-```yaml
+````yaml
 ---
 description: Find and analyze TODO comments in code
 argument-hint: [directory] [--format=list|grouped|json]
@@ -572,23 +595,22 @@ Searches for TODO, FIXME, and HACK comments in your codebase.
 
 ```bash
 /find-todos              # Search current directory
-/find-todos src/         # Search specific directory  
+/find-todos src/         # Search specific directory
 /find-todos --format=json # Output as JSON
-```
+````
 
 ## Workflow
 
 1. **Search for patterns**:
    Use Grep to find: TODO, FIXME, HACK, NOTE, XXX
-   
 2. **Analyze context**:
    - Extract surrounding code
    - Identify author (if in git)
    - Calculate age
-   
 3. **Generate report**:
    Group by file, priority, or author based on --format
-```
+
+````
 
 ### Example 2: MCP-Enhanced Command
 
@@ -631,7 +653,7 @@ Use pattern matching for:
 **Confidence Level**: [High|Medium|Low]
 
 [Security findings...]
-```
+````
 
 ### Example 3: Workflow Command
 

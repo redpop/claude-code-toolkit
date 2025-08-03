@@ -24,6 +24,7 @@ This command establishes a security baseline for your project, allowing you to t
 **IF Semgrep MCP is available:**
 
 1. **Comprehensive Security Scan**:
+
    - Use `mcp__semgrep__security_check` for initial assessment
    - Use `mcp__semgrep__semgrep_scan` with multiple configs:
      - `p/security` - General security rules
@@ -31,6 +32,7 @@ This command establishes a security baseline for your project, allowing you to t
      - `p/r2c-security-audit` - Security audit rules
 
 2. **Retrieve Existing Findings** (if in CI/CD):
+
    - Use `mcp__semgrep__semgrep_findings` to get historical data
    - Compare with current scan results
 
@@ -81,35 +83,42 @@ When `--compare` flag is provided:
 
 1. **Load Previous Baseline**
 2. **Compare Metrics**:
+
    - New vulnerabilities introduced
    - Fixed vulnerabilities
    - Changed severity levels
    - Overall security score delta
 
 3. **Generate Comparison Report**:
+
    ```markdown
    # Security Baseline Comparison
-   
+
    ## Summary
+
    - **Previous Date**: [timestamp]
    - **Current Date**: [timestamp]
    - **Tool Used**: [Semgrep MCP | Local Semgrep | Pattern-Based]
-   
+
    ## Progress
+
    - **Security Score**: 72 → 85 (+13) ✅
    - **Critical Issues**: 3 → 0 (-3) ✅
    - **High Issues**: 8 → 4 (-4) ✅
    - **New Issues**: 2 ⚠️
-   
+
    ## Fixed Vulnerabilities
+
    1. SQL Injection in user.js:45
    2. XSS in template.html:23
-   
+
    ## New Vulnerabilities
+
    1. Hardcoded credential in config.js:12
    2. Missing CSRF protection in api.js:89
-   
+
    ## Recommendations
+
    - Address new vulnerabilities before next release
    - Continue improving test coverage
    - Update dependencies with known CVEs
@@ -120,21 +129,25 @@ When `--compare` flag is provided:
 With `--track-improvements` flag:
 
 1. **Maintain History File** (`.security-baseline-history.json`):
+
    - Append each baseline with timestamp
    - Track trend over time
    - Calculate improvement velocity
 
 2. **Generate Trend Analysis**:
+
    ```markdown
    ## Security Trend Analysis
-   
+
    ### Last 30 Days
+
    - Average improvement: +2.5 points/week
    - Issues fixed: 23
    - Issues introduced: 5
    - Net improvement: 18 issues resolved
-   
+
    ### Projection
+
    - Target score (90): ~4 weeks at current pace
    - Critical issues zero date: Already achieved ✅
    ```
@@ -201,11 +214,13 @@ This baseline can be integrated into CI/CD pipelines:
 ## Best Practices
 
 1. **Regular Baselines**:
+
    - Run weekly or with each release
    - Track improvements over time
    - Set security score targets
 
 2. **Baseline Storage**:
+
    - Commit baseline to repository
    - Track changes in version control
    - Use for release notes
@@ -222,6 +237,7 @@ This baseline can be integrated into CI/CD pipelines:
 - **Pattern-Based**: Basic baseline, may miss complex issues
 
 💡 **Tip**: For best results, install Semgrep MCP:
+
 ```bash
 npm install -g @semgrep/mcp
 ```

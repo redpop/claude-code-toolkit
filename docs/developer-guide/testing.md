@@ -31,6 +31,7 @@ test-project/
 ### Known Issues in Test Project
 
 #### vulnerable-code.js
+
 - SQL injection vulnerability
 - XSS vulnerability
 - Hardcoded credentials
@@ -38,17 +39,20 @@ test-project/
 - Command injection risk
 
 #### slow-algorithm.js
+
 - Nested loops creating O(n²) complexity
 - Inefficient array operations
 - Missing memoization
 - Unnecessary repeated calculations
 
 #### untested-module.js
+
 - Complex logic without tests
 - Edge cases not covered
 - Missing input validation
 
 #### legacy-code.js
+
 - Functions over 100 lines
 - Repeated code blocks
 - Poor naming conventions
@@ -104,22 +108,26 @@ export CLAUDE_CMD=claude
 ### Without Claude Code CLI
 
 Tests will fall back to structural validation:
+
 - Check if files exist in correct locations
 - Verify installation structure
 - Create mock outputs for workflow testing
 
 #### Run All Tests
+
 ```bash
 cd claude-code-toolkit
 ./tests/run-all.sh
 ```
 
 #### Run Specific Command Test
+
 ```bash
 ./tests/commands/test-scan-deep.sh
 ```
 
 #### Test After Installation
+
 ```bash
 # Install toolkit
 ./install.sh global --force
@@ -131,6 +139,7 @@ cd claude-code-toolkit
 ### Test Modes
 
 1. **Programmatic Mode** (with Claude CLI)
+
    - Uses `claude -p` for actual command execution
    - Tests real functionality
    - Provides accurate results
@@ -232,21 +241,25 @@ echo "✅ Agent test passed!"
 ## Test Best Practices
 
 ### 1. Isolated Tests
+
 - Each test should be independent
 - Clean up temporary files after tests
 - Don't rely on global state
 
 ### 2. Clear Expectations
+
 - Document what each test validates
 - Use descriptive error messages
 - Include both positive and negative test cases
 
 ### 3. Performance Considerations
+
 - Keep individual tests under 30 seconds
 - Use `--quick` or `--limit` flags when appropriate
 - Cache test data when possible
 
 ### 4. Maintenance
+
 - Run tests before committing changes
 - Update tests when commands change
 - Remove tests for deprecated features
@@ -265,13 +278,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Install toolkit
         run: ./install.sh ci
-      
+
       - name: Run tests
         run: ./tests/run-all.sh
-      
+
       - name: Upload test results
         if: failure()
         uses: actions/upload-artifact@v3
@@ -285,10 +298,12 @@ jobs:
 ### Common Issues
 
 1. **Command not found**
+
    - Ensure toolkit is installed: `./install.sh global --force`
    - Check command name and prefix
 
 2. **No output generated**
+
    - Verify test project has expected issues
    - Check command supports `--export-json`
 
@@ -310,16 +325,19 @@ DEBUG=1 ./tests/commands/test-scan-deep.sh
 ### Planned Enhancements
 
 1. **Coverage Metrics**
+
    - Track which commands have tests
    - Measure code paths tested
    - Generate coverage reports
 
 2. **Performance Benchmarks**
+
    - Track command execution times
    - Identify performance regressions
    - Optimize slow commands
 
 3. **Integration Tests**
+
    - Test command chains
    - Validate workflow scenarios
    - Test error handling

@@ -10,45 +10,50 @@ Execute pre-defined command chains for common development workflows with a singl
 ## Available Pipelines
 
 ### 🚀 Quick Quality Check
+
 **Purpose**: Fast quality assessment before commits
 **Duration**: ~30 seconds
 
 ```bash
-/prefix:scan:quick . --export-json=quick-check.json
-/prefix:scan:report quick-check.json --quick-wins
+# Automatic filename generation
+/prefix:scan:quick . --export-json
+/prefix:scan:report --latest --quick-wins
 ```
 
 ### 🔍 Deep Quality Analysis
+
 **Purpose**: Comprehensive analysis with actionable fixes
 **Duration**: ~5 minutes
 
 ```bash
-# 1. Deep scan
-/prefix:scan:deep . --export-json=analysis.json
+# 1. Deep scan with auto-generated filename
+/prefix:scan:deep . --export-json
 
-# 2. Generate action plan  
-/prefix:scan:report analysis.json --generate-action-plan
+# 2. Generate action plan from latest report
+/prefix:scan:report --latest --generate-action-plan
 
 # 3. Preview fixes
-/prefix:auto:execute action-plan.md --dry-run
+/prefix:auto:execute --latest --dry-run
 ```
 
 ### 🛡️ Security Hardening
+
 **Purpose**: Find and fix security vulnerabilities
 **Duration**: ~10 minutes
 
 ```bash
-# 1. Security audit
-/prefix:sec:audit . --export-json=security.json
+# 1. Security audit with auto-generated report
+/prefix:sec:audit . --export-json
 
-# 2. Fix critical issues
-/prefix:fix:security security.json --severity=critical,high
+# 2. Fix critical issues from latest report
+/prefix:fix:security --latest --severity=critical,high
 
 # 3. Verify compliance
 /prefix:sec:comply . --standard=owasp
 ```
 
 ### 🏗️ Refactoring Sprint
+
 **Purpose**: Improve code structure systematically
 **Duration**: ~30 minutes
 
@@ -65,6 +70,7 @@ Execute pre-defined command chains for common development workflows with a singl
 ```
 
 ### 📈 Release Preparation
+
 **Purpose**: Ensure code is release-ready
 **Duration**: ~20 minutes
 
@@ -84,6 +90,7 @@ Execute pre-defined command chains for common development workflows with a singl
 ```
 
 ### 🔄 Continuous Improvement
+
 **Purpose**: Weekly code quality improvement
 **Duration**: ~2 hours
 
@@ -134,19 +141,25 @@ Use Task tool with subagent_type="general-purpose":
 ## Pipeline Execution
 
 ### Dry Run Mode
+
 Preview what commands would be executed:
+
 ```bash
 /prefix:meta:pipelines release-prep --dry-run
 ```
 
 ### Customization
+
 Modify pipeline before execution:
+
 ```bash
 /prefix:meta:pipelines security-hardening --customize
 ```
 
 ### Automated Execution
+
 Run pipeline automatically:
+
 ```bash
 /prefix:meta:pipelines quick-quality --auto
 ```
@@ -154,12 +167,14 @@ Run pipeline automatically:
 ## Integration Examples
 
 ### Git Hooks
+
 ```bash
 # Pre-commit hook
 /prefix:meta:pipelines quick-quality || exit 1
 ```
 
 ### CI/CD Pipeline
+
 ```yaml
 # GitHub Actions
 - name: Quality Check
@@ -169,6 +184,7 @@ Run pipeline automatically:
 ```
 
 ### Scheduled Tasks
+
 ```bash
 # Weekly improvement (cron)
 0 9 * * MON /prefix:meta:pipelines continuous-improvement
@@ -185,18 +201,21 @@ Run pipeline automatically:
 ## Common Patterns
 
 ### Before PR Review
+
 ```bash
 /prefix:meta:pipelines quick-quality
 /prefix:flow:review . --focus=changes
 ```
 
 ### After Major Feature
+
 ```bash
 /prefix:meta:pipelines deep-quality
 /prefix:meta:pipelines refactoring-sprint
 ```
 
 ### Before Release
+
 ```bash
 /prefix:meta:pipelines release-prep
 /prefix:meta:health --verbose

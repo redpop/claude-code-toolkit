@@ -59,20 +59,25 @@ After all agents complete, consolidate findings:
 ## Parallel Analysis Report
 
 ### Executive Summary
+
 - **Scan Duration**: [X seconds]
-- **Total Issues**: [Count by severity]  
+- **Total Issues**: [Count by severity]
 - **Health Score**: [0-100]
 
 ### Critical Issues (Immediate Action)
+
 [Security vulnerabilities, memory leaks, broken functionality]
 
 ### High Priority (This Sprint)
+
 [Performance problems, major code smells, missing tests]
 
 ### Medium Priority (Next Sprint)
+
 [Code complexity, documentation gaps, style issues]
 
 ### Quick Wins (< 1 hour each)
+
 [Easy fixes with high impact]
 
 ## 🎯 Next Steps
@@ -80,12 +85,14 @@ After all agents complete, consolidate findings:
 Based on the quick analysis, I recommend:
 
 ### 1. **Immediate Actions** (5 min)
+
 ```bash
 # Fix the quick wins identified
 /prefix:fix:quick-wins {export-file}
 ```
 
 ### 2. **Deep Analysis** (If critical issues found)
+
 ```bash
 # Run comprehensive scan for detailed insights
 /prefix:scan:deep . --focus={critical-area}
@@ -95,6 +102,7 @@ Based on the quick analysis, I recommend:
 ```
 
 ### 3. **Continuous Monitoring**
+
 ```bash
 # Set up pre-commit hook with this command
 /prefix:meta:install-hook pre-commit "scan:quick"
@@ -104,6 +112,7 @@ Based on the quick analysis, I recommend:
 ```
 
 ## 📤 Export Information
+
 - **Results saved to**: `{export-file}`
 - **Scan time**: ~30 seconds
 - **Coverage**: 80% of common issues
@@ -126,6 +135,7 @@ Based on the quick analysis, I recommend:
 ## Integration Points
 
 This command is ideal for:
+
 - Pre-commit hooks (fast enough for real-time)
 - CI/CD pipeline quality gates
 - Daily health checks

@@ -30,6 +30,7 @@ That's it! All commands are now available as `/myprefix:category:command`
 ```
 
 This will:
+
 - Install all commands to `~/.claude/commands/myprefix/`
 - Install all agents to `~/.claude/agents/`
 - Display all available commands after installation
@@ -152,6 +153,7 @@ cd toolkit-team
 ```
 
 Now you have access to:
+
 - `/main:scan:deep` - From main toolkit
 - `/custom:scan:deep` - From your fork
 - `/team:scan:deep` - From team toolkit
@@ -167,6 +169,7 @@ git pull
 ```
 
 The installer will:
+
 1. Detect existing installation
 2. Offer to create a backup
 3. Update all commands and agents
@@ -192,6 +195,7 @@ ls ~/.claude/agents/
 ### Command Not Found
 
 If commands aren't recognized:
+
 1. Ensure you're using the correct prefix
 2. Check the installation directory exists
 3. Restart Claude Code if needed
@@ -207,6 +211,7 @@ chmod -R u+rw ~/.claude/
 ### Installation Conflicts
 
 If you have conflicts with existing commands:
+
 1. Choose a unique prefix
 2. Use `--force` to overwrite
 3. Manually backup important customizations
@@ -216,6 +221,7 @@ If you have conflicts with existing commands:
 ### Adding Custom Commands
 
 1. Create new command in your fork:
+
    ```bash
    mkdir -p commands/custom
    echo "Your command content" > commands/custom/mycommand.md
@@ -235,6 +241,7 @@ If you have conflicts with existing commands:
 ## Best Practices
 
 1. **Use Descriptive Prefixes**: Choose prefixes that indicate the source
+
    - `main` - Main toolkit
    - `team` - Team commands
    - `proj` - Project-specific
@@ -267,11 +274,13 @@ rm -rf ~/.claude/agents/
 ## Next Steps
 
 1. Try the quick start workflow:
+
    ```bash
    /myprefix:flow:smart "Help me improve my code quality"
    ```
 
 2. Explore pre-built pipelines:
+
    ```bash
    /myprefix:meta:pipelines deep-quality
    ```

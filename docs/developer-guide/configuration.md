@@ -25,12 +25,12 @@ Each level overrides the previous, allowing fine-grained control.
   "default_branch": "main",
   "description": "Toolkit description",
   "version": "3.3.0",
-  
+
   "subAgentOrchestration": {
     "enabled": true,
     "version": "2.0.0",
     "description": "Sub-Agent Orchestration System",
-    
+
     "defaults": {
       "tokenBudget": 3000,
       "timeout": 30000,
@@ -38,7 +38,7 @@ Each level overrides the previous, allowing fine-grained control.
       "maxRetries": 2,
       "parallelExecution": true
     },
-    
+
     "performanceMode": "balanced",
     "performanceModes": {
       "conservative": {
@@ -57,7 +57,7 @@ Each level overrides the previous, allowing fine-grained control.
         "timeout": 45000
       }
     },
-    
+
     "synthesis": {
       "format": "markdown",
       "deduplication": true,
@@ -65,27 +65,27 @@ Each level overrides the previous, allowing fine-grained control.
       "includeMetrics": true,
       "generateActionItems": true
     },
-    
+
     "outputFormats": {
       "default": "markdown",
       "available": ["markdown", "json", "csv", "mermaid"],
       "includeTimestamps": true,
       "includeAgentMetadata": false
     },
-    
+
     "errorHandling": {
       "continueOnAgentFailure": true,
       "minimumSuccessfulAgents": 0.7,
       "fallbackStrategy": "sequential",
       "logErrors": true
     },
-    
+
     "caching": {
       "enabled": false,
       "ttl": 3600,
       "cacheLocation": "~/.claude/cache/sub-agents"
     },
-    
+
     "commandOverrides": {
       "scan:deep": {
         "performanceMode": "aggressive",
@@ -95,11 +95,11 @@ Each level overrides the previous, allowing fine-grained control.
       }
     }
   },
-  
+
   "hybridMode": {
     "enabled": true,
     "description": "Hybrid architecture settings",
-    
+
     "agentRegistry": {
       "security-specialist": {
         "type": "sub-agent",
@@ -108,7 +108,7 @@ Each level overrides the previous, allowing fine-grained control.
         "priority": "high"
       }
     },
-    
+
     "delegationStrategy": {
       "automatic": true,
       "thresholdScore": 0.7,
@@ -139,33 +139,39 @@ Each level overrides the previous, allowing fine-grained control.
 Configure how aggressively the toolkit uses resources:
 
 #### Conservative Mode
+
 ```json
 {
   "performanceMode": "conservative"
 }
 ```
+
 - **Use Case**: Limited resources, production environments
 - **Agents**: Maximum 5 concurrent
 - **Tokens**: 2000 per agent
 - **Timeout**: 20 seconds
 
 #### Balanced Mode (Default)
+
 ```json
 {
   "performanceMode": "balanced"
 }
 ```
+
 - **Use Case**: Standard development
 - **Agents**: Maximum 10 concurrent
 - **Tokens**: 3000 per agent
 - **Timeout**: 30 seconds
 
 #### Aggressive Mode
+
 ```json
 {
   "performanceMode": "aggressive"
 }
 ```
+
 - **Use Case**: Large codebases, powerful machines
 - **Agents**: Maximum 20 concurrent
 - **Tokens**: 4000 per agent
@@ -186,6 +192,7 @@ Control token usage to prevent exceeding limits:
 ```
 
 **Strategies**:
+
 - `equal`: Divide tokens equally among agents
 - `weighted`: More tokens for complex agents
 - `dynamic`: Adjust based on agent feedback
@@ -226,6 +233,7 @@ Define behavior when things go wrong:
 ```
 
 **Fallback Strategies**:
+
 - `sequential`: Run agents one by one
 - `reduce`: Use fewer agents
 - `abort`: Stop execution
@@ -295,7 +303,7 @@ Create `.claude-commands.json` in your project root:
       "ignorePatterns": ["node_modules", "build", "*.test.js"]
     }
   },
-  
+
   "commandDefaults": {
     "scan:deep": {
       "focus": "security,performance"
@@ -461,12 +469,15 @@ Track all operations:
 ## 📋 Configuration Best Practices
 
 ### 1. Start with Defaults
+
 Don't over-configure. The defaults work well for most cases.
 
 ### 2. Use Project Configuration
+
 Keep repository configuration minimal, use project-specific settings.
 
 ### 3. Document Changes
+
 ```json
 {
   "_comment": "Increased token budget for complex codebase",
@@ -475,11 +486,13 @@ Keep repository configuration minimal, use project-specific settings.
 ```
 
 ### 4. Version Control
+
 - Commit `.claude-commands.json` to repository
 - Use `.gitignore` for project-specific configs
 - Document configuration changes in CHANGELOG
 
 ### 5. Test Configuration Changes
+
 ```bash
 # Validate configuration
 /global:meta:validate-config
@@ -491,6 +504,7 @@ Keep repository configuration minimal, use project-specific settings.
 ## 🚨 Common Configuration Issues
 
 ### Token Limit Exceeded
+
 ```json
 {
   "defaults": {
@@ -500,6 +514,7 @@ Keep repository configuration minimal, use project-specific settings.
 ```
 
 ### Timeout Errors
+
 ```json
 {
   "defaults": {
@@ -509,6 +524,7 @@ Keep repository configuration minimal, use project-specific settings.
 ```
 
 ### Memory Issues
+
 ```json
 {
   "performanceMode": "conservative",
@@ -521,6 +537,7 @@ Keep repository configuration minimal, use project-specific settings.
 ## 📚 Configuration Examples
 
 ### Security-Focused Setup
+
 ```json
 {
   "performanceMode": "conservative",
@@ -536,6 +553,7 @@ Keep repository configuration minimal, use project-specific settings.
 ```
 
 ### Speed-Optimized Setup
+
 ```json
 {
   "performanceMode": "aggressive",
@@ -548,6 +566,7 @@ Keep repository configuration minimal, use project-specific settings.
 ```
 
 ### Minimal Setup
+
 ```json
 {
   "performanceMode": "balanced"

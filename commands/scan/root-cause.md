@@ -26,13 +26,16 @@ Apply the Five Whys root cause analysis technique to systematically investigate 
 ## Workflow Steps
 
 ### 1. Problem Statement
+
 - Start with a clear, specific description of the issue
 - Focus on observable symptoms or failures
 - Include relevant context (when, where, how often)
 - Avoid jumping to conclusions about causes
 
 ### 2. Five Whys Analysis
+
 For each level, I will:
+
 - Ask "Why did this happen?" or "Why is this occurring?"
 - Document the answer based on evidence
 - Examine if this is truly a cause or just another symptom
@@ -40,12 +43,14 @@ For each level, I will:
 - Continue asking "why" for each answer
 
 ### 3. Root Cause Validation
+
 - Review the chain of causation from root to symptom
 - Verify each connection is logical and evidence-based
 - Check if addressing the root cause would prevent recurrence
 - Identify any additional contributing factors
 
 ### 4. Solution Development
+
 - Propose solutions targeting the root cause
 - Consider preventive measures to avoid recurrence
 - Evaluate feasibility and impact of solutions
@@ -63,16 +68,16 @@ PROBLEM STATEMENT
 FIVE WHYS ANALYSIS
 Why 1: [First level cause]
   Evidence: [Supporting data/observations]
-  
+
 Why 2: [Second level cause]
   Evidence: [Supporting data/observations]
-  
+
 Why 3: [Third level cause]
   Evidence: [Supporting data/observations]
-  
+
 Why 4: [Fourth level cause]
   Evidence: [Supporting data/observations]
-  
+
 Why 5: [Fifth level cause - often the root]
   Evidence: [Supporting data/observations]
 
@@ -90,6 +95,7 @@ RECOMMENDED SOLUTIONS
 ## Best Practices
 
 ### Effective Questioning
+
 - Ask open-ended "why" questions
 - Avoid leading questions that assume causes
 - Focus on processes and systems, not blame
@@ -97,6 +103,7 @@ RECOMMENDED SOLUTIONS
 - Look for patterns across similar issues
 
 ### Common Pitfalls to Avoid
+
 - Stopping at human error (dig deeper into why the error occurred)
 - Accepting "lack of resources" without examining why resources are lacking
 - Confusing correlation with causation
@@ -104,6 +111,7 @@ RECOMMENDED SOLUTIONS
 - Focusing only on technical causes while ignoring process issues
 
 ### When to Go Beyond Five Whys
+
 - Complex problems may need more than 5 iterations
 - Multiple root causes may require separate analysis branches
 - Stop when you reach a cause you can realistically address
@@ -112,6 +120,7 @@ RECOMMENDED SOLUTIONS
 ## Example Analyses
 
 ### Example 1: Application Performance Issue
+
 ```
 PROBLEM: Users report the dashboard loads slowly
 
@@ -126,6 +135,7 @@ SOLUTION: Implement mandatory reviews for all migration scripts
 ```
 
 ### Example 2: Frequent Deployment Failures
+
 ```
 PROBLEM: Production deployments fail 30% of the time
 
@@ -142,6 +152,7 @@ SOLUTION: Implement centralized config management with automation
 ## Error Handling
 
 The analysis handles:
+
 - **Vague problem statements**: Will prompt for specific details
 - **Circular reasoning**: Detects and breaks circular why chains
 - **Multiple root causes**: Explores different causal branches
@@ -151,12 +162,14 @@ The analysis handles:
 ## Integration Points
 
 ### Documentation
+
 - Generate analysis reports in markdown
 - Create tickets for identified action items
 - Link to relevant logs or monitoring data
 - Reference similar past analyses
 
 ### Follow-up Actions
+
 - Track implementation of solutions
 - Schedule reviews to verify effectiveness
 - Update runbooks with findings

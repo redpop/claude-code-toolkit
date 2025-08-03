@@ -11,6 +11,51 @@ This is the Claude Code Toolkit - a comprehensive collection of commands, agents
 
 The repository is designed to be cloned and installed into `~/.claude/` with a custom prefix, making all commands and agents available for use.
 
+## Quick Start Workflows (Recommended First Steps)
+
+When helping users optimize their projects, prioritize these pre-defined workflows:
+
+### 🎯 Top 3 Workflows for Project Optimization
+
+1. **Deep Quality Analysis** (Most Comprehensive - 3 steps):
+   ```bash
+   # Step 1: Deep scan with automatic timestamp filename
+   /prefix:scan:deep . --export-json
+   # Creates: analysis-YYYYMMDD-HHMMSS.json
+   
+   # Step 2: Generate action plan from latest report
+   /prefix:scan:report --latest --generate-action-plan
+   # Creates: action-plan-YYYYMMDD-HHMMSS.md
+   
+   # Step 3: Execute the action plan
+   /prefix:auto:execute --latest
+   ```
+
+2. **Quick Quality Check** (Fast Results - 2 steps):
+   ```bash
+   # Quick scan with auto-generated filename
+   /prefix:scan:quick . --export-json
+   
+   # Apply quick wins from latest report
+   /prefix:fix:quick-wins --latest
+   ```
+
+3. **One-Command Pipeline**:
+   ```bash
+   /prefix:meta:pipelines deep-quality
+   ```
+
+### 📝 Export Parameter Behavior
+
+- `--export-json` → Auto-generates: `{command}-YYYYMMDD-HHMMSS.json`
+- `--export-md` → Auto-generates: `{command}-YYYYMMDD-HHMMSS.md`
+- `--export-json=custom.json` → Uses specified filename
+- `--latest` → Automatically finds most recent report file
+
+💡 **Always suggest these simplified workflows FIRST when users ask about project analysis or optimization!**
+
+See `/prefix:meta:pipelines` for more pre-defined workflows including security hardening, refactoring sprints, and release preparation.
+
 ## Repository Structure
 
 ```

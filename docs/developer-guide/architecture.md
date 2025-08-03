@@ -22,21 +22,25 @@ graph TB
 ## 🎯 Design Principles
 
 ### 1. **Modularity**
+
 - Commands are self-contained Markdown files
 - Agents are independent specialists
 - Clear separation of concerns
 
 ### 2. **Scalability**
+
 - Parallel execution for performance
 - Token budget management
 - Configurable resource limits
 
 ### 3. **Extensibility**
+
 - Template-based command creation
 - Plugin-like agent system
 - Configuration overrides
 
 ### 4. **User-Centric**
+
 - Wizard-like guidance
 - Context preservation
 - Clear next steps
@@ -46,6 +50,7 @@ graph TB
 ### Command System
 
 #### Structure
+
 ```
 commands/
 ├── category/
@@ -53,6 +58,7 @@ commands/
 ```
 
 #### Command File Format
+
 ```markdown
 ---
 allowed-tools: Task, Read, Grep, Bash, Write
@@ -63,16 +69,20 @@ argument-hint: <args>
 # Command Implementation
 
 ## Phase 1: Analysis
+
 [Task definitions]
 
 ## Phase 2: Processing
+
 [Logic and coordination]
 
 ## Phase 3: Output
+
 [Results and next steps]
 ```
 
 #### Command Execution Flow
+
 1. **Parse Command**: Extract category and name
 2. **Load Definition**: Read Markdown file
 3. **Process Frontmatter**: Extract metadata
@@ -84,6 +94,7 @@ argument-hint: <args>
 #### Agent Types
 
 1. **Task Agents** (Parallel)
+
    - Limited tool access
    - Fast, focused execution
    - Used in scanning phases
@@ -94,6 +105,7 @@ argument-hint: <args>
    - Used for deep dives
 
 #### Agent Definition
+
 ```markdown
 ---
 name: agent-name
@@ -103,41 +115,41 @@ description: Specialization area
 You are an expert in [domain].
 
 ## Core Expertise
+
 - Area 1
 - Area 2
 
 ## Analysis Approach
+
 [Methodology]
 
 ## Output Format
+
 [Structure]
 ```
 
 ### Orchestration Engine
 
 #### Multi-Agent Coordination
+
 ```javascript
 // Conceptual flow
 async function orchestrate(command) {
   // Phase 1: Parallel scanning
   const scanResults = await Promise.all(
-    scanners.map(scanner => 
-      TaskTool.execute(scanner)
-    )
+    scanners.map((scanner) => TaskTool.execute(scanner))
   );
-  
+
   // Phase 2: Expert analysis
-  const expertResults = await delegateToExperts(
-    scanResults,
-    command.experts
-  );
-  
+  const expertResults = await delegateToExperts(scanResults, command.experts);
+
   // Phase 3: Synthesis
   return synthesize(scanResults, expertResults);
 }
 ```
 
 #### Performance Optimization
+
 - **Parallel Execution**: 5-20 agents simultaneously
 - **Token Distribution**: Smart allocation based on complexity
 - **Timeout Management**: Prevent hanging operations
@@ -146,17 +158,19 @@ async function orchestrate(command) {
 ### Configuration System
 
 #### Hierarchy
+
 1. **Global Configuration**: `.claude-commands.json`
 2. **Project Configuration**: Project-specific overrides
 3. **Command Configuration**: Per-command settings
 4. **Runtime Configuration**: CLI parameters
 
 #### Configuration Schema
+
 ```typescript
 interface Configuration {
   subAgentOrchestration: {
     enabled: boolean;
-    performanceMode: 'conservative' | 'balanced' | 'aggressive';
+    performanceMode: "conservative" | "balanced" | "aggressive";
     defaults: {
       tokenBudget: number;
       timeout: number;
@@ -169,7 +183,7 @@ interface Configuration {
   };
   hybridMode: {
     enabled: boolean;
-    strategy: 'adaptive' | 'manual' | 'threshold';
+    strategy: "adaptive" | "manual" | "threshold";
     agentRegistry: {
       [agentName: string]: AgentConfig;
     };
@@ -197,26 +211,28 @@ The Hybrid Architecture is the key innovation that enables both speed and depth:
 **Purpose**: Broad, fast analysis across the codebase
 
 **Implementation**:
+
 ```javascript
 const scanners = [
-  { name: 'Security Scanner', focus: 'vulnerabilities' },
-  { name: 'Performance Scanner', focus: 'bottlenecks' },
-  { name: 'Architecture Scanner', focus: 'patterns' },
+  { name: "Security Scanner", focus: "vulnerabilities" },
+  { name: "Performance Scanner", focus: "bottlenecks" },
+  { name: "Architecture Scanner", focus: "patterns" },
   // ... more scanners
 ];
 
 // Execute in parallel
 const results = await Promise.all(
-  scanners.map(scanner => 
+  scanners.map((scanner) =>
     TaskTool.execute({
       prompt: scanner.prompt,
-      tools: ['Read', 'Grep', 'Bash']
+      tools: ["Read", "Grep", "Bash"],
     })
   )
 );
 ```
 
 **Characteristics**:
+
 - High parallelism (10-20 agents)
 - Limited context per agent
 - Structured output (JSON)
@@ -227,23 +243,25 @@ const results = await Promise.all(
 **Purpose**: Deep dive into critical findings
 
 **Implementation**:
+
 ```javascript
 const criticalFindings = filterCritical(scanResults);
 
 const experts = selectExperts(criticalFindings);
 
 const expertAnalysis = await Promise.all(
-  experts.map(expert => 
+  experts.map((expert) =>
     SubAgent.execute({
       agent: expert.name,
       context: expert.findings,
-      tokenBudget: 5000
+      tokenBudget: 5000,
     })
   )
 );
 ```
 
 **Characteristics**:
+
 - Selective activation
 - Deep context analysis
 - Full tool access
@@ -254,6 +272,7 @@ const expertAnalysis = await Promise.all(
 **Purpose**: Combine all findings into actionable insights
 
 **Implementation**:
+
 ```javascript
 function synthesize(scanResults, expertResults) {
   return {
@@ -261,7 +280,7 @@ function synthesize(scanResults, expertResults) {
     criticalIssues: prioritizeIssues(expertResults),
     quickWins: identifyQuickWins(scanResults),
     actionPlan: generateActionPlan(expertResults),
-    nextSteps: recommendNextSteps()
+    nextSteps: recommendNextSteps(),
   };
 }
 ```
@@ -269,6 +288,7 @@ function synthesize(scanResults, expertResults) {
 ## 📊 Data Flow
 
 ### Input Processing
+
 ```
 User Command
     ↓
@@ -282,6 +302,7 @@ Execution Engine
 ```
 
 ### Result Aggregation
+
 ```
 Individual Results
     ↓
@@ -295,6 +316,7 @@ Final Report
 ```
 
 ### Context Preservation
+
 ```
 Result Export
     ↓
@@ -308,12 +330,14 @@ Next Command Input
 ## 🔐 Security Considerations
 
 ### Tool Permissions
+
 - Commands declare required tools
 - Agents have restricted access
 - No arbitrary code execution
 - Sandboxed file operations
 
 ### Token Security
+
 - Budget limits prevent abuse
 - Timeout protection
 - Rate limiting capabilities
@@ -322,25 +346,33 @@ Next Command Input
 ## 🎨 Design Patterns
 
 ### Command Pattern
+
 Each command encapsulates:
+
 - Request parameters
 - Execution logic
 - Result formatting
 
 ### Strategy Pattern
+
 Performance modes implement different strategies:
+
 - Conservative: Safety first
 - Balanced: Optimal trade-off
 - Aggressive: Maximum performance
 
 ### Observer Pattern
+
 Progress tracking and reporting:
+
 - Real-time updates
 - Error notifications
 - Completion callbacks
 
 ### Factory Pattern
+
 Agent creation based on:
+
 - Problem type
 - Available resources
 - Configuration settings
@@ -348,19 +380,22 @@ Agent creation based on:
 ## 📈 Performance Characteristics
 
 ### Execution Times
-| Phase | Conservative | Balanced | Aggressive |
-|-------|-------------|----------|------------|
-| Scan | 8-12s | 5-8s | 3-5s |
-| Analyze | 15-25s | 10-20s | 8-15s |
-| Total | 25-40s | 15-30s | 12-25s |
+
+| Phase   | Conservative | Balanced | Aggressive |
+| ------- | ------------ | -------- | ---------- |
+| Scan    | 8-12s        | 5-8s     | 3-5s       |
+| Analyze | 15-25s       | 10-20s   | 8-15s      |
+| Total   | 25-40s       | 15-30s   | 12-25s     |
 
 ### Resource Usage
+
 - **Memory**: ~100-500MB per command
 - **CPU**: Scales with agent count
 - **Network**: Minimal (local execution)
 - **Disk**: Results caching only
 
 ### Scalability Limits
+
 - Max parallel agents: 20
 - Max token budget: 100k total
 - Max file size: 10MB
@@ -369,18 +404,21 @@ Agent creation based on:
 ## 🔄 Extension Points
 
 ### Adding Commands
+
 1. Create Markdown file in category folder
 2. Define frontmatter metadata
 3. Implement command logic
 4. Add to documentation
 
 ### Adding Agents
+
 1. Create agent definition file
 2. Define expertise and approach
 3. Register in configuration
 4. Test with sample data
 
 ### Custom Workflows
+
 1. Define pipeline steps
 2. Create chain configuration
 3. Add to pipelines registry
@@ -389,12 +427,14 @@ Agent creation based on:
 ## 🐛 Debugging
 
 ### Debug Mode
+
 ```bash
 export CLAUDE_DEBUG=true
 export CLAUDE_LOG_LEVEL=debug
 ```
 
 ### Performance Profiling
+
 ```javascript
 {
   "metrics": {
@@ -410,6 +450,7 @@ export CLAUDE_LOG_LEVEL=debug
 ```
 
 ### Common Issues
+
 1. **Token limit exceeded**: Reduce agent count or budget
 2. **Timeout errors**: Increase timeout or simplify tasks
 3. **Parsing failures**: Check command syntax
@@ -418,6 +459,7 @@ export CLAUDE_LOG_LEVEL=debug
 ## 🏁 Summary
 
 The Claude Code Toolkit architecture provides:
+
 - **Flexibility** through modular design
 - **Performance** through parallel execution
 - **Depth** through specialized agents

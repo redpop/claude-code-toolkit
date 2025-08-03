@@ -10,9 +10,11 @@ This command performs a comprehensive code review by coordinating multiple speci
 ## Review Process
 
 ### Phase 1: Parallel Analysis
+
 Multiple specialized agents review your code simultaneously:
 
 1. **Code Quality Review** (@code-reviewer)
+
    - Style and readability
    - SOLID principles adherence
    - Design patterns usage
@@ -20,6 +22,7 @@ Multiple specialized agents review your code simultaneously:
    - Complexity metrics
 
 2. **Security Review** (@security-auditor)
+
    - Authentication/authorization flaws
    - Input validation
    - Injection vulnerabilities
@@ -27,6 +30,7 @@ Multiple specialized agents review your code simultaneously:
    - Security misconfigurations
 
 3. **Architecture Review** (@architect-reviewer)
+
    - Service boundaries
    - Coupling and cohesion
    - Scalability considerations
@@ -34,6 +38,7 @@ Multiple specialized agents review your code simultaneously:
    - API design quality
 
 4. **Performance Review** (@performance-analyst)
+
    - Algorithm efficiency
    - Resource usage
    - Potential bottlenecks
@@ -47,7 +52,9 @@ Multiple specialized agents review your code simultaneously:
    - Test maintainability
 
 ### Phase 2: Synthesis
+
 All findings are consolidated into a unified report with:
+
 - Critical issues requiring immediate attention
 - Important improvements for code quality
 - Minor suggestions and nice-to-haves
@@ -92,15 +99,19 @@ Use Task tool with subagent_type="general-purpose" to assess testing:
 After all agents complete their analysis:
 
 ### 🚨 Critical Issues
+
 [Security vulnerabilities, broken functionality, major architectural flaws]
 
 ### ⚠️ Important Issues
+
 [Performance problems, code quality issues, missing tests]
 
 ### 💡 Suggestions
+
 [Style improvements, minor refactoring, documentation gaps]
 
 ### ✅ Good Practices
+
 [Well-designed components, good test coverage, security best practices]
 
 ## Usage Examples

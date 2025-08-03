@@ -99,34 +99,38 @@ export class UserService {
 
 ### 2. README Generation
 
-```markdown
+````markdown
 # User Service Module
 
 ## Overview
+
 The User Service module provides comprehensive user management functionality including CRUD operations, authentication, and user-related business logic.
 
 ## Installation
+
 ```bash
 npm install @myapp/user-service
 ```
+````
 
 ## Usage
 
 ### Basic Example
+
 ```javascript
-import { UserService } from '@myapp/user-service';
-import { Database } from '@myapp/database';
+import { UserService } from "@myapp/user-service";
+import { Database } from "@myapp/database";
 
 const db = new Database();
 const userService = new UserService(db);
 
 // Find a user
-const user = await userService.findUser('123');
+const user = await userService.findUser("123");
 
 // Create a user
 const newUser = await userService.createUser({
-  email: 'user@example.com',
-  name: 'John Doe'
+  email: "user@example.com",
+  name: "John Doe",
 });
 ```
 
@@ -135,34 +139,42 @@ const newUser = await userService.createUser({
 ### UserService
 
 #### Constructor
+
 - `new UserService(db: Database)`
 
 #### Methods
 
 ##### findUser(id: string): Promise<User | null>
+
 Finds a user by their ID.
 
 **Parameters:**
+
 - `id` (string): The unique identifier of the user
 
 **Returns:**
+
 - `Promise<User | null>`: The user object if found, null otherwise
 
 ##### createUser(data: CreateUserDto): Promise<User>
+
 Creates a new user in the system.
 
 **Parameters:**
+
 - `data` (CreateUserDto): User creation data
   - `email` (string): User's email address
   - `name` (string): User's full name
   - `role` (string, optional): User's role (default: 'user')
 
 **Returns:**
+
 - `Promise<User>`: The created user object
 
 ## Error Handling
 
 The service may throw the following errors:
+
 - `ValidationError`: When input data is invalid
 - `DuplicateError`: When attempting to create a user with existing email
 - `DatabaseError`: When database operations fail
@@ -174,11 +186,14 @@ npm test -- user-service
 ```
 
 ## Contributing
+
 Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
 
 ## License
+
 This module is part of MyApp and is proprietary software.
-```
+
+````
 
 ### 3. Architecture Diagrams
 
@@ -193,25 +208,25 @@ graph TB
         UI[UI Components]
         State[State Management]
     end
-    
+
     subgraph "API Layer"
         REST[REST API]
         GraphQL[GraphQL API]
         Auth[Auth Middleware]
     end
-    
+
     subgraph "Service Layer"
         UserSvc[User Service]
         ProductSvc[Product Service]
         OrderSvc[Order Service]
     end
-    
+
     subgraph "Data Layer"
         DB[(PostgreSQL)]
         Redis[(Redis Cache)]
         S3[S3 Storage]
     end
-    
+
     UI --> REST
     UI --> GraphQL
     REST --> Auth
@@ -224,7 +239,7 @@ graph TB
     ProductSvc --> DB
     ProductSvc --> S3
     OrderSvc --> DB
-```
+````
 
 ## Component Relationships
 
@@ -237,20 +252,20 @@ classDiagram
         +updateUser(id: string, data: UpdateUserDto) User
         +deleteUser(id: string) boolean
     }
-    
+
     class Database {
         +users: UserRepository
         +connect() void
         +disconnect() void
     }
-    
+
     class UserRepository {
         +findOne(query: object) User
         +create(data: object) User
         +update(id: string, data: object) User
         +delete(id: string) boolean
     }
-    
+
     UserService --> Database
     Database --> UserRepository
 ```
@@ -260,7 +275,10 @@ classDiagram
 ```javascript
 // Before
 function calculatePrice(items, discount, tax) {
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subtotal = items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
   const discountAmount = subtotal * discount;
   const discountedPrice = subtotal - discountAmount;
   const taxAmount = discountedPrice * tax;
@@ -277,12 +295,15 @@ function calculatePrice(items, discount, tax) {
  */
 function calculatePrice(items, discount, tax) {
   // Calculate base price by summing all items
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  
+  const subtotal = items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
   // Apply discount to subtotal
   const discountAmount = subtotal * discount;
   const discountedPrice = subtotal - discountAmount;
-  
+
   // Calculate and add tax on discounted price
   const taxAmount = discountedPrice * tax;
   return discountedPrice + taxAmount;
@@ -294,6 +315,7 @@ function calculatePrice(items, discount, tax) {
 ### Phase 1: Analysis
 
 1. **Code Structure Analysis**:
+
    - Parse source files
    - Build dependency graph
    - Identify public APIs
@@ -308,12 +330,14 @@ function calculatePrice(items, discount, tax) {
 ### Phase 2: Generation Strategy
 
 1. **API Documentation**:
+
    - Extract function signatures
    - Infer parameter types
    - Generate examples
    - Add error documentation
 
 2. **README Structure**:
+
    - Project overview
    - Installation steps
    - Usage examples
@@ -329,12 +353,14 @@ function calculatePrice(items, discount, tax) {
 ### Phase 3: Content Generation
 
 1. **Smart Inference**:
+
    - Analyze function names
    - Understand patterns
    - Extract business logic
    - Generate descriptions
 
 2. **Example Creation**:
+
    ```javascript
    // Analyze test files for examples
    // Extract common usage patterns
@@ -349,6 +375,7 @@ function calculatePrice(items, discount, tax) {
 ### Phase 4: Formatting
 
 1. **Markdown Generation**:
+
    - Proper headings
    - Code blocks
    - Tables for parameters
@@ -375,25 +402,26 @@ function calculatePrice(items, discount, tax) {
 ## Documentation Patterns
 
 ### Function Documentation
+
 ```javascript
 /**
  * Brief description of what the function does
- * 
+ *
  * @description Detailed explanation including business logic,
  * side effects, and important notes
- * 
+ *
  * @param {Type} paramName - Parameter description
  * @param {Object} options - Configuration object
  * @param {boolean} [options.flag=false] - Optional flag
- * 
+ *
  * @returns {ReturnType} Description of return value
- * 
+ *
  * @throws {ErrorType} When this error occurs
- * 
+ *
  * @example
  * // Example usage
  * const result = functionName(param, { flag: true });
- * 
+ *
  * @see {@link RelatedFunction} For related functionality
  * @since 1.2.0
  * @deprecated Use {@link NewFunction} instead
@@ -401,13 +429,14 @@ function calculatePrice(items, discount, tax) {
 ```
 
 ### Class Documentation
+
 ```javascript
 /**
  * @class ClassName
  * @classdesc Comprehensive description of the class purpose
  * @implements {Interface}
  * @extends {BaseClass}
- * 
+ *
  * @example
  * const instance = new ClassName(options);
  * instance.method();
@@ -415,11 +444,12 @@ function calculatePrice(items, discount, tax) {
 ```
 
 ### Module Documentation
+
 ```javascript
 /**
  * @module moduleName
  * @description Module overview and purpose
- * 
+ *
  * @requires module:otherModule
  * @exports {Function} functionName
  * @exports {Class} ClassName
@@ -429,6 +459,7 @@ function calculatePrice(items, discount, tax) {
 ## Output Examples
 
 ### Generated API Docs Structure
+
 ```
 docs/
 ├── index.html
@@ -453,6 +484,7 @@ docs/
 ## Configuration
 
 Default settings:
+
 - Types: api, readme, comments
 - Format: markdown
 - Update existing: true
@@ -462,11 +494,13 @@ Default settings:
 ## Best Practices
 
 1. **Keep Updated**:
+
    - Run after significant changes
    - Include in CI/CD
    - Version documentation
 
 2. **Be Descriptive**:
+
    - Explain "why" not just "what"
    - Include examples
    - Document edge cases

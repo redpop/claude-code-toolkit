@@ -1,23 +1,26 @@
 ---
 allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*), Write
-description: Deep code analysis with parallel scanning and expert delegation for comprehensive insights
+description: Deep code analysis with streamlined output and clear workflow guidance
 argument-hint: <directory> [--focus=security|performance|architecture|all] [--export-md] [--export-json]
 ---
 
 # Deep Code Analysis
 
-Comprehensive code analysis using a hybrid approach: parallel scanning for speed, followed by expert analysis for depth.
+Comprehensive code analysis using a hybrid approach with **simplified, action-oriented output**.
 
 ## Analysis Process
 
 ### Phase 1: Parallel Scanning (5-8 seconds)
-10 specialized scanners analyze your codebase simultaneously, each focusing on specific aspects.
+
+10 specialized scanners analyze your codebase simultaneously.
 
 ### Phase 2: Expert Delegation (10-20 seconds)
-Based on Phase 1 findings, appropriate expert agents provide deep analysis of critical issues.
 
-### Phase 3: Synthesis & Reporting
-All findings are consolidated into actionable insights with clear next steps.
+Critical findings get expert analysis for detailed insights.
+
+### Phase 3: Simplified Reporting
+
+Clear next steps with optional detailed findings.
 
 ## Execution
 
@@ -25,95 +28,92 @@ All findings are consolidated into actionable insights with clear next steps.
 
 ### Phase 1: Parallel Scanning
 
-Deploying 10 parallel scanners...
-
 Use Task tool with subagent_type="general-purpose" for each scanner:
 
-1. **Code Complexity Scanner**
-   Prompt: "Scan $ARGUMENTS for complexity issues. Find functions with cyclomatic complexity >10, nested code >4 levels, functions >50 lines. Return JSON with top 5 complex areas."
+1. **Security Scanner**
+   Prompt: "Scan $ARGUMENTS for critical security issues: hardcoded secrets, SQL injection risks, missing validation, unencrypted data. Focus on severity and auto-fixability. Return JSON with: {critical_count, issues: [{type, file, line, severity, auto_fixable, fix_time_minutes}]}"
 
-2. **Security Scanner**
-   Prompt: "Scan $ARGUMENTS for security patterns: hardcoded secrets, SQL injection risks, eval/exec usage, unvalidated inputs. Return JSON with severity ratings."
+2. **Performance Scanner**
+   Prompt: "Scan $ARGUMENTS for performance bottlenecks: N+1 queries, blocking operations, memory leaks, inefficient algorithms. Prioritize by impact. Return JSON with: {bottlenecks_count, issues: [{type, file, impact, fix_effort_hours, expected_improvement}]}"
 
-3. **Performance Scanner**
-   Prompt: "Find performance issues in $ARGUMENTS: O(n²) algorithms, sync I/O in loops, memory leaks, blocking operations. Return JSON with performance hotspots."
+3. **Code Quality Scanner**
+   Prompt: "Scan $ARGUMENTS for quick quality wins: code smells, duplication, complexity >15, dead code. Focus on high-ROI fixes. Return JSON with: {quick_wins_count, issues: [{type, file, roi_score, fix_minutes}]}"
 
 4. **Architecture Scanner**
-   Prompt: "Check architecture in $ARGUMENTS: circular dependencies, layer violations, god objects, tight coupling. Return JSON with architectural issues."
+   Prompt: "Scan $ARGUMENTS for architectural issues: circular dependencies, god objects, layer violations. Prioritize by refactoring complexity. Return JSON with: {violations_count, issues: [{type, affected_files, complexity, refactor_effort}]}"
 
 5. **Test Coverage Scanner**
-   Prompt: "Analyze test coverage in $ARGUMENTS: untested critical functions, modules <50% coverage, missing tests. Return JSON with coverage gaps."
+   Prompt: "Scan $ARGUMENTS for critical test gaps: untested business logic, missing edge cases, <50% coverage modules. Return JSON with: {coverage_gaps, critical_untested: [{file, function, risk_level}]}"
 
-6. **Code Smell Scanner**
-   Prompt: "Detect code smells in $ARGUMENTS: duplicate code, long parameter lists, dead code, poor naming. Return JSON with top code smells."
+### Phase 2: Expert Analysis (only for critical findings)
 
-7. **Documentation Scanner**
-   Prompt: "Check documentation in $ARGUMENTS: missing function docs, outdated comments, unclear names. Return JSON with doc issues."
-
-8. **Dependency Scanner**
-   Prompt: "Scan dependencies in $ARGUMENTS: outdated packages, vulnerabilities, unused deps, conflicts. Return JSON with dependency issues."
-
-9. **Error Handling Scanner**
-   Prompt: "Analyze error handling in $ARGUMENTS: unhandled exceptions, generic catches, missing logs. Return JSON with error handling issues."
-
-10. **Integration Scanner**
-    Prompt: "Find integration points in $ARGUMENTS: API calls, database queries, file I/O, network requests. Return JSON with integration risks."
-
-### Phase 2: Expert Delegation
-
-Based on scanner findings, delegate to specialized experts:
-
-**If critical security issues found:**
+**If >5 critical security issues:**
 Use Task tool with subagent_type="general-purpose":
-"As security expert, analyze these findings: [security scanner results]. Provide detailed vulnerability assessment and remediation strategies."
+"Security expert analysis: Review findings: [security results]. Provide: 1) Most critical vulnerability, 2) Auto-fix strategy, 3) Manual fix requirements, 4) Risk assessment. Format for immediate action."
 
-**If performance bottlenecks found:**
+**If >3 performance bottlenecks:**
 Use Task tool with subagent_type="general-purpose":
-"As performance expert, analyze these bottlenecks: [performance scanner results]. Provide optimization strategies with expected improvements."
-
-**If architectural violations found:**
-Use Task tool with subagent_type="general-purpose":
-"As architecture expert, review these issues: [architecture scanner results]. Suggest refactoring approach and migration path."
-
-**If test coverage gaps found:**
-Use Task tool with subagent_type="general-purpose":
-"As test expert, analyze coverage gaps: [test scanner results]. Provide test strategy for critical uncovered code."
+"Performance expert analysis: Review bottlenecks: [performance results]. Provide: 1) Highest impact optimization, 2) Quick wins vs major refactors, 3) Expected improvement metrics. Prioritize by ROI."
 
 ### Phase 3: Report Generation
 
-## Deep Analysis Report
+Generate a streamlined, action-focused report:
 
-### Executive Summary
-- **Health Score**: [0-100 based on findings]
-- **Critical Issues**: [Count by category]
-- **Quick Wins**: [Easy fixes with high impact]
+````markdown
+# 🔍 Deep Analysis Complete
 
-### Critical Findings
+📊 **Health Score: {score}/100** | 🔴 Critical: {critical_count} | ⚡ Quick Wins: {quick_wins_count}
 
-#### 🔒 Security Issues
-[Expert-verified security vulnerabilities with remediation]
-
-#### ⚡ Performance Bottlenecks  
-[Expert-analyzed performance issues with optimization strategies]
-
-#### 🏗️ Architecture Concerns
-[Expert-reviewed architectural issues with refactoring plans]
-
-### Quick Actions
+## 🎯 Your Next Step
 
 ```bash
-# Fix critical security issues
-/prefix:fix:security --severity=critical
-
-# Optimize performance hotspots
-/prefix:fix:performance --target=algorithm
-
-# Generate missing tests
-/prefix:gen:tests --coverage-target=80
+/prefix:scan:report --latest --generate-action-plan
 ```
+````
 
-### Detailed Findings
-[Comprehensive list organized by priority]
+**Why?** This creates a prioritized action plan with specific fix commands for all issues found.
+
+---
+
+<details>
+<summary>📋 Summary of Findings (click to expand)</summary>
+
+### Top Issues Found:
+
+1. {most_critical_issue} - {impact_description}
+2. {second_critical_issue} - {impact_description}
+3. {third_critical_issue} - {impact_description}
+
+### By Category:
+
+- 🔒 Security: {security_count} issues ({critical_security} critical)
+- ⚡ Performance: {perf_count} bottlenecks ({major_perf} major impact)
+- 🏗️ Architecture: {arch_count} concerns ({refactor_needed} need refactoring)
+- 🧪 Testing: {coverage}% coverage ({untested_critical} critical paths untested)
+
+### Expert Insights:
+
+{2-3 key insights from expert analysis}
+
+</details>
+
+💡 **Tip**: {contextual_tip_based_on_findings}
+
+````
+
+**Contextual Tips Logic**:
+- If security critical ≥ 5: "Critical security issues detected - fix these immediately before proceeding!"
+- If quick wins ≥ 10: "Great news! Many easy improvements available for quick impact."
+- If health < 50: "Your codebase needs attention - start with the action plan for systematic improvement."
+- If health > 80: "Your code is in good shape! Focus on the remaining optimizations."
+- Default: "The action plan will guide you through improvements in priority order."
+
+**Report Principles**:
+1. Lead with the next action, not the problems
+2. Show health metrics at a glance
+3. Hide overwhelming details in collapsible sections
+4. Provide context-aware guidance
+5. Use the 3-step workflow as the primary recommendation
 
 ## Export Options
 
@@ -131,55 +131,54 @@ Use Task tool with subagent_type="general-purpose":
 /prefix:scan:deep . --focus=security --export-json
 
 # Pre-release comprehensive check
-/prefix:scan:deep . --export-md=release-report.md
-```
+/prefix:scan:deep . --export-md
+````
 
-## 🎯 Next Steps
+## 🎯 Your Next Step
 
-Based on the analysis, I recommend:
-
-### 1. **Immediate Actions** (5-15 min)
-**Quick fixes with high impact:**
 ```bash
-# Fix critical issues from this scan
-/prefix:fix:quick-wins {export-file}
-
-# Or fix specific critical security issues
-/prefix:fix:security {export-file} --severity=critical
+/prefix:scan:report --latest --generate-action-plan
 ```
 
-### 2. **Comprehensive Improvement** (30-60 min)
-**For thorough code quality enhancement:**
+This will create a prioritized action plan from your analysis. The plan will include specific commands to fix the issues found.
+
+---
+
+<details>
+<summary>📊 See Full Analysis Details</summary>
+
+The complete analysis has been saved to `{export-file}` and includes:
+
+- Detailed findings for each category
+- Severity ratings and impact scores
+- Specific file locations and line numbers
+- Technical recommendations
+
+</details>
+
+<details>
+<summary>🚀 Alternative Workflows</summary>
+
+If you prefer a different approach:
+
+**Quick Wins Only** (15 min):
+
 ```bash
-# Generate and execute action plan
-/prefix:scan:report {export-file} --generate-action-plan
-/prefix:auto:execute action-plan-*.md
-
-# Or run quality improvement workflow
-/prefix:meta:workflow quality-sprint
+/prefix:fix:quick-wins --latest
 ```
 
-### 3. **Focused Approach**
-**Choose based on your priorities:**
+**Security First** (if critical issues found):
 
-- [ ] 🔒 **Security Focus**: `/prefix:sec:audit . --comprehensive`
-- [ ] ⚡ **Performance**: `/prefix:fix:performance {export-file} --target=critical`
-- [ ] 🧪 **Testing**: `/prefix:gen:tests --focus={uncovered-modules}`
-- [ ] 🏗️ **Architecture**: `/prefix:flow:refactor . --based-on={export-file}`
-- [ ] 📚 **Documentation**: `/prefix:fix:documentation {export-file}`
-
-### 4. **Track Progress**
 ```bash
-# Compare with this baseline
-/prefix:scan:quality . --compare={export-file}
-
-# Review detailed findings
-/prefix:flow:review {export-file}
+/prefix:fix:security --latest --severity=critical
 ```
 
-## 📤 Export Information
-- **Results saved to**: `{export-file}`
-- **Format**: JSON/Markdown
-- **Use in next commands**: Pass the export file as input to fix commands
+**Complete Pipeline**:
 
-💡 **Pro tip**: Start with quick wins for immediate value, then proceed to comprehensive improvements.
+```bash
+/prefix:meta:pipelines deep-quality
+```
+
+</details>
+
+💡 **Why this workflow?** The 3-step process (scan → plan → execute) ensures systematic improvements with minimal manual effort.

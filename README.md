@@ -4,25 +4,39 @@ The complete toolkit for extending Claude Code with commands, agents, and tools.
 
 ## 🚀 Quick Start: Transform Your Code Quality
 
-Three powerful workflows to improve your codebase:
+### Recommended 3-Step Workflow for Project Optimization
 
-### 1. Smart Problem Solving
 ```bash
-# Let AI analyze and route your problem to the right specialists
-/prefix:flow:smart "My API endpoints are slow and tests are failing"
+# Step 1: Deep analysis with automatic report generation
+/prefix:scan:deep . --export-json
+# Creates: analysis-YYYYMMDD-HHMMSS.json
+
+# Step 2: Generate action plan from latest report
+/prefix:scan:report --latest --generate-action-plan
+# Creates: action-plan-YYYYMMDD-HHMMSS.md
+
+# Step 3: Execute the improvements
+/prefix:auto:execute --latest
 ```
 
-### 2. Automated Quality Pipeline
+### Alternative Quick Workflows
+
+**2-Step Quick Check:**
 ```bash
-# Run a complete quality improvement pipeline
-/prefix:meta:pipelines deep-quality
+/prefix:scan:quick . --export-json    # Fast scan
+/prefix:fix:quick-wins --latest       # Apply immediate fixes
 ```
 
-### 3. Custom Command Chains
+**One-Command Pipeline:**
 ```bash
-# Chain commands with automatic data flow
-/prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}" -> "scan:quality . --compare"
+/prefix:meta:pipelines deep-quality    # Complete quality improvement
 ```
+
+### 💡 Pro Tips
+
+- `--export-json` without filename → Auto-generates timestamped files
+- `--latest` → Automatically finds the most recent report
+- Commands can be chained: `/prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}"`
 
 **[See Full Workflow Guide →](docs/guides/MODERN-WORKFLOW.md)**
 
@@ -252,7 +266,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 
 | Command | Description | Options |
 |---------|-------------|---------|
-| `/prefix:scan:deep` | Deep code analysis with parallel scanning and expert delegation for comprehensive insights | `<directory>`, `--focus=security\|performance\|architecture\|all`, `--export-md`, `--export-json` |
+| `/prefix:scan:deep` | Deep code analysis with streamlined output and clear workflow guidance | `<directory>`, `--focus=security\|performance\|architecture\|all`, `--export-md`, `--export-json` |
 | `/prefix:scan:deps` | In-depth dependency analysis with 6 specialized agents for complete transparency | `package-name\|file`, `--depth=direct\|transitive\|full`, `--check=security\|licenses\|all` |
 | `/prefix:scan:docs` | Analyze documentation health, validate code-doc synchronization, check cross-references, and identify outdated content | `directory`, `--scope=readme\|api\|all`, `--check-links`, `--validate-params`, `--export-report` |
 | `/prefix:scan:explore` | Multi-Perspective Deep Research with 8 different viewpoints on a topic | `topic`, `--depth=surface\|medium\|deep`, `--focus=technical\|business\|all` |
@@ -261,7 +275,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:scan:quality` | Comprehensive code quality metrics with trend analysis and improvement roadmap | `<directory>`, `--baseline=previous.json`, `--threshold=80`, `--export` |
 | `/prefix:scan:quick` | Quick parallel code analysis for rapid feedback (30 seconds) | `<directory>`, `--focus=area`, `--export-json` |
 | `/prefix:scan:refactor` | Analyzes the impact of refactoring changes using 6 specialized agents | `file-or-pattern`, `--change-type=rename\|move\|signature\|structure` |
-| `/prefix:scan:report` | Intelligent analysis of code quality reports with trend detection, prioritization, and actionable insights | `report.json`, `--compare=other-report.json`, `--history`, `--trends`, `--quick-wins`, `--export-md`, `--generate-action-plan` |
+| `/prefix:scan:report` | Intelligent analysis of code quality reports with trend detection, prioritization, and actionable insights | `report.json`, `--latest`, `--compare=other-report.json`, `--history`, `--trends`, `--quick-wins`, `--export-md`, `--generate-action-plan` |
 | `/prefix:scan:root-cause` | Apply the Five Whys root cause analysis technique to investigate issues | `issue_description` |
 | `/prefix:scan:tests` | Comprehensive test coverage analysis with 5 specialized agents for test quality | `directory`, `--framework=jest\|pytest\|go-test\|cargo-test`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
 

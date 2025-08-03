@@ -10,6 +10,7 @@ Centralized export handling for all toolkit reports with format conversion and t
 ## Export Capabilities
 
 ### Supported Formats
+
 - **Markdown** (.md) - Human-readable reports
 - **JSON** (.json) - Machine-readable data
 - **HTML** (.html) - Web-viewable reports
@@ -38,13 +39,14 @@ Convert any analysis output to any format:
    - High-level overview
    - Key metrics only
    - Action items
-   
 2. **Technical Report**
+
    - Detailed findings
    - Code examples
    - Technical recommendations
 
 3. **Progress Report**
+
    - Baseline comparison
    - Trend analysis
    - Improvement metrics
@@ -84,6 +86,7 @@ Combine multiple reports into unified output:
 ### Step 1: Gather Reports
 
 Collect all analysis outputs:
+
 ```bash
 # Run analyses with export
 /prefix:scan:deep . --export-json=deep.json
@@ -99,6 +102,7 @@ Use Task tool with subagent_type="general-purpose":
 ### Step 3: Generate Output
 
 Create formatted report with:
+
 - Consistent styling
 - Proper sections
 - Visual elements (charts for HTML/PDF)
@@ -110,6 +114,7 @@ Create formatted report with:
 ### Custom Branding
 
 Add your branding to exports:
+
 ```bash
 /prefix:meta:export report.json --format=html --brand=company-logo.png
 ```
@@ -117,6 +122,7 @@ Add your branding to exports:
 ### Scheduled Exports
 
 Automate regular reporting:
+
 ```bash
 # Weekly quality report
 /prefix:meta:export weekly-*.json --merge --template=progress --format=pdf --output=week-{date}.pdf
@@ -125,6 +131,7 @@ Automate regular reporting:
 ### Diff Reports
 
 Compare two exports:
+
 ```bash
 /prefix:meta:export current.json --compare=previous.json --format=md
 ```
@@ -156,6 +163,7 @@ Compare two exports:
 ## Output Examples
 
 ### Executive Summary (Markdown)
+
 ```markdown
 # Code Quality Report - Executive Summary
 
@@ -163,11 +171,13 @@ Compare two exports:
 **Overall Health**: 78/100 ↑
 
 ## Key Findings
+
 - 3 critical security issues (fixed)
 - Test coverage improved to 82%
 - Performance optimized by 35%
 
 ## Recommended Actions
+
 1. Address remaining security warnings
 2. Increase test coverage to 90%
 3. Review architectural debt
@@ -176,20 +186,23 @@ Compare two exports:
 ```
 
 ### Progress Report (HTML)
+
 ```html
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Progress Report</title>
-    <style>/* Professional styling */</style>
-</head>
-<body>
+    <style>
+      /* Professional styling */
+    </style>
+  </head>
+  <body>
     <h1>Quality Improvement Progress</h1>
     <canvas id="trend-chart"></canvas>
     <table class="metrics-table">
-        <!-- Formatted metrics -->
+      <!-- Formatted metrics -->
     </table>
-</body>
+  </body>
 </html>
 ```
 
@@ -200,23 +213,26 @@ Compare two exports:
 3. **Template Choice**: Match template to audience
 4. **Format Selection**:
    - JSON for automation
-   - Markdown for developers  
+   - Markdown for developers
    - HTML for web viewing
    - PDF for stakeholders
 
 ## Usage Patterns
 
 ### Daily Standup
+
 ```bash
 /prefix:meta:export yesterday.json today.json --template=progress --format=md
 ```
 
 ### Sprint Review
+
 ```bash
 /prefix:meta:export sprint-*.json --merge --template=executive --format=pdf
 ```
 
 ### Annual Audit
+
 ```bash
 /prefix:meta:export year-*.json --merge --template=compliance --format=pdf --output=audit-2024.pdf
 ```

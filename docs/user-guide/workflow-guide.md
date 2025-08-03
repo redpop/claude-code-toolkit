@@ -5,6 +5,7 @@ This guide shows you how to use the Claude Code Toolkit effectively for differen
 ## 🎯 Choose Your Workflow Approach
 
 ### 1. Smart Problem Solving (Fastest) 🤖
+
 Let AI analyze your problem and automatically route to the right solution:
 
 ```bash
@@ -12,12 +13,14 @@ Let AI analyze your problem and automatically route to the right solution:
 ```
 
 **Best for:**
+
 - Complex, multi-faceted problems
 - When you're not sure where to start
 - Quick problem resolution
 - Incident response
 
 ### 2. Pre-Built Pipelines (Structured) 🚀
+
 Use tested workflow sequences for common tasks:
 
 ```bash
@@ -25,6 +28,7 @@ Use tested workflow sequences for common tasks:
 ```
 
 **Available pipelines:**
+
 - `quick-quality` - 30-second pre-commit check
 - `deep-quality` - Comprehensive analysis with fixes
 - `security-hardening` - Find and fix vulnerabilities
@@ -32,6 +36,7 @@ Use tested workflow sequences for common tasks:
 - `release-prep` - Ensure code is production-ready
 
 ### 3. Command Chaining (Flexible) 🔗
+
 Build custom workflows by chaining commands:
 
 ```bash
@@ -39,12 +44,14 @@ Build custom workflows by chaining commands:
 ```
 
 **Features:**
+
 - Sequential execution with `->`
 - Parallel execution with `[cmd1, cmd2]`
 - Data passing with `{output}`
 - Conditional execution with `?>`
 
 ### 4. Manual Control (Granular) 🔧
+
 Execute individual commands for specific tasks:
 
 ```bash
@@ -60,11 +67,13 @@ Execute individual commands for specific tasks:
 **Goal**: Ensure code quality before committing
 
 #### Quick Check (30 seconds)
+
 ```bash
 /global:meta:pipelines quick-quality
 ```
 
 #### Or Manual Steps:
+
 ```bash
 # 1. Fast analysis
 /global:scan:quick . --export-json=pre-commit.json
@@ -81,11 +90,13 @@ Execute individual commands for specific tasks:
 **Goal**: Find and fix performance bottlenecks
 
 #### Smart Approach:
+
 ```bash
 /global:flow:smart "application is slow, especially database queries"
 ```
 
 #### Or Structured Approach:
+
 ```bash
 # 1. Performance analysis
 /global:scan:perf . --export-json=perf-analysis.json
@@ -102,11 +113,13 @@ Execute individual commands for specific tasks:
 **Goal**: Find and fix security vulnerabilities
 
 #### Pipeline Approach:
+
 ```bash
 /global:meta:pipelines security-hardening
 ```
 
 #### Or Step-by-Step:
+
 ```bash
 # 1. Security audit
 /global:sec:audit . --export-json=security-audit.json
@@ -222,9 +235,10 @@ Every command provides recommended next steps. Follow the wizard-like guidance:
 
 ```markdown
 ## 🎯 Next Steps
+
 Based on the analysis, I recommend:
 
-1. **Quick Fix** (5 min): 
+1. **Quick Fix** (5 min):
    `/global:fix:quick-wins report.json`
 
 2. **Comprehensive** (30 min):
@@ -239,6 +253,7 @@ Based on the analysis, I recommend:
 ## 💡 Best Practices
 
 ### 1. Start with Baselines
+
 ```bash
 # Before any major work
 /global:scan:deep . --export=baseline.json
@@ -246,12 +261,14 @@ Based on the analysis, I recommend:
 ```
 
 ### 2. Use Smart Commands for Complex Problems
+
 ```bash
 # Instead of figuring out commands yourself
 /global:flow:smart "help me improve test coverage to 80%"
 ```
 
 ### 3. Chain Commands for Automation
+
 ```bash
 # Create reusable workflows
 /global:meta:chain \
@@ -262,12 +279,14 @@ Based on the analysis, I recommend:
 ```
 
 ### 4. Export Everything
+
 ```bash
 # Always use --export flags
 /global:scan:deep . --export-all
 ```
 
 ### 5. Verify Changes
+
 ```bash
 # After fixes, always verify
 /global:scan:quality . --compare=before.json
@@ -276,6 +295,7 @@ Based on the analysis, I recommend:
 ## 🔗 Advanced Patterns
 
 ### Conditional Workflows
+
 ```bash
 # Only proceed if issues found
 /global:meta:chain \
@@ -285,6 +305,7 @@ Based on the analysis, I recommend:
 ```
 
 ### Parallel Analysis
+
 ```bash
 # Run multiple scans simultaneously
 /global:meta:chain \
@@ -293,6 +314,7 @@ Based on the analysis, I recommend:
 ```
 
 ### Custom Pipelines
+
 ```bash
 # Define your own pipeline
 /global:meta:chain --save="my-pipeline" \
@@ -308,6 +330,7 @@ Based on the analysis, I recommend:
 ## 📊 Progress Tracking
 
 ### Daily Progress
+
 ```bash
 # Morning check
 /global:meta:health --compare=yesterday
@@ -317,6 +340,7 @@ Based on the analysis, I recommend:
 ```
 
 ### Sprint Progress
+
 ```bash
 # Start of sprint
 /global:auto:sprint . --duration=2w --start
@@ -331,6 +355,7 @@ Based on the analysis, I recommend:
 ## 🆘 When Things Go Wrong
 
 ### Rollback Changes
+
 ```bash
 # If automated fixes cause issues
 /global:meta:rollback --to=checkpoint
@@ -341,12 +366,14 @@ git checkout .
 ```
 
 ### Debug Mode
+
 ```bash
 # Run commands with debug output
 /global:scan:deep . --debug --verbose
 ```
 
 ### Get Help
+
 ```bash
 # Ask for help
 /global:flow:smart "help me understand why this command failed"
@@ -357,20 +384,21 @@ git checkout .
 
 ## 📋 Workflow Cheat Sheet
 
-| Goal | Command |
-|------|---------|
-| Quick quality check | `/global:meta:pipelines quick-quality` |
-| Find security issues | `/global:sec:audit .` |
-| Fix performance | `/global:flow:smart "app is slow"` |
-| Improve tests | `/global:gen:tests --coverage-target=80` |
-| Refactor safely | `/global:flow:refactor . --safe` |
-| Update docs | `/global:fix:documentation` |
-| Full analysis | `/global:scan:deep .` |
-| Execute fixes | `/global:auto:execute plan.md` |
+| Goal                 | Command                                  |
+| -------------------- | ---------------------------------------- |
+| Quick quality check  | `/global:meta:pipelines quick-quality`   |
+| Find security issues | `/global:sec:audit .`                    |
+| Fix performance      | `/global:flow:smart "app is slow"`       |
+| Improve tests        | `/global:gen:tests --coverage-target=80` |
+| Refactor safely      | `/global:flow:refactor . --safe`         |
+| Update docs          | `/global:fix:documentation`              |
+| Full analysis        | `/global:scan:deep .`                    |
+| Execute fixes        | `/global:auto:execute plan.md`           |
 
 ---
 
 **Remember**: The toolkit is designed to guide you. When in doubt, use:
+
 ```bash
 /global:flow:smart "what should I do next?"
 ```

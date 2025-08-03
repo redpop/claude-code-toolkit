@@ -21,6 +21,7 @@ The Claude Code Toolkit v3.0 provides powerful workflows for code quality improv
 ```
 
 **Available pipelines**:
+
 - `quick-quality` - 30-second check before commits
 - `deep-quality` - Comprehensive analysis with fixes
 - `security-hardening` - Security-focused improvements
@@ -35,6 +36,7 @@ The Claude Code Toolkit v3.0 provides powerful workflows for code quality improv
 ```
 
 **Features**:
+
 - `->` Sequential execution
 - `[cmd1, cmd2]` Parallel execution
 - `{output}` Data passing
@@ -152,21 +154,25 @@ For granular control, use individual commands:
 ## 🔗 Common Patterns
 
 ### Before Commit
+
 ```bash
 /prefix:meta:pipelines quick-quality
 ```
 
 ### Before PR
+
 ```bash
 /prefix:meta:chain "flow:review ." -> "gen:docs --update" -> "git:commit"
 ```
 
 ### Weekly Maintenance
+
 ```bash
 /prefix:meta:pipelines continuous-improvement
 ```
 
 ### Emergency Response
+
 ```bash
 /prefix:flow:incident "describe the issue"
 ```

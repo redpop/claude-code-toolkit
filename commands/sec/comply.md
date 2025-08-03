@@ -57,22 +57,26 @@ This command runs comprehensive compliance checks against industry standards and
 **IF Semgrep MCP is available:**
 
 1. **OWASP Compliance**:
+
    ```markdown
-   Use mcp__semgrep__semgrep_scan with config "p/owasp-top-ten"
+   Use mcp**semgrep**semgrep_scan with config "p/owasp-top-ten"
    Map findings to OWASP categories
    Calculate compliance percentage
    ```
 
 2. **PCI-DSS Compliance**:
+
    ```markdown
-   Use mcp__semgrep__semgrep_scan with config "p/pci-dss"
+   Use mcp**semgrep**semgrep_scan with config "p/pci-dss"
    Check for credit card data handling
    Verify encryption implementations
    ```
 
 3. **GDPR Compliance**:
+
    ```markdown
-   Use mcp__semgrep__semgrep_scan_with_custom_rule for GDPR-specific checks:
+   Use mcp**semgrep**semgrep_scan_with_custom_rule for GDPR-specific checks:
+
    - Personal data identification patterns
    - Consent verification logic
    - Data retention implementations
@@ -81,8 +85,9 @@ This command runs comprehensive compliance checks against industry standards and
 4. **Custom Policy Compliance**:
    ```markdown
    If --custom-rules provided:
+
    - Load custom Semgrep rules
-   - Use mcp__semgrep__semgrep_scan_with_custom_rule
+   - Use mcp**semgrep**semgrep_scan_with_custom_rule
    - Generate custom compliance report
    ```
 
@@ -108,6 +113,7 @@ fi
 **IF no Semgrep tools available:**
 
 Run basic pattern-based checks for common compliance issues:
+
 - Hardcoded secrets (PCI-DSS)
 - Unencrypted data transmission
 - Missing authentication
@@ -121,6 +127,7 @@ Run basic pattern-based checks for common compliance issues:
 # Compliance Report
 
 ## Executive Summary
+
 - **Date**: [timestamp]
 - **Standards Checked**: [OWASP, PCI-DSS, GDPR]
 - **Analysis Tool**: [Semgrep MCP | Local Semgrep | Pattern-Based]
@@ -128,14 +135,15 @@ Run basic pattern-based checks for common compliance issues:
 
 ## OWASP Top 10 Compliance
 
-| Category | Status | Issues | Compliance |
-|----------|--------|--------|------------|
-| A01: Broken Access Control | ⚠️ Partial | 3 | 75% |
-| A02: Cryptographic Failures | ✅ Pass | 0 | 100% |
-| A03: Injection | ❌ Fail | 5 | 40% |
-| ... | ... | ... | ... |
+| Category                    | Status     | Issues | Compliance |
+| --------------------------- | ---------- | ------ | ---------- |
+| A01: Broken Access Control  | ⚠️ Partial | 3      | 75%        |
+| A02: Cryptographic Failures | ✅ Pass    | 0      | 100%       |
+| A03: Injection              | ❌ Fail    | 5      | 40%        |
+| ...                         | ...        | ...    | ...        |
 
 ### Critical Findings
+
 1. **SQL Injection** (A03)
    - Location: user-service.js:45
    - Risk: High
@@ -144,12 +152,14 @@ Run basic pattern-based checks for common compliance issues:
 ## PCI-DSS Compliance
 
 ### Requirement 3: Protect Stored Cardholder Data
+
 - **Status**: ❌ Non-Compliant
 - **Issues Found**:
   1. Credit card numbers stored in plain text (database.js:123)
   2. Missing encryption for sensitive data fields
-  
+
 ### Requirement 6.5: Secure Coding
+
 - **Status**: ⚠️ Partial Compliance (70%)
 - **Issues Found**:
   1. Input validation missing in payment module
@@ -158,12 +168,14 @@ Run basic pattern-based checks for common compliance issues:
 ## GDPR Compliance
 
 ### Data Protection Measures
+
 - **Encryption at Rest**: ✅ Implemented
 - **Encryption in Transit**: ⚠️ Partial (HTTPS not enforced)
 - **Access Controls**: ✅ RBAC implemented
 - **Data Minimization**: ❌ Excessive data collection detected
 
 ### Privacy by Design
+
 1. **Consent Management**: Not implemented
 2. **Right to Erasure**: Partial implementation
 3. **Data Portability**: Not implemented
@@ -171,16 +183,19 @@ Run basic pattern-based checks for common compliance issues:
 ## Recommendations
 
 ### Immediate Actions (Critical)
+
 1. Fix SQL injection vulnerabilities (OWASP A03)
 2. Implement credit card encryption (PCI-DSS Req 3)
 3. Add consent management system (GDPR)
 
 ### Short-term (1-2 weeks)
+
 1. Implement comprehensive input validation
 2. Enforce HTTPS across all endpoints
 3. Add data retention policies
 
 ### Long-term (1-3 months)
+
 1. Implement full GDPR compliance framework
 2. Achieve PCI-DSS Level 1 compliance
 3. Automate compliance monitoring
@@ -200,7 +215,7 @@ rules:
     severity: ERROR
     metadata:
       compliance: company-policy
-      
+
   - id: company-secure-api-keys
     patterns:
       - pattern: api_key = "$KEY"
@@ -247,21 +262,18 @@ Calculate and track compliance scores:
   },
   "trend": "improving",
   "target_date": "2024-03-01",
-  "blockers": [
-    "SQL injection fixes",
-    "Consent management implementation"
-  ]
+  "blockers": ["SQL injection fixes", "Consent management implementation"]
 }
 ```
 
 ## Tool Quality Impact
 
-- **Semgrep MCP**: 
+- **Semgrep MCP**:
   - Comprehensive rule coverage
   - Low false positive rate
   - Automated compliance mapping
-  
 - **Local Semgrep**:
+
   - Good coverage
   - Manual mapping required
   - Slower execution

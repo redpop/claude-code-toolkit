@@ -29,71 +29,82 @@ This command analyzes test coverage and test quality with 5 parallel working age
 After completion of all test agents:
 
 1. **Create Coverage Dashboard**:
+
    ```markdown
    # Test Coverage Report
-   
+
    ## Overall Metrics
+
    - Line Coverage: X%
    - Branch Coverage: X%
    - Function Coverage: X%
    - Test Execution Time: Xs
-   
+
    ## Coverage by Module
+
    | Module | Coverage | Tests | Quality |
-   |--------|----------|-------|---------|
+   | ------ | -------- | ----- | ------- |
    | Core   | 95%      | 120   | A       |
    | API    | 78%      | 45    | B       |
    | Utils  | 45%      | 12    | D       |
    ```
 
 2. **Identify Critical Gaps**:
+
    ```markdown
    ## Critical Coverage Gaps
-   
+
    ### Completely Untested Files
+
    - src/payment/processor.js (0% - CRITICAL)
    - src/auth/validator.js (0% - HIGH)
-   
+
    ### Low Coverage Areas (<50%)
+
    - src/api/endpoints.js (35% - Complex Logic)
    - src/database/queries.js (42% - Error Paths)
    ```
 
 3. **Generate Test Improvement Plan**:
+
    ```markdown
    ## Test Improvement Roadmap
-   
+
    ### Immediate Actions (Week 1)
+
    1. Add tests for payment processor (Est: 20 tests)
    2. Cover error handling in API layer (Est: 15 tests)
    3. Fix 5 identified flaky tests
-   
+
    ### Short-term (Week 2-3)
+
    1. Increase utils coverage to 80%
    2. Add integration tests for critical paths
    3. Implement test performance optimizations
-   
+
    ### Long-term (Month 2)
+
    1. Achieve 90% overall coverage
    2. Establish coverage gates in CI/CD
    3. Implement mutation testing
    ```
 
 4. **Suggest Test Structure (DO NOT CREATE FILES)**:
+
    ```javascript
    // EXAMPLE ONLY - Show this structure to developers
    // DO NOT create any test files
-   describe('PaymentProcessor', () => {
-     describe('processPayment', () => {
-       it('should handle successful payment', () => {
+   describe("PaymentProcessor", () => {
+     describe("processPayment", () => {
+       it("should handle successful payment", () => {
          // Developer should implement
        });
-       
-       it('should handle insufficient funds', () => {
+
+       it("should handle insufficient funds", () => {
          // Developer should implement
        });
-       
-       it('should handle network errors', () => {
+
+       it("should handle network errors", () => {
          // Developer should implement
        });
      });

@@ -33,12 +33,14 @@ This command performs deep performance profiling with 7 specialized agents. Iden
 After completion of all Performance Agents:
 
 1. **Create Performance Score Card**:
+
    ```markdown
    # Performance Analysis Report
-   
+
    ## Overall Performance Score: C+ (65/100)
-   
+
    ### Breakdown by Category
+
    - Algorithm Efficiency: B (75/100)
    - Database Performance: D (45/100)
    - Memory Management: C (60/100)
@@ -47,15 +49,17 @@ After completion of all Performance Agents:
    ```
 
 2. **Identify Top Bottlenecks**:
+
    ```markdown
    ## Critical Performance Issues
-   
+
    1. **Database N+1 Problem** (Impact: HIGH)
+
       - Location: UserService.getWithPosts()
       - Current: 100 queries per request
       - Solution: Add eager loading
       - Expected Improvement: 95% reduction
-   
+
    2. **O(n³) Algorithm** (Impact: HIGH)
       - Location: DataProcessor.correlate()
       - Current: 5s for 1000 items
@@ -64,26 +68,31 @@ After completion of all Performance Agents:
    ```
 
 3. **Generate Optimization Roadmap**:
+
    ```markdown
    ## Performance Optimization Roadmap
-   
+
    ### Phase 1: Quick Wins (1 day)
+
    - [ ] Add database indexes (2h, +40% query speed)
    - [ ] Enable HTTP caching (1h, -30% server load)
    - [ ] Fix N+1 queries (3h, -90% DB load)
-   
+
    ### Phase 2: Medium Impact (1 week)
+
    - [ ] Implement Redis caching (8h, +60% response time)
    - [ ] Optimize algorithms (12h, +80% processing speed)
    - [ ] Add pagination (4h, -70% memory usage)
-   
+
    ### Phase 3: Architecture (1 month)
+
    - [ ] Implement job queues (40h)
    - [ ] Add microservice caching layer (60h)
    - [ ] Database sharding (80h)
    ```
 
 4. **Code-Level Optimizations**:
+
    ```javascript
    // Before: O(n²) search
    function findDuplicates(arr) {
@@ -94,7 +103,7 @@ After completion of all Performance Agents:
        }
      }
    }
-   
+
    // After: O(n) with Set
    function findDuplicates(arr) {
      const seen = new Set();
