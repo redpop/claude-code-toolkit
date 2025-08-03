@@ -1,7 +1,7 @@
 ---
-allowed-tools: Task, Read, Grep, Bash(jq:*), Write, TodoWrite
+allowed-tools: Task, Read, Grep, Bash(jq:*), Bash(find:*), Bash(ls:*), Write, Edit, TodoWrite
 description: Execute action plans systematically with progress tracking and smart error handling
-argument-hint: <action-plan.md> [--mode=supervised|auto] [--dry-run] [--parallel=N]
+argument-hint: <action-plan.md>|--latest [--mode=supervised|auto] [--dry-run] [--parallel=N]
 ---
 
 # Execute Action Plan
@@ -18,46 +18,77 @@ Systematically execute fix commands from an action plan, with progress tracking 
 
 ### Phase 1: Plan Loading & Validation
 
-1. Read action plan file: $ARGUMENTS
-2. Parse todo items and commands
-3. Validate command syntax
-4. Check prerequisites
+1. **Handle --latest Flag**:
+   - If `--latest` is specified:
+     - Search for most recent action plan: `ls -t ACTION-PLAN-*.md 2>/dev/null | head -1`
+     - Alternative: `find . -maxdepth 1 -name "ACTION-PLAN-*.md" -o -name "action-plan-*.md" | head -1`
+     - Use timestamps in filenames to identify newest
+   - Otherwise use provided filename: $ARGUMENTS
+
+2. Read action plan file
+3. **Parse task checkboxes and commands**:
+   - Look for patterns: `- [ ] /prefix:command` (pending tasks)
+   - Look for patterns: `- [x] /prefix:command` (completed tasks)
+   - Extract command, reason, and ROI for each task
+4. **Count completed vs pending tasks** for progress reporting
+5. Validate command syntax for pending tasks only
+6. Check prerequisites
 
 ### Phase 2: Execution
 
+**Progress Overview:**
+```
+📊 Action Plan Status:
+- Total Tasks: {total_count}
+- Already Completed: {completed_count} ✓
+- Remaining: {pending_count}
+```
+
 **Using TodoWrite for Progress Tracking:**
 
-Initialize todo list with all tasks from the action plan:
+Initialize todo list with all tasks, marking already completed ones:
 ```
 TodoWrite([
-  {id: "task-1", content: "Fix security vulnerabilities", status: "pending", priority: "high"},
-  {id: "task-2", content: "Optimize performance", status: "pending", priority: "medium"},
+  {id: "task-1", content: "Fix security vulnerabilities", status: "completed"},  // - [x] in plan
+  {id: "task-2", content: "Optimize performance", status: "pending", priority: "medium"},  // - [ ] in plan
   ...
 ])
 ```
 
-**For each task in priority order:**
+**For each task in the action plan:**
 
-1. Update status to "in_progress"
-   ```
-   TodoWrite(update task-N status: "in_progress")
-   ```
+1. **Check task checkbox status**:
+   - If `- [x]`: Skip with message "✓ Already completed"
+   - If `- [ ]`: Proceed with execution
 
-2. Execute the command
+2. Update TodoWrite status to "in_progress"
+
+3. Execute the command
    - If supervised mode: Show preview and ask confirmation
    - If auto mode: Execute directly
    - If dry-run: Show what would be done
 
-3. Handle results
-   - Success: Update status to "completed"
-   - Failure: Log error, decide if critical
-   - Skip: Mark as "skipped" with reason
+4. Handle results
+   - Success: 
+     - Update TodoWrite status to "completed"
+     - **Update action plan**: Change `- [ ]` to `- [x]` using Edit tool
+     ```
+     Edit(action-plan.md, 
+       old_string="- [ ] /prefix:command...",
+       new_string="- [x] /prefix:command...")
+     ```
+   - Failure: 
+     - Log error, decide if critical
+     - Leave checkbox as `- [ ]` with error note
+   - Skip: 
+     - Mark as "skipped" with reason
+     - Update checkbox to `- [~]` (optional)
 
-4. Progress report after each task:
+5. Progress report after each task:
    ```
-   Completed: X/Y (Z%)
-   Current: [task name]
-   Remaining: Y-X tasks
+   ✅ Completed: X/Y (Z%)
+   🔄 Current: [task name]
+   ⏳ Remaining: Y-X tasks
    ```
 
 ### Phase 3: Completion Report
@@ -98,26 +129,46 @@ Use Task tool with subagent_type="general-purpose":
 # Dry run to preview
 /prefix:auto:execute action-plan.md --dry-run
 
+# Continue where left off (reads checkboxes)
+/prefix:auto:execute action-plan.md --mode=auto
+
 # Parallel execution (auto mode only)
 /prefix:auto:execute action-plan.md --mode=auto --parallel=3
 ```
 
 ## Integration with Other Commands
 
-**Typical Workflow:**
+**Simplified 3-Step Workflow:**
 ```bash
 # 1. Analyze codebase
 /prefix:scan:deep . --export-json
 
 # 2. Generate action plan
-/prefix:scan:report analysis.json --generate-action-plan
+/prefix:scan:report --latest --generate-action-plan
 
 # 3. Execute fixes
-/prefix:auto:execute action-plan.md --mode=supervised
+/prefix:auto:execute --latest
 
-# 4. Verify results
+# 4. Verify results (optional)
 /prefix:auto:report
 ```
+
+**Using --latest throughout:**
+```bash
+# Execute most recent action plan
+/prefix:auto:execute --latest
+
+# Auto mode (no confirmations)
+/prefix:auto:execute --latest --mode=auto
+
+# Preview mode
+/prefix:auto:execute --latest --dry-run
+```
+
+**Resuming Execution:**
+The command automatically detects completed tasks by reading the checkboxes in the action plan:
+- `- [x]` = Already completed (will be skipped)
+- `- [ ]` = Pending (will be executed)
 
 ## Options
 
@@ -125,6 +176,7 @@ Use Task tool with subagent_type="general-purpose":
 - `--dry-run`: Preview without changes
 - `--parallel`: Number of parallel tasks (auto mode only)
 - `--focus`: Execute only specific category
+- `--force-all`: Execute all tasks, even those marked as completed
 
 ## Real-time Progress
 
@@ -141,3 +193,35 @@ Final report includes:
 - Key improvements made
 - Any failures requiring attention
 - Recommended next steps
+
+## Progress Tracking
+
+**Checkbox-based State:**
+- The action plan itself is the source of truth
+- `- [ ]` = Task pending
+- `- [x]` = Task completed
+- Tasks are updated in real-time during execution
+- No separate state files needed
+
+**Benefits:**
+- Simple and visible progress tracking
+- Resume capability built into the action plan
+- Easy manual intervention if needed
+- Git-friendly (tracks changes to plan)
+
+**Example Action Plan with Progress:**
+```markdown
+## TASKS
+
+- [x] /prefix:fix:security --target=validation --file=src/utils/dataExportImport.ts
+  REASON: JSON Injection vulnerability
+  ROI: 10.0
+
+- [x] /prefix:fix:security --target=validation --file=src/services/neutralinoStorage.ts
+  REASON: JSON.parse() without error handling
+  ROI: 9.0
+
+- [ ] /prefix:generate:tests --focus=dataExportImport --coverage-target=90
+  REASON: Critical functions untested
+  ROI: 8.0
+```

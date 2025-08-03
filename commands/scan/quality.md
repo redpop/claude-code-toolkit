@@ -45,92 +45,102 @@ If baseline provided, compare metrics:
 Use Task tool with subagent_type="general-purpose":
 "Compare current metrics with baseline: [current metrics] vs [baseline metrics]. Calculate: 1) Improvement/degradation %, 2) Trend direction, 3) Problem areas, 4) Success stories. Return trend analysis."
 
-### Phase 3: Quality Report
+### Phase 3: Report Generation
 
-## Code Quality Report
+Generate streamlined, action-focused report with these principles:
+1. Lead with the next action, not analysis
+2. Hide detailed metrics in expandable sections
+3. Focus on what changed and what to do next
+4. No time-based groupings (weeks/months)
 
-### Overall Health Score: [X/100]
+**Report Format:**
 
-```
-Maintainability: ████████░░ 78/100 (↑ +5)
-Reliability:     ██████░░░░ 65/100 (↓ -3)
-Security:        █████████░ 92/100 (→ 0)
-Performance:     ███████░░░ 71/100 (↑ +8)
-Testability:     ██████░░░░ 68/100 (↑ +2)
-```
+# 📊 Code Quality Report
 
-### Key Metrics
+**Health Score: {score}/100** {trend_emoji} {change_text}
 
-| Metric           | Current | Target | Status |
-| ---------------- | ------- | ------ | ------ |
-| Code Coverage    | 72%     | 80%    | ⚠️     |
-| Complexity (avg) | 8.3     | <10    | ✅     |
-| Duplication      | 12%     | <5%    | ❌     |
-| Tech Debt        | 45h     | <20h   | ⚠️     |
-| Doc Coverage     | 68%     | >80%   | ⚠️     |
-
-### Top Issues by Impact
-
-1. **High Complexity Functions** (Impact: High)
-
-   - `processOrder()` - Complexity: 24
-   - `validateUser()` - Complexity: 19
-   - Action: `/prefix:flow:refactor --type=extract`
-
-2. **Low Test Coverage** (Impact: High)
-
-   - `PaymentService` - Coverage: 45%
-   - `AuthModule` - Coverage: 52%
-   - Action: `/prefix:gen:tests --focus=critical`
-
-3. **Code Duplication** (Impact: Medium)
-   - 3 instances of data validation logic
-   - 2 instances of error handling pattern
-   - Action: `/prefix:fix:duplicates`
-
-### Improvement Roadmap
-
-#### Week 1: Quick Wins (8h effort, +10 quality points)
+## 🎯 Your Next Step
 
 ```bash
-# Fix critical complexity
-/prefix:flow:refactor src/OrderProcessor.js --type=extract
-
-# Add missing critical tests
-/prefix:gen:tests src/PaymentService.js --coverage-target=80
-
-# Remove obvious duplication
-/prefix:fix:duplicates --threshold=90
+{primary_action_command}
 ```
 
-#### Week 2-3: Major Improvements (24h effort, +15 quality points)
+**Why:** {action_reason}
+
+---
+
+<details>
+<summary>📊 Metrics Overview (click to expand)</summary>
+
+```
+Maintainability: {maint_bar} {maint_score}/100 {maint_trend}
+Reliability:     {rel_bar} {rel_score}/100 {rel_trend}
+Security:        {sec_bar} {sec_score}/100 {sec_trend}
+Performance:     {perf_bar} {perf_score}/100 {perf_trend}
+Testability:     {test_bar} {test_score}/100 {test_trend}
+```
+
+| Metric           | Current | Previous | Target | Status |
+| ---------------- | ------- | -------- | ------ | ------ |
+| Code Coverage    | {cov}%  | {p_cov}% | 80%    | {cov_status} |
+| Complexity (avg) | {comp}  | {p_comp} | <10    | {comp_status} |
+| Duplication      | {dup}%  | {p_dup}% | <5%    | {dup_status} |
+| Tech Debt        | {debt}h | {p_debt}h| <20h   | {debt_status} |
+| Doc Coverage     | {doc}%  | {p_doc}% | >80%   | {doc_status} |
+
+</details>
+
+<details>
+<summary>🚨 Critical Issues Found ({critical_count})</summary>
+
+{critical_issues_list}
+
+</details>
+
+<details>
+<summary>🎉 Success Stories ({success_count})</summary>
+
+{success_stories_list}
+
+</details>
+
+<details>
+<summary>📋 All Recommended Actions</summary>
+
+**Priority Actions** (sorted by ROI)
 
 ```bash
-# Comprehensive test coverage
-/prefix:gen:tests --coverage-target=80
+# 1. {action_1_desc}
+{action_1_cmd}
+# ROI: {action_1_roi}
 
-# Architecture improvements
-/prefix:flow:refactor --type=restructure
+# 2. {action_2_desc}
+{action_2_cmd}
+# ROI: {action_2_roi}
 
-# Documentation update
-/prefix:gen:docs --comprehensive
+# 3. {action_3_desc}
+{action_3_cmd}
+# ROI: {action_3_roi}
 ```
 
-#### Month 2: Excellence (40h effort, +20 quality points)
+**Additional Actions**
 
-- Achieve 90% test coverage
-- Reduce complexity below 8
-- Eliminate code duplication
-- Complete documentation
+{additional_actions_list}
+
+</details>
+
+💡 **Tip:** {contextual_tip}
 
 ### Quality Gates
 
-Configure CI/CD to enforce:
-
-- No new code with complexity >15
-- Maintain test coverage >80%
-- No critical security issues
-- Documentation for public APIs
+```yaml
+# Recommended thresholds
+quality_gates:
+  complexity_max: 15
+  coverage_min: 80
+  security_critical: 0
+  doc_coverage_min: 80
+```
 
 ## Usage Examples
 
@@ -150,18 +160,34 @@ Configure CI/CD to enforce:
 
 ## Export Format
 
+Results are exported as JSON with filename: `code-quality-report-{YYYYMMDD}.json`
+
+<details>
+<summary>JSON Schema</summary>
+
 ```json
 {
-  "timestamp": "2024-01-30T10:00:00Z",
-  "overall_score": 74,
-  "metrics": {
-    "maintainability": 78,
-    "reliability": 65,
-    "security": 92,
-    "performance": 71,
-    "testability": 68
+  "timestamp": "ISO-8601",
+  "overall_score": {current},
+  "comparison": {
+    "baseline_file": "filename",
+    "score_change": {delta}
   },
-  "details": {...},
-  "recommendations": [...]
+  "metrics": {
+    "maintainability": {score},
+    "reliability": {score},
+    "security": {score},
+    "performance": {score},
+    "testability": {score}
+  },
+  "top_actions": [
+    {
+      "command": "/prefix:...",
+      "reason": "...",
+      "roi": {score}
+    }
+  ]
 }
 ```
+
+</details>
