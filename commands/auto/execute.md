@@ -41,34 +41,51 @@ Systematically execute fix commands from an action plan, with progress tracking 
 📊 Action Plan Status:
 - Total Tasks: {total_count}
 - Already Completed: {completed_count} ✓
-- Remaining: {pending_count}
+- Matching Criteria: {matching_count}
+- Will Execute: {execution_count}
 ```
+
+**Task Filtering (if filters applied):**
+- Apply `--min-roi`, `--max-roi`, `--focus` filters to pending tasks
+- Show filtered task list upfront
 
 **Using TodoWrite for Progress Tracking:**
 
-Initialize todo list with all tasks, marking already completed ones:
+Initialize todo list with ALL tasks that will be executed:
 ```
 TodoWrite([
   {id: "task-1", content: "Fix security vulnerabilities", status: "completed"},  // - [x] in plan
-  {id: "task-2", content: "Optimize performance", status: "pending", priority: "medium"},  // - [ ] in plan
-  ...
+  {id: "task-2", content: "Generate tests for dataExportImport (ROI: 8.0)", status: "pending", priority: "high"},
+  {id: "task-3", content: "Generate tests for storage layer (ROI: 7.0)", status: "pending", priority: "high"},
+  {id: "task-4", content: "Extract magic numbers to constants (ROI: 7.0)", status: "pending", priority: "high"},
+  // Only tasks that match execution criteria
 ])
 ```
 
-**For each task in the action plan:**
+**Execution Overview Display:**
+```
+🎯 Execution Plan (ROI ≥ 7.9):
 
-1. **Check task checkbox status**:
+1. Generate tests for dataExportImport (ROI: 8.0)
+2. Generate tests for storage layer (ROI: 7.0) 
+3. Extract magic numbers to constants (ROI: 7.0)
+
+Total: 3 tasks to execute
+```
+
+**For each task in the filtered execution list:**
+
+1. **Pre-execution checks**:
    - If `- [x]`: Skip with message "✓ Already completed"
-   - If `- [ ]`: Proceed with execution
+   - If `- [ ]` and matches criteria: Proceed
+   - Update TodoWrite status to "in_progress"
 
-2. Update TodoWrite status to "in_progress"
-
-3. Execute the command
+2. Execute the command
    - If supervised mode: Show preview and ask confirmation
    - If auto mode: Execute directly
    - If dry-run: Show what would be done
 
-4. Handle results
+3. Handle results
    - Success: 
      - Update TodoWrite status to "completed"
      - **Update action plan**: Change `- [ ]` to `- [x]` using Edit tool
@@ -82,14 +99,26 @@ TodoWrite([
      - Leave checkbox as `- [ ]` with error note
    - Skip: 
      - Mark as "skipped" with reason
-     - Update checkbox to `- [~]` (optional)
 
-5. Progress report after each task:
+4. Progress report after each task:
    ```
-   ✅ Completed: X/Y (Z%)
+   ✅ Completed: X/Y ({Z}%)
    🔄 Current: [task name]
    ⏳ Remaining: Y-X tasks
    ```
+
+**Final Summary:**
+```
+🎉 Execution Complete!
+
+Completed Tasks:
+✅ Task 1: [description] (ROI: X.X)
+✅ Task 2: [description] (ROI: X.X)
+✅ Task 3: [description] (ROI: X.X)
+
+Total: X/X tasks completed successfully
+Time: XX minutes
+```
 
 ### Phase 3: Completion Report
 
@@ -177,6 +206,8 @@ The command automatically detects completed tasks by reading the checkboxes in t
 - `--parallel`: Number of parallel tasks (auto mode only)
 - `--focus`: Execute only specific category
 - `--force-all`: Execute all tasks, even those marked as completed
+- `--min-roi`: Only execute tasks with ROI >= threshold
+- `--max-roi`: Only execute tasks with ROI <= threshold
 
 ## Real-time Progress
 
