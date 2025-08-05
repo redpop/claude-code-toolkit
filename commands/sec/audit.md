@@ -50,14 +50,18 @@ This command performs a deep security audit using the best available tools, with
 **IF Semgrep MCP is NOT available BUT local semgrep is installed:**
 
 ```bash
-# Run comprehensive security scan
-semgrep --config=auto --json --severity=ERROR,WARNING $ARGUMENTS
+# Run comprehensive security scan (includes all severities)
+semgrep --config=auto --json $ARGUMENTS
 
 # Run OWASP specific checks
 semgrep --config=p/owasp-top-ten --json $ARGUMENTS
 
 # Run security audit
 semgrep --config=p/security-audit --json $ARGUMENTS
+
+# For specific severity filtering, run multiple commands:
+# semgrep --config=auto --json --severity=ERROR $ARGUMENTS
+# semgrep --config=auto --json --severity=WARNING $ARGUMENTS
 ```
 
 ### Option C: Traditional Pattern-Based Audit

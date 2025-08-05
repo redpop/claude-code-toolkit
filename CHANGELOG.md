@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.4.1] - 2025-08-05
+
+### Added
+
+- ✨ **Test Guide Command** - New `/meta:test-guide` command for generating interactive test documentation
+  - Creates test guides suitable for both end-users and technical reviewers
+  - Supports multiple languages (English, German, Spanish, French, Japanese, Chinese)
+  - Flexible output options: display only or save with auto-generated filenames
+  - Includes browser DevTools instructions for all testers
+  - Adapts content based on project type (Frontend/Backend/CLI)
+  - Combines user-friendly steps with embedded technical validation
+
+### Fixed
+
+- 🐛 Fixed semgrep command syntax error in `/sec:audit` - removed invalid comma-separated severity values
+  - Changed from `--severity=ERROR,WARNING` to running without severity filter
+  - Now includes all severity levels by default for comprehensive security scanning
+
 ## [3.4.0] - 2025-08-05
 
 ### Added
@@ -428,6 +446,7 @@ This release marks the transition from a commands-only repository to a full tool
 
 - 🐛 Update instructions in README now reflect actual Git-based workflow
 
+[3.4.1]: https://github.com/redpop/claude-code-toolkit/compare/v3.4.0...v3.4.1
 [3.4.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.3.0...v3.4.0
 [3.3.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.1.0...v3.2.0
