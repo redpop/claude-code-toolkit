@@ -1,6 +1,6 @@
 ---
 description: Generates interactive test guides for recent changes, suitable for both end-users and technical reviewers
-argument-hint: [--type=all|user|technical] [--format=md|checklist] [--lang=en|de|es|fr] [--output[=file.md]]
+argument-hint: [--type=all|user|technical] [--format=md|checklist|jira] [--lang=en|de|es|fr] [--output[=file.md]]
 ---
 
 # Claude Command: Test Guide
@@ -16,8 +16,10 @@ This command analyzes recent implementations and generates comprehensive test gu
 /test-guide --type=user               # User-focused testing only
 /test-guide --type=technical          # Developer-focused testing only
 /test-guide --format=checklist        # Simple checklist format
+/test-guide --format=jira             # Jira Wiki Markup format
 /test-guide --lang=de                 # Generate guide in German
 /test-guide --output --lang=de        # Save German guide with auto filename
+/test-guide --format=jira --output    # Save as Jira-formatted file
 ```
 
 ## Output Location
@@ -27,7 +29,7 @@ The test guide output behavior:
 1. **Default (no `--output`)**: Display only in Claude Code interface
 2. **With `--output`**: Save to auto-generated filename: `test-guides/YYYY-MM-DD_HH-MM-SS_test-guide.md`
 3. **With `--output=filename.md`**: Save to your specified file
-4. **Format**: Always saves as .md file, `--format` only affects content style
+4. **Format**: Always saves as .md file (even with Jira format), `--format` only affects content syntax
 
 ### Auto-generated Filename Convention
 
@@ -145,6 +147,66 @@ Enhanced login system with 2FA support and improved error messages.
 - Console tab: No red errors
 - Network tab: `/api/login` returns 200 status
 - Application tab → Cookies: `auth-token` is set
+```
+
+## Example Output (Jira Wiki Markup)
+
+When using `--format=jira`, the output uses Jira Wiki Markup syntax:
+
+```
+h1. Test Guide: User Authentication Update
+
+h2. What Changed?
+
+Enhanced login system with 2FA support and improved error messages.
+
+h2. Test Instructions
+
+h3. 1. Basic Login Flow
+
+*For All Testers:*
+
+# Navigate to login page
+# Enter username: {{testuser}}
+# Enter password: {{testpass123}}
+# Click "Login"
+
+*Expected Result:*
+* Redirected to dashboard
+* Welcome message shows username
+
+*Technical Check (Press F12):*
+
+{panel:title=Console Check}
+* Console tab: No red errors
+* Network tab: {{/api/login}} returns 200 status
+* Application tab → Cookies: {{auth-token}} is set
+{panel}
+
+h3. 2. Two-Factor Authentication
+
+|| Test Step || Action || Expected Result ||
+| 1 | Login with test credentials | Success |
+| 2 | Go to Settings → Security | Page loads |
+| 3 | Click "Enable 2FA" | QR code appears |
+
+{code:javascript}
+// Browser Console Test
+localStorage.getItem('2fa-setup')
+// Should return: "pending"
+{code}
+
+h2. Quick Checklist
+
+* (+) Can login with valid credentials
+* (+) Invalid login shows error message
+* (+) 2FA setup completes successfully
+* (+) Session persists after browser refresh
+* (+) Logout clears all tokens
+
+{note}
+Check DevTools → Application tab to verify token removal
+{note}
 ```
 
 ## Example Output (German / Deutsch)
@@ -279,12 +341,41 @@ Works well with:
 - `/scan:quality` - Identify areas needing testing
 - `/flow:review` - Generate test guides for review process
 
+## Format Options
+
+The command supports three output formats:
+
+### 1. **Markdown** (default)
+- Standard markdown formatting
+- Works in most documentation systems
+- Best for GitHub, GitLab, general docs
+
+### 2. **Checklist**
+- Simple checkbox format
+- Quick validation lists
+- Minimal formatting
+
+### 3. **Jira Wiki Markup**
+- Native Jira text formatting
+- Direct copy-paste into Jira tickets
+- No conversion needed
+- Includes panels, tables, and code blocks
+
+#### Jira Format Features:
+- `h1.` `h2.` `h3.` for headings
+- `*bold*` and `_italic_` text
+- `||header||` for tables
+- `{code}` blocks for code
+- `{panel}` for highlighted sections
+- `{{inline code}}` for code snippets
+- `* (+)` for checkmarks in lists
+
 ## Command Arguments
 
 - `$ARGUMENTS`: Optional parameters
   - `--feature`: Target specific feature for testing
   - `--type`: Focus on user, technical, or all (default: all)
-  - `--format`: Output style - markdown or checklist (default: markdown)
+  - `--format`: Output style - markdown, checklist, or jira (default: markdown)
   - `--lang`: Language for output (en, de, es, fr, ja, zh) - default: en
   - `--output`: Save to file. Without value: auto-generated name. With value: specific file
 

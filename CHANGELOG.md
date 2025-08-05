@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.4.2] - 2025-08-05
+
+### Changed
+
+- 🔄 Enhanced `/meta:test-guide` command with Jira Wiki Markup format support
+  - Added `--format=jira` option for native Jira text formatting
+  - Direct copy-paste compatibility with Jira tickets
+  - Supports Jira syntax: headings (h1. h2. h3.), tables, panels, code blocks
+  - No conversion needed - outputs ready-to-use Jira formatted text
+
 ## [3.4.1] - 2025-08-05
 
 ### Added
@@ -446,6 +456,7 @@ This release marks the transition from a commands-only repository to a full tool
 
 - 🐛 Update instructions in README now reflect actual Git-based workflow
 
+[3.4.2]: https://github.com/redpop/claude-code-toolkit/compare/v3.4.1...v3.4.2
 [3.4.1]: https://github.com/redpop/claude-code-toolkit/compare/v3.4.0...v3.4.1
 [3.4.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.3.0...v3.4.0
 [3.3.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.2.0...v3.3.0
