@@ -46,7 +46,9 @@ MCP servers extend Claude Code's capabilities through specialized tools. The too
 ### Supported MCP Servers
 
 #### Semgrep MCP
+
 Provides advanced security analysis with AST-based scanning:
+
 - `mcp__semgrep__security_check` - Fast security vulnerability scanning
 - `mcp__semgrep__semgrep_scan` - Comprehensive code analysis
 - `mcp__semgrep__semgrep_scan_with_custom_rule` - Custom rule scanning
@@ -56,15 +58,21 @@ Provides advanced security analysis with AST-based scanning:
 - `mcp__semgrep__get_supported_languages` - Language support check
 
 #### GitHub MCP
+
 Repository and pull request integration:
+
 - `mcp__github__*` - Various GitHub operations
 
 #### GitLab MCP
+
 GitLab-specific operations:
+
 - `mcp__gitlab__*` - GitLab API integration
 
 #### Perplexity MCP
+
 Web search and documentation:
+
 - `mcp__perplexity__*` - Web search capabilities
 
 ### Declaring MCP Enhancement
@@ -81,6 +89,7 @@ argument-hint: [directory] [--severity=high]
 ```
 
 The `mcp-enhanced` field:
+
 - Lists MCP tools that enhance the command
 - Serves as documentation for available enhancements
 - Does not enforce tool availability
@@ -92,6 +101,7 @@ Commands implement a three-tier fallback strategy to ensure functionality in all
 ### Tier 1: MCP-Enhanced Execution
 
 When MCP tools are available, commands use them for:
+
 - Higher accuracy analysis
 - Faster processing
 - Advanced features (AST analysis, semantic understanding)
@@ -100,14 +110,17 @@ When MCP tools are available, commands use them for:
 ### Tier 2: Local Tool Fallback
 
 When MCP is unavailable but local tools exist:
-```markdown
+
+````markdown
 **IF local Semgrep is available but not MCP:**
 
 ```bash
 # Use local CLI with appropriate parameters
 semgrep --config=auto --json --severity=ERROR,WARNING .
 ```
-```
+````
+
+````
 
 ### Tier 3: Basic Pattern Fallback
 
@@ -120,7 +133,7 @@ Use Task Tool agents for parallel pattern-based analysis:
 - XSS vulnerability detection
 - Basic security checks
 - Manual pattern matching
-```
+````
 
 ### Fallback Implementation Example
 
@@ -136,22 +149,28 @@ Use Task Tool agents for parallel pattern-based analysis:
 ## Execution Strategy
 
 ### Option A: MCP-Enhanced (Preferred)
-IF mcp__semgrep__security_check is available:
-   - Use MCP tool for comprehensive analysis
-   - Leverage AST-based detection
-   - Get semantic understanding
+
+IF mcp**semgrep**security_check is available:
+
+- Use MCP tool for comprehensive analysis
+- Leverage AST-based detection
+- Get semantic understanding
 
 ### Option B: Local Tool Fallback
+
 ELSE IF local semgrep is available:
-   - Run semgrep with appropriate configs
-   - Process JSON output
-   - Apply similar analysis logic
+
+- Run semgrep with appropriate configs
+- Process JSON output
+- Apply similar analysis logic
 
 ### Option C: Pattern-Based Fallback
+
 ELSE:
-   - Use ripgrep for pattern matching
-   - Deploy Task agents for parallel scanning
-   - Apply heuristic-based detection
+
+- Use ripgrep for pattern matching
+- Deploy Task agents for parallel scanning
+- Apply heuristic-based detection
 ```
 
 ## Tool Discovery
@@ -163,7 +182,7 @@ Commands discover available tools through a systematic check process:
 Commands check for MCP availability by testing specific tool names:
 
 ```markdown
-1. **Check for Semgrep MCP**: 
+1. **Check for Semgrep MCP**:
    - Test if `mcp__semgrep__security_check` is callable
    - Verify other required MCP tools
    - Note available capabilities
@@ -173,16 +192,19 @@ Commands check for MCP availability by testing specific tool names:
 
 Use Bash to check for local installations:
 
-```markdown
+````markdown
 2. **Check for local tools**:
+
    ```bash
    # Check if semgrep is installed
    which semgrep >/dev/null 2>&1 && echo "available" || echo "not found"
-   
+
    # Check version if needed
    semgrep --version 2>/dev/null || echo "not installed"
    ```
-```
+````
+
+````
 
 ### 3. Capability Assessment
 
@@ -215,7 +237,7 @@ The most common pattern checks availability before use:
 1. Use ripgrep with security patterns
 2. Deploy parallel Task agents
 3. Apply manual security checks
-```
+````
 
 ### Pattern 2: Progressive Enhancement
 
@@ -223,16 +245,19 @@ Start with basic functionality and enhance when possible:
 
 ```markdown
 ## Base Analysis (Always Available)
+
 - Pattern-based vulnerability detection
 - Basic code quality checks
 - Simple security scans
 
 ## Enhanced with Local Tools
-+ Semantic analysis
-+ Better false-positive reduction
-+ More vulnerability types
+
+- Semantic analysis
+- Better false-positive reduction
+- More vulnerability types
 
 ## Enhanced with MCP
+
 ++ AST-based precision
 ++ Cross-file analysis
 ++ Custom rule support
@@ -245,16 +270,19 @@ Combine multiple tools for comprehensive analysis:
 
 ```markdown
 ## Phase 1: Parallel Scanning
+
 - Deploy multiple Task agents simultaneously
 - Use MCP tools if available for specific agents
 - Collect all results in structured format
 
 ## Phase 2: Deep Analysis
+
 - Delegate critical findings to specialized tools
 - Use MCP for high-priority issues
 - Fall back to patterns for others
 
 ## Phase 3: Synthesis
+
 - Combine results from all sources
 - Weight findings by tool quality
 - Generate unified report
@@ -266,17 +294,20 @@ Leverage unique capabilities when available:
 
 ```markdown
 **MCP-Specific Features:**
+
 - AST analysis for precise code understanding
 - Custom rule creation and execution
 - CI/CD findings integration
 - Language-specific semantic analysis
 
 **Local Tool Features:**
+
 - Configuration flexibility
 - Offline operation
 - Custom rule paths
 
 **Basic Features:**
+
 - Pattern matching
 - Parallel execution
 - Cross-platform compatibility
@@ -289,6 +320,7 @@ Robust error handling ensures commands continue functioning even when tools fail
 ### Tool Failure Scenarios
 
 #### 1. MCP Server Not Running
+
 ```markdown
 **Error**: MCP tool not found
 **Action**: Automatically fall back to local tool
@@ -296,6 +328,7 @@ Robust error handling ensures commands continue functioning even when tools fail
 ```
 
 #### 2. Local Tool Missing
+
 ```markdown
 **Error**: Command not found
 **Action**: Fall back to pattern-based approach
@@ -303,23 +336,27 @@ Robust error handling ensures commands continue functioning even when tools fail
 ```
 
 #### 3. Tool Execution Failure
+
 ```markdown
 **Error**: Tool returned non-zero exit code
-**Action**: 
+**Action**:
+
 1. Log error details
 2. Attempt fallback method
 3. Continue with partial results if possible
-**User Notification**: Include error in report with reduced confidence
+   **User Notification**: Include error in report with reduced confidence
 ```
 
 ### Error Recovery Strategies
 
 1. **Partial Result Handling**
+
    - Continue analysis with available data
    - Mark incomplete sections clearly
    - Provide confidence indicators
 
 2. **Timeout Management**
+
    - Set reasonable timeouts for each tool
    - Fall back if tool exceeds timeout
    - Inform user of timeout occurrence
@@ -335,6 +372,7 @@ Robust error handling ensures commands continue functioning even when tools fail
 ## Analysis Report
 
 **Tool Status**:
+
 - Attempted: Semgrep MCP ❌ (server not running)
 - Fallback: Local Semgrep ❌ (not installed)
 - Used: Pattern-based analysis ✓
@@ -350,11 +388,13 @@ npm install -g @semgrep/mcp
 ### Tool Trust Levels
 
 1. **MCP Tools**: Highest trust
+
    - Vetted by MCP ecosystem
    - Consistent API and behavior
    - Sandboxed execution
 
 2. **Local Tools**: Medium trust
+
    - User-installed and configured
    - Version variability
    - Direct system access
@@ -367,6 +407,7 @@ npm install -g @semgrep/mcp
 ### Security Best Practices
 
 1. **Input Validation**
+
    ```markdown
    - Sanitize file paths before passing to tools
    - Validate tool output format
@@ -374,6 +415,7 @@ npm install -g @semgrep/mcp
    ```
 
 2. **Output Sanitization**
+
    ```markdown
    - Never expose actual secrets found
    - Sanitize error messages
@@ -381,6 +423,7 @@ npm install -g @semgrep/mcp
    ```
 
 3. **Tool Restrictions**
+
    ```yaml
    # Restrict Bash access to specific commands
    allowed-tools: Bash(semgrep:*), Bash(npm:view), Bash(git:log)
@@ -389,6 +432,7 @@ npm install -g @semgrep/mcp
 4. **Sensitive Data Handling**
    ```markdown
    **When detecting secrets:**
+
    - Report type and location only
    - Never log actual secret values
    - Use secure deletion for temp files
@@ -399,8 +443,10 @@ npm install -g @semgrep/mcp
 ### 1. Always Check First
 
 Never assume tool availability:
+
 ```markdown
 **FIRST, CHECK AVAILABLE TOOLS:**
+
 1. Test specific MCP tools needed
 2. Check for local alternatives
 3. Have fallback ready
@@ -409,11 +455,12 @@ Never assume tool availability:
 ### 2. Transparent Reporting
 
 Always indicate which tools were used:
+
 ```markdown
 ## Security Analysis Report
 
 **Analysis Method**: Semgrep MCP (High Accuracy)
-**Tool Version**: mcp__semgrep v1.2.3
+**Tool Version**: mcp\_\_semgrep v1.2.3
 **Scan Duration**: 2.3 seconds
 **Files Analyzed**: 156
 
@@ -423,11 +470,11 @@ Always indicate which tools were used:
 ### 3. Progressive Enhancement Design
 
 Structure commands for enhancement:
+
 ```markdown
 1. **Core Functionality** (always works)
    - Basic pattern matching
    - Essential features
-   
 2. **Enhanced Features** (when tools available)
    - Advanced analysis
    - Better accuracy
@@ -437,13 +484,16 @@ Structure commands for enhancement:
 ### 4. Performance Optimization
 
 Consider performance across tool tiers:
+
 ```markdown
 **Performance Planning:**
+
 - MCP tools: Usually fastest (optimized)
 - Local tools: Medium speed (varies by system)
 - Pattern fallback: Can be slow on large codebases
 
 **Optimization Strategies:**
+
 - Use focused scans when possible
 - Implement progress reporting
 - Allow incremental analysis
@@ -452,27 +502,31 @@ Consider performance across tool tiers:
 ### 5. User Guidance
 
 Help users get the best experience:
-```markdown
+
+````markdown
 💡 **Tip**: For enhanced security analysis, install Semgrep MCP:
 
 ```bash
 npm install -g @semgrep/mcp
 ```
+````
 
 Then configure in Claude Desktop settings:
 {
-  "mcpServers": {
-    "semgrep": {
-      "command": "semgrep-mcp"
-    }
-  }
+"mcpServers": {
+"semgrep": {
+"command": "semgrep-mcp"
+}
+}
 }
 
 This enables:
+
 - 3x faster analysis
 - 90% fewer false positives
 - AST-based precision
-```
+
+````
 
 ### 6. Testing Strategies
 
@@ -508,27 +562,31 @@ This command provides security analysis with three quality levels:
 - **Best**: With Semgrep MCP (recommended)
 - **Good**: With local Semgrep
 - **Basic**: Pattern-based fallback
-```
+````
 
 ### 8. Graceful Degradation Patterns
 
 Implement smooth quality transitions:
+
 ```markdown
 ## Quality Indicators
 
 With MCP:
+
 - Semantic analysis ✓
 - Cross-file tracking ✓
 - Custom rules ✓
 - CI/CD integration ✓
 
 With Local Tools:
+
 - Semantic analysis ✓
 - Cross-file tracking ✓
 - Custom rules ✗
 - CI/CD integration ✗
 
 Pattern-Based:
+
 - Semantic analysis ✗
 - Cross-file tracking ✗
 - Custom rules ✗
@@ -551,22 +609,25 @@ description: Comprehensive security analysis with progressive enhancement
 ## Tool Detection
 
 1. Check for Semgrep MCP availability
-2. Check for local Semgrep installation  
+2. Check for local Semgrep installation
 3. Select appropriate strategy
 
 ## Execution
 
 ### With MCP (Preferred)
-- Use mcp__semgrep__security_check for rapid scan
-- Deep dive with mcp__semgrep__semgrep_scan
+
+- Use mcp**semgrep**security_check for rapid scan
+- Deep dive with mcp**semgrep**semgrep_scan
 - Generate detailed remediation guide
 
 ### With Local Semgrep
+
 - Run semgrep with security configs
 - Process JSON output
 - Generate standard report
 
 ### Pattern-Based Fallback
+
 - Deploy security-focused Task agents
 - Use ripgrep for vulnerability patterns
 - Generate basic security report
@@ -586,17 +647,20 @@ description: Performance profiling with optional MCP enhancement
 ## Available Analysis Levels
 
 **Tier 1 - MCP Enhanced**:
+
 - Runtime profiling
 - Memory allocation tracking
 - CPU flame graphs
 - Precise bottleneck identification
 
 **Tier 2 - Local Profiler**:
+
 - Basic runtime analysis
 - Memory usage estimates
 - Performance patterns
 
 **Tier 3 - Static Analysis**:
+
 - Complexity analysis
 - Pattern-based bottleneck detection
 - Algorithm efficiency review
@@ -616,10 +680,12 @@ description: Multi-dimensional analysis using multiple MCP servers
 ## Tool Orchestra
 
 1. **Security (Semgrep MCP)**
+
    - Vulnerability scanning
    - Compliance checking
 
 2. **Repository (GitHub MCP)**
+
    - PR history analysis
    - Issue correlation
 
@@ -628,7 +694,9 @@ description: Multi-dimensional analysis using multiple MCP servers
    - Security advisory search
 
 ## Graceful Degradation
+
 Each dimension degrades independently:
+
 - Security → Local Semgrep → Patterns
 - Repository → Git CLI → File analysis
 - Documentation → Local docs → Built-in knowledge

@@ -5,6 +5,7 @@ This document provides practical examples of using the Report Analyzer agent and
 ## Quick Start
 
 ### Basic Report Analysis
+
 ```bash
 # Analyze a single report
 /analyze-report reports/analyze-deep-20250128.json
@@ -17,6 +18,7 @@ This document provides practical examples of using the Report Analyzer agent and
 ```
 
 ### Report Comparison
+
 ```bash
 # Compare two reports
 /analyze-report current.json --compare=previous.json
@@ -28,6 +30,7 @@ This document provides practical examples of using the Report Analyzer agent and
 ## Real-World Scenarios
 
 ### 1. Daily Standup Report
+
 ```bash
 #!/bin/bash
 # daily-standup.sh - Generate progress report for standup
@@ -50,6 +53,7 @@ jq -r '.new_issues | "🆕 New Issues: \(length)"' standup-report.json
 ```
 
 ### 2. Sprint Planning
+
 ```bash
 # sprint-planning.sh - Generate sprint backlog from quick wins
 
@@ -57,7 +61,7 @@ jq -r '.new_issues | "🆕 New Issues: \(length)"' standup-report.json
 /analyze-report latest-report.json --quick-wins --export-json=quick-wins.json
 
 # Convert to story points
-jq -r '.quick_wins[] | 
+jq -r '.quick_wins[] |
   "[\(.severity | ascii_upcase)] \(.title)",
   "  Effort: \(.estimated_effort)",
   "  Impact: \(.impact)",
@@ -70,6 +74,7 @@ echo "Total Quick Wins Effort: ${TOTAL_HOURS} hours"
 ```
 
 ### 3. Weekly Team Review
+
 ```bash
 # weekly-review.sh - Comprehensive weekly analysis
 
@@ -97,6 +102,7 @@ EOF
 ```
 
 ### 4. Quality Gate Check
+
 ```bash
 # quality-gate.sh - CI/CD quality gate
 
@@ -132,14 +138,15 @@ echo "✅ Quality Gate PASSED"
 ```
 
 ### 5. ROI-Based Prioritization
+
 ```bash
 # roi-prioritization.sh - Generate work items by ROI
 
 /analyze-report latest-report.json --export-json=analysis.json
 
 # Extract and sort by ROI
-jq -r '.findings[] | 
-  select(.roi_score > 5) | 
+jq -r '.findings[] |
+  select(.roi_score > 5) |
   {
     roi: .roi_score,
     title: .title,
@@ -147,7 +154,7 @@ jq -r '.findings[] |
     impact: .impact,
     file: .file
   }' analysis.json | \
-jq -s 'sort_by(.roi) | reverse[] | 
+jq -s 'sort_by(.roi) | reverse[] |
   "ROI: \(.roi) - \(.title)",
   "  File: \(.file)",
   "  Effort: \(.effort) | Impact: \(.impact)",
@@ -155,6 +162,7 @@ jq -s 'sort_by(.roi) | reverse[] |
 ```
 
 ### 6. Historical Trend Analysis
+
 ```bash
 # trend-analysis.sh - Analyze long-term trends
 
@@ -165,8 +173,8 @@ jq -s 'sort_by(.roi) | reverse[] |
 /analyze-report --history --trends --export-md=trend-report.md
 
 # Generate trend chart
-jq -r '.historical_data | 
-  map("\(.date): \(.health_score)") | 
+jq -r '.historical_data |
+  map("\(.date): \(.health_score)") |
   join("\n")' trend-report.json | \
 gnuplot -e "set terminal dumb; plot '-' with lines"
 ```
@@ -174,6 +182,7 @@ gnuplot -e "set terminal dumb; plot '-' with lines"
 ## Advanced Usage
 
 ### Multi-Project Portfolio Analysis
+
 ```bash
 # portfolio-analysis.sh - Analyze multiple projects
 
@@ -204,6 +213,7 @@ jq -r '.projects[] | "\(.name): \(.health)/100 (\(.critical_issues) critical)"' 
 ```
 
 ### Anomaly Detection
+
 ```bash
 # anomaly-detection.sh - Detect unusual changes
 
@@ -214,11 +224,11 @@ jq -r '
   if .metrics.health_score_delta < -10 then
     "⚠️ ANOMALY: Health score dropped by \(.metrics.health_score_delta) points!"
   else empty end,
-  
+
   if .new_critical_issues > 3 then
     "⚠️ ANOMALY: \(.new_critical_issues) new critical issues detected!"
   else empty end,
-  
+
   if .metrics.test_coverage_delta < -5 then
     "⚠️ ANOMALY: Test coverage dropped by \(.metrics.test_coverage_delta)%!"
   else empty end
@@ -226,6 +236,7 @@ jq -r '
 ```
 
 ### Team Performance Metrics
+
 ```bash
 # team-metrics.sh - Track team improvement velocity
 
@@ -245,6 +256,7 @@ jq -r '
 ## Integration Patterns
 
 ### GitHub Actions
+
 ```yaml
 name: Code Quality Analysis
 on: [push, pull_request]
@@ -254,16 +266,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Run deep analysis
         run: /analyze-deep --export-json=report.json
-        
+
       - name: Analyze report
         run: |
           /analyze-report report.json \
             --compare=.baseline/report.json \
             --export-json=analysis.json
-          
+
       - name: Comment on PR
         if: github.event_name == 'pull_request'
         run: |
@@ -273,6 +285,7 @@ jobs:
 ```
 
 ### Slack Integration
+
 ```bash
 #!/bin/bash
 # slack-report.sh - Send analysis to Slack

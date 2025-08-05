@@ -5,6 +5,7 @@ This document provides practical examples of how to use the report export functi
 ## Basic Export Examples
 
 ### Markdown Report Export
+
 ```bash
 # Basic markdown export (default filename with timestamp)
 /analyze-deep --export-md
@@ -17,6 +18,7 @@ This document provides practical examples of how to use the report export functi
 ```
 
 ### JSON Data Export
+
 ```bash
 # Basic JSON export for CI/CD integration
 /security-audit --export-json
@@ -29,6 +31,7 @@ This document provides practical examples of how to use the report export functi
 ```
 
 ### All Formats Export
+
 ```bash
 # Export all available formats
 /analyze-deep --export-all
@@ -40,6 +43,7 @@ This document provides practical examples of how to use the report export functi
 ## Workflow Integration Examples
 
 ### Daily Security Check
+
 ```bash
 #!/bin/bash
 # daily-security-check.sh
@@ -55,6 +59,7 @@ fi
 ```
 
 ### CI/CD Pipeline Integration
+
 ```yaml
 # .github/workflows/code-analysis.yml
 name: Code Analysis
@@ -65,11 +70,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Run comprehensive analysis
         run: |
           /analyze-deep --export-json=analysis-results.json
-          
+
       - name: Check quality gate
         run: |
           HEALTH_SCORE=$(jq '.summary.health_score' analysis-results.json)
@@ -77,7 +82,7 @@ jobs:
             echo "❌ Quality gate failed: Health score $HEALTH_SCORE < 70"
             exit 1
           fi
-          
+
       - name: Upload analysis report
         uses: actions/upload-artifact@v3
         with:
@@ -86,6 +91,7 @@ jobs:
 ```
 
 ### Team Review Workflow
+
 ```bash
 #!/bin/bash
 # weekly-team-review.sh
@@ -115,19 +121,20 @@ echo "Weekly code analysis complete. Reports: $REPORT_DIR" | mail -s "Code Analy
 ## Custom Tooling Examples
 
 ### Quality Dashboard Script
+
 ```javascript
 #!/usr/bin/env node
 // quality-dashboard.js
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 // Run analysis and get JSON
-const { execSync } = require('child_process');
-execSync('/analyze-deep --export-json=current-analysis.json');
+const { execSync } = require("child_process");
+execSync("/analyze-deep --export-json=current-analysis.json");
 
 // Load results
-const analysis = JSON.parse(fs.readFileSync('current-analysis.json'));
+const analysis = JSON.parse(fs.readFileSync("current-analysis.json"));
 
 // Generate dashboard
 console.log(`
@@ -150,14 +157,15 @@ console.log(`
 
 // Show top 3 critical findings
 analysis.findings
-  .filter(f => f.severity === 'critical')
+  .filter((f) => f.severity === "critical")
   .slice(0, 3)
   .forEach((finding, i) => {
-    console.log(`   ${i+1}. ${finding.title} (${finding.file})`);
+    console.log(`   ${i + 1}. ${finding.title} (${finding.file})`);
   });
 ```
 
 ### Report Comparison Tool
+
 ```bash
 #!/bin/bash
 # compare-reports.sh
@@ -193,6 +201,7 @@ fi
 ## Advanced Export Patterns
 
 ### Automated Report Archive
+
 ```bash
 #!/bin/bash
 # archive-reports.sh
@@ -214,6 +223,7 @@ echo "📦 Monthly archive created: $ARCHIVE_DIR.tar.gz"
 ```
 
 ### Multi-Project Analysis
+
 ```bash
 #!/bin/bash
 # multi-project-analysis.sh
@@ -223,11 +233,11 @@ TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 
 for project in "${PROJECTS[@]}"; do
     echo "🔍 Analyzing $project..."
-    
+
     cd "$project" || continue
-    
+
     /analyze-deep --export-json="../reports/${project}-${TIMESTAMP}.json"
-    
+
     cd ..
 done
 
@@ -238,6 +248,7 @@ node combine-reports.js reports/*-${TIMESTAMP}.json > "combined-analysis-${TIMES
 ```
 
 ### Git Hook Integration
+
 ```bash
 #!/bin/bash
 # .git/hooks/pre-push
@@ -263,6 +274,7 @@ echo "✅ Security check passed"
 ## Integration with External Tools
 
 ### SonarQube Integration
+
 ```bash
 # Export JSON for SonarQube generic format conversion
 /analyze-deep --export-json=claude-analysis.json
@@ -275,6 +287,7 @@ sonar-scanner -Dsonar.externalIssuesReportPaths=sonar-issues.json
 ```
 
 ### Slack Notifications
+
 ```bash
 #!/bin/bash
 # slack-notify.sh
@@ -302,6 +315,7 @@ curl -X POST -H 'Content-type: application/json' \
 ## Report Storage Strategies
 
 ### Time-Based Organization
+
 ```
 reports/
 ├── 2025/
@@ -314,6 +328,7 @@ reports/
 ```
 
 ### Project-Based Organization
+
 ```
 reports/
 ├── frontend/

@@ -72,7 +72,11 @@ When conducting security analysis, you will:
    - Evaluate infrastructure as code security
 
 ### 4. **Risk-Based Prioritization**
-   - Classify findings by severity (Critical, High, Medium, Low)
+   - Classify findings by severity with clear definitions:
+     - **Critical**: Immediate exploitation possible, severe business impact
+     - **High**: Exploitation likely, significant data/system compromise
+     - **Medium**: Exploitation requires specific conditions, moderate impact
+     - **Low**: Minor issues, defense-in-depth improvements
    - Consider exploitability and impact
    - Provide CVSS scores where applicable
    - Account for business context and data sensitivity
@@ -109,27 +113,76 @@ Structure your security assessment as:
 - Critical findings count
 - Key risks identified
 
-## Critical Vulnerabilities
-### [Vulnerability Name]
-- **Severity**: Critical/High/Medium/Low
+## Vulnerability Findings
+
+### Critical Vulnerabilities (Immediate Action Required)
+#### [Vulnerability Name]
+- **Severity**: CRITICAL
+- **CVSS Score**: X.X (Vector: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H)
 - **CWE/CVE**: Reference numbers
-- **Location**: Specific file and line
+- **Location**: `path/to/file.py:123-145`
 - **Description**: Clear explanation
-- **Impact**: Potential consequences
-- **Proof of Concept**: Safe demonstration
-- **Remediation**: Step-by-step fix
-- **References**: Documentation links
+- **Attack Scenario**: How an attacker would exploit this
+- **Business Impact**: Data breach, system compromise, compliance failure
+- **Proof of Concept**: 
+  ```[language]
+  // Safe demonstration of the vulnerability
+  ```
+- **Remediation**: 
+  ```[language]
+  // Secure code fix
+  ```
+- **Timeline**: Fix within 24 hours
+- **References**: OWASP link, security advisory
+
+### High/Medium/Low Vulnerabilities
+[Similar structure, grouped by severity]
 
 ## Security Recommendations
-1. Immediate actions (0-24 hours)
-2. Short-term improvements (1-7 days)
-3. Long-term security enhancements
 
-## Secure Code Examples
-[Provide secure alternatives for identified issues]
+### 🚨 Immediate Actions (0-24 hours)
+1. **[Critical Fix #1]**
+   - What: Specific action to take
+   - Why: Security impact if not fixed
+   - How: Step-by-step implementation
 
-## Compliance Gaps
-[If applicable, note any compliance issues]
+### ⚠️ Short-term Improvements (1-7 days)
+1. **[High Priority Fix]**
+   - Implementation steps
+   - Testing requirements
+   - Rollout strategy
+
+### 📋 Long-term Security Enhancements (1-4 weeks)
+1. **[Strategic Improvement]**
+   - Architecture changes needed
+   - Security controls to implement
+   - Monitoring to add
+
+## Secure Code Patterns
+
+### Input Validation Example
+```[language]
+// Insecure pattern
+[vulnerable code]
+
+// Secure pattern
+[secure implementation]
+```
+
+### Authentication Example
+[Similar structure with before/after]
+
+## Compliance & Standards
+
+### OWASP Compliance
+- ✅ A1: Injection - Compliant/Non-compliant
+- ⚠️ A2: Broken Authentication - Partial compliance
+- ❌ A3: Sensitive Data Exposure - Gaps identified
+
+### Regulatory Requirements
+- **GDPR**: [Status and gaps]
+- **PCI DSS**: [Status and gaps]
+- **SOC 2**: [Status and gaps]
 ```
 
 ## Best Practices

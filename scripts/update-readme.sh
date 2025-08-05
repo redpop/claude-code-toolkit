@@ -115,7 +115,19 @@ for category_dir in "$COMMANDS_DIR"/*; do
                     # Clean up the argument hint and format as code
                     # Remove brackets and wrap each option in backticks
                     cleaned=$(echo "$argument_hint" | sed 's/\[//g; s/\]//g')
-                    options=$(echo "$cleaned" | sed "s/ /, /g; s/^/\`/; s/$/\`/; s/, /\`, \`/g")
+                    # Only wrap in backticks if not empty after cleaning
+                    if [ -n "$cleaned" ]; then
+                        # Split by spaces and wrap each option in backticks
+                        # Also escape pipe characters for markdown tables
+                        options=$(echo "$cleaned" | awk '{
+                            for(i=1; i<=NF; i++) {
+                                if(i>1) printf ", "
+                                # Escape pipe characters in the option
+                                gsub(/\|/, "\\|", $i)
+                                printf "`%s`", $i
+                            }
+                        }')
+                    fi
                 fi
                 
                 # Add command row

@@ -1,50 +1,50 @@
 ---
 allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*)
-description: [Kurze Beschreibung des Commands]
+description: [Brief description of the command]
 argument-hint: [expected-arguments]
 ---
 
 # [Command Name]
 
-[Detaillierte Beschreibung was dieses Command tut und wann es verwendet werden sollte]
+[Detailed description of what this command does and when it should be used]
 
-## Ausführung
+## Execution
 
-**SOFORT [N] PARALLELE AGENTS STARTEN:**
+**IMMEDIATELY START [N] PARALLEL AGENTS:**
 
-1. **[Agent Name]**: Task(description="[Task Description]", prompt="[Detaillierter Prompt für den Agent. Beschreibe genau was analysiert werden soll, welche Tools verwendet werden sollen, und in welchem Format die Ergebnisse zurückgegeben werden sollen. Beende mit: Gib Ergebnisse als JSON zurück.]", subagent_type="general-purpose")
+1. **[Agent Name]**: Task(description="[Task Description]", prompt="[Detailed prompt for the agent. Describe exactly what should be analyzed, which tools should be used, and in what format the results should be returned. End with: Return results as JSON.]", subagent_type="general-purpose")
 
-2. **[Agent Name]**: Task(description="[Task Description]", prompt="[Detaillierter Prompt]", subagent_type="general-purpose")
+2. **[Agent Name]**: Task(description="[Task Description]", prompt="[Detailed prompt]", subagent_type="general-purpose")
 
-3. **[Agent Name]**: Task(description="[Task Description]", prompt="[Detaillierter Prompt]", subagent_type="general-purpose")
+3. **[Agent Name]**: Task(description="[Task Description]", prompt="[Detailed prompt]", subagent_type="general-purpose")
 
-[Weitere Agents nach Bedarf...]
+[Additional agents as needed...]
 
 ## Synthesis
 
-Nach Abschluss aller Agents:
+After all agents complete:
 
 1. **[Synthesis Step 1]**:
-   - [Beschreibung wie die Ergebnisse zusammengeführt werden]
-   - [Welche Priorisierung angewendet wird]
+   - [Description of how results are merged]
+   - [What prioritization is applied]
 
 2. **[Synthesis Step 2]**:
    ```markdown
    # [Report Title]
    
    ## [Section 1]
-   [Beschreibung des Report-Formats]
+   [Description of report format]
    
    ## [Section 2]
-   [Weitere Sections]
+   [Additional sections]
    ```
 
 3. **[Action Items]**:
-   - [Wie werden konkrete nächste Schritte generiert]
-   - [Welche Empfehlungen gegeben werden]
+   - [How concrete next steps are generated]
+   - [What recommendations are given]
 
-**Performance-Erwartung**: [X-Y Sekunden für parallele Ausführung, verglichen mit Z Sekunden sequentiell]
+**Performance Expectation**: [X-Y seconds for parallel execution, compared to Z seconds sequentially]
 
-**Hinweise**: 
-- [Spezielle Hinweise zur Verwendung]
-- [Limitationen oder Voraussetzungen]
+**Notes**: 
+- [Special usage notes]
+- [Limitations or prerequisites]

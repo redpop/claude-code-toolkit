@@ -1,30 +1,67 @@
 # Automated Code Quality Workflow Guide
 
-This guide shows you how to use the Claude Code Toolkit's powerful automated workflow to go from analysis to completed fixes with minimal manual intervention.
+This guide shows you three powerful ways to improve your code quality with the Claude Code Toolkit v3.0.
 
-## 🚀 Quick Start: The 3-Step Workflow
+## 🚀 Method 1: Smart Problem Solving (Recommended)
 
-Transform your codebase quality in just 3 commands:
+Let AI analyze your problem and coordinate the solution:
+
+```bash
+# Describe your problem in natural language
+/prefix:flow:smart "My API endpoints are slow and I have failing tests"
+```
+
+The toolkit will:
+
+- Analyze the problem type
+- Route to appropriate specialists
+- Execute fixes in parallel where possible
+- Provide consolidated results
+
+## 🏃 Method 2: Pre-Built Quality Pipeline
+
+Run a complete quality improvement pipeline with one command:
+
+```bash
+# Run deep quality analysis and fixes
+/prefix:meta:pipelines deep-quality
+```
+
+Available pipelines:
+
+- `quick-quality` - 30-second quality check
+- `deep-quality` - Full analysis with fixes
+- `security-hardening` - Security-focused improvements
+- `release-prep` - Prepare for production
+
+## 🔧 Method 3: Custom Workflow Chain
+
+Build your own workflow with command chaining:
+
+```bash
+# Analyze → Fix → Verify
+/prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}" -> "scan:quality . --compare"
+```
+
+Or the traditional step-by-step approach:
 
 ```bash
 # Step 1: Analyze your codebase
-/analyze-deep . --export-json
+/prefix:scan:deep . --export-json
 
 # Step 2: Generate an executable action plan
-/analyze-report latest-report.json --generate-action-plan
+/prefix:scan:report latest-report.json --generate-action-plan
 
 # Step 3: Execute the fixes automatically
-/execute-action-plan action-plan-*.md --mode=auto
+/prefix:auto:execute action-plan-*.md --mode=auto
 
-# Bonus Step 4: View what was accomplished
-/completion-report
+# Step 4: View what was accomplished
+/prefix:auto:report
 ```
-
-That's it! The toolkit will analyze your code, create a prioritized fix plan, execute the fixes, and show you the results.
 
 ## 📋 Understanding Action Plans
 
-When you run `/analyze-report --generate-action-plan`, the toolkit creates a structured todo list with:
+When you run `/prefix:scan:report --generate-action-plan`, the toolkit creates a structured todo list with:
 
 - **Exact commands** to fix each issue
 - **Time estimates** for each task
@@ -36,6 +73,7 @@ When you run `/analyze-report --generate-action-plan`, the toolkit creates a str
 
 ```markdown
 # Action Plan Report
+
 **Generated**: 2025-01-29 10:30:00
 **Total Estimated Effort**: 24h
 **Critical Issues**: 3
@@ -44,24 +82,29 @@ When you run `/analyze-report --generate-action-plan`, the toolkit creates a str
 ## Todo List (Prioritized by ROI)
 
 ### 🔴 Critical Security (8h)
+
 - [ ] **Input Sanitization** (3h)
-  - Command: `/fix-security --focus="xss,sanitization" --auto-fix`
-  - Files: src/components/*, src/utils/*
+
+  - Command: `/prefix:fix:security --focus="xss,sanitization" --auto-fix`
+  - Files: src/components/_, src/utils/_
   - Impact: Prevents XSS attacks across 15 components
 
 - [ ] **JSON Validation** (2h)
-  - Command: `/fix-security --focus="validation" --library="zod"`
+
+  - Command: `/prefix:fix:security --focus="validation" --library="zod"`
   - Files: src/services/dataImport.ts
   - Impact: Prevents prototype pollution attacks
 
 - [ ] **Remove Sensitive Logs** (1h)
-  - Command: `/fix-security --remove-console-logs --pattern="password|token|key"`
+  - Command: `/prefix:fix:security --remove-console-logs --pattern="password|token|key"`
   - Files: 47 files with sensitive data in logs
   - Impact: Prevents credential leakage
 
 ### 🟡 Quick Wins (6h)
+
 - [ ] **Remove Code Duplication** (2h)
-  - Command: `/fix-duplicates --file="src/utils/pdfExport.ts"`
+
+  - Command: `/prefix:fix:duplicates --file="src/utils/pdfExport.ts"`
   - Lines saved: 140
   - Impact: 50% reduction in maintenance effort
 
@@ -71,8 +114,10 @@ When you run `/analyze-report --generate-action-plan`, the toolkit creates a str
   - Files: src/services/bulkImport.ts
 
 ### 🟢 Enhancements (10h)
+
 - [ ] **Increase Test Coverage** (8h)
-  - Command: `/generate-tests --coverage-target=60 --focus="critical"`
+
+  - Command: `/prefix:gen:tests --coverage-target=60 --focus="critical"`
   - Current: 30% → Target: 60%
   - Impact: Catch 80% more bugs before production
 
@@ -97,10 +142,11 @@ When you run `/analyze-report --generate-action-plan`, the toolkit creates a str
 - Safer for production environments
 
 **Example interaction:**
+
 ```
 📋 Task 1/15: Input Sanitization
 Estimated time: 3h
-Command: /fix-security --focus="xss,sanitization" --auto-fix
+Command: /prefix:fix:security --focus="xss,sanitization" --auto-fix
 Files affected: 15
 
 Preview changes? (y/n/skip): y
@@ -156,11 +202,12 @@ Execute this task? (y/n): y
 ```
 
 **Typical Results:**
+
 ```
 Security Score: 35/100 → 89/100 (+154%)
 Vulnerabilities Fixed: 23
 - Critical: 3 → 0
-- High: 7 → 0  
+- High: 7 → 0
 - Medium: 13 → 2
 Time Taken: 6.5 hours
 ```
@@ -182,6 +229,7 @@ Time Taken: 6.5 hours
 ```
 
 **Typical Results:**
+
 ```
 Page Load Time: 3.2s → 1.4s (-56%)
 API Response Time: 450ms → 180ms (-60%)
@@ -210,6 +258,7 @@ Database Queries: Reduced by 65%
 For large codebases or risk-averse environments:
 
 ### Phase 1: Critical Issues Only (Day 1)
+
 ```bash
 /execute-action-plan action-plan.md --focus=critical --dry-run
 /execute-action-plan action-plan.md --focus=critical
@@ -217,12 +266,14 @@ git commit -m "fix: critical security vulnerabilities"
 ```
 
 ### Phase 2: Quick Wins (Day 2-3)
+
 ```bash
 /execute-action-plan action-plan.md --focus=quick-wins --max-effort=4h
 git commit -m "improvement: quick wins - performance and quality"
 ```
 
 ### Phase 3: Comprehensive Improvements (Week 2)
+
 ```bash
 /execute-action-plan action-plan.md --focus=enhancement
 git commit -m "enhancement: test coverage and documentation"
@@ -236,7 +287,7 @@ The toolkit provides real-time progress updates during execution:
 ## Execution Progress
 
 ### ✅ Completed (5/12)
-- Input Sanitization (2h 45m) 
+- Input Sanitization (2h 45m)
 - JSON Validation (1h 30m)
 - Remove Console Logs (45m)
 - CSP Headers (1h 15m)
@@ -248,7 +299,7 @@ The toolkit provides real-time progress updates during execution:
 
 ### ⏳ Pending (5/12)
 - Test Generation
-- Performance Optimization  
+- Performance Optimization
 - Error Boundaries
 - Documentation Update
 - Final Security Scan
@@ -268,6 +319,7 @@ After execution, get a comprehensive summary:
 ```
 
 **Example Output:**
+
 ```markdown
 # Workflow Completion Report
 
@@ -276,20 +328,23 @@ After execution, get a comprehensive summary:
 **ROI**: 156 hours saved annually
 
 ## Key Achievements
+
 ✅ Eliminated all critical security vulnerabilities
 ✅ Improved performance by 65%
 ✅ Increased test coverage from 30% to 58%
 ✅ Reduced code duplication by 40%
 
 ## Metrics Improvement
-| Metric | Before | After | Change |
-|--------|--------|-------|--------|
-| Security Score | 45/100 | 89/100 | +98% |
-| Load Time | 3.2s | 1.4s | -56% |
-| Test Coverage | 30% | 58% | +93% |
-| Code Duplication | 340 lines | 200 lines | -41% |
+
+| Metric           | Before    | After     | Change |
+| ---------------- | --------- | --------- | ------ |
+| Security Score   | 45/100    | 89/100    | +98%   |
+| Load Time        | 3.2s      | 1.4s      | -56%   |
+| Test Coverage    | 30%       | 58%       | +93%   |
+| Code Duplication | 340 lines | 200 lines | -41%   |
 
 ## Next Steps
+
 1. Address 2 remaining medium-priority issues
 2. Schedule manual refactoring for legacy module
 3. Set up continuous monitoring
@@ -298,12 +353,14 @@ After execution, get a comprehensive summary:
 ## 🚦 Best Practices
 
 ### 1. Start with Dry Runs
+
 ```bash
 # Always preview before executing in production
 /execute-action-plan action-plan.md --dry-run
 ```
 
 ### 2. Use Checkpoints for Large Projects
+
 ```bash
 # Create checkpoints after each phase
 /execute-action-plan action-plan.md --focus=critical --checkpoint=critical-done
@@ -311,12 +368,14 @@ After execution, get a comprehensive summary:
 ```
 
 ### 3. Parallelize Independent Tasks
+
 ```bash
 # Execute up to 3 tasks simultaneously
 /execute-action-plan action-plan.md --parallel=3
 ```
 
 ### 4. Monitor System Resources
+
 ```bash
 # Set resource limits for safety
 /execute-action-plan action-plan.md --max-memory=2G --max-cpu=50%
@@ -325,12 +384,13 @@ After execution, get a comprehensive summary:
 ## 🔧 CI/CD Integration
 
 ### GitHub Actions Example
+
 ```yaml
 name: Automated Code Quality Fixes
 
 on:
   schedule:
-    - cron: '0 2 * * 1'  # Weekly on Monday 2 AM
+    - cron: "0 2 * * 1" # Weekly on Monday 2 AM
   workflow_dispatch:
 
 jobs:
@@ -338,25 +398,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Analyze Code
         run: |
           /analyze-deep . --export-json=report.json
-          
+
       - name: Generate Action Plan
         run: |
           /analyze-report report.json --generate-action-plan \
             --quick-wins --max-effort=4h
-            
+
       - name: Execute Fixes
         run: |
           /execute-action-plan action-plan.md \
             --mode=auto --parallel=2
-            
+
       - name: Generate Report
         run: |
           /completion-report --export-all
-          
+
       - name: Create PR
         uses: peter-evans/create-pull-request@v4
         with:
@@ -366,6 +426,7 @@ jobs:
 ```
 
 ### GitLab CI Example
+
 ```yaml
 quality-improvements:
   stage: maintenance
@@ -385,6 +446,7 @@ quality-improvements:
 ## 🆘 Troubleshooting
 
 ### Issue: Execution Fails Midway
+
 ```bash
 # Resume from last checkpoint
 /execute-action-plan action-plan.md --resume
@@ -394,12 +456,14 @@ quality-improvements:
 ```
 
 ### Issue: Too Many Changes at Once
+
 ```bash
 # Execute in smaller batches
 /execute-action-plan action-plan.md --batch-size=3 --pause-between=30m
 ```
 
 ### Issue: Uncertain About Changes
+
 ```bash
 # Use supervised mode with detailed previews
 /execute-action-plan action-plan.md --mode=supervised --verbose
