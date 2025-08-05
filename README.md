@@ -204,7 +204,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 
 | Command | Description | Options |
 |---------|-------------|---------|
-| `/prefix:auto:execute` | Execute action plans systematically with progress tracking and smart error handling | `<action-plan.md>`, `--mode=supervised\|auto`, `--dry-run`, `--parallel=N` |
+| `/prefix:auto:execute` | Execute action plans systematically with progress tracking and smart error handling | `<action-plan.md>\|--latest`, `--mode=supervised\|auto`, `--dry-run`, `--parallel=N` |
 | `/prefix:auto:monitor` | Set up and manage continuous code quality monitoring with automated analysis, fixes, and reporting | `directory`, `--schedule=daily\|weekly\|commit`, `--auto-fix=safe\|all\|none`, `--notify=email\|slack\|github` |
 | `/prefix:auto:report` | Generate comprehensive completion report after action plan execution, showing results, metrics, and next steps | `--action-plan=<file>`, `--execution-log=<file>`, `--compare-baseline`, `--export-formats=md,json,html` |
 | `/prefix:auto:sprint` | Plan and execute a complete code quality improvement sprint with analysis, prioritization, fixes, and tracking | `directory`, `--duration=1w\|2w\|1m`, `--team-size=N`, `--focus=security\|performance\|quality\|all` |
@@ -259,6 +259,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:meta:handoff` | Documents current problem context for handoff to another AI assistant | `output-file` |
 | `/prefix:meta:health` | Comprehensive project health check with actionable insights and trend analysis | `--verbose`, `--compare=last-check.json`, `--export` |
 | `/prefix:meta:pipelines` | Pre-defined command pipelines for common development workflows | `<workflow-name>`, `--customize`, `--dry-run` |
+| `/prefix:meta:summary` | Creates a chat summary for another AI with complete context | `summaries/` |
 | `/prefix:meta:update-docs` | Intelligently updates project documentation based on code changes and implementation status | `--scope=<type>`, `--analyze`, `--commit` |
 
 
