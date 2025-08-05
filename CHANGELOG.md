@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.4.0] - 2025-08-05
+
+### Added
+
+- ✨ **Chat Summary Command** - New `/meta:summary` command for AI handoff and context preservation
+  - Automatically generates meaningful filenames with date, topic, and category
+  - Intelligent categorization (security, feature, bugfix, performance, etc.)
+  - Creates organized `summaries/` directory structure
+  - Captures entire chat history with structured output
+  - Self-documenting filenames prevent overwrites
+  - Perfect for shift changes between AI assistants
+
+- ✨ **Enhanced Workflow Execution** - Improved ROI-based task filtering and tracking
+  - `/auto:execute` now supports ROI-based task filtering
+  - Better progress tracking in quality improvement commands
+  - Enhanced completion reporting with task metrics
+
+- ✨ **Test Infrastructure** - Added comprehensive testing framework
+  - Support for Claude Code programmatic mode (-p)
+  - Example tests demonstrating best practices
+  - Tests adapted to work outside Claude Code environment
+  - Comprehensive testing documentation
+
+### Changed
+
+- 🔄 **Documentation Restructuring** - Major reorganization for better usability
+  - New quick start workflows prominently featured
+  - Simplified 3-step quality improvement process
+  - Better separation of user and developer documentation
+  - Updated CLAUDE.md with latest command additions
+
+### Fixed
+
+- 🐛 Test compatibility issues when running outside Claude Code environment
+- 🐛 Minor documentation inconsistencies in workflow guides
+
 ## [3.3.0] - 2025-07-30
 
 ### Added
@@ -392,6 +428,7 @@ This release marks the transition from a commands-only repository to a full tool
 
 - 🐛 Update instructions in README now reflect actual Git-based workflow
 
+[3.4.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.3.0...v3.4.0
 [3.3.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.1.0...v3.2.0
 [3.1.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.0.0...v3.1.0

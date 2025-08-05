@@ -105,6 +105,7 @@ claude-code-toolkit/
 │   │   ├── handoff.md      # AI handoff
 │   │   ├── health.md       # Project health
 │   │   ├── pipelines.md    # Pre-defined pipelines
+│   │   ├── summary.md      # Chat summary with auto-naming
 │   │   └── update-docs.md  # Update documentation
 │   ├── scan/               # Analysis & investigation
 │   │   ├── deep.md         # Deep analysis
