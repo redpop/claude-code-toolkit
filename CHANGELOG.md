@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- ✨ Enhanced `/meta:changelog` command with `--push` option for complete release workflow
+  - New `--push` flag automatically pushes commits to remote repository
+  - Requires `--commit` flag to be specified
+  - Supports full release workflow: `--commit --update-version --push`
+  - Includes safety checks for remote branch status before pushing
+
 ## [3.4.2] - 2025-08-05
 
 ### Changed

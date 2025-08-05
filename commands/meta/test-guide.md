@@ -209,7 +209,7 @@ Check DevTools → Application tab to verify token removal
 {note}
 ```
 
-## Example Output (German / Deutsch)
+## Example Output (German / Deutsch - Du-Form)
 
 ```markdown
 # Testanleitung: Benutzer-Authentifizierung Update
@@ -224,17 +224,17 @@ Verbessertes Login-System mit 2FA-Unterstützung und besseren Fehlermeldungen.
 
 **Für alle Tester:**
 
-1. Navigieren Sie zur Login-Seite
-2. Benutzername eingeben: `testuser`
-3. Passwort eingeben: `testpass123`
-4. Auf "Anmelden" klicken
+1. Navigiere zur Login-Seite
+2. Gib den Benutzernamen ein: `testuser`
+3. Gib das Passwort ein: `testpass123`
+4. Klicke auf "Anmelden"
 
 **Erwartetes Ergebnis:**
 
-- Weiterleitung zum Dashboard
-- Willkommensnachricht zeigt Benutzernamen
+- Du wirst zum Dashboard weitergeleitet
+- Die Willkommensnachricht zeigt deinen Benutzernamen
 
-**Technische Prüfung (Drücken Sie F12):**
+**Technische Prüfung (Drücke F12):**
 
 - Konsole-Tab: Keine roten Fehler
 - Netzwerk-Tab: `/api/login` gibt Status 200 zurück
@@ -244,12 +244,12 @@ Verbessertes Login-System mit 2FA-Unterstützung und besseren Fehlermeldungen.
 
 **Testkonto einrichten:**
 
-1. Mit Testdaten anmelden
-2. Zu Einstellungen → Sicherheit navigieren
-3. "2FA aktivieren" anklicken
+1. Melde dich mit Testdaten an
+2. Navigiere zu Einstellungen → Sicherheit
+3. Klicke auf "2FA aktivieren"
 
 **Browser-Tipp:**
-Öffnen Sie die Konsole (F12) und geben Sie ein: `localStorage.getItem('2fa-setup')`
+Öffne die Konsole (F12) und gib ein: `localStorage.getItem('2fa-setup')`
 Sollte zurückgeben: `"pending"`
 
 ## Schnelle Checkliste
@@ -258,7 +258,7 @@ Sollte zurückgeben: `"pending"`
 - [ ] Ungültige Anmeldung zeigt Fehlermeldung
 - [ ] 2FA-Einrichtung erfolgreich abgeschlossen
 - [ ] Sitzung bleibt nach Browser-Aktualisierung bestehen
-- [ ] Abmeldung löscht alle Token (prüfen in DevTools → Anwendung)
+- [ ] Abmeldung löscht alle Token (prüfe in DevTools → Anwendung)
 ```
 
 ## Adaptations by Project Type
