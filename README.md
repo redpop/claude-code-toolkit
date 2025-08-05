@@ -260,6 +260,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:meta:health` | Comprehensive project health check with actionable insights and trend analysis | `--verbose`, `--compare=last-check.json`, `--export` |
 | `/prefix:meta:pipelines` | Pre-defined command pipelines for common development workflows | `<workflow-name>`, `--customize`, `--dry-run` |
 | `/prefix:meta:summary` | Creates a chat summary for another AI with complete context | `summaries/` |
+| `/prefix:meta:test-guide` | Generates interactive test guides for recent changes, suitable for both end-users and technical reviewers | `--type=all\|user\|technical`, `--format=md\|checklist`, `--lang=en\|de\|es\|fr`, `--output=file.md` |
 | `/prefix:meta:update-docs` | Intelligently updates project documentation based on code changes and implementation status | `--scope=<type>`, `--analyze`, `--commit` |
 
 

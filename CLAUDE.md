@@ -106,6 +106,7 @@ claude-code-toolkit/
 │   │   ├── health.md       # Project health
 │   │   ├── pipelines.md    # Pre-defined pipelines
 │   │   ├── summary.md      # Chat summary with auto-naming
+│   │   ├── test-guide.md   # Interactive test guides
 │   │   └── update-docs.md  # Update documentation
 │   ├── scan/               # Analysis & investigation
 │   │   ├── deep.md         # Deep analysis
