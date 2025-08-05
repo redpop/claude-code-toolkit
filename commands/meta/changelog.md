@@ -1,6 +1,6 @@
 ---
 description: AI-powered CHANGELOG.md management that automatically determines version based on changes
-argument-hint: [--analyze] [--commit] [--update-version]
+argument-hint: [--analyze] [--commit] [--push] [--update-version]
 ---
 
 # Claude Command: Changelog
@@ -13,14 +13,17 @@ This command intelligently manages your project's CHANGELOG.md file by analyzing
 /changelog                              # AI determines version and updates changelog
 /changelog --analyze                    # Preview what version would be chosen without making changes
 /changelog --commit                     # Update changelog and commit using git commit command
+/changelog --push                       # Update changelog, commit, and push to remote
 /changelog --update-version             # Also update version in package files
 /changelog --commit --update-version    # Full automated workflow
+/changelog --commit --push              # Update, commit, and push in one command
 ```
 
 ### Arguments
 
 - `--analyze`: Preview mode - shows what version would be chosen and what changes would be added
 - `--commit`: Automatically commit the changelog update (uses `/git/commit` command if available)
+- `--push`: Also push the commit to the remote repository (requires --commit)
 - `--update-version`: Update version in package files (package.json, pyproject.toml, etc.)
 
 ## Examples
@@ -29,7 +32,9 @@ This command intelligently manages your project's CHANGELOG.md file by analyzing
 /changelog                                    # Basic usage - AI analyzes and updates changelog
 /changelog --analyze                          # See what would happen without changes
 /changelog --commit                           # Update and commit with proper message
+/changelog --commit --push                    # Update, commit, and push to remote
 /changelog --commit --update-version          # Full release workflow
+/changelog --commit --update-version --push   # Complete release with push
 ```
 
 ## What This Command Does
@@ -61,6 +66,7 @@ This command intelligently manages your project's CHANGELOG.md file by analyzing
    - **--analyze**: Preview mode to see what would happen
    - **--update-version**: Updates version in all detected package files
    - **--commit**: Integrates with `/git/commit` command for proper commit workflow
+   - **--push**: Pushes the commit to remote repository (requires --commit)
 
 ## Change Type Emojis
 
@@ -151,6 +157,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
      - Create conventional commit with emoji
    - If not exists: Simple git commit
    - Commit message: `📝 docs: update changelog for v{version}`
+
+7. **Push to Remote** (if --push with --commit):
+   - Verify commit was successful
+   - Check remote branch status
+   - Push changes to remote repository
+   - Show push result and remote URL
 
 ## AI Version Detection
 
@@ -264,6 +276,8 @@ The command handles:
 - Integrates seamlessly with git commit command when available
 - Supports both new projects and existing ones with version history
 - Analyzes both committed and uncommitted changes
+- The `--push` option requires `--commit` to be specified
+- Push operation includes safety checks for remote branch status
 
 ## Integration with Git Commit Command
 
@@ -337,6 +351,18 @@ Running `/changelog --commit --update-version`:
 - Updates CHANGELOG.md
 - Updates version in package.json
 - Commits with: `📝 docs: update changelog for v1.1.1`
+
+### Example 5: Complete Release with Push
+
+Running `/changelog --commit --update-version --push`:
+
+- Analyzes all changes since last version
+- Determines appropriate version bump
+- Updates CHANGELOG.md with categorized entries
+- Updates version in all package files
+- Commits all changes with proper message
+- Pushes to remote repository
+- Shows: `✅ Successfully pushed v1.2.0 to origin/main`
 
 ### Example 4: Preview Mode
 
