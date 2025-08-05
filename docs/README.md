@@ -1,171 +1,77 @@
 # Claude Code Toolkit Documentation
 
-Welcome to the Claude Code Toolkit documentation. This directory contains comprehensive guides, architectural documentation, and reference materials.
-
-## 🚀 NEW: Automated Code Quality Workflow
-
-Transform your codebase in just 3 commands:
-
-```bash
-# 1. Analyze
-/analyze-deep . --export-json
-
-# 2. Plan
-/analyze-report latest-report.json --generate-action-plan
-
-# 3. Execute
-/execute-action-plan action-plan-*.md --mode=auto
-
-# 4. Review
-/completion-report
-```
-
-**[→ See the Complete Automated Workflow Guide](guides/AUTOMATED-WORKFLOW.md)** 🔥
+Welcome to the Claude Code Toolkit documentation. This directory contains comprehensive guides for both end users and developers.
 
 ## 📚 Documentation Structure
 
-### 🏗️ Architecture (`/architecture/`)
-Deep technical documentation about the toolkit's design and implementation:
+### 🎯 Start Here
 
-- **[SYSTEM-ARCHITECTURE-EN.md](architecture/SYSTEM-ARCHITECTURE-EN.md)** 🆕 - Complete technical architecture and workflow documentation
-- **[SYSTEM-ARCHITECTURE-DE.md](architecture/SYSTEM-ARCHITECTURE-DE.md)** 🆕 - Technische Architektur auf Deutsch
-- **[HYBRID-ARCHITECTURE.md](architecture/HYBRID-ARCHITECTURE.md)** - The innovative hybrid approach combining parallel scanning with expert analysis
-- **[SUB-AGENT-ORCHESTRATION.md](architecture/SUB-AGENT-ORCHESTRATION.md)** - How specialized AI agents work together
-- **[TECHNICAL-GUIDE.md](architecture/TECHNICAL-GUIDE.md)** - Technical implementation details and patterns
+- **[QUICK START GUIDE](guides/QUICK-START.md)** - The fastest way to get productive with the toolkit
 
-### 📖 Guides (`/guides/`)
-Practical guides for using the toolkit effectively:
+### For End Users
 
-- **[AUTOMATED-WORKFLOW.md](guides/AUTOMATED-WORKFLOW.md)** 🔥 **NEW** - Zero-friction automated workflow from analysis to fixes
-- **[COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md)** ⭐ - Complete end-to-end workflow documentation
-- **[REPORT-EXPORT-SYSTEM.md](guides/REPORT-EXPORT-SYSTEM.md)** - How to export and use analysis reports
-- **[REPORT-ANALYZER-EXAMPLES.md](guides/REPORT-ANALYZER-EXAMPLES.md)** - Examples of report analysis and interpretation
-- **[EXPORT-EXAMPLES.md](guides/EXPORT-EXAMPLES.md)** - Sample exports in different formats
-- **[TROUBLESHOOTING-FILE-MODIFICATIONS.md](guides/TROUBLESHOOTING-FILE-MODIFICATIONS.md)** - Fixing unwanted file modifications
+- **[User Guide](user-guide/)** - Everything you need to use the toolkit effectively
+  - [Quick Start](user-guide/README.md) - Get started in 5 minutes
+  - [Workflow Guide](user-guide/workflow-guide.md) - Common workflows and patterns
+  - [Command Reference](user-guide/command-reference.md) - All commands explained
+  - [Troubleshooting](user-guide/troubleshooting.md) - Solve common issues
 
-### 🎓 Tutorials (`/tutorials/`)
-Step-by-step tutorials for common tasks:
+### For Developers
 
-- **[quick-start-tutorial.md](tutorials/quick-start-tutorial.md)** - Get started with the toolkit in 10 minutes
-- **[building-custom-commands.md](tutorials/building-custom-commands.md)** - Create your own powerful commands
-- **[creating-specialized-agents.md](tutorials/creating-specialized-agents.md)** - Build expert AI agents for specific tasks
+- **[Developer Guide](developer-guide/)** - Technical documentation for extending and maintaining
+  - [Overview](developer-guide/README.md) - Technical introduction
+  - [Architecture](developer-guide/architecture.md) - System design and patterns
+  - [Configuration](developer-guide/configuration.md) - Settings and customization
+  - [Extending](developer-guide/extending.md) - Create commands and agents
+  - [Testing](developer-guide/testing.md) - Test infrastructure and writing tests
+  - [Internals](developer-guide/internals.md) - How everything works
 
-### 🔧 API Reference (`/api/`)
-Technical API documentation:
+### Additional Resources
 
-- **[command-api-reference.md](api/command-api-reference.md)** - Complete command structure and API specification
-- **[agent-interface-specification.md](api/agent-interface-specification.md)** - Agent definition and integration patterns
-- **[tool-integration-guide.md](api/tool-integration-guide.md)** - MCP and tool integration best practices
+- **[Tutorials](tutorials/)** - Step-by-step guides (coming soon)
+- **[Archive](archive/)** - Historical documentation
 
-### 🗄️ Archive (`/archive/`)
-Older documentation kept for reference:
+## 🚀 Quick Links
 
-- Historical installation guides
-- Legacy architecture documents
-- Previous versions of guides
+### Getting Started
 
-## 🚀 Quick Start
+1. [Install the toolkit](user-guide/README.md#installation)
+2. [Run your first analysis](user-guide/README.md#your-first-analysis)
+3. [Explore workflows](user-guide/workflow-guide.md)
 
-### Option 1: Automated Workflow (Recommended) 🔥
-Try the new zero-friction workflow that automates everything:
-```bash
-/analyze-deep . --export-json
-/analyze-report latest-report.json --generate-action-plan  
-/execute-action-plan action-plan-*.md --mode=auto
-/completion-report
-```
-**[→ Full Automated Workflow Guide](guides/AUTOMATED-WORKFLOW.md)**
+### Common Tasks
 
-### Option 2: Traditional Workflow
-1. **New Users**: Start with [COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md) to understand the complete toolkit workflow.
+- [Improve code quality](user-guide/workflow-guide.md#common-workflows)
+- [Fix security issues](user-guide/command-reference.md#sec-commands)
+- [Generate tests](user-guide/command-reference.md#gen-commands)
+- [Create custom commands](developer-guide/extending.md)
 
-2. **Understanding the Architecture**: Read [HYBRID-ARCHITECTURE.md](architecture/HYBRID-ARCHITECTURE.md) to learn about our innovative approach.
+## 📖 Documentation Versions
 
-3. **Using Reports**: Check [REPORT-EXPORT-SYSTEM.md](guides/REPORT-EXPORT-SYSTEM.md) for report generation and analysis.
+- **Current Version**: 3.3.0
+- **Last Updated**: February 2025
+- **Language**: English
 
-## 📊 Key Concepts
+## 🤝 Contributing to Documentation
 
-### The Hybrid Architecture
-Our unique approach combines:
-- **Phase 1**: Parallel scanning with the Task Tool for speed
-- **Phase 2**: Deep analysis with specialized Sub-Agents for expertise  
-- **Phase 3**: Intelligent synthesis for actionable insights
+When contributing:
 
-### Sub-Agent Specialization
-Five expert agents provide focused analysis:
-- 🏗️ **Code Architect** - System design and architecture
-- ⚡ **Performance Optimizer** - Speed and efficiency
-- 🔄 **Refactoring Expert** - Code improvement strategies
-- 🔒 **Security Specialist** - Vulnerability detection
-- 🧪 **Test Engineer** - Testing strategies and coverage
+1. Keep language clear and concise
+2. Include practical examples
+3. Update the appropriate guide
+4. Cross-reference related topics
+5. Test all code examples
 
-### Workflow Automation 🚀 NEW!
-Complete automated pipeline from analysis to fixes:
-1. **Analyze** - Comprehensive code quality assessment (`/analyze-deep`)
-2. **Plan** - Generate executable action plan (`/analyze-report --generate-action-plan`)  
-3. **Execute** - Run fixes automatically (`/execute-action-plan`)
-4. **Report** - View accomplishments (`/completion-report`)
+## 📞 Need Help?
 
-**[→ Try the Automated Workflow Now!](guides/AUTOMATED-WORKFLOW.md)**
-
-## 📈 Command Categories
-
-### Analysis Commands
-- `/analyze-deep` - Comprehensive hybrid analysis
-- `/security-audit` - Security-focused scan
-- `/performance-scan` - Performance analysis
-- `/test-coverage` - Testing assessment
-- `/analyze-parallel` - Multi-agent parallel analysis
-
-### Report Commands  
-- `/analyze-report` - Intelligent report analysis
-- `/trend-analyzer` - Historical trending
-
-### Research Commands
-- `/codebase-map` - Generate codebase overview
-- `/deep-dive` - Focused investigation
-- `/dependency-trace` - Trace dependencies
-
-### Fix Commands
-- `/fix-quick-wins` - Apply high-ROI fixes
-- `/fix-duplicates` - Remove duplication
-- `/fix-security` - Fix security vulnerabilities
-- `/fix-documentation` - Fix documentation issues
-
-### Generate Commands
-- `/generate-tests` - Create missing tests
-- `/generate-documentation` - Generate comprehensive documentation
-
-## 🔍 Finding Information
-
-### By Task
-- **Starting a new project analysis**: [COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md)
-- **Understanding reports**: [REPORT-ANALYZER-EXAMPLES.md](guides/REPORT-ANALYZER-EXAMPLES.md)
-- **Fixing issues**: See Phase 3 in [COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md)
-- **CI/CD Integration**: See Phase 5 in [COMPREHENSIVE-WORKFLOW.md](guides/COMPREHENSIVE-WORKFLOW.md)
-
-### By Technical Interest
-- **How agents work**: [SUB-AGENT-ORCHESTRATION.md](architecture/SUB-AGENT-ORCHESTRATION.md)
-- **Parallel processing**: [HYBRID-ARCHITECTURE.md](architecture/HYBRID-ARCHITECTURE.md)
-- **Implementation details**: [TECHNICAL-GUIDE.md](architecture/TECHNICAL-GUIDE.md)
-
-## 🤝 Contributing
-
-When adding new documentation:
-
-1. Place files in the appropriate subdirectory
-2. Update this README.md index
-3. Follow the existing format and style
-4. Include practical examples
-5. Cross-reference related documents
-
-## 📞 Getting Help
-
-- **Issues**: Check troubleshooting guides in `/guides/`
-- **Examples**: See example sections in each guide
-- **Updates**: Watch the repository for new features
+- **Quick questions**: Use `/global:flow:smart "your question"`
+- **Bug reports**: GitHub Issues
+- **Feature requests**: GitHub Discussions
+- **Community**: Discord/Slack channel
 
 ---
 
-*Last Updated: January 2025*
-*Documentation Version: 2.0*
+Choose your path:
+
+- 👤 **[I'm a user](user-guide/)** - Learn how to use the toolkit
+- 🔧 **[I'm a developer](developer-guide/)** - Understand and extend the toolkit

@@ -1,58 +1,58 @@
 ---
 allowed-tools: Task, Read, WebSearch, WebFetch, Grep, Bash(fd:*), Bash(rg:*)
-description: Template für Research Commands die verschiedene Informationsquellen parallel durchsuchen
+description: Template for research commands that search various information sources in parallel
 argument-hint: [research-topic] [--scope=local|web|all]
 ---
 
 # [Research Command Name]
 
-Dieses Command führt eine umfassende Recherche zu [Thema] durch, indem [N] spezialisierte Research Agents parallel verschiedene Aspekte untersuchen.
+This command performs comprehensive research on [topic] by having [N] specialized research agents investigate different aspects in parallel.
 
-## Research-Strategie
+## Research Strategy
 
-Die Recherche deckt folgende Bereiche ab:
-- **Technische Perspektive**: [Beschreibung]
-- **Praktische Implementierung**: [Beschreibung]
-- **Best Practices & Standards**: [Beschreibung]
-- **Probleme & Lösungen**: [Beschreibung]
+The research covers the following areas:
+- **Technical Perspective**: [Description]
+- **Practical Implementation**: [Description]
+- **Best Practices & Standards**: [Description]
+- **Problems & Solutions**: [Description]
 
-## Ausführung
+## Execution
 
-**SOFORT [N] PARALLELE RESEARCH AGENTS STARTEN:**
+**IMMEDIATELY START [N] PARALLEL RESEARCH AGENTS:**
 
-1. **Technical Documentation Agent**: Task(description="Research Technical Docs", prompt="Recherchiere technische Dokumentation zu '$ARGUMENTS'. Untersuche: 1) Offizielle Dokumentation, 2) API References, 3) Architecture Guides, 4) Technical Specifications. Fokussiere auf [Hauptaspekte]. Nutze lokale Docs und Code-Kommentare. Gib strukturierte Technical Insights als Markdown zurück.", subagent_type="general-purpose")
+1. **Technical Documentation Agent**: Task(description="Research Technical Docs", prompt="Research technical documentation for '$ARGUMENTS'. Investigate: 1) Official documentation, 2) API references, 3) Architecture guides, 4) Technical specifications. Focus on [main aspects]. Use local docs and code comments. Return structured technical insights as Markdown.", subagent_type="general-purpose")
 
-2. **Implementation Examples Agent**: Task(description="Find Implementation Examples", prompt="Finde konkrete Implementierungsbeispiele für '$ARGUMENTS'. Suche: 1) Code Examples in der Codebase, 2) Common Usage Patterns, 3) Real-world Implementations, 4) Test Cases als Beispiele. Nutze grep/rg intensiv. Gib annotierte Code-Beispiele mit Erklärungen als Markdown zurück.", subagent_type="general-purpose")
+2. **Implementation Examples Agent**: Task(description="Find Implementation Examples", prompt="Find concrete implementation examples for '$ARGUMENTS'. Search: 1) Code examples in the codebase, 2) Common usage patterns, 3) Real-world implementations, 4) Test cases as examples. Use grep/rg extensively. Return annotated code examples with explanations as Markdown.", subagent_type="general-purpose")
 
-3. **Problem Analysis Agent**: Task(description="Research Common Problems", prompt="Identifiziere häufige Probleme und Lösungen bei '$ARGUMENTS'. Recherchiere: 1) Known Issues und Bugs, 2) Common Pitfalls, 3) Troubleshooting Patterns, 4) Workarounds. Analysiere Code-Comments, TODOs, und Error-Handling. Gib Problem-Solution Matrix als Markdown zurück.", subagent_type="general-purpose")
+3. **Problem Analysis Agent**: Task(description="Research Common Problems", prompt="Identify common problems and solutions for '$ARGUMENTS'. Research: 1) Known issues and bugs, 2) Common pitfalls, 3) Troubleshooting patterns, 4) Workarounds. Analyze code comments, TODOs, and error handling. Return problem-solution matrix as Markdown.", subagent_type="general-purpose")
 
-4. **Best Practices Agent**: Task(description="Compile Best Practices", prompt="Sammle Best Practices für '$ARGUMENTS'. Analysiere: 1) Coding Standards, 2) Design Patterns, 3) Performance Optimizations, 4) Security Considerations. Suche in Style Guides und etablierten Patterns. Gib Best Practice Guide als Markdown zurück.", subagent_type="general-purpose")
+4. **Best Practices Agent**: Task(description="Compile Best Practices", prompt="Collect best practices for '$ARGUMENTS'. Analyze: 1) Coding standards, 2) Design patterns, 3) Performance optimizations, 4) Security considerations. Search in style guides and established patterns. Return best practice guide as Markdown.", subagent_type="general-purpose")
 
-[Weitere Research Agents nach Bedarf...]
+[Additional research agents as needed...]
 
 ## Synthesis
 
-Nach Abschluss aller Research Agents:
+After all research agents complete:
 
-1. **Erstelle Comprehensive Knowledge Base**:
+1. **Create Comprehensive Knowledge Base**:
    ```markdown
    # [Topic] Research Findings
    
    ## Overview
-   [2-3 Paragraphen Zusammenfassung der wichtigsten Erkenntnisse]
+   [2-3 paragraph summary of key findings]
    
    ## Key Insights
    
    ### Technical Foundation
-   [Konsolidierte technische Erkenntnisse]
+   [Consolidated technical insights]
    
    ### Implementation Guide
    #### Recommended Approach
-   [Step-by-step Anleitung basierend auf Best Practices]
+   [Step-by-step guide based on best practices]
    
    #### Code Examples
    ```[language]
-   // Bestes Beispiel aus der Recherche
+   // Best example from research
    ```
    
    ### Common Challenges & Solutions
@@ -61,17 +61,17 @@ Nach Abschluss aller Research Agents:
    | ...       | ...      | ...     |
    ```
 
-2. **Generiere Decision Matrix**:
+2. **Generate Decision Matrix**:
    ```markdown
    ## Decision Guide
    
    ### When to Use [Topic]
-   ✅ Scenario 1: [Beschreibung]
-   ✅ Scenario 2: [Beschreibung]
+   ✅ Scenario 1: [Description]
+   ✅ Scenario 2: [Description]
    
    ### When to Avoid
-   ❌ Scenario 1: [Beschreibung]
-   ❌ Alternative: [Bessere Option]
+   ❌ Scenario 1: [Description]
+   ❌ Alternative: [Better option]
    
    ### Comparison with Alternatives
    | Aspect | [Topic] | Alternative 1 | Alternative 2 |
@@ -79,17 +79,17 @@ Nach Abschluss aller Research Agents:
    | ...    | ...     | ...           | ...           |
    ```
 
-3. **Erstelle Learning Path**:
-   - Beginner: Start hier
-   - Intermediate: Diese Konzepte
-   - Advanced: Diese Optimierungen
+3. **Create Learning Path**:
+   - Beginner: Start here
+   - Intermediate: These concepts
+   - Advanced: These optimizations
 
 4. **Compile Resource List**:
-   - Wichtigste Dokumentationen
-   - Hilfreiche Tools
-   - Community Resources
-   - Weiterführende Literatur
+   - Key documentation
+   - Helpful tools
+   - Community resources
+   - Further reading
 
-**Performance-Erwartung**: Research in [X-Y] Sekunden abgeschlossen.
+**Performance Expectation**: Research completed in [X-Y] seconds.
 
-**Output**: Vollständiges Markdown-Dokument, bereit für Team-Wiki oder Dokumentation.
+**Output**: Complete Markdown document, ready for team wiki or documentation.

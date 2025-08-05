@@ -13,11 +13,13 @@ MCP servers extend Claude Code's capabilities by providing access to specialized
 To use Semgrep MCP with the toolkit:
 
 1. Install the Semgrep MCP server globally:
+
    ```bash
    npm install -g @semgrep/mcp
    ```
 
 2. Configure it in your Claude Desktop settings:
+
    ```json
    {
      "mcpServers": {
@@ -49,7 +51,7 @@ When Semgrep MCP is installed, the following tools become available:
 Commands check for MCP availability using this pattern:
 
 ```markdown
-1. Check if mcp__semgrep__* tools are available
+1. Check if mcp**semgrep**\* tools are available
 2. If available: Use MCP-powered analysis
 3. If not available: Fall back to traditional methods
 4. Notify user of analysis method used
@@ -67,27 +69,31 @@ When Semgrep MCP is not available, commands use:
 
 Reports indicate the analysis quality achieved:
 
-| Analysis Method | Quality | Speed | Coverage |
-|----------------|---------|-------|----------|
-| Semgrep MCP | Excellent | Fast | Complete |
-| Local Semgrep | Very Good | Medium | Complete |
-| Pattern-based | Basic | Fast | Limited |
+| Analysis Method | Quality   | Speed  | Coverage |
+| --------------- | --------- | ------ | -------- |
+| Semgrep MCP     | Excellent | Fast   | Complete |
+| Local Semgrep   | Very Good | Medium | Complete |
+| Pattern-based   | Basic     | Fast   | Limited  |
 
 ## Usage in Commands
 
 ### Security Audit Command
 
 With Semgrep MCP:
+
 ```markdown
-Uses mcp__semgrep__security_check for:
+Uses mcp**semgrep**security_check for:
+
 - OWASP Top 10 vulnerability detection
 - Known CVE identification
 - Security best practice violations
 ```
 
 Without Semgrep MCP:
+
 ```markdown
 Falls back to:
+
 - Regex patterns for common vulnerabilities
 - Manual security checks
 - Basic pattern matching
@@ -96,13 +102,15 @@ Falls back to:
 ### Fix Security Command
 
 With Semgrep MCP:
+
 ```markdown
-1. Runs mcp__semgrep__semgrep_scan to identify issues
+1. Runs mcp**semgrep**semgrep_scan to identify issues
 2. Uses AST analysis for precise fixes
 3. Validates fixes with another scan
 ```
 
 Without Semgrep MCP:
+
 ```markdown
 1. Uses pattern matching to find issues
 2. Applies template-based fixes
@@ -112,6 +120,7 @@ Without Semgrep MCP:
 ### Deep Analysis Command
 
 Integrates Semgrep as one of many analysis tools:
+
 ```markdown
 Phase 1: Parallel scanning (includes Semgrep if available)
 Phase 2: Expert delegation based on findings
@@ -123,16 +132,18 @@ Phase 3: Comprehensive report generation
 ### 1. Conditional Tool Usage
 
 Always check for tool availability:
+
 ```markdown
-IF mcp__semgrep__security_check is available:
-  Use MCP tool for accurate analysis
+IF mcp**semgrep**security_check is available:
+Use MCP tool for accurate analysis
 ELSE:
-  Use fallback method and inform user
+Use fallback method and inform user
 ```
 
 ### 2. Transparent Reporting
 
 Always indicate which analysis method was used:
+
 ```markdown
 ## Security Analysis Report
 
@@ -146,6 +157,7 @@ Always indicate which analysis method was used:
 ### 3. Progressive Enhancement
 
 Design commands to work at multiple quality levels:
+
 - **Best**: Full MCP integration
 - **Good**: Local tool availability
 - **Basic**: Pattern-based fallbacks
@@ -153,6 +165,7 @@ Design commands to work at multiple quality levels:
 ### 4. User Guidance
 
 When MCP is not available, provide installation instructions:
+
 ```markdown
 💡 **Tip**: For enhanced security analysis, install Semgrep MCP:
 npm install -g @semgrep/mcp
@@ -164,6 +177,7 @@ Then configure in Claude Desktop settings
 When creating new commands that can use MCP:
 
 1. **List MCP tools in frontmatter** (when they enhance functionality):
+
    ```yaml
    ---
    allowed-tools: Task, Read, Grep, Bash, Write
@@ -173,11 +187,13 @@ When creating new commands that can use MCP:
    ```
 
 2. **Implement detection logic**:
+
    ```markdown
    Check for MCP availability and adjust approach
    ```
 
 3. **Document both paths**:
+
    ```markdown
    With MCP: [enhanced approach]
    Without MCP: [fallback approach]
@@ -192,16 +208,19 @@ When creating new commands that can use MCP:
 While Semgrep is the primary example, the same patterns apply to other MCP servers:
 
 ### GitHub MCP
+
 - Enhanced repository analysis
 - PR and issue integration
 - Direct API access
 
 ### Perplexity MCP
+
 - Web search for documentation
 - Current security advisories
 - Best practice research
 
 ### GitLab MCP
+
 - GitLab-specific operations
 - CI/CD integration
 - Merge request analysis

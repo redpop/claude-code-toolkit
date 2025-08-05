@@ -1,43 +1,43 @@
-# Sub-Agent Orchestration für Claude Code
+# Sub-Agent Orchestration for Claude Code
 
-## Übersicht
+## Overview
 
-Dieses System nutzt Claude Code's Task Tool für massive Performance-Steigerungen durch intelligente Parallelisierung. Durch die gleichzeitige Ausführung mehrerer spezialisierter Sub-Agents können komplexe Analysen und Aufgaben 5-10x schneller erledigt werden als bei sequentieller Verarbeitung.
+This system uses Claude Code's Task Tool for massive performance improvements through intelligent parallelization. By executing multiple specialized sub-agents simultaneously, complex analyses and tasks can be completed 5-10x faster than sequential processing.
 
-### Kernvorteile
+### Core Benefits
 
-- **5-10x Performance-Steigerung** bei parallelen Aufgaben
-- **Token-effiziente Analyse** durch fokussierte Sub-Agents
-- **Skalierbare Architektur** für komplexe Codebases
-- **Wiederverwendbare Commands** global verfügbar
-- **Best Practices** aus Production-Einsatz integriert
+- **5-10x performance improvement** for parallel tasks
+- **Token-efficient analysis** through focused sub-agents
+- **Scalable architecture** for complex codebases
+- **Reusable commands** globally available
+- **Best practices** from production use integrated
 
 ## Quick Start
 
 ### Installation
 
 ```bash
-# Standard-Installation mit "global" Prefix
+# Standard installation with "global" prefix
 curl -fsSL https://raw.githubusercontent.com/redpop/claude-code-toolkit/main/install.sh | bash -s -- global
 
-# Custom Prefix
+# Custom prefix
 curl -fsSL https://raw.githubusercontent.com/redpop/claude-code-toolkit/main/install.sh | bash -s -- myprefix
 ```
 
-### Erste Schritte
+### Getting Started
 
 ```bash
-# Ultra-schnelle Code-Analyse (10 parallele Agents)
+# Ultra-fast code analysis (10 parallel agents)
 /global:orchestration:analyze-parallel src/
 
-# Security Audit (8 spezialisierte Agents)
+# Security audit (8 specialized agents)
 /global:orchestration:security-audit
 
-# Test Coverage Analyse (5 Agents)
+# Test coverage analysis (5 agents)
 /global:orchestration:test-coverage
 ```
 
-### Performance-Vergleich
+### Performance Comparison
 
 | Task           | Sequential | Parallel | Speedup |
 | -------------- | ---------- | -------- | ------- |
@@ -46,33 +46,33 @@ curl -fsSL https://raw.githubusercontent.com/redpop/claude-code-toolkit/main/ins
 | Test Coverage  | 30-40s     | 4-6s     | ~7x     |
 | Dependency Map | 45-55s     | 6-8s     | ~7x     |
 
-## Architektur
+## Architecture
 
-### Task Tool als Orchestrator
+### Task Tool as Orchestrator
 
-Das Task Tool ist Claude Code's primärer Mechanismus für Sub-Agent Management:
+The Task Tool is Claude Code's primary mechanism for sub-agent management:
 
 ```yaml
 allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*), Bash(jq:*)
 ```
 
-### Token-Budget Management
+### Token Budget Management
 
-Optimale Token-Verteilung für maximale Effizienz:
+Optimal token distribution for maximum efficiency:
 
-- **Pro Agent**: 2000-4000 Tokens
-- **Gesamt-Budget**: ~30000 Tokens für 10 Agents
-- **Context Sharing**: Minimaler, fokussierter Context pro Agent
-- **Output Format**: Strukturiert für einfache Synthesis
+- **Per Agent**: 2000-4000 tokens
+- **Total Budget**: ~30000 tokens for 10 agents
+- **Context Sharing**: Minimal, focused context per agent
+- **Output Format**: Structured for easy synthesis
 
-### Synthesis-Strategien
+### Synthesis Strategies
 
-Nach Abschluss aller Sub-Agents werden die Ergebnisse intelligent zusammengeführt:
+After all sub-agents complete, results are intelligently merged:
 
-1. **Strukturierte Outputs** - JSON/Markdown für maschinelle Verarbeitung
-2. **Deduplication** - Vermeidung redundanter Informationen
-3. **Priorisierung** - Wichtigste Findings zuerst
-4. **Cross-Reference** - Verbindungen zwischen Agent-Ergebnissen
+1. **Structured Outputs** - JSON/Markdown for machine processing
+2. **Deduplication** - Avoiding redundant information
+3. **Prioritization** - Most important findings first
+4. **Cross-Reference** - Connections between agent results
 
 ## Command Reference
 
@@ -80,7 +80,7 @@ Nach Abschluss aller Sub-Agents werden die Ergebnisse intelligent zusammengefüh
 
 #### `/global:orchestration:analyze-parallel`
 
-Ultra-schnelle Code-Analyse mit 10 spezialisierten Agents:
+Ultra-fast code analysis with 10 specialized agents:
 
 - Code Complexity Analysis
 - Duplicate Code Detection
@@ -95,7 +95,7 @@ Ultra-schnelle Code-Analyse mit 10 spezialisierten Agents:
 
 #### `/global:orchestration:security-audit`
 
-Umfassender Security Scan mit 8 Agents:
+Comprehensive security scan with 8 agents:
 
 - SQL Injection Detection
 - XSS Vulnerability Scan
@@ -108,7 +108,7 @@ Umfassender Security Scan mit 8 Agents:
 
 #### `/global:orchestration:refactor-impact`
 
-Impact-Analyse für Refactoring mit 6 Agents:
+Impact analysis for refactoring with 6 agents:
 
 - Breaking Changes Detection
 - API Contract Changes
@@ -119,7 +119,7 @@ Impact-Analyse für Refactoring mit 6 Agents:
 
 #### `/global:orchestration:test-coverage`
 
-Test-Analyse mit 5 Agents:
+Test analysis with 5 agents:
 
 - Coverage Metrics
 - Test Quality Assessment
@@ -129,7 +129,7 @@ Test-Analyse mit 5 Agents:
 
 #### `/global:orchestration:performance-scan`
 
-Performance-Profiling mit 7 Agents:
+Performance profiling with 7 agents:
 
 - Algorithm Complexity
 - Database Query Analysis
@@ -143,43 +143,43 @@ Performance-Profiling mit 7 Agents:
 
 #### `/global:research:deep-dive`
 
-Multi-Perspective Research mit 8 verschiedenen Blickwinkeln auf ein Thema.
+Multi-perspective research with 8 different viewpoints on a topic.
 
 #### `/global:research:codebase-map`
 
-Vollständige Codebase-Kartierung mit 10 Agents für unterschiedliche Aspekte.
+Complete codebase mapping with 10 agents for different aspects.
 
 #### `/global:research:dependency-trace`
 
-Tiefgehende Dependency-Analyse mit 6 spezialisierten Agents.
+In-depth dependency analysis with 6 specialized agents.
 
 ## Best Practices
 
-### Wann Sub-Agents verwenden
+### When to Use Sub-Agents
 
-**IMMER verwenden für:**
+**ALWAYS use for:**
 
-- Multi-File Analysen
-- Code Quality Checks
-- Security Audits
-- Test Coverage Analysis
-- Documentation Tasks
-- Performance Profiling
-- Migration Planning
-- Bug Investigation über mehrere Files
-- Architecture Reviews
-- Refactoring Impact Analysis
+- Multi-file analyses
+- Code quality checks
+- Security audits
+- Test coverage analysis
+- Documentation tasks
+- Performance profiling
+- Migration planning
+- Bug investigation across multiple files
+- Architecture reviews
+- Refactoring impact analysis
 
-**VERMEIDEN für:**
+**AVOID for:**
 
-- Single-File Edits
-- Kleine, sequentielle Änderungen
-- Direkte Code-Modifikationen
-- Tasks mit starken Dependencies
+- Single-file edits
+- Small, sequential changes
+- Direct code modifications
+- Tasks with strong dependencies
 
 ### Task Decomposition Patterns
 
-#### Pattern 1: Domain-basierte Aufteilung
+#### Pattern 1: Domain-based Division
 
 ```
 Agent 1: Frontend Analysis
@@ -188,7 +188,7 @@ Agent 3: Database Layer
 Agent 4: API Contracts
 ```
 
-#### Pattern 2: Concern-basierte Aufteilung
+#### Pattern 2: Concern-based Division
 
 ```
 Agent 1: Security Concerns
@@ -197,7 +197,7 @@ Agent 3: Code Quality
 Agent 4: Documentation
 ```
 
-#### Pattern 3: File-basierte Aufteilung
+#### Pattern 3: File-based Division
 
 ```
 Agent 1: Core Module Files
@@ -206,80 +206,80 @@ Agent 3: Configuration
 Agent 4: Documentation
 ```
 
-### Performance-Optimierung
+### Performance Optimization
 
-1. **Batch-Start**: Alle Agents in einem Tool-Call starten
-2. **Klare Boundaries**: Keine Task-Überlappungen zwischen Agents
-3. **Fokussierte Prompts**: Spezifische, klar abgegrenzte Aufgaben
-4. **Strukturierter Output**: Einheitliches Format für Synthesis
-5. **Early Termination**: Agents können bei Bedarf früh beenden
+1. **Batch Start**: Start all agents in one tool call
+2. **Clear Boundaries**: No task overlaps between agents
+3. **Focused Prompts**: Specific, clearly defined tasks
+4. **Structured Output**: Unified format for synthesis
+5. **Early Termination**: Agents can terminate early when needed
 
 ### Debugging Multi-Agent Workflows
 
-Bei Problemen mit Sub-Agent Commands:
+When troubleshooting sub-agent commands:
 
-1. **Einzelne Agent-Outputs prüfen**: Jeder Agent gibt strukturiertes Feedback
-2. **Token-Usage monitoren**: Überschreitung des Budgets vermeiden
-3. **Task-Overlap identifizieren**: Redundante Arbeit minimieren
-4. **Synthesis-Fehler debuggen**: Output-Format-Konsistenz sicherstellen
+1. **Check individual agent outputs**: Each agent provides structured feedback
+2. **Monitor token usage**: Avoid exceeding budget
+3. **Identify task overlap**: Minimize redundant work
+4. **Debug synthesis errors**: Ensure output format consistency
 
-## Eigene Commands erstellen
+## Creating Custom Commands
 
-### Mit Helper Script
+### Using Helper Script
 
 ```bash
-# Einfaches Command erstellen
+# Create simple command
 ./scripts/create-sub-agent-command.sh \
   --name "dependency-audit" \
   --agents 6 \
   --category "orchestration"
 ```
 
-### Manuell mit Templates
+### Manual with Templates
 
-1. Template aus `commands/templates/` wählen
-2. Anpassen für spezifischen Use Case
-3. Agent-Aufgaben klar definieren
-4. Performance-Ziele dokumentieren
-5. Testen und iterieren
+1. Choose template from `commands/templates/`
+2. Adapt for specific use case
+3. Clearly define agent tasks
+4. Document performance goals
+5. Test and iterate
 
-### Command-Struktur
+### Command Structure
 
 ```yaml
 ---
 allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*)
-description: Kurze Beschreibung für Command-Liste
+description: Brief description for command list
 argument-hint: [expected-arguments]
 ---
 
 # Command Name
 
-Detaillierte Beschreibung des Commands und seiner Funktion.
+Detailed description of the command and its function.
 
-## Sub-Agent Strategie
+## Sub-Agent Strategy
 
-**SOFORT [N] PARALLELE AGENTS STARTEN:**
+**IMMEDIATELY START [N] PARALLEL AGENTS:**
 
-1. **Agent Name**: Spezifische Aufgabe
-2. **Agent Name**: Spezifische Aufgabe
+1. **Agent Name**: Specific task
+2. **Agent Name**: Specific task
 ...
 
-**Erwartete Performance**: Xx schneller als sequentiell
+**Expected Performance**: Xx faster than sequential
 
 ## Synthesis
 
-Nach Abschluss aller Agents:
-- Wie werden Ergebnisse kombiniert
-- Welches Output-Format wird verwendet
-- Priorisierung der Findings
+After all agents complete:
+- How results are combined
+- What output format is used
+- Prioritization of findings
 ```
 
-## Integration mit bestehenden Workflows
+## Integration with Existing Workflows
 
 ### Git Hooks
 
 ```bash
-# Pre-commit Hook für automatische Code-Analyse
+# Pre-commit hook for automatic code analysis
 #!/bin/bash
 claude-code /global:orchestration:analyze-parallel --quick
 ```
@@ -305,9 +305,9 @@ claude-code /global:orchestration:analyze-parallel --quick
 }
 ```
 
-## Erweiterte Konfiguration
+## Advanced Configuration
 
-Die `.claude-commands.json` ermöglicht project-spezifische Anpassungen:
+The `.claude-commands.json` enables project-specific customizations:
 
 ```json
 {
@@ -327,31 +327,31 @@ Die `.claude-commands.json` ermöglicht project-spezifische Anpassungen:
 
 ## Troubleshooting
 
-### Häufige Probleme
+### Common Issues
 
 **"Token limit exceeded"**
 
-- Token-Budget pro Agent reduzieren
-- Weniger Agents verwenden
-- Context-Größe optimieren
+- Reduce token budget per agent
+- Use fewer agents
+- Optimize context size
 
 **"Agent timeout"**
 
-- Timeout in Konfiguration erhöhen
-- Task-Scope verkleinern
-- Parallelität reduzieren
+- Increase timeout in configuration
+- Reduce task scope
+- Decrease parallelism
 
 **"Synthesis failed"**
 
-- Output-Format der Agents prüfen
-- Strukturierte Outputs sicherstellen
-- Error Handling verbessern
+- Check agent output format
+- Ensure structured outputs
+- Improve error handling
 
-## Metriken und Monitoring
+## Metrics and Monitoring
 
-### Performance-Tracking
+### Performance Tracking
 
-Commands loggen automatisch Performance-Metriken:
+Commands automatically log performance metrics:
 
 ```
 [PERF] analyze-parallel completed:
@@ -362,33 +362,33 @@ Commands loggen automatisch Performance-Metriken:
 - Tokens used: 28,450
 ```
 
-### Erfolgsmetriken
+### Success Metrics
 
-- **Ausführungszeit**: Ziel < 10s für die meisten Commands
-- **Speedup-Faktor**: Ziel > 5x vs. sequentiell
-- **Token-Effizienz**: < 3000 Tokens/Agent
-- **Fehlerrate**: < 5% Agent-Failures
+- **Execution time**: Target < 10s for most commands
+- **Speedup factor**: Target > 5x vs. sequential
+- **Token efficiency**: < 3000 tokens/agent
+- **Error rate**: < 5% agent failures
 
-## Weiterentwicklung
+## Future Development
 
-### Geplante Features
+### Planned Features
 
-1. **Adaptive Agent-Anzahl** basierend auf Codebase-Größe
-2. **Caching** für wiederholte Analysen
-3. **Custom Synthesis Strategies** per Command
-4. **Real-time Progress Updates** während Ausführung
-5. **Integration mit Claude Code Memory**
+1. **Adaptive agent count** based on codebase size
+2. **Caching** for repeated analyses
+3. **Custom synthesis strategies** per command
+4. **Real-time progress updates** during execution
+5. **Integration with Claude Code Memory**
 
 ### Community Contributions
 
-Contributions sind willkommen! Besonders gesucht:
+Contributions are welcome! Especially sought:
 
-- Neue Command-Ideen
-- Performance-Optimierungen
-- Integration-Examples
-- Dokumentations-Verbesserungen
+- New command ideas
+- Performance optimizations
+- Integration examples
+- Documentation improvements
 
-## Referenzen
+## References
 
 - [Claude Code Documentation](https://docs.anthropic.com/claude-code)
 - [Task Tool Reference](https://docs.anthropic.com/claude-code/tools)
