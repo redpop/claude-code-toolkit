@@ -253,9 +253,10 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | Command | Description | Options |
 |---------|-------------|---------|
 | `/prefix:meta:chain` | Chain multiple commands with intelligent data flow and error handling | `<command1>`, `->`, `command2`, `->`, `command3...`, `--stop-on-error`, `--parallel` |
-| `/prefix:meta:changelog` | AI-powered CHANGELOG.md management that automatically determines version based on changes | `--analyze`, `--commit`, `--update-version` |
+| `/prefix:meta:changelog` | AI-powered CHANGELOG.md management that automatically determines version based on changes | `--analyze`, `--commit`, `--push`, `--update-version` |
 | `/prefix:meta:create-cmd` | Create new slash commands from natural language descriptions | `description`, `of`, `what`, `you`, `want`, `the`, `command`, `to`, `do` |
 | `/prefix:meta:export` | Unified export management for all analysis results with format conversion | `<report-files...>`, `--format=md\|json\|html\|pdf`, `--merge`, `--template=name` |
+| `/prefix:meta:find-cmd` | Find the best command for your task from all available commands (global and local) | `<task-description>`, `--all`, `--local-only`, `--global-only` |
 | `/prefix:meta:handoff` | Documents current problem context for handoff to another AI assistant | `output-file` |
 | `/prefix:meta:health` | Comprehensive project health check with actionable insights and trend analysis | `--verbose`, `--compare=last-check.json`, `--export` |
 | `/prefix:meta:pipelines` | Pre-defined command pipelines for common development workflows | `<workflow-name>`, `--customize`, `--dry-run` |

@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- ✨ **Command Finder** - New `/meta:find-cmd` command for discovering the best tool for any task
+  - Intelligently searches all available commands (global and local)
+  - Analyzes task descriptions with natural language processing
+  - Provides ranked recommendations with usage examples
+  - Supports filtering by scope: `--local-only`, `--global-only`, or `--all`
+  - Suggests command chaining for complex workflows
+  - Categories include: analysis, fixing, security, testing, documentation, and more
+
 - ✨ Enhanced `/meta:changelog` command with `--push` option for complete release workflow
   - New `--push` flag automatically pushes commits to remote repository
   - Requires `--commit` flag to be specified
