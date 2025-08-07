@@ -7,7 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.5.0] - 2025-08-07
+
 ### Added
+
+- ✨ **TYPO3 Integration** - Complete TYPO3 v13.4 development support with Content Blocks v1.3
+  - Four new TYPO3-specific commands in `/commands/typo3/`:
+    - `/typo3:sitepackage` - Creates complete TYPO3 v13.4 SitePackages with Site Sets
+    - `/typo3:content-blocks` - Generates Content Blocks v1.3 configurations with all field types
+    - `/typo3:make-content-block` - Intelligent wrapper for native `make:content-block` command
+    - `/typo3:extension-kickstarter` - Creates TYPO3 extensions with best practices
+  - Four specialized TYPO3 AI agents:
+    - `typo3-architect` - TYPO3 architecture and best practices expert
+    - `typo3-content-blocks-specialist` - Content Blocks v1.3 master
+    - `typo3-extension-developer` - Extbase/Fluid development specialist
+    - `typo3-typoscript-expert` - Modern TypoScript and Site Sets expert
+  - Full Content Blocks v1.3 feature support:
+    - Collection child type restrictions
+    - Default configurations (content-blocks.yaml)
+    - Core page type re-definition
+    - Page type compatibility with FLUIDTEMPLATE (not PAGEVIEW)
+  - Skeleton templates for rapid development (hero, card-grid, accordion, landing-page)
+  - Integration with stefanfroemken/ext-kickstarter
+  - Comprehensive documentation in `docs/TYPO3-INTEGRATION.md`
 
 - ✨ **Command Finder** - New `/meta:find-cmd` command for discovering the best tool for any task
   - Intelligently searches all available commands (global and local)
