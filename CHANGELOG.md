@@ -7,7 +7,129 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.5.3] - 2025-08-08
+
+### Changed
+
+- 🔄 **Standardized Task Tool Invocation Syntax** - Unified Task tool syntax across all commands
+  - Converted 38 inline Task invocations to structured format in 7 files
+  - Affected commands: `/scan:perf` (7 agents), `/scan:map` (10 agents), `/scan:explore` (8 agents), `/sec:audit` (8 agents)
+  - Previously completed: `/scan:deps` (6 agents), `/scan:refactor` (6 agents), `/scan:tests` (5 agents)
+  - Improves consistency, readability, and maintainability across the toolkit
+  - All commands now use the same `Use Task tool with subagent_type=...` pattern
+
+- 🔄 **Enhanced TYPO3 Content Blocks Specialist** - Improved backend preview best practices
+  - Added comprehensive guidelines for semantic HTML-only backend previews
+  - Emphasized no styling in backend preview templates (no CSS, no inline styles)
+  - Updated with clear DO/DON'T examples for backend preview implementation
+  - Better documentation for TYPO3 v13.4 Content Blocks v1.3 compatibility
+
+### Removed
+
+- 🗑️ `/fix:smart` command - Eliminated redundancy with `/flow:smart`
+  - All functionality already available in `/flow:smart` command
+  - Reduces confusion and maintains single source of truth for intelligent problem routing
+  - Users should use `/flow:smart` for all intelligent routing needs
+
+### Fixed
+
+- 🐛 **Toolkit Consistency Issues** - Applied auto-fixes from self-analysis
+  - Fixed inconsistent Task tool invocation patterns across 38 agent definitions
+  - Resolved command redundancy between `fix:smart` and `flow:smart`
+  - Updated README.md to reflect current command structure
+
+## [3.5.2] - 2025-08-08
+
 ### Added
+
+- ✨ **Toolkit Self-Analysis Command** - New `/meta:analyze-toolkit` command for comprehensive toolkit analysis
+  - Analyzes all commands and agents for redundancies and inconsistencies
+  - Detects overlapping functionality and suggests consolidation opportunities
+  - Performs quality checks on documentation and naming conventions
+  - Tracks evolution trends and technical debt indicators
+  - Generates prioritized refactoring plans with risk assessment
+  - Optional auto-fix mode for safe, non-breaking improvements
+  - Exports analysis results in JSON and Markdown formats
+
+### Changed
+
+- 🔄 **Merged Pipelines into Chain Command** - Consolidated command chaining functionality
+  - All pipeline functionality from `/meta:pipelines` now integrated into `/meta:chain`
+  - Pre-defined workflows now accessible through chain command templates
+  - Simplified command structure by removing redundant pipeline command
+  - Enhanced chain command with pipeline examples and templates
+
+- 🔄 **Simplified Command Creation** - Unified intelligent creation process
+  - Merged `/meta:create-cmd` functionality into new `/meta:create` command
+  - Single command now intelligently determines resource type (command, agent, or workflow)
+  - Maintains all previous functionality with improved detection logic
+  - Reduces command redundancy while preserving all capabilities
+
+### Removed
+
+- 🗑️ `/meta:pipelines` command - Functionality merged into `/meta:chain`
+- 🗑️ `/meta:create-cmd` command - Functionality merged into `/meta:create`
+
+## [3.5.1] - 2025-08-08
+
+### Added
+
+- ✨ **Unified Command Creation** - New `/meta:create` command replaces and enhances previous creation commands
+  - Intelligently detects whether you need a command, agent, or complete workflow from description
+  - Automatic resource reusability checking - reuses existing agents when possible
+  - Smart technology detection (Laravel, Vue, TYPO3, React, etc.) with auto-category creation
+  - Zero configuration needed - handles naming, templates, integration, and documentation automatically
+  - Replaces and merges functionality from previous `/meta:create-cmd` and smart-create commands
+
+- ✨ **Developer Process Improvements** - New checklist and workflows for adding command categories
+  - Created comprehensive checklist at `docs/developer-guide/adding-new-category-checklist.md`
+  - Step-by-step guide for adding new technology integrations (TYPO3, Laravel, etc.)
+  - Template for updating find-cmd.md with proper keyword discovery
+  - Git commit structure recommendations for complete category additions
+
+### Changed
+
+- 🔄 **Enhanced TYPO3 Integration Discovery** - Improved command discoverability and MCP integration
+  - Added comprehensive TYPO3 keywords to `/meta:find-cmd` for better command discovery
+  - Enhanced TYPO3 commands with MCP (Model Context Protocol) integration documentation
+  - Added agent discovery workflow to find-cmd for complete resource mapping
+  - Improved TYPO3 Content Blocks specialist agent with additional expertise areas
+
+- 🔄 **Simplified Command Creation Workflow** - Unified intelligent creation process
+  - Single `/meta:create` command now handles all creation scenarios
+  - Automatic agent reusability checking prevents duplicate agent creation
+  - Improved command/agent creation workflow with better integration
+
+### Fixed
+
+- 🐛 **TYPO3 Command Discovery** - Fixed missing TYPO3 category in find-cmd command
+  - Added missing TYPO3 section with all relevant keywords and commands
+  - Ensures users can discover TYPO3 commands through natural language queries
+  - Prevents future oversights when adding new integrations through developer checklist
+
+## [3.5.0] - 2025-08-07
+
+### Added
+
+- ✨ **TYPO3 Integration** - Complete TYPO3 v13.4 development support with Content Blocks v1.3
+  - Four new TYPO3-specific commands in `/commands/typo3/`:
+    - `/typo3:sitepackage` - Creates complete TYPO3 v13.4 SitePackages with Site Sets
+    - `/typo3:content-blocks` - Generates Content Blocks v1.3 configurations with all field types
+    - `/typo3:make-content-block` - Intelligent wrapper for native `make:content-block` command
+    - `/typo3:extension-kickstarter` - Creates TYPO3 extensions with best practices
+  - Four specialized TYPO3 AI agents:
+    - `typo3-architect` - TYPO3 architecture and best practices expert
+    - `typo3-content-blocks-specialist` - Content Blocks v1.3 master
+    - `typo3-extension-developer` - Extbase/Fluid development specialist
+    - `typo3-typoscript-expert` - Modern TypoScript and Site Sets expert
+  - Full Content Blocks v1.3 feature support:
+    - Collection child type restrictions
+    - Default configurations (content-blocks.yaml)
+    - Core page type re-definition
+    - Page type compatibility with FLUIDTEMPLATE (not PAGEVIEW)
+  - Skeleton templates for rapid development (hero, card-grid, accordion, landing-page)
+  - Integration with stefanfroemken/ext-kickstarter
+  - Comprehensive documentation in `docs/TYPO3-INTEGRATION.md`
 
 - ✨ **Command Finder** - New `/meta:find-cmd` command for discovering the best tool for any task
   - Intelligently searches all available commands (global and local)
@@ -472,6 +594,10 @@ This release marks the transition from a commands-only repository to a full tool
 
 - 🐛 Update instructions in README now reflect actual Git-based workflow
 
+[3.5.3]: https://github.com/redpop/claude-code-toolkit/compare/v3.5.2...v3.5.3
+[3.5.2]: https://github.com/redpop/claude-code-toolkit/compare/v3.5.1...v3.5.2
+[3.5.1]: https://github.com/redpop/claude-code-toolkit/compare/v3.5.0...v3.5.1
+[3.5.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.4.2...v3.5.0
 [3.4.2]: https://github.com/redpop/claude-code-toolkit/compare/v3.4.1...v3.4.2
 [3.4.1]: https://github.com/redpop/claude-code-toolkit/compare/v3.4.0...v3.4.1
 [3.4.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.3.0...v3.4.0

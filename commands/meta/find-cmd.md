@@ -61,6 +61,11 @@ This intelligent command helps you find the most suitable Claude Code command fo
 **Keywords**: docs, documentation, README, comments, API docs, annotate
 **Commands**: gen:docs, fix:documentation, scan:docs
 
+### 🛠️ Creation & Generation
+**Keywords**: create, generate, scaffold, new command, new agent, builder, generator, make new
+**Commands**: meta:create - Universal intelligent creator for commands, agents, and workflows
+**Scripts**: create-sub-agent.sh, create-sub-agent-command.sh (for advanced users)
+
 ### 🐚 Shell & Scripts
 **Keywords**: shell, bash, script, sh, zsh, shellcheck, terminal
 **Commands**: fix:shell
@@ -77,15 +82,20 @@ This intelligent command helps you find the most suitable Claude Code command fo
 **Keywords**: report, metrics, statistics, quality, trends, analysis
 **Commands**: scan:report, auto:report, meta:export
 
+### 🏗️ TYPO3 & CMS
+**Keywords**: typo3, content block, content blocks, contentblock, contentblocks, content element, content-element, sitepackage, typoscript, fluid, extension, extbase, backend module
+**Commands**: typo3:content-blocks, typo3:sitepackage, typo3:extension-kickstarter, typo3:make-content-block
+**Agents**: typo3-content-blocks-specialist, typo3-architect, typo3-typoscript-expert, typo3-extension-developer
+
 ## Workflow
 
 $ARGUMENTS
 
 Let me analyze your request and find the best commands for this task:
 
-### Step 1: Discovering Available Commands
+### Step 1: Discovering Available Commands and Agents
 
-First, I'll scan for all available commands in your environment:
+First, I'll scan for all available commands and agents in your environment:
 
 ```bash
 # Check global commands
@@ -95,6 +105,10 @@ find ~/.claude/commands -name "*.md" -type f 2>/dev/null | head -20
 # Check local project commands  
 echo "📁 Scanning local commands in .claude/commands/"
 find .claude/commands -name "*.md" -type f 2>/dev/null | head -20
+
+# Check available agents
+echo "🤖 Scanning agents in ~/.claude/agents/"
+find ~/.claude/agents -name "*.md" -type f 2>/dev/null | head -20
 ```
 
 ### Step 2: Analyzing Your Request
@@ -134,6 +148,12 @@ Based on your request, I'll search for commands that match your needs by:
 - **Best for**: [Specific use case]
 - **Usage**: `[Example usage]`
 
+## 🤖 Specialized Agents Available
+
+For complex tasks, consider using these specialized agents:
+- `[AGENT_NAME]`: [Agent expertise and capabilities]
+- Use with: `/prefix:flow:smart "your specific task"`
+
 ## 💡 Related Commands You Might Need
 
 Based on your task, you might also want to consider:
@@ -163,8 +183,8 @@ To learn more about any command, you can:
 ## Didn't Find What You Need?
 
 If no existing command matches your needs:
-1. Use `/prefix:meta:create-cmd` to create a custom command
-2. Use `/prefix:flow:smart` for intelligent problem routing
+1. Use `/prefix:meta:create` to create any command, agent, or workflow you need
+2. Use `/prefix:flow:smart` for intelligent problem routing  
 3. Combine multiple commands with `/prefix:meta:chain`
 
 Remember: Commands are constantly being added and improved. Run this finder regularly to discover new tools!

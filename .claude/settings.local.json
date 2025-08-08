@@ -46,7 +46,18 @@
       "Bash(pipx runpip semgrep-mcp list:*)",
       "Bash(pipx runpip semgrep-mcp show:*)",
       "Bash(docker:*)",
-      "Bash(semgrep:*)"
+      "Bash(semgrep:*)",
+      "WebFetch(domain:docs.typo3.org)",
+      "Bash(git log:*)",
+      "Bash(git tag:*)",
+      "Bash(for:*)",
+      "Bash(do)",
+      "Bash(if ! grep -q \"^description:\" \"$file\")",
+      "Bash(then)",
+      "Bash(echo:*)",
+      "Bash(fi)",
+      "Bash(if ! grep -q \"^argument-hint:\" \"$file\")",
+      "Bash(done)"
     ],
     "deny": []
   }

@@ -14,25 +14,55 @@ This command creates a comprehensive mapping of the entire codebase with 10 spec
 
 **IMMEDIATELY START 10 PARALLEL MAPPING AGENTS:**
 
-1. **Structure Overview Agent**: Task(description="Map Directory Structure", prompt="Create an overview of the directory structure of $ARGUMENTS. Analyze: 1) Main directories and their purpose, 2) File Organization Patterns, 3) Naming Conventions, 4) Module Boundaries, 5) Hidden/Config Directories. Use tree and fd for the analysis. Return hierarchical structure with annotations as JSON.", subagent_type="general-purpose")
+1. **Structure Overview Agent**:
 
-2. **Technology Stack Agent**: Task(description="Identify Tech Stack", prompt="Identify the complete technology stack in $ARGUMENTS. Analyze: 1) Programming Languages (with version hints), 2) Frameworks and Libraries, 3) Build Tools and Package Managers, 4) Testing Frameworks, 5) Development Tools. Examine config files, dependencies, and imports. Return Tech Stack Matrix as JSON.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose":
+"Create an overview of the directory structure of $ARGUMENTS. Analyze: 1) Main directories and their purpose, 2) File Organization Patterns, 3) Naming Conventions, 4) Module Boundaries, 5) Hidden/Config Directories. Use tree and fd for the analysis. Return hierarchical structure with annotations as JSON."
 
-3. **Entry Points Agent**: Task(description="Find Entry Points", prompt="Locate all entry points in $ARGUMENTS. Search for: 1) Main Functions/Files, 2) CLI Entry Points, 3) API Endpoints, 4) Web Server Routes, 5) Background Job Handlers, 6) Event Listeners. Use pattern matching for various frameworks. Return Entry Point Map as JSON.", subagent_type="general-purpose")
+2. **Technology Stack Agent**:
 
-4. **Core Components Agent**: Task(description="Identify Core Components", prompt="Identify Core Business Logic Components in $ARGUMENTS. Analyze: 1) Domain Models/Entities, 2) Services/Use Cases, 3) Controllers/Handlers, 4) Data Access Layer, 5) Utility Modules. Focus on central business logic. Return Component Architecture as JSON.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose":
+"Identify the complete technology stack in $ARGUMENTS. Analyze: 1) Programming Languages (with version hints), 2) Frameworks and Libraries, 3) Build Tools and Package Managers, 4) Testing Frameworks, 5) Development Tools. Examine config files, dependencies, and imports. Return Tech Stack Matrix as JSON."
 
-5. **Data Flow Agent**: Task(description="Map Data Flow", prompt="Analyze Data Flow Patterns in $ARGUMENTS. Examine: 1) Input Sources (APIs, Files, DBs), 2) Data Transformations, 3) Storage Locations, 4) Output Destinations, 5) Cache Layers. Trace typical data journeys. Return Data Flow Diagram as JSON/Mermaid.", subagent_type="general-purpose")
+3. **Entry Points Agent**:
 
-6. **Configuration Agent**: Task(description="Configuration Analysis", prompt="Map all configuration aspects in $ARGUMENTS. Find: 1) Config Files and Formats, 2) Environment Variables, 3) Feature Flags, 4) Build Configurations, 5) Deployment Configs. Analyze config hierarchy and overrides. Return Configuration Map as JSON.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose":
+"Locate all entry points in $ARGUMENTS. Search for: 1) Main Functions/Files, 2) CLI Entry Points, 3) API Endpoints, 4) Web Server Routes, 5) Background Job Handlers, 6) Event Listeners. Use pattern matching for various frameworks. Return Entry Point Map as JSON."
 
-7. **External Dependencies Agent**: Task(description="Map External Dependencies", prompt="Map all external dependencies in $ARGUMENTS. Analyze: 1) Third-party Libraries (with versions), 2) External APIs/Services, 3) Database Connections, 4) Message Queues, 5) Cloud Services. Check transitive dependencies as well. Return Dependency Graph as JSON.", subagent_type="general-purpose")
+4. **Core Components Agent**:
 
-8. **Test Architecture Agent**: Task(description="Test Structure Mapping", prompt="Map the test architecture in $ARGUMENTS. Examine: 1) Test File Organization, 2) Unit vs Integration vs E2E Tests, 3) Test Utilities/Helpers, 4) Mock/Stub Structure, 5) Test Data/Fixtures. Analyze test coverage distribution. Return Test Architecture Map as JSON.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose":
+"Identify Core Business Logic Components in $ARGUMENTS. Analyze: 1) Domain Models/Entities, 2) Services/Use Cases, 3) Controllers/Handlers, 4) Data Access Layer, 5) Utility Modules. Focus on central business logic. Return Component Architecture as JSON."
 
-9. **Build & Deploy Agent**: Task(description="Build Pipeline Analysis", prompt="Analyze build and deployment setup in $ARGUMENTS. Examine: 1) Build Scripts/Commands, 2) CI/CD Configurations, 3) Docker/Container Setup, 4) Deployment Targets, 5) Release Processes. Focus on automation. Return Build/Deploy Pipeline as JSON.", subagent_type="general-purpose")
+5. **Data Flow Agent**:
 
-10. **Code Metrics Agent**: Task(description="Calculate Code Metrics", prompt="Calculate code metrics for $ARGUMENTS. Analyze: 1) Lines of Code per Language, 2) File/Function Counts, 3) Complexity Metrics, 4) Code Duplication Ratio, 5) Comment Density. Use cloc and custom analysis. Return Metrics Dashboard as JSON.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose":
+"Analyze Data Flow Patterns in $ARGUMENTS. Examine: 1) Input Sources (APIs, Files, DBs), 2) Data Transformations, 3) Storage Locations, 4) Output Destinations, 5) Cache Layers. Trace typical data journeys. Return Data Flow Diagram as JSON/Mermaid."
+
+6. **Configuration Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Map all configuration aspects in $ARGUMENTS. Find: 1) Config Files and Formats, 2) Environment Variables, 3) Feature Flags, 4) Build Configurations, 5) Deployment Configs. Analyze config hierarchy and overrides. Return Configuration Map as JSON."
+
+7. **External Dependencies Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Map all external dependencies in $ARGUMENTS. Analyze: 1) Third-party Libraries (with versions), 2) External APIs/Services, 3) Database Connections, 4) Message Queues, 5) Cloud Services. Check transitive dependencies as well. Return Dependency Graph as JSON."
+
+8. **Test Architecture Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Map the test architecture in $ARGUMENTS. Examine: 1) Test File Organization, 2) Unit vs Integration vs E2E Tests, 3) Test Utilities/Helpers, 4) Mock/Stub Structure, 5) Test Data/Fixtures. Analyze test coverage distribution. Return Test Architecture Map as JSON."
+
+9. **Build & Deploy Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Analyze build and deployment setup in $ARGUMENTS. Examine: 1) Build Scripts/Commands, 2) CI/CD Configurations, 3) Docker/Container Setup, 4) Deployment Targets, 5) Release Processes. Focus on automation. Return Build/Deploy Pipeline as JSON."
+
+10. **Code Metrics Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Calculate code metrics for $ARGUMENTS. Analyze: 1) Lines of Code per Language, 2) File/Function Counts, 3) Complexity Metrics, 4) Code Duplication Ratio, 5) Comment Density. Use cloc and custom analysis. Return Metrics Dashboard as JSON."
 
 ## Synthesis
 

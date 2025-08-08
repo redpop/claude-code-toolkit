@@ -22,12 +22,14 @@ The complete toolkit for extending Claude Code with commands, agents, and tools.
 ### Alternative Quick Workflows
 
 **2-Step Quick Check:**
+
 ```bash
 /prefix:scan:quick . --export-json    # Fast scan
 /prefix:fix:quick-wins --latest       # Apply immediate fixes
 ```
 
 **One-Command Pipeline:**
+
 ```bash
 /prefix:meta:pipelines deep-quality    # Complete quality improvement
 ```
@@ -91,7 +93,7 @@ Forking this repository allows you to:
    # Clone your fork
    git clone https://github.com/YourUsername/your-fork.git
    cd your-fork
-   
+
    # Install with your chosen prefix
    ./install.sh myprefix
    ```
@@ -101,7 +103,7 @@ Forking this repository allows you to:
    ```bash
    # Check that commands are installed
    ls ~/.claude/commands/myprefix/
-   
+
    # Check that agents are installed
    ls ~/.claude/agents/
    ```
@@ -162,6 +164,7 @@ git pull
 ```
 
 The installation script will:
+
 - Back up your existing installation (if you choose to)
 - Copy the latest versions of all commands and agents
 - Display the updated command list
@@ -171,27 +174,35 @@ The installation script will:
 Commands are organized into logical categories for different workflows:
 
 ### 🔍 **Scan** - Analysis & Investigation
+
 Deep code analysis, quality metrics, dependency tracing, and comprehensive scanning
 
-### 🔧 **Fix** - Direct Corrections  
+### 🔧 **Fix** - Direct Corrections
+
 Automated fixes for security issues, performance problems, code duplication, and documentation
 
 ### 🏭 **Gen** - Code & Documentation Generation
+
 Generate tests, documentation, configurations, and other project artifacts
 
 ### 🌊 **Flow** - Multi-Agent Workflows
+
 Intelligent problem routing, parallel analysis, and coordinated multi-agent operations
 
 ### 🤖 **Auto** - Automation & Orchestration
+
 Sprint planning, continuous monitoring, and automated execution of improvement plans
 
 ### 🔒 **Sec** - Security Operations
+
 Security audits, compliance checking, and vulnerability management
 
 ### 🗂️ **Git** - Version Control
+
 Enhanced git operations with intelligent commit messages and workflow integration
 
 ### 🎯 **Meta** - Project & Toolkit Management
+
 Project health checks, command chaining, export management, and toolkit utilities
 
 ## Available Commands
@@ -220,7 +231,6 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:fix:quick-wins` | Apply high-ROI fixes from analysis reports - quick wins with maximum impact and minimal effort | `report.json`, `--dry-run`, `--category=security\|performance\|quality`, `--max-effort=4h`, `--min-roi=5` |
 | `/prefix:fix:security` | Fix security vulnerabilities with MCP-enhanced analysis or traditional pattern matching | `report.json`, `--severity=critical,high,medium`, `--dry-run`, `--interactive`, `--owasp-top10` |
 | `/prefix:fix:shell` | Automatically fix shell script issues using shellcheck analysis | `--check-only`, `--strict`, `--summary-only` |
-| `/prefix:fix:smart` | Intelligent fix router that analyzes issues and applies appropriate fixes | `<report.json\|issue-description>`, `--mode=safe\|aggressive`, `--preview` |
 
 
 ### Flow Commands
@@ -252,14 +262,14 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 
 | Command | Description | Options |
 |---------|-------------|---------|
-| `/prefix:meta:chain` | Chain multiple commands with intelligent data flow and error handling | `<command1>`, `->`, `command2`, `->`, `command3...`, `--stop-on-error`, `--parallel` |
+| `/prefix:meta:analyze-toolkit` | Analyze toolkit commands and agents for redundancies, inconsistencies, and refactoring opportunities | `--fix`, `--export-json`, `--export-md`, `--focus=<area>` |
+| `/prefix:meta:chain` | Chain commands or execute pre-defined pipelines with intelligent data flow | `<pipeline-name`, `\|`, `command-chain>`, `--list`, `--save-as=name`, `--dry-run` |
 | `/prefix:meta:changelog` | AI-powered CHANGELOG.md management that automatically determines version based on changes | `--analyze`, `--commit`, `--push`, `--update-version` |
-| `/prefix:meta:create-cmd` | Create new slash commands from natural language descriptions | `description`, `of`, `what`, `you`, `want`, `the`, `command`, `to`, `do` |
+| `/prefix:meta:create` | Intelligently create commands, agents, or workflows from your description | `<what`, `you`, `need>`, `--type=auto\|command\|agent\|workflow` |
 | `/prefix:meta:export` | Unified export management for all analysis results with format conversion | `<report-files...>`, `--format=md\|json\|html\|pdf`, `--merge`, `--template=name` |
 | `/prefix:meta:find-cmd` | Find the best command for your task from all available commands (global and local) | `<task-description>`, `--all`, `--local-only`, `--global-only` |
 | `/prefix:meta:handoff` | Documents current problem context for handoff to another AI assistant | `output-file` |
 | `/prefix:meta:health` | Comprehensive project health check with actionable insights and trend analysis | `--verbose`, `--compare=last-check.json`, `--export` |
-| `/prefix:meta:pipelines` | Pre-defined command pipelines for common development workflows | `<workflow-name>`, `--customize`, `--dry-run` |
 | `/prefix:meta:summary` | Creates a chat summary for another AI with complete context | `summaries/` |
 | `/prefix:meta:test-guide` | Generates interactive test guides for recent changes, suitable for both end-users and technical reviewers | `--type=all\|user\|technical`, `--format=md\|checklist\|jira`, `--lang=en\|de\|es\|fr`, `--output=file.md` |
 | `/prefix:meta:update-docs` | Intelligently updates project documentation based on code changes and implementation status | `--scope=<type>`, `--analyze`, `--commit` |
@@ -290,6 +300,16 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:sec:audit` | Comprehensive security audit with MCP-enhanced scanning or traditional fallback methods | `directory`, `--severity=critical\|high\|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
 | `/prefix:sec:baseline` | Establish and track security baseline with MCP-enhanced scanning or traditional methods | `directory`, `--export-baseline`, `--compare=previous-baseline.json`, `--track-improvements` |
 | `/prefix:sec:comply` | Run compliance checks for OWASP, PCI-DSS, GDPR, and custom security policies | `directory`, `--standard=owasp\|pci-dss\|gdpr\|all`, `--custom-rules=rules.yaml`, `--export-report` |
+
+
+### Typo3 Commands
+
+| Command | Description | Options |
+|---------|-------------|---------|
+| `/prefix:typo3:content-blocks` | Generate TYPO3 Content Blocks v1.3 with modern field configurations | `name`, `--type=element\|page`, `--fields=...`, `--sitepackage=path` |
+| `/prefix:typo3:extension-kickstarter` | Create TYPO3 extensions using ext-kickstarter or manual scaffolding | `extension-key`, `--type=...`, `--use-kickstarter`, `--composer-name=...` |
+| `/prefix:typo3:make-content-block` | Wrapper for TYPO3 make:content-block command with intelligent defaults | `--vendor=...`, `--type=...`, `--skeleton-path=...`, `--config-path=...` |
+| `/prefix:typo3:sitepackage` | Create a complete TYPO3 v13.4 SitePackage structure with Site Sets | `vendor`, `package-name`, `--options` |
 
 <!-- COMMANDS:END -->
 
@@ -567,24 +587,28 @@ When adding or modifying commands:
 ## Key Features
 
 ### 🚀 Intelligent Multi-Agent System
+
 - **Parallel Processing**: Run up to 10 specialized agents simultaneously
 - **Smart Routing**: AI automatically determines which agents to use
 - **Cross-Validation**: Agents validate each other's findings
 - **Deep Expertise**: Each agent has specialized domain knowledge
 
 ### 🔄 Advanced Command Chaining
+
 - **Data Flow**: Automatic output passing between commands
 - **Error Handling**: Intelligent error recovery and fallbacks
 - **Conditional Logic**: Execute commands based on results
 - **Pipeline Templates**: Pre-built workflows for common tasks
 
 ### 📊 Comprehensive Analysis
+
 - **Multi-Dimensional**: Security, performance, architecture, and quality
 - **Trend Detection**: Track improvements over time
 - **ROI Prioritization**: Focus on high-impact changes
 - **Export Flexibility**: Multiple formats (MD, JSON, HTML, PDF)
 
 ### 🤖 Automation First
+
 - **Action Plans**: Executable improvement plans
 - **Progress Tracking**: Real-time status updates
 - **Batch Operations**: Fix multiple issues automatically
