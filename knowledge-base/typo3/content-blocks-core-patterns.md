@@ -162,6 +162,36 @@ Content Blocks v1.3 automatically generates:
 </html>
 ```
 
+### Using Shared Partials from Sitepackage
+Content Blocks can use shared partials to avoid redundancy:
+
+```html
+<html data-namespace-typo3-fluid="true"
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
+
+<f:comment>-- Use shared component from sitepackage --</f:comment>
+<f:render partial="Components/Accordion/Accordion" arguments="{
+    title: data.punktde_accordion_title,
+    items: data.punktde_accordion_items,
+    firstExpanded: data.punktde_accordion_first_expanded,
+    allowMultiple: data.punktde_accordion_allow_multiple
+}" />
+</html>
+```
+
+**Required TypoScript Configuration:**
+```typoscript
+# In your sitepackage's TypoScript (e.g., ContentBlocks.typoscript)
+lib.contentElement {
+    partialRootPaths {
+        100 = EXT:sitepackage/Resources/Private/Partials/
+    }
+}
+```
+
+This allows all Content Blocks to use partials from the sitepackage.
+See: [Content Blocks Shared Partials Documentation](./content-blocks-shared-partials.md)
+
 ### Asset Inclusion
 ```html
 <!-- External JavaScript -->
