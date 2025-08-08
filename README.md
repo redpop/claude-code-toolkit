@@ -295,7 +295,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:sec:baseline` | Establish and track security baseline with MCP-enhanced scanning or traditional methods | `directory`, `--export-baseline`, `--compare=previous-baseline.json`, `--track-improvements`                                        |
 | `/prefix:sec:comply`   | Run compliance checks for OWASP, PCI-DSS, GDPR, and custom security policies            | `directory`, `--standard=owasp\|pci-dss\|gdpr\|all`, `--custom-rules=rules.yaml`, `--export-report`                                 |
 
-### Typo3 Commands
+### TYPO3 Commands
 
 | Command                               | Description                                                            | Options                                                                   |
 | ------------------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------- |

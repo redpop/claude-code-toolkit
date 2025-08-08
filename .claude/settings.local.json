@@ -47,7 +47,8 @@
       "Bash(pipx runpip semgrep-mcp show:*)",
       "Bash(docker:*)",
       "Bash(semgrep:*)",
-      "WebFetch(domain:docs.typo3.org)"
+      "WebFetch(domain:docs.typo3.org)",
+      "Bash(git log:*)"
     ],
     "deny": []
   }
