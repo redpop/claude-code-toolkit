@@ -26,7 +26,12 @@ Generates Content Blocks v1.3 compatible configurations for TYPO3 v13.4.
    - Then `mcp__context7__get-library-docs` for latest API documentation
    - This provides up-to-date field types, configurations, and best practices
 
-2. **Fallback to embedded knowledge**:
+2. **Reference modular documentation**:
+   - Core patterns: `/knowledge-base/typo3/content-blocks-core-patterns.md`
+   - UI patterns: `/knowledge-base/ui-patterns/[pattern-name].md`
+   - Framework integration: `/knowledge-base/frameworks/[framework]-integration.md`
+
+3. **Fallback to embedded knowledge**:
    - Use the field configurations defined in this command
    - Reference official documentation URLs provided above
 

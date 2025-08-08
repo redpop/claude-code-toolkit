@@ -231,7 +231,6 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:fix:quick-wins` | Apply high-ROI fixes from analysis reports - quick wins with maximum impact and minimal effort | `report.json`, `--dry-run`, `--category=security\|performance\|quality`, `--max-effort=4h`, `--min-roi=5` |
 | `/prefix:fix:security` | Fix security vulnerabilities with MCP-enhanced analysis or traditional pattern matching | `report.json`, `--severity=critical,high,medium`, `--dry-run`, `--interactive`, `--owasp-top10` |
 | `/prefix:fix:shell` | Automatically fix shell script issues using shellcheck analysis | `--check-only`, `--strict`, `--summary-only` |
-| `/prefix:fix:smart` | Intelligent fix router that analyzes issues and applies appropriate fixes | `<report.json\|issue-description>`, `--mode=safe\|aggressive`, `--preview` |
 
 
 ### Flow Commands
@@ -263,6 +262,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 
 | Command | Description | Options |
 |---------|-------------|---------|
+| `/prefix:meta:analyze-toolkit` | Analyze toolkit commands and agents for redundancies, inconsistencies, and refactoring opportunities | `--fix`, `--export-json`, `--export-md`, `--focus=<area>` |
 | `/prefix:meta:chain` | Chain commands or execute pre-defined pipelines with intelligent data flow | `<pipeline-name`, `\|`, `command-chain>`, `--list`, `--save-as=name`, `--dry-run` |
 | `/prefix:meta:changelog` | AI-powered CHANGELOG.md management that automatically determines version based on changes | `--analyze`, `--commit`, `--push`, `--update-version` |
 | `/prefix:meta:create` | Intelligently create commands, agents, or workflows from your description | `<what`, `you`, `need>`, `--type=auto\|command\|agent\|workflow` |

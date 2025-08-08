@@ -14,17 +14,35 @@ This command performs a comprehensive dependency analysis, with 6 specialized ag
 
 **IMMEDIATELY START 6 PARALLEL DEPENDENCY AGENTS:**
 
-1. **Direct Dependencies Agent**: Task(description="Analyze Direct Dependencies", prompt="Analyze direct dependencies for $ARGUMENTS. Examine: 1) Package.json, requirements.txt, go.mod, Cargo.toml dependencies, 2) Version constraints and ranges, 3) Dev vs Production dependencies, 4) Optional/Peer dependencies, 5) Local/File dependencies. Create complete list with version info. Return Direct Dependency Tree as JSON.", subagent_type="general-purpose")
+1. **Direct Dependencies Agent**:
 
-2. **Transitive Dependencies Agent**: Task(description="Trace Transitive Dependencies", prompt="Trace transitive dependencies for $ARGUMENTS. Analyze: 1) Complete dependency chain, 2) Version conflicts/resolutions, 3) Duplicate packages (different versions), 4) Dependency depth (how deep the chain goes), 5) Total unique packages. Use lock files if available. Return complete dependency graph as JSON.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose":
+"Analyze direct dependencies for $ARGUMENTS. Examine: 1) Package.json, requirements.txt, go.mod, Cargo.toml dependencies, 2) Version constraints and ranges, 3) Dev vs Production dependencies, 4) Optional/Peer dependencies, 5) Local/File dependencies. Create complete list with version info. Return Direct Dependency Tree as JSON."
 
-3. **Security Vulnerabilities Agent**: Task(description="Security Dependency Scan", prompt="Scan dependencies for security issues for $ARGUMENTS. Check: 1) Known CVEs in dependencies, 2) Outdated packages with security fixes, 3) Packages with security advisories, 4) Unmaintained/Abandoned packages, 5) Packages with suspicious patterns. Use available security databases. Return vulnerabilities with severity as JSON.", subagent_type="general-purpose")
+2. **Transitive Dependencies Agent**:
 
-4. **License Compliance Agent**: Task(description="License Analysis", prompt="Analyze licenses of all dependencies for $ARGUMENTS. Examine: 1) License types (MIT, GPL, Apache, etc.), 2) License compatibility matrix, 3) Commercial use restrictions, 4) Attribution requirements, 5) Copyleft obligations. Identify problematic license combinations. Return license report as JSON.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose":
+"Trace transitive dependencies for $ARGUMENTS. Analyze: 1) Complete dependency chain, 2) Version conflicts/resolutions, 3) Duplicate packages (different versions), 4) Dependency depth (how deep the chain goes), 5) Total unique packages. Use lock files if available. Return complete dependency graph as JSON."
 
-5. **Usage Analysis Agent**: Task(description="Dependency Usage Tracking", prompt="Analyze how dependencies are used in $ARGUMENTS. Find: 1) Import statements and require calls, 2) Actual usage vs declared dependencies, 3) Unused dependencies, 4) Missing dependencies (used but not declared), 5) Feature usage (which parts of the lib are used). Return usage report with recommendations as JSON.", subagent_type="general-purpose")
+3. **Security Vulnerabilities Agent**:
 
-6. **Update Impact Agent**: Task(description="Update Impact Analysis", prompt="Evaluate update impact for dependencies in $ARGUMENTS. Analyze: 1) Available updates (Major/Minor/Patch), 2) Breaking changes in updates, 3) Migration effort estimation, 4) Update priority (Security/Features/Bugs), 5) Dependency update order. Check changelogs and release notes. Return update strategy as JSON.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose":
+"Scan dependencies for security issues for $ARGUMENTS. Check: 1) Known CVEs in dependencies, 2) Outdated packages with security fixes, 3) Packages with security advisories, 4) Unmaintained/Abandoned packages, 5) Packages with suspicious patterns. Use available security databases. Return vulnerabilities with severity as JSON."
+
+4. **License Compliance Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Analyze licenses of all dependencies for $ARGUMENTS. Examine: 1) License types (MIT, GPL, Apache, etc.), 2) License compatibility matrix, 3) Commercial use restrictions, 4) Attribution requirements, 5) Copyleft obligations. Identify problematic license combinations. Return license report as JSON."
+
+5. **Usage Analysis Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Analyze how dependencies are used in $ARGUMENTS. Find: 1) Import statements and require calls, 2) Actual usage vs declared dependencies, 3) Unused dependencies, 4) Missing dependencies (used but not declared), 5) Feature usage (which parts of the lib are used). Return usage report with recommendations as JSON."
+
+6. **Update Impact Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Evaluate update impact for dependencies in $ARGUMENTS. Analyze: 1) Available updates (Major/Minor/Patch), 2) Breaking changes in updates, 3) Migration effort estimation, 4) Update priority (Security/Features/Bugs), 5) Dependency update order. Check changelogs and release notes. Return update strategy as JSON."
 
 ## Synthesis
 
