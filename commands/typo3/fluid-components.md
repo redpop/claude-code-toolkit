@@ -31,6 +31,32 @@ Generates Fluid v4 Components for TYPO3 v13.3+ projects using modern component-b
    - TYPO3 v13 integration guides
    - Atomic Design principles
 
+## Important: Fluid v4.3 Component Syntax
+
+**Note:** The `fc:component` syntax (`TYPO3\CMS\Fluid\ViewHelpers\Component`) is **NOT available in Fluid v4.3/TYPO3 13**. 
+It's an experimental feature. Use standard partials with `f:render partial=""` instead.
+
+### Correct Approach for TYPO3 13:
+```html
+<!-- Component as Partial -->
+<f:render partial="Components/Accordion/Accordion" arguments="{
+    title: title,
+    items: items,
+    allowMultiple: allowMultiple
+}" />
+```
+
+### Content Blocks Integration:
+Content Blocks can use shared partials from sitepackage via TypoScript configuration:
+```typoscript
+lib.contentElement {
+    partialRootPaths {
+        100 = EXT:sitepackage/Resources/Private/Partials/
+    }
+}
+```
+See: [Content Blocks Shared Partials Documentation](../../knowledge-base/typo3/content-blocks-shared-partials.md)
+
 ## Command Workflow
 
 Parse the arguments from $ARGUMENTS to extract:
