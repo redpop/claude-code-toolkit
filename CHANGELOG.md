@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.5.2] - 2025-08-08
+
+### Added
+
+- ✨ **Toolkit Self-Analysis Command** - New `/meta:analyze-toolkit` command for comprehensive toolkit analysis
+  - Analyzes all commands and agents for redundancies and inconsistencies
+  - Detects overlapping functionality and suggests consolidation opportunities
+  - Performs quality checks on documentation and naming conventions
+  - Tracks evolution trends and technical debt indicators
+  - Generates prioritized refactoring plans with risk assessment
+  - Optional auto-fix mode for safe, non-breaking improvements
+  - Exports analysis results in JSON and Markdown formats
+
+### Changed
+
+- 🔄 **Merged Pipelines into Chain Command** - Consolidated command chaining functionality
+  - All pipeline functionality from `/meta:pipelines` now integrated into `/meta:chain`
+  - Pre-defined workflows now accessible through chain command templates
+  - Simplified command structure by removing redundant pipeline command
+  - Enhanced chain command with pipeline examples and templates
+
+- 🔄 **Simplified Command Creation** - Unified intelligent creation process
+  - Merged `/meta:create-cmd` functionality into new `/meta:create` command
+  - Single command now intelligently determines resource type (command, agent, or workflow)
+  - Maintains all previous functionality with improved detection logic
+  - Reduces command redundancy while preserving all capabilities
+
+### Removed
+
+- 🗑️ `/meta:pipelines` command - Functionality merged into `/meta:chain`
+- 🗑️ `/meta:create-cmd` command - Functionality merged into `/meta:create`
+
 ## [3.5.1] - 2025-08-08
 
 ### Added
@@ -531,6 +563,7 @@ This release marks the transition from a commands-only repository to a full tool
 
 - 🐛 Update instructions in README now reflect actual Git-based workflow
 
+[3.5.2]: https://github.com/redpop/claude-code-toolkit/compare/v3.5.1...v3.5.2
 [3.5.1]: https://github.com/redpop/claude-code-toolkit/compare/v3.5.0...v3.5.1
 [3.5.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.4.2...v3.5.0
 [3.4.2]: https://github.com/redpop/claude-code-toolkit/compare/v3.4.1...v3.4.2
