@@ -282,6 +282,324 @@ class PriceViewHelper extends AbstractViewHelper
 }
 ```
 
+### Fluid v4 Components Development
+
+#### Component Architecture
+
+Fluid v4 Components (available in TYPO3 v13.3+) provide modern component-based development:
+
+```
+EXT:my_extension/
+├── Classes/
+│   └── Components/
+│       └── ComponentCollection.php
+└── Resources/
+    └── Private/
+        └── Components/
+            ├── Atom/           # Basic elements
+            ├── Molecule/       # Composite components
+            └── Organism/       # Complex structures
+```
+
+#### ComponentCollection Class
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Vendor\Extension\Components;
+
+use TYPO3Fluid\Fluid\Core\Component\AbstractComponentCollection;
+
+final class ComponentCollection extends AbstractComponentCollection
+{
+    /**
+     * Allow additional HTML attributes (data-*, aria-*)
+     */
+    protected function additionalArgumentsAllowed(string $viewHelperName): bool
+    {
+        return true;
+    }
+    
+    /**
+     * Provide global design tokens to all components
+     */
+    public function getDesignTokens(): array
+    {
+        return [
+            'colors' => [
+                'primary' => '#007bff',
+                'secondary' => '#6c757d',
+                'success' => '#28a745',
+            ],
+            'spacing' => [
+                'small' => '0.5rem',
+                'medium' => '1rem',
+                'large' => '2rem',
+            ],
+        ];
+    }
+}
+```
+
+#### Component Template Examples
+
+**Atom/Button.html**:
+```html
+<!-- Typed arguments with Fluid v4 -->
+<f:argument name="href" type="string" optional="{true}" />
+<f:argument name="variant" type="string" optional="{true}" default="primary" />
+<f:argument name="size" type="string" optional="{true}" default="medium" />
+<f:argument name="disabled" type="boolean" optional="{true}" default="{false}" />
+<f:argument name="loading" type="boolean" optional="{true}" default="{false}" />
+<f:argument name="icon" type="string" optional="{true}" />
+<f:argument name="iconPosition" type="string" optional="{true}" default="left" />
+
+<f:if condition="{href}">
+    <f:then>
+        <a href="{href}" 
+           class="btn btn--{variant} btn--{size}"
+           {f:if(condition: disabled, then: 'aria-disabled="true" tabindex="-1"')}>
+            <f:render section="ButtonContent" arguments="{_all}" />
+        </a>
+    </f:then>
+    <f:else>
+        <button type="button"
+                class="btn btn--{variant} btn--{size}"
+                {f:if(condition: disabled, then: 'disabled="disabled"')}
+                {f:if(condition: loading, then: 'aria-busy="true"')}>
+            <f:render section="ButtonContent" arguments="{_all}" />
+        </button>
+    </f:else>
+</f:if>
+
+<f:section name="ButtonContent">
+    <f:if condition="{loading}">
+        <my:atom.spinner size="small" />
+    </f:if>
+    <f:if condition="{icon} && {iconPosition} == 'left'">
+        <my:atom.icon name="{icon}" />
+    </f:if>
+    <span class="btn__label"><f:slot /></span>
+    <f:if condition="{icon} && {iconPosition} == 'right'">
+        <my:atom.icon name="{icon}" />
+    </f:if>
+</f:section>
+```
+
+**Molecule/Card.html**:
+```html
+<f:argument name="title" type="string" />
+<f:argument name="description" type="string" optional="{true}" />
+<f:argument name="image" type="TYPO3\CMS\Core\Resource\FileInterface" optional="{true}" />
+<f:argument name="link" type="string" optional="{true}" />
+<f:argument name="variant" type="string" optional="{true}" default="default" />
+
+<article class="card card--{variant}">
+    <f:if condition="{image}">
+        <div class="card__media">
+            <my:atom.responsiveImage 
+                image="{image}" 
+                sizes="(max-width: 768px) 100vw, 33vw" />
+        </div>
+    </f:if>
+    
+    <div class="card__body">
+        <h3 class="card__title">
+            <f:if condition="{link}">
+                <f:then><a href="{link}">{title}</a></f:then>
+                <f:else>{title}</f:else>
+            </f:if>
+        </h3>
+        
+        <f:if condition="{description}">
+            <p class="card__description">{description}</p>
+        </f:if>
+        
+        <f:slot name="footer">
+            <f:if condition="{link}">
+                <my:atom.button href="{link}" variant="secondary" size="small">
+                    Read more
+                </my:atom.button>
+            </f:if>
+        </f:slot>
+    </div>
+</article>
+```
+
+#### Component Usage in Templates
+
+```html
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:my="http://typo3.org/ns/Vendor/Extension/Components/ComponentCollection"
+      data-namespace-typo3-fluid="true">
+
+<!-- Basic usage -->
+<my:atom.button variant="primary">Click me</my:atom.button>
+
+<!-- With boolean literals (Fluid v4 feature) -->
+<my:atom.button disabled="{true}" loading="{false}">
+    Processing...
+</my:atom.button>
+
+<!-- Complex component with slots -->
+<my:molecule.card title="{product.title}" image="{product.image}">
+    <f:slot name="footer">
+        <my:atom.button href="{product.link}" icon="cart">
+            Add to Cart
+        </my:atom.button>
+    </f:slot>
+</my:molecule.card>
+
+<!-- Component composition -->
+<my:organism.productGrid>
+    <f:for each="{products}" as="product">
+        <my:molecule.productCard product="{product}" />
+    </f:for>
+</my:organism.productGrid>
+</html>
+```
+
+#### Component Testing
+
+```php
+namespace Vendor\Extension\Tests\Unit\Components;
+
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
+use TYPO3Fluid\Fluid\View\TemplateView;
+
+class ButtonComponentTest extends UnitTestCase
+{
+    protected TemplateView $view;
+    
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->view = new TemplateView();
+        $this->view->getTemplatePaths()->setTemplateRootPaths([
+            'EXT:my_extension/Resources/Private/Components/'
+        ]);
+    }
+    
+    /**
+     * @test
+     */
+    public function buttonRendersWithCorrectClasses(): void
+    {
+        $template = '<my:atom.button variant="primary" size="large">Test</my:atom.button>';
+        $this->view->assign('data', []);
+        $output = $this->view->renderSection('Main', ['template' => $template]);
+        
+        self::assertStringContainsString('btn--primary', $output);
+        self::assertStringContainsString('btn--large', $output);
+    }
+    
+    /**
+     * @test
+     */
+    public function buttonRendersAsLinkWhenHrefProvided(): void
+    {
+        $template = '<my:atom.button href="/test">Link Button</my:atom.button>';
+        $output = $this->view->renderSection('Main', ['template' => $template]);
+        
+        self::assertStringContainsString('<a href="/test"', $output);
+        self::assertStringNotContainsString('<button', $output);
+    }
+}
+```
+
+#### Migration from ViewHelpers to Components
+
+**Before (ViewHelper)**:
+```php
+// PHP ViewHelper
+class ButtonViewHelper extends AbstractTagBasedViewHelper
+{
+    protected $tagName = 'button';
+    
+    public function initializeArguments(): void
+    {
+        parent::initializeArguments();
+        $this->registerArgument('variant', 'string', 'Button variant', false, 'primary');
+    }
+    
+    public function render(): string
+    {
+        $this->tag->addAttribute('class', 'btn btn--' . $this->arguments['variant']);
+        $this->tag->setContent($this->renderChildren());
+        return $this->tag->render();
+    }
+}
+```
+
+**After (Component)**:
+```html
+<!-- Fluid Component Template -->
+<f:argument name="variant" type="string" optional="{true}" default="primary" />
+<f:argument name="type" type="string" optional="{true}" default="button" />
+
+<button type="{type}" class="btn btn--{variant}">
+    <f:slot />
+</button>
+```
+
+#### Component Best Practices
+
+1. **Atomic Design Structure**:
+   - **Atoms**: Basic UI elements (buttons, inputs, icons)
+   - **Molecules**: Simple combinations (cards, form groups)
+   - **Organisms**: Complex sections (headers, product grids)
+
+2. **Type Safety**:
+   ```html
+   <!-- Use strict typing for arguments -->
+   <f:argument name="items" type="array" />
+   <f:argument name="currentPage" type="integer" />
+   <f:argument name="itemsPerPage" type="integer" default="10" />
+   ```
+
+3. **Performance Optimization**:
+   ```html
+   <!-- Use f:spaceless to remove unnecessary whitespace -->
+   <f:spaceless>
+       <my:molecule.card title="{item.title}" />
+   </f:spaceless>
+   
+   <!-- Cache component output when possible -->
+   <f:cache key="card-{item.uid}" lifetime="3600">
+       <my:molecule.card item="{item}" />
+   </f:cache>
+   ```
+
+4. **Accessibility**:
+   ```html
+   <!-- Include ARIA attributes -->
+   <f:argument name="ariaLabel" type="string" optional="{true}" />
+   <f:argument name="ariaDescribedBy" type="string" optional="{true}" />
+   
+   <button aria-label="{ariaLabel}" aria-describedby="{ariaDescribedBy}">
+       <f:slot />
+   </button>
+   ```
+
+5. **Documentation**:
+   ```html
+   <!--
+   Component: Atom/Input
+   Purpose: Reusable form input component
+   
+   Arguments:
+   - type (string): Input type [text|email|password|number]
+   - name (string): Form field name
+   - value (string): Current value
+   - required (boolean): Required field
+   - placeholder (string): Placeholder text
+   
+   Example:
+   <my:atom.input type="email" name="user[email]" required="{true}" />
+   -->
+   ```
+
 ## Testing Patterns
 
 ### Unit Testing

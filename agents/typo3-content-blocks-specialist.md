@@ -394,6 +394,236 @@ fields:
 - EXT:solr indexing
 - Custom DataProcessors
 
+### With Fluid v4 Components
+
+#### Component-Based Content Blocks
+
+Leverage Fluid v4 Components (available in TYPO3 v13.3+) for reusable UI patterns:
+
+```html
+<!-- Content Block template using Fluid Components -->
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
+      xmlns:my="http://typo3.org/ns/Vendor/SitePackage/Components/ComponentCollection"
+      data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+<f:section name="Main">
+    <!-- Use component for hero section -->
+    <my:molecule.heroSection 
+        headline="{data.vendor_hero_headline}"
+        subheadline="{data.vendor_hero_subheadline}"
+        variant="primary"
+        fullWidth="{true}">
+        
+        <f:if condition="{data.vendor_hero_buttons}">
+            <f:slot name="actions">
+                <f:for each="{data.vendor_hero_buttons}" as="button">
+                    <my:atom.button 
+                        href="{button.link}"
+                        variant="{button.style}"
+                        size="large">
+                        {button.label}
+                    </my:atom.button>
+                </f:for>
+            </f:slot>
+        </f:if>
+        
+        <f:if condition="{data.vendor_hero_image}">
+            <f:slot name="media">
+                <my:atom.responsiveImage 
+                    image="{data.vendor_hero_image.0}"
+                    cropVariant="hero" />
+            </f:slot>
+        </f:if>
+    </my:molecule.heroSection>
+</f:section>
+</html>
+```
+
+#### Component Creation for Content Blocks
+
+1. **Create Component Structure**:
+```
+EXT:sitepackage/
+├── Classes/
+│   └── Components/
+│       └── ComponentCollection.php
+└── Resources/
+    └── Private/
+        └── Components/
+            ├── Atom/
+            │   ├── Button.html
+            │   ├── Icon.html
+            │   └── ResponsiveImage.html
+            └── Molecule/
+                ├── HeroSection.html
+                └── Card.html
+```
+
+2. **ComponentCollection Class**:
+```php
+<?php
+namespace Vendor\SitePackage\Components;
+
+use TYPO3Fluid\Fluid\Core\Component\AbstractComponentCollection;
+
+final class ComponentCollection extends AbstractComponentCollection
+{
+    protected function additionalArgumentsAllowed(string $viewHelperName): bool
+    {
+        // Allow data-* attributes for all components
+        return true;
+    }
+}
+```
+
+3. **Component Template Example** (Atom/Button.html):
+```html
+<f:argument name="href" type="string" optional="{true}" />
+<f:argument name="variant" type="string" optional="{true}" default="primary" />
+<f:argument name="size" type="string" optional="{true}" default="medium" />
+<f:argument name="disabled" type="boolean" optional="{true}" default="{false}" />
+<f:argument name="icon" type="string" optional="{true}" />
+
+<f:if condition="{href}">
+    <f:then>
+        <a href="{href}" class="btn btn--{variant} btn--{size}" 
+           {f:if(condition: disabled, then: 'aria-disabled="true"')}>
+            <f:if condition="{icon}">
+                <my:atom.icon name="{icon}" />
+            </f:if>
+            <f:slot />
+        </a>
+    </f:then>
+    <f:else>
+        <button class="btn btn--{variant} btn--{size}" 
+                {f:if(condition: disabled, then: 'disabled="disabled"')}>
+            <f:if condition="{icon}">
+                <my:atom.icon name="{icon}" />
+            </f:if>
+            <f:slot />
+        </button>
+    </f:else>
+</f:if>
+```
+
+#### Best Practices for Component Integration
+
+1. **Component Architecture for Content Blocks**:
+   - Use Atomic Design: atoms → molecules → organisms
+   - Keep Content Block templates thin, delegate to components
+   - Share components across multiple Content Blocks
+   - Version components independently from Content Blocks
+
+2. **Performance Optimization**:
+   ```html
+   <!-- Use f:spaceless to remove unnecessary whitespace -->
+   <f:spaceless>
+       <my:molecule.card title="{item.title}" />
+   </f:spaceless>
+   ```
+
+3. **Type Safety**:
+   ```html
+   <!-- Define strict argument types -->
+   <f:argument name="items" type="array" />
+   <f:argument name="maxItems" type="integer" optional="{true}" default="10" />
+   <f:argument name="showPagination" type="boolean" optional="{true}" default="{false}" />
+   ```
+
+4. **Component Documentation**:
+   ```html
+   <!-- Component: Atom/Button.html -->
+   <!--
+   Button Component
+   
+   Arguments:
+   - href (string, optional): Link URL (creates <a> tag instead of <button>)
+   - variant (string, optional): Visual variant [primary|secondary|tertiary]
+   - size (string, optional): Button size [small|medium|large]
+   - disabled (boolean, optional): Disabled state
+   - icon (string, optional): Icon name to display
+   
+   Slots:
+   - default: Button label content
+   -->
+   ```
+
+#### Migration Strategy: ViewHelpers to Components
+
+1. **Identify Reusable Patterns**:
+   - Scan existing ViewHelpers for UI-focused functionality
+   - Extract presentation logic into components
+   - Keep data processing in ViewHelpers or DataProcessors
+
+2. **Progressive Migration**:
+   ```html
+   <!-- Phase 1: Wrap existing ViewHelper in component -->
+   <my:atom.legacyWrapper>
+       <vendor:oldViewHelper argument="value" />
+   </my:atom.legacyWrapper>
+   
+   <!-- Phase 2: Replace with native component -->
+   <my:atom.newComponent argument="value" />
+   ```
+
+3. **Component Testing**:
+   ```php
+   // Test component rendering
+   $view = $this->getFluidTemplate('
+       <my:atom.button variant="primary">Test</my:atom.button>
+   ');
+   $output = $view->render();
+   $this->assertStringContainsString('btn--primary', $output);
+   ```
+
+#### Advanced Component Patterns
+
+1. **Conditional Rendering**:
+   ```html
+   <f:argument name="renderCondition" type="boolean" optional="{true}" default="{true}" />
+   
+   <f:if condition="{renderCondition}">
+       <div class="component">
+           <f:slot />
+       </div>
+   </f:if>
+   ```
+
+2. **Dynamic Component Selection**:
+   ```html
+   <!-- In Content Block template -->
+   <f:switch expression="{data.component_type}">
+       <f:case value="hero">
+           <my:molecule.heroSection {...} />
+       </f:case>
+       <f:case value="cards">
+           <my:organism.cardGrid {...} />
+       </f:case>
+       <f:defaultCase>
+           <my:molecule.defaultSection {...} />
+       </f:defaultCase>
+   </f:switch>
+   ```
+
+3. **Component Composition**:
+   ```html
+   <!-- Molecule using multiple atoms -->
+   <my:molecule.card>
+       <f:slot name="header">
+           <my:atom.heading level="3">{title}</my:atom.heading>
+       </f:slot>
+       <f:slot name="content">
+           <my:atom.text>{description}</my:atom.text>
+       </f:slot>
+       <f:slot name="footer">
+           <my:atom.button href="{link}">Read More</my:atom.button>
+       </f:slot>
+   </my:molecule.card>
+   ```
+
 When analyzing Content Blocks, always consider:
 
 - User experience in backend
@@ -401,3 +631,4 @@ When analyzing Content Blocks, always consider:
 - Translation workflow
 - Maintenance overhead
 - Future extensibility
+- Component reusability with Fluid v4

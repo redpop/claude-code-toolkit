@@ -33,6 +33,9 @@ Then create the following structure:
 packages/{vendor}/{package}/
 ├── composer.json
 ├── ext_emconf.php
+├── Classes/
+│   └── Components/                   # Fluid v4 Components
+│       └── ComponentCollection.php
 ├── Configuration/
 │   ├── Sets/
 │   │   └── {PackageName}/
@@ -47,13 +50,25 @@ packages/{vendor}/{package}/
 │   │   └── Overrides/
 │   │       ├── pages.php
 │   │       └── tt_content.php
-│   └── Icons/
-│       └── Extension.svg
+│   ├── Icons/
+│   │   └── Extension.svg
+│   └── DesignTokens.json            # Design system tokens
 ├── ContentBlocks/                    # For Content Blocks v1.3
 │   ├── ContentElements/
 │   └── PageTypes/
 ├── Resources/
 │   ├── Private/
+│   │   ├── Components/               # Fluid v4 Component templates
+│   │   │   ├── Atom/
+│   │   │   │   ├── Button.html
+│   │   │   │   ├── Icon.html
+│   │   │   │   └── Input.html
+│   │   │   ├── Molecule/
+│   │   │   │   ├── Card.html
+│   │   │   │   └── Navigation.html
+│   │   │   └── Organism/
+│   │   │       ├── Header.html
+│   │   │       └── Footer.html
 │   │   ├── Language/
 │   │   │   └── locallang.xlf
 │   │   ├── Layouts/
@@ -68,7 +83,11 @@ packages/{vendor}/{package}/
 │   │   │   └── Footer.html
 │   │   └── Scss/
 │   │       ├── main.scss
-│   │       └── _variables.scss
+│   │       ├── _variables.scss
+│   │       └── components/           # Component styles
+│   │           ├── _atoms.scss
+│   │           ├── _molecules.scss
+│   │           └── _organisms.scss
 │   └── Public/
 │       ├── Css/
 │       │   └── main.css
@@ -269,6 +288,243 @@ defined('TYPO3') or die();
         </div>
     </div>
 </f:section>
+```
+
+### Classes/Components/ComponentCollection.php
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace {Vendor}\{Package}\Components;
+
+use TYPO3Fluid\Fluid\Core\Component\AbstractComponentCollection;
+
+final class ComponentCollection extends AbstractComponentCollection
+{
+    /**
+     * Allow additional HTML attributes (data-*, aria-*)
+     */
+    protected function additionalArgumentsAllowed(string $viewHelperName): bool
+    {
+        return true;
+    }
+    
+    /**
+     * Provide global design tokens to all components
+     */
+    public function getDesignTokens(): array
+    {
+        $tokensFile = __DIR__ . '/../../Configuration/DesignTokens.json';
+        if (file_exists($tokensFile)) {
+            return json_decode(file_get_contents($tokensFile), true);
+        }
+        
+        return [
+            'colors' => [
+                'primary' => '#007bff',
+                'secondary' => '#6c757d',
+                'success' => '#28a745',
+                'danger' => '#dc3545',
+                'warning' => '#ffc107',
+                'info' => '#17a2b8',
+            ],
+            'spacing' => [
+                'xs' => '0.25rem',
+                'sm' => '0.5rem',
+                'md' => '1rem',
+                'lg' => '1.5rem',
+                'xl' => '2rem',
+            ],
+            'breakpoints' => [
+                'sm' => '576px',
+                'md' => '768px',
+                'lg' => '992px',
+                'xl' => '1200px',
+            ],
+        ];
+    }
+}
+```
+
+### Configuration/DesignTokens.json
+
+```json
+{
+    "colors": {
+        "primary": "#007bff",
+        "secondary": "#6c757d",
+        "success": "#28a745",
+        "danger": "#dc3545",
+        "warning": "#ffc107",
+        "info": "#17a2b8",
+        "light": "#f8f9fa",
+        "dark": "#343a40"
+    },
+    "spacing": {
+        "xs": "0.25rem",
+        "sm": "0.5rem",
+        "md": "1rem",
+        "lg": "1.5rem",
+        "xl": "2rem",
+        "xxl": "3rem"
+    },
+    "typography": {
+        "fontFamily": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+        "fontSize": {
+            "xs": "0.75rem",
+            "sm": "0.875rem",
+            "base": "1rem",
+            "lg": "1.125rem",
+            "xl": "1.25rem",
+            "2xl": "1.5rem",
+            "3xl": "1.875rem",
+            "4xl": "2.25rem"
+        }
+    },
+    "breakpoints": {
+        "sm": "576px",
+        "md": "768px",
+        "lg": "992px",
+        "xl": "1200px",
+        "xxl": "1400px"
+    }
+}
+```
+
+### Resources/Private/Components/Atom/Button.html
+
+```html
+<f:comment>
+Component: Atom/Button
+Purpose: Reusable button component with variants and states
+</f:comment>
+
+<f:argument name="href" type="string" optional="{true}" />
+<f:argument name="variant" type="string" optional="{true}" default="primary" />
+<f:argument name="size" type="string" optional="{true}" default="md" />
+<f:argument name="disabled" type="boolean" optional="{true}" default="{false}" />
+<f:argument name="icon" type="string" optional="{true}" />
+<f:argument name="iconPosition" type="string" optional="{true}" default="left" />
+<f:argument name="type" type="string" optional="{true}" default="button" />
+<f:argument name="ariaLabel" type="string" optional="{true}" />
+
+<f:if condition="{href}">
+    <f:then>
+        <a href="{href}" 
+           class="btn btn--{variant} btn--{size}"
+           {f:if(condition: disabled, then: 'aria-disabled="true" tabindex="-1"')}
+           {f:if(condition: ariaLabel, then: 'aria-label="{ariaLabel}"')}>
+            <f:render section="ButtonContent" arguments="{_all}" />
+        </a>
+    </f:then>
+    <f:else>
+        <button type="{type}"
+                class="btn btn--{variant} btn--{size}"
+                {f:if(condition: disabled, then: 'disabled="disabled"')}
+                {f:if(condition: ariaLabel, then: 'aria-label="{ariaLabel}"')}>
+            <f:render section="ButtonContent" arguments="{_all}" />
+        </button>
+    </f:else>
+</f:if>
+
+<f:section name="ButtonContent">
+    <f:if condition="{icon} && {iconPosition} == 'left'">
+        <my:atom.icon name="{icon}" class="btn__icon btn__icon--left" />
+    </f:if>
+    <span class="btn__label"><f:slot /></span>
+    <f:if condition="{icon} && {iconPosition} == 'right'">
+        <my:atom.icon name="{icon}" class="btn__icon btn__icon--right" />
+    </f:if>
+</f:section>
+```
+
+### Resources/Private/Components/Molecule/Card.html
+
+```html
+<f:comment>
+Component: Molecule/Card
+Purpose: Card component for content display
+</f:comment>
+
+<f:argument name="title" type="string" />
+<f:argument name="description" type="string" optional="{true}" />
+<f:argument name="image" type="TYPO3\CMS\Core\Resource\FileInterface" optional="{true}" />
+<f:argument name="link" type="string" optional="{true}" />
+<f:argument name="variant" type="string" optional="{true}" default="default" />
+
+<article class="card card--{variant}">
+    <f:if condition="{image}">
+        <div class="card__media">
+            <f:image image="{image}" 
+                     class="card__image" 
+                     width="400" 
+                     height="300c" 
+                     loading="lazy" />
+        </div>
+    </f:if>
+    
+    <div class="card__body">
+        <h3 class="card__title">
+            <f:if condition="{link}">
+                <f:then><a href="{link}">{title}</a></f:then>
+                <f:else>{title}</f:else>
+            </f:if>
+        </h3>
+        
+        <f:if condition="{description}">
+            <p class="card__description">{description}</p>
+        </f:if>
+        
+        <f:slot />
+    </div>
+    
+    <f:slot name="footer">
+        <!-- Optional footer content -->
+    </f:slot>
+</article>
+```
+
+### Resources/Private/Components/Organism/Header.html
+
+```html
+<f:comment>
+Component: Organism/Header
+Purpose: Site header with navigation
+</f:comment>
+
+<f:argument name="logo" type="string" optional="{true}" />
+<f:argument name="siteName" type="string" optional="{true}" />
+<f:argument name="variant" type="string" optional="{true}" default="default" />
+
+<header class="site-header site-header--{variant}">
+    <div class="site-header__container">
+        <div class="site-header__brand">
+            <f:if condition="{logo}">
+                <f:then>
+                    <a href="/" class="site-header__logo">
+                        <img src="{logo}" alt="{siteName}" />
+                    </a>
+                </f:then>
+                <f:else>
+                    <a href="/" class="site-header__name">{siteName}</a>
+                </f:else>
+            </f:if>
+        </div>
+        
+        <nav class="site-header__nav" aria-label="Main navigation">
+            <f:slot name="navigation">
+                <!-- Navigation content -->
+            </f:slot>
+        </nav>
+        
+        <div class="site-header__actions">
+            <f:slot name="actions">
+                <!-- Action buttons -->
+            </f:slot>
+        </div>
+    </div>
+</header>
 ```
 
 ### Resources/Private/Layouts/Default.html
