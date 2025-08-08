@@ -68,21 +68,45 @@ semgrep --config=p/security-audit --json $ARGUMENTS
 
 **IF neither MCP nor local Semgrep is available, START 8 PARALLEL SECURITY AGENTS:**
 
-1. **SQL Injection Agent**: Task(description="SQL Injection Detection", prompt="Scan $ARGUMENTS for SQL injection vulnerabilities. Search for: 1) String concatenation in SQL queries, 2) Unescaped user input in queries, 3) Dynamic query building, 4) Raw SQL without prepared statements. Use rg for patterns like 'SELECT.*\\+|WHERE.*\\$|query\\(.\*\\+'. Return all findings with severity and code location as JSON.", subagent_type="general-purpose")
+1. **SQL Injection Agent**:
 
-2. **XSS Vulnerability Agent**: Task(description="XSS Detection", prompt="Identify XSS vulnerabilities in $ARGUMENTS. Check: 1) Unescaped output in templates (innerHTML, document.write), 2) User input in HTML/JavaScript, 3) Missing Content Security Policy, 4) Unsafe eval() usage. Search in .js, .jsx, .ts, .tsx, .html files. Return structured findings with exploit examples as JSON.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose":
+"Scan $ARGUMENTS for SQL injection vulnerabilities. Search for: 1) String concatenation in SQL queries, 2) Unescaped user input in queries, 3) Dynamic query building, 4) Raw SQL without prepared statements. Use rg for patterns like 'SELECT.*\\+|WHERE.*\\$|query\\(.\*\\+'. Return all findings with severity and code location as JSON."
 
-3. **Authentication Weakness Agent**: Task(description="Auth Security Check", prompt="Analyze authentication/authorization weaknesses in $ARGUMENTS. Examine: 1) Hardcoded credentials, 2) Weak password policies, 3) Missing rate limiting, 4) Session management issues, 5) JWT vulnerabilities, 6) Missing CSRF protection. Focus on auth*, login*, session\* patterns. Return critical findings as JSON.", subagent_type="general-purpose")
+2. **XSS Vulnerability Agent**:
 
-4. **Secret Exposure Agent**: Task(description="Secret/Credential Scanner", prompt="Find exposed secrets in $ARGUMENTS. Scan for: 1) API keys (AWS, Azure, GCP), 2) Private keys, 3) Passwords/tokens in code, 4) Database credentials, 5) .env files in Git. Use regex patterns for various secret formats. IMPORTANT: Return only secret type and location, NEVER the actual secret! JSON format.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose":
+"Identify XSS vulnerabilities in $ARGUMENTS. Check: 1) Unescaped output in templates (innerHTML, document.write), 2) User input in HTML/JavaScript, 3) Missing Content Security Policy, 4) Unsafe eval() usage. Search in .js, .jsx, .ts, .tsx, .html files. Return structured findings with exploit examples as JSON."
 
-5. **CORS Configuration Agent**: Task(description="CORS Security Analysis", prompt="Check CORS configurations in $ARGUMENTS. Analyze: 1) Wildcard origins (\*), 2) Credentials with unsafe origins, 3) Missing CORS headers, 4) Overly permissive policies. Search in API routes, server configs, middleware. Return misconfigurations with risk level as JSON.", subagent_type="general-purpose")
+3. **Authentication Weakness Agent**:
 
-6. **Dependency CVE Agent**: Task(description="Vulnerable Dependencies", prompt="Scan dependencies for known CVEs in $ARGUMENTS. Check: 1) package.json, requirements.txt, go.mod, Cargo.toml, 2) Outdated packages with security issues, 3) Dependencies with critical CVEs. If possible, use local tools. Return top 10 most critical vulnerabilities with CVE IDs as JSON.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose":
+"Analyze authentication/authorization weaknesses in $ARGUMENTS. Examine: 1) Hardcoded credentials, 2) Weak password policies, 3) Missing rate limiting, 4) Session management issues, 5) JWT vulnerabilities, 6) Missing CSRF protection. Focus on auth*, login*, session\* patterns. Return critical findings as JSON."
 
-7. **CSRF Protection Agent**: Task(description="CSRF Vulnerability Check", prompt="Identify CSRF vulnerabilities in $ARGUMENTS. Examine: 1) Missing CSRF tokens in forms, 2) State-changing GET requests, 3) Missing SameSite cookie attributes, 4) Unprotected API endpoints. Focus on web frameworks and API routes. Return findings with exploit scenarios as JSON.", subagent_type="general-purpose")
+4. **Secret Exposure Agent**:
 
-8. **Information Disclosure Agent**: Task(description="Info Disclosure Scanner", prompt="Find information disclosure issues in $ARGUMENTS. Search for: 1) Stack traces in production, 2) Debug mode enabled, 3) Verbose error messages, 4) Source maps in production, 5) Exposed admin panels, 6) Directory listing. Return all findings with sensitivity level as JSON.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose":
+"Find exposed secrets in $ARGUMENTS. Scan for: 1) API keys (AWS, Azure, GCP), 2) Private keys, 3) Passwords/tokens in code, 4) Database credentials, 5) .env files in Git. Use regex patterns for various secret formats. IMPORTANT: Return only secret type and location, NEVER the actual secret! JSON format."
+
+5. **CORS Configuration Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Check CORS configurations in $ARGUMENTS. Analyze: 1) Wildcard origins (\*), 2) Credentials with unsafe origins, 3) Missing CORS headers, 4) Overly permissive policies. Search in API routes, server configs, middleware. Return misconfigurations with risk level as JSON."
+
+6. **Dependency CVE Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Scan dependencies for known CVEs in $ARGUMENTS. Check: 1) package.json, requirements.txt, go.mod, Cargo.toml, 2) Outdated packages with security issues, 3) Dependencies with critical CVEs. If possible, use local tools. Return top 10 most critical vulnerabilities with CVE IDs as JSON."
+
+7. **CSRF Protection Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Identify CSRF vulnerabilities in $ARGUMENTS. Examine: 1) Missing CSRF tokens in forms, 2) State-changing GET requests, 3) Missing SameSite cookie attributes, 4) Unprotected API endpoints. Focus on web frameworks and API routes. Return findings with exploit scenarios as JSON."
+
+8. **Information Disclosure Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Find information disclosure issues in $ARGUMENTS. Search for: 1) Stack traces in production, 2) Debug mode enabled, 3) Verbose error messages, 4) Source maps in production, 5) Exposed admin panels, 6) Directory listing. Return all findings with sensitivity level as JSON."
 
 ## Synthesis
 

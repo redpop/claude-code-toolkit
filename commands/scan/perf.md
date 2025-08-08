@@ -14,19 +14,40 @@ This command performs deep performance profiling with 7 specialized agents. Iden
 
 **IMMEDIATELY START 7 PARALLEL PERFORMANCE AGENTS:**
 
-1. **Algorithm Complexity Agent**: Task(description="Analyze Algorithm Complexity", prompt="Analyze algorithmic complexity in $ARGUMENTS. Identify: 1) Nested Loops (O(n²) or worse), 2) Recursive Functions without Memoization, 3) Inefficient Sorting Algorithms, 4) Brute-Force Approaches, 5) Polynomial/Exponential Complexity. Use code pattern analysis. Return Hot Spots with Big-O Notation and optimization suggestions as JSON.", subagent_type="general-purpose")
+1. **Algorithm Complexity Agent**:
 
-2. **Database Query Agent**: Task(description="Database Performance Analysis", prompt="Examine Database Query Performance in $ARGUMENTS. Check: 1) N+1 Query Problems, 2) Missing Indexes (JOINs, WHERE clauses), 3) Full Table Scans, 4) Inefficient Subqueries, 5) Missing Query Caching, 6) Transaction Scope Issues. Search for SQL/ORM Patterns. Return problematic queries with Optimization Hints as JSON.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose":
+"Analyze algorithmic complexity in $ARGUMENTS. Identify: 1) Nested Loops (O(n²) or worse), 2) Recursive Functions without Memoization, 3) Inefficient Sorting Algorithms, 4) Brute-Force Approaches, 5) Polynomial/Exponential Complexity. Use code pattern analysis. Return Hot Spots with Big-O Notation and optimization suggestions as JSON."
 
-3. **Memory Usage Agent**: Task(description="Memory Pattern Analysis", prompt="Analyze Memory Usage Patterns in $ARGUMENTS. Identify: 1) Memory Leaks (unreleased resources), 2) Large Object Allocations, 3) Inefficient Data Structures, 4) Circular References, 5) Cache Misuse, 6) String Concatenation in Loops. Focus on Memory-intensive Operations. Return Memory Hot Spots with fix strategies as JSON.", subagent_type="general-purpose")
+2. **Database Query Agent**:
 
-4. **CPU Hotspot Agent**: Task(description="CPU Usage Profiling", prompt="Find CPU-intensive code areas in $ARGUMENTS. Analyze: 1) Tight Loops with heavy Computations, 2) Synchronous Blocking Operations, 3) Regex Catastrophic Backtracking, 4) JSON Parse/Stringify in Loops, 5) Crypto Operations, 6) Image/Video Processing. Return CPU Hotspots with parallelization possibilities as JSON.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose":
+"Examine Database Query Performance in $ARGUMENTS. Check: 1) N+1 Query Problems, 2) Missing Indexes (JOINs, WHERE clauses), 3) Full Table Scans, 4) Inefficient Subqueries, 5) Missing Query Caching, 6) Transaction Scope Issues. Search for SQL/ORM Patterns. Return problematic queries with Optimization Hints as JSON."
 
-5. **I/O Bottleneck Agent**: Task(description="I/O Performance Analysis", prompt="Identify I/O Bottlenecks in $ARGUMENTS. Examine: 1) Synchronous File Operations, 2) Network Calls in Loops, 3) Missing Batch Operations, 4) Inefficient Streaming, 5) Missing Compression, 6) Serial instead of Parallel I/O. Search for fs, http, database I/O Patterns. Return I/O Bottlenecks with Async/Batch alternatives as JSON.", subagent_type="general-purpose")
+3. **Memory Usage Agent**:
 
-6. **Caching Opportunity Agent**: Task(description="Cache Optimization Analysis", prompt="Find caching opportunities in $ARGUMENTS. Analyze: 1) Repeated Expensive Calculations, 2) Redundant API/DB Calls, 3) Missing HTTP Cache Headers, 4) Missing Memoization, 5) Static Data Recomputation, 6) Missing CDN Usage. Calculate potential Performance Gains. Return Caching Opportunities with implementation strategies as JSON.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose":
+"Analyze Memory Usage Patterns in $ARGUMENTS. Identify: 1) Memory Leaks (unreleased resources), 2) Large Object Allocations, 3) Inefficient Data Structures, 4) Circular References, 5) Cache Misuse, 6) String Concatenation in Loops. Focus on Memory-intensive Operations. Return Memory Hot Spots with fix strategies as JSON."
 
-7. **Optimization Strategy Agent**: Task(description="Performance Optimization Plan", prompt="Develop Optimization Strategies for $ARGUMENTS based on Common Patterns. Create: 1) Quick Wins (< 1h effort), 2) Medium Optimizations (1-5h), 3) Major Refactoring (> 5h). Consider: Code Splitting, Lazy Loading, Worker Threads, Debouncing, Virtual Scrolling. Return prioritized Optimization Roadmap as JSON.", subagent_type="general-purpose")
+4. **CPU Hotspot Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Find CPU-intensive code areas in $ARGUMENTS. Analyze: 1) Tight Loops with heavy Computations, 2) Synchronous Blocking Operations, 3) Regex Catastrophic Backtracking, 4) JSON Parse/Stringify in Loops, 5) Crypto Operations, 6) Image/Video Processing. Return CPU Hotspots with parallelization possibilities as JSON."
+
+5. **I/O Bottleneck Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Identify I/O Bottlenecks in $ARGUMENTS. Examine: 1) Synchronous File Operations, 2) Network Calls in Loops, 3) Missing Batch Operations, 4) Inefficient Streaming, 5) Missing Compression, 6) Serial instead of Parallel I/O. Search for fs, http, database I/O Patterns. Return I/O Bottlenecks with Async/Batch alternatives as JSON."
+
+6. **Caching Opportunity Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Find caching opportunities in $ARGUMENTS. Analyze: 1) Repeated Expensive Calculations, 2) Redundant API/DB Calls, 3) Missing HTTP Cache Headers, 4) Missing Memoization, 5) Static Data Recomputation, 6) Missing CDN Usage. Calculate potential Performance Gains. Return Caching Opportunities with implementation strategies as JSON."
+
+7. **Optimization Strategy Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Develop Optimization Strategies for $ARGUMENTS based on Common Patterns. Create: 1) Quick Wins (< 1h effort), 2) Medium Optimizations (1-5h), 3) Major Refactoring (> 5h). Consider: Code Splitting, Lazy Loading, Worker Threads, Debouncing, Virtual Scrolling. Return prioritized Optimization Roadmap as JSON."
 
 ## Synthesis
 

@@ -14,15 +14,30 @@ This command analyzes test coverage and test quality with 5 parallel working age
 
 **IMMEDIATELY START 5 PARALLEL TEST AGENTS:**
 
-1. **Coverage Metrics Agent**: Task(description="Calculate Coverage Metrics", prompt="Calculate test coverage metrics for $ARGUMENTS. Analyze: 1) Line Coverage Percentage, 2) Branch Coverage, 3) Function Coverage, 4) Statement Coverage. Identify files with coverage < 80%. If coverage reports exist, parse them. Otherwise analyze test-to-code ratio. Return coverage matrix as JSON with uncovered code areas.", subagent_type="general-purpose")
+1. **Coverage Metrics Agent**:
 
-2. **Test Quality Agent**: Task(description="Assess Test Quality", prompt="Evaluate test quality in $ARGUMENTS. Check: 1) Test Naming Conventions, 2) Assertion Quality (not just 'truthy' checks), 3) Test Isolation (no dependencies), 4) Setup/Teardown Patterns, 5) Test Documentation. Search for anti-patterns like test.skip, commented tests, or hardcoded values. Return quality score per test file as JSON.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose":
+"Calculate test coverage metrics for $ARGUMENTS. Analyze: 1) Line Coverage Percentage, 2) Branch Coverage, 3) Function Coverage, 4) Statement Coverage. Identify files with coverage < 80%. If coverage reports exist, parse them. Otherwise analyze test-to-code ratio. Return coverage matrix as JSON with uncovered code areas."
 
-3. **Missing Tests Agent**: Task(description="Find Missing Test Cases", prompt="Identify missing test cases in $ARGUMENTS. Analyze: 1) Untested Public Functions/Methods, 2) Missing Edge Case Tests (null, empty, boundaries), 3) Error Handling Tests, 4) Integration Points without tests, 5) Complex Logic without tests (Cyclomatic Complexity > 5). Generate list of suggested test cases as JSON.", subagent_type="general-purpose")
+2. **Test Quality Agent**:
 
-4. **Test Performance Agent**: Task(description="Analyze Test Performance", prompt="Analyze test performance in $ARGUMENTS. Identify: 1) Slow Tests (>1s for unit tests), 2) Test suites with long runtime, 3) Unnecessary sleeps/waits, 4) Inefficient test data setup, 5) Missing parallel execution. If test logs available, parse execution times. Return performance bottlenecks as JSON.", subagent_type="general-purpose")
+Use Task tool with subagent_type="general-purpose":
+"Evaluate test quality in $ARGUMENTS. Check: 1) Test Naming Conventions, 2) Assertion Quality (not just 'truthy' checks), 3) Test Isolation (no dependencies), 4) Setup/Teardown Patterns, 5) Test Documentation. Search for anti-patterns like test.skip, commented tests, or hardcoded values. Return quality score per test file as JSON."
 
-5. **Flaky Test Agent**: Task(description="Detect Flaky Tests", prompt="Find flaky/unstable tests in $ARGUMENTS. Search for: 1) Time-dependent tests (Date.now, timestamps), 2) Order-dependent tests, 3) Random data without seed, 4) External API calls without mocks, 5) Race conditions, 6) Platform-specific tests. Analyze test code for instability patterns. Return flaky test candidates with fix suggestions as JSON.", subagent_type="general-purpose")
+3. **Missing Tests Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Identify missing test cases in $ARGUMENTS. Analyze: 1) Untested Public Functions/Methods, 2) Missing Edge Case Tests (null, empty, boundaries), 3) Error Handling Tests, 4) Integration Points without tests, 5) Complex Logic without tests (Cyclomatic Complexity > 5). Generate list of suggested test cases as JSON."
+
+4. **Test Performance Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Analyze test performance in $ARGUMENTS. Identify: 1) Slow Tests (>1s for unit tests), 2) Test suites with long runtime, 3) Unnecessary sleeps/waits, 4) Inefficient test data setup, 5) Missing parallel execution. If test logs available, parse execution times. Return performance bottlenecks as JSON."
+
+5. **Flaky Test Agent**:
+
+Use Task tool with subagent_type="general-purpose":
+"Find flaky/unstable tests in $ARGUMENTS. Search for: 1) Time-dependent tests (Date.now, timestamps), 2) Order-dependent tests, 3) Random data without seed, 4) External API calls without mocks, 5) Race conditions, 6) Platform-specific tests. Analyze test code for instability patterns. Return flaky test candidates with fix suggestions as JSON."
 
 ## Synthesis
 
