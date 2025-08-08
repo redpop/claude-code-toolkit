@@ -61,6 +61,11 @@ This intelligent command helps you find the most suitable Claude Code command fo
 **Keywords**: docs, documentation, README, comments, API docs, annotate
 **Commands**: gen:docs, fix:documentation, scan:docs
 
+### 🛠️ Creation & Generation
+**Keywords**: create, generate, scaffold, new command, new agent, builder, generator, make new
+**Commands**: meta:create - Universal intelligent creator for commands, agents, and workflows
+**Scripts**: create-sub-agent.sh, create-sub-agent-command.sh (for advanced users)
+
 ### 🐚 Shell & Scripts
 **Keywords**: shell, bash, script, sh, zsh, shellcheck, terminal
 **Commands**: fix:shell
@@ -178,8 +183,8 @@ To learn more about any command, you can:
 ## Didn't Find What You Need?
 
 If no existing command matches your needs:
-1. Use `/prefix:meta:create-cmd` to create a custom command
-2. Use `/prefix:flow:smart` for intelligent problem routing
+1. Use `/prefix:meta:create` to create any command, agent, or workflow you need
+2. Use `/prefix:flow:smart` for intelligent problem routing  
 3. Combine multiple commands with `/prefix:meta:chain`
 
 Remember: Commands are constantly being added and improved. Run this finder regularly to discover new tools!
