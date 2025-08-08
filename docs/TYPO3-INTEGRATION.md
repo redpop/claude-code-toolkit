@@ -50,6 +50,10 @@ Creates a complete TYPO3 v13.4 SitePackage with:
 - Site Sets configuration (new in v13)
 - Modern Composer setup
 - Content Blocks structure
+- **Fluid v4 Components** (new)
+- ComponentCollection class
+- Starter component library (Atoms/Molecules/Organisms)
+- Design tokens system
 - FLUIDTEMPLATE configuration
 - Responsive templates
 - SCSS/CSS structure
@@ -57,7 +61,7 @@ Creates a complete TYPO3 v13.4 SitePackage with:
 ### Content Blocks Generator
 
 ```bash
-/typo3:content-blocks [name] [--type=element|page]
+/typo3:content-blocks [name] [--type=element|page] [--with-components]
 ```
 
 Generates Content Blocks v1.3 configurations with:
@@ -66,6 +70,21 @@ Generates Content Blocks v1.3 configurations with:
 - Page type support
 - Backend previews
 - Responsive templates
+- **Fluid v4 Components integration** (with --with-components flag)
+
+### Fluid Components Generator (NEW)
+
+```bash
+/typo3:fluid-components [component-name] [--type=atom|molecule|organism]
+```
+
+Generates Fluid v4 Components for TYPO3 v13.3+:
+- Atomic Design structure
+- Typed arguments with `<f:argument>`
+- Slot-based content handling
+- ComponentCollection class
+- Test files and SCSS scaffolding
+- Accessibility features
 
 ### Make Content Block (Native Wrapper)
 
@@ -173,6 +192,133 @@ page.10.templateName.cObject {
     key.field = doktype
     {generated_doktype}.value = LandingPage
 }
+```
+
+## Fluid v4 Components Integration
+
+### Overview
+
+Fluid v4 Components (available in TYPO3 v13.3+) bring modern component-based development to TYPO3:
+
+- **Server-side Components**: Unlike JavaScript frameworks, Fluid Components are server-rendered
+- **Type Safety**: Strictly typed arguments using `<f:argument>` ViewHelper
+- **Reusability**: Share components across Content Blocks and templates
+- **No PHP Required**: Template-based components accessible to frontend developers
+
+### Component Architecture
+
+```
+sitepackage/
+├── Classes/
+│   └── Components/
+│       └── ComponentCollection.php    # Component configuration
+├── Configuration/
+│   └── DesignTokens.json             # Design system tokens
+└── Resources/
+    └── Private/
+        └── Components/
+            ├── Atom/                  # Basic elements
+            │   ├── Button.html
+            │   ├── Icon.html
+            │   └── Input.html
+            ├── Molecule/              # Composite components
+            │   ├── Card.html
+            │   └── Navigation.html
+            └── Organism/              # Complex structures
+                ├── Header.html
+                └── Grid.html
+```
+
+### Using Components with Content Blocks
+
+#### 1. Standard Content Block (without components)
+```html
+<div class="hero">
+    <h2>{data.vendor_hero_title}</h2>
+    <f:format.html>{data.vendor_hero_text}</f:format.html>
+</div>
+```
+
+#### 2. Component-Based Content Block
+```html
+<html xmlns:my="http://typo3.org/ns/Vendor/Package/Components/ComponentCollection">
+    
+<my:molecule.hero 
+    title="{data.vendor_hero_title}"
+    variant="primary">
+    <f:slot name="content">
+        <my:atom.richText>{data.vendor_hero_text}</my:atom.richText>
+    </f:slot>
+    <f:slot name="actions">
+        <my:atom.button href="{data.vendor_hero_link}">
+            Learn More
+        </my:atom.button>
+    </f:slot>
+</my:molecule.hero>
+</html>
+```
+
+### Component Examples
+
+#### Button Component (Atom)
+```html
+<f:argument name="href" type="string" optional="{true}" />
+<f:argument name="variant" type="string" optional="{true}" default="primary" />
+<f:argument name="disabled" type="boolean" optional="{true}" default="{false}" />
+
+<f:if condition="{href}">
+    <f:then>
+        <a href="{href}" class="btn btn--{variant}">
+            <f:slot />
+        </a>
+    </f:then>
+    <f:else>
+        <button class="btn btn--{variant}" {f:if(condition: disabled, then: 'disabled')}>
+            <f:slot />
+        </button>
+    </f:else>
+</f:if>
+```
+
+#### Card Component (Molecule)
+```html
+<f:argument name="title" type="string" />
+<f:argument name="image" type="TYPO3\CMS\Core\Resource\FileInterface" optional="{true}" />
+
+<article class="card">
+    <f:if condition="{image}">
+        <f:image image="{image}" class="card__image" />
+    </f:if>
+    <h3 class="card__title">{title}</h3>
+    <div class="card__content">
+        <f:slot />
+    </div>
+</article>
+```
+
+### Benefits
+
+1. **Consistency**: Shared components ensure UI consistency
+2. **Maintainability**: Update once, apply everywhere
+3. **Performance**: Server-side rendering, optimized compilation
+4. **Developer Experience**: Frontend developers can work independently
+5. **Type Safety**: Catch errors at template compile time
+
+### Migration from ViewHelpers
+
+**Before (ViewHelper):**
+```php
+class ButtonViewHelper extends AbstractTagBasedViewHelper {
+    public function initializeArguments(): void {
+        $this->registerArgument('variant', 'string', 'Button variant', false, 'primary');
+    }
+}
+```
+
+**After (Component):**
+```html
+<f:argument name="variant" type="string" optional="{true}" default="primary" />
+<button class="btn btn--{variant}"><f:slot /></button>
 ```
 
 ## Content Blocks v1.3 Features

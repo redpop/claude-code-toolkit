@@ -17,6 +17,13 @@ Generates Content Blocks v1.3 compatible configurations for TYPO3 v13.4.
 /prefix:typo3:content-blocks [name] [options]
 ```
 
+## Options
+
+- `--type=element|page` - Content Element (default) or Page Type
+- `--with-components` - Generate Fluid v4 Components alongside Content Block
+- `--component-type=inline|external` - Inline components in template or external component files
+- `--fields=...` - Comma-separated list of fields to include
+
 ## Documentation & Context Enhancement
 
 **CHECK FOR ENHANCED DOCUMENTATION ACCESS:**
@@ -258,7 +265,7 @@ Based on the --fields parameter or interactive input, generate appropriate field
 
 ## Template Files
 
-### frontend.html (Content Element)
+### frontend.html (Content Element - Standard)
 
 ```html
 <html
@@ -295,6 +302,110 @@ Based on the --fields parameter or interactive input, generate appropriate field
     </f:if>
   </div>
 </html>
+```
+
+### frontend.html (Content Element - With Fluid v4 Components)
+
+When using `--with-components` flag, generate component-based template:
+
+```html
+<html
+  data-namespace-typo3-fluid="true"
+  xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+  xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
+  xmlns:my="http://typo3.org/ns/{Vendor}/{Package}/Components/ComponentCollection"
+>
+  <f:layout name="Default" />
+  
+  <f:section name="Main">
+    <my:molecule.contentBlock variant="{name}">
+      <f:if condition="{data.{vendor}_{name}_title}">
+        <f:slot name="header">
+          <my:atom.heading level="2">{data.{vendor}_{name}_title}</my:atom.heading>
+        </f:slot>
+      </f:if>
+
+      <f:if condition="{data.{vendor}_{name}_text}">
+        <f:slot name="content">
+          <my:atom.richText>{data.{vendor}_{name}_text}</my:atom.richText>
+        </f:slot>
+      </f:if>
+
+      <f:if condition="{data.{vendor}_{name}_image}">
+        <f:slot name="media">
+          <my:organism.imageGallery images="{data.{vendor}_{name}_image}" />
+        </f:slot>
+      </f:if>
+
+      <f:if condition="{data.{vendor}_{name}_link}">
+        <f:slot name="actions">
+          <my:atom.button 
+            href="{data.{vendor}_{name}_link.url}"
+            variant="primary">
+            {data.{vendor}_{name}_link_title -> f:or(alternative: 'Read more')}
+          </my:atom.button>
+        </f:slot>
+      </f:if>
+    </my:molecule.contentBlock>
+  </f:section>
+</html>
+```
+
+### Component Files (When --with-components is used)
+
+Generate accompanying Fluid Components:
+
+**Molecule/ContentBlock.html**:
+```html
+<f:argument name="variant" type="string" optional="{true}" default="default" />
+<f:argument name="layout" type="string" optional="{true}" default="standard" />
+
+<div class="content-block content-block--{variant} content-block--layout-{layout}">
+    <f:slot name="header">
+        <!-- Header content -->
+    </f:slot>
+    
+    <f:slot name="content">
+        <!-- Main content -->
+    </f:slot>
+    
+    <f:slot name="media">
+        <!-- Media content -->
+    </f:slot>
+    
+    <f:slot name="actions">
+        <!-- Action buttons -->
+    </f:slot>
+    
+    <f:slot>
+        <!-- Default slot for additional content -->
+    </f:slot>
+</div>
+```
+
+**Atom/Heading.html**:
+```html
+<f:argument name="level" type="integer" optional="{true}" default="2" />
+<f:argument name="class" type="string" optional="{true}" />
+
+<f:switch expression="{level}">
+    <f:case value="1"><h1 class="heading heading--h1 {class}"><f:slot /></h1></f:case>
+    <f:case value="2"><h2 class="heading heading--h2 {class}"><f:slot /></h2></f:case>
+    <f:case value="3"><h3 class="heading heading--h3 {class}"><f:slot /></h3></f:case>
+    <f:case value="4"><h4 class="heading heading--h4 {class}"><f:slot /></h4></f:case>
+    <f:case value="5"><h5 class="heading heading--h5 {class}"><f:slot /></h5></f:case>
+    <f:case value="6"><h6 class="heading heading--h6 {class}"><f:slot /></h6></f:case>
+    <f:defaultCase><div class="heading heading--div {class}"><f:slot /></div></f:defaultCase>
+</f:switch>
+```
+
+**Atom/RichText.html**:
+```html
+<f:argument name="class" type="string" optional="{true}" />
+
+<div class="rich-text {class}">
+    <f:format.html><f:slot /></f:format.html>
+</div>
 ```
 
 ### backend-preview.html
@@ -446,6 +557,38 @@ For custom file field configurations, use overrideType:
           - identifier: custom_field
             type: Text
             label: "Custom metadata"
+```
+
+## Fluid v4 Components Integration Benefits
+
+When using `--with-components`, you get:
+
+1. **Reusable UI Components**: Share components across multiple Content Blocks
+2. **Type Safety**: Strictly typed component arguments with `<f:argument>`
+3. **Better Maintainability**: Separate UI logic from content structure
+4. **Frontend Developer Friendly**: Template-based components, no PHP required
+5. **Performance**: Server-side rendering with optimized compilation
+6. **Consistent Design System**: Centralized component library
+
+### Component Architecture with Content Blocks
+
+```
+packages/sitepackage/
+├── ContentBlocks/              # Content Blocks definitions
+│   └── ContentElements/
+│       └── hero/
+│           ├── config.yaml
+│           └── templates/
+│               └── frontend.html  # Uses components
+├── Classes/
+│   └── Components/
+│       └── ComponentCollection.php
+└── Resources/
+    └── Private/
+        └── Components/          # Reusable components
+            ├── Atom/            # Buttons, inputs, icons
+            ├── Molecule/        # Cards, forms, media
+            └── Organism/        # Grids, sliders, galleries
 ```
 
 ## Success Message
