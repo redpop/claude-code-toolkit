@@ -1,6 +1,10 @@
 ---
 description: Generate TYPO3 Content Blocks v1.3 with modern field configurations
 argument-hint: "[name] [--type=element|page] [--fields=...] [--sitepackage=path]"
+mcp-enhanced: mcp__context7__get-library-docs
+documentation-sources:
+  - https://docs.typo3.org/p/content-blocks/content-blocks/main/en-us/
+  - https://github.com/TYPO3-Initiatives/content-blocks
 ---
 
 # TYPO3 Content Blocks Generator
@@ -12,6 +16,19 @@ Generates Content Blocks v1.3 compatible configurations for TYPO3 v13.4.
 ```bash
 /prefix:typo3:content-blocks [name] [options]
 ```
+
+## Documentation & Context Enhancement
+
+**CHECK FOR ENHANCED DOCUMENTATION ACCESS:**
+
+1. **If Context7 MCP is available**: 
+   - Use `mcp__context7__resolve-library-id "TYPO3 Content Blocks"`
+   - Then `mcp__context7__get-library-docs` for latest API documentation
+   - This provides up-to-date field types, configurations, and best practices
+
+2. **Fallback to embedded knowledge**:
+   - Use the field configurations defined in this command
+   - Reference official documentation URLs provided above
 
 ## Command Workflow
 

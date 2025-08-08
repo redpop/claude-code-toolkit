@@ -77,15 +77,20 @@ This intelligent command helps you find the most suitable Claude Code command fo
 **Keywords**: report, metrics, statistics, quality, trends, analysis
 **Commands**: scan:report, auto:report, meta:export
 
+### 🏗️ TYPO3 & CMS
+**Keywords**: typo3, content block, content blocks, contentblock, contentblocks, content element, content-element, sitepackage, typoscript, fluid, extension, extbase, backend module
+**Commands**: typo3:content-blocks, typo3:sitepackage, typo3:extension-kickstarter, typo3:make-content-block
+**Agents**: typo3-content-blocks-specialist, typo3-architect, typo3-typoscript-expert, typo3-extension-developer
+
 ## Workflow
 
 $ARGUMENTS
 
 Let me analyze your request and find the best commands for this task:
 
-### Step 1: Discovering Available Commands
+### Step 1: Discovering Available Commands and Agents
 
-First, I'll scan for all available commands in your environment:
+First, I'll scan for all available commands and agents in your environment:
 
 ```bash
 # Check global commands
@@ -95,6 +100,10 @@ find ~/.claude/commands -name "*.md" -type f 2>/dev/null | head -20
 # Check local project commands  
 echo "📁 Scanning local commands in .claude/commands/"
 find .claude/commands -name "*.md" -type f 2>/dev/null | head -20
+
+# Check available agents
+echo "🤖 Scanning agents in ~/.claude/agents/"
+find ~/.claude/agents -name "*.md" -type f 2>/dev/null | head -20
 ```
 
 ### Step 2: Analyzing Your Request
@@ -133,6 +142,12 @@ Based on your request, I'll search for commands that match your needs by:
 - **Description**: [Command description]
 - **Best for**: [Specific use case]
 - **Usage**: `[Example usage]`
+
+## 🤖 Specialized Agents Available
+
+For complex tasks, consider using these specialized agents:
+- `[AGENT_NAME]`: [Agent expertise and capabilities]
+- Use with: `/prefix:flow:smart "your specific task"`
 
 ## 💡 Related Commands You Might Need
 
