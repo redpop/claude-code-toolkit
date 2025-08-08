@@ -48,7 +48,8 @@
       "Bash(docker:*)",
       "Bash(semgrep:*)",
       "WebFetch(domain:docs.typo3.org)",
-      "Bash(git log:*)"
+      "Bash(git log:*)",
+      "Bash(git tag:*)"
     ],
     "deny": []
   }
