@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.5.3] - 2025-08-08
+
+### Changed
+
+- 🔄 **Standardized Task Tool Invocation Syntax** - Unified Task tool syntax across all commands
+  - Converted 38 inline Task invocations to structured format in 7 files
+  - Affected commands: `/scan:perf` (7 agents), `/scan:map` (10 agents), `/scan:explore` (8 agents), `/sec:audit` (8 agents)
+  - Previously completed: `/scan:deps` (6 agents), `/scan:refactor` (6 agents), `/scan:tests` (5 agents)
+  - Improves consistency, readability, and maintainability across the toolkit
+  - All commands now use the same `Use Task tool with subagent_type=...` pattern
+
+- 🔄 **Enhanced TYPO3 Content Blocks Specialist** - Improved backend preview best practices
+  - Added comprehensive guidelines for semantic HTML-only backend previews
+  - Emphasized no styling in backend preview templates (no CSS, no inline styles)
+  - Updated with clear DO/DON'T examples for backend preview implementation
+  - Better documentation for TYPO3 v13.4 Content Blocks v1.3 compatibility
+
+### Removed
+
+- 🗑️ `/fix:smart` command - Eliminated redundancy with `/flow:smart`
+  - All functionality already available in `/flow:smart` command
+  - Reduces confusion and maintains single source of truth for intelligent problem routing
+  - Users should use `/flow:smart` for all intelligent routing needs
+
+### Fixed
+
+- 🐛 **Toolkit Consistency Issues** - Applied auto-fixes from self-analysis
+  - Fixed inconsistent Task tool invocation patterns across 38 agent definitions
+  - Resolved command redundancy between `fix:smart` and `flow:smart`
+  - Updated README.md to reflect current command structure
+
 ## [3.5.2] - 2025-08-08
 
 ### Added
@@ -563,6 +594,7 @@ This release marks the transition from a commands-only repository to a full tool
 
 - 🐛 Update instructions in README now reflect actual Git-based workflow
 
+[3.5.3]: https://github.com/redpop/claude-code-toolkit/compare/v3.5.2...v3.5.3
 [3.5.2]: https://github.com/redpop/claude-code-toolkit/compare/v3.5.1...v3.5.2
 [3.5.1]: https://github.com/redpop/claude-code-toolkit/compare/v3.5.0...v3.5.1
 [3.5.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.4.2...v3.5.0
