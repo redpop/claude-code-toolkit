@@ -1,13 +1,126 @@
 ---
-description: Chain multiple commands with intelligent data flow and error handling
-argument-hint: <command1> [-> command2] [-> command3...] [--stop-on-error] [--parallel]
+description: Chain commands or execute pre-defined pipelines with intelligent data flow
+argument-hint: <pipeline-name | command-chain> [--list] [--save-as=name] [--dry-run]
 ---
 
-# Command Chaining
+# Command Chaining & Pipelines
 
-Execute multiple commands in sequence with automatic data passing and intelligent error handling.
+Execute commands in sequence, run pre-defined pipelines, or create your own workflows with automatic data passing and intelligent error handling.
 
-## Chaining Syntax
+## Quick Start
+
+### Pre-defined Pipelines
+
+Run optimized workflows with a single command:
+
+```bash
+# Run a pre-defined pipeline
+/prefix:meta:chain deep-quality
+/prefix:meta:chain security-hardening
+/prefix:meta:chain release-prep
+
+# List all available pipelines
+/prefix:meta:chain --list
+```
+
+### Custom Command Chains
+
+Create ad-hoc command sequences:
+
+```bash
+# Simple chain
+/prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}"
+
+# Save as reusable pipeline
+/prefix:meta:chain --save-as="my-workflow" "scan:deep ." -> "fix:all"
+```
+
+## Intelligent Detection
+
+The command automatically detects what you want:
+
+1. **Pipeline name** (no arrows) → Runs pre-defined pipeline
+2. **Chain syntax** (contains `->`) → Creates ad-hoc chain
+3. **Pipeline + extension** → Runs pipeline then additional steps
+
+## Pre-defined Pipelines
+
+### 🚀 quick-quality
+
+**Purpose**: Fast quality assessment before commits (~30 seconds)
+
+```bash
+/prefix:meta:chain quick-quality
+# Executes:
+# - scan:quick . --export-json
+# - scan:report --latest --quick-wins
+```
+
+### 🔍 deep-quality
+
+**Purpose**: Comprehensive analysis with actionable fixes (~5 minutes)
+
+```bash
+/prefix:meta:chain deep-quality
+# Executes:
+# - scan:deep . --export-json
+# - scan:report --latest --generate-action-plan  
+# - auto:execute --latest --dry-run
+```
+
+### 🛡️ security-hardening
+
+**Purpose**: Find and fix security vulnerabilities (~10 minutes)
+
+```bash
+/prefix:meta:chain security-hardening
+# Executes:
+# - sec:audit . --export-json
+# - fix:security --latest --severity=critical,high
+# - sec:comply . --standard=owasp
+```
+
+### 🏗️ refactoring-sprint
+
+**Purpose**: Improve code structure systematically (~30 minutes)
+
+```bash
+/prefix:meta:chain refactoring-sprint
+# Executes:
+# - flow:refactor . --export=refactor-plan.md
+# - flow:refactor . --safety=conservative --execute
+# - test:run --all
+# - scan:quality . --compare=baseline.json
+```
+
+### 📈 release-prep
+
+**Purpose**: Ensure code is release-ready (~20 minutes)
+
+```bash
+/prefix:meta:chain release-prep
+# Executes:
+# - scan:deep . --export-all
+# - fix:quick-wins analysis.json
+# - gen:docs --update-all
+# - meta:changelog --update-version
+# - meta:health --export=release-health.json
+```
+
+### 🔄 continuous-improvement
+
+**Purpose**: Weekly code quality improvement (~2 hours)
+
+```bash
+/prefix:meta:chain continuous-improvement
+# Executes:
+# - scan:quality . --export=week-start.json
+# - auto:sprint . --duration=1w --focus=quality
+# - scan:quality . --baseline=week-start.json
+# - auto:report --compare-baseline
+```
+
+## Custom Chaining Syntax
 
 ### Sequential Execution
 
@@ -211,26 +324,100 @@ Duration: 48s
 
 ## Usage Examples
 
-### Quick Quality Fix
+### Pipeline Operations
 
 ```bash
-/prefix:meta:chain "scan:quick ." -> "fix:quick-wins {output}"
+# Run pre-defined pipeline
+/prefix:meta:chain deep-quality
+
+# Extend a pipeline
+/prefix:meta:chain deep-quality -> "git:commit --message='Quality improvements'"
+
+# Preview pipeline execution
+/prefix:meta:chain release-prep --dry-run
+
+# List all pipelines
+/prefix:meta:chain --list
 ```
 
-### Full Analysis Pipeline
+### Custom Chains
 
 ```bash
+# Quick quality fix
+/prefix:meta:chain "scan:quick ." -> "fix:quick-wins {output}"
+
+# Full analysis pipeline
 /prefix:meta:chain \
   "scan:deep . --export-all" -> \
   "flow:review {output}" -> \
   "meta:export {outputs} --merge --template=technical"
+
+# Save custom pipeline
+/prefix:meta:chain --save-as="my-analysis" \
+  "scan:deep ." -> "fix:all" -> "scan:verify"
 ```
 
-### Automated Improvement
+### Hybrid Usage
 
 ```bash
-/prefix:meta:chain \
-  "meta:health --export" as health -> \
-  "flow:smart 'Improve lowest scoring area from {health}'" -> \
-  "meta:health --compare={health}"
+# Start with pipeline, add custom steps
+/prefix:meta:chain quick-quality -> "notify:slack 'Quality check complete'"
+
+# Chain multiple pipelines
+/prefix:meta:chain security-hardening -> refactoring-sprint
+```
+
+## Creating Custom Pipelines
+
+### Save for Reuse
+
+```bash
+# Define and save
+/prefix:meta:chain --save-as="test-improvement" \
+  "scan:tests ." -> \
+  "gen:tests --coverage-target=90" -> \
+  "scan:tests . --verify"
+
+# Use saved pipeline
+/prefix:meta:chain test-improvement
+```
+
+### Define with Task Tool
+
+For complex pipelines:
+
+Use Task tool with subagent_type="general-purpose":
+"Create a command pipeline for: $ARGUMENTS. Include: 1) Analysis phase, 2) Action phase, 3) Verification phase. Output as chain syntax."
+
+## Integration Examples
+
+### CI/CD
+
+```yaml
+# GitHub Actions
+- name: Quality Gate
+  run: /prefix:meta:chain deep-quality --stop-on-error
+
+- name: Security Check  
+  run: /prefix:meta:chain security-hardening
+```
+
+### Git Hooks
+
+```bash
+# pre-commit
+/prefix:meta:chain quick-quality || exit 1
+
+# pre-push
+/prefix:meta:chain release-prep --dry-run
+```
+
+### Scheduled Tasks
+
+```bash
+# Daily quality check (cron)
+0 9 * * * /prefix:meta:chain deep-quality
+
+# Weekly improvement
+0 9 * * MON /prefix:meta:chain continuous-improvement
 ```
