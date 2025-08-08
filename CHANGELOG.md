@@ -7,6 +7,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.5.1] - 2025-08-08
+
+### Added
+
+- ✨ **Unified Command Creation** - New `/meta:create` command replaces and enhances previous creation commands
+  - Intelligently detects whether you need a command, agent, or complete workflow from description
+  - Automatic resource reusability checking - reuses existing agents when possible
+  - Smart technology detection (Laravel, Vue, TYPO3, React, etc.) with auto-category creation
+  - Zero configuration needed - handles naming, templates, integration, and documentation automatically
+  - Replaces and merges functionality from previous `/meta:create-cmd` and smart-create commands
+
+- ✨ **Developer Process Improvements** - New checklist and workflows for adding command categories
+  - Created comprehensive checklist at `docs/developer-guide/adding-new-category-checklist.md`
+  - Step-by-step guide for adding new technology integrations (TYPO3, Laravel, etc.)
+  - Template for updating find-cmd.md with proper keyword discovery
+  - Git commit structure recommendations for complete category additions
+
+### Changed
+
+- 🔄 **Enhanced TYPO3 Integration Discovery** - Improved command discoverability and MCP integration
+  - Added comprehensive TYPO3 keywords to `/meta:find-cmd` for better command discovery
+  - Enhanced TYPO3 commands with MCP (Model Context Protocol) integration documentation
+  - Added agent discovery workflow to find-cmd for complete resource mapping
+  - Improved TYPO3 Content Blocks specialist agent with additional expertise areas
+
+- 🔄 **Simplified Command Creation Workflow** - Unified intelligent creation process
+  - Single `/meta:create` command now handles all creation scenarios
+  - Automatic agent reusability checking prevents duplicate agent creation
+  - Improved command/agent creation workflow with better integration
+
+### Fixed
+
+- 🐛 **TYPO3 Command Discovery** - Fixed missing TYPO3 category in find-cmd command
+  - Added missing TYPO3 section with all relevant keywords and commands
+  - Ensures users can discover TYPO3 commands through natural language queries
+  - Prevents future oversights when adding new integrations through developer checklist
+
 ## [3.5.0] - 2025-08-07
 
 ### Added
@@ -494,6 +531,8 @@ This release marks the transition from a commands-only repository to a full tool
 
 - 🐛 Update instructions in README now reflect actual Git-based workflow
 
+[3.5.1]: https://github.com/redpop/claude-code-toolkit/compare/v3.5.0...v3.5.1
+[3.5.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.4.2...v3.5.0
 [3.4.2]: https://github.com/redpop/claude-code-toolkit/compare/v3.4.1...v3.4.2
 [3.4.1]: https://github.com/redpop/claude-code-toolkit/compare/v3.4.0...v3.4.1
 [3.4.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.3.0...v3.4.0
