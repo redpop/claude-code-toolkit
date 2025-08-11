@@ -204,7 +204,7 @@ ls ~/.claude/commands/tk/
 
 1. **Try it now**: `/tk:flow:smart "analyze my code"`
 2. **Read more**: [Modern Workflow Guide](../guides/MODERN-WORKFLOW.md)
-3. **See changes**: [Migration Guide](../MIGRATION-GUIDE.md)
+3. **See changes**: [Migration Guide](../archive/MIGRATION-GUIDE.md)
 4. **Go deep**: [Command Reference](../../README.md#available-commands)
 
 ## Quick Reference Card

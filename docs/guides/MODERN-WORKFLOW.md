@@ -179,6 +179,6 @@ For granular control, use individual commands:
 
 ## 📚 Next Steps
 
-- See [MIGRATION-GUIDE.md](../MIGRATION-GUIDE.md) for v3.0 changes
+- See [MIGRATION-GUIDE.md](../archive/MIGRATION-GUIDE.md) for v3.0 changes
 - Check [command reference](../../README.md#available-commands) for all commands
 - Try `/prefix:flow:smart "help me get started"` for personalized guidance

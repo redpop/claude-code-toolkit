@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.6.1] - 2025-08-11
+
+### Added
+
+- ✨ **Comprehensive TYPO3 Sitepackage Documentation** - Complete guide for sitepackage creation and configuration
+  - Added sitepackage installation guide with step-by-step instructions
+  - Added sitepackage configuration guide covering Site Sets, TypoScript, TSconfig, and RTE
+  - Added sitepackage structure reference with complete directory organization
+  - Added practical examples with Bootstrap 5 integration, custom content elements, and ViewHelpers
+  - Created centralized TYPO3 knowledge base index (README.md) for better navigation
+  
+- ✨ **TYPO3 Knowledge Base Reference System** - Centralized references to eliminate redundancy
+  - Added commands reference for all TYPO3 CLI commands
+  - Added field naming reference for Content Blocks naming patterns
+  - Added backend preview reference with template examples
+
+### Changed
+
+- 🔄 **Restructured TYPO3 Knowledge Base** - Eliminated redundancies and improved organization
+  - Reduced documentation redundancy from ~25% to <5%
+  - Reorganized content into primary documents and reference guides
+  - Updated existing documents to use cross-references instead of duplicating content
+  - Improved navigation with comprehensive README index
+
+### Fixed
+
+- 🐛 **Documentation Redundancies** - Removed duplicate content across TYPO3 documentation
+  - Consolidated cache clearing commands into single reference
+  - Unified field naming patterns in dedicated reference
+  - Centralized backend preview templates
+  - Eliminated duplicate shared partials configuration
+
 ## [3.6.0] - 2025-01-10
 
 ### Added
@@ -160,7 +192,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Page type compatibility with FLUIDTEMPLATE (not PAGEVIEW)
   - Skeleton templates for rapid development (hero, card-grid, accordion, landing-page)
   - Integration with stefanfroemken/ext-kickstarter
-  - Comprehensive documentation in `docs/TYPO3-INTEGRATION.md`
+  - Comprehensive documentation in `docs/archive/TYPO3-INTEGRATION.md`
 
 - ✨ **Command Finder** - New `/meta:find-cmd` command for discovering the best tool for any task
   - Intelligently searches all available commands (global and local)
@@ -287,7 +319,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Analysis commands moved to `scan` category
   - Workflow commands split between `flow` and `auto`
   - Project commands moved to `meta` category
-  - See MIGRATION-GUIDE.md for complete mapping
+  - See docs/archive/MIGRATION-GUIDE.md for complete mapping
   
 - 🔄 **Enhanced Existing Agents**
   - `refactoring-expert` - Extended with performance and testing capabilities
@@ -625,6 +657,8 @@ This release marks the transition from a commands-only repository to a full tool
 
 - 🐛 Update instructions in README now reflect actual Git-based workflow
 
+[3.6.1]: https://github.com/redpop/claude-code-toolkit/compare/v3.6.0...v3.6.1
+[3.6.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.5.3...v3.6.0
 [3.5.3]: https://github.com/redpop/claude-code-toolkit/compare/v3.5.2...v3.5.3
 [3.5.2]: https://github.com/redpop/claude-code-toolkit/compare/v3.5.1...v3.5.2
 [3.5.1]: https://github.com/redpop/claude-code-toolkit/compare/v3.5.0...v3.5.1

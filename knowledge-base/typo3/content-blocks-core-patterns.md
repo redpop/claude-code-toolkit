@@ -2,27 +2,7 @@
 
 ## Field Naming Conventions
 
-### Database Field Generation
-Content Blocks automatically generates database field names based on:
-- Vendor prefix (e.g., `punktde`)
-- Content Block name (e.g., `accordion`)
-- Field identifier (e.g., `title`)
-
-Pattern: `{vendor}_{blockname}_{fieldname}`
-
-### Collection Fields Special Case
-Collections create separate database tables:
-- Table name: `{vendor}_{collection_field_name}`
-- Within collections, fields are accessed directly: `item.header` not `item.{vendor}_{blockname}_{collection}_header`
-
-**Example:**
-```yaml
-- identifier: accordion_items  # Creates table: punktde_accordion_items
-  type: Collection
-  fields:
-    - identifier: header       # Accessed as: item.header
-    - identifier: content      # Accessed as: item.content
-```
+See [Field Naming Reference](./references/field-naming-reference.md) for complete naming patterns and examples.
 
 ## Database Table Generation
 
@@ -39,29 +19,7 @@ Content Blocks v1.3 automatically generates:
 
 ## Field Access Patterns
 
-### Root Level Fields
-```html
-<!-- Access pattern for root fields -->
-{data.{vendor}_{blockname}_{fieldname}}
-
-<!-- Example -->
-{data.punktde_accordion_title}
-{data.punktde_accordion_allow_multiple}
-```
-
-### Collection Fields
-```html
-<!-- Collections are accessed directly -->
-<f:for each="{data.{vendor}_{blockname}_{collection}}" as="item">
-    {item.fieldname}  <!-- Direct access, no prefix -->
-</f:for>
-
-<!-- Example -->
-<f:for each="{data.punktde_accordion_accordion_items}" as="item">
-    <h3>{item.header}</h3>
-    <div>{item.content}</div>
-</f:for>
-```
+See [Field Naming Reference](./references/field-naming-reference.md#complete-access-pattern-reference) for detailed field access patterns.
 
 ## Common Field Types
 
@@ -121,32 +79,7 @@ Content Blocks v1.3 automatically generates:
 
 ## Backend Preview Structure
 
-### Essential Elements
-```html
-<html data-namespace-typo3-fluid="true"
-      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-      xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
-      xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers">
-
-<div class="content-block-backend-preview">
-    <!-- Title with icon -->
-    <strong>
-        <core:icon identifier="content-{blockname}" size="small" />
-        {blocktitle}
-    </strong>
-    
-    <!-- Field summaries -->
-    <f:if condition="{data.field}">
-        <p><strong>Label:</strong> {data.field}</p>
-    </f:if>
-    
-    <!-- Collection counts -->
-    <f:if condition="{data.collection}">
-        <p><strong>Items:</strong> {data.collection -> f:count()}</p>
-    </f:if>
-</div>
-</html>
-```
+See [Backend Preview Reference](./references/backend-preview-reference.md) for complete preview template examples and best practices.
 
 ## Frontend Template Structure
 
@@ -204,31 +137,13 @@ See: [Content Blocks Shared Partials Documentation](./content-blocks-shared-part
 ## Debugging Strategies
 
 ### 1. Field Name Discovery
-```html
-<!-- Debug output to see all available fields -->
-<f:debug>{data}</f:debug>
-
-<!-- Or selective debug -->
-<f:debug title="Collection Items">{data.punktde_accordion_accordion_items}</f:debug>
-```
+See [Field Naming Reference](./references/field-naming-reference.md#debug-field-names) for debugging field names.
 
 ### 2. Cache Clearing
-```bash
-# Always clear caches after Content Block changes
-ddev exec typo3 cache:flush
-
-# Or more aggressive
-ddev exec rm -rf var/cache/*
-```
+See [Commands Reference](./references/commands-reference.md#cache-management) for all cache clearing options.
 
 ### 3. Database Verification
-```bash
-# Check if table was created
-ddev mysql -e "SHOW TABLES LIKE '%punktde%'"
-
-# Inspect table structure
-ddev mysql -e "DESCRIBE punktde_accordion_items"
-```
+See [Commands Reference](./references/commands-reference.md#database-commands) for database inspection commands.
 
 ### 4. TCA Inspection
 Check generated TCA in:
@@ -247,11 +162,7 @@ Check generated TCA in:
 
 ### 3. Cache Not Clearing
 **Problem:** Changes not reflecting
-**Solution:** 
-```bash
-ddev exec typo3 cache:flush
-ddev exec rm -rf var/cache/*
-```
+**Solution:** See [Commands Reference](./references/commands-reference.md#cache-management)
 
 ### 4. Missing Backend Preview
 **Problem:** Backend shows raw data
