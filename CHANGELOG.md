@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.6.3] - 2025-01-11
+
+### Fixed
+
+- 🐛 **Command Finder Accuracy** - Fixed meta:find-cmd to only suggest actual existing commands
+  - Now properly searches through real command files in the toolkit
+  - Prevents suggesting non-existent commands like `/task`
+  - Correctly identifies commands from both global (`~/.claude/`) and local (`.claude/`) directories
+  - Searches for agents in both global and project-local locations
+  - Marks commands and agents with [GLOBAL] or [LOCAL] source indicators
+
 ## [3.6.2] - 2025-01-11
 
 ### Added

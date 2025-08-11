@@ -106,9 +106,13 @@ find ~/.claude/commands -name "*.md" -type f 2>/dev/null | head -20
 echo "📁 Scanning local commands in .claude/commands/"
 find .claude/commands -name "*.md" -type f 2>/dev/null | head -20
 
-# Check available agents
-echo "🤖 Scanning agents in ~/.claude/agents/"
+# Check global agents
+echo "🤖 Scanning global agents in ~/.claude/agents/"
 find ~/.claude/agents -name "*.md" -type f 2>/dev/null | head -20
+
+# Check local project agents
+echo "📁 Scanning local agents in .claude/agents/"
+find .claude/agents -name "*.md" -type f 2>/dev/null | head -20
 ```
 
 ### Step 2: Analyzing Your Request
@@ -120,39 +124,57 @@ Now I'll analyze your task description to understand:
 
 ### Step 3: Matching Commands
 
-Based on your request, I'll search for commands that match your needs by:
-1. Parsing command frontmatter for descriptions
-2. Analyzing command content for capabilities
-3. Matching keywords and synonyms
-4. Calculating relevance scores
+Now I'll analyze the actual commands found in your toolkit to match your needs:
+
+Use Task tool with subagent_type="general-purpose":
+"Analyze the user's request: '$ARGUMENTS'. Then examine ALL command files found in step 1 from BOTH locations:
+- Global commands in ~/.claude/commands/
+- Local project commands in .claude/commands/
+
+For each command file found:
+1. Read its frontmatter (description, argument-hint)
+2. Analyze its content to understand what it does
+3. Check if it matches the user's needs
+4. Note whether it's a global or local command
+
+Focus on commands that exist in these categories based on keywords in the request:
+- For 'refactor/restructure/redesign': Look for flow:refactor, scan:refactor commands
+- For 'analyze/scan/explore': Look for scan:* commands
+- For 'fix/optimize/improve': Look for fix:* commands  
+- For 'security/audit': Look for sec:* commands
+- For 'test/coverage': Look for gen:tests, scan:tests
+- For 'docs/documentation': Look for gen:docs, scan:docs, fix:documentation
+- For 'typo3/extension': Look for typo3:* commands (often in local .claude/commands)
+- For framework-specific tasks: Check local commands first
+
+Return ONLY commands that actually exist in the found files. Do not suggest hypothetical commands.
+Format as a ranked list with relevance scores and indicate [GLOBAL] or [LOCAL] source."
 
 ### Step 4: Recommendations
 
-## 🎯 Best Match
+Based on the analysis of your actual available commands:
 
-**Command**: `[BEST_MATCH_COMMAND]`
-- **Description**: [Command description]
-- **Why it's best**: [Explanation of why this matches your needs]
-- **Usage**: `[Example usage]`
-- **Source**: [Global/Local]
+## 🎯 Best Matches from Your Toolkit
 
-## 📊 Alternative Commands
+I'll now present the commands that actually exist in your Claude Code Toolkit and match your request.
 
-### Option 2: `[ALTERNATIVE_COMMAND_1]`
-- **Description**: [Command description]
-- **Best for**: [Specific use case]
-- **Usage**: `[Example usage]`
+Note: I will ONLY recommend commands that were found in the file system scan above. No hypothetical or non-existent commands will be suggested.
 
-### Option 3: `[ALTERNATIVE_COMMAND_2]`
-- **Description**: [Command description]
-- **Best for**: [Specific use case]
-- **Usage**: `[Example usage]`
+## 🤖 Available Specialized Agents
 
-## 🤖 Specialized Agents Available
+Based on the agents found in your environment, here are relevant specialists for your task:
 
-For complex tasks, consider using these specialized agents:
-- `[AGENT_NAME]`: [Agent expertise and capabilities]
-- Use with: `/prefix:flow:smart "your specific task"`
+Use Task tool with subagent_type="general-purpose":
+"List ONLY the agents actually found in the directory scans from step 1:
+- Global agents in ~/.claude/agents/
+- Local project agents in .claude/agents/
+
+For each agent found, provide:
+1. Its actual name and location [GLOBAL] or [LOCAL]
+2. Its capabilities based on reading its content
+3. How it relates to the user's request
+
+Do not invent agents that don't exist. Only list what was actually found in the file system."
 
 ## 💡 Related Commands You Might Need
 
