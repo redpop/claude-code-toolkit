@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.6.0] - 2025-01-10
+
+### Added
+
+- ✨ **Official TYPO3 v13 Sitepackage Template Integration** - Complete reference implementation from get.typo3.org
+  - Added comprehensive knowledge base with full sitepackage template (`knowledge-base/typo3/sitepackage-v13-template.md`)
+  - Includes all file contents from official TYPO3 v13.4 sitepackage generator
+  - Complete Site Sets configuration with config.yaml, settings.yaml, and TypoScript
+  - PAGEVIEW content object implementation for modern page rendering
+  - Backend layout configuration via TSconfig
+  - RTE preset configuration with CKEditor
+  - XLF localization files for frontend and backend
+  - Full Fluid Styled Content integration
+
+### Changed
+
+- 🔄 **Enhanced TYPO3 Sitepackage Command** - Updated to use official template
+  - `/typo3:sitepackage` now creates packages based on official TYPO3 v13 template
+  - All file contents embedded inline - no external dependencies required
+  - Complete directory structure matching get.typo3.org/sitepackage
+  - Modern Site Sets configuration (v13) instead of legacy TypoScript
+  - PAGEVIEW content object for page rendering
+  - Proper PSR-4 autoloading structure
+  - Consolidated functionality - removed duplicate sitepackage-v13 command
+
+- 🔄 **Updated TYPO3 Architect Agent** - Added official template reference
+  - Now references official sitepackage template as best practice
+  - Documents Site Sets configuration patterns from official template
+  - Includes PAGEVIEW content object guidance
+  - Enhanced with official directory structure recommendations
+
 ## [3.5.3] - 2025-08-08
 
 ### Changed
