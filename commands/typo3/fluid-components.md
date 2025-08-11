@@ -55,7 +55,7 @@ lib.contentElement {
     }
 }
 ```
-See: [Content Blocks Shared Partials Documentation](../../knowledge-base/typo3/content-blocks-shared-partials.md)
+See: Content Blocks Shared Partials Documentation at ~/.claude/claude-code-toolkit/knowledge-base/typo3/content-blocks-shared-partials.md
 
 ## Command Workflow
 

@@ -57,7 +57,8 @@
       "Bash(echo:*)",
       "Bash(fi)",
       "Bash(if ! grep -q \"^argument-hint:\" \"$file\")",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash([ -d ~/.claude/claude-code-toolkit/knowledge-base ])"
     ],
     "deny": []
   }

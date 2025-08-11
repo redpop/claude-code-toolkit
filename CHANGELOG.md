@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.6.2] - 2025-01-11
+
+### Added
+
+- ✨ **Knowledge Base Installation Support** - Knowledge base is now properly installed during toolkit setup
+  - Created dedicated `~/.claude/claude-code-toolkit/` directory for toolkit resources
+  - Knowledge base is automatically copied to `~/.claude/claude-code-toolkit/knowledge-base/`
+  - Supports both global and local project installations
+  - Includes automatic backup mechanism for existing knowledge base during updates
+
+### Changed
+
+- 🔄 **Updated Command Path References** - Fixed knowledge base references in commands
+  - Updated TYPO3 commands to reference correct knowledge base path
+  - Changed from relative paths to absolute paths (`~/.claude/claude-code-toolkit/knowledge-base/`)
+  - Ensures commands work correctly after global installation
+
+### Fixed
+
+- 🐛 **Global Installation Knowledge Base Access** - Resolved missing knowledge base issue
+  - Commands now correctly reference knowledge base after global installation
+  - Fixed path resolution for TYPO3 content-blocks, fluid-components, and sitepackage commands
+  - Knowledge base is now accessible from any project when globally installed
+
 ## [3.6.1] - 2025-08-11
 
 ### Added
