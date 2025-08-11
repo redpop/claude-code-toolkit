@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.6.4] - 2025-01-11
+
+### Changed
+
+- 🔄 **Command Finder Behavior** - Improved meta:find-cmd to show recommendations instead of executing
+  - Now presents clear command recommendations first
+  - Removed automatic task execution behavior
+  - Shows explicit command options with descriptions and examples
+  - Added clear note that commands are recommendations only, not auto-executed
+  - Provides workflow suggestions for complex tasks like refactoring
+
 ## [3.6.3] - 2025-01-11
 
 ### Fixed

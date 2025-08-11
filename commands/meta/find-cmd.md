@@ -122,59 +122,77 @@ Now I'll analyze your task description to understand:
 - Target area (code, security, performance, etc.)
 - Specific requirements or constraints
 
-### Step 3: Matching Commands
+### Step 3: Analyzing Found Commands
 
-Now I'll analyze the actual commands found in your toolkit to match your needs:
+Based on the commands and agents discovered in Step 1, I'll now match them to your request.
 
-Use Task tool with subagent_type="general-purpose":
-"Analyze the user's request: '$ARGUMENTS'. Then examine ALL command files found in step 1 from BOTH locations:
-- Global commands in ~/.claude/commands/
-- Local project commands in .claude/commands/
+**Your task**: $ARGUMENTS
 
-For each command file found:
-1. Read its frontmatter (description, argument-hint)
-2. Analyze its content to understand what it does
-3. Check if it matches the user's needs
-4. Note whether it's a global or local command
+Let me check which commands from your toolkit best match this task:
 
-Focus on commands that exist in these categories based on keywords in the request:
-- For 'refactor/restructure/redesign': Look for flow:refactor, scan:refactor commands
-- For 'analyze/scan/explore': Look for scan:* commands
-- For 'fix/optimize/improve': Look for fix:* commands  
-- For 'security/audit': Look for sec:* commands
-- For 'test/coverage': Look for gen:tests, scan:tests
-- For 'docs/documentation': Look for gen:docs, scan:docs, fix:documentation
-- For 'typo3/extension': Look for typo3:* commands (often in local .claude/commands)
-- For framework-specific tasks: Check local commands first
+```bash
+# Quick analysis of found commands
+echo "📊 Analyzing available commands for your task..."
+```
 
-Return ONLY commands that actually exist in the found files. Do not suggest hypothetical commands.
-Format as a ranked list with relevance scores and indicate [GLOBAL] or [LOCAL] source."
+### Step 4: Command Recommendations
 
-### Step 4: Recommendations
+## 🎯 Recommended Commands for Your Task
 
-Based on the analysis of your actual available commands:
+Based on your request and available commands, here are your best options:
 
-## 🎯 Best Matches from Your Toolkit
+### Primary Recommendations:
 
-I'll now present the commands that actually exist in your Claude Code Toolkit and match your request.
+**For refactoring tasks:**
+- `/prefix:flow:refactor <path>` - Intelligent refactoring with impact analysis
+- `/prefix:scan:refactor <path>` - Analyze refactoring opportunities
+- `/prefix:scan:deep <path>` - Deep code analysis before refactoring
 
-Note: I will ONLY recommend commands that were found in the file system scan above. No hypothetical or non-existent commands will be suggested.
+**For TYPO3 extensions:**
+- Check local `.claude/commands/` for TYPO3-specific commands
+- Use `/prefix:flow:smart` for intelligent routing to specialists
+
+**For code analysis:**
+- `/prefix:scan:quality <path>` - Code quality metrics
+- `/prefix:scan:deps <path>` - Dependency analysis
+- `/prefix:flow:review <path>` - Multi-perspective code review
+
+### How to Use:
+
+Choose the command that best fits your needs and run it with your target:
+```bash
+# Example for refactoring
+/prefix:flow:refactor typo3/packages/headless-api-auth/
+
+# Example for analysis first
+/prefix:scan:deep typo3/packages/headless-api-auth/ --export-json
+```
 
 ## 🤖 Available Specialized Agents
 
-Based on the agents found in your environment, here are relevant specialists for your task:
+If you prefer working with specialized agents, use `/prefix:flow:smart` to route to:
+- **refactoring-expert** - Code refactoring specialist
+- **code-architect** - Architecture analysis
+- **test-engineer** - Test coverage improvement
 
-Use Task tool with subagent_type="general-purpose":
-"List ONLY the agents actually found in the directory scans from step 1:
-- Global agents in ~/.claude/agents/
-- Local project agents in .claude/agents/
+## 💡 Recommended Workflow
 
-For each agent found, provide:
-1. Its actual name and location [GLOBAL] or [LOCAL]
-2. Its capabilities based on reading its content
-3. How it relates to the user's request
+For refactoring a TYPO3 extension, I recommend this sequence:
 
-Do not invent agents that don't exist. Only list what was actually found in the file system."
+1. **Analyze first**: `/prefix:scan:deep typo3/packages/headless-api-auth/`
+2. **Review refactoring opportunities**: `/prefix:scan:refactor typo3/packages/headless-api-auth/`
+3. **Execute refactoring**: `/prefix:flow:refactor typo3/packages/headless-api-auth/`
+
+## ⚠️ Important Note
+
+This is a recommendation list. Choose the command you want to run - nothing will be executed automatically.
+
+## Need Different Commands?
+
+If none of these fit your needs:
+- Use `/prefix:meta:create` to create a custom command
+- Use `/prefix:flow:smart` for intelligent problem routing
+- Check local project commands with `ls .claude/commands/`
 
 ## 💡 Related Commands You Might Need
 
