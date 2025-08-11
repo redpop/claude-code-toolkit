@@ -109,12 +109,22 @@ Step-by-step migration guide
 
 ## Best Practices Knowledge
 
+### Official TYPO3 v13 Sitepackage Template
+
+The official template from https://get.typo3.org/sitepackage serves as the reference implementation:
+- Site Sets configuration with config.yaml, settings.yaml, and setup.typoscript
+- PAGEVIEW content object for page rendering
+- Proper directory structure for Resources/Private/PageView/
+- Backend layout configuration via TSconfig
+- RTE preset configuration
+- XLF localization files structure
+
 ### Site Sets (v13)
 
-- Proper configuration structure
-- Dependency management
-- Settings inheritance
-- TypoScript organization
+- Proper configuration structure (config.yaml for dependencies, settings.yaml for constants)
+- Dependency management through Site Sets
+- Settings inheritance and overrides
+- TypoScript organization in Sets/{SetName}/TypoScript/
 
 ### Content Blocks v1.3
 
