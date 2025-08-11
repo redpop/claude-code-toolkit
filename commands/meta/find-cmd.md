@@ -5,7 +5,16 @@ argument-hint: <task-description> [--all] [--local-only] [--global-only]
 
 # Command Finder - Discover the Right Tool for Your Task
 
+**PURPOSE**: This command ONLY recommends other commands. It does NOT execute any tasks.
+
 This intelligent command helps you find the most suitable Claude Code command for your specific task by analyzing all available commands (both globally installed and project-local).
+
+⚠️ **IMPORTANT INSTRUCTION FOR AI**: 
+- This is a DISCOVERY command only
+- DO NOT execute the user's task
+- DO NOT refactor, analyze, or modify any code
+- ONLY list available commands that the user can run themselves
+- Your job is to be a command recommendation engine, nothing more
 
 ## Usage
 
@@ -89,103 +98,63 @@ This intelligent command helps you find the most suitable Claude Code command fo
 
 ## Workflow
 
-$ARGUMENTS
+**CRITICAL**: This is a DISCOVERY command only. Do NOT analyze code or execute tasks!
 
-Let me analyze your request and find the best commands for this task:
+User's request: "$ARGUMENTS"
 
-### Step 1: Discovering Available Commands and Agents
+## Quick Analysis (Surface Level Only)
 
-First, I'll scan for all available commands and agents in your environment:
+Understanding your request category:
+- Request type: Identify if it's about refactoring, analysis, security, etc.
+- Technology: Look for keywords like TYPO3, React, Python, etc.
+- Goal: What outcome is desired
 
+## Available Commands for Your Task
+
+Based on your request "$ARGUMENTS", here are the commands you can run:
+
+### 🔧 For Refactoring Tasks:
 ```bash
-# Check global commands
-echo "🌍 Scanning global commands in ~/.claude/commands/"
-find ~/.claude/commands -name "*.md" -type f 2>/dev/null | head -20
-
-# Check local project commands  
-echo "📁 Scanning local commands in .claude/commands/"
-find .claude/commands -name "*.md" -type f 2>/dev/null | head -20
-
-# Check global agents
-echo "🤖 Scanning global agents in ~/.claude/agents/"
-find ~/.claude/agents -name "*.md" -type f 2>/dev/null | head -20
-
-# Check local project agents
-echo "📁 Scanning local agents in .claude/agents/"
-find .claude/agents -name "*.md" -type f 2>/dev/null | head -20
+# Most common refactoring commands:
+/global:flow:refactor <path>     # Intelligent refactoring workflow
+/global:scan:refactor <path>     # Analyze refactoring opportunities
+/global:scan:deep <path>         # Deep code analysis first
 ```
 
-### Step 2: Analyzing Your Request
-
-Now I'll analyze your task description to understand:
-- Primary action needed (analyze, fix, generate, etc.)
-- Target area (code, security, performance, etc.)
-- Specific requirements or constraints
-
-### Step 3: Analyzing Found Commands
-
-Based on the commands and agents discovered in Step 1, I'll now match them to your request.
-
-**Your task**: $ARGUMENTS
-
-Let me check which commands from your toolkit best match this task:
-
+### 📊 For Analysis Tasks:
 ```bash
-# Quick analysis of found commands
-echo "📊 Analyzing available commands for your task..."
+# Analysis commands:
+/global:scan:quality <path>      # Code quality metrics
+/global:flow:review <path>       # Multi-perspective review
+/global:scan:deps <path>         # Dependency analysis
 ```
 
-### Step 4: Command Recommendations
-
-## 🎯 Recommended Commands for Your Task
-
-Based on your request and available commands, here are your best options:
-
-### Primary Recommendations:
-
-**For refactoring tasks:**
-- `/prefix:flow:refactor <path>` - Intelligent refactoring with impact analysis
-- `/prefix:scan:refactor <path>` - Analyze refactoring opportunities
-- `/prefix:scan:deep <path>` - Deep code analysis before refactoring
-
-**For TYPO3 extensions:**
-- Check local `.claude/commands/` for TYPO3-specific commands
-- Use `/prefix:flow:smart` for intelligent routing to specialists
-
-**For code analysis:**
-- `/prefix:scan:quality <path>` - Code quality metrics
-- `/prefix:scan:deps <path>` - Dependency analysis
-- `/prefix:flow:review <path>` - Multi-perspective code review
-
-### How to Use:
-
-Choose the command that best fits your needs and run it with your target:
+### 🚀 For Smart Routing:
 ```bash
-# Example for refactoring
-/prefix:flow:refactor typo3/packages/headless-api-auth/
-
-# Example for analysis first
-/prefix:scan:deep typo3/packages/headless-api-auth/ --export-json
+# Let AI choose the best approach:
+/global:flow:smart "your specific task description"
 ```
 
-## 🤖 Available Specialized Agents
+### 🔍 Check What's Actually Available:
+```bash
+# See all your commands:
+find ~/.claude/commands -name "*.md" | sed 's|.*/commands/||; s|/|:|g; s|\.md$||' | sort
+find .claude/commands -name "*.md" | sed 's|.*/commands/||; s|/|:|g; s|\.md$||' | sort
+```
 
-If you prefer working with specialized agents, use `/prefix:flow:smart` to route to:
-- **refactoring-expert** - Code refactoring specialist
-- **code-architect** - Architecture analysis
-- **test-engineer** - Test coverage improvement
+## 📝 Quick Recommendations
 
-## 💡 Recommended Workflow
+For "$ARGUMENTS":
 
-For refactoring a TYPO3 extension, I recommend this sequence:
+**Primary suggestion**: `/global:flow:refactor <your-path>`
+**If you want analysis first**: `/global:scan:deep <your-path> --export-json`
+**For TYPO3 extensions**: Check if you have local TYPO3 commands with `ls .claude/commands/typo3/`
 
-1. **Analyze first**: `/prefix:scan:deep typo3/packages/headless-api-auth/`
-2. **Review refactoring opportunities**: `/prefix:scan:refactor typo3/packages/headless-api-auth/`
-3. **Execute refactoring**: `/prefix:flow:refactor typo3/packages/headless-api-auth/`
+## ✅ Command Discovery Complete
 
-## ⚠️ Important Note
+That's it! I've provided command recommendations without doing any actual work.
 
-This is a recommendation list. Choose the command you want to run - nothing will be executed automatically.
+**Your next step**: Choose one of the commands above and run it yourself.
 
 ## Need Different Commands?
 

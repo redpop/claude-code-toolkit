@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.6.5] - 2025-01-11
+
+### Fixed
+
+- 🐛 **Command Finder Execution Prevention** - Completely fixed meta:find-cmd to never execute tasks
+  - Removed all agent invocations and code analysis from command finder
+  - Simplified to pure command discovery and recommendation engine
+  - No longer calls refactoring-expert or other agents during discovery
+  - Drastically shortened command to focus only on listing available commands
+  - Added explicit warnings to prevent any task execution during discovery
+
 ## [3.6.4] - 2025-01-11
 
 ### Changed
