@@ -743,4 +743,4 @@ Happy coding! 🚀
 ## Reference
 
 This command creates a sitepackage based on the official TYPO3 v13 template from https://get.typo3.org/sitepackage.
-The complete template reference is documented in `knowledge-base/typo3/sitepackage-v13-template.md`.
+The complete template reference is documented in `~/.claude/claude-code-toolkit/knowledge-base/typo3/sitepackage-v13-template.md`.

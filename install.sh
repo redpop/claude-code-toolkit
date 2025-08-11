@@ -41,6 +41,7 @@ fi
 # Default values
 CLAUDE_COMMANDS_DIR="$HOME/.claude/commands"
 CLAUDE_AGENTS_DIR="$HOME/.claude/agents"
+CLAUDE_TOOLKIT_DIR="$HOME/.claude/claude-code-toolkit"
 FORCE_INSTALL=false
 INSTALL_COMPONENTS="all"
 LOCAL_INSTALL=false
@@ -184,6 +185,7 @@ if [ "$LOCAL_INSTALL" = true ]; then
     
     CLAUDE_COMMANDS_DIR="$LOCAL_DIR/commands"
     CLAUDE_AGENTS_DIR="$LOCAL_DIR/agents"
+    CLAUDE_TOOLKIT_DIR="$LOCAL_DIR/claude-code-toolkit"
     
     print_info "Installing locally in: $LOCAL_DIR"
 fi
@@ -276,6 +278,26 @@ if [ "$INSTALL_AGENTS" = true ]; then
         print_info "Installing agents to $CLAUDE_AGENTS_DIR..."
         cp "$SCRIPT_DIR/agents/"*.md "$CLAUDE_AGENTS_DIR/" 2>/dev/null || true
     fi
+fi
+
+# Install knowledge-base to claude-code-toolkit directory
+if [ -d "$SCRIPT_DIR/knowledge-base" ]; then
+    print_info "Installing knowledge-base to $CLAUDE_TOOLKIT_DIR..."
+    mkdir -p "$CLAUDE_TOOLKIT_DIR"
+    
+    # Check if knowledge-base already exists
+    if [ -d "$CLAUDE_TOOLKIT_DIR/knowledge-base" ]; then
+        if [ "$FORCE_INSTALL" = true ]; then
+            print_info "Force mode: Overwriting existing knowledge-base..."
+            rm -rf "$CLAUDE_TOOLKIT_DIR/knowledge-base"
+        else
+            print_info "Backing up existing knowledge-base..."
+            mv "$CLAUDE_TOOLKIT_DIR/knowledge-base" "$CLAUDE_TOOLKIT_DIR/knowledge-base.backup.$(date +%Y%m%d_%H%M%S)"
+        fi
+    fi
+    
+    cp -r "$SCRIPT_DIR/knowledge-base" "$CLAUDE_TOOLKIT_DIR/"
+    print_success "Knowledge-base installed to $CLAUDE_TOOLKIT_DIR/knowledge-base"
 fi
 
 print_success "Installation complete!"
