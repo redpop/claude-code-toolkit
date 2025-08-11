@@ -1,20 +1,11 @@
 # Content Blocks Shared Partials Configuration
 
 ## Overview
-Content Blocks can use shared partials from the sitepackage to avoid redundancy and maintain consistency across the project. This is achieved through TypoScript configuration of `partialRootPaths`.
+Content Blocks can use shared partials from the sitepackage to avoid redundancy and maintain consistency across the project.
 
-## Problem
-By default, Content Blocks look for partials in their own template directories:
-- `/vendor/punktde/sitepackage/ContentBlocks/ContentElements/{blockname}/templates/partials/`
+## TypoScript Configuration
 
-This leads to:
-- **Redundancy**: Same partials copied multiple times
-- **Maintenance issues**: Updates need to be made in multiple places
-- **Inconsistency**: Different versions of the same component
-
-## Solution: Shared Partials via TypoScript
-
-### 1. Configure TypoScript
+### Configure Shared Partial Paths
 Add to your sitepackage's TypoScript configuration (e.g., `ContentBlocks.typoscript`):
 
 ```typoscript
@@ -33,34 +24,10 @@ tt_content {
             100 = EXT:sitepackage/Resources/Private/Partials/
         }
     }
-    punktde_textblock {
-        partialRootPaths {
-            100 = EXT:sitepackage/Resources/Private/Partials/
-        }
-    }
 }
 ```
 
-### 2. Directory Structure
-Organize shared partials in the sitepackage:
-
-```
-packages/sitepackage/
-└── Resources/
-    └── Private/
-        └── Partials/
-            └── Components/           # Shared components
-                ├── Accordion/
-                │   └── Accordion.html
-                ├── TextBlock/
-                │   └── TextBlock.html
-                ├── Button/
-                │   └── Button.html
-                └── Card/
-                    └── Card.html
-```
-
-### 3. Usage in Content Blocks
+## Usage in Content Blocks
 In Content Block templates (`frontend.html`):
 
 ```html
@@ -78,8 +45,9 @@ In Content Block templates (`frontend.html`):
 </html>
 ```
 
-### 4. Component Definition (Partial)
-Create reusable components as standard Fluid partials:
+## Component Example
+
+Example accordion component partial (`Partials/Components/Accordion/Accordion.html`):
 
 ```html
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
@@ -87,12 +55,7 @@ Create reusable components as standard Fluid partials:
 
 <f:comment>
     Component: Accordion
-    Parameters:
-    - title (string, optional): Optional title above the accordion
-    - items (array): Array of accordion items with header and content
-    - firstExpanded (bool, default: false): Whether first panel is expanded by default
-    - allowMultiple (bool, default: true): Allow multiple panels open simultaneously
-    - class (string, optional): Additional CSS classes for wrapper
+    Parameters: title, items, firstExpanded, allowMultiple, class
 </f:comment>
 
 <div class="accordion-wrapper {class}">
@@ -100,18 +63,15 @@ Create reusable components as standard Fluid partials:
         <h2>{title}</h2>
     </f:if>
     
-    <f:for each="{items}" as="item" iteration="iterator">
+    <f:for each="{items}" as="item">
         <div class="accordion-item">
-            <button class="accordion-header">
-                {item.header}
-            </button>
+            <button class="accordion-header">{item.header}</button>
             <div class="accordion-content">
                 <f:format.html>{item.content}</f:format.html>
             </div>
         </div>
     </f:for>
 </div>
-
 </html>
 ```
 
@@ -138,15 +98,11 @@ TYPO3 checks paths in descending numerical order:
 ## Important Notes
 
 ### Fluid v4.3 Compatibility
-- The `fc:component` syntax (`TYPO3\CMS\Fluid\ViewHelpers\Component`) does NOT exist in Fluid v4.3
-- It's an experimental feature not yet available in TYPO3 13
+- The `fc:component` syntax does NOT exist in Fluid v4.3 (experimental feature)
 - Use standard `f:render partial=""` instead
 
 ### Cache Clearing
-Always clear caches after changing TypoScript configuration:
-```bash
-ddev exec typo3 cache:flush
-```
+See [Commands Reference](./references/commands-reference.md#cache-management) for cache clearing after TypoScript changes.
 
 ### Error: "The Fluid template files could not be loaded"
 This error indicates the partial path is not configured correctly. Check:

@@ -4,14 +4,14 @@
 
 | Symptom | Likely Cause | Solution | Reference |
 |---------|--------------|----------|-----------|
-| Content not showing in frontend | Cache not cleared | `ddev exec typo3 cache:flush` | [Core Patterns](./content-blocks-core-patterns.md#cache-clearing) |
-| Table doesn't exist error | Generic collection name | Use descriptive names like `accordion_items` | [Core Patterns](./content-blocks-core-patterns.md#database-table-generation) |
+| Content not showing in frontend | Cache not cleared | `ddev exec typo3 cache:flush` | [Commands Reference](./references/commands-reference.md#cache-management) |
+| Table doesn't exist error | Generic collection name | Use descriptive names like `accordion_items` | [Field Naming Reference](./references/field-naming-reference.md#collection-fields-special-rules) |
 | JavaScript syntax errors | Fluid/JS mixing | Use data attributes pattern | [Alpine.js Integration](../frameworks/alpine-js-integration.md#fluidalpine-integration-patterns) |
-| Field data not accessible | Wrong field naming | Check prefix pattern: `{vendor}_{block}_{field}` | [Core Patterns](./content-blocks-core-patterns.md#field-naming-conventions) |
-| Collection items empty | Wrong access pattern | Use `item.fieldname` not prefixed version | [Core Patterns](./content-blocks-core-patterns.md#collection-fields) |
-| Backend preview broken | Missing template | Create `backend-preview.html` | [UI Patterns](../ui-patterns/accordion.md#backend-preview-template) |
+| Field data not accessible | Wrong field naming | Check prefix pattern: `{vendor}_{block}_{field}` | [Field Naming Reference](./references/field-naming-reference.md) |
+| Collection items empty | Wrong access pattern | Use `item.fieldname` not prefixed version | [Field Naming Reference](./references/field-naming-reference.md#field-access-in-collections) |
+| Backend preview broken | Missing template | Create `backend-preview.html` | [Backend Preview Reference](./references/backend-preview-reference.md) |
 | Assets not loading | Wrong inclusion method | Use `f:asset.script` for JS/CSS CDN | [Alpine.js Integration](../frameworks/alpine-js-integration.md#setup) |
-| Changes not reflecting | Aggressive caching | `rm -rf var/cache/*` + flush | [Core Patterns](./content-blocks-core-patterns.md#cache-clearing) |
+| Changes not reflecting | Aggressive caching | `rm -rf var/cache/*` + flush | [Commands Reference](./references/commands-reference.md#cache-management) |
 
 ## Detailed Troubleshooting
 
@@ -39,9 +39,7 @@ Table 'db.punktde_items' doesn't exist
 ```
 
 #### Verification
-```bash
-ddev mysql -e "SHOW TABLES LIKE '%punktde%'"
-```
+See [Commands Reference](./references/commands-reference.md#database-commands) for table verification.
 
 ---
 
@@ -87,23 +85,10 @@ function accordionComponent() {
 - Debug shows different field names
 
 #### Diagnosis Steps
-```html
-<!-- Add debug output -->
-<f:debug title="All Data">{data}</f:debug>
-<f:debug title="Specific Field">{data.punktde_accordion_title}</f:debug>
-```
+See [Field Naming Reference](./references/field-naming-reference.md#debug-field-names) for debugging field names.
 
 #### Common Patterns
-```html
-<!-- Root fields -->
-{data.{vendor}_{blockname}_{fieldname}}
-{data.punktde_accordion_title}
-
-<!-- Collection fields -->
-<f:for each="{data.punktde_accordion_accordion_items}" as="item">
-    {item.header}  <!-- Direct access -->
-</f:for>
-```
+See [Field Naming Reference](./references/field-naming-reference.md#complete-access-pattern-reference) for field access patterns.
 
 ---
 
@@ -115,24 +100,7 @@ function accordionComponent() {
 - Database changes not reflected
 
 #### Progressive Solutions
-```bash
-# Level 1: Standard cache clear
-ddev exec typo3 cache:flush
-
-# Level 2: Aggressive cache clear
-ddev exec rm -rf var/cache/*
-ddev exec typo3 cache:flush
-
-# Level 3: Full reset
-ddev exec rm -rf var/cache/*
-ddev exec rm -rf public/typo3temp/*
-ddev exec typo3 cache:flush
-ddev exec typo3 database:updateschema
-
-# Level 4: Container restart
-ddev stop
-ddev start
-```
+See [Commands Reference](./references/commands-reference.md#cache-management) for all cache clearing levels.
 
 ---
 
@@ -144,26 +112,7 @@ ddev start
 - Missing icons or styling
 
 #### Solution Structure
-```html
-<html data-namespace-typo3-fluid="true"
-      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-      xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
-      xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers">
-
-<div class="content-block-backend-preview">
-    <!-- Icon and title -->
-    <strong>
-        <core:icon identifier="content-{blockname}" size="small" />
-        {title}
-    </strong>
-    
-    <!-- Field summaries with conditions -->
-    <f:if condition="{data.field}">
-        <!-- Content here -->
-    </f:if>
-</div>
-</html>
-```
+See [Backend Preview Reference](./references/backend-preview-reference.md) for complete template examples.
 
 ---
 
@@ -249,16 +198,4 @@ See [Alpine.js Integration Guide](../frameworks/alpine-js-integration.md#common-
 6. Debug output
 
 ### Debug Commands
-```bash
-# System info
-ddev describe
-ddev exec typo3 list
-
-# Database inspection
-ddev mysql -e "SHOW TABLES"
-ddev mysql -e "DESCRIBE table_name"
-
-# Cache and logs
-ddev exec typo3 cache:flush
-ddev logs -f
-```
+See [Commands Reference](./references/commands-reference.md) for all debugging commands.
