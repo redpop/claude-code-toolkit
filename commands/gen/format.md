@@ -15,6 +15,7 @@ This command does ONE thing well: **Creates or converts content into your desire
 Supported formats:
 
 - `--html` - Clean, semantic HTML (no CSS/JS)
+- `--html-simple` - Simple HTML fragment (no head/body, no wrapper elements)
 - `--markdown` - Standard Markdown
 - `--jira` - Jira Wiki Markup
 - `--text` - Formatted plain text
@@ -24,6 +25,9 @@ Supported formats:
 ```bash
 # Create new content
 /prefix:gen:format "I need an accessibility guide for web projects" --html
+
+# Create simple HTML fragment for embedding
+/prefix:gen:format README.md --html-simple
 
 # Convert existing file
 /prefix:gen:format README.md --html
@@ -50,14 +54,29 @@ Input: $ARGUMENTS
 
 Instructions:
 
-1. Identify the requested output format (--html, --markdown, --jira, or --text)
+1. Identify the requested output format (--html, --html-simple, --markdown, --jira, or --text)
 2. Parse the input:
    - If it's a request (text in quotes), create new content
    - If it's a file path, read and convert it
    - If multiple sources provided, combine them intelligently
 3. For URLs: Fetch and extract relevant content
 4. Generate the output in the requested format:
-   - HTML: Pure semantic HTML with proper entities (&amp;, &lt;, &gt;, &quot;). No CSS, no JavaScript. Use only semantic elements (header, nav, main, article, section, aside, footer, h1-h6, p, ul, ol, li, dl, dt, dd, blockquote, figure, figcaption, table, thead, tbody, tr, th, td, form, label, fieldset, legend, details, summary, mark, time, etc.). NEVER use DIV, SPAN or other non-semantic wrapper elements. For line breaks, always use self-closing `<br />` tags.
+   - HTML: Pure semantic HTML with PROPERLY ESCAPED entities. CRITICAL: In ALL HTML content, especially within <code>, <pre>, and other elements, you MUST escape these characters:
+     * < must become &lt;
+     * > must become &gt;  
+     * & must become &amp;
+     * " must become &quot;
+     * ' must become &#39;
+     This is MANDATORY for valid HTML. Example: "if (x < 5)" must become "if (x &lt; 5)" inside HTML.
+     No CSS, no JavaScript. Use only semantic elements (header, nav, main, article, section, aside, footer, h1-h6, p, ul, ol, li, dl, dt, dd, blockquote, figure, figcaption, table, thead, tbody, tr, th, td, form, label, fieldset, legend, details, summary, mark, time, code, pre, kbd, samp, var, etc.). NEVER use DIV, SPAN or other non-semantic wrapper elements. For line breaks, always use self-closing `<br />` tags.
+   - HTML-SIMPLE: Create a SIMPLE HTML fragment suitable for direct embedding. CRITICAL RULES:
+     * NO <!DOCTYPE>, <html>, <head>, or <body> tags
+     * NO wrapper elements like <header>, <footer>, <section>, <article>, <aside>, <nav>, <main>
+     * Use ONLY basic HTML elements: h1-h6, p, ul, ol, li, table, tr, td, th, code, pre, blockquote, br, strong, em, a
+     * Keep structure FLAT and SIMPLE - minimal nesting
+     * STILL MUST escape all HTML entities properly (< → &lt;, > → &gt;, & → &amp;, etc.)
+     * This format is designed for easy copy-paste into existing applications
+     * Example: Instead of <section><h2>Title</h2><p>Text</p></section>, just use <h2>Title</h2><p>Text</p>
    - Markdown: CommonMark standard
    - Jira: Proper Jira Wiki Markup syntax
    - Text: Well-formatted ASCII text
@@ -110,6 +129,14 @@ Creates a complete HTML guide with proper structure, ready for Confluence or any
 
 Converts 1:1 maintaining structure, creating pure semantic HTML without DIV elements.
 
+### Creating simple HTML for embedding
+
+```bash
+/prefix:gen:format documentation.md --html-simple
+```
+
+Creates a simple HTML fragment without head/body tags, perfect for copy-pasting into existing applications or CMS systems.
+
 ### Generating Jira content
 
 ```bash
@@ -134,3 +161,4 @@ Combines information from multiple sources into cohesive documentation.
 - Handles special characters correctly (especially for HTML)
 - Can reference both local files and web resources
 - HTML output uses ONLY semantic elements - no DIV, SPAN or generic wrappers
+- HTML-SIMPLE creates flat, minimal HTML fragments perfect for embedding in existing applications
