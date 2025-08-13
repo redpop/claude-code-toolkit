@@ -57,7 +57,7 @@ Instructions:
    - If multiple sources provided, combine them intelligently
 3. For URLs: Fetch and extract relevant content
 4. Generate the output in the requested format:
-   - HTML: Clean, semantic HTML with proper entities (&amp;, &lt;, &gt;, &quot;). No CSS, no JavaScript. Use structural elements only.
+   - HTML: Pure semantic HTML with proper entities (&amp;, &lt;, &gt;, &quot;). No CSS, no JavaScript. Use only semantic elements (header, nav, main, article, section, aside, footer, h1-h6, p, ul, ol, li, dl, dt, dd, blockquote, figure, figcaption, table, thead, tbody, tr, th, td, form, label, fieldset, legend, details, summary, mark, time, etc.). NEVER use DIV, SPAN or other non-semantic wrapper elements.
    - Markdown: CommonMark standard
    - Jira: Proper Jira Wiki Markup syntax
    - Text: Well-formatted ASCII text
@@ -103,7 +103,7 @@ Creates a complete HTML guide with proper structure, ready for Confluence or any
 /prefix:gen:format architecture.md --html
 ```
 
-Converts 1:1 maintaining structure, creating clean semantic HTML.
+Converts 1:1 maintaining structure, creating pure semantic HTML without DIV elements.
 
 ### Generating Jira content
 
@@ -128,3 +128,4 @@ Combines information from multiple sources into cohesive documentation.
 - Clean, valid output in every format
 - Handles special characters correctly (especially for HTML)
 - Can reference both local files and web resources
+- HTML output uses ONLY semantic elements - no DIV, SPAN or generic wrappers
