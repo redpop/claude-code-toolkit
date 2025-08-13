@@ -230,7 +230,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:fix:performance` | Automated performance issue fixes including O(n²) algorithms, memory optimization, and database batching | `--target=algorithm\|memory\|database\|all`, `--file=path`, `--dry-run` |
 | `/prefix:fix:quick-wins` | Apply high-ROI fixes from analysis reports - quick wins with maximum impact and minimal effort | `report.json`, `--dry-run`, `--category=security\|performance\|quality`, `--max-effort=4h`, `--min-roi=5` |
 | `/prefix:fix:security` | Fix security vulnerabilities with MCP-enhanced analysis or traditional pattern matching | `report.json`, `--severity=critical,high,medium`, `--dry-run`, `--interactive`, `--owasp-top10` |
-| `/prefix:fix:shell` | Automatically fix shell script issues using shellcheck analysis | `--check-only`, `--strict`, `--summary-only` |
+| `/prefix:fix:shell` | Automatically fix shell script issues using shellcheck analysis | `path/file`, `--check-only`, `--strict`, `--summary-only` |
 
 
 ### Flow Commands

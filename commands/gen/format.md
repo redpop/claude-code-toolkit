@@ -84,12 +84,29 @@ Instructions:
      - Use HTML tags for formatting: <h1>-<h6>, <strong>bold</strong>, <em>italic</em>
      - MUST escape HTML entities in text content: & → &amp;, < → &lt;, > → &gt;, " → &quot;
      - For inline code use: <code>inline code here</code> (with escaped entities inside!)
-     - For code blocks use the structured macro format:
+     - For code blocks use the structured macro format with language detection:
        <ac:structured-macro ac:name="code" ac:schema-version="1">
-       <ac:plain-text-body><![CDATA[
+         <ac:parameter ac:name="language">LANGUAGE</ac:parameter>
+         <ac:parameter ac:name="title">Optional Title</ac:parameter>
+         <ac:plain-text-body><![CDATA[
          // Your code here
          ]]></ac:plain-text-body>
        </ac:structured-macro>
+     - Language parameter mapping:
+       * JavaScript/TypeScript: language="js"
+       * Bash/Shell: language="bash"
+       * Python: language="python"
+       * Java: language="java"
+       * HTML/XML: language="xml"
+       * CSS: language="css"
+       * SQL: language="sql"
+       * JSON: language="json"
+       * YAML: language="yaml"
+       * Default/Unknown: language="text"
+     - Title parameter is OPTIONAL - adds a heading/caption above the code block in Confluence
+       * Use for descriptive titles like "Installation Script", "Configuration Example", "API Response"
+       * Only include <ac:parameter ac:name="title"> when a title adds value
+       * If no title needed, omit the entire title parameter line
      - IMPORTANT: All code content must be wrapped in CDATA tags (no escaping needed inside CDATA)
      - NO complex panels or other macros
      - Keep structure FLAT and SIMPLE - minimal nesting

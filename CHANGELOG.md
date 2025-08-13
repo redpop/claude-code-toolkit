@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.9.0] - 2025-01-13
+
+### Added
+
+- ✨ **Enhanced Shell Script Fix Command** - Path-specific shellcheck functionality
+  - Added optional path/file parameter to check specific files or directories
+  - Supports targeted analysis: `/shellcheck docker/helpers/` for specific folders
+  - Can analyze individual scripts: `/shellcheck path/to/script.sh`
+  - Maintains backward compatibility for full project scans
+  - Improved script discovery logic for better shell script detection
+
 ## [3.8.0] - 2025-01-13
 
 ### Added
