@@ -7,6 +7,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.8.0] - 2025-01-13
+
+### Added
+
+- ✨ **Version Tracking System** - Automatic version tracking in installation
+  - Saves Git commit hash, date, and branch during installation
+  - Shows available updates when re-running installation script
+  - New `/prefix:meta:version` command to check installed version
+  - Displays commit history since last installation
+
+- ✨ **Enhanced Format Command** - Major improvements to content formatting
+  - New `--html-simple` option for flat HTML fragments without wrapper elements
+  - Renamed `--jira` to `--confluence` for accurate naming
+  - Proper Confluence storage format with HTML tags and structured macros
+  - Added language detection for code blocks (bash, js, python, xml, etc.)
+  - Optional title parameter for code blocks in Confluence
+  - Comprehensive HTML entity escaping rules (& must be escaped first!)
+  - Support for Du-Form (informal German) as default language style
+
+### Changed
+
+- 🔄 **Format Command Confluence Support** - Complete rewrite for Confluence compatibility
+  - Uses HTML tags: `<strong>`, `<em>`, `<h1>`-`<h6>`, `<p>`, `<ul>`, `<ol>`, `<table>`
+  - Inline code with `<code>` tags (with proper entity escaping)
+  - Code blocks with `ac:structured-macro` and language parameter
+  - CDATA wrapping for code content (no escaping needed inside)
+
+### Fixed
+
+- 🐛 **HTML Entity Escaping** - Critical fixes for valid HTML output
+  - Proper escape order: & → &amp; (first), then <, >, ", '
+  - Examples: "x < 5 && y > 3" → "x &lt; 5 &amp;&amp; y &gt; 3"
+  - Applies to all HTML-based formats (HTML, HTML-Simple, Confluence)
+
 ## [3.7.0] - 2025-01-13
 
 ### Added
