@@ -58,7 +58,13 @@
       "Bash(fi)",
       "Bash(if ! grep -q \"^argument-hint:\" \"$file\")",
       "Bash(done)",
-      "Bash([ -d ~/.claude/claude-code-toolkit/knowledge-base ])"
+      "Bash([ -d ~/.claude/claude-code-toolkit/knowledge-base ])",
+      "Bash(git describe:*)",
+      "Bash(cat:*)",
+      "Bash(if [ -f \"$HOME/.claude/claude-code-toolkit/.installed-version\" ])",
+      "Bash(else echo \"No version information found. Toolkit may not be installed or needs reinstallation.\")",
+      "Bash(git fetch:*)",
+      "Bash(git rev-list:*)"
     ],
     "deny": []
   }
