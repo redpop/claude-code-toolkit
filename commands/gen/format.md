@@ -1,7 +1,7 @@
 ---
 allowed-tools: Task, Read, Write, WebFetch, Grep
-description: Create or convert content into various formats (HTML, Markdown, Jira, Plain Text)
-argument-hint: <request-or-file> [--html|--html-simple|--markdown|--jira|--text]
+description: Create or convert content into various formats (HTML, Markdown, Confluence, Plain Text)
+argument-hint: <request-or-file> [--html|--html-simple|--markdown|--confluence|--text]
 ---
 
 # Format Command
@@ -17,7 +17,7 @@ Supported formats:
 - `--html` - Clean, semantic HTML (no CSS/JS)
 - `--html-simple` - Simple HTML fragment (no head/body, no wrapper elements)
 - `--markdown` - Standard Markdown
-- `--jira` - Jira Wiki Markup
+- `--confluence` - Simple Confluence Wiki Markup (basic formatting for easy copy-paste)
 - `--text` - Formatted plain text
 
 ## Usage Examples
@@ -35,8 +35,8 @@ Supported formats:
 # Create from multiple sources
 /prefix:gen:format "Create API docs from:" api.yaml https://api-reference.com --html
 
-# Generate Jira story
-/prefix:gen:format "As a user I want to reset my password" --jira
+# Generate Confluence content
+/prefix:gen:format "As a user I want to reset my password" --confluence
 ```
 
 ## Execution
@@ -54,7 +54,7 @@ Input: $ARGUMENTS
 
 Instructions:
 
-1. Identify the requested output format (--html, --html-simple, --markdown, --jira, or --text)
+1. Identify the requested output format (--html, --html-simple, --markdown, --confluence, or --text)
 2. Parse the input:
    - If it's a request (text in quotes), create new content
    - If it's a file path, read and convert it
@@ -62,28 +62,46 @@ Instructions:
 3. For URLs: Fetch and extract relevant content
 4. Generate the output in the requested format:
    - HTML: Pure semantic HTML with PROPERLY ESCAPED entities. CRITICAL: In ALL HTML content, especially within <code>, <pre>, and other elements, you MUST escape these characters:
-     * < must become &lt;
-     * > must become &gt;  
-     * & must become &amp;
-     * " must become &quot;
-     * ' must become &#39;
-     This is MANDATORY for valid HTML. Example: "if (x < 5)" must become "if (x &lt; 5)" inside HTML.
-     No CSS, no JavaScript. Use only semantic elements (header, nav, main, article, section, aside, footer, h1-h6, p, ul, ol, li, dl, dt, dd, blockquote, figure, figcaption, table, thead, tbody, tr, th, td, form, label, fieldset, legend, details, summary, mark, time, code, pre, kbd, samp, var, etc.). NEVER use DIV, SPAN or other non-semantic wrapper elements. For line breaks, always use self-closing `<br />` tags.
+     - < must become &lt;
+     - > must become &gt;
+     - & must become &amp;
+     - " must become &quot;
+     - ' must become &#39;
+       This is MANDATORY for valid HTML. Example: "if (x < 5)" must become "if (x &lt; 5)" inside HTML.
+       No CSS, no JavaScript. Use only semantic elements (header, nav, main, article, section, aside, footer, h1-h6, p, ul, ol, li, dl, dt, dd, blockquote, figure, figcaption, table, thead, tbody, tr, th, td, form, label, fieldset, legend, details, summary, mark, time, code, pre, kbd, samp, var, etc.). NEVER use DIV, SPAN or other non-semantic wrapper elements. For line breaks, always use self-closing `<br />` tags.
    - HTML-SIMPLE: Create a SIMPLE HTML fragment suitable for direct embedding. CRITICAL RULES:
-     * NO <!DOCTYPE>, <html>, <head>, or <body> tags
-     * NO wrapper elements like <header>, <footer>, <section>, <article>, <aside>, <nav>, <main>
-     * Use ONLY basic HTML elements: h1-h6, p, ul, ol, li, table, tr, td, th, code, pre, blockquote, br, strong, em, a
-     * Keep structure FLAT and SIMPLE - minimal nesting
-     * STILL MUST escape all HTML entities properly (< → &lt;, > → &gt;, & → &amp;, etc.)
-     * This format is designed for easy copy-paste into existing applications
-     * Example: Instead of <section><h2>Title</h2><p>Text</p></section>, just use <h2>Title</h2><p>Text</p>
+     - NO <!DOCTYPE>, <html>, <head>, or <body> tags
+     - NO wrapper elements like <header>, <footer>, <section>, <article>, <aside>, <nav>, <main>
+     - Use ONLY basic HTML elements: h1-h6, p, ul, ol, li, table, tr, td, th, code, pre, blockquote, br, strong, em, a
+     - Keep structure FLAT and SIMPLE - minimal nesting
+     - STILL MUST escape all HTML entities properly (< → &lt;, > → &gt;, & → &amp;, etc.)
+     - This format is designed for easy copy-paste into existing applications
+     - Example: Instead of <section><h2>Title</h2><p>Text</p></section>, just use <h2>Title</h2><p>Text</p>
    - Markdown: CommonMark standard
-   - Jira: Proper Jira Wiki Markup syntax
+   - Confluence: Confluence storage format for direct copy-paste. CRITICAL RULES:
+     - Use HTML tags for formatting: <h1>-<h6>, <strong>bold</strong>, <em>italic</em>
+     - For inline code use: <code>inline code here</code>
+     - For code blocks use the structured macro format:
+       <ac:structured-macro ac:name="code" ac:schema-version="1">
+       <ac:plain-text-body><![CDATA[
+         // Your code here
+         ]]></ac:plain-text-body>
+       </ac:structured-macro>
+     - IMPORTANT: All code content must be wrapped in CDATA tags
+     - NO complex panels or other macros
+     - Keep structure FLAT and SIMPLE - minimal nesting
+     - Use HTML lists: <ul><li>item</li></ul> and <ol><li>item</li></ol>
+     - Tables with HTML: <table><tr><th>header</th></tr><tr><td>cell</td></tr></table>
+     - Links with HTML: <a href="url">text</a>
+     - Paragraphs with <p>text</p>
+     - This format is designed for direct paste into Confluence editor (source mode)
+     - Example: <h2>Title</h2> for headings, structured macro for code blocks
    - Text: Well-formatted ASCII text
-   
+
 WICHTIG: Verwende beim Erstellen von eigenen Texten IMMER die Du-Form (informelle Anrede), außer im Prompt wird explizit etwas anderes gefordert (z.B. Sie-Form, formelle Anrede, oder Englisch). Beispiele:
-   - Richtig: 'Du kannst...', 'Klicke auf...', 'Deine Einstellungen...'
-   - Falsch: 'Sie können...', 'Klicken Sie auf...', 'Ihre Einstellungen...'
+
+- Richtig: 'Du kannst...', 'Klicke auf...', 'Deine Einstellungen...'
+- Falsch: 'Sie können...', 'Klicken Sie auf...', 'Ihre Einstellungen...'
 
 5. Choose an intelligent filename based on content (e.g., 'accessibility-guide', 'api-documentation', 'user-story-login')
 6. Save with format: {smart-name}-YYYYMMDD-HHMMSS.{extension}
@@ -137,13 +155,13 @@ Converts 1:1 maintaining structure, creating pure semantic HTML without DIV elem
 
 Creates a simple HTML fragment without head/body tags, perfect for copy-pasting into existing applications or CMS systems.
 
-### Generating Jira content
+### Generating Confluence content
 
 ```bash
-/prefix:gen:format "Epic: Implement multi-factor authentication" --jira
+/prefix:gen:format "Epic: Implement multi-factor authentication" --confluence
 ```
 
-Creates properly formatted Jira epic with all necessary sections.
+Creates Confluence storage format with proper code macro syntax, ready for direct paste into Confluence editor (source mode). Code blocks use the structured macro format with CDATA wrapping.
 
 ### Using multiple sources
 
