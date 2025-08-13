@@ -248,7 +248,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | Command | Description | Options |
 |---------|-------------|---------|
 | `/prefix:gen:docs` | Generate comprehensive documentation including API docs, README files, code comments, and architecture diagrams | `directory\|file`, `--types=api,readme,comments,diagrams`, `--format=markdown,html`, `--update-existing` |
-| `/prefix:gen:format` | Create or convert content into various formats (HTML, Markdown, Jira, Plain Text) | `request`, `or`, `file"`, `--format`, `--html\|--markdown\|--jira\|--text` |
+| `/prefix:gen:format` | Create or convert content into various formats (HTML, Markdown, Jira, Plain Text) | `<request-or-file>`, `--html\|--html-simple\|--markdown\|--jira\|--text` |
 | `/prefix:gen:tests` | Generate comprehensive test suites for uncovered code, including unit tests, integration tests, and edge cases | `report.json\|file\|directory`, `--coverage-target=80`, `--framework=auto`, `--types=unit,integration`, `--mock-externals` |
 
 
