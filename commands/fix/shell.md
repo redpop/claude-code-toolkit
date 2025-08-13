@@ -1,6 +1,6 @@
 ---
 description: Automatically fix shell script issues using shellcheck analysis
-argument-hint: [--check-only] [--strict] [--summary-only]
+argument-hint: [path/file] [--check-only] [--strict] [--summary-only]
 ---
 
 # Claude Command: Shellcheck
@@ -10,15 +10,19 @@ This command automatically fixes shell script issues using shellcheck analysis. 
 ## Usage
 
 ```
-/shellcheck                    # Automatically fix all shell script issues
+/shellcheck                    # Automatically fix all shell script issues in project
+/shellcheck path/to/script.sh  # Fix specific script file
+/shellcheck docker/helpers/    # Fix all scripts in specific directory
+/shellcheck . --check-only    # Check current directory without fixing
 /shellcheck --check-only       # Only check and report issues without fixing
 /shellcheck --strict           # Fix issues including optional/style checks
 /shellcheck --summary-only     # Fix issues and show only summary
-/shellcheck --check-only --strict  # Check with strict mode without fixing
+/shellcheck file.sh --check-only --strict  # Check specific file with strict mode
 ```
 
 ### Arguments
 
+- `[path/file]`: Optional path to specific file or directory to check (defaults to entire project)
 - `--check-only`: Only analyze and report issues without applying fixes
 - `--strict`: Enable strict mode (includes optional and style checks)
 - `--summary-only`: Display only the summary without detailed issue listings
@@ -26,9 +30,11 @@ This command automatically fixes shell script issues using shellcheck analysis. 
 ## What This Command Does
 
 1. **Discovers Shell Scripts**:
-   - Searches for all shell scripts in the project (*.sh, *.bash, *.zsh, *.ksh)
+   - If path/file provided: Checks specific file or searches within specified directory
+   - Otherwise: Searches entire project for shell scripts
+   - Looks for files with extensions: *.sh, *.bash, *.zsh, *.ksh
    - Detects scripts by shebang line (#!/bin/bash, #!/bin/sh, etc.)
-   - Excludes common directories (node_modules, .git, vendor, etc.)
+   - Excludes common directories (node_modules, .git, vendor, etc.) unless explicitly specified
    - Identifies executable files that might be shell scripts
 
 2. **Checks Shellcheck Installation**:
@@ -141,7 +147,11 @@ if [[ "$var" == "value" && "$other" == "test" ]]
    - Ensure proper permissions for script modification
 
 2. **Script Discovery**:
-   - Use find/glob to locate shell scripts
+   - Parse $ARGUMENTS for optional path/file parameter
+   - If specific path provided:
+     - For file: Verify it's a shell script (by extension or shebang)
+     - For directory: Search within that directory only
+   - Otherwise: Use find/glob to locate all shell scripts in project
    - Check file headers for shell shebangs
    - Build list of scripts to analyze
 
