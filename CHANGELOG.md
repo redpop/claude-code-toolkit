@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.7.0] - 2025-01-13
+
+### Added
+
+- ✨ **Format Command** - New universal content formatting command `/prefix:gen:format`
+  - Converts between HTML, Markdown, Jira markup, and plain text formats
+  - Creates clean, semantic HTML without CSS or JavaScript
+  - Generates Jira-compatible markup for stories, bugs, tasks, and epics
+  - Intelligently names output files based on content analysis
+  - Supports multiple input sources including files and URLs
+  - Automatically generates timestamped output files
+  - Perfect for creating Confluence documentation, Jira tickets, and clean HTML
+
 ## [3.6.5] - 2025-01-11
 
 ### Fixed
