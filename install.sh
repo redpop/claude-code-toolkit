@@ -190,6 +190,41 @@ if [ "$LOCAL_INSTALL" = true ]; then
     print_info "Installing locally in: $LOCAL_DIR"
 fi
 
+# Check for updates if already installed
+if [ -f "$CLAUDE_TOOLKIT_DIR/.installed-version" ]; then
+    print_info "Checking for updates..."
+    
+    # Read the old commit hash
+    OLD_HASH=$(grep "^COMMIT_HASH=" "$CLAUDE_TOOLKIT_DIR/.installed-version" 2>/dev/null | cut -d= -f2)
+    OLD_DATE=$(grep "^INSTALLED_AT=" "$CLAUDE_TOOLKIT_DIR/.installed-version" 2>/dev/null | cut -d= -f2-)
+    
+    if [ -n "$OLD_HASH" ] && [ "$OLD_HASH" != "unknown" ]; then
+        # Get current hash
+        CURRENT_HASH=$(cd "$SCRIPT_DIR" && git rev-parse HEAD 2>/dev/null || echo "unknown")
+        
+        if [ "$CURRENT_HASH" != "unknown" ] && [ "$OLD_HASH" != "$CURRENT_HASH" ]; then
+            # Count new commits
+            NEW_COMMITS=$(cd "$SCRIPT_DIR" && git rev-list "$OLD_HASH"..HEAD --count 2>/dev/null || echo "0")
+            
+            if [ "$NEW_COMMITS" -gt 0 ]; then
+                echo
+                echo -e "${GREEN}📦 Found $NEW_COMMITS new commits since last installation (installed: $OLD_DATE)${NC}"
+                echo -e "${YELLOW}Recent changes:${NC}"
+                echo
+                # Show up to 15 recent commits
+                cd "$SCRIPT_DIR" && git log "$OLD_HASH"..HEAD --oneline --no-decorate | head -15 | while IFS= read -r line; do
+                    echo "  $line"
+                done
+                echo
+            else
+                print_success "Already up to date (commit: ${OLD_HASH:0:7})"
+            fi
+        elif [ "$OLD_HASH" = "$CURRENT_HASH" ]; then
+            print_success "Already up to date (commit: ${OLD_HASH:0:7})"
+        fi
+    fi
+fi
+
 COMMANDS_INSTALL_PATH="$CLAUDE_COMMANDS_DIR/$PREFIX"
 
 # Create Claude directories if they don't exist
@@ -299,6 +334,29 @@ if [ -d "$SCRIPT_DIR/knowledge-base" ]; then
     cp -r "$SCRIPT_DIR/knowledge-base" "$CLAUDE_TOOLKIT_DIR/"
     print_success "Knowledge-base installed to $CLAUDE_TOOLKIT_DIR/knowledge-base"
 fi
+
+# Save version information from source repository
+print_info "Saving version information..."
+mkdir -p "$CLAUDE_TOOLKIT_DIR"
+
+# Get Git information from the source repository
+CURRENT_HASH=$(cd "$SCRIPT_DIR" && git rev-parse HEAD 2>/dev/null || echo "unknown")
+CURRENT_DATE=$(cd "$SCRIPT_DIR" && git log -1 --format=%ci 2>/dev/null || date '+%Y-%m-%d %H:%M:%S')
+CURRENT_BRANCH=$(cd "$SCRIPT_DIR" && git branch --show-current 2>/dev/null || echo "unknown")
+CURRENT_MESSAGE=$(cd "$SCRIPT_DIR" && git log -1 --pretty=%s 2>/dev/null || echo "unknown")
+
+# Create version file
+cat > "$CLAUDE_TOOLKIT_DIR/.installed-version" << EOF
+COMMIT_HASH=$CURRENT_HASH
+COMMIT_DATE=$CURRENT_DATE
+COMMIT_MESSAGE=$CURRENT_MESSAGE
+BRANCH=$CURRENT_BRANCH
+INSTALLED_AT=$(date '+%Y-%m-%d %H:%M:%S')
+SOURCE_DIR=$SCRIPT_DIR
+PREFIX=$PREFIX
+EOF
+
+print_success "Version information saved"
 
 print_success "Installation complete!"
 

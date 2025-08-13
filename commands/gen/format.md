@@ -61,6 +61,11 @@ Instructions:
    - Markdown: CommonMark standard
    - Jira: Proper Jira Wiki Markup syntax
    - Text: Well-formatted ASCII text
+   
+WICHTIG: Verwende beim Erstellen von eigenen Texten IMMER die Du-Form (informelle Anrede), außer im Prompt wird explizit etwas anderes gefordert (z.B. Sie-Form, formelle Anrede, oder Englisch). Beispiele:
+   - Richtig: 'Du kannst...', 'Klicke auf...', 'Deine Einstellungen...'
+   - Falsch: 'Sie können...', 'Klicken Sie auf...', 'Ihre Einstellungen...'
+
 5. Choose an intelligent filename based on content (e.g., 'accessibility-guide', 'api-documentation', 'user-story-login')
 6. Save with format: {smart-name}-YYYYMMDD-HHMMSS.{extension}
 
