@@ -1,7 +1,7 @@
 ---
 allowed-tools: Task, Read, Write, WebFetch, Grep
 description: Create or convert content into various formats (HTML, Markdown, Jira, Plain Text)
-argument-hint: "request or file" --format [--html|--markdown|--jira|--text]
+argument-hint: <request-or-file> [--html|--html-simple|--markdown|--jira|--text]
 ---
 
 # Format Command
