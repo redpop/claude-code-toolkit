@@ -62,32 +62,35 @@ Instructions:
 3. For URLs: Fetch and extract relevant content
 4. Generate the output in the requested format:
    - HTML: Pure semantic HTML with PROPERLY ESCAPED entities. CRITICAL: In ALL HTML content, especially within <code>, <pre>, and other elements, you MUST escape these characters:
+     - & must become &amp; (MUST be done FIRST before other escapes!)
      - < must become &lt;
      - > must become &gt;
-     - & must become &amp;
      - " must become &quot;
      - ' must become &#39;
-       This is MANDATORY for valid HTML. Example: "if (x < 5)" must become "if (x &lt; 5)" inside HTML.
+       This is MANDATORY for valid HTML. Examples: 
+       - "if (x < 5 && y > 3)" must become "if (x &lt; 5 &amp;&amp; y &gt; 3)"
+       - "name && age" must become "name &amp;&amp; age"
        No CSS, no JavaScript. Use only semantic elements (header, nav, main, article, section, aside, footer, h1-h6, p, ul, ol, li, dl, dt, dd, blockquote, figure, figcaption, table, thead, tbody, tr, th, td, form, label, fieldset, legend, details, summary, mark, time, code, pre, kbd, samp, var, etc.). NEVER use DIV, SPAN or other non-semantic wrapper elements. For line breaks, always use self-closing `<br />` tags.
    - HTML-SIMPLE: Create a SIMPLE HTML fragment suitable for direct embedding. CRITICAL RULES:
      - NO <!DOCTYPE>, <html>, <head>, or <body> tags
      - NO wrapper elements like <header>, <footer>, <section>, <article>, <aside>, <nav>, <main>
      - Use ONLY basic HTML elements: h1-h6, p, ul, ol, li, table, tr, td, th, code, pre, blockquote, br, strong, em, a
      - Keep structure FLAT and SIMPLE - minimal nesting
-     - STILL MUST escape all HTML entities properly (< → &lt;, > → &gt;, & → &amp;, etc.)
+     - STILL MUST escape all HTML entities properly (& → &amp; FIRST, then < → &lt;, > → &gt;, etc.)
      - This format is designed for easy copy-paste into existing applications
      - Example: Instead of <section><h2>Title</h2><p>Text</p></section>, just use <h2>Title</h2><p>Text</p>
    - Markdown: CommonMark standard
    - Confluence: Confluence storage format for direct copy-paste. CRITICAL RULES:
      - Use HTML tags for formatting: <h1>-<h6>, <strong>bold</strong>, <em>italic</em>
-     - For inline code use: <code>inline code here</code>
+     - MUST escape HTML entities in text content: & → &amp;, < → &lt;, > → &gt;, " → &quot;
+     - For inline code use: <code>inline code here</code> (with escaped entities inside!)
      - For code blocks use the structured macro format:
        <ac:structured-macro ac:name="code" ac:schema-version="1">
        <ac:plain-text-body><![CDATA[
          // Your code here
          ]]></ac:plain-text-body>
        </ac:structured-macro>
-     - IMPORTANT: All code content must be wrapped in CDATA tags
+     - IMPORTANT: All code content must be wrapped in CDATA tags (no escaping needed inside CDATA)
      - NO complex panels or other macros
      - Keep structure FLAT and SIMPLE - minimal nesting
      - Use HTML lists: <ul><li>item</li></ul> and <ol><li>item</li></ol>
