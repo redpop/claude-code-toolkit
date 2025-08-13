@@ -57,7 +57,7 @@ Instructions:
    - If multiple sources provided, combine them intelligently
 3. For URLs: Fetch and extract relevant content
 4. Generate the output in the requested format:
-   - HTML: Pure semantic HTML with proper entities (&amp;, &lt;, &gt;, &quot;). No CSS, no JavaScript. Use only semantic elements (header, nav, main, article, section, aside, footer, h1-h6, p, ul, ol, li, dl, dt, dd, blockquote, figure, figcaption, table, thead, tbody, tr, th, td, form, label, fieldset, legend, details, summary, mark, time, etc.). NEVER use DIV, SPAN or other non-semantic wrapper elements.
+   - HTML: Pure semantic HTML with proper entities (&amp;, &lt;, &gt;, &quot;). No CSS, no JavaScript. Use only semantic elements (header, nav, main, article, section, aside, footer, h1-h6, p, ul, ol, li, dl, dt, dd, blockquote, figure, figcaption, table, thead, tbody, tr, th, td, form, label, fieldset, legend, details, summary, mark, time, etc.). NEVER use DIV, SPAN or other non-semantic wrapper elements. For line breaks, always use self-closing `<br />` tags.
    - Markdown: CommonMark standard
    - Jira: Proper Jira Wiki Markup syntax
    - Text: Well-formatted ASCII text
