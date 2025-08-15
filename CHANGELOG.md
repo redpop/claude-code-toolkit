@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.10.0] - 2025-01-15
+
+### Added
+
+- ✨ **New Debug Mode Command** - Context-aware intensive debugging mode switch
+  - New `/prefix:flow:debug-mode` command for instant debugging mode activation
+  - Automatically analyzes current chat context - no problem description needed
+  - Activates debugging-specialist agent with ultra intensive reasoning
+  - Supports `--verbose` and `--trace` options for extra detail
+  - Perfect for when standard debugging approaches have failed
+
+- ✨ **Ultra Deep Thinking Integration** - Enhanced reasoning for debugging commands
+  - All debugging-related commands now use "ultra deep thinking" patterns
+  - Enhanced `/prefix:scan:root-cause` with ultra intensive root cause analysis
+  - Updated `/prefix:flow:incident` with ultra deep investigation at every phase
+  - Improved `/prefix:flow:smart` with ultra deep problem analysis and routing
+  - debugging-specialist and performance-optimizer agents enhanced with maximum reasoning depth
+  - Consistent "think ultra deeply" terminology throughout debugging workflows
+
+### Changed
+
+- 🔄 **Root Cause Analysis Command** - Complete overhaul with ultra intensive reasoning
+  - Now uses debugging-specialist agent instead of simple Five Whys
+  - Implements ultra deep thinking at every analysis level
+  - Enhanced with subtle pattern detection and hidden connection discovery
+  
+- 🔄 **Incident Response Workflow** - Upgraded all analysis phases
+  - System diagnostics now use debugging-specialist with ultra deep investigation
+  - Code analysis employs ultra intensive reasoning for bug detection
+  - Performance investigation uses performance-optimizer agent
+  - All phases emphasize thinking ultra deeply about cascading effects
+
 ## [3.9.0] - 2025-01-13
 
 ### Added

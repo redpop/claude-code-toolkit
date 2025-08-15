@@ -1,11 +1,11 @@
 ---
-description: Apply the Five Whys root cause analysis technique to investigate issues
+description: Deep root cause analysis with ultra intensive reasoning
 argument-hint: "[issue_description]"
 ---
 
 **IMPORTANT: This is a READ-ONLY analysis command. Do NOT create, modify, or write any files. Only analyze and provide root cause analysis.**
 
-# Claude Command: Five Whys Analysis
+# Root Cause Analysis with Ultra Deep Thinking
 
 Apply the Five Whys root cause analysis technique to systematically investigate issues and identify their root causes. This command helps you drill down from surface-level symptoms to the fundamental reasons behind problems.
 
@@ -25,36 +25,43 @@ Apply the Five Whys root cause analysis technique to systematically investigate 
 
 ## Workflow Steps
 
-### 1. Problem Statement
+### Phase 1: Ultra Intensive Root Cause Analysis
 
-- Start with a clear, specific description of the issue
-- Focus on observable symptoms or failures
-- Include relevant context (when, where, how often)
-- Avoid jumping to conclusions about causes
+Use Task tool with subagent_type="debugging-specialist":
+"ULTRA INTENSIVE ROOT CAUSE ANALYSIS MODE ACTIVATED
 
-### 2. Five Whys Analysis
+Problem Description: $ARGUMENTS
 
-For each level, I will:
+Instructions:
+1. **THINK ULTRA DEEPLY** about this problem - use maximum reasoning depth
+2. Apply Five Whys analysis with ULTRA INTENSIVE REASONING at each level:
+   - Ask 'Why did this happen?' with ultra deep thinking
+   - Think ultra deeply about each answer before proceeding
+   - Consider ALL possible causes with extreme thoroughness
+   - Reason through subtle connections and hidden patterns
+3. For EACH 'Why' level:
+   - Document evidence with ultra careful analysis
+   - Think ultra deeply about whether it's a cause or symptom
+   - Explore multiple branches with intense reasoning
+   - Look for non-obvious connections
+4. Root Cause Validation:
+   - Review causation chain with ultra deep reasoning
+   - Think ultra deeply about logical connections
+   - Verify with extreme thoroughness
+5. Solution Development:
+   - Generate solutions with ultra deep thinking
+   - Consider all implications and edge cases
+   - Think ultra deeply about prevention strategies
 
-- Ask "Why did this happen?" or "Why is this occurring?"
-- Document the answer based on evidence
-- Examine if this is truly a cause or just another symptom
-- Consider multiple possible reasons at each level
-- Continue asking "why" for each answer
+CRITICAL: Use ULTRA INTENSIVE THINKING throughout. Think ultra deeply about every aspect. Don't accept surface-level explanations. Dig ultra deep into the real causes."
 
-### 3. Root Cause Validation
+### Phase 2: Solution Implementation Planning
 
-- Review the chain of causation from root to symptom
-- Verify each connection is logical and evidence-based
-- Check if addressing the root cause would prevent recurrence
-- Identify any additional contributing factors
-
-### 4. Solution Development
-
-- Propose solutions targeting the root cause
-- Consider preventive measures to avoid recurrence
-- Evaluate feasibility and impact of solutions
-- Create action items with clear ownership
+After root cause identification:
+- Develop immediate fixes
+- Create long-term prevention strategies
+- Design monitoring for early detection
+- Document lessons learned
 
 ## Analysis Format
 

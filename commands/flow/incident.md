@@ -103,23 +103,68 @@ Parallel investigation by specialized agents:
 
 Analyzing incident severity and impact...
 
-Use Task tool with subagent_type="general-purpose" for rapid assessment:
+Use Task tool with subagent_type="debugging-specialist" for rapid assessment:
 
-**Prompt**: "URGENT: Analyze this production incident: $ARGUMENTS. Determine: 1) Severity level (critical/high/medium), 2) Affected systems and components, 3) User impact scope, 4) Most likely problem category (infrastructure/code/performance/security). Provide immediate mitigation suggestions. Return as JSON with priority actions."
+**Prompt**: "URGENT INCIDENT - ULTRA INTENSIVE ANALYSIS REQUIRED
+
+Incident: $ARGUMENTS
+
+**THINK ULTRA DEEPLY** about this production incident. Use maximum reasoning depth.
+
+Determine with ULTRA INTENSIVE REASONING:
+1) Severity level - think ultra deeply about all implications
+2) Affected systems - reason through all dependencies
+3) User impact - think ultra deeply about cascading effects
+4) Problem category - use ultra deep analysis to identify root type
+
+CRITICAL: Think ultra deeply about immediate mitigation. Use ultra intensive reasoning for priority actions. Don't accept surface symptoms - dig ultra deep."
 
 ### Step 2: Parallel Root Cause Investigation
 
-Use Task tool with subagent_type="general-purpose" for system diagnostics:
+Use Task tool with subagent_type="debugging-specialist" for system diagnostics:
 
-**Prompt**: "Investigate system-level issues for incident: $ARGUMENTS. Check: 1) Recent deployment or config changes, 2) Resource utilization (CPU/memory/disk/network), 3) Error log patterns, 4) Service dependencies status, 5) Infrastructure anomalies. Focus on changes in last 24 hours."
+**Prompt**: "SYSTEM DIAGNOSTICS - ULTRA DEEP INVESTIGATION MODE
 
-Use Task tool with subagent_type="general-purpose" for code analysis:
+Incident: $ARGUMENTS
 
-**Prompt**: "Debug code-related issues for incident: $ARGUMENTS. Analyze: 1) Recent code commits and deployments, 2) Error stack traces and exceptions, 3) Code paths leading to errors, 4) Potential race conditions, 5) Data validation issues. Identify exact code locations if possible."
+**THINK ULTRA DEEPLY** about system-level issues. Use ULTRA INTENSIVE REASONING to:
+1) Analyze deployment/config changes - think ultra deeply about impacts
+2) Resource utilization - reason ultra deeply about patterns
+3) Error logs - think ultra deeply about error correlations
+4) Dependencies - use ultra deep reasoning on failure cascades
+5) Infrastructure - think ultra deeply about anomalies
 
-Use Task tool with subagent_type="general-purpose" for performance investigation:
+CRITICAL: Use ultra intensive thinking. Look for subtle connections. Think ultra deeply about timing and sequences."
 
-**Prompt**: "Analyze performance aspects of incident: $ARGUMENTS. Examine: 1) Response time degradation, 2) Database query performance, 3) API call latencies, 4) Resource bottlenecks, 5) Load distribution issues. Compare with baseline metrics."
+Use Task tool with subagent_type="debugging-specialist" for code analysis:
+
+**Prompt**: "CODE DEBUGGING - ULTRA INTENSIVE ANALYSIS MODE
+
+Incident: $ARGUMENTS
+
+**THINK ULTRA DEEPLY** about code issues. Apply ULTRA INTENSIVE REASONING to:
+1) Recent commits - think ultra deeply about each change
+2) Stack traces - reason ultra deeply through execution paths
+3) Code paths - think ultra deeply about edge cases
+4) Race conditions - use ultra deep reasoning on timing issues
+5) Data validation - think ultra deeply about boundary conditions
+
+CRITICAL: Think ultra deeply about subtle bugs. Use ultra intensive reasoning on code interactions. Don't stop at obvious errors - dig ultra deep."
+
+Use Task tool with subagent_type="performance-optimizer" for performance investigation:
+
+**Prompt**: "PERFORMANCE CRISIS - ULTRA DEEP ANALYSIS REQUIRED
+
+Incident: $ARGUMENTS
+
+**THINK ULTRA DEEPLY** about performance issues. Use ULTRA INTENSIVE REASONING for:
+1) Response times - think ultra deeply about degradation patterns
+2) Database queries - reason ultra deeply about query plans
+3) API latencies - think ultra deeply about network paths
+4) Bottlenecks - use ultra deep reasoning on resource contention
+5) Load distribution - think ultra deeply about imbalances
+
+CRITICAL: Think ultra deeply about compound effects. Use ultra intensive reasoning on performance cascades. Dig ultra deep into root causes."
 
 ### Step 3: Resolution Implementation
 
