@@ -142,21 +142,40 @@ For complex problems spanning multiple domains:
 
 $ARGUMENTS
 
-Let me analyze this problem and route it appropriately:
+### Phase 1: Ultra Deep Problem Analysis
 
-1. **Problem Analysis**
+Use Task tool with subagent_type="general-purpose":
+"ULTRA INTENSIVE PROBLEM ANALYSIS FOR SMART ROUTING
 
-   - Understanding the core issue
-   - Identifying problem domain
-   - Assessing complexity
+Problem: $ARGUMENTS
 
-2. **Agent Selection**
+**THINK ULTRA DEEPLY** about this problem. Use ULTRA INTENSIVE REASONING to:
 
-   - Choosing the most appropriate specialist(s)
-   - Determining execution order
-   - Preparing context for each agent
+1. **Core Issue Identification**
+   - Think ultra deeply about the real problem vs symptoms
+   - Use ultra deep reasoning to identify hidden complexities
+   - Think ultra deeply about interconnected issues
 
-3. **Execution**
-   - Invoking selected agents with tailored prompts
-   - Coordinating multi-agent responses
-   - Synthesizing comprehensive solution
+2. **Domain Classification**
+   - Reason ultra deeply about problem categories
+   - Think ultra deeply about cross-domain aspects
+   - Use ultra intensive analysis for edge cases
+
+3. **Specialist Selection**
+   - Think ultra deeply about which agents are needed
+   - Reason ultra deeply about execution order
+   - Use ultra deep thinking for coordination strategy
+
+CRITICAL: Think ultra deeply about subtle nuances. Don't accept surface-level categorization. Use ultra intensive reasoning to find the optimal routing strategy."
+
+### Phase 2: Specialist Execution
+
+Based on ultra deep analysis, invoke appropriate specialists with ultra intensive thinking directives:
+- Each specialist receives "THINK ULTRA DEEPLY" instructions
+- Coordination includes ultra deep reasoning requirements
+- Synthesis uses ultra intensive analysis
+
+### Phase 3: Solution Integration
+- Combining insights with ultra deep reasoning
+- Cross-validating solutions
+- Providing comprehensive action plan
