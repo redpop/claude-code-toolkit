@@ -1,6 +1,6 @@
 ---
 description: Documents current problem context for handoff to another AI assistant
-argument-hint: [output-file]
+argument-hint: [output-file] [additional instructions...]
 ---
 
 # Claude Command: AI Handoff
@@ -10,8 +10,10 @@ This command analyzes the current chat history to extract and document the lates
 ## Usage
 
 ```
-/handoff                    # Creates handoff.md in current directory
-/handoff problem-context    # Creates problem-context.md
+/handoff                                           # Creates handoff.md in current directory
+/handoff problem-context.md                        # Creates problem-context.md
+/handoff handoff.md "focus on database issues"     # Creates handoff.md with specific focus
+/handoff migration.md "include error logs and skip UI topics"  # Custom file with instructions
 ```
 
 ## What This Command Does
@@ -249,8 +251,65 @@ The user mentioned this is blocking a production release scheduled for next week
 
 ## Command Arguments
 
-- `$ARGUMENTS`: Optional output filename (defaults to "handoff.md")
-  - If provided, creates file with specified name
+The command accepts arguments in the following format:
+```
+
+/handoff [filename] [additional instructions]
+
+````
+
+- **First argument (optional)**: Output filename
+  - Defaults to "handoff.md" if not specified
   - Must end with .md extension
   - Overwrites existing file if present
+
+- **Remaining arguments (optional)**: Additional instructions for the handoff
+  - Can specify what to focus on or include
+  - Can specify what to exclude or skip
+  - Multiple instructions can be provided as a single quoted string
+  - Examples:
+    - `"focus on WebSocket issues"`
+    - `"include error logs and stack traces"`
+    - `"skip resolved issues, focus only on current blocker"`
+    - `"emphasize infrastructure configuration problems"`
+
+### Parsing Logic
+
+The command intelligently parses `$ARGUMENTS`:
+1. If first argument ends with `.md` → treated as filename
+2. Everything after the filename → treated as additional instructions
+3. If no `.md` file specified → all arguments are treated as instructions, file defaults to "handoff.md"
+
+### Examples
+
+```bash
+# Default file, no special instructions
+/handoff
+
+# Custom filename only
+/handoff websocket-issue.md
+
+# Default file with instructions
+/handoff "focus on database migration errors"
+
+# Custom file with instructions
+/handoff migration-handoff.md "include all SQL errors and skip authentication topics"
+
+# Multiple instruction phrases
+/handoff debug.md "focus on performance issues" "include profiling data" "skip unit tests"
+````
+
+## Processing Additional Instructions
+
+When additional instructions are provided, the command:
+
+1. **Incorporates them into the analysis**: Adjusts focus based on the instructions
+2. **Filters content accordingly**: Includes/excludes topics as specified
+3. **Adds a section to the output**: Documents what special focus was applied
+4. **Maintains comprehensive coverage**: Still includes all critical information, but emphasizes requested areas
+
+The instructions act as **guidance** rather than strict filters - important context is never completely excluded, but the emphasis and detail level adjusts based on your instructions.
+
+```
+
 ```

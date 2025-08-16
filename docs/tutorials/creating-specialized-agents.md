@@ -34,15 +34,17 @@ Every agent consists of:
 
 ```yaml
 ---
-name: agent-identifier
-description: Brief description of agent's purpose
-type: specialist|analyzer|research|helper
-expertise: Primary domain of knowledge
-version: 1.0.0
-mcp-enhanced: tool1, tool2 # Optional MCP tools
+name: agent-identifier # REQUIRED - Unique identifier for Claude Code
+description: Brief description # REQUIRED - Agent's purpose and expertise
+type: specialist|analyzer|research|helper # Optional - Agent classification
+expertise: Primary domain of knowledge # Optional - Domain specialization
+version: 1.0.0 # Optional - Semantic versioning
+mcp-enhanced: tool1, tool2 # Optional - MCP tool enhancements
 ---
 # Agent content...
 ```
+
+**Important**: The `name` field is required by Claude Code for agent registration. Without it, the agent will fail to load.
 
 ### Agent Lifecycle
 
@@ -132,7 +134,7 @@ Let's create a "Database Performance Specialist" agent step by step.
 
 Create file: `/agents/database-performance-specialist.md`
 
-````markdown
+`````markdown
 ---
 name: database-performance-specialist
 description: Database optimization expert specializing in query performance, indexing strategies, and database architecture for high-scale applications.
@@ -242,7 +244,9 @@ Structure your assessment as:
 CREATE INDEX idx_table_columns ON table(column1, column2);
 ```
 ````
-````
+`````
+
+`````
 
 ### Index Optimization
 
@@ -411,7 +415,7 @@ You are a code complexity analysis expert, specialized in identifying maintainab
 **Hotspots Identified**: 5 critical files
 **Quick Wins Available**: 12 methods
 ```
-````
+`````
 
 ### Detailed Analysis Report
 

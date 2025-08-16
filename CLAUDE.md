@@ -5,6 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Repository Purpose
 
 This is the Claude Code Toolkit - a comprehensive collection of commands, agents, and tools for extending Claude Code capabilities. The repository provides:
+
 - Reusable slash commands for common tasks
 - Specialized AI agents for code analysis and operations
 - Tools and utilities for enhanced productivity
@@ -18,24 +19,26 @@ When helping users optimize their projects, prioritize these pre-defined workflo
 ### 🎯 Top 3 Workflows for Project Optimization
 
 1. **Deep Quality Analysis** (Most Comprehensive - 3 steps):
+
    ```bash
    # Step 1: Deep scan with automatic timestamp filename
    /prefix:scan:deep . --export-json
    # Creates: analysis-YYYYMMDD-HHMMSS.json
-   
+
    # Step 2: Generate action plan from latest report
    /prefix:scan:report --latest --generate-action-plan
    # Creates: action-plan-YYYYMMDD-HHMMSS.md
-   
+
    # Step 3: Execute the action plan
    /prefix:auto:execute --latest
    ```
 
 2. **Quick Quality Check** (Fast Results - 2 steps):
+
    ```bash
    # Quick scan with auto-generated filename
    /prefix:scan:quick . --export-json
-   
+
    # Apply quick wins from latest report
    /prefix:fix:quick-wins --latest
    ```
@@ -236,7 +239,8 @@ Sub-Agents are specialized AI agents defined in the `/agents/` directory:
 
 **Sub-Agent Structure:**
 
-- Defined as markdown files with specific personas
+- Defined as markdown files with YAML frontmatter
+- Must include `name` field in frontmatter (required by Claude Code)
 - Include specialized knowledge and focus areas
 - Can be invoked through orchestration commands
 - Work in isolated contexts for deep analysis
@@ -254,14 +258,25 @@ Sub-Agents are specialized AI agents defined in the `/agents/` directory:
 
 ### Adding New Sub-Agents
 
-1. Define the agent's expertise and purpose
-2. Create `.md` file in `/agents/` directory
-3. Structure the agent with:
-   - Clear persona definition
-   - Specific expertise areas
-   - Analysis methodology
-   - Output format specifications
-4. Test the agent through orchestration commands
+**Recommended Method**: Use the standardized workflow (see `docs/guides/AGENT-CREATION-WORKFLOW.md`)
+
+```bash
+# Quick agent creation with validation
+./scripts/create-agent.sh <agent-name> <type> "<description>"
+
+# Example
+./scripts/create-agent.sh database-optimizer specialist "Database performance expert"
+```
+
+This ensures:
+
+1. Required frontmatter fields (`name`, `description`) are always present
+2. Consistent structure using `/templates/agent-template.md`
+3. Proper validation of agent names and types
+4. No Claude Code parsing errors
+5. Ready for testing through orchestration commands
+
+For manual creation or detailed guidance, see the [Agent Creation Workflow Guide](docs/guides/AGENT-CREATION-WORKFLOW.md)
 
 ### Creating Orchestration Commands
 
@@ -327,6 +342,7 @@ Use Task tool with subagent_type="general-purpose":
 ```
 
 This pattern ensures:
+
 - Clear agent invocation
 - Proper context isolation
 - Predictable behavior
@@ -341,6 +357,7 @@ Commands can be chained with automatic data flow:
 ```
 
 Features:
+
 - `{output}` - Previous command's output
 - `{outputs}` - All previous outputs array
 - `->` - Sequential execution
@@ -360,6 +377,7 @@ The `/flow:smart` command analyzes problems and routes to appropriate specialist
 ### Compact Command Design
 
 Commands follow these principles:
+
 - Maximum 200-300 lines
 - Clear phase structure
 - Explicit Task syntax
@@ -371,6 +389,7 @@ Commands follow these principles:
 ### Scan Commands (`/prefix:scan:*`)
 
 Analysis and investigation commands:
+
 - **deep** - Comprehensive analysis with parallel scanning
 - **quality** - Code quality metrics and trends
 - **perf** - Performance profiling
@@ -381,6 +400,7 @@ Analysis and investigation commands:
 ### Fix Commands (`/prefix:fix:*`)
 
 Direct correction commands:
+
 - **quick-wins** - High-ROI fixes from reports
 - **security** - Security vulnerability fixes
 - **performance** - Performance optimizations
@@ -390,6 +410,7 @@ Direct correction commands:
 ### Flow Commands (`/prefix:flow:*`)
 
 Multi-agent workflow commands:
+
 - **smart** - Intelligent problem routing
 - **review** - Multi-perspective code review
 - **incident** - Rapid incident response
@@ -399,12 +420,12 @@ Multi-agent workflow commands:
 ### Meta Commands (`/prefix:meta:*`)
 
 Project and toolkit management:
+
 - **health** - Project health assessment
 - **pipelines** - Pre-defined workflows
 - **chain** - Command chaining
 - **export** - Export management
 - **changelog** - Changelog updates
-
 
 ## Migration Guide
 
@@ -412,16 +433,16 @@ Project and toolkit management:
 
 The following commands have been renamed for clarity and consistency:
 
-| Old Command | New Command | Category Change |
-|-------------|-------------|-----------------|
-| `/prefix:analyze-deep` | `/prefix:scan:deep` | analysis → scan |
-| `/prefix:analyze-report` | `/prefix:scan:report` | analysis → scan |
-| `/prefix:analyze-parallel` | `/prefix:scan:quick` | orchestration → scan |
-| `/prefix:project:create-command` | `/prefix:meta:create-cmd` | project → meta |
-| `/prefix:ai:handoff` | `/prefix:meta:handoff` | ai → meta |
-| `/prefix:code:shellcheck` | `/prefix:fix:shell` | code → fix |
-| `/prefix:execute-action-plan` | `/prefix:auto:execute` | workflow → auto |
-| `/prefix:completion-report` | `/prefix:auto:report` | workflow → auto |
+| Old Command                      | New Command               | Category Change      |
+| -------------------------------- | ------------------------- | -------------------- |
+| `/prefix:analyze-deep`           | `/prefix:scan:deep`       | analysis → scan      |
+| `/prefix:analyze-report`         | `/prefix:scan:report`     | analysis → scan      |
+| `/prefix:analyze-parallel`       | `/prefix:scan:quick`      | orchestration → scan |
+| `/prefix:project:create-command` | `/prefix:meta:create-cmd` | project → meta       |
+| `/prefix:ai:handoff`             | `/prefix:meta:handoff`    | ai → meta            |
+| `/prefix:code:shellcheck`        | `/prefix:fix:shell`       | code → fix           |
+| `/prefix:execute-action-plan`    | `/prefix:auto:execute`    | workflow → auto      |
+| `/prefix:completion-report`      | `/prefix:auto:report`     | workflow → auto      |
 
 ### New Workflow Commands
 
@@ -545,6 +566,7 @@ mcp-enhanced: mcp__semgrep__security_check, mcp__semgrep__semgrep_scan
 ### Implementation Pattern
 
 Commands should:
+
 1. Check for MCP tool availability
 2. Use enhanced approach if available
 3. Fall back to traditional methods if not
