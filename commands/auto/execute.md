@@ -1,7 +1,7 @@
 ---
 allowed-tools: Task, Read, Grep, Bash(jq:*), Bash(find:*), Bash(ls:*), Write, Edit, TodoWrite
 description: Execute action plans systematically with progress tracking and smart error handling
-argument-hint: <action-plan.md>|--latest [--mode=supervised|auto] [--dry-run] [--parallel=N]
+argument-hint: <action-plan.md>|--latest [--mode=supervised|auto] [--dry-run] [--parallel=N] [--focus=category] [--force-all] [--min-roi=threshold] [--max-roi=threshold]
 ---
 
 # Execute Action Plan

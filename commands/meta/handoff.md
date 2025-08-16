@@ -1,11 +1,20 @@
 ---
 description: Documents current problem context for handoff to another AI assistant
-argument-hint: [output-file] [--compact] [--focus topic] ["instructions"]
+argument-hint: [output-file] [-c|--compact] [-t|--technical] [--focus topic] [--skip topic] [--include topic] ["instructions"]
 ---
 
 # Claude Command: AI Handoff
 
 This command analyzes the current chat history to extract and document the latest unresolved problem, providing comprehensive context for another AI assistant to continue the work.
+
+⚠️ **IMPORTANT SAFETY NOTICE**: This is a READ-ONLY analysis command that:
+- **NEVER modifies any code or files** (except creating the handoff document)
+- **ONLY analyzes and summarizes** the current conversation
+- **ONLY creates ONE output file** with the handoff documentation
+- Does NOT execute fixes, changes, or improvements
+- Does NOT run any commands or make any modifications
+
+If you see any code being modified, STOP immediately - this is a bug!
 
 ## Usage
 
@@ -15,7 +24,7 @@ This command analyzes the current chat history to extract and document the lates
 /handoff problem-context.md                 # Custom filename
 
 # Compact mode
-/handoff --compact                          # Compact handoff.md 
+/handoff --compact                          # Compact handoff.md
 /handoff brief.md --compact                 # Compact with custom name
 /handoff -c                                 # Short flag for compact
 
@@ -41,6 +50,16 @@ This command analyzes the current chat history to extract and document the lates
    - Current blockers or challenges
    - Relevant code snippets or error messages
 4. **Creates Structured Documentation**: Generates a markdown file with all context needed for another AI
+
+## CRITICAL: What This Command DOES NOT Do
+
+❌ **NEVER modifies existing code files**
+❌ **NEVER executes fixes or improvements**
+❌ **NEVER runs bash commands** (except to create the output file)
+❌ **NEVER changes project files**
+❌ **NEVER implements solutions**
+
+This is STRICTLY an analysis and documentation command. Any code modifications are a BUG and should be reported!
 
 ## Output Format
 
@@ -267,8 +286,10 @@ The user mentioned this is blocking a production release scheduled for next week
 
 The command accepts arguments in the following format:
 ```
+
 /handoff [filename] [flags] ["additional instructions"]
-```
+
+````
 
 ### Positional Arguments
 
@@ -283,7 +304,7 @@ The command accepts arguments in the following format:
 - `--brief`: Alias for --compact
 - `--technical`, `-t`: Force technical details even in compact mode
 - `--focus <topic>`: Focus on specific area (can be used multiple times)
-- `--skip <topic>`: Exclude specific topics (can be used multiple times)  
+- `--skip <topic>`: Exclude specific topics (can be used multiple times)
 - `--include <topic>`: Explicitly include topics (can be used multiple times)
 
 ### Free-form Instructions
@@ -328,16 +349,17 @@ The command intelligently parses `$ARGUMENTS`:
 # Backward compatible (still works)
 /handoff "focus on database migration errors"
 /handoff debug.md "include profiling data"
-```
+````
 
 ## Processing Instructions & Flags
 
 ### Standard Mode (default)
 
 Generates comprehensive handoff with all sections:
+
 - Executive Summary
 - Problem Context
-- Technical Environment  
+- Technical Environment
 - Progress So Far
 - Current Blockers
 - Relevant Code & Files
@@ -351,22 +373,28 @@ Generates condensed handoff with strict limits:
 # Compact Handoff
 
 ## Requirement (2 sentences max)
+
 Core need and business value.
 
 ## Current State (2 sentences max)
+
 What's working and progress percentage.
 
 ## Main Blocker (2 sentences max)
+
 Primary issue and what specifically failed.
 
 ## Failed Attempts (1 sentence each, max 3)
+
 - Attempt 1: approach and failure reason
 - Attempt 2: approach and failure reason
 
 ## Solution Paths (2 sentences max)
+
 Untested approaches and most promising direction.
 
 ## Technical Context (only with --technical or code projects)
+
 Files: [file1:line, file2:line]
 Error: [type and location]
 Stack: [key technologies]
@@ -382,10 +410,25 @@ Stack: [key technologies]
 ### Adaptive Behavior
 
 The command automatically adapts based on project type:
+
 - **Code projects**: Includes file references, error types, tech stack
 - **Non-code projects**: Uses general language, focuses on concepts
 - **Compact + Technical**: Maintains precision despite brevity
 
-```
+## Command Implementation Instructions
 
-```
+🛡️ **SAFETY-FIRST IMPLEMENTATION**:
+
+1. **ONLY use Read tool** to analyze conversation history
+2. **ONLY use Write tool ONCE** to create the handoff document
+3. **DO NOT use Edit, MultiEdit, or any modification tools**
+4. **DO NOT execute any fixes or improvements mentioned in the analysis**
+5. **DO NOT run any bash commands except to verify output file creation**
+
+The command should:
+- Analyze the conversation using only READ operations
+- Extract and summarize information
+- Write ONLY the handoff document
+- Nothing else - no fixes, no changes, no improvements
+
+⚠️ **If you find yourself using Edit, MultiEdit, or modifying code - STOP! You're implementing the command incorrectly!**
