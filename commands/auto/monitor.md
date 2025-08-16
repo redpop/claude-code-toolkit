@@ -1,7 +1,7 @@
 ---
 allowed-tools: Task, Read, Write, Bash(npm:*), Bash(git:*), Bash(cron:*)
 description: Set up and manage continuous code quality monitoring with automated analysis, fixes, and reporting
-argument-hint: [directory] [--schedule=daily|weekly|commit] [--auto-fix=safe|all|none] [--notify=email|slack|github]
+argument-hint: [directory] [--schedule=daily|weekly|commit] [--auto-fix=safe|all|none] [--notify=email|slack|github] [--init]
 ---
 
 # Continuous Quality Workflow

@@ -1,7 +1,7 @@
 ---
 allowed-tools: Task, Read, Grep, Bash(jq:*), Bash(git:log,diff,status), Write
 description: Generate comprehensive completion report after action plan execution, showing results, metrics, and next steps
-argument-hint: [--action-plan=<file>] [--execution-log=<file>] [--compare-baseline] [--export-formats=md,json,html]
+argument-hint: [--action-plan=<file>] [--execution-log=<file>] [--compare-baseline] [--baseline=<file>] [--current=<file>] [--export-formats=md,json,html] [--export-all] [--export-json=<file>] [--include-metrics] [--include-git-log] [--team-report] [--recommendations]
 ---
 
 # Completion Report Command

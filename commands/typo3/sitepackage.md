@@ -1,6 +1,6 @@
 ---
 description: Create a TYPO3 v13.4 SitePackage based on official template with Site Sets
-argument-hint: "[vendor] [package-name] [--options]"
+argument-hint: "[vendor] [package-name] [--include-ddev] [--include-docker] [--author=name] [--email=address]"
 ---
 
 # TYPO3 v13 SitePackage Generator (Official Template)

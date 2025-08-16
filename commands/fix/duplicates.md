@@ -1,7 +1,7 @@
 ---
 allowed-tools: Task, Read, Edit, MultiEdit, Write, Grep, Bash(npm:*), Bash(git:*)
 description: Remove code duplication by extracting common functions, creating shared utilities, and applying DRY principles
-argument-hint: [report.json|directory] [--threshold=80] [--min-lines=5] [--dry-run] [--create-utils]
+argument-hint: [report.json|directory] [--threshold=80] [--min-lines=5] [--dry-run] [--create-utils] [--group-by] [--preserve-comments]
 ---
 
 # Fix Duplicates Command
