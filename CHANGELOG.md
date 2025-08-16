@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.11.1] - 2025-01-16
+
+### Changed
+
+- 🔄 **Handoff Command - Advanced Flag System** - Complete redesign with structured arguments
+  - Added `--compact` (`-c`) flag for condensed 10-sentence handoffs
+  - Added `--technical` (`-t`) flag to force technical details in compact mode
+  - Added `--focus <topic>` flag to emphasize specific areas (repeatable)
+  - Added `--skip <topic>` flag to exclude topics (repeatable)
+  - Added `--include <topic>` flag to explicitly include topics (repeatable)
+  - Supports flag combinations: `/handoff debug.md --compact --technical --focus "performance"`
+  - Maintains backward compatibility with original instruction format
+  - Adaptive behavior based on project type (code vs non-code)
+  - Structured compact format with strict sentence limits per section
+
 ## [3.11.0] - 2025-01-16
 
 ### Added

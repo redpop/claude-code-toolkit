@@ -1,6 +1,6 @@
 ---
 description: Documents current problem context for handoff to another AI assistant
-argument-hint: [output-file] [additional instructions...]
+argument-hint: [output-file] [--compact] [--focus topic] ["instructions"]
 ---
 
 # Claude Command: AI Handoff
@@ -9,11 +9,25 @@ This command analyzes the current chat history to extract and document the lates
 
 ## Usage
 
-```
-/handoff                                           # Creates handoff.md in current directory
-/handoff problem-context.md                        # Creates problem-context.md
-/handoff handoff.md "focus on database issues"     # Creates handoff.md with specific focus
-/handoff migration.md "include error logs and skip UI topics"  # Custom file with instructions
+```bash
+# Standard handoff
+/handoff                                    # Creates handoff.md
+/handoff problem-context.md                 # Custom filename
+
+# Compact mode
+/handoff --compact                          # Compact handoff.md 
+/handoff brief.md --compact                 # Compact with custom name
+/handoff -c                                 # Short flag for compact
+
+# With focus flags
+/handoff --focus "database errors"          # Focus on specific topic
+/handoff --skip "UI issues"                 # Skip certain topics
+/handoff --include "error logs"             # Explicitly include
+
+# Combinations
+/handoff debug.md --compact --technical     # Compact with tech details
+/handoff --compact --focus "blockers" "emphasize workarounds"
+/handoff migration.md -c --skip "resolved" --include "SQL errors"
 ```
 
 ## What This Command Does
@@ -253,62 +267,124 @@ The user mentioned this is blocking a production release scheduled for next week
 
 The command accepts arguments in the following format:
 ```
+/handoff [filename] [flags] ["additional instructions"]
+```
 
-/handoff [filename] [additional instructions]
+### Positional Arguments
 
-````
-
-- **First argument (optional)**: Output filename
+- **filename** (optional): Output filename
+  - Must end with `.md` extension if provided
   - Defaults to "handoff.md" if not specified
-  - Must end with .md extension
   - Overwrites existing file if present
 
-- **Remaining arguments (optional)**: Additional instructions for the handoff
-  - Can specify what to focus on or include
-  - Can specify what to exclude or skip
-  - Multiple instructions can be provided as a single quoted string
-  - Examples:
-    - `"focus on WebSocket issues"`
-    - `"include error logs and stack traces"`
-    - `"skip resolved issues, focus only on current blocker"`
-    - `"emphasize infrastructure configuration problems"`
+### Flag Arguments
+
+- `--compact`, `-c`: Generate compact handoff (max 10 sentences total)
+- `--brief`: Alias for --compact
+- `--technical`, `-t`: Force technical details even in compact mode
+- `--focus <topic>`: Focus on specific area (can be used multiple times)
+- `--skip <topic>`: Exclude specific topics (can be used multiple times)  
+- `--include <topic>`: Explicitly include topics (can be used multiple times)
+
+### Free-form Instructions
+
+- Any non-flag text after flags is treated as additional instructions
+- Use quotes for multi-word instructions: `"focus on error handling"`
+- Multiple instruction strings can be provided
 
 ### Parsing Logic
 
 The command intelligently parses `$ARGUMENTS`:
-1. If first argument ends with `.md` → treated as filename
-2. Everything after the filename → treated as additional instructions
-3. If no `.md` file specified → all arguments are treated as instructions, file defaults to "handoff.md"
+
+1. **Extract filename**: If first argument ends with `.md` → use as filename
+2. **Parse flags**: Identify all arguments starting with `--` or `-`
+   - Extract flag values where applicable (e.g., `--focus database`)
+   - Handle both long (`--compact`) and short (`-c`) forms
+3. **Remaining text**: Everything else → additional instructions
+4. **Default behavior**: No filename → use "handoff.md"
 
 ### Examples
 
 ```bash
-# Default file, no special instructions
-/handoff
+# Standard mode
+/handoff                                    # Default handoff.md
+/handoff websocket-issue.md                 # Custom filename
 
-# Custom filename only
-/handoff websocket-issue.md
+# Compact mode examples
+/handoff --compact                          # Compact handoff.md
+/handoff -c                                 # Using short flag
+/handoff brief.md --compact                 # Compact with filename
 
-# Default file with instructions
+# Using focus flags
+/handoff --focus "database"                 # Focus on database issues
+/handoff --skip "UI" --skip "styling"       # Skip multiple topics
+/handoff --include "errors" --include "logs" # Include specific items
+
+# Complex combinations
+/handoff debug.md --compact --technical --focus "performance"
+/handoff --compact --skip "resolved" "emphasize untested solutions"
+/handoff migration.md -c --focus "SQL" --include "error traces"
+
+# Backward compatible (still works)
 /handoff "focus on database migration errors"
+/handoff debug.md "include profiling data"
+```
 
-# Custom file with instructions
-/handoff migration-handoff.md "include all SQL errors and skip authentication topics"
+## Processing Instructions & Flags
 
-# Multiple instruction phrases
-/handoff debug.md "focus on performance issues" "include profiling data" "skip unit tests"
-````
+### Standard Mode (default)
 
-## Processing Additional Instructions
+Generates comprehensive handoff with all sections:
+- Executive Summary
+- Problem Context
+- Technical Environment  
+- Progress So Far
+- Current Blockers
+- Relevant Code & Files
+- Suggested Next Steps
 
-When additional instructions are provided, the command:
+### Compact Mode (`--compact` or `-c`)
 
-1. **Incorporates them into the analysis**: Adjusts focus based on the instructions
-2. **Filters content accordingly**: Includes/excludes topics as specified
-3. **Adds a section to the output**: Documents what special focus was applied
-4. **Maintains comprehensive coverage**: Still includes all critical information, but emphasizes requested areas
+Generates condensed handoff with strict limits:
 
-The instructions act as **guidance** rather than strict filters - important context is never completely excluded, but the emphasis and detail level adjusts based on your instructions.
+```markdown
+# Compact Handoff
+
+## Requirement (2 sentences max)
+Core need and business value.
+
+## Current State (2 sentences max)
+What's working and progress percentage.
+
+## Main Blocker (2 sentences max)
+Primary issue and what specifically failed.
+
+## Failed Attempts (1 sentence each, max 3)
+- Attempt 1: approach and failure reason
+- Attempt 2: approach and failure reason
+
+## Solution Paths (2 sentences max)
+Untested approaches and most promising direction.
+
+## Technical Context (only with --technical or code projects)
+Files: [file1:line, file2:line]
+Error: [type and location]
+Stack: [key technologies]
+```
+
+### Flag Behaviors
+
+- **`--focus`**: Emphasizes specified topics with more detail
+- **`--skip`**: Reduces or omits specified topics
+- **`--include`**: Ensures topics are included even if normally filtered
+- **`--technical`**: Forces inclusion of technical details in compact mode
+
+### Adaptive Behavior
+
+The command automatically adapts based on project type:
+- **Code projects**: Includes file references, error types, tech stack
+- **Non-code projects**: Uses general language, focuses on concepts
+- **Compact + Technical**: Maintains precision despite brevity
 
 ```
 
