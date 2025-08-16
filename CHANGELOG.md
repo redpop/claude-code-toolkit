@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.11.2] - 2025-01-16
+
+### Changed
+
+- 🔄 **Command Argument Hints** - Improved auto-completion support
+  - Updated argument-hints in 6 commands to include all available flags
+  - Added missing flags for `auto/execute`, `auto/monitor`, `auto/report` commands
+  - Added missing flags for `fix/duplicates` and `typo3/sitepackage` commands
+  - Ensures all short flags (like `-c`, `-t`) are documented in argument-hints
+
+### Security
+
+- 🔒 **Handoff Command Safety** - Added critical safety guards
+  - Added prominent safety notices to prevent unintended code modifications
+  - Explicitly documented that handoff is READ-ONLY (analysis only)
+  - Added "DOES NOT Do" section listing prohibited actions
+  - Added implementation instructions emphasizing safety-first approach
+  - Prevents accidental code changes when using any flag combination
+
 ## [3.11.1] - 2025-01-16
 
 ### Changed
