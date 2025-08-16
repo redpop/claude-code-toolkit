@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.11.0] - 2025-01-16
+
+### Added
+
+- ✨ **Standardized Agent Creation Workflow** - Robust agent creation system with validation
+  - New `scripts/create-agent.sh` script for automated agent creation
+  - Standardized `templates/agent-template.md` with required fields
+  - Comprehensive `docs/guides/AGENT-CREATION-WORKFLOW.md` documentation
+  - Validates agent names, types, and required frontmatter fields
+  - Ensures all agents have required `name` field for Claude Code compatibility
+  - Auto-detects expertise domain based on agent name
+
+- ✨ **Enhanced Handoff Command** - Additional instructions support
+  - Now accepts custom instructions after filename parameter
+  - Supports focus directives: `"focus on database issues"`
+  - Allows exclusion rules: `"skip resolved issues"`
+  - Multiple instructions can be combined in one quoted string
+  - Intelligent parsing distinguishes filenames from instructions
+
+### Changed
+
+- 🔄 **Meta Create Command** - Integrated with standardized workflow
+  - Now uses `scripts/create-agent.sh` for agent creation
+  - Ensures proper frontmatter with required fields
+  - Links to agent creation workflow documentation
+  - Validates all created agents for Claude Code compatibility
+
+- 🔄 **Documentation Updates** - Improved clarity and workflow guidance
+  - Updated CLAUDE.md with agent creation best practices
+  - Enhanced README with simplified quick start workflows
+  - Added agent creation workflow to documentation index
+  - Improved tutorials for creating specialized agents
+
 ## [3.10.0] - 2025-01-15
 
 ### Added

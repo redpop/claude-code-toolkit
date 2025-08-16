@@ -13,7 +13,7 @@ One command to create anything you need. Just describe it, and I'll figure out t
 ```bash
 # Just tell me what you need
 /prefix:meta:create "Find all TODO comments"
-/prefix:meta:create "Laravel security analyzer"  
+/prefix:meta:create "Laravel security analyzer"
 /prefix:meta:create "Database optimization expert"
 /prefix:meta:create "Complete Vue.js workflow"
 ```
@@ -30,10 +30,8 @@ Based on your description, I automatically detect:
 
 1. **Simple Command** (keywords: find, check, list, validate, fix)
    → Creates a standalone command
-   
 2. **Expert/Agent** (keywords: expert, specialist, analyzer, optimizer)
    → Creates an agent with expertise
-   
 3. **Workflow** (keywords: workflow, complete, full, pipeline, multi-step)
    → Creates command + agents + orchestration
 
@@ -75,8 +73,12 @@ Creates: /commands/scan/console-logs.md
 
 ```bash
 Input: "Database optimization expert"
-Creates: /agents/database-optimizer.md
+Creates: /agents/database-optimizer.md (using standardized template)
          /commands/db/optimize.md (to use the agent)
+
+# Behind the scenes, uses:
+# ./scripts/create-agent.sh database-optimizer specialist "Database optimization expert"
+# This ensures proper frontmatter with required 'name' field
 ```
 
 #### For Workflows
@@ -91,6 +93,7 @@ Creates: /agents/laravel-security.md (if needed)
 ### Zero Configuration Needed
 
 I handle everything:
+
 - ✓ Naming (follows conventions)
 - ✓ Categories (creates if needed)
 - ✓ Templates (picks the right one)
@@ -101,6 +104,7 @@ I handle everything:
 ## Examples
 
 ### Example 1: Simple Task
+
 ```
 You: "Remove trailing whitespace from files"
 
@@ -110,6 +114,7 @@ I create:
 ```
 
 ### Example 2: Expert Needed
+
 ```
 You: "PostgreSQL query optimization expert"
 
@@ -120,12 +125,13 @@ I create:
 ```
 
 ### Example 3: Complex Workflow
+
 ```
 You: "Full Vue.js application setup with testing"
 
 I create:
 → /agents/vue-architect.md (if needed)
-→ /agents/vue-testing-expert.md (if needed)  
+→ /agents/vue-testing-expert.md (if needed)
 → /commands/vue/setup.md (orchestration)
 → Reuses existing frontend-specialist
 → Creates vue category in find-cmd
@@ -149,9 +155,27 @@ Only use these if you need specific control:
 
 ## Behind the Scenes
 
+### Agent Creation Process
+
+When creating an agent, I follow a validated workflow:
+
+1. **Template Selection**: Use `/templates/agent-template.md`
+2. **Validation**: Ensure all required fields (especially `name`)
+3. **Script Execution**: Run `./scripts/create-agent.sh` with proper parameters
+4. **Customization**: Fill in domain-specific expertise and methodologies
+5. **Integration**: Link with commands and update discovery
+
+This guarantees:
+
+- ✓ Required `name` field is always present
+- ✓ Consistent structure across all agents
+- ✓ No parsing errors in Claude Code
+- ✓ Proper frontmatter format
+
 ### Reusability Check
 
 Before creating any agent, I check:
+
 ```bash
 # Do we have similar agents?
 → security-specialist (for security tasks)
@@ -165,6 +189,7 @@ Before creating any agent, I check:
 ### Auto-Integration
 
 After creation:
+
 1. Updates `/commands/meta/find-cmd.md` with keywords
 2. Adds to README if new category
 3. Creates usage examples
@@ -173,7 +198,8 @@ After creation:
 ### Quality Assurance
 
 Every creation includes:
-- Proper frontmatter
+
+- Proper frontmatter (with required `name` field for agents)
 - Clear descriptions
 - Usage examples
 - Error handling
@@ -200,6 +226,7 @@ A: I analyze your description for technology/domain keywords and pick the best f
 3. **Indicate complexity**: "simple check" vs "complete workflow"
 
 But don't worry - even vague descriptions work:
+
 - "Something for testing" → I'll ask what kind
 - "Database stuff" → I'll create a general DB helper
 - "Make it faster" → I'll create a performance analyzer
@@ -207,6 +234,7 @@ But don't worry - even vague descriptions work:
 ## The Magic
 
 This single command replaces:
+
 - `/meta:create-cmd` (merged)
 - `/meta:smart-create` (merged)
 - Manual agent creation
