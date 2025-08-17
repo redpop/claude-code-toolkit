@@ -1,186 +1,92 @@
 # Testing Guide
 
-This guide explains the testing infrastructure of the Claude Code Toolkit, including the test project, test scripts, and how to maintain tests when commands or agents change.
+Test infrastructure and practices for the Claude Code Toolkit.
 
-## Overview
-
-The toolkit uses two main directories for testing:
-
-- **`test-project/`** - A sample project with intentionally problematic code
-- **`tests/`** - Test scripts and automation tools
-
-## Test Project (`test-project/`)
-
-### Purpose
-
-The test project serves as a controlled environment with known issues that commands can analyze and fix. It contains deliberately problematic code to validate that our analysis and fix commands work correctly.
-
-### Structure
+## Test Structure
 
 ```
-test-project/
-├── package.json           # Basic Node.js project setup
+test-project/           # Sample project with known issues
 ├── src/
-│   ├── vulnerable-code.js # Security vulnerabilities (SQL injection, XSS, etc.)
-│   ├── slow-algorithm.js  # Performance issues (O(n²) algorithms, inefficient loops)
-│   ├── untested-module.js # Code without tests (for test generation commands)
-│   └── legacy-code.js     # Code needing refactoring (long functions, duplication)
-└── tests/                 # Empty directory for generated tests
+│   ├── vulnerable-code.js  # Security vulnerabilities
+│   ├── slow-algorithm.js   # Performance issues
+│   ├── untested-module.js  # Missing tests
+│   └── legacy-code.js      # Needs refactoring
+tests/                  # Test scripts
+├── run-all.sh         # Master test runner
+├── commands/          # Command tests
+├── agents/            # Agent tests
+├── workflows/         # Workflow tests
+└── integration/       # End-to-end tests
 ```
 
-### Known Issues in Test Project
+## Running Tests
 
-#### vulnerable-code.js
-
-- SQL injection vulnerability
-- XSS vulnerability
-- Hardcoded credentials
-- Insecure random number generation
-- Command injection risk
-
-#### slow-algorithm.js
-
-- Nested loops creating O(n²) complexity
-- Inefficient array operations
-- Missing memoization
-- Unnecessary repeated calculations
-
-#### untested-module.js
-
-- Complex logic without tests
-- Edge cases not covered
-- Missing input validation
-
-#### legacy-code.js
-
-- Functions over 100 lines
-- Repeated code blocks
-- Poor naming conventions
-- Mixed responsibilities
-
-### Using the Test Project
-
+### With Claude CLI
 ```bash
-# Test security scanning
-/global:sec:audit test-project/
-
-# Test performance analysis
-/global:scan:perf test-project/
-
-# Test fix commands
-/global:fix:smart test-project/
-
-# Test code generation
-/global:gen:tests test-project/src/untested-module.js
-```
-
-## Test Scripts (`tests/`)
-
-### Structure
-
-```
-tests/
-├── run-all.sh              # Master test runner
-├── commands/               # Individual command tests
-│   ├── test-scan-deep.sh
-│   ├── test-flow-smart.sh
-│   └── test-meta-pipelines.sh
-├── agents/                 # Sub-agent tests (to be implemented)
-├── workflows/              # Workflow tests (to be implemented)
-└── integration/            # End-to-end tests (to be implemented)
-```
-
-### Running Tests
-
-### With Claude Code CLI (Recommended)
-
-If you have Claude Code installed (`claude` or `claude-code` command), tests will automatically use programmatic mode (`-p` flag) for more accurate testing:
-
-```bash
-# Tests will detect and use Claude CLI automatically
+# Auto-detects claude command and uses programmatic mode
 ./tests/run-all.sh
 
-# Or set explicitly
+# Or specify explicitly
 export CLAUDE_CMD=claude
 ./tests/run-all.sh
 ```
 
-### Without Claude Code CLI
+### Without Claude CLI
+Falls back to structural validation:
+- Verifies file existence
+- Checks installation structure
+- Creates mock outputs
 
-Tests will fall back to structural validation:
-
-- Check if files exist in correct locations
-- Verify installation structure
-- Create mock outputs for workflow testing
-
-#### Run All Tests
-
+### Test Specific Components
 ```bash
-cd claude-code-toolkit
-./tests/run-all.sh
-```
-
-#### Run Specific Command Test
-
-```bash
+# Test single command
 ./tests/commands/test-scan-deep.sh
-```
 
-#### Test After Installation
-
-```bash
-# Install toolkit
+# Test after installation
 ./install.sh global --force
-
-# Run tests
 ./tests/run-all.sh
 ```
 
-### Test Modes
+## Known Issues in Test Project
 
-1. **Programmatic Mode** (with Claude CLI)
-
-   - Uses `claude -p` for actual command execution
-   - Tests real functionality
-   - Provides accurate results
-
-2. **Structural Mode** (without Claude CLI)
-   - Verifies file existence
-   - Checks installation integrity
-   - Creates mock data for testing
+| File | Issues | Purpose |
+|------|--------|---------|
+| `vulnerable-code.js` | SQL injection, XSS, hardcoded secrets | Security testing |
+| `slow-algorithm.js` | O(n²) loops, missing memoization | Performance testing |
+| `untested-module.js` | Complex logic without tests | Test generation |
+| `legacy-code.js` | 100+ line functions, duplication | Refactoring testing |
 
 ## Writing Tests
 
 ### Command Test Template
 
-Create a new test file: `tests/commands/test-[command-name].sh`
+Create `tests/commands/test-{command}.sh`:
 
 ```bash
 #!/bin/bash
 set -euo pipefail
 
-echo "Testing /global:[category]:[command]..."
+echo "Testing /prefix:category:command..."
 
 # Setup
 TEST_DIR="test-project"
 OUTPUT_FILE="/tmp/test-output-$$.json"
 
 # Run command
-/global:[category]:[command] "$TEST_DIR" --export-json="$OUTPUT_FILE"
+/prefix:category:command "$TEST_DIR" --export-json="$OUTPUT_FILE"
 
-# Validate output exists
+# Validate output
 if [ ! -f "$OUTPUT_FILE" ]; then
-    echo "❌ Command failed to create output file"
+    echo "❌ No output file created"
     exit 1
 fi
 
-# Validate output structure
 if ! jq -e '.results' "$OUTPUT_FILE" > /dev/null 2>&1; then
-    echo "❌ Invalid output structure"
+    echo "❌ Invalid JSON structure"
     exit 1
 fi
 
-# Check for expected findings
+# Check expectations
 ISSUE_COUNT=$(jq '.results | length' "$OUTPUT_FILE")
 if [ "$ISSUE_COUNT" -eq 0 ]; then
     echo "❌ No issues found (expected > 0)"
@@ -189,88 +95,65 @@ fi
 
 # Cleanup
 rm -f "$OUTPUT_FILE"
-
 echo "✅ Test passed!"
 ```
 
 ### Agent Test Template
 
-Create a new test file: `tests/agents/test-[agent-name].sh`
+Create `tests/agents/test-{agent}.sh`:
 
 ```bash
 #!/bin/bash
 set -euo pipefail
 
-echo "Testing [agent-name] sub-agent..."
+echo "Testing {agent} sub-agent..."
 
-# Test agent can be invoked
-RESULT=$(/global:flow:smart "test [agent-name] functionality" --dry-run)
+# Test agent invocation
+RESULT=$(/prefix:flow:smart "test {agent} functionality" --dry-run)
 
-# Validate agent was selected
-if [[ ! "$RESULT" =~ "[agent-name]" ]]; then
-    echo "❌ Agent was not properly invoked"
+if [[ ! "$RESULT" =~ "{agent}" ]]; then
+    echo "❌ Agent not invoked"
     exit 1
 fi
 
 echo "✅ Agent test passed!"
 ```
 
-## Maintaining Tests
+## Test Maintenance
 
-### When Adding a New Command
+### When Adding Commands
+1. Create test script in `tests/commands/`
+2. Add test cases to `test-project/` if needed
+3. Update `tests/run-all.sh`
+4. Document expected behavior
 
-1. Create a test script in `tests/commands/`
-2. Add known test cases to `test-project/` if needed
-3. Update `tests/run-all.sh` to include the new test
-4. Document expected behavior in the test script
+### When Modifying Commands
+1. Run existing tests for baseline
+2. Update test expectations
+3. Add tests for new functionality
+4. Ensure backward compatibility
 
-### When Modifying a Command
+### When Adding Agents
+1. Create test in `tests/agents/`
+2. Add triggering scenarios
+3. Validate agent selection
+4. Update integration tests
 
-1. Run existing tests to establish baseline
-2. Update test expectations if behavior changes
-3. Add new test cases for new functionality
-4. Ensure backward compatibility or document breaking changes
+## Best Practices
 
-### When Adding a New Agent
+| Practice | Description |
+|----------|-------------|
+| **Isolated** | Each test independent, clean up after |
+| **Clear** | Document what test validates |
+| **Fast** | Keep tests under 30 seconds |
+| **Maintained** | Update tests with code changes |
 
-1. Create test script in `tests/agents/`
-2. Add test scenarios that trigger the agent
-3. Validate agent selection and output
-4. Update integration tests if needed
+## CI/CD Integration
 
-## Test Best Practices
-
-### 1. Isolated Tests
-
-- Each test should be independent
-- Clean up temporary files after tests
-- Don't rely on global state
-
-### 2. Clear Expectations
-
-- Document what each test validates
-- Use descriptive error messages
-- Include both positive and negative test cases
-
-### 3. Performance Considerations
-
-- Keep individual tests under 30 seconds
-- Use `--quick` or `--limit` flags when appropriate
-- Cache test data when possible
-
-### 4. Maintenance
-
-- Run tests before committing changes
-- Update tests when commands change
-- Remove tests for deprecated features
-
-## Continuous Integration
-
-### GitHub Actions Example
+### GitHub Actions (Future)
 
 ```yaml
 name: Test Commands
-
 on: [push, pull_request]
 
 jobs:
@@ -278,16 +161,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - name: Install toolkit
-        run: ./install.sh ci
-
-      - name: Run tests
-        run: ./tests/run-all.sh
-
-      - name: Upload test results
+      - run: ./install.sh ci
+      - run: ./tests/run-all.sh
+      - uses: actions/upload-artifact@v3
         if: failure()
-        uses: actions/upload-artifact@v3
         with:
           name: test-results
           path: /tmp/test-output-*.json
@@ -295,65 +172,42 @@ jobs:
 
 ## Debugging Failed Tests
 
-### Common Issues
-
-1. **Command not found**
-
-   - Ensure toolkit is installed: `./install.sh global --force`
-   - Check command name and prefix
-
-2. **No output generated**
-
-   - Verify test project has expected issues
-   - Check command supports `--export-json`
-
-3. **Unexpected results**
-   - Compare with manual command execution
-   - Check for recent command changes
-   - Validate test expectations are current
+| Issue | Solution |
+|-------|----------|
+| Command not found | Run `./install.sh global --force` |
+| No output | Verify test project has expected issues |
+| Wrong results | Compare with manual execution |
+| Timeout | Increase timeout or use `--quick` |
 
 ### Debug Mode
-
-Run tests with debug output:
-
 ```bash
 DEBUG=1 ./tests/commands/test-scan-deep.sh
 ```
 
-## Future Improvements
+## Test Coverage Goals
 
-### Planned Enhancements
-
-1. **Coverage Metrics**
-
-   - Track which commands have tests
-   - Measure code paths tested
-   - Generate coverage reports
-
-2. **Performance Benchmarks**
-
-   - Track command execution times
-   - Identify performance regressions
-   - Optimize slow commands
-
-3. **Integration Tests**
-
-   - Test command chains
-   - Validate workflow scenarios
-   - Test error handling
-
-4. **Mock Infrastructure**
-   - Mock external dependencies
-   - Test error conditions
-   - Validate edge cases
+- [ ] All commands have basic tests
+- [ ] Critical paths have integration tests
+- [ ] Performance benchmarks established
+- [ ] Error conditions tested
 
 ## Contributing Tests
 
-When contributing new features:
+When contributing:
+1. Write tests for new features
+2. Update tests for changes
+3. Document test purpose
+4. Ensure all tests pass
 
-1. Write tests for new commands/agents
-2. Update existing tests if behavior changes
-3. Document test purpose and expectations
-4. Ensure all tests pass before submitting PR
+## Future Enhancements
 
-Tests are crucial for maintaining toolkit quality and preventing regressions. Every command should have at least one test validating its core functionality.
+- **Coverage metrics** - Track tested code paths
+- **Performance benchmarks** - Monitor execution times
+- **Integration tests** - Test command chains
+- **Mock infrastructure** - Test edge cases
+
+## Related Documentation
+
+- [Extending](extending.md) - Creating testable components
+- [Architecture](architecture.md) - Understanding test points
+- [Configuration](configuration.md) - Test configurations

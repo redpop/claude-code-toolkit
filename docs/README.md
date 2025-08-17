@@ -6,7 +6,8 @@ Welcome to the Claude Code Toolkit documentation. This directory contains compre
 
 ### 🎯 Start Here
 
-- **[QUICK START GUIDE](guides/QUICK-START.md)** - The fastest way to get productive with the toolkit
+- **[QUICK START GUIDE](guides/QUICK-START.md)** - The fastest way to get productive
+- **[INSTALLATION GUIDE](INSTALLATION-GUIDE.md)** - Complete setup instructions
 
 ### For End Users
 
@@ -36,9 +37,9 @@ Welcome to the Claude Code Toolkit documentation. This directory contains compre
 
 ### Getting Started
 
-1. [Install the toolkit](user-guide/README.md#installation)
-2. [Run your first analysis](user-guide/README.md#your-first-analysis)
-3. [Explore workflows](user-guide/workflow-guide.md)
+1. [Install the toolkit](INSTALLATION-GUIDE.md)
+2. [Get started quickly](guides/QUICK-START.md)
+3. [Learn workflows](user-guide/workflow-guide.md)
 
 ### Common Tasks
 
@@ -47,11 +48,11 @@ Welcome to the Claude Code Toolkit documentation. This directory contains compre
 - [Generate tests](user-guide/command-reference.md#gen-commands)
 - [Create custom commands](developer-guide/extending.md)
 
-## 📖 Documentation Versions
+## 📖 Additional Resources
 
-- **Current Version**: 3.3.0
-- **Last Updated**: February 2025
-- **Language**: English
+- **[FAQ](FAQ.md)** - Frequently asked questions
+- **[Troubleshooting](user-guide/troubleshooting.md)** - Common issues and solutions
+- **[API Reference](api/)** - Technical specifications
 
 ## 🤝 Contributing to Documentation
 

@@ -2,37 +2,27 @@
 
 ## Installation
 
-### Q: Can I install multiple versions with different prefixes?
+### Q: How do I install the toolkit?
 
-Yes! You can install the toolkit multiple times with different prefixes:
+See the [Installation Guide](INSTALLATION-GUIDE.md) for complete setup instructions.
+
+### Q: Can I use multiple prefixes?
+
+Yes! Install with different prefixes:
 
 ```bash
-./install.sh myprefix
+./install.sh global
 ./install.sh team
-./install.sh test
 ```
-
-### Q: How do I update to the latest version?
-
-Pull the latest changes and re-run the installation:
-
-```bash
-git pull origin main
-./install.sh myprefix
-```
-
-### Q: Where are commands installed?
-
-Commands are installed to `~/.claude/commands/PREFIX/` where PREFIX is your chosen prefix.
 
 ## Usage
 
 ### Q: How do I know which commands are available?
 
-After installation, all available commands are listed. You can also check:
+Check the [Command Reference](user-guide/command-reference.md) or:
 
 ```bash
-ls ~/.claude/commands/myprefix/
+ls ~/.claude/commands/global/
 ```
 
 ### Q: Can I modify commands after installation?
@@ -44,23 +34,23 @@ Yes, but it's better to modify them in your fork and reinstall. Direct edits wil
 Use the chain command:
 
 ```bash
-/prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}"
+/global:meta:chain "scan:deep ." -> "fix:quick-wins {output}"
 ```
 
 ## Troubleshooting
 
 ### Q: Command not found error
 
-Ensure you're using the correct prefix and category:
+Ensure you're using the correct format:
 
 ```bash
 # Correct format
-/myprefix:scan:deep .
+/global:scan:deep .
 
 # Common mistakes
 /scan:deep .           # Missing prefix
-/myprefix:deep .       # Missing category
-/myprefix-scan-deep .  # Wrong separator
+/global:deep .         # Missing category
+/global-scan-deep .    # Wrong separator
 ```
 
 ### Q: Analysis taking too long
@@ -68,11 +58,11 @@ Ensure you're using the correct prefix and category:
 For large codebases, use focused analysis:
 
 ```bash
-# Instead of analyzing everything
-/prefix:scan:deep .
-
 # Focus on specific areas
-/prefix:scan:deep src/ --focus=security
+/global:scan:deep src/ --focus=security
+
+# Or use quick scan
+/global:scan:quick . --export-json
 ```
 
 ### Q: Fixes not working as expected
@@ -80,7 +70,7 @@ For large codebases, use focused analysis:
 Always use dry-run mode first:
 
 ```bash
-/prefix:fix:security . --dry-run
+/global:fix:quick-wins report.json --preview
 ```
 
 ## Sub-Agents
@@ -95,7 +85,7 @@ Yes! Create a new `.md` file in the `/agents/` directory following the template 
 
 ### Q: How many agents can run in parallel?
 
-The Task tool supports multiple parallel agents. Commands like `/prefix:scan:quick` use up to 10 agents simultaneously.
+Commands like `/global:scan:quick` use up to 10 agents simultaneously.
 
 ## Contributing
 
@@ -116,31 +106,31 @@ The Task tool supports multiple parallel agents. Commands like `/prefix:scan:qui
 
 ### Q: Can I use MCP servers?
 
-Yes! Commands can leverage MCP servers when available. See the [MCP Integration Guide](guides/MCP-INTEGRATION.md).
+Yes! See the [MCP Integration Guide](guides/MCP-INTEGRATION.md) for setup.
 
-### Q: How do I create pre-defined pipelines?
+### Q: What workflows are available?
 
-Use the pipelines command to see available workflows:
+See the [Workflow Guide](user-guide/workflow-guide.md) or try:
 
 ```bash
-/prefix:meta:pipelines --list
+/global:flow:smart "help me get started"
 ```
 
-### Q: Can I export reports in different formats?
+### Q: Can I export reports?
 
-Yes, most analysis commands support multiple export formats:
+Yes, use export flags:
 
 ```bash
-/prefix:scan:deep . --export-json --export-md --export-html
+/global:scan:deep . --export-json --export-md
 ```
 
 ## Support
 
 ### Q: Where can I get help?
 
-- Check the documentation in `/docs/`
-- Review the [Modern Workflow Guide](guides/MODERN-WORKFLOW.md)
-- Open an issue on GitHub
+- Try: `/global:flow:smart "help with [your question]"`
+- Check the [Quick Start Guide](guides/QUICK-START.md)
+- Review [Troubleshooting](user-guide/troubleshooting.md)
 
 ### Q: How do I report bugs?
 

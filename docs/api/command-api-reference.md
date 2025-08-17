@@ -51,192 +51,95 @@ The directory structure determines the command namespace:
 
 ## Frontmatter Format
 
-The YAML frontmatter contains metadata that Claude Code uses to understand and execute commands. All fields are optional except `description`.
+The YAML frontmatter contains metadata that Claude Code uses to understand and execute commands.
 
 ### Core Fields
 
-#### `description` (Required)
+| Field | Required | Description | Example |
+|-------|----------|-------------|----------|
+| `description` | **Yes** | Brief command description shown in listings and auto-completion | `description: Creates structured Git commits with Conventional Commit format` |
+| `argument-hint` | No | Expected arguments for auto-completion | `argument-hint: [directory] [--focus=security\|performance] [--export-md]` |
+| `allowed-tools` | No | Tools the command can use (access control) | `allowed-tools: Task, Read, Grep, Bash(git:*), Write` |
+| `mcp-enhanced` | No | MCP tools that enhance this command | `mcp-enhanced: mcp__semgrep__security_check, mcp__semgrep__semgrep_scan` |
 
-Brief description of what the command does. This appears in command listings and auto-completion.
+### Tool Specifications
 
-```yaml
-description: Creates structured Git commits with Conventional Commit format and emojis
-```
+- `Task` - Parallel task execution with sub-agents
+- `Read`, `Write`, `Edit`, `MultiEdit` - File operations
+- `Grep` - Advanced pattern searching
+- `Bash` - Command execution (all commands)
+- `Bash(command:*)` - Specific command allowlist (e.g., `Bash(git:*)` for git only)
+- `TodoWrite` - Task management
 
-#### `argument-hint` (Optional)
+### Argument Patterns
 
-Provides hints for expected arguments, shown in auto-completion and help.
-
-```yaml
-argument-hint: [directory] [--focus=security|performance|all] [--export-md]
-```
-
-Common patterns:
-
-- `[optional-arg]` - Optional positional argument
-- `<required-arg>` - Required positional argument
+- `[optional-arg]` - Optional positional
+- `<required-arg>` - Required positional
 - `[--flag]` - Optional flag
 - `[--option=value]` - Option with value
-- `[arg1] [arg2] ...` - Multiple arguments
 
-#### `allowed-tools` (Optional)
-
-Specifies which Claude Code tools the command can use. This enables tool access control.
-
-```yaml
-allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*), Bash(semgrep:*), Write
-```
-
-Tool specifications:
-
-- `Task` - Parallel task execution
-- `Read` - File reading
-- `Write` - File writing (use sparingly)
-- `Grep` - Advanced search
-- `Bash` - Command execution
-- `Bash(command:*)` - Specific command allowlist
-
-#### `mcp-enhanced` (Optional)
-
-Lists MCP (Model Context Protocol) tools that enhance this command's functionality.
-
-```yaml
-mcp-enhanced: mcp__semgrep__security_check, mcp__semgrep__semgrep_scan
-```
-
-Commands should:
-
-1. Check if these tools are available
-2. Use enhanced functionality if present
-3. Fall back to traditional methods if not
-
-### Complete Frontmatter Example
+### Example
 
 ```yaml
 ---
-allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*), Bash(semgrep:*), Write
-mcp-enhanced: mcp__semgrep__security_check, mcp__semgrep__semgrep_scan
 description: Deep code analysis combining parallel scanning with specialized sub-agent expertise
 argument-hint: [directory] [--focus=security|performance|all] [--export-md] [--export-json]
+allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*), Bash(semgrep:*), Write
+mcp-enhanced: mcp__semgrep__security_check, mcp__semgrep__semgrep_scan
 ---
 ```
 
 ## Command Body Format
 
-The command body is written in Markdown and serves as the prompt/instructions for Claude Code. It should be structured, clear, and actionable.
+The command body is a Markdown prompt/instructions for Claude Code.
 
-### Standard Sections
-
-#### 1. Command Title and Overview
+### Standard Structure
 
 ```markdown
 # Command Name
+Brief description and primary use case.
 
-Brief description of what this command does and its primary use case.
-```
-
-#### 2. Usage Examples
-
-````markdown
 ## Usage
-
 ```bash
-/command basic-usage
-/command with --options
-/command complex example --option1=value --option2
-```
-````
-
-## What This Command Does
-
-1. **Step 1**: Clear description
-2. **Step 2**: What happens next
-3. **Step 3**: Final outcome
-
-````
-
-#### 3. Detailed Workflow
-
-```markdown
-## Workflow Steps
-
-### Phase 1: Initialization
-- Validate environment
-- Check prerequisites
-- Gather parameters
-
-### Phase 2: Execution
-- Main logic implementation
-- Process data
-- Handle edge cases
-
-### Phase 3: Reporting
-- Generate output
-- Provide recommendations
-- Suggest next steps
-````
-
-#### 4. Configuration Options
-
-```markdown
-## Configuration Options
-
-### Focus Parameters
-
-- `--focus=security`: Prioritize security analysis
-- `--focus=performance`: Prioritize performance analysis
-- `--focus=all`: Comprehensive analysis (default)
-
-### Export Parameters
-
-- `--export-md[=filename]`: Export markdown report
-- `--export-json[=filename]`: Export JSON data
-- `--export-dir=path`: Custom export directory
+/command [arguments] [--options]
 ```
 
-### Special Patterns
+## Workflow
+1. **Phase 1**: Initial step description
+2. **Phase 2**: Main execution logic  
+3. **Phase 3**: Output generation
 
-#### Tool Detection Pattern (MCP-aware commands)
-
-```markdown
-## Tool Detection
-
-**FIRST, CHECK AVAILABLE TOOLS:**
-
-1. **Check for [MCP Server]**: Test if `mcp__[server]__*` tools are available
-2. **Check for local alternatives**: `Bash("which [tool]")`
-3. **Adjust strategy** based on available tools
+## Options
+- `--option=value`: Description
+- `--flag`: Description
 ```
 
-#### Parallel Execution Pattern
+### Key Patterns
 
+**Tool Detection (MCP-aware):**
 ```markdown
-## Phase 1: Parallel Scanning
-
-**START PARALLEL SCANNING AGENTS:**
-
-1. **Scanner 1**: Task(description="...", prompt="...", subagent_type="general-purpose")
-2. **Scanner 2**: Task(description="...", prompt="...", subagent_type="general-purpose")
-3. **Scanner 3**: Task(description="...", prompt="...", subagent_type="general-purpose")
+1. Check for MCP tools: `mcp__[server]__*`
+2. Check local tools: `Bash("which [tool]")`
+3. Adjust strategy based on availability
 ```
 
-#### Sub-Agent Delegation Pattern
-
+**Parallel Execution:**
 ```markdown
-## Phase 2: Expert Analysis
+Use Task Tool with multiple agents:
+- Task(description="...", prompt="...", subagent_type="...")
+```
 
+**Sub-Agent Delegation:**
+```markdown
 Delegate to @specialist-agent:
-"READ-ONLY ANALYSIS. DO NOT MODIFY ANY FILES.
-Analyze: [specific areas]
-Focus on: [key concerns]
-Provide: [expected outputs]"
+"READ-ONLY ANALYSIS. Analyze: [areas] Focus: [concerns]"
 ```
 
 ## Parameter Handling
 
 ### The $ARGUMENTS Variable
 
-The `$ARGUMENTS` placeholder receives all user input after the command invocation:
+The `$ARGUMENTS` placeholder receives all user input after the command:
 
 ```bash
 /command some input --flag --option=value
@@ -244,464 +147,190 @@ The `$ARGUMENTS` placeholder receives all user input after the command invocatio
                    $ARGUMENTS
 ```
 
-### Parameter Parsing Patterns
+### Common Patterns
 
-#### 1. Simple Arguments
-
-```markdown
-Scan the directory specified in $ARGUMENTS for security issues.
-If no directory is provided, use the current directory (.).
-```
-
-#### 2. Flag Detection
-
-```markdown
-Check if $ARGUMENTS contains:
-
-- `--no-verify`: Skip verification steps
-- `--fast`: Use quick mode
-- `--push`: Push after completion
-```
-
-#### 3. Option Extraction
-
-```markdown
-Extract options from $ARGUMENTS:
-
-- `--focus=<value>`: Extract focus area (security|performance|all)
-- `--export-dir=<path>`: Extract custom export directory
-- `--severity=<level>`: Extract severity filter
-```
-
-#### 4. Multiple File Handling
-
-```markdown
-Process all files/directories provided in $ARGUMENTS:
-
-- If single path: analyze that path
-- If multiple paths: process each separately
-- If glob pattern: expand and process matches
-```
-
-### Validation Patterns
-
-````markdown
-## Parameter Validation
-
-1. **Validate directory exists**:
-   ```bash
-   if [ ! -d "$DIRECTORY" ]; then
-     echo "Error: Directory not found"
-     exit 1
-   fi
-   ```
-````
-
-2. **Validate option values**:
-   - Ensure --focus is one of: security, performance, architecture, all
-   - Verify --duration matches pattern: 1w, 2w, 1m
-   - Check --team-size is a positive integer
-
-````
+- **Default values**: `If no directory provided, use current directory (.)`
+- **Flag detection**: `Check if $ARGUMENTS contains --no-verify`
+- **Option extraction**: `Extract --focus=<value> from $ARGUMENTS`
+- **Multiple paths**: `Process each path/glob pattern in $ARGUMENTS`
+- **Validation**: Verify paths exist, options are valid
 
 ## Output Specifications
 
-Commands should produce structured, actionable output following these patterns:
-
-### 1. Structured Reports
+### Report Structure
 
 ```markdown
 # Analysis Report
 
 ## Executive Summary
-- **Duration**: X seconds
-- **Tool Used**: [Enhanced|Traditional]
-- **Issues Found**: X critical, Y high, Z medium
-- **Health Score**: X/100
+- Duration: X seconds
+- Tool Used: [Enhanced|Traditional]
+- Issues Found: X critical, Y high, Z medium
 
-## Critical Findings
-
-### 🔒 Security Issues
-1. **SQL Injection** (Critical)
-   - File: `src/db/query.js:45`
-   - Risk: Remote code execution
-   - Fix: Use parameterized queries
-
-### ⚡ Performance Bottlenecks
-[Performance findings...]
+## Findings
+### Category
+1. **Issue Title** (Severity)
+   - File: `path/file.js:line`
+   - Impact: Description
+   - Fix: Solution
 
 ## Recommendations
-
-### Immediate Actions (0-24h)
-1. Fix critical security vulnerabilities
-2. Apply emergency patches
-
-### Short-term (1 week)
-1. Improve test coverage
-2. Refactor complex functions
-````
-
-### 2. Progress Indicators
-
-```markdown
-## Progress
-
-Analyzing security patterns... ████████░░ 80%
-Scanning dependencies... ██████████ 100%
-Generating report... ████░░░░░░ 40%
-
-Overall Progress: ████████░░ 75%
+- Immediate: Critical fixes
+- Short-term: Important improvements
 ```
 
-### 3. JSON Output Format
+### Export Formats
 
-````markdown
-When --export-json is specified, structure data as:
-
+**JSON Export (`--export-json`):**
 ```json
 {
-  "metadata": {
-    "timestamp": "2024-01-15T10:30:00Z",
-    "command": "analyze-deep",
-    "version": "2.3.0",
-    "duration_seconds": 15.3
-  },
-  "summary": {
-    "health_score": 75,
-    "total_issues": 42,
-    "critical": 3,
-    "high": 12
-  },
-  "findings": [
-    {
-      "id": "SEC-001",
-      "type": "security",
-      "severity": "critical",
-      "title": "SQL Injection Vulnerability",
-      "file": "src/db/user.js",
-      "line": 45,
-      "description": "...",
-      "remediation": "..."
-    }
-  ]
+  "metadata": { "timestamp": "...", "command": "..." },
+  "summary": { "health_score": 75, "issues": {...} },
+  "findings": [{ "id": "...", "severity": "...", ... }]
 }
 ```
-````
 
-````
-
-### 4. Export Handling
-
-```markdown
-## Report Export
-
-After analysis, if export parameters are provided:
-
-1. **Parse Export Parameters**:
-   - Detect requested format(s)
-   - Generate timestamp-based filename if not specified
-   - Create export directory if needed
-
-2. **Write Report Files**:
-   ```bash
-   # Create reports directory
-   mkdir -p reports/
-
-   # Write report with timestamp
-   FILENAME="analyze-deep-$(date +%Y%m%d-%H%M%S).md"
-   Write("reports/$FILENAME", reportContent)
-````
-
-3. **Success Message**:
-
-   ```
-   ✓ Report exported to: reports/analyze-deep-20240115-103000.md
-   ```
-
-````
+**Auto-generated filenames:**
+- Pattern: `command-YYYYMMDD-HHMMSS.ext`
+- Default directory: `reports/`
 
 ## Integration with Claude Code
 
-### 1. Command Discovery
-
-Claude Code discovers commands through the filesystem structure:
+### Command Discovery & Invocation
 
 ```bash
-~/.claude/
-├── commands/
-│   └── prefix/
-│       ├── category/
-│       │   └── command.md
-│       └── another-category/
-│           └── command.md
-└── agents/
-    └── agent-name.md
-````
+# File structure
+~/.claude/commands/prefix/category/command.md
 
-### 2. Command Invocation
-
-Users invoke commands using the pattern:
-
-```
+# Invocation pattern
 /prefix:category:command [arguments]
 ```
 
 Claude Code:
+1. Parses command path
+2. Loads `.md` file
+3. Extracts frontmatter
+4. Executes body as instructions
+5. Passes arguments via `$ARGUMENTS`
 
-1. Parses the command path
-2. Loads the corresponding `.md` file
-3. Extracts frontmatter metadata
-4. Executes the command body as instructions
-5. Passes user arguments via `$ARGUMENTS`
+### Tool Access Control
 
-### 3. Tool Access
+Commands only use tools in `allowed-tools`:
+- `Task` - Parallel sub-agent execution
+- `Read/Write/Edit` - File operations
+- `Grep` - Pattern searching
+- `Bash(cmd:*)` - Command-specific access
 
-Commands can only use tools specified in `allowed-tools`:
+### Sub-Agent & MCP Integration
 
-```yaml
-allowed-tools: Task, Read, Grep, Bash(git:*), Write
+**Sub-agents:** Delegate specialized tasks
+```markdown
+Delegate to @agent-name: "Task description"
 ```
 
-This enables:
-
-- `Task()` for parallel execution
-- `Read()` for file access
-- `Grep()` for searching
-- `Bash("git ...")` for git commands
-- `Write()` for file creation (use sparingly)
-
-### 4. Sub-Agent Integration
-
-Commands can delegate to specialized sub-agents:
-
+**MCP Enhancement:** Progressive enhancement
 ```markdown
-Delegate to @security-specialist:
-"Perform deep security analysis on the following findings..."
-```
-
-Sub-agents:
-
-- Run in isolated contexts
-- Have specialized knowledge
-- Return structured results
-- Don't have file write access by default
-
-### 5. MCP Integration
-
-When MCP tools are available, commands can leverage enhanced functionality:
-
-```markdown
-**Check for MCP availability:**
-
-1. Test if `mcp__semgrep__security_check` is available
-2. If yes: Use enhanced AST-based analysis
-3. If no: Fall back to pattern-based scanning
+If mcp__tool available: Use enhanced features
+Else: Fall back to traditional methods
 ```
 
 ## Best Practices
 
-### 1. Command Design
+### Command Design Principles
 
-- **Single Responsibility**: Each command should do one thing well
-- **Clear Purpose**: The command name and description should immediately convey its function
-- **Predictable Behavior**: Similar commands should work similarly
-- **Graceful Degradation**: Commands should work without optional tools
+1. **Single Responsibility** - One clear purpose
+2. **Graceful Degradation** - Works without optional tools
+3. **Read-Only Default** - Avoid modifications unless requested
+4. **Clear Documentation** - Usage, parameters, output format
+5. **Input Validation** - Check parameters before use
+6. **Error Handling** - Clear messages, graceful exits
 
-### 2. Error Handling
+### Performance Guidelines
 
-```markdown
-## Error Handling
+- Target: <30 seconds for standard analysis
+- Use parallel execution where possible
+- Implement progress indicators for long operations
+- Consider incremental processing for large codebases
 
-The command handles these scenarios:
+### Testing Checklist
 
-- Missing required arguments
-- Invalid option values
-- Tool unavailability
-- File access errors
-- Network failures
-
-For each error:
-
-1. Provide clear error message
-2. Suggest corrective action
-3. Exit gracefully
-```
-
-### 3. Performance Considerations
-
-```markdown
-## Performance Expectations
-
-- Phase 1: 5-8 seconds (parallel scanning)
-- Phase 2: 10-20 seconds (expert analysis)
-- Phase 3: 2-3 seconds (report generation)
-- Total: ~30 seconds for comprehensive analysis
-
-For large codebases:
-
-- Use incremental analysis
-- Implement progress indicators
-- Consider sampling strategies
-```
-
-### 4. Security Guidelines
-
-- **Read-Only by Default**: Avoid file modifications unless explicitly requested
-- **Validate Inputs**: Check all parameters before use
-- **Safe Defaults**: Choose secure options by default
-- **Clear Warnings**: Alert users before destructive operations
-
-### 5. Documentation Standards
-
-Every command should include:
-
-- Clear usage examples
-- Complete parameter documentation
-- Expected output format
-- Performance expectations
-- Error scenarios
-- Integration notes
-
-### 6. Testing Patterns
-
-```markdown
-## Testing Your Command
-
-1. **Basic Invocation**:
-   /your-command
-2. **With Parameters**:
-   /your-command src/ --option=value
-3. **Edge Cases**:
-   - Empty directory
-   - Missing tools
-   - Invalid parameters
-   - Large datasets
-```
+- [ ] Basic invocation works
+- [ ] Parameters parse correctly
+- [ ] Handles missing tools gracefully
+- [ ] Validates input properly
+- [ ] Produces expected output format
 
 ## Examples
 
-### Example 1: Simple Analysis Command
+### Basic Command
 
-````yaml
+```yaml
 ---
 description: Find and analyze TODO comments in code
 argument-hint: [directory] [--format=list|grouped|json]
 ---
 
-# Find TODOs Command
-
-Searches for TODO, FIXME, and HACK comments in your codebase.
+# Find TODOs
+Searches for TODO, FIXME, HACK comments.
 
 ## Usage
-
-```bash
-/find-todos              # Search current directory
-/find-todos src/         # Search specific directory
-/find-todos --format=json # Output as JSON
-````
+/find-todos src/ --format=json
 
 ## Workflow
+1. Search patterns with Grep
+2. Extract context and metadata
+3. Format output based on --format
+```
 
-1. **Search for patterns**:
-   Use Grep to find: TODO, FIXME, HACK, NOTE, XXX
-2. **Analyze context**:
-   - Extract surrounding code
-   - Identify author (if in git)
-   - Calculate age
-3. **Generate report**:
-   Group by file, priority, or author based on --format
-
-````
-
-### Example 2: MCP-Enhanced Command
+### MCP-Enhanced Command
 
 ```yaml
 ---
-allowed-tools: Task, Read, Grep, Bash(semgrep:*), Write
-mcp-enhanced: mcp__semgrep__security_check
-description: Security audit with enhanced scanning when available
+description: Security audit with optional MCP enhancement
 argument-hint: [directory] [--severity=critical|high|all]
+allowed-tools: Task, Read, Grep, Bash(semgrep:*)
+mcp-enhanced: mcp__semgrep__security_check
 ---
 
 # Security Audit
 
-Comprehensive security analysis with automatic tool detection.
-
 ## Tool Detection
-
-**CHECK AVAILABLE TOOLS:**
-1. Test for `mcp__semgrep__security_check`
-2. Check for local semgrep: `Bash("which semgrep")`
-3. Select best available method
+1. Check mcp__semgrep__security_check
+2. Check local semgrep
+3. Fall back to patterns
 
 ## Execution
+- With MCP: AST-based analysis
+- Fallback: Pattern matching
+```
 
-### With MCP (Preferred):
-Use `mcp__semgrep__security_check` for:
-- AST-based analysis
-- Low false positives
-- Comprehensive coverage
-
-### Fallback Method:
-Use pattern matching for:
-- Basic security patterns
-- Common vulnerabilities
-- Known antipatterns
-
-## Output
-
-**Analysis Quality**: [Enhanced|Standard|Basic]
-**Confidence Level**: [High|Medium|Low]
-
-[Security findings...]
-````
-
-### Example 3: Workflow Command
+### Workflow Command
 
 ```yaml
 ---
-allowed-tools: Task, Read, Write, TodoWrite, Bash(git:*)
-description: Orchestrate a complete code quality sprint
+description: Orchestrate code quality sprint
 argument-hint: [--duration=1w|2w] [--team-size=N]
+allowed-tools: Task, Read, Write, TodoWrite, Bash(git:*)
 ---
 
-# Quality Sprint Workflow
+# Quality Sprint
 
-Plans and tracks a code quality improvement sprint.
+## Phases
+1. Planning: Analysis → Prioritization → Assignment
+2. Execution: Progress tracking → Quality gates
+3. Review: Reports → Metrics → Next sprint
 
-## Sprint Phases
-
-### Phase 1: Planning
-1. Run comprehensive analysis
-2. Generate prioritized backlog
-3. Assign tasks to team
-
-### Phase 2: Execution
-1. Track daily progress
-2. Run quality gates
-3. Update metrics
-
-### Phase 3: Review
-1. Generate sprint report
-2. Calculate velocity
-3. Plan next sprint
-
-## Progress Tracking
-
-Use TodoWrite to maintain sprint tasks:
-- Mark tasks as in_progress when starting
-- Update to completed when done
-- Add new tasks as discovered
+Use TodoWrite for task management.
 ```
 
-## Conclusion
+## Summary
 
-The Claude Code Toolkit command format provides a flexible, powerful way to extend Claude Code's capabilities. By following these specifications and patterns, you can create commands that are:
+Claude Code Toolkit commands use Markdown files with YAML frontmatter to define reusable operations. Key aspects:
 
-- **Discoverable**: Clear names and descriptions
-- **Predictable**: Consistent behavior and output
-- **Powerful**: Leverage parallel execution and specialized agents
-- **Reliable**: Graceful error handling and fallbacks
-- **Integrated**: Work seamlessly with Claude Code's tool ecosystem
+- **Frontmatter**: Defines metadata (`description`, `argument-hint`, `allowed-tools`, `mcp-enhanced`)
+- **Body**: Contains instructions executed by Claude Code
+- **Parameters**: Handled via `$ARGUMENTS` placeholder
+- **Integration**: Supports sub-agents, MCP tools, and progressive enhancement
+- **Best Practices**: Single responsibility, graceful degradation, clear documentation
 
-For more examples and templates, see the `/commands/templates/` directory in the toolkit repository.
+For templates and examples, see `/commands/templates/` in the repository.
