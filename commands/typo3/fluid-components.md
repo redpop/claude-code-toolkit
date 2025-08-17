@@ -21,7 +21,7 @@ Generates Fluid v4 Components for TYPO3 v13.3+ projects using modern component-b
 
 **CHECK FOR ENHANCED DOCUMENTATION ACCESS:**
 
-1. **If Context7 MCP is available**: 
+1. **If Context7 MCP is available**:
    - Use `mcp__context7__resolve-library-id "TYPO3 Fluid"`
    - Then `mcp__context7__get-library-docs` with topic="components" for latest documentation
    - This provides up-to-date component patterns and best practices
@@ -33,10 +33,11 @@ Generates Fluid v4 Components for TYPO3 v13.3+ projects using modern component-b
 
 ## Important: Fluid v4.3 Component Syntax
 
-**Note:** The `fc:component` syntax (`TYPO3\CMS\Fluid\ViewHelpers\Component`) is **NOT available in Fluid v4.3/TYPO3 13**. 
+**Note:** The `fc:component` syntax (`TYPO3\CMS\Fluid\ViewHelpers\Component`) is **NOT available in Fluid v4.3/TYPO3 13**.
 It's an experimental feature. Use standard partials with `f:render partial=""` instead.
 
-### Correct Approach for TYPO3 13:
+### Correct Approach for TYPO3 13
+
 ```html
 <!-- Component as Partial -->
 <f:render partial="Components/Accordion/Accordion" arguments="{
@@ -46,8 +47,10 @@ It's an experimental feature. Use standard partials with `f:render partial=""` i
 }" />
 ```
 
-### Content Blocks Integration:
+### Content Blocks Integration
+
 Content Blocks can use shared partials from sitepackage via TypoScript configuration:
+
 ```typoscript
 lib.contentElement {
     partialRootPaths {
@@ -55,6 +58,7 @@ lib.contentElement {
     }
 }
 ```
+
 See: Content Blocks Shared Partials Documentation at ~/.claude/claude-code-toolkit/knowledge-base/typo3/content-blocks-shared-partials.md
 
 ## Command Workflow

@@ -32,7 +32,7 @@ This command automatically fixes shell script issues using shellcheck analysis. 
 1. **Discovers Shell Scripts**:
    - If path/file provided: Checks specific file or searches within specified directory
    - Otherwise: Searches entire project for shell scripts
-   - Looks for files with extensions: *.sh, *.bash, *.zsh, *.ksh
+   - Looks for files with extensions: *.sh,*.bash, *.zsh,*.ksh
    - Detects scripts by shebang line (#!/bin/bash, #!/bin/sh, etc.)
    - Excludes common directories (node_modules, .git, vendor, etc.) unless explicitly specified
    - Identifies executable files that might be shell scripts
@@ -72,27 +72,35 @@ This command automatically fixes shell script issues using shellcheck analysis. 
 ## Shellcheck Severity Levels
 
 ### Error (SC2xxx)
+
 Critical issues that will likely cause script failure:
+
 - Syntax errors
 - Undefined variables
 - Missing quotes that cause word splitting
 - Incorrect test operators
 
 ### Warning (SC1xxx)
+
 Issues that may cause unexpected behavior:
+
 - Deprecated syntax
 - Portability problems
 - Common logic errors
 - Security concerns
 
 ### Info (SC3xxx)
+
 Suggestions for better practices:
+
 - Performance improvements
 - Readability enhancements
 - Modern syntax alternatives
 
 ### Style (SC4xxx) - Only with --strict
+
 Optional style recommendations:
+
 - Consistent formatting
 - Best practice patterns
 - Code clarity improvements
@@ -100,6 +108,7 @@ Optional style recommendations:
 ## Automatic Fix Examples
 
 ### Variable Quoting
+
 ```bash
 # Before
 if [ $1 = "test" ]; then
@@ -111,6 +120,7 @@ if [ "$1" = "test" ]; then
 ```
 
 ### Command Substitution
+
 ```bash
 # Before
 result=`ls -la`
@@ -120,6 +130,7 @@ result=$(ls -la)
 ```
 
 ### Array Handling
+
 ```bash
 # Before
 for item in ${array[@]}; do
@@ -131,6 +142,7 @@ for item in "${array[@]}"; do
 ```
 
 ### Conditional Improvements
+
 ```bash
 # Before
 if [[ $var == "value" && $other == "test" ]]
@@ -218,6 +230,7 @@ shellcheck:
 ## Exclusions and Ignoring
 
 ### Default Exclusions
+
 - `node_modules/`
 - `.git/`
 - `vendor/`
@@ -226,6 +239,7 @@ shellcheck:
 - `*.min.sh` (minified scripts)
 
 ### Inline Ignoring
+
 Scripts can include directives to ignore specific warnings:
 
 ```bash
@@ -251,6 +265,7 @@ The command handles various scenarios:
 ## Example Output
 
 ### Check-Only Mode (--check-only)
+
 ```
 🔍 Analyzing shell scripts in project...
 
@@ -283,6 +298,7 @@ Found 12 shell scripts to analyze:
 ```
 
 ### Default Fix Mode (Standard Behavior)
+
 ```
 🔧 Automatically fixing shell script issues...
 
@@ -330,6 +346,7 @@ Found 12 shell scripts to analyze:
 ## Platform-Specific Installation
 
 ### macOS
+
 ```bash
 # Homebrew (recommended)
 brew install shellcheck
@@ -339,6 +356,7 @@ sudo port install shellcheck
 ```
 
 ### Linux
+
 ```bash
 # Ubuntu/Debian
 sudo apt-get update && sudo apt-get install shellcheck
@@ -354,6 +372,7 @@ sudo snap install shellcheck
 ```
 
 ### Direct Download
+
 ```bash
 # Latest release from GitHub
 wget -qO- "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xJv
@@ -361,6 +380,7 @@ sudo cp shellcheck-stable/shellcheck /usr/local/bin/
 ```
 
 ### Docker Alternative
+
 ```bash
 # If shellcheck cannot be installed
 docker run --rm -v "$PWD:/mnt" koalaman/shellcheck:stable scripts/*.sh

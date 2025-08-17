@@ -47,6 +47,7 @@ cd claude-code-toolkit
 ```
 
 Creates a complete TYPO3 v13.4 SitePackage with:
+
 - Site Sets configuration (new in v13)
 - Modern Composer setup
 - Content Blocks structure
@@ -65,6 +66,7 @@ Creates a complete TYPO3 v13.4 SitePackage with:
 ```
 
 Generates Content Blocks v1.3 configurations with:
+
 - All 30+ field types
 - Collection with child type restrictions (v1.3)
 - Page type support
@@ -79,6 +81,7 @@ Generates Content Blocks v1.3 configurations with:
 ```
 
 Generates Fluid v4 Components for TYPO3 v13.3+:
+
 - Atomic Design structure
 - Typed arguments with `<f:argument>`
 - Slot-based content handling
@@ -93,6 +96,7 @@ Generates Fluid v4 Components for TYPO3 v13.3+:
 ```
 
 Intelligent wrapper for the native `make:content-block` command:
+
 - Automatic configuration management
 - Skeleton templates
 - Interactive field builder
@@ -105,6 +109,7 @@ Intelligent wrapper for the native `make:content-block` command:
 ```
 
 Creates complete TYPO3 extensions:
+
 - Plugin extensions with Extbase/Fluid
 - Backend modules
 - Service extensions
@@ -116,6 +121,7 @@ Creates complete TYPO3 extensions:
 ### typo3-architect
 
 Expert in TYPO3 architecture and best practices:
+
 - Project structure analysis
 - Performance optimization
 - Security auditing
@@ -125,6 +131,7 @@ Expert in TYPO3 architecture and best practices:
 ### typo3-content-blocks-specialist
 
 Master of Content Blocks v1.3:
+
 - Field type optimization
 - Collection management
 - Template development
@@ -134,6 +141,7 @@ Master of Content Blocks v1.3:
 ### typo3-extension-developer
 
 Extbase/Fluid development expert:
+
 - Service architecture
 - Dependency injection
 - Event system
@@ -143,6 +151,7 @@ Extbase/Fluid development expert:
 ### typo3-typoscript-expert
 
 Modern TypoScript and configuration:
+
 - Site Sets (v13)
 - Data processing
 - Condition syntax
@@ -187,6 +196,7 @@ vendor/bin/typo3 cache:flush
 ```
 
 Then add to your page.typoscript:
+
 ```typoscript
 page.10.templateName.cObject {
     key.field = doktype
@@ -232,6 +242,7 @@ sitepackage/
 ### Using Components with Content Blocks
 
 #### 1. Standard Content Block (without components)
+
 ```html
 <div class="hero">
     <h2>{data.vendor_hero_title}</h2>
@@ -240,6 +251,7 @@ sitepackage/
 ```
 
 #### 2. Component-Based Content Block
+
 ```html
 <html xmlns:my="http://typo3.org/ns/Vendor/Package/Components/ComponentCollection">
     
@@ -261,6 +273,7 @@ sitepackage/
 ### Component Examples
 
 #### Button Component (Atom)
+
 ```html
 <f:argument name="href" type="string" optional="{true}" />
 <f:argument name="variant" type="string" optional="{true}" default="primary" />
@@ -281,6 +294,7 @@ sitepackage/
 ```
 
 #### Card Component (Molecule)
+
 ```html
 <f:argument name="title" type="string" />
 <f:argument name="image" type="TYPO3\CMS\Core\Resource\FileInterface" optional="{true}" />
@@ -307,6 +321,7 @@ sitepackage/
 ### Migration from ViewHelpers
 
 **Before (ViewHelper):**
+
 ```php
 class ButtonViewHelper extends AbstractTagBasedViewHelper {
     public function initializeArguments(): void {
@@ -316,6 +331,7 @@ class ButtonViewHelper extends AbstractTagBasedViewHelper {
 ```
 
 **After (Component):**
+
 ```html
 <f:argument name="variant" type="string" optional="{true}" default="primary" />
 <button class="btn btn--{variant}"><f:slot /></button>
@@ -337,6 +353,7 @@ class ButtonViewHelper extends AbstractTagBasedViewHelper {
 ### Default Configurations
 
 Create `content-blocks.yaml` in your extension:
+
 ```yaml
 defaults:
   contentElements:
@@ -361,6 +378,7 @@ fields:
 ## Skeleton Templates
 
 Pre-configured templates available:
+
 - **hero**: Full-width hero section
 - **card-grid**: Responsive card layout
 - **accordion**: Expandable content
@@ -393,6 +411,7 @@ project/
 ### 3. Field Configuration
 
 Always specify:
+
 - Meaningful identifiers
 - Proper field types
 - Translation labels
@@ -504,6 +523,7 @@ blocks:
 ## Contributing
 
 Contributions are welcome! Please:
+
 1. Follow TYPO3 coding standards
 2. Add tests for new features
 3. Update documentation

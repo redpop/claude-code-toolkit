@@ -18,6 +18,7 @@ Designed to be installed into `~/.claude/` with a custom prefix, making all tool
 ### 🎯 Essential Workflows
 
 **Deep Analysis Pipeline** (Recommended):
+
 ```bash
 /prefix:scan:deep . --export-json
 /prefix:scan:report --latest --generate-action-plan
@@ -25,12 +26,14 @@ Designed to be installed into `~/.claude/` with a custom prefix, making all tool
 ```
 
 **Quick Quality Check**:
+
 ```bash
 /prefix:scan:quick . --export-json
 /prefix:fix:quick-wins --latest
 ```
 
 **One-Command Pipelines**:
+
 ```bash
 /prefix:meta:pipelines deep-quality
 ```
@@ -58,6 +61,7 @@ Each CLAUDE.md file provides focused context for its specific area, reducing cog
 ### Command System
 
 Commands follow a hierarchical namespace pattern:
+
 - Structure: `/prefix:category:command`
 - Categories: `scan`, `fix`, `gen`, `flow`, `auto`, `sec`, `git`, `meta`, `typo3`
 - Example: `/prefix:scan:deep` for deep code analysis
@@ -67,6 +71,7 @@ See **[commands/CLAUDE.md](commands/CLAUDE.md)** for detailed command documentat
 ### Agent System
 
 Specialized AI agents provide domain expertise:
+
 - Located in `/agents/` directory
 - Each agent has specific focus area
 - Invoked through commands or Task Tool
@@ -76,17 +81,20 @@ See **[agents/CLAUDE.md](agents/CLAUDE.md)** for agent details.
 ### Key Patterns
 
 **Task Tool Invocation**:
+
 ```markdown
 Use Task tool with subagent_type="security-specialist":
 "Perform security audit focusing on OWASP Top 10"
 ```
 
 **Command Chaining**:
+
 ```bash
 /prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}"
 ```
 
 **Export Parameters**:
+
 - `--export-json` → Auto-generates timestamped JSON
 - `--export-md` → Auto-generates timestamped Markdown
 - `--latest` → Uses most recent report
@@ -105,12 +113,14 @@ cd claude-code-toolkit
 ```
 
 This installs:
+
 - Commands to `~/.claude/commands/myproject/`
 - Agents to `~/.claude/agents/`
 - Hooks to `~/.claude/claude-code-toolkit/hooks/`
 - Creates backup if updating existing installation
 
 For sound notifications:
+
 ```bash
 ./install.sh myproject --with-settings
 ```

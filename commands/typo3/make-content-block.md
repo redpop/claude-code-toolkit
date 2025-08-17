@@ -16,6 +16,7 @@ Intelligent wrapper for the native TYPO3 `make:content-block` command with sensi
 ## Command Workflow
 
 This command wraps the native TYPO3 Content Blocks make command and provides:
+
 1. Automatic content-blocks.yaml configuration
 2. Intelligent defaults based on project structure
 3. Skeleton management
@@ -48,7 +49,9 @@ skeleton-path: .claude/typo3/skeletons  # Custom skeleton path
 Create custom skeletons in `.claude/typo3/skeletons/`:
 
 ### Hero Section Skeleton
+
 `.claude/typo3/skeletons/hero/config.yaml`:
+
 ```yaml
 name: <vendor>/<name>
 title: Hero Section
@@ -96,7 +99,9 @@ fields:
 ```
 
 ### Card Grid Skeleton
+
 `.claude/typo3/skeletons/card-grid/config.yaml`:
+
 ```yaml
 name: <vendor>/<name>
 title: Card Grid
@@ -147,7 +152,9 @@ fields:
 ```
 
 ### Accordion Skeleton
+
 `.claude/typo3/skeletons/accordion/config.yaml`:
+
 ```yaml
 name: <vendor>/<name>
 title: Accordion
@@ -179,7 +186,9 @@ fields:
 ```
 
 ### Page Type Skeleton
+
 `.claude/typo3/skeletons/landing-page/config.yaml`:
+
 ```yaml
 name: <vendor>/<name>
 title: Landing Page
@@ -223,6 +232,7 @@ fields:
 ## Command Execution Flow
 
 1. **Check for content-blocks.yaml**:
+
 ```bash
 # Look for configuration in these locations (in order):
 # 1. ./content-blocks.yaml
@@ -231,6 +241,7 @@ fields:
 ```
 
 2. **If no config exists, create one**:
+
 ```yaml
 vendor: {ask-user}
 extension: {detect-or-ask}
@@ -239,6 +250,7 @@ skeleton-path: .claude/typo3/skeletons
 ```
 
 3. **Show available skeletons**:
+
 ```
 Available skeletons:
 1. hero - Full-width hero section
@@ -251,6 +263,7 @@ Select skeleton [1-5]:
 ```
 
 4. **Run the make command**:
+
 ```bash
 vendor/bin/typo3 make:content-block \
     --vendor="{vendor}" \
@@ -264,6 +277,7 @@ vendor/bin/typo3 make:content-block \
 If user wants custom configuration:
 
 1. **Content Type Selection**:
+
 ```
 Select content type:
 1. content-element - Standard content element
@@ -273,6 +287,7 @@ Choice [1-3]:
 ```
 
 2. **Field Builder**:
+
 ```
 Add fields to your content block:
 1. Text field
@@ -291,6 +306,7 @@ Choice:
 
 3. **Field Configuration**:
 For each field type, ask relevant questions:
+
 - Field identifier (kebab-case)
 - Label
 - Required? (y/n)
@@ -299,6 +315,7 @@ For each field type, ask relevant questions:
 ## Smart Defaults
 
 ### Vendor Detection
+
 ```bash
 # Try to detect from:
 1. composer.json "name" field
@@ -308,6 +325,7 @@ For each field type, ask relevant questions:
 ```
 
 ### Extension Detection
+
 ```bash
 # Look for sitepackage in:
 1. packages/sitepackage
@@ -317,7 +335,9 @@ For each field type, ask relevant questions:
 ```
 
 ### Unique TypeName Generation
+
 For page types, generate unique typeName:
+
 ```php
 $typeName = time(); // Unix timestamp ensures uniqueness
 // Or use a more readable format:
@@ -329,11 +349,13 @@ $typeName = 200000000 + (date('ymd') * 100); // 2024 = 200241220
 After successful generation:
 
 1. **Clear caches**:
+
 ```bash
 vendor/bin/typo3 cache:flush
 ```
 
 2. **Show next steps**:
+
 ```
 ✅ Content Block created successfully!
 
@@ -367,6 +389,7 @@ Next steps:
 ## Advanced Features
 
 ### Custom Skeleton Creation
+
 ```bash
 # Guide user to create custom skeleton:
 /prefix:typo3:make-content-block --create-skeleton
@@ -379,12 +402,14 @@ Next steps:
 ```
 
 ### Batch Creation
+
 ```bash
 # Create multiple blocks from definition file:
 /prefix:typo3:make-content-block --batch=content-blocks-definition.yaml
 ```
 
 ### Migration Helper
+
 ```bash
 # Convert Mask/DCE to Content Blocks:
 /prefix:typo3:make-content-block --migrate-from=mask --mask-key=slider
@@ -393,6 +418,7 @@ Next steps:
 ## Integration with Other Commands
 
 This command integrates with:
+
 - `/prefix:typo3:sitepackage` - Creates extension structure
 - `/prefix:typo3:analyze` - Analyzes existing blocks
 - `/prefix:typo3:optimize` - Optimizes block configuration

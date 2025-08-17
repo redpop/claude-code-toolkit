@@ -28,7 +28,7 @@ Generates Content Blocks v1.3 compatible configurations for TYPO3 v13.4.
 
 **CHECK FOR ENHANCED DOCUMENTATION ACCESS:**
 
-1. **If Context7 MCP is available**: 
+1. **If Context7 MCP is available**:
    - Use `mcp__context7__resolve-library-id "TYPO3 Content Blocks"`
    - Then `mcp__context7__get-library-docs` for latest API documentation
    - This provides up-to-date field types, configurations, and best practices
@@ -356,6 +356,7 @@ When using `--with-components` flag, generate component-based template:
 Generate accompanying Fluid Components:
 
 **Molecule/ContentBlock.html**:
+
 ```html
 <f:argument name="variant" type="string" optional="{true}" default="default" />
 <f:argument name="layout" type="string" optional="{true}" default="standard" />
@@ -384,6 +385,7 @@ Generate accompanying Fluid Components:
 ```
 
 **Atom/Heading.html**:
+
 ```html
 <f:argument name="level" type="integer" optional="{true}" default="2" />
 <f:argument name="class" type="string" optional="{true}" />
@@ -400,6 +402,7 @@ Generate accompanying Fluid Components:
 ```
 
 **Atom/RichText.html**:
+
 ```html
 <f:argument name="class" type="string" optional="{true}" />
 

@@ -11,24 +11,28 @@ This command generates a comprehensive report after executing an action plan, an
 ## Usage Patterns
 
 ### 1. Basic Completion Report
+
 ```bash
 /completion-report
 /completion-report --action-plan=action-plan-20250129.md
 ```
 
 ### 2. With Baseline Comparison
+
 ```bash
 /completion-report --compare-baseline
 /completion-report --baseline=security-baseline-20250115.json --current=current-state.json
 ```
 
 ### 3. From Execution Log
+
 ```bash
 /completion-report --execution-log=execution-log-20250129.md
 /completion-report --action-plan=plan.md --execution-log=log.md
 ```
 
 ### 4. Multi-format Export
+
 ```bash
 /completion-report --export-formats=md,json,html
 /completion-report --export-all --include-metrics
@@ -222,12 +226,14 @@ Generate final report with multiple sections:
 ## Export Formats
 
 ### Markdown (Default)
+
 - Human-readable format
 - Includes tables and formatting
 - Suitable for documentation
 - Git-friendly
 
 ### JSON
+
 ```json
 {
   "metadata": {
@@ -251,6 +257,7 @@ Generate final report with multiple sections:
 ```
 
 ### HTML
+
 - Interactive dashboard
 - Charts and graphs
 - Expandable sections
@@ -259,6 +266,7 @@ Generate final report with multiple sections:
 ## Integration Examples
 
 ### CI/CD Pipeline
+
 ```yaml
 - name: Execute Fixes
   run: |
@@ -273,6 +281,7 @@ Generate final report with multiple sections:
 ```
 
 ### Slack Notification
+
 ```bash
 # Generate report and send summary
 /completion-report --export-json=report.json
@@ -281,6 +290,7 @@ curl -X POST $SLACK_WEBHOOK -d "Success Rate: ${SUCCESS_RATE}%"
 ```
 
 ### JIRA Integration
+
 ```bash
 # Create follow-up tickets for failed items
 /completion-report --export-json=report.json

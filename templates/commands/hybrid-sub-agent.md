@@ -6,6 +6,7 @@ argument-hint: [expected-arguments]
 # /[Command Name] - Hybrid Three-Phase Analysis
 
 This is a hybrid command that uses a three-phase approach:
+
 1. **Parallel Scanning**: Multiple agents scan the codebase in parallel
 2. **Expert Delegation**: Based on findings, delegate to specialized experts
 3. **Synthesis**: Combine all insights into a comprehensive report
@@ -168,6 +169,7 @@ def hybrid_analysis(target: str = "$ARGUMENTS") -> str:
 ## Configuration
 
 ### Scanning Agents Configuration
+
 ```python
 # Define your scanning agents for Phase 1
 scanning_agents = [
@@ -186,6 +188,7 @@ scanning_agents = [
 ```
 
 ### Expert Types Available
+
 - `code-expert`: Deep code analysis and quality assessment
 - `architecture-expert`: System design and pattern evaluation
 - `security-expert`: Security vulnerability assessment
@@ -217,6 +220,7 @@ scanning_agents = [
 ## Output Format
 
 The command returns a comprehensive markdown report with:
+
 - Executive summary
 - Detailed findings from each phase
 - Expert recommendations

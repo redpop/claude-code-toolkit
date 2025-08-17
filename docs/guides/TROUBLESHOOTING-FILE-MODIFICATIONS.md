@@ -44,7 +44,7 @@ All analysis commands now include explicit READ-ONLY constraints:
 
    - Note which command caused file modifications
    - List which files were created/modified
-   - Create an issue at: https://github.com/redpop/claude-code-toolkit/issues
+   - Create an issue at: <https://github.com/redpop/claude-code-toolkit/issues>
 
 2. **Temporary Workaround**:
    - Run analysis in a separate branch

@@ -37,6 +37,7 @@ Systematically execute fix commands from an action plan, with progress tracking 
 ### Phase 2: Execution
 
 **Progress Overview:**
+
 ```
 📊 Action Plan Status:
 - Total Tasks: {total_count}
@@ -46,12 +47,14 @@ Systematically execute fix commands from an action plan, with progress tracking 
 ```
 
 **Task Filtering (if filters applied):**
+
 - Apply `--min-roi`, `--max-roi`, `--focus` filters to pending tasks
 - Show filtered task list upfront
 
 **Using TodoWrite for Progress Tracking:**
 
 Initialize todo list with ALL tasks that will be executed:
+
 ```
 TodoWrite([
   {id: "task-1", content: "Fix security vulnerabilities", status: "completed"},  // - [x] in plan
@@ -63,6 +66,7 @@ TodoWrite([
 ```
 
 **Execution Overview Display:**
+
 ```
 🎯 Execution Plan (ROI ≥ 7.9):
 
@@ -86,21 +90,24 @@ Total: 3 tasks to execute
    - If dry-run: Show what would be done
 
 3. Handle results
-   - Success: 
+   - Success:
      - Update TodoWrite status to "completed"
      - **Update action plan**: Change `- [ ]` to `- [x]` using Edit tool
+
      ```
      Edit(action-plan.md, 
        old_string="- [ ] /prefix:command...",
        new_string="- [x] /prefix:command...")
      ```
-   - Failure: 
+
+   - Failure:
      - Log error, decide if critical
      - Leave checkbox as `- [ ]` with error note
-   - Skip: 
+   - Skip:
      - Mark as "skipped" with reason
 
 4. Progress report after each task:
+
    ```
    ✅ Completed: X/Y ({Z}%)
    🔄 Current: [task name]
@@ -108,6 +115,7 @@ Total: 3 tasks to execute
    ```
 
 **Final Summary:**
+
 ```
 🎉 Execution Complete!
 
@@ -123,6 +131,7 @@ Time: XX minutes
 ### Phase 3: Completion Report
 
 Generate summary using Task tool:
+
 ```
 Use Task tool with subagent_type="general-purpose":
 "Generate execution summary from these results: [execution log]. Include success rate, key achievements, failures, and next steps."
@@ -131,17 +140,20 @@ Use Task tool with subagent_type="general-purpose":
 ## Error Handling
 
 **Critical Failures** (stop execution):
+
 - Git conflicts
 - Build breakage
 - Test failures
 - Security vulnerabilities introduced
 
 **Non-Critical Failures** (continue):
+
 - Linting warnings
 - Documentation gaps
 - Style violations
 
 **Recovery Actions**:
+
 - Create checkpoint before risky operations
 - Offer rollback on critical failures
 - Log all errors for review
@@ -168,6 +180,7 @@ Use Task tool with subagent_type="general-purpose":
 ## Integration with Other Commands
 
 **Simplified 3-Step Workflow:**
+
 ```bash
 # 1. Analyze codebase
 /prefix:scan:deep . --export-json
@@ -183,6 +196,7 @@ Use Task tool with subagent_type="general-purpose":
 ```
 
 **Using --latest throughout:**
+
 ```bash
 # Execute most recent action plan
 /prefix:auto:execute --latest
@@ -196,6 +210,7 @@ Use Task tool with subagent_type="general-purpose":
 
 **Resuming Execution:**
 The command automatically detects completed tasks by reading the checkboxes in the action plan:
+
 - `- [x]` = Already completed (will be skipped)
 - `- [ ]` = Pending (will be executed)
 
@@ -212,6 +227,7 @@ The command automatically detects completed tasks by reading the checkboxes in t
 ## Real-time Progress
 
 The command provides real-time updates:
+
 - ✅ Completed tasks
 - 🔄 Current task in progress
 - ⏳ Pending tasks
@@ -219,6 +235,7 @@ The command provides real-time updates:
 - ⏭️ Skipped tasks
 
 Final report includes:
+
 - Total execution time
 - Success rate
 - Key improvements made
@@ -228,6 +245,7 @@ Final report includes:
 ## Progress Tracking
 
 **Checkbox-based State:**
+
 - The action plan itself is the source of truth
 - `- [ ]` = Task pending
 - `- [x]` = Task completed
@@ -235,12 +253,14 @@ Final report includes:
 - No separate state files needed
 
 **Benefits:**
+
 - Simple and visible progress tracking
 - Resume capability built into the action plan
 - Easy manual intervention if needed
 - Git-friendly (tracks changes to plan)
 
 **Example Action Plan with Progress:**
+
 ```markdown
 ## TASKS
 

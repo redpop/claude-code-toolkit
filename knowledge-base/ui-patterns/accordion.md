@@ -1,11 +1,13 @@
 # Accordion UI Pattern
 
 ## Overview
+
 An accordion is a vertically stacked list of headers that reveal or hide content sections when clicked.
 
 ## Content Block Configuration
 
 ### Basic Structure
+
 ```yaml
 name: vendor/accordion
 title: 'Accordion'
@@ -42,7 +44,9 @@ fields:
 ## Implementation Patterns
 
 ### Pattern 1: Global Settings (Recommended)
+
 Settings that affect all panels should be at the root level:
+
 ```yaml
 # Root level - affects all panels
 - identifier: first_expanded
@@ -53,7 +57,9 @@ Settings that affect all panels should be at the root level:
 ```
 
 ### Pattern 2: Per-Item Settings (Complex)
+
 Settings per panel add complexity:
+
 ```yaml
 # Inside collection - per panel
 fields:
@@ -64,6 +70,7 @@ fields:
 ## Frontend Templates
 
 ### Framework-Agnostic Structure
+
 ```html
 <div class="accordion-wrapper">
     <f:if condition="{data.vendor_accordion_title}">
@@ -89,6 +96,7 @@ fields:
 ```
 
 ### Data Attributes for JavaScript
+
 ```html
 <div class="accordion-container"
      data-allow-multiple="{f:if(condition: data.allow_multiple, then: '1', else: '0')}"
@@ -98,6 +106,7 @@ fields:
 ## Backend Preview Template
 
 ### Informative Preview
+
 ```html
 <div class="content-block-backend-preview">
     <strong>
@@ -149,6 +158,7 @@ fields:
 ## JavaScript Implementation Examples
 
 ### Vanilla JavaScript
+
 ```javascript
 class Accordion {
     constructor(element) {
@@ -219,6 +229,7 @@ document.querySelectorAll('.accordion-container').forEach(el => {
 ```
 
 ### See Framework-Specific Implementations
+
 - [Alpine.js Integration](../frameworks/alpine-js-integration.md)
 - React: Coming soon
 - Vue: Coming soon
@@ -226,6 +237,7 @@ document.querySelectorAll('.accordion-container').forEach(el => {
 ## Accessibility
 
 ### ARIA Attributes
+
 ```html
 <button class="accordion-header" 
         role="button"
@@ -242,6 +254,7 @@ document.querySelectorAll('.accordion-container').forEach(el => {
 ```
 
 ### Keyboard Navigation
+
 - Enter/Space: Toggle panel
 - Arrow keys: Navigate between headers
 - Home/End: Jump to first/last panel
@@ -249,6 +262,7 @@ document.querySelectorAll('.accordion-container').forEach(el => {
 ## CSS Styling
 
 ### Basic Styles
+
 ```css
 .accordion-item {
     border: 1px solid #e5e7eb;
@@ -292,22 +306,26 @@ document.querySelectorAll('.accordion-container').forEach(el => {
 ## Testing Checklist
 
 ### Functionality
+
 - [ ] Panels open and close correctly
 - [ ] First panel opens if configured
 - [ ] Multiple panels work if enabled
 - [ ] Single panel mode closes others
 
 ### Accessibility
+
 - [ ] Keyboard navigation works
 - [ ] ARIA attributes update correctly
 - [ ] Screen reader announces state changes
 
 ### Performance
+
 - [ ] Smooth animations
 - [ ] No layout shift
 - [ ] Fast interaction response
 
 ### Edge Cases
+
 - [ ] Empty accordion handled
 - [ ] Single panel accordion works
 - [ ] Long content doesn't break layout

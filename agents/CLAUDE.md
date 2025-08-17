@@ -9,6 +9,7 @@ Sub-Agents are specialized AI agents that provide domain-specific expertise for 
 ## Available Sub-Agents
 
 ### Core Analysis Agents
+
 - **ai-specialist**: AI integration expert specializing in prompt engineering and LLM optimization
 - **code-architect**: Analyzes system architecture and design patterns  
 - **performance-optimizer**: Identifies performance bottlenecks and optimizations
@@ -18,6 +19,7 @@ Sub-Agents are specialized AI agents that provide domain-specific expertise for 
 - **test-engineer**: Analyzes test coverage and testing strategies
 
 ### Specialized Agents
+
 - **debugging-specialist**: Expert in systematic debugging, log analysis, and root cause identification
 - **deployment-specialist**: CI/CD and deployment expert for automated pipelines and production troubleshooting
 - **documentation-health-specialist**: Analyzes documentation quality and code-doc synchronization
@@ -25,6 +27,7 @@ Sub-Agents are specialized AI agents that provide domain-specific expertise for 
 - **workflow-optimizer**: Developer workflow expert focused on productivity and reducing friction
 
 ### TYPO3 Specific Agents
+
 - **typo3-architect**: TYPO3 system architecture specialist
 - **typo3-content-blocks-specialist**: Content Blocks implementation expert
 - **typo3-extension-developer**: Extension development specialist
@@ -35,6 +38,7 @@ Sub-Agents are specialized AI agents that provide domain-specific expertise for 
 Each agent file must include:
 
 1. **Required Frontmatter Fields**:
+
    ```yaml
    ---
    name: agent-name  # REQUIRED by Claude Code
@@ -64,6 +68,7 @@ Use the standardized workflow for consistent agent creation:
 ```
 
 This ensures:
+
 1. Required frontmatter fields (`name`, `description`) are always present
 2. Consistent structure using `/templates/agent-template.md`
 3. Proper validation of agent names and types
@@ -73,6 +78,7 @@ This ensures:
 ### Manual Creation Steps
 
 If creating manually:
+
 1. Copy an existing agent or use template from `/templates/agent-template.md`
 2. Ensure `name` field is present in frontmatter (CRITICAL)
 3. Define clear expertise domain
@@ -90,11 +96,13 @@ If creating manually:
 ## Invocation Patterns
 
 Sub-agents are invoked through:
+
 1. Orchestration commands (`/flow:*`, `/scan:*`)
 2. Direct Task Tool invocation
 3. Hybrid architecture commands
 
 Example Task Tool invocation:
+
 ```markdown
 Use Task tool with subagent_type="security-specialist":
 "Perform a comprehensive security audit of the codebase focusing on OWASP Top 10 vulnerabilities."
@@ -111,6 +119,7 @@ Use Task tool with subagent_type="security-specialist":
 ## Testing Agents
 
 After creating an agent:
+
 1. Install locally: `./install.sh <prefix>`
 2. Test via orchestration command
 3. Verify output format

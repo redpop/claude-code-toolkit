@@ -255,6 +255,7 @@ describe("UserService", () => {
    - Cleanup
 
 3. **Mock Generation**:
+
    ```javascript
    // Auto-generate mocks for imports
    jest.mock("./database", () => ({

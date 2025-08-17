@@ -5,6 +5,7 @@ This directory contains tests for pre-defined workflows and pipelines.
 ## Purpose
 
 Workflow tests verify complete user scenarios:
+
 - Pre-built pipelines work correctly
 - Workflows produce expected results
 - User journeys are smooth
@@ -32,6 +33,7 @@ done
 ## Test Strategy
 
 Each workflow test should:
+
 1. Set up a test scenario
 2. Execute the workflow
 3. Verify expected outputs

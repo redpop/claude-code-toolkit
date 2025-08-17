@@ -288,6 +288,7 @@ const ISSUE_COMMAND_MAPPING = {
    - Finally work on 🟢 Enhancements
 
 3. **After completion, run**:
+
    ```bash
    /global:workflow:completion-report --action-plan=action-plan-{timestamp}.md
    ```

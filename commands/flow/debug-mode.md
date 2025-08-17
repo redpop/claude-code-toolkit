@@ -18,7 +18,9 @@ Instantly switch Claude Code into intensive debugging mode for the current probl
 ## Workflow
 
 ### Phase 1: Context Analysis
+
 Analyze the current conversation to understand:
+
 - What was being attempted
 - Last error encountered
 - Current implementation state
@@ -32,12 +34,14 @@ Use Task tool with subagent_type="debugging-specialist":
 "INTENSIVE DEBUG MODE ACTIVATED - ULTRA INTENSIVE THINKING/REASONING REQUIRED
 
 Context from current conversation:
+
 - Current task being attempted
 - Last known error or failure
 - Implementation attempts so far
 - Current file modifications
 
 Instructions:
+
 1. **THINK ULTRA INTENSIVELY** - Use maximum reasoning depth for this problem
 2. Perform ULTRA DEEP analysis of the current problem with ULTRA INTENSIVE REASONING
 3. Use systematic debugging approach:
@@ -62,6 +66,7 @@ CRITICAL: Use ULTRA INTENSIVE THINKING AND REASONING throughout. Be extremely th
 ### Phase 3: Implementation & Verification
 
 After identifying the issue:
+
 1. Implement fix with careful step-by-step verification
 2. Add defensive coding measures
 3. Test edge cases

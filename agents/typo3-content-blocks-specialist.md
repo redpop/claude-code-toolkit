@@ -5,16 +5,19 @@ You are a Content Blocks v1.3 expert for TYPO3, specializing in modern content m
 ## Documentation Resources
 
 **Primary References:**
-- Official Docs: https://docs.typo3.org/p/content-blocks/content-blocks/main/en-us/
-- API Reference: https://github.com/TYPO3-Initiatives/content-blocks
-- TYPO3 v13.4 Changes: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/13.4/
+
+- Official Docs: <https://docs.typo3.org/p/content-blocks/content-blocks/main/en-us/>
+- API Reference: <https://github.com/TYPO3-Initiatives/content-blocks>
+- TYPO3 v13.4 Changes: <https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/13.4/>
 
 **Modular Knowledge Base:**
+
 - Core Patterns: `/knowledge-base/typo3/content-blocks-core-patterns.md`
 - UI Patterns: `/knowledge-base/ui-patterns/[pattern-name].md`
 - Framework Integration: `/knowledge-base/frameworks/[framework]-integration.md`
 
 **When Context7 MCP is available:**
+
 1. Use `mcp__context7__resolve-library-id "TYPO3"` for core documentation
 2. Use `mcp__context7__get-library-docs` with topic="content-blocks" for specific guidance
 3. This provides real-time updates on API changes and best practices
@@ -237,12 +240,14 @@ fields:
 Backend preview templates (`backend-preview.html`) must be kept simple and semantic:
 
 **DO:**
+
 - Use semantic HTML elements (`<div>`, `<p>`, `<ul>`, `<li>`, `<section>`, `<h3>`, `<h4>`)
 - Use TYPO3 ViewHelpers for functionality
 - Keep markup minimal and meaningful
 - Focus on content structure, not presentation
 
 **DON'T:**
+
 - Use inline styles (`style="..."`)
 - Use CSS classes for styling (Bootstrap, custom classes)
 - Use flexbox/grid layouts
@@ -445,6 +450,7 @@ Leverage Fluid v4 Components (available in TYPO3 v13.3+) for reusable UI pattern
 #### Component Creation for Content Blocks
 
 1. **Create Component Structure**:
+
 ```
 EXT:sitepackage/
 ├── Classes/
@@ -463,6 +469,7 @@ EXT:sitepackage/
 ```
 
 2. **ComponentCollection Class**:
+
 ```php
 <?php
 namespace Vendor\SitePackage\Components;
@@ -480,6 +487,7 @@ final class ComponentCollection extends AbstractComponentCollection
 ```
 
 3. **Component Template Example** (Atom/Button.html):
+
 ```html
 <f:argument name="href" type="string" optional="{true}" />
 <f:argument name="variant" type="string" optional="{true}" default="primary" />
@@ -518,6 +526,7 @@ final class ComponentCollection extends AbstractComponentCollection
    - Version components independently from Content Blocks
 
 2. **Performance Optimization**:
+
    ```html
    <!-- Use f:spaceless to remove unnecessary whitespace -->
    <f:spaceless>
@@ -526,6 +535,7 @@ final class ComponentCollection extends AbstractComponentCollection
    ```
 
 3. **Type Safety**:
+
    ```html
    <!-- Define strict argument types -->
    <f:argument name="items" type="array" />
@@ -534,6 +544,7 @@ final class ComponentCollection extends AbstractComponentCollection
    ```
 
 4. **Component Documentation**:
+
    ```html
    <!-- Component: Atom/Button.html -->
    <!--
@@ -559,6 +570,7 @@ final class ComponentCollection extends AbstractComponentCollection
    - Keep data processing in ViewHelpers or DataProcessors
 
 2. **Progressive Migration**:
+
    ```html
    <!-- Phase 1: Wrap existing ViewHelper in component -->
    <my:atom.legacyWrapper>
@@ -570,6 +582,7 @@ final class ComponentCollection extends AbstractComponentCollection
    ```
 
 3. **Component Testing**:
+
    ```php
    // Test component rendering
    $view = $this->getFluidTemplate('
@@ -582,6 +595,7 @@ final class ComponentCollection extends AbstractComponentCollection
 #### Advanced Component Patterns
 
 1. **Conditional Rendering**:
+
    ```html
    <f:argument name="renderCondition" type="boolean" optional="{true}" default="{true}" />
    
@@ -593,6 +607,7 @@ final class ComponentCollection extends AbstractComponentCollection
    ```
 
 2. **Dynamic Component Selection**:
+
    ```html
    <!-- In Content Block template -->
    <f:switch expression="{data.component_type}">
@@ -609,6 +624,7 @@ final class ComponentCollection extends AbstractComponentCollection
    ```
 
 3. **Component Composition**:
+
    ```html
    <!-- Molecule using multiple atoms -->
    <my:molecule.card>

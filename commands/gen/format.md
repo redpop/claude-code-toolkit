@@ -67,7 +67,7 @@ Instructions:
      - > must become &gt;
      - " must become &quot;
      - ' must become &#39;
-       This is MANDATORY for valid HTML. Examples: 
+       This is MANDATORY for valid HTML. Examples:
        - "if (x < 5 && y > 3)" must become "if (x &lt; 5 &amp;&amp; y &gt; 3)"
        - "name && age" must become "name &amp;&amp; age"
        No CSS, no JavaScript. Use only semantic elements (header, nav, main, article, section, aside, footer, h1-h6, p, ul, ol, li, dl, dt, dd, blockquote, figure, figcaption, table, thead, tbody, tr, th, td, form, label, fieldset, legend, details, summary, mark, time, code, pre, kbd, samp, var, etc.). NEVER use DIV, SPAN or other non-semantic wrapper elements. For line breaks, always use self-closing `<br />` tags.
@@ -93,20 +93,20 @@ Instructions:
          ]]></ac:plain-text-body>
        </ac:structured-macro>
      - Language parameter mapping:
-       * JavaScript/TypeScript: language="js"
-       * Bash/Shell: language="bash"
-       * Python: language="python"
-       * Java: language="java"
-       * HTML/XML: language="xml"
-       * CSS: language="css"
-       * SQL: language="sql"
-       * JSON: language="json"
-       * YAML: language="yaml"
-       * Default/Unknown: language="text"
+       - JavaScript/TypeScript: language="js"
+       - Bash/Shell: language="bash"
+       - Python: language="python"
+       - Java: language="java"
+       - HTML/XML: language="xml"
+       - CSS: language="css"
+       - SQL: language="sql"
+       - JSON: language="json"
+       - YAML: language="yaml"
+       - Default/Unknown: language="text"
      - Title parameter is OPTIONAL - adds a heading/caption above the code block in Confluence
-       * Use for descriptive titles like "Installation Script", "Configuration Example", "API Response"
-       * Only include <ac:parameter ac:name="title"> when a title adds value
-       * If no title needed, omit the entire title parameter line
+       - Use for descriptive titles like "Installation Script", "Configuration Example", "API Response"
+       - Only include <ac:parameter ac:name="title"> when a title adds value
+       - If no title needed, omit the entire title parameter line
      - IMPORTANT: All code content must be wrapped in CDATA tags (no escaping needed inside CDATA)
      - NO complex panels or other macros
      - Keep structure FLAT and SIMPLE - minimal nesting

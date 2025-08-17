@@ -1,11 +1,13 @@
 # Alpine.js Integration with TYPO3 Content Blocks
 
 ## Overview
+
 Alpine.js is a lightweight JavaScript framework ideal for adding interactivity to server-rendered HTML. This guide covers integration patterns specific to Alpine.js with TYPO3 Content Blocks.
 
 ## Setup
 
 ### CDN Inclusion
+
 ```html
 <!-- In your Fluid template -->
 <f:asset.script identifier="alpine-js" 
@@ -15,6 +17,7 @@ Alpine.js is a lightweight JavaScript framework ideal for adding interactivity t
 ```
 
 ### With Tailwind CSS v4
+
 ```html
 <!-- Note: Tailwind v4 CDN must be included as script, not CSS -->
 <f:asset.script identifier="tailwind-css" 
@@ -25,13 +28,16 @@ Alpine.js is a lightweight JavaScript framework ideal for adding interactivity t
 ## Fluid/Alpine Integration Patterns
 
 ### Critical: Separation of Concerns
+
 Alpine.js and Fluid operate at different times:
+
 - Fluid: Server-side, during template rendering
 - Alpine.js: Client-side, in the browser
 
 **Never mix Fluid ViewHelpers inside Alpine.js expressions!**
 
 ### Data Transfer Pattern
+
 Use data attributes to pass Fluid data to Alpine.js:
 
 ```html
@@ -56,6 +62,7 @@ function componentName() {
 ## Component Patterns
 
 ### Basic Interactive Component
+
 ```html
 <div x-data="{ open: false }">
     <button @click="open = !open">Toggle</button>
@@ -64,6 +71,7 @@ function componentName() {
 ```
 
 ### Component with Fluid Data
+
 ```html
 <div x-data="accordionComponent()"
      data-allow-multiple="{f:if(condition: data.allow_multiple, then: '1', else: '0')}"
@@ -116,6 +124,7 @@ function accordionComponent() {
 ## Alpine.js Directives Reference
 
 ### Core Directives
+
 - `x-data`: Initialize component state
 - `x-show`: Toggle visibility (display: none)
 - `x-if`: Conditional rendering (adds/removes from DOM)
@@ -128,6 +137,7 @@ function accordionComponent() {
 - `x-transition`: Animations
 
 ### Transition Effects
+
 ```html
 <div x-show="open"
      x-transition:enter="transition ease-out duration-200"
@@ -143,13 +153,16 @@ function accordionComponent() {
 ## Common Pitfalls & Solutions
 
 ### 1. Fluid Expression in JavaScript
+
 **Problem:**
+
 ```javascript
 // ❌ Causes syntax error
 x-data="{ active: <f:if condition='{data.active}' then='true' else='false' /> }"
 ```
 
 **Solution:**
+
 ```javascript
 // ✅ Use data attributes
 data-active="{f:if(condition: data.active, then: '1', else: '0')}"
@@ -157,20 +170,25 @@ x-data="{ active: $el.dataset.active === '1' }"
 ```
 
 ### 2. String vs Boolean Confusion
+
 **Problem:**
+
 ```javascript
 // ❌ String '0' is truthy in JavaScript
 if (this.$el.dataset.setting) { /* Always true */ }
 ```
 
 **Solution:**
+
 ```javascript
 // ✅ Explicit comparison
 if (this.$el.dataset.setting === '1') { /* Works correctly */ }
 ```
 
 ### 3. Iterating with Indices
+
 **Problem:**
+
 ```html
 <!-- ❌ No index available -->
 <f:for each="{items}" as="item">
@@ -178,6 +196,7 @@ if (this.$el.dataset.setting === '1') { /* Works correctly */ }
 ```
 
 **Solution:**
+
 ```html
 <!-- ✅ Use iteration helper -->
 <f:for each="{items}" as="item" iteration="iter">
@@ -185,9 +204,11 @@ if (this.$el.dataset.setting === '1') { /* Works correctly */ }
 ```
 
 ### 4. Alpine Not Initializing
+
 **Problem:** Alpine code runs before Alpine.js loads
 
 **Solution:** Use defer attribute
+
 ```html
 <f:asset.script identifier="alpine-js" 
                 src="..." 
@@ -198,6 +219,7 @@ if (this.$el.dataset.setting === '1') { /* Works correctly */ }
 ## Testing & Debugging
 
 ### Browser Console Commands
+
 ```javascript
 // Get Alpine component data
 document.querySelector('[x-data]')._x_dataStack
@@ -210,6 +232,7 @@ Alpine.version
 ```
 
 ### Debug Output
+
 ```html
 <!-- Show component state -->
 <div x-data="{ items: [1,2,3] }">
@@ -220,10 +243,12 @@ Alpine.version
 ## Performance Considerations
 
 ### 1. Use x-show vs x-if
+
 - `x-show`: Faster toggling, keeps in DOM
 - `x-if`: Removes from DOM, better for large content
 
 ### 2. Defer Complex Initialization
+
 ```javascript
 init() {
     // Defer heavy operations
@@ -234,6 +259,7 @@ init() {
 ```
 
 ### 3. Avoid Deep Reactivity
+
 ```javascript
 // Prefer flat state structure
 x-data="{
@@ -250,13 +276,16 @@ x-data="{
 ## Migration Guide
 
 ### To React/Vue
+
 When migrating from Alpine.js:
+
 1. Data attributes remain the same
 2. Replace Alpine directives with framework equivalents
 3. Move inline functions to component methods
 4. Convert x-data to component state
 
 ### Example Migration Map
+
 | Alpine.js | React | Vue |
 |-----------|-------|-----|
 | x-data | useState | data() |

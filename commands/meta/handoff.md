@@ -8,6 +8,7 @@ argument-hint: [output-file] [-c|--compact] [-t|--technical] [--focus topic] [--
 This command analyzes the current chat history to extract and document the latest unresolved problem, providing comprehensive context for another AI assistant to continue the work.
 
 ⚠️ **IMPORTANT SAFETY NOTICE**: This is a READ-ONLY analysis command that:
+
 - **NEVER modifies any code or files** (except creating the handoff document)
 - **ONLY analyzes and summarizes** the current conversation
 - **ONLY creates ONE output file** with the handoff documentation
@@ -426,6 +427,7 @@ The command automatically adapts based on project type:
 5. **DO NOT run any bash commands except to verify output file creation**
 
 The command should:
+
 - Analyze the conversation using only READ operations
 - Extract and summarize information
 - Write ONLY the handoff document

@@ -1,6 +1,7 @@
 # TYPO3 v13 Sitepackage Installation & Setup Guide
 
 ## Overview
+
 This guide provides comprehensive instructions for creating, configuring, and installing a TYPO3 v13 sitepackage extension. A sitepackage is the foundation of any TYPO3 project, containing templates, configurations, and assets.
 
 ## Prerequisites
@@ -13,6 +14,7 @@ This guide provides comprehensive instructions for creating, configuring, and in
 ## Step 1: Generate Sitepackage Structure
 
 ### Option A: Using TYPO3 Sitepackage Builder
+
 1. Visit [https://get.typo3.org/sitepackage/new/](https://get.typo3.org/sitepackage/new/)
 2. Fill in the form:
    - **Vendor Name**: Your company/organization (e.g., `punktde`)
@@ -23,6 +25,7 @@ This guide provides comprehensive instructions for creating, configuring, and in
 4. Extract to `packages/` directory in your TYPO3 project
 
 ### Option B: Manual Creation
+
 Create the following directory structure in `packages/{vendor}/{package}/`:
 
 ```
@@ -356,6 +359,7 @@ ddev exec chmod -R 644 packages/punktde/sitepackage/**/*.{php,yaml,html,css,js}
 **Symptom**: Composer can't find the package
 
 **Solution**:
+
 ```bash
 # Check if path is correct
 ls -la packages/punktde/sitepackage/
@@ -372,6 +376,7 @@ ddev composer update
 **Symptom**: PHP class autoloading errors
 
 **Solution**:
+
 ```bash
 # Regenerate autoload files
 ddev composer dump-autoload
@@ -385,6 +390,7 @@ ddev exec vendor/bin/typo3 cache:flush
 **Symptom**: Blank pages or missing templates
 
 **Solution**:
+
 1. Check Site Sets configuration
 2. Verify template paths in settings.yaml
 3. Clear all caches
@@ -395,6 +401,7 @@ ddev exec vendor/bin/typo3 cache:flush
 **Symptom**: SQL errors or missing tables
 
 **Solution**:
+
 ```bash
 # Update database schema
 ddev exec vendor/bin/typo3 database:updateschema

@@ -27,7 +27,7 @@ Or with options:
 
 ## What This Command Does
 
-### Standard Mode (default):
+### Standard Mode (default)
 
 1. Unless specified with `--no-verify`, automatically runs any configured pre-commit checks or hooks if they exist in the project
 2. Checks which files are staged with `git status`
@@ -39,7 +39,7 @@ Or with options:
 8. No Claude co-authorship footer is added
 9. If `--push` is specified, automatically pushes to the remote repository
 
-### Fast Mode (--fast):
+### Fast Mode (--fast)
 
 When using `--fast` option, the workflow changes:
 
@@ -189,7 +189,7 @@ Example of splitting commits:
 
 ## Important Notes
 
-### Standard Mode:
+### Standard Mode
 
 - By default, any configured pre-commit checks or hooks will run to ensure code quality
 - If pre-commit checks fail, you'll be asked if you want to proceed with the commit anyway or fix the issues first
@@ -202,7 +202,7 @@ Example of splitting commits:
 - No Claude co-authorship footer is added
 - If `--push` is used, the commit will be pushed to the remote repository automatically
 
-### Fast Mode (--fast):
+### Fast Mode (--fast)
 
 - Pre-commit checks or hooks still run by default (use `--no-verify` to skip)
 - Files must be already staged - no automatic staging
@@ -213,7 +213,7 @@ Example of splitting commits:
 - No Claude co-authorship footer is added
 - Can be combined with `--push` for a complete commit-and-push workflow
 
-### Push Mode (--push):
+### Push Mode (--push)
 
 When using `--push` option:
 

@@ -18,16 +18,19 @@
 ### Problem: Database Table Creation Issues
 
 #### Symptom
+
 ```
 Table 'db.punktde_items' doesn't exist
 ```
 
 #### Diagnosis Steps
+
 1. Check collection field identifier in `config.yaml`
 2. Verify table name is descriptive
 3. Check database for created tables
 
 #### Solution
+
 ```yaml
 # ❌ BAD - Too generic
 - identifier: items
@@ -39,6 +42,7 @@ Table 'db.punktde_items' doesn't exist
 ```
 
 #### Verification
+
 See [Commands Reference](./references/commands-reference.md#database-commands) for table verification.
 
 ---
@@ -46,17 +50,20 @@ See [Commands Reference](./references/commands-reference.md#database-commands) f
 ### Problem: JavaScript/Alpine.js Errors
 
 #### Symptom
+
 ```
 Alpine Expression Error: Unexpected token 'if'
 Uncaught SyntaxError: Unexpected token '<'
 ```
 
 #### Diagnosis Steps
+
 1. Check for Fluid ViewHelpers in JavaScript
 2. Verify data attribute pattern usage
 3. Check Alpine.js loading order
 
 #### Solution
+
 ```html
 <!-- ❌ WRONG -->
 <div x-data="{ active: <f:if condition='{data.field}' then='true' else='false' /> }">
@@ -80,14 +87,17 @@ function accordionComponent() {
 ### Problem: Field Data Not Accessible
 
 #### Symptom
+
 - Empty values in template
 - `{data.field}` shows nothing
 - Debug shows different field names
 
 #### Diagnosis Steps
+
 See [Field Naming Reference](./references/field-naming-reference.md#debug-field-names) for debugging field names.
 
 #### Common Patterns
+
 See [Field Naming Reference](./references/field-naming-reference.md#complete-access-pattern-reference) for field access patterns.
 
 ---
@@ -95,11 +105,13 @@ See [Field Naming Reference](./references/field-naming-reference.md#complete-acc
 ### Problem: Cache Not Clearing
 
 #### Symptom
+
 - Changes not visible after clearing cache
 - Old content still showing
 - Database changes not reflected
 
 #### Progressive Solutions
+
 See [Commands Reference](./references/commands-reference.md#cache-management) for all cache clearing levels.
 
 ---
@@ -107,11 +119,13 @@ See [Commands Reference](./references/commands-reference.md#cache-management) fo
 ### Problem: Backend Preview Issues
 
 #### Symptom
+
 - Raw data shown in backend
 - No formatted preview
 - Missing icons or styling
 
 #### Solution Structure
+
 See [Backend Preview Reference](./references/backend-preview-reference.md) for complete template examples.
 
 ---
@@ -119,12 +133,14 @@ See [Backend Preview Reference](./references/backend-preview-reference.md) for c
 ## Debug Checklist
 
 ### Initial Setup
+
 - [ ] DDEV running: `ddev describe`
 - [ ] Database accessible: `ddev mysql -e "SHOW TABLES"`
 - [ ] TYPO3 accessible: Check `/typo3` backend
 - [ ] Logs checked: `ddev logs -f`
 
 ### Content Block Creation
+
 - [ ] Directory structure correct
 - [ ] config.yaml valid YAML
 - [ ] Templates in correct locations
@@ -132,12 +148,14 @@ See [Backend Preview Reference](./references/backend-preview-reference.md) for c
 - [ ] Icon file exists
 
 ### After Changes
+
 - [ ] Cache cleared: `ddev exec typo3 cache:flush`
 - [ ] Database updated: `ddev exec typo3 database:updateschema`
 - [ ] Browser cache cleared
 - [ ] Console errors checked
 
 ### Data Flow
+
 - [ ] Database table created
 - [ ] Data saved to database
 - [ ] Data loaded in template
@@ -147,14 +165,17 @@ See [Backend Preview Reference](./references/backend-preview-reference.md) for c
 ## Framework-Specific Issues
 
 ### Alpine.js
+
 See [Alpine.js Integration Guide](../frameworks/alpine-js-integration.md#common-pitfalls--solutions)
 
 ### React (Coming Soon)
+
 - Component not rendering
 - State management issues
 - Props not passing correctly
 
 ### Vue (Coming Soon)
+
 - Reactivity issues
 - Component registration
 - Template compilation errors
@@ -162,12 +183,14 @@ See [Alpine.js Integration Guide](../frameworks/alpine-js-integration.md#common-
 ## Performance Issues
 
 ### Slow Backend
+
 - Too many collection items
 - Missing indexes
 - Large RTE content
 - Solution: Pagination, lazy loading
 
 ### Slow Frontend
+
 - Too many DOM manipulations
 - Large JavaScript bundles
 - Missing asset optimization
@@ -176,12 +199,14 @@ See [Alpine.js Integration Guide](../frameworks/alpine-js-integration.md#common-
 ## Migration Issues
 
 ### From Mask/DCE
+
 - Field naming differences
 - Template structure changes
 - TCA configuration conflicts
 - Solution: Step-by-step migration guide
 
 ### Version Upgrades
+
 - Breaking changes in Content Blocks
 - TYPO3 core changes
 - Extension conflicts
@@ -190,6 +215,7 @@ See [Alpine.js Integration Guide](../frameworks/alpine-js-integration.md#common-
 ## Getting Help
 
 ### Information to Provide
+
 1. TYPO3 version
 2. Content Blocks version
 3. Error messages (exact)
@@ -198,4 +224,5 @@ See [Alpine.js Integration Guide](../frameworks/alpine-js-integration.md#common-
 6. Debug output
 
 ### Debug Commands
+
 See [Commands Reference](./references/commands-reference.md) for all debugging commands.

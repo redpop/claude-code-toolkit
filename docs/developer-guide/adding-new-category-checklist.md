@@ -5,6 +5,7 @@ When adding a new category of commands (like TYPO3, Laravel, Vue, etc.), ensure 
 ## ✅ Required Updates
 
 ### 1. Core Meta Commands
+
 - [ ] **`/commands/meta/find-cmd.md`** - Add keyword section with:
   - Category name and icon
   - All relevant keywords and synonyms
@@ -12,19 +13,23 @@ When adding a new category of commands (like TYPO3, Laravel, Vue, etc.), ensure 
   - List of specialized agents
 
 ### 2. Documentation
+
 - [ ] **`README.md`** - Update command categories section
 - [ ] **`CLAUDE.md`** - Add to "Current Command Categories" section
 - [ ] **`docs/README.md`** - Update documentation index
 
 ### 3. Installation & Discovery
+
 - [ ] **`install.sh`** - Ensure new category is properly installed
 - [ ] **`scripts/update-readme.sh`** - Verify it captures new commands
 
 ### 4. Templates & Examples
+
 - [ ] Create category-specific command template if needed
 - [ ] Add example workflows to `docs/guides/`
 
 ### 5. Testing
+
 - [ ] Test `find-cmd` with category keywords
 - [ ] Verify all commands are discoverable
 - [ ] Test installation with fresh prefix

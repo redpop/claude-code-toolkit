@@ -183,7 +183,7 @@ After completion of security analysis (regardless of method used):
 
 Include in report based on analysis method:
 
-### With Semgrep MCP:
+### With Semgrep MCP
 
 ```markdown
 ✅ **High-Accuracy Analysis**: Using Semgrep's AST-based scanning
@@ -191,7 +191,7 @@ Include in report based on analysis method:
 ✅ **Low False Positive Rate**: Advanced semantic analysis
 ```
 
-### With Local Semgrep:
+### With Local Semgrep
 
 ```markdown
 ⚡ **Good Analysis Quality**: Using local Semgrep installation
@@ -199,7 +199,7 @@ Include in report based on analysis method:
 ⚠️ **Note**: Consider installing Semgrep MCP for faster analysis
 ```
 
-### With Pattern-Based:
+### With Pattern-Based
 
 ```markdown
 ⚠️ **Basic Analysis**: Using pattern matching (reduced accuracy)

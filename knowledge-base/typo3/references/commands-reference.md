@@ -3,11 +3,13 @@
 ## Cache Management
 
 ### Standard Cache Clear
+
 ```bash
 ddev exec typo3 cache:flush
 ```
 
 ### Aggressive Cache Clear
+
 ```bash
 # Remove all cache files
 ddev exec rm -rf var/cache/*
@@ -15,6 +17,7 @@ ddev exec typo3 cache:flush
 ```
 
 ### Full System Reset
+
 ```bash
 # Complete cache and temp clear
 ddev exec rm -rf var/cache/*
@@ -24,6 +27,7 @@ ddev exec typo3 database:updateschema
 ```
 
 ### Container Restart (Last Resort)
+
 ```bash
 ddev stop
 ddev start
@@ -32,6 +36,7 @@ ddev start
 ## Database Commands
 
 ### Show Tables
+
 ```bash
 # Show all tables with specific prefix
 ddev mysql -e "SHOW TABLES LIKE '%punktde%'"
@@ -41,6 +46,7 @@ ddev mysql -e "SHOW TABLES"
 ```
 
 ### Inspect Table Structure
+
 ```bash
 # Describe table structure
 ddev mysql -e "DESCRIBE punktde_accordion_items"
@@ -50,6 +56,7 @@ ddev mysql -e "SHOW CREATE TABLE punktde_accordion_items"
 ```
 
 ### Database Schema Update
+
 ```bash
 ddev exec typo3 database:updateschema
 ```
@@ -57,6 +64,7 @@ ddev exec typo3 database:updateschema
 ## System Information
 
 ### DDEV Status
+
 ```bash
 # Check DDEV environment
 ddev describe
@@ -66,6 +74,7 @@ ddev logs -f
 ```
 
 ### TYPO3 Status
+
 ```bash
 # List all TYPO3 commands
 ddev exec typo3 list
@@ -77,6 +86,7 @@ ddev exec typo3 extension:list
 ## Development Commands
 
 ### Extension Setup
+
 ```bash
 # Activate extensions
 vendor/bin/typo3 extension:setup
@@ -87,6 +97,7 @@ ddev exec typo3 database:updateschema
 ```
 
 ### Composer Operations
+
 ```bash
 # Require local sitepackage
 composer require vendor/package:@dev
@@ -98,6 +109,7 @@ composer dump-autoload
 ## Debugging Commands
 
 ### PHP Debugging
+
 ```bash
 # Check PHP configuration
 ddev exec php -i | grep -i xdebug
@@ -107,6 +119,7 @@ ddev exec tail -f var/log/typo3_*.log
 ```
 
 ### MySQL Debugging
+
 ```bash
 # Check running queries
 ddev mysql -e "SHOW PROCESSLIST"

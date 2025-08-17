@@ -5,6 +5,7 @@ This directory contains tests for individual sub-agents.
 ## Structure
 
 Each agent should have its own test file:
+
 - `test-security-specialist.sh`
 - `test-performance-optimizer.sh`
 - `test-code-architect.sh`

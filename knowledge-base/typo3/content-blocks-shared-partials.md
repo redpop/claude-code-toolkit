@@ -1,11 +1,13 @@
 # Content Blocks Shared Partials Configuration
 
 ## Overview
+
 Content Blocks can use shared partials from the sitepackage to avoid redundancy and maintain consistency across the project.
 
 ## TypoScript Configuration
 
 ### Configure Shared Partial Paths
+
 Add to your sitepackage's TypoScript configuration (e.g., `ContentBlocks.typoscript`):
 
 ```typoscript
@@ -28,6 +30,7 @@ tt_content {
 ```
 
 ## Usage in Content Blocks
+
 In Content Block templates (`frontend.html`):
 
 ```html
@@ -89,6 +92,7 @@ Example accordion component partial (`Partials/Components/Accordion/Accordion.ht
 ## Path Resolution Order
 
 TYPO3 checks paths in descending numerical order:
+
 ```
 200 = EXT:my_extension/Resources/Private/Partials/  # Checked first
 100 = EXT:sitepackage/Resources/Private/Partials/   # Checked second
@@ -98,14 +102,18 @@ TYPO3 checks paths in descending numerical order:
 ## Important Notes
 
 ### Fluid v4.3 Compatibility
+
 - The `fc:component` syntax does NOT exist in Fluid v4.3 (experimental feature)
 - Use standard `f:render partial=""` instead
 
 ### Cache Clearing
+
 See [Commands Reference](./references/commands-reference.md#cache-management) for cache clearing after TypoScript changes.
 
 ### Error: "The Fluid template files could not be loaded"
+
 This error indicates the partial path is not configured correctly. Check:
+
 1. TypoScript configuration is loaded
 2. Path in `partialRootPaths` is correct
 3. Partial file exists at the specified location

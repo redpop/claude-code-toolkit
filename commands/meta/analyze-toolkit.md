@@ -10,6 +10,7 @@ This command performs a comprehensive analysis of the Claude Code Toolkit itself
 ## Purpose
 
 As the toolkit grows with new commands and agents, it's essential to periodically analyze the codebase for:
+
 - Redundant or overlapping functionality
 - Inconsistent patterns or naming conventions
 - Opportunities for consolidation and refactoring
@@ -24,6 +25,7 @@ As the toolkit grows with new commands and agents, it's essential to periodicall
 
 Use Task tool with subagent_type="general-purpose":
 "Analyze all command files in the toolkit:
+
 1. Read and parse all .md files in commands/ directory
 2. Extract and validate frontmatter for each command:
    - Check for required fields (description, argument-hint)
@@ -43,6 +45,7 @@ Return structured data with all findings."
 
 Use Task tool with subagent_type="general-purpose":
 "Analyze all agent files in agents/ directory:
+
 1. Parse each agent definition
 2. Extract key characteristics:
    - Expertise areas
@@ -63,6 +66,7 @@ Return structured analysis data."
 
 Use Task tool with subagent_type="code-architect":
 "Analyze the command and agent data for redundancies:
+
 1. Semantic similarity analysis:
    - Commands with similar descriptions
    - Commands with overlapping functionality
@@ -83,6 +87,7 @@ Provide specific recommendations for each redundancy found."
 
 Use Task tool with subagent_type="general-purpose":
 "Perform consistency and quality checks:
+
 1. Naming conventions:
    - Command naming patterns (verb-noun, action-oriented)
    - Category naming consistency
@@ -105,6 +110,7 @@ Rate each area and provide specific improvements."
 
 Use Task tool with subagent_type="general-purpose":
 "Analyze toolkit evolution and trends:
+
 1. Growth metrics:
    - Commands added over time (using git history if available)
    - Category expansion patterns
@@ -127,6 +133,7 @@ Provide trend analysis and forward-looking recommendations."
 
 Use Task tool with subagent_type="report-analyzer":
 "Synthesize all analysis results into actionable refactoring plan:
+
 1. Prioritized issue list:
    - [CRITICAL] Breaking issues or major inconsistencies
    - [HIGH] Significant redundancies or quality issues
@@ -147,6 +154,7 @@ Use Task tool with subagent_type="report-analyzer":
    - Migration requirements
 
 Format as both:
+
 - Markdown report for human review
 - JSON structure for automated processing"
 
@@ -156,6 +164,7 @@ If --fix flag is provided:
 
 Use Task tool with subagent_type="refactoring-expert":
 "Apply safe, non-breaking fixes automatically:
+
 1. Fix missing or malformed frontmatter
 2. Standardize Task tool invocation syntax
 3. Update inconsistent naming (with user confirmation)
@@ -163,6 +172,7 @@ Use Task tool with subagent_type="refactoring-expert":
 5. Generate deprecation notices where needed
 
 Only apply fixes that:
+
 - Don't change functionality
 - Don't break existing usage
 - Improve consistency and quality
@@ -171,6 +181,7 @@ Report all changes made."
 ## Output Format
 
 ### Default Output (Terminal)
+
 ```
 ═══════════════════════════════════════════════════
     CLAUDE CODE TOOLKIT ANALYSIS REPORT
@@ -219,6 +230,7 @@ Report all changes made."
 ```
 
 ### JSON Export (--export-json)
+
 ```json
 {
   "timestamp": "2024-01-15T10:30:00Z",
@@ -248,6 +260,7 @@ Report all changes made."
 ```
 
 ### Markdown Export (--export-md)
+
 Full detailed report with code examples, detailed explanations, and implementation guidance.
 
 ## Options
@@ -289,6 +302,7 @@ Full detailed report with code examples, detailed explanations, and implementati
 ## Integration
 
 This command integrates with:
+
 - `/prefix:meta:health` - For overall project health
 - `/prefix:meta:chain` - Can be part of maintenance pipelines
 - `/prefix:auto:monitor` - For continuous toolkit quality monitoring

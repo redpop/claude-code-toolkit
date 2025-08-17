@@ -111,7 +111,8 @@ Step-by-step migration guide
 
 ### Official TYPO3 v13 Sitepackage Template
 
-The official template from https://get.typo3.org/sitepackage serves as the reference implementation:
+The official template from <https://get.typo3.org/sitepackage> serves as the reference implementation:
+
 - Site Sets configuration with config.yaml, settings.yaml, and setup.typoscript
 - PAGEVIEW content object for page rendering
 - Proper directory structure for Resources/Private/PageView/

@@ -33,6 +33,7 @@ Use Task tool with subagent_type="debugging-specialist":
 Problem Description: $ARGUMENTS
 
 Instructions:
+
 1. **THINK ULTRA DEEPLY** about this problem - use maximum reasoning depth
 2. Apply Five Whys analysis with ULTRA INTENSIVE REASONING at each level:
    - Ask 'Why did this happen?' with ultra deep thinking
@@ -58,6 +59,7 @@ CRITICAL: Use ULTRA INTENSIVE THINKING throughout. Think ultra deeply about ever
 ### Phase 2: Solution Implementation Planning
 
 After root cause identification:
+
 - Develop immediate fixes
 - Create long-term prevention strategies
 - Design monitoring for early detection

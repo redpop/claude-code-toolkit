@@ -3,6 +3,7 @@
 ## Basic Structure
 
 ### Minimal Template
+
 ```html
 <html data-namespace-typo3-fluid="true"
       xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
@@ -14,6 +15,7 @@
 ```
 
 ### Full Template with Namespaces
+
 ```html
 <html data-namespace-typo3-fluid="true"
       xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
@@ -29,6 +31,7 @@
 ## Common Elements
 
 ### Title with Icon
+
 ```html
 <strong>
     <core:icon identifier="content-{blockname}" size="small" />
@@ -37,6 +40,7 @@
 ```
 
 ### Field Display with Condition
+
 ```html
 <f:if condition="{data.vendor_block_field}">
     <p><strong>Label:</strong> {data.vendor_block_field}</p>
@@ -44,6 +48,7 @@
 ```
 
 ### Collection Count
+
 ```html
 <f:if condition="{data.vendor_block_collection}">
     <p><strong>Items:</strong> {data.vendor_block_collection -> f:count()}</p>
@@ -51,6 +56,7 @@
 ```
 
 ### Collection Preview (First 3 Items)
+
 ```html
 <f:if condition="{data.vendor_block_items}">
     <ul>
@@ -69,6 +75,7 @@
 ## Complete Examples
 
 ### Accordion Backend Preview
+
 ```html
 <html data-namespace-typo3-fluid="true"
       xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
@@ -103,6 +110,7 @@
 ```
 
 ### Text Block Backend Preview
+
 ```html
 <html data-namespace-typo3-fluid="true"
       xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
@@ -134,6 +142,7 @@
 ## Styling Guidelines
 
 ### Recommended CSS Classes
+
 ```css
 .content-block-backend-preview {
     /* Container styling */
@@ -157,11 +166,13 @@
 ## ViewHelpers Reference
 
 ### Icon ViewHelper
+
 ```html
 <core:icon identifier="content-{name}" size="small|default|large" />
 ```
 
 ### Format ViewHelpers
+
 ```html
 <!-- Strip HTML tags -->
 <f:format.stripTags>{content}</f:format.stripTags>
@@ -177,6 +188,7 @@
 ```
 
 ### Count ViewHelper
+
 ```html
 {collection -> f:count()}
 ```
@@ -191,5 +203,6 @@
 6. **Handle empty states** - Use conditions to avoid empty displays
 
 ## Related Documentation
+
 - [Content Blocks Core Patterns](../content-blocks-core-patterns.md)
 - [Field Naming Reference](./field-naming-reference.md)

@@ -8,7 +8,8 @@
 ## Todo List (Prioritized by ROI)
 
 ### 🔴 Critical Security (8h)
-- [ ] **Input Sanitization** (3h) 
+
+- [ ] **Input Sanitization** (3h)
   - Command: `/global:fix:security --focus="xss,sanitization" --auto-fix`
   - Files: `src/components/*`, `src/utils/*`
   - Impact: Prevents XSS attacks in all user inputs
@@ -33,6 +34,7 @@
   - Dependencies: Server configuration access
 
 ### 🟡 Quick Wins (12h)
+
 - [ ] **Remove Code Duplication** (2h)
   - Command: `/global:fix:duplicates --file="src/utils/pdfExport.ts" --extract-common`
   - Lines saved: 140
@@ -64,6 +66,7 @@
   - Dependencies: Update tests
 
 ### 🟢 Enhancement (12h)
+
 - [ ] **Increase Test Coverage** (8h)
   - Command: `/global:generate:tests --coverage-target=60 --focus="critical"`
   - Current: 30% → Target: 60%
@@ -77,6 +80,7 @@
   - Dependencies: None
 
 ### 📊 Progress Tracking
+
 - [ ] **Create Security Baseline**
   - Command: `/global:security:baseline --save`
   - When: Before starting any fixes
@@ -90,6 +94,7 @@
 ## Execution Instructions
 
 ### 1. Prerequisites
+
 ```bash
 # Ensure clean git status
 git status
@@ -102,11 +107,13 @@ git checkout -b quality-improvements
 ```
 
 ### 2. Execution Order
+
 1. Complete all 🔴 Critical items first (security is paramount)
 2. Then proceed to 🟡 Quick Wins (high ROI, fast delivery)
 3. Finally work on 🟢 Enhancements (long-term benefits)
 
 ### 3. Validation After Each Phase
+
 ```bash
 # After security fixes
 /global:security:compliance --check
@@ -119,6 +126,7 @@ git checkout -b quality-improvements
 ```
 
 ### 4. Generate Completion Report
+
 ```bash
 /global:workflow:completion-report --action-plan=this-file.md
 ```
@@ -126,7 +134,9 @@ git checkout -b quality-improvements
 ## Team Allocation (--team-mode)
 
 ### Senior Developer (16h allocated)
+
 **Focus**: Security & Architecture
+
 - [ ] Input Sanitization (3h)
 - [ ] JSON Validation (2h)
 - [ ] CSP Headers (2h)
@@ -134,14 +144,18 @@ git checkout -b quality-improvements
 - [ ] Architecture Review (5h)
 
 ### Mid-level Developer (16h allocated)
+
 **Focus**: Testing & Performance
+
 - [ ] Test Coverage Increase (8h)
 - [ ] Error Boundaries (2h)
 - [ ] Logger Service (2h)
 - [ ] Type Safety (4h)
 
 ### Junior Developer (8h allocated)
+
 **Focus**: Quick Fixes & Documentation
+
 - [ ] Remove Sensitive Logs (1h)
 - [ ] Code Duplication (2h)
 - [ ] Simplify Functions (2h)
@@ -150,16 +164,18 @@ git checkout -b quality-improvements
 ## Risk Mitigation
 
 ### Potential Blockers
+
 1. **Database Migration**: Batching may require schema changes
    - Mitigation: Create compatibility layer first
-   
+
 2. **Legacy Dependencies**: Some fixes may break old code
    - Mitigation: Comprehensive testing before deployment
-   
+
 3. **Performance Regression**: Security fixes might slow things
    - Mitigation: Benchmark before/after each change
 
 ### Rollback Plan
+
 - Git commits after each major task
 - Tag stable points: `git tag pre-security-fixes`
 - Keep baseline metrics for comparison

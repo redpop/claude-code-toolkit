@@ -11,6 +11,7 @@ Templates provide consistent starting points for creating new commands, agents, 
 ### Agent Templates
 
 **agent-template.md**
+
 - Base template for all new agents
 - Includes required frontmatter structure
 - Standard sections for agent definition
@@ -18,41 +19,49 @@ Templates provide consistent starting points for creating new commands, agents, 
 ### Command Templates (`commands/`)
 
 **analysis-sub-agent.md**
+
 - Template for analysis-focused agents
 - Structured analysis phases
 - Report generation patterns
 
 **analyzer-agent.md**
+
 - Specialized analyzer agent template
 - Metrics and measurement focus
 - Comparative analysis structure
 
 **basic-sub-agent.md**
+
 - Minimal agent template
 - Essential structure only
 - Good for simple agents
 
 **helper-agent.md**
+
 - Support and utility agent template
 - Tool-like functionality
 - Clear input/output structure
 
 **hybrid-sub-agent.md**
+
 - Hybrid architecture command template
 - Multi-phase execution pattern
 - Combines Task Tool with specialized agents
 
 **mcp-aware-command.md**
+
 - MCP-enhanced command template
 - Graceful degradation pattern
 - MCP tool detection and usage
 
 **research-sub-agent.md**
+
 - Investigation and research template
 - Discovery-oriented structure
 - Information gathering patterns
 
 **specialist-agent.md**
+
 - Domain expert agent template
 - Deep expertise structure
 - Specialized knowledge areas
@@ -60,21 +69,25 @@ Templates provide consistent starting points for creating new commands, agents, 
 ### Report Templates (`reports/`)
 
 **action-plan-template.md**
+
 - Structured action plan format
 - Priority-based organization
 - Clear next steps
 
 **markdown-template.md**
+
 - Standard markdown report structure
 - Consistent formatting
 - Section organization
 
 **json-schema.json**
+
 - JSON report schema definition
 - Structured data format
 - Validation rules
 
 **next-steps-template.md**
+
 - Post-analysis recommendations
 - Actionable items format
 - Progress tracking structure
@@ -91,6 +104,7 @@ Templates provide consistent starting points for creating new commands, agents, 
 6. Test through orchestration command
 
 Example:
+
 ```bash
 cp templates/specialist-agent.md agents/database-optimizer.md
 # Edit the file to customize
@@ -106,6 +120,7 @@ cp templates/specialist-agent.md agents/database-optimizer.md
 6. Run `update-readme.sh` to document
 
 Example:
+
 ```bash
 cp templates/commands/hybrid-sub-agent.md commands/scan/comprehensive.md
 # Customize for specific scanning needs
@@ -114,6 +129,7 @@ cp templates/commands/hybrid-sub-agent.md commands/scan/comprehensive.md
 ### For Report Generation
 
 Templates guide consistent report formatting:
+
 - Use markdown-template.md for human-readable reports
 - Use json-schema.json for structured data
 - Use action-plan-template.md for executable plans
@@ -136,6 +152,7 @@ Most templates include:
 Minimum required fields vary by type:
 
 **Agents**:
+
 ```yaml
 ---
 name: agent-name  # REQUIRED
@@ -144,6 +161,7 @@ description: Agent purpose
 ```
 
 **Commands**:
+
 ```yaml
 ---
 description: Command purpose
@@ -164,6 +182,7 @@ When creating new templates:
 ### Template Placeholders
 
 Use consistent placeholder format:
+
 - `[AGENT_NAME]` - Name replacement
 - `[DESCRIPTION]` - Description text
 - `[SPECIFIC_INSTRUCTIONS]` - Custom instructions

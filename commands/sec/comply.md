@@ -83,6 +83,7 @@ This command runs comprehensive compliance checks against industry standards and
    ```
 
 4. **Custom Policy Compliance**:
+
    ```markdown
    If --custom-rules provided:
 
@@ -121,7 +122,7 @@ Run basic pattern-based checks for common compliance issues:
 
 ## Compliance Report Generation
 
-### Standard Report Format:
+### Standard Report Format
 
 ```markdown
 # Compliance Report

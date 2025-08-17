@@ -7,6 +7,7 @@ This file provides context for Claude Code when working with utility scripts in 
 ### Core Scripts
 
 **install.sh**
+
 - Main installation script for the toolkit
 - Copies commands and agents to `~/.claude/`
 - Supports custom prefix installation
@@ -14,6 +15,7 @@ This file provides context for Claude Code when working with utility scripts in 
 - Must be run from inside the cloned repository
 
 **update-readme.sh**
+
 - Auto-generates command documentation in README.md
 - Scans all `.md` files in `commands/` directory
 - Extracts frontmatter metadata
@@ -23,6 +25,7 @@ This file provides context for Claude Code when working with utility scripts in 
 ### Creation Scripts
 
 **create-agent.sh**
+
 - Standardized agent creation with validation
 - Usage: `./scripts/create-agent.sh <agent-name> <type> "<description>"`
 - Ensures required frontmatter fields
@@ -30,11 +33,13 @@ This file provides context for Claude Code when working with utility scripts in 
 - Validates agent names and types
 
 **create-sub-agent.sh**
+
 - Creates new sub-agent definitions
 - Generates proper structure
 - Includes boilerplate code
 
 **create-sub-agent-command.sh**
+
 - Scaffolds new sub-agent orchestration commands
 - Generates boilerplate with proper structure
 - Ensures consistent command format
@@ -42,11 +47,13 @@ This file provides context for Claude Code when working with utility scripts in 
 ### Analysis Scripts
 
 **report-history.js**
+
 - Manages report history and tracking
 - Analyzes trends across multiple reports
 - JavaScript-based for JSON processing
 
 **trend-analyzer.sh**
+
 - Analyzes code quality trends over time
 - Compares metrics across reports
 - Generates trend visualizations
@@ -56,6 +63,7 @@ This file provides context for Claude Code when working with utility scripts in 
 The `install.sh` script handles toolkit installation:
 
 ### Key Features
+
 - Simple file copy installation (no git in target)
 - Supports multiple installations with different prefixes
 - Creates backups of existing installations
@@ -63,6 +71,7 @@ The `install.sh` script handles toolkit installation:
 - Clean separation between repository and installation
 
 ### Installation Process
+
 1. Validates running from repository root
 2. Prompts for installation prefix
 3. Creates target directories
@@ -71,6 +80,7 @@ The `install.sh` script handles toolkit installation:
 6. Lists installed commands and agents
 
 ### Usage
+
 ```bash
 # Basic installation
 ./install.sh
@@ -114,17 +124,20 @@ shellcheck scripts/*.sh install.sh
 The `update-readme.sh` script maintains command documentation:
 
 ### Auto-generated Section
+
 - Section between markers is automatically maintained
 - **DO NOT manually edit** content between markers
 - Changes will be overwritten on next update
 
 ### Update Process
+
 1. Scans all `.md` files in `commands/` directory
 2. Extracts frontmatter metadata (`description` and `argument-hint`)
 3. Generates formatted table with all commands
 4. Updates only marked section in README.md
 
 ### When to Run
+
 - After adding new commands
 - After modifying command frontmatter
 - Before committing command changes
@@ -191,6 +204,7 @@ Before committing new or modified scripts:
 ## CI Integration
 
 Consider adding to CI pipeline:
+
 - Shellcheck validation
 - Script execution tests
 - Dependency verification

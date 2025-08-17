@@ -3,11 +3,13 @@
 ## Field Naming Pattern
 
 ### Basic Pattern
+
 ```
 {vendor}_{blockname}_{fieldname}
 ```
 
 ### Examples
+
 - `punktde_accordion_title`
 - `punktde_textblock_content`
 - `vendor_slider_speed`
@@ -15,9 +17,11 @@
 ## Database Field Generation Rules
 
 ### Root Level Fields
+
 Fields at the root level of a Content Block are automatically prefixed:
 
 **Configuration:**
+
 ```yaml
 name: vendor/accordion
 fields:
@@ -28,6 +32,7 @@ fields:
 **Database field:** `vendor_accordion_title`
 
 **Template access:**
+
 ```html
 {data.vendor_accordion_title}
 ```
@@ -35,20 +40,24 @@ fields:
 ## Collection Fields Special Rules
 
 ### Table Creation
+
 Collections create separate database tables:
 
 **Pattern:** `{vendor}_{collection_identifier}`
 
 **Example:**
+
 ```yaml
 - identifier: accordion_items  # Creates table: vendor_accordion_items
   type: Collection
 ```
 
 ### Field Access in Collections
+
 Within collections, fields are accessed directly WITHOUT prefix:
 
 **Configuration:**
+
 ```yaml
 - identifier: accordion_items
   type: Collection
@@ -58,6 +67,7 @@ Within collections, fields are accessed directly WITHOUT prefix:
 ```
 
 **Template access:**
+
 ```html
 <f:for each="{data.vendor_accordion_accordion_items}" as="item">
     {item.header}   <!-- Direct access, NO prefix -->
@@ -68,6 +78,7 @@ Within collections, fields are accessed directly WITHOUT prefix:
 ## Complete Access Pattern Reference
 
 ### Single Value Fields
+
 ```html
 <!-- Root level field -->
 {data.{vendor}_{blockname}_{fieldname}}
@@ -78,6 +89,7 @@ Within collections, fields are accessed directly WITHOUT prefix:
 ```
 
 ### Collection Fields
+
 ```html
 <!-- Collection access -->
 <f:for each="{data.{vendor}_{blockname}_{collection}}" as="item">
@@ -92,6 +104,7 @@ Within collections, fields are accessed directly WITHOUT prefix:
 ```
 
 ### Nested Collections (if supported)
+
 ```html
 <f:for each="{data.vendor_block_items}" as="item">
     {item.title}
@@ -104,16 +117,19 @@ Within collections, fields are accessed directly WITHOUT prefix:
 ## Debug Field Names
 
 ### Show All Available Fields
+
 ```html
 <f:debug>{data}</f:debug>
 ```
 
 ### Show Specific Collection
+
 ```html
 <f:debug title="Collection Items">{data.vendor_block_collection}</f:debug>
 ```
 
 ### Show Field Structure
+
 ```html
 <f:for each="{data.vendor_block_items}" as="item" iteration="iterator">
     <f:if condition="{iterator.isFirst}">
@@ -125,6 +141,7 @@ Within collections, fields are accessed directly WITHOUT prefix:
 ## Common Naming Mistakes
 
 ### ❌ Wrong Patterns
+
 ```yaml
 # Too generic collection name
 - identifier: items  # Creates: vendor_items (too generic!)
@@ -134,6 +151,7 @@ Within collections, fields are accessed directly WITHOUT prefix:
 ```
 
 ### ✅ Correct Patterns
+
 ```yaml
 # Descriptive collection name
 - identifier: accordion_items  # Creates: vendor_accordion_items
@@ -154,5 +172,6 @@ Within collections, fields are accessed directly WITHOUT prefix:
 | Collection template | `{item.fieldname}` | `{item.header}` |
 
 ## Related Documentation
+
 - [Content Blocks Core Patterns](../content-blocks-core-patterns.md)
 - [Troubleshooting Matrix](../troubleshooting-matrix.md)

@@ -29,6 +29,7 @@ After all agents complete:
    - [What prioritization is applied]
 
 2. **[Synthesis Step 2]**:
+
    ```markdown
    # [Report Title]
    
@@ -45,6 +46,7 @@ After all agents complete:
 
 **Performance Expectation**: [X-Y seconds for parallel execution, compared to Z seconds sequentially]
 
-**Notes**: 
+**Notes**:
+
 - [Special usage notes]
 - [Limitations or prerequisites]

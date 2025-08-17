@@ -228,6 +228,7 @@ If you have conflicts with existing commands:
    ```
 
 2. Reinstall:
+
    ```bash
    ./install.sh myprefix
    ```
@@ -286,6 +287,7 @@ rm -rf ~/.claude/agents/
    ```
 
 3. Create command chains:
+
    ```bash
    /myprefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}"
    ```

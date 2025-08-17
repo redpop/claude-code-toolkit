@@ -7,12 +7,15 @@ See [Field Naming Reference](./references/field-naming-reference.md) for complet
 ## Database Table Generation
 
 ### Automatic Table Creation
+
 Content Blocks v1.3 automatically generates:
+
 1. TCA configurations
 2. Database tables for collections
 3. SQL definitions
 
 ### Table Naming Best Practices
+
 - Use descriptive collection field names (e.g., `accordion_items` not just `items`)
 - Avoid generic names that could conflict
 - Consider prefixing with content block name for clarity
@@ -24,6 +27,7 @@ See [Field Naming Reference](./references/field-naming-reference.md#complete-acc
 ## Common Field Types
 
 ### Text Field
+
 ```yaml
 - identifier: title
   type: Text
@@ -33,6 +37,7 @@ See [Field Naming Reference](./references/field-naming-reference.md#complete-acc
 ```
 
 ### Textarea with RTE
+
 ```yaml
 - identifier: content
   type: Textarea
@@ -42,6 +47,7 @@ See [Field Naming Reference](./references/field-naming-reference.md#complete-acc
 ```
 
 ### Collection
+
 ```yaml
 - identifier: items
   type: Collection
@@ -55,6 +61,7 @@ See [Field Naming Reference](./references/field-naming-reference.md#complete-acc
 ```
 
 ### Checkbox Toggle
+
 ```yaml
 - identifier: active
   type: Checkbox
@@ -64,6 +71,7 @@ See [Field Naming Reference](./references/field-naming-reference.md#complete-acc
 ```
 
 ### File/Image
+
 ```yaml
 - identifier: image
   type: File
@@ -84,6 +92,7 @@ See [Backend Preview Reference](./references/backend-preview-reference.md) for c
 ## Frontend Template Structure
 
 ### Basic Setup
+
 ```html
 <html data-namespace-typo3-fluid="true"
       xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
@@ -96,6 +105,7 @@ See [Backend Preview Reference](./references/backend-preview-reference.md) for c
 ```
 
 ### Using Shared Partials from Sitepackage
+
 Content Blocks can use shared partials to avoid redundancy:
 
 ```html
@@ -113,6 +123,7 @@ Content Blocks can use shared partials to avoid redundancy:
 ```
 
 **Required TypoScript Configuration:**
+
 ```typoscript
 # In your sitepackage's TypoScript (e.g., ContentBlocks.typoscript)
 lib.contentElement {
@@ -126,6 +137,7 @@ This allows all Content Blocks to use partials from the sitepackage.
 See: [Content Blocks Shared Partials Documentation](./content-blocks-shared-partials.md)
 
 ### Asset Inclusion
+
 ```html
 <!-- External JavaScript -->
 <f:asset.script identifier="script-id" src="https://cdn.example.com/script.js" external="true" defer="true" />
@@ -137,47 +149,59 @@ See: [Content Blocks Shared Partials Documentation](./content-blocks-shared-part
 ## Debugging Strategies
 
 ### 1. Field Name Discovery
+
 See [Field Naming Reference](./references/field-naming-reference.md#debug-field-names) for debugging field names.
 
 ### 2. Cache Clearing
+
 See [Commands Reference](./references/commands-reference.md#cache-management) for all cache clearing options.
 
 ### 3. Database Verification
+
 See [Commands Reference](./references/commands-reference.md#database-commands) for database inspection commands.
 
 ### 4. TCA Inspection
+
 Check generated TCA in:
+
 - `/var/cache/code/content-blocks/`
 - Backend Configuration module
 
 ## Common Pitfalls
 
 ### 1. Collection Field Naming
+
 **Problem:** Table `punktde_items` too generic
 **Solution:** Use descriptive names like `accordion_items`
 
 ### 2. Field Access in Collections
+
 **Problem:** Trying to access `item.punktde_accordion_accordion_items_header`
 **Solution:** Use direct access: `item.header`
 
 ### 3. Cache Not Clearing
+
 **Problem:** Changes not reflecting
 **Solution:** See [Commands Reference](./references/commands-reference.md#cache-management)
 
 ### 4. Missing Backend Preview
+
 **Problem:** Backend shows raw data
 **Solution:** Create proper `backend-preview.html` with formatted output
 
 ## Migration Considerations
 
 ### From Individual Settings to Global
+
 When changing from per-item settings to global:
+
 1. Remove field from collection definition
 2. Add field at root level
 3. Update templates to use global setting
 4. Clear caches and update database schema
 
 ### Renaming Collections
+
 1. Change identifier in config.yaml
 2. New table will be created
 3. Migrate data if needed
@@ -186,12 +210,14 @@ When changing from per-item settings to global:
 ## Version-Specific Features
 
 ### Content Blocks v1.3
+
 - Collection child type restrictions
 - Default configurations
 - Enhanced ViewHelpers
 - Improved backend preview capabilities
 
 ### TYPO3 v13.4
+
 - Set-based configuration
 - Improved Content Blocks integration
 - Enhanced caching mechanisms

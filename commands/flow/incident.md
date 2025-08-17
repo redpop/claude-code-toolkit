@@ -112,6 +112,7 @@ Incident: $ARGUMENTS
 **THINK ULTRA DEEPLY** about this production incident. Use maximum reasoning depth.
 
 Determine with ULTRA INTENSIVE REASONING:
+
 1) Severity level - think ultra deeply about all implications
 2) Affected systems - reason through all dependencies
 3) User impact - think ultra deeply about cascading effects
@@ -128,6 +129,7 @@ Use Task tool with subagent_type="debugging-specialist" for system diagnostics:
 Incident: $ARGUMENTS
 
 **THINK ULTRA DEEPLY** about system-level issues. Use ULTRA INTENSIVE REASONING to:
+
 1) Analyze deployment/config changes - think ultra deeply about impacts
 2) Resource utilization - reason ultra deeply about patterns
 3) Error logs - think ultra deeply about error correlations
@@ -143,6 +145,7 @@ Use Task tool with subagent_type="debugging-specialist" for code analysis:
 Incident: $ARGUMENTS
 
 **THINK ULTRA DEEPLY** about code issues. Apply ULTRA INTENSIVE REASONING to:
+
 1) Recent commits - think ultra deeply about each change
 2) Stack traces - reason ultra deeply through execution paths
 3) Code paths - think ultra deeply about edge cases
@@ -158,6 +161,7 @@ Use Task tool with subagent_type="performance-optimizer" for performance investi
 Incident: $ARGUMENTS
 
 **THINK ULTRA DEEPLY** about performance issues. Use ULTRA INTENSIVE REASONING for:
+
 1) Response times - think ultra deeply about degradation patterns
 2) Database queries - reason ultra deeply about query plans
 3) API latencies - think ultra deeply about network paths

@@ -26,6 +26,7 @@ This command orchestrates a complete code quality improvement sprint, from initi
 ### Phase 1: Sprint Planning (Day 1)
 
 1. **Comprehensive Analysis**:
+
    ```bash
    # Run deep analysis
    /analyze-deep . --focus=all --export-all
@@ -35,6 +36,7 @@ This command orchestrates a complete code quality improvement sprint, from initi
    ```
 
 2. **Sprint Backlog Generation**:
+
    ```markdown
    ## Sprint Backlog (2 Weeks, 4 Developers)
    
@@ -62,6 +64,7 @@ This command orchestrates a complete code quality improvement sprint, from initi
    ```
 
 3. **Task Assignment**:
+
    ```javascript
    // Generate JIRA/GitHub issues
    const sprintTasks = [
@@ -79,6 +82,7 @@ This command orchestrates a complete code quality improvement sprint, from initi
 ### Phase 2: Daily Execution
 
 1. **Daily Standup Report**:
+
    ```markdown
    ## Day 3 Progress Report
    
@@ -97,6 +101,7 @@ This command orchestrates a complete code quality improvement sprint, from initi
    ```
 
 2. **Progress Tracking**:
+
    ```
    Sprint Progress: ████████░░░░░░░░ 45%
    
@@ -108,6 +113,7 @@ This command orchestrates a complete code quality improvement sprint, from initi
    ```
 
 3. **Quality Gates**:
+
    ```bash
    # After each fix
    npm test
@@ -142,6 +148,7 @@ This command orchestrates a complete code quality improvement sprint, from initi
 ### Phase 4: Implementation Patterns
 
 1. **Security Fix Day**:
+
    ```bash
    # Morning: Analysis
    /security-audit . --severity=critical,high
@@ -155,6 +162,7 @@ This command orchestrates a complete code quality improvement sprint, from initi
    ```
 
 2. **Performance Day**:
+
    ```bash
    # Profile current state
    /performance-scan . --profile=all
@@ -167,6 +175,7 @@ This command orchestrates a complete code quality improvement sprint, from initi
    ```
 
 3. **Test Coverage Day**:
+
    ```bash
    # Generate tests for uncovered code
    /generate-tests report.json --coverage-target=80
@@ -181,6 +190,7 @@ This command orchestrates a complete code quality improvement sprint, from initi
 ### Phase 5: Sprint Completion
 
 1. **Final Report**:
+
    ```markdown
    ## Sprint Summary
    
@@ -210,6 +220,7 @@ This command orchestrates a complete code quality improvement sprint, from initi
    ```
 
 2. **Retrospective**:
+
    ```markdown
    ## Sprint Retrospective
    
@@ -232,6 +243,7 @@ This command orchestrates a complete code quality improvement sprint, from initi
 ## Workflow Automation
 
 ### Daily Automation Script
+
 ```bash
 #!/bin/bash
 # daily-quality-check.sh
@@ -254,6 +266,7 @@ echo "🔍 Running Daily Quality Check..."
 ```
 
 ### CI/CD Integration
+
 ```yaml
 # .github/workflows/quality-sprint.yml
 name: Quality Sprint Checks
@@ -282,21 +295,25 @@ jobs:
 ## Sprint Templates
 
 ### Security Sprint
+
 - Week 1: Critical vulnerabilities
 - Week 2: OWASP Top 10 compliance
 - Focus: Zero security debt
 
 ### Performance Sprint  
+
 - Week 1: Quick optimizations
 - Week 2: Architecture improvements
 - Focus: 50% faster response times
 
 ### Quality Sprint
+
 - Week 1: Code cleanup
 - Week 2: Test coverage
 - Focus: 90% coverage, zero lint errors
 
 ### Technical Debt Sprint
+
 - Week 1: Refactoring
 - Week 2: Modernization
 - Focus: Reduce debt by 40%
@@ -304,6 +321,7 @@ jobs:
 ## Metrics & KPIs
 
 Track throughout sprint:
+
 - Velocity (story points/day)
 - Quality scores (health, security, etc.)
 - Test coverage percentage

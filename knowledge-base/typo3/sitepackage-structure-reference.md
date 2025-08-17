@@ -199,6 +199,7 @@ sitepackage/
 ### Root Files
 
 #### composer.json
+
 ```json
 {
     "name": "vendor/sitepackage",
@@ -210,6 +211,7 @@ sitepackage/
 ```
 
 #### ext_emconf.php
+
 ```php
 <?php
 $EM_CONF[$_EXTKEY] = [
@@ -224,6 +226,7 @@ $EM_CONF[$_EXTKEY] = [
 ```
 
 #### ext_localconf.php
+
 ```php
 <?php
 defined('TYPO3') or die();
@@ -232,6 +235,7 @@ defined('TYPO3') or die();
 ```
 
 #### ext_tables.php
+
 ```php
 <?php
 defined('TYPO3') or die();
@@ -242,6 +246,7 @@ defined('TYPO3') or die();
 ### Configuration Files
 
 #### Configuration/Sets/SitePackage/config.yaml
+
 ```yaml
 name: vendor/sitepackage
 label: 'Sitepackage'
@@ -250,6 +255,7 @@ dependencies:
 ```
 
 #### Configuration/Sets/SitePackage/settings.yaml
+
 ```yaml
 page:
   pageview:
@@ -259,6 +265,7 @@ page:
 ### Template Files
 
 #### Resources/Private/PageView/Pages/Default.html
+
 ```html
 <f:layout name="Default" />
 <f:section name="Main">
@@ -267,6 +274,7 @@ page:
 ```
 
 #### Resources/Private/PageView/Layouts/Default.html
+
 ```html
 <f:render partial="Header" arguments="{_all}" />
 <f:render section="Main" />
@@ -276,6 +284,7 @@ page:
 ## Directory Purposes
 
 ### Classes/
+
 - **Controller/**: MVC controllers for plugins
 - **Domain/**: Business logic and domain models
 - **ViewHelpers/**: Custom Fluid ViewHelpers
@@ -284,6 +293,7 @@ page:
 - **Middleware/**: PSR-15 middleware components
 
 ### Configuration/
+
 - **Sets/**: TYPO3 v13 Site Sets configuration
 - **TCA/**: Database table configuration
 - **RTE/**: Rich Text Editor presets
@@ -291,12 +301,14 @@ page:
 - **Icons.php**: Icon registration for backend
 
 ### Resources/Private/
+
 - **PageView/**: TYPO3 v13 page templates
 - **ContentElements/**: Content element templates
 - **Language/**: Translation files
 - **Sass/**: Source SCSS files
 
 ### Resources/Public/
+
 - **Css/**: Compiled stylesheets
 - **JavaScript/**: JavaScript files
 - **Images/**: Image assets
@@ -306,19 +318,23 @@ page:
 ## Naming Conventions
 
 ### PHP Classes
+
 - PascalCase for class names
 - Namespace: `Vendor\Sitepackage\Category\`
 
 ### Templates
+
 - PascalCase for template files
 - Descriptive names matching backend labels
 
 ### Configuration
+
 - lowercase with underscores for TypoScript
 - camelCase for Fluid variables
 - kebab-case for CSS classes
 
 ### Assets
+
 - kebab-case for CSS/JS files
 - Descriptive names for images
 

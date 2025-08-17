@@ -72,7 +72,7 @@ Execute individual commands for specific tasks:
 /global:meta:pipelines quick-quality
 ```
 
-#### Or Manual Steps:
+#### Or Manual Steps
 
 ```bash
 # 1. Fast analysis
@@ -89,13 +89,13 @@ Execute individual commands for specific tasks:
 
 **Goal**: Find and fix performance bottlenecks
 
-#### Smart Approach:
+#### Smart Approach
 
 ```bash
 /global:flow:smart "application is slow, especially database queries"
 ```
 
-#### Or Structured Approach:
+#### Or Structured Approach
 
 ```bash
 # 1. Performance analysis
@@ -112,13 +112,13 @@ Execute individual commands for specific tasks:
 
 **Goal**: Find and fix security vulnerabilities
 
-#### Pipeline Approach:
+#### Pipeline Approach
 
 ```bash
 /global:meta:pipelines security-hardening
 ```
 
-#### Or Step-by-Step:
+#### Or Step-by-Step
 
 ```bash
 # 1. Security audit

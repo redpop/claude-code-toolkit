@@ -48,6 +48,7 @@ Use Task tool with subagent_type="general-purpose":
 ### Phase 3: Report Generation
 
 Generate streamlined, action-focused report with these principles:
+
 1. Lead with the next action, not analysis
 2. Hide detailed metrics in expandable sections
 3. Focus on what changed and what to do next
