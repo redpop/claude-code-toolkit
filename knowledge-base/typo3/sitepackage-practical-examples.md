@@ -9,6 +9,7 @@ This guide provides practical, copy-paste ready examples for common sitepackage 
 ### Page Template with Bootstrap
 
 **Resources/Private/PageView/Layouts/Bootstrap.html**
+
 ```html
 <!DOCTYPE html>
 <html lang="{site.language.locale}">
@@ -32,6 +33,7 @@ This guide provides practical, copy-paste ready examples for common sitepackage 
 ```
 
 **Resources/Private/PageView/Partials/Navigation/Main.html**
+
 ```html
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
@@ -83,6 +85,7 @@ This guide provides practical, copy-paste ready examples for common sitepackage 
 ### Hero Banner Element
 
 **Configuration/TCA/Overrides/tt_content.php**
+
 ```php
 <?php
 defined('TYPO3') or die();
@@ -133,6 +136,7 @@ $GLOBALS['TCA']['tt_content']['types']['hero_banner'] = [
 ```
 
 **Resources/Private/ContentElements/Templates/HeroBanner.html**
+
 ```html
 <html data-namespace-typo3-fluid="true"
       xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
@@ -196,6 +200,7 @@ $GLOBALS['TCA']['tt_content']['types']['hero_banner'] = [
 ### Responsive Image ViewHelper
 
 **Classes/ViewHelpers/ResponsiveImageViewHelper.php**
+
 ```php
 <?php
 declare(strict_types=1);
@@ -245,6 +250,7 @@ class ResponsiveImageViewHelper extends ImageViewHelper
 ```
 
 **Usage in template:**
+
 ```html
 <sitepackage:responsiveImage 
     image="{image}" 
@@ -257,6 +263,7 @@ class ResponsiveImageViewHelper extends ImageViewHelper
 ### Social Media Links Processor
 
 **Classes/DataProcessing/SocialMediaProcessor.php**
+
 ```php
 <?php
 declare(strict_types=1);
@@ -309,6 +316,7 @@ class SocialMediaProcessor implements DataProcessorInterface
 ```
 
 **Configuration in TypoScript:**
+
 ```typoscript
 page.10.dataProcessing {
     100 = Vendor\Sitepackage\DataProcessing\SocialMediaProcessor
@@ -327,6 +335,7 @@ page.10.dataProcessing {
 ### Language Menu Implementation
 
 **Resources/Private/PageView/Partials/Navigation/Language.html**
+
 ```html
 <f:if condition="{languagenavigation}">
     <div class="language-menu dropdown">
@@ -355,6 +364,7 @@ page.10.dataProcessing {
 ## Example 6: Cookie Consent Banner
 
 **Resources/Private/PageView/Partials/CookieConsent.html**
+
 ```html
 <div id="cookieConsent" class="cookie-consent" style="display: none;">
     <div class="container">
@@ -416,6 +426,7 @@ function declineCookies() {
 ## Example 7: Backend Layout with Content Areas
 
 **Configuration/Sets/SitePackage/PageTsConfig/BackendLayouts/landingpage.tsconfig**
+
 ```tsconfig
 mod {
     web_layout {
@@ -519,6 +530,7 @@ mod {
 ```
 
 **Resources/Private/PageView/Pages/Landingpage.html**
+
 ```html
 <f:layout name="Default" />
 
@@ -575,6 +587,7 @@ mod {
 ### Contact Form Configuration
 
 **Configuration/Forms/contact.form.yaml**
+
 ```yaml
 renderingOptions:
   submitButtonLabel: Send Message
@@ -669,6 +682,7 @@ renderables:
 ## Common Patterns Summary
 
 ### 1. Asset Loading Pattern
+
 ```typoscript
 page.includeCSS {
     main = EXT:sitepackage/Resources/Public/Css/main.min.css
@@ -684,6 +698,7 @@ page.includeJSFooter {
 ```
 
 ### 2. Responsive Images Pattern
+
 ```html
 <picture>
     <source media="(min-width: 1200px)" 
@@ -697,6 +712,7 @@ page.includeJSFooter {
 ```
 
 ### 3. Conditional Content Pattern
+
 ```html
 <f:if condition="{data.field}">
     <f:then>

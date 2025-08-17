@@ -11,6 +11,7 @@ This command performs comprehensive research on [topic] by having [N] specialize
 ## Research Strategy
 
 The research covers the following areas:
+
 - **Technical Perspective**: [Description]
 - **Practical Implementation**: [Description]
 - **Best Practices & Standards**: [Description]
@@ -35,6 +36,7 @@ The research covers the following areas:
 After all research agents complete:
 
 1. **Create Comprehensive Knowledge Base**:
+
    ```markdown
    # [Topic] Research Findings
    
@@ -54,14 +56,17 @@ After all research agents complete:
    ```[language]
    // Best example from research
    ```
-   
+
    ### Common Challenges & Solutions
+
    | Challenge | Solution | Example |
    |-----------|----------|---------|
    | ...       | ...      | ...     |
+
    ```
 
 2. **Generate Decision Matrix**:
+
    ```markdown
    ## Decision Guide
    

@@ -29,15 +29,20 @@ By participating in this project, you agree to abide by our code of conduct:
 
 1. **Fork the repository** on GitHub
 2. **Clone your fork** locally:
+
    ```bash
    git clone https://github.com/YOUR-USERNAME/claude-code-toolkit.git
    cd claude-code-toolkit
    ```
+
 3. **Add upstream remote**:
+
    ```bash
    git remote add upstream https://github.com/anthropics/claude-code-toolkit.git
    ```
+
 4. **Create a feature branch**:
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -45,18 +50,22 @@ By participating in this project, you agree to abide by our code of conduct:
 ## Development Setup
 
 1. **Install the toolkit locally** for testing:
+
    ```bash
    ./install.sh test
    ```
+
    This installs commands with the `test:` prefix for local testing.
 
 2. **Verify installation**:
+
    ```bash
    # List your test commands
    ls ~/.claude/commands/test/
    ```
 
 3. **Test your changes** in Claude Code using the test prefix:
+
    ```bash
    /test:your-command arguments
    ```
@@ -86,6 +95,7 @@ By participating in this project, you agree to abide by our code of conduct:
 ### 1. Choose the Right Category
 
 Place your command in the appropriate category:
+
 - `scan/` - Analysis and investigation
 - `fix/` - Direct corrections
 - `gen/` - Generation commands
@@ -147,6 +157,7 @@ Detailed description of what the command does.
 ### 1. Define Agent Purpose
 
 Create agents with specific expertise:
+
 - Architecture analysis
 - Security auditing
 - Performance optimization
@@ -179,6 +190,7 @@ You are a specialized AI agent focused on [specific domain].
 ### 4. Integration
 
 Create orchestration commands that use your agent:
+
 ```bash
 ./scripts/create-sub-agent-command.sh your-agent
 ```
@@ -207,14 +219,17 @@ Create orchestration commands that use your agent:
 
 1. Update command documentation in the `.md` file
 2. Run the update script:
+
    ```bash
    ./scripts/update-readme.sh
    ```
+
 3. Verify README.md was updated correctly
 
 ### When Modifying Core Features
 
 Update relevant sections in:
+
 - `CLAUDE.md` - Implementation details
 - `README.md` - User-facing documentation
 - `docs/` - Extended documentation
@@ -231,9 +246,11 @@ Update relevant sections in:
 ### Shell Scripts
 
 - Validate with shellcheck:
+
   ```bash
   shellcheck scripts/*.sh install.sh
   ```
+
 - Use proper quoting: `"$variable"`
 - Handle errors appropriately
 - Add comments for complex logic
@@ -250,12 +267,14 @@ Update relevant sections in:
 ### Before Submitting
 
 1. **Update your branch**:
+
    ```bash
    git fetch upstream
    git rebase upstream/main
    ```
 
 2. **Run quality checks**:
+
    ```bash
    # Update documentation
    ./scripts/update-readme.sh
@@ -268,6 +287,7 @@ Update relevant sections in:
    ```
 
 3. **Commit with clear messages**:
+
    ```bash
    git commit -m "feat: add performance analysis command
    

@@ -19,6 +19,7 @@ The knowledge base contains specialized documentation, patterns, and reference m
 The TYPO3 section is particularly comprehensive:
 
 ### Core Documentation
+
 - `README.md` - TYPO3 section overview
 - `content-blocks-core-patterns.md` - Content Blocks patterns
 - `content-blocks-shared-partials.md` - Shared partial templates
@@ -30,17 +31,20 @@ The TYPO3 section is particularly comprehensive:
 - `troubleshooting-matrix.md` - Common issues and solutions
 
 ### Reference Materials (`typo3/references/`)
+
 - `backend-preview-reference.md` - Backend preview configuration
 - `commands-reference.md` - TYPO3 CLI commands
 - `field-naming-reference.md` - Field naming conventions
 
 ### Related TYPO3 Agents
+
 - `typo3-architect` - System architecture specialist
 - `typo3-content-blocks-specialist` - Content Blocks expert
 - `typo3-extension-developer` - Extension development
 - `typo3-typoscript-expert` - TypoScript configuration
 
 ### Related TYPO3 Commands
+
 - `/prefix:typo3:content-blocks` - Create Content Blocks
 - `/prefix:typo3:extension-kickstarter` - Scaffold extensions
 - `/prefix:typo3:fluid-components` - Generate Fluid components
@@ -50,15 +54,19 @@ The TYPO3 section is particularly comprehensive:
 ## Framework Patterns
 
 ### Alpine.js Integration
+
 - `frameworks/alpine-js-integration.md` - Alpine.js patterns and best practices
 
 ### UI Patterns
+
 - `ui-patterns/accordion.md` - Accordion component implementation
 
 ## Using the Knowledge Base
 
 ### For Reference
+
 Knowledge base files provide:
+
 - Implementation patterns
 - Best practices
 - Configuration examples
@@ -66,13 +74,17 @@ Knowledge base files provide:
 - Architecture decisions
 
 ### For Commands and Agents
+
 Commands and agents can reference knowledge base materials:
+
 ```markdown
 Refer to knowledge-base/typo3/content-blocks-core-patterns.md for Content Blocks implementation patterns.
 ```
 
 ### For Learning
+
 Use knowledge base for:
+
 - Understanding specific technologies
 - Learning implementation patterns
 - Finding configuration examples
@@ -83,6 +95,7 @@ Use knowledge base for:
 ### When to Add Content
 
 Add to the knowledge base when:
+
 1. Documentation is technology-specific
 2. Content is reference material
 3. Patterns are reusable across projects
@@ -99,21 +112,25 @@ Add to the knowledge base when:
 ### Content Types
 
 **Guides** - Step-by-step instructions
+
 - Installation procedures
 - Configuration walkthroughs
 - Integration guides
 
 **References** - Lookup materials
+
 - API documentation
 - Configuration options
 - Naming conventions
 
 **Patterns** - Reusable solutions
+
 - Architecture patterns
 - Code patterns
 - UI components
 
 **Troubleshooting** - Problem-solving
+
 - Error matrices
 - Common issues
 - Debug procedures
@@ -139,7 +156,9 @@ Add to the knowledge base when:
 ## Integration with Toolkit
 
 ### Command Enhancement
+
 Commands can leverage knowledge base:
+
 ```yaml
 ---
 description: TYPO3 Content Blocks creation
@@ -148,7 +167,9 @@ knowledge-base: typo3/content-blocks-core-patterns.md
 ```
 
 ### Agent Specialization
+
 Agents reference domain knowledge:
+
 ```markdown
 You are a TYPO3 specialist. Refer to knowledge-base/typo3/ for TYPO3-specific patterns and best practices.
 ```
@@ -176,11 +197,13 @@ You are a TYPO3 specialist. Refer to knowledge-base/typo3/ for TYPO3-specific pa
 ### Most Used Resources
 
 **TYPO3 Development**:
+
 - Sitepackage guides
 - Content Blocks patterns
 - Troubleshooting matrix
 
 **Frontend Patterns**:
+
 - Alpine.js integration
 - UI component patterns
 

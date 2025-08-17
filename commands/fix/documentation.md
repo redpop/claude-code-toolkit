@@ -32,6 +32,7 @@ This command automatically fixes common documentation issues identified by docum
 ### 1. Parameter Synchronization
 
 #### CLI Arguments
+
 ```markdown
 # Before (README.md)
 Usage: analyze-deep --output-format=json|xml
@@ -41,6 +42,7 @@ Usage: analyze-deep --export-json --export-md --export-html
 ```
 
 #### Function Parameters
+
 ```markdown
 # Before (API.md)
 ### processData(data)
@@ -58,6 +60,7 @@ Processes the input data.
 ```
 
 #### Configuration Options
+
 ```markdown
 # Before (config.md)
 - `timeout`: Request timeout in seconds
@@ -70,6 +73,7 @@ Processes the input data.
 ### 2. Cross-Reference Fixes
 
 #### Internal Links
+
 ```markdown
 # Before
 See [Installation Guide](./docs/install.md) <!-- File doesn't exist -->
@@ -79,6 +83,7 @@ See [Getting Started](./docs/getting-started.md) <!-- Corrected path -->
 ```
 
 #### Anchor Links
+
 ```markdown
 # Before  
 [Testing](#testing-guidelines) <!-- Anchor missing -->
@@ -88,6 +93,7 @@ See [Getting Started](./docs/getting-started.md) <!-- Corrected path -->
 ```
 
 #### Smart Reference Addition
+
 ```markdown
 # Before
 For configuration options, check the documentation.
@@ -117,6 +123,7 @@ const result = oldMethod(params);
 // New way
 const result = newMethod(params);
 ```
+
 ```
 
 ### 4. Structure Improvements
@@ -154,24 +161,30 @@ npm install my-project
 ## Usage
 
 ### Basic Example
+
 ```javascript
 const myProject = require('my-project');
 const result = myProject.process(data);
 ```
 
 ### CLI Usage
+
 ```bash
 my-project analyze --input=file.json
 ```
 
 ## API Reference
+
 See the [full API documentation](./docs/api.md).
 
 ## Contributing
+
 Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 
 ## License
+
 This project is licensed under the MIT License - see [LICENSE](./LICENSE).
+
 ```
 
 ## Fix Workflow
@@ -185,6 +198,7 @@ This project is licensed under the MIT License - see [LICENSE](./LICENSE).
    ```
 
 2. **From Fresh Analysis**:
+
    ```bash
    # Run quick analysis
    /doc-health . --export-json=temp-report.json
@@ -193,6 +207,7 @@ This project is licensed under the MIT License - see [LICENSE](./LICENSE).
 ### Phase 2: Categorize Fixes
 
 Group issues by:
+
 1. **Auto-fixable**: Parameter names, broken links, formatting
 2. **Semi-automatic**: Need code analysis for context
 3. **Manual required**: Complex restructuring, content creation
@@ -202,6 +217,7 @@ Group issues by:
 For each auto-fixable issue:
 
 1. **Parameter Fixes**:
+
    ```javascript
    // Extract from code
    const actualParams = parseFunction(codeFile);
@@ -214,6 +230,7 @@ For each auto-fixable issue:
    ```
 
 2. **Link Fixes**:
+
    ```javascript
    // Find correct target
    const correctPath = findSimilarFile(brokenLink);
@@ -226,6 +243,7 @@ For each auto-fixable issue:
    ```
 
 3. **Deprecation Notices**:
+
    ```javascript
    // Check code annotations
    if (hasDeprecationAnnotation(method)) {
@@ -240,6 +258,7 @@ For each auto-fixable issue:
 ### Phase 4: Validation
 
 After fixes:
+
 ```bash
 # Re-run health check
 /doc-health . --quick
@@ -301,6 +320,7 @@ git diff --check
 ## Fix Strategies
 
 ### Smart Link Resolution
+
 ```javascript
 // When link target missing, find best match:
 1. Similar filename: install.md → installation.md
@@ -310,6 +330,7 @@ git diff --check
 ```
 
 ### Parameter Matching
+
 ```javascript
 // Fuzzy matching for parameters:
 - timeout vs timeoutMs (suffix variation)
@@ -318,6 +339,7 @@ git diff --check
 ```
 
 ### Deprecation Detection
+
 ```javascript
 // Sources for deprecation info:
 1. Code annotations (@deprecated, @obsolete)
@@ -353,6 +375,7 @@ style:
 ## Safety Features
 
 ### Dry Run Mode
+
 ```bash
 /fix-documentation . --dry-run
 
@@ -364,6 +387,7 @@ Would fix:
 ```
 
 ### Interactive Mode
+
 ```bash
 /fix-documentation . --interactive
 
@@ -374,6 +398,7 @@ Apply this fix? [Y/n/e(dit)/s(kip)]: y
 ```
 
 ### Backup Creation
+
 ```bash
 # Automatic backup before fixes
 Creating backup: .documentation-backup-20240128/

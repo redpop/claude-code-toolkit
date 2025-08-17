@@ -37,6 +37,7 @@ This command automatically applies high-ROI (Return on Investment) fixes identif
    - Extract findings and metrics
 
 2. **Calculate ROI Scores**:
+
    ```
    ROI = (Impact × 10) / Effort_Hours
    
@@ -65,6 +66,7 @@ This command automatically applies high-ROI (Return on Investment) fixes identif
    - Create backup branch
 
 3. **Generate Fix Summary**:
+
    ```markdown
    ## Quick Wins Fix Plan
    
@@ -106,11 +108,13 @@ For each quick win issue:
 ### Phase 4: Verification
 
 1. **Run Tests**:
+
    ```bash
    npm test  # or appropriate test command
    ```
 
 2. **Check Linting**:
+
    ```bash
    npm run lint
    ```
@@ -154,6 +158,7 @@ Generate fix summary:
 ## Fix Categories
 
 ### Security Quick Wins
+
 - Missing input validation
 - Basic SQL injection prevention
 - XSS protection gaps
@@ -162,6 +167,7 @@ Generate fix summary:
 - Exposed sensitive data
 
 ### Performance Quick Wins
+
 - N+1 query problems
 - Missing database indexes
 - Unnecessary re-renders
@@ -170,6 +176,7 @@ Generate fix summary:
 - Memory leaks
 
 ### Code Quality Quick Wins
+
 - Dead code removal
 - Linting violations
 - Missing type annotations
@@ -202,6 +209,7 @@ Generate fix summary:
 ## Configuration
 
 Default thresholds:
+
 - Max effort: 4 hours
 - Min ROI: 5
 - Categories: all
@@ -211,6 +219,7 @@ Default thresholds:
 ## Integration
 
 Works seamlessly with:
+
 - `/analyze-deep` - Generate reports
 - `/analyze-report` - Identify quick wins
 - `/verify-fixes` - Validate changes

@@ -5,6 +5,7 @@ This guide covers the advanced hook scripts available in the Claude Code Toolkit
 ## Overview
 
 The toolkit now includes 7 specialized hook scripts that provide:
+
 - **Context-aware sound notifications** based on tool usage and outcomes
 - **macOS system notifications** for critical events
 - **Session logging and metrics** tracking
@@ -14,11 +15,13 @@ The toolkit now includes 7 specialized hook scripts that provide:
 ## Available Hook Scripts
 
 ### 1. stop-notification.sh (Basic)
+
 **Purpose**: Plays a sound when Claude finishes responding  
 **Default Sound**: Glass.aiff  
 **Hook Type**: Stop
 
 ### 2. tool-specific-notification.sh
+
 **Purpose**: Different sounds for different tools  
 **Hook Type**: PostToolUse
 
@@ -32,6 +35,7 @@ The toolkit now includes 7 specialized hook scripts that provide:
 | WebFetch | Blow.aiff | Web content fetched |
 
 ### 3. subagent-notification.sh
+
 **Purpose**: Agent-specific completion sounds  
 **Hook Type**: SubagentStop
 
@@ -44,18 +48,22 @@ The toolkit now includes 7 specialized hook scripts that provide:
 | code-architect | Submarine.aiff | Architecture analyzed |
 
 ### 4. error-detection.sh
+
 **Purpose**: Monitors for critical errors and security issues  
 **Hook Type**: PostToolUse  
 **Features**:
+
 - Loud alerts for critical security vulnerabilities
 - Different sounds for error severity levels
 - macOS notifications for critical issues
 - Success sounds for clean security scans
 
 ### 5. success-notification.sh
+
 **Purpose**: Celebrates successful operations  
 **Hook Type**: Stop  
 **Triggers**:
+
 - Security vulnerabilities fixed
 - Clean security scans
 - Successful test runs
@@ -64,9 +72,11 @@ The toolkit now includes 7 specialized hook scripts that provide:
 - Performance improvements
 
 ### 6. system-notification.sh
+
 **Purpose**: macOS system notifications for important events  
 **Hook Type**: PostToolUse  
 **Notifications for**:
+
 - Critical security alerts
 - Build failures
 - Test results
@@ -77,18 +87,22 @@ The toolkit now includes 7 specialized hook scripts that provide:
 - Quota warnings
 
 ### 7. command-chain-notification.sh
+
 **Purpose**: Tracks progress through command chains  
 **Hook Type**: PostToolUse  
 **Features**:
+
 - Ascending tones for progression through phases
 - Progress notifications at 25%, 50%, 75%
 - Different sound for parallel execution
 - Error sound if chain fails
 
 ### 8. session-logger.sh
+
 **Purpose**: Logs session activity and provides summaries  
 **Hook Types**: SessionStart, Stop  
 **Features**:
+
 - Tracks session duration
 - Counts tools used, files modified, errors
 - Creates JSON summaries for sessions > 5 minutes
@@ -98,7 +112,9 @@ The toolkit now includes 7 specialized hook scripts that provide:
 ## Installation Options
 
 ### Option 1: Minimal (Default)
+
 Just the basic Stop notification:
+
 ```bash
 ./install.sh myprefix --with-settings
 ```
@@ -106,7 +122,9 @@ Just the basic Stop notification:
 Uses: `settings/global-settings.json`
 
 ### Option 2: Advanced (All Features)
+
 All notification hooks enabled:
+
 ```bash
 # Install hooks
 ./install.sh myprefix
@@ -116,7 +134,9 @@ cp settings/advanced-hooks-settings.json ~/.claude/settings.json
 ```
 
 ### Option 3: Custom Mix
+
 Choose specific hooks:
+
 ```json
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
@@ -144,7 +164,9 @@ Choose specific hooks:
 ## Configuration Profiles
 
 ### 🔇 Silent Mode
+
 No sounds, only critical notifications:
+
 ```json
 {
   "hooks": {
@@ -161,13 +183,17 @@ No sounds, only critical notifications:
 ```
 
 ### 🎵 Developer Mode
+
 All sounds, optimized for active development:
+
 ```json
 # Use settings/advanced-hooks-settings.json
 ```
 
 ### 🔔 Security Focus
+
 Enhanced security monitoring:
+
 ```json
 {
   "hooks": {
@@ -193,7 +219,9 @@ Enhanced security monitoring:
 ## Customization
 
 ### Changing Sounds
+
 Edit any hook script to modify sounds:
+
 ```bash
 # In any hook script:
 SOUND_FILE="/System/Library/Sounds/YourChoice.aiff"
@@ -201,7 +229,9 @@ VOLUME="0.5"  # 0.0 to 1.0
 ```
 
 ### Disabling Specific Notifications
+
 Comment out unwanted conditions in hook scripts:
+
 ```bash
 # In error-detection.sh, disable test failure sounds:
 # if echo "$TOOL_OUTPUT" | grep -qi "test.*failed"; then
@@ -210,7 +240,9 @@ Comment out unwanted conditions in hook scripts:
 ```
 
 ### Adding Custom Patterns
+
 Add your own detection patterns:
+
 ```bash
 # In success-notification.sh:
 if echo "$CONTEXT" | grep -qi "your.*pattern"; then
@@ -222,6 +254,7 @@ fi
 ## Session Logs Location
 
 Session logs are stored in:
+
 ```
 ~/.claude/claude-code-toolkit/logs/
 ├── sessions.log              # Main activity log
@@ -232,21 +265,25 @@ Session logs are stored in:
 ## Troubleshooting
 
 ### Too Many Notifications
+
 - Use `minimal-hooks-settings.json` instead
 - Reduce volume in individual scripts
 - Remove hooks from PostToolUse
 
 ### No Notifications
+
 - Check `~/.claude/settings.json` is configured
 - Verify hooks are executable: `ls -la ~/.claude/claude-code-toolkit/hooks/`
 - Test individually: `echo '{}' | ~/.claude/claude-code-toolkit/hooks/stop-notification.sh`
 
 ### System Notifications Not Appearing
+
 - Check System Preferences > Notifications
 - Ensure Terminal has notification permissions
 - Test: `osascript -e 'display notification "Test" with title "Test"'`
 
 ### Session Logs Growing Large
+
 - Logs auto-rotate at 10MB
 - Old summaries deleted after 30 days
 - Manually clean: `rm ~/.claude/claude-code-toolkit/logs/session_*_summary.json`
@@ -254,6 +291,7 @@ Session logs are stored in:
 ## Performance Impact
 
 All hooks are designed to be lightweight:
+
 - Sounds play in background (`&`)
 - Scripts exit immediately (0-5ms)
 - No blocking operations
@@ -264,7 +302,9 @@ All hooks are designed to be lightweight:
 Currently optimized for **macOS**. For other platforms:
 
 ### Linux
+
 Replace `afplay` with `paplay` or `aplay`:
+
 ```bash
 # In hook scripts:
 paplay "$SOUND_FILE" &  # PulseAudio
@@ -273,7 +313,9 @@ aplay "$SOUND_FILE" &   # ALSA
 ```
 
 ### Windows (WSL)
+
 Use PowerShell for sounds:
+
 ```bash
 powershell.exe -c "(New-Object Media.SoundPlayer '$SOUND_FILE').PlaySync()" &
 ```
@@ -292,21 +334,25 @@ powershell.exe -c "(New-Object Media.SoundPlayer '$SOUND_FILE').PlaySync()" &
 ### Recommended Combinations
 
 **For Regular Development**:
+
 - stop-notification.sh
 - success-notification.sh
 - error-detection.sh (critical only)
 
 **For Security Work**:
+
 - All error-detection features
 - system-notification.sh
 - subagent-notification.sh (security-specialist)
 
 **For Long Sessions**:
+
 - session-logger.sh
 - command-chain-notification.sh
 - stop-notification.sh
 
 **For Team Environments**:
+
 - Minimal sounds (respect coworkers)
 - System notifications for critical issues
 - Session logging for metrics
@@ -314,6 +360,7 @@ powershell.exe -c "(New-Object Media.SoundPlayer '$SOUND_FILE').PlaySync()" &
 ## Future Enhancements
 
 Potential additions:
+
 - Slack/Discord notifications
 - Time-based volume adjustment
 - Custom sound packs

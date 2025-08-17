@@ -171,11 +171,13 @@ CRITICAL: Think ultra deeply about subtle nuances. Don't accept surface-level ca
 ### Phase 2: Specialist Execution
 
 Based on ultra deep analysis, invoke appropriate specialists with ultra intensive thinking directives:
+
 - Each specialist receives "THINK ULTRA DEEPLY" instructions
 - Coordination includes ultra deep reasoning requirements
 - Synthesis uses ultra intensive analysis
 
 ### Phase 3: Solution Integration
+
 - Combining insights with ultra deep reasoning
 - Cross-validating solutions
 - Providing comprehensive action plan

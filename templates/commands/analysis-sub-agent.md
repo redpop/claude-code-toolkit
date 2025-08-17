@@ -11,6 +11,7 @@ This command analyzes [description] using [N] specialized agents working in para
 ## Analysis Strategy
 
 The analysis is divided into the following areas:
+
 - **Structural Analysis**: [Description]
 - **Qualitative Analysis**: [Description]
 - **Quantitative Metrics**: [Description]
@@ -37,6 +38,7 @@ After all analysis agents complete:
    - Identify patterns across multiple agents
 
 2. **Create Analysis Dashboard**:
+
    ```markdown
    # [Analysis Type] Report
    
@@ -63,6 +65,7 @@ After all analysis agents complete:
    ```
 
 3. **Generate Visualizations**:
+
    ```mermaid
    pie title Issue Distribution
      "Critical" : [count]
@@ -78,7 +81,8 @@ After all analysis agents complete:
 
 **Performance Expectation**: Analysis completed in [X-Y] seconds, [Z]x faster than sequential.
 
-**Output Formats**: 
+**Output Formats**:
+
 - JSON for tool integration
 - Markdown for human-readable reports
 - CSV for data export

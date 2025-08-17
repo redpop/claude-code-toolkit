@@ -430,6 +430,7 @@ npm install -g @semgrep/mcp
    ```
 
 4. **Sensitive Data Handling**
+
    ```markdown
    **When detecting secrets:**
 

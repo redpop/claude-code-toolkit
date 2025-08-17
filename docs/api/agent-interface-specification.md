@@ -89,6 +89,7 @@ mcp-enhanced: mcp__semgrep__security_check, mcp__semgrep__semgrep_scan
 ```
 
 **Important**: Without the `name` field, Claude Code will fail to load the agent with an error:
+
 ```
 Failed to parse agent file: Missing required "name" field in frontmatter
 ```
@@ -163,6 +164,7 @@ Agents receive tasks through two primary mechanisms:
    ```
 
 2. **Task Tool Integration**
+
    ```javascript
    Task(
      (description = "Security analysis"),

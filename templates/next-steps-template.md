@@ -3,7 +3,9 @@
 Based on the analysis, I recommend:
 
 ### 1. **Immediate Actions** (5-15 min)
+
 **Quick fixes with high impact:**
+
 ```bash
 # Fix critical issues
 /global:fix:quick-wins {export-file}
@@ -13,7 +15,9 @@ Based on the analysis, I recommend:
 ```
 
 ### 2. **Comprehensive Improvement** (30-60 min)
+
 **For thorough code quality enhancement:**
+
 ```bash
 # Run quality improvement workflow
 /global:meta:workflow quality-sprint
@@ -24,6 +28,7 @@ Based on the analysis, I recommend:
 ```
 
 ### 3. **Focused Approach**
+
 **Choose based on your priorities:**
 
 - [ ] 🔒 **Security Focus**: `/global:sec:audit . --comprehensive`
@@ -33,6 +38,7 @@ Based on the analysis, I recommend:
 - [ ] 📚 **Documentation**: `/global:fix:documentation --sync`
 
 ### 4. **Track Progress**
+
 ```bash
 # Compare with baseline
 /global:scan:quality . --compare={export-file}
@@ -42,6 +48,7 @@ Based on the analysis, I recommend:
 ```
 
 ## 📤 Export Information
+
 - **Results saved to**: `{export-file}`
 - **Format**: {format}
 - **Use in next commands**: Pass the export file as input

@@ -20,6 +20,7 @@ Commands are organized hierarchically by category, with each command being a mar
 Each command is a Markdown file containing:
 
 1. **Frontmatter** (YAML format) with Claude Code-compatible fields:
+
    ```yaml
    ---
    description: Brief command description
@@ -38,7 +39,9 @@ Each command is a Markdown file containing:
 ## Command Categories
 
 ### scan/ - Analysis & Investigation
+
 Analysis and investigation commands for understanding codebases:
+
 - **deep** - Comprehensive analysis with parallel scanning
 - **quality** - Code quality metrics and trends
 - **perf** - Performance profiling
@@ -53,7 +56,9 @@ Analysis and investigation commands for understanding codebases:
 - **map** - Codebase structure mapping
 
 ### fix/ - Direct Corrections
+
 Commands that make direct fixes to code:
+
 - **quick-wins** - High-ROI fixes from reports
 - **security** - Security vulnerability fixes
 - **performance** - Performance optimizations
@@ -62,7 +67,9 @@ Commands that make direct fixes to code:
 - **shell** - Shell script improvements
 
 ### flow/ - Multi-Agent Workflows
+
 Intelligent multi-agent coordination:
+
 - **smart** - Intelligent problem routing
 - **review** - Multi-perspective code review
 - **incident** - Rapid incident response
@@ -70,30 +77,40 @@ Intelligent multi-agent coordination:
 - **debug-mode** - Interactive debugging
 
 ### auto/ - Automation & Orchestration
+
 Automated workflow execution:
+
 - **execute** - Execute action plans
 - **monitor** - Continuous monitoring
 - **report** - Completion reports
 - **sprint** - Quality improvement sprints
 
 ### gen/ - Generation Commands
+
 Code and content generation:
+
 - **docs** - Generate documentation
 - **tests** - Generate test files
 - **format** - Format code consistently
 
 ### sec/ - Security Operations
+
 Security-focused commands:
+
 - **audit** - Security audit
 - **baseline** - Security baseline establishment
 - **comply** - Compliance checking
 
 ### git/ - Git Operations
+
 Git workflow commands:
+
 - **commit** - Smart commit generation
 
 ### meta/ - Project & Toolkit Management
+
 Meta-commands for project and toolkit:
+
 - **health** - Project health assessment
 - **chain** - Command chaining
 - **changelog** - Changelog updates
@@ -108,7 +125,9 @@ Meta-commands for project and toolkit:
 - **analyze-toolkit** - Analyze toolkit usage
 
 ### typo3/ - TYPO3 Specific Commands
+
 TYPO3 development commands:
+
 - **content-blocks** - Content Blocks creation
 - **extension-kickstarter** - Extension scaffolding
 - **fluid-components** - Fluid component generation
@@ -127,6 +146,7 @@ Use Task tool with subagent_type="general-purpose":
 ```
 
 This pattern ensures:
+
 - Clear agent invocation
 - Proper context isolation
 - Predictable behavior
@@ -141,6 +161,7 @@ Commands can be chained with automatic data flow:
 ```
 
 Features:
+
 - `{output}` - Previous command's output
 - `{outputs}` - All previous outputs array
 - `->` - Sequential execution
@@ -153,18 +174,21 @@ Features:
 The hybrid architecture combines parallel processing with specialized expertise:
 
 **Phase 1: Parallel Scanning**
+
 - Uses Task Tool for rapid parallel execution
 - Multiple scanner agents work simultaneously
 - Optimized for speed and broad coverage
 - Produces structured JSON output
 
 **Phase 2: Expert Analysis**
+
 - Results from Phase 1 are intelligently delegated
 - Specialized Sub-Agents provide deep analysis
 - Each agent has domain-specific expertise
 - Agents work in isolated contexts
 
 **Phase 3: Synthesis**
+
 - Results from all agents are combined
 - Final report integrates all perspectives
 - Provides actionable recommendations
@@ -172,6 +196,7 @@ The hybrid architecture combines parallel processing with specialized expertise:
 ### Smart Problem Routing
 
 The `/flow:smart` command analyzes problems and routes to appropriate specialists:
+
 1. Problem analysis and categorization
 2. Multi-agent task distribution
 3. Parallel execution where possible
@@ -205,6 +230,7 @@ mcp-enhanced: mcp__semgrep__security_check, mcp__github__create_pr
 ```
 
 Implementation should:
+
 1. Check for MCP tool availability
 2. Use enhanced approach if available
 3. Fall back to traditional methods if not
@@ -213,6 +239,7 @@ Implementation should:
 ## Testing Commands
 
 After adding a command:
+
 1. Install locally: `~/.claude/commands/test/`
 2. Verify command appears with correct namespace
 3. Test command execution in a sample project

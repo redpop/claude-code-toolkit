@@ -37,6 +37,7 @@ This command establishes a security baseline for your project, allowing you to t
    - Compare with current scan results
 
 3. **Generate Baseline Data**:
+
    ```json
    {
      "timestamp": "ISO-8601",
@@ -154,7 +155,7 @@ With `--track-improvements` flag:
 
 ## Export Options
 
-### Baseline Export (`--export-baseline`):
+### Baseline Export (`--export-baseline`)
 
 ```json
 {

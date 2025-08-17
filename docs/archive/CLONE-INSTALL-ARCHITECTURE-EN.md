@@ -5,13 +5,17 @@
 This guide describes the new architecture for Claude Code Slash Commands, which enables a clean separation between source repository and installation. It's designed for both developers who want to extend the toolkit and end users who simply want to use the commands.
 
 ### For End Users
+
 If you just want to use the commands, you only need to:
+
 1. Clone the repository
 2. Run `./install.sh [prefix]`
 3. Start using commands like `/prefix:command:name`
 
 ### For Developers
+
 If you want to modify or create new commands/agents, this guide explains:
+
 - How the architecture works
 - How to configure your modifications
 - How the agent orchestration system functions
@@ -20,16 +24,19 @@ If you want to modify or create new commands/agents, this guide explains:
 ## Core Concepts
 
 ### 1. **Separation of Concerns**
+
 - **Source Repository**: Where code is developed and versioned (any location)
 - **Installation**: Where Claude Code expects the commands/agents (`~/.claude/`)
 - **Manifest System**: Tracking which files come from where
 
 ### 2. **Multi-Repository Support**
+
 - Multiple command collections can be installed simultaneously
 - Each with its own prefix
 - Central agent management with conflict handling
 
 ### 3. **User-First Design**
+
 - User's own agents are never overwritten
 - Clear separation between repo agents and user agents
 - Intelligent conflict handling
@@ -37,6 +44,7 @@ If you want to modify or create new commands/agents, this guide explains:
 ## Directory Structure
 
 ### Source Repository (any location)
+
 ```
 ~/projects/my-claude-commands/          # Or any other location
 ├── commands/                           # Command definitions
@@ -59,6 +67,7 @@ If you want to modify or create new commands/agents, this guide explains:
 ```
 
 ### Installation Target (`~/.claude/`)
+
 ```
 ~/.claude/
 ├── commands/                          # Installed commands
@@ -86,6 +95,7 @@ If you want to modify or create new commands/agents, this guide explains:
 ## Manifest System
 
 ### Command Manifest (`.claude/.manifests/PREFIX.json`)
+
 ```json
 {
   "version": "1.0.0",
@@ -111,6 +121,7 @@ If you want to modify or create new commands/agents, this guide explains:
 ```
 
 ### Agent Manifest (`.claude/.manifests/agents.json`)
+
 ```json
 {
   "version": "1.0.0",
@@ -147,6 +158,7 @@ If you want to modify or create new commands/agents, this guide explains:
 ## Installation Workflow
 
 ### 1. Initial Installation
+
 ```bash
 # Clone repository
 git clone https://github.com/redpop/claude-code-toolkit.git ~/projects/claude-commands
@@ -160,6 +172,7 @@ cd ~/projects/claude-commands
 ```
 
 ### 2. Fork Installation
+
 ```bash
 # Clone fork
 git clone https://github.com/myteam/our-claude-commands.git ~/projects/team-commands
@@ -170,6 +183,7 @@ cd ~/projects/team-commands
 ```
 
 ### 3. Update Workflow
+
 ```bash
 # Option 1: Manual update
 cd ~/projects/claude-commands
@@ -186,6 +200,7 @@ claude-sync update global
 ## Conflict Handling
 
 ### Agent Conflicts
+
 When an agent already exists:
 
 ```
@@ -207,7 +222,8 @@ Options:
 Selection [s/r/b/m]: 
 ```
 
-### Special Rules:
+### Special Rules
+
 1. **User agents are NEVER automatically overwritten**
 2. **Repo agents can replace other repo agents** (with warning)
 3. **Backup option creates**: `agent-name.md.backup-20250127`
@@ -216,6 +232,7 @@ Selection [s/r/b/m]:
 ## Command-Line Interface
 
 ### install.sh
+
 ```bash
 Usage: ./install.sh [PREFIX] [OPTIONS]
 
@@ -239,6 +256,7 @@ EXAMPLES:
 ```
 
 ### claude-sync (Global Tool)
+
 ```bash
 Usage: claude-sync [COMMAND] [OPTIONS]
 
@@ -293,18 +311,21 @@ rm -rf ~/.claude/commands/global
 ## Best Practices
 
 ### 1. For Repository Maintainers
+
 - Use **Semantic Versioning** for releases
 - Clearly document **Breaking Changes**
 - **Agent names** should be unique
 - **Minimize conflicts** through specific names
 
 ### 2. For End Users
+
 - Always create **your own agents** in `~/.claude/agents/`
 - **Choose a prefix** that avoids conflicts
 - **Regular updates** via `claude-sync check`
 - **Backup** before major updates
 
 ### 3. For Teams
+
 - Create a **team fork** for shared commands
 - **Own prefix** (e.g. "acme-team")
 - **CI/CD** for automatic tests
@@ -313,6 +334,7 @@ rm -rf ~/.claude/commands/global
 ## Technical Details
 
 ### Checksum Verification
+
 ```bash
 # Check agent integrity
 sha256sum ~/.claude/agents/security-specialist.md
@@ -320,6 +342,7 @@ sha256sum ~/.claude/agents/security-specialist.md
 ```
 
 ### Symlink vs. Copy
+
 ```bash
 # install.sh can use symlinks (development mode)
 ./install.sh global --use-symlinks
@@ -329,6 +352,7 @@ sha256sum ~/.claude/agents/security-specialist.md
 ```
 
 ### Custom Hooks
+
 ```bash
 # Post-Install Hook
 ~/.claude/hooks/post-install.sh
@@ -340,6 +364,7 @@ sha256sum ~/.claude/agents/security-specialist.md
 ## Troubleshooting
 
 ### "Command not found"
+
 ```bash
 # Check installation
 ls ~/.claude/commands/PREFIX/
@@ -349,6 +374,7 @@ cat ~/.claude/.manifests/PREFIX.json
 ```
 
 ### "Agent is not recognized"
+
 ```bash
 # Check agent directory
 ls ~/.claude/agents/
@@ -358,6 +384,7 @@ cat ~/.claude/.manifests/agents.json | jq
 ```
 
 ### "Updates not working"
+
 ```bash
 # Check source path
 cat ~/.claude/.manifests/PREFIX.json | jq .source.path
@@ -375,6 +402,7 @@ The `.claude-commands.json` file is the central configuration for the entire too
 ### Key Sections Explained
 
 #### 1. **Repository Information**
+
 ```json
 {
   "repo_owner": "redpop",
@@ -384,10 +412,12 @@ The `.claude-commands.json` file is the central configuration for the entire too
   "version": "2.0.0"
 }
 ```
+
 - Identifies the repository and version
 - Used for updates and fork management
 
 #### 2. **Fork Configuration**
+
 ```json
 "fork_config": {
   "auto_update_urls": true,
@@ -395,11 +425,13 @@ The `.claude-commands.json` file is the central configuration for the entire too
   "custom_prefix_support": true
 }
 ```
+
 - `auto_update_urls`: Automatically updates URLs when forked
 - `preserve_original_references`: Whether to keep original repo references
 - `custom_prefix_support`: Allows custom prefixes during installation
 
 #### 3. **Sub-Agent Orchestration**
+
 ```json
 "subAgentOrchestration": {
   "enabled": true,
@@ -410,12 +442,14 @@ The `.claude-commands.json` file is the central configuration for the entire too
   }
 }
 ```
+
 - Controls how multiple agents work together
 - `tokenBudget`: Max tokens per agent (affects response length)
 - `timeout`: Max execution time in milliseconds
 - `parallelExecution`: Whether agents run in parallel
 
 #### 4. **Performance Modes**
+
 ```json
 "performanceModes": {
   "conservative": { "maxConcurrentAgents": 5 },
@@ -423,12 +457,14 @@ The `.claude-commands.json` file is the central configuration for the entire too
   "aggressive": { "maxConcurrentAgents": 20 }
 }
 ```
+
 - Choose based on your system capabilities
 - `conservative`: Safer for limited resources
 - `balanced`: Default, good for most systems
 - `aggressive`: Maximum parallelization
 
 #### 5. **Agent Registry**
+
 ```json
 "agentRegistry": {
   "security-specialist": {
@@ -439,6 +475,7 @@ The `.claude-commands.json` file is the central configuration for the entire too
   }
 }
 ```
+
 - Defines available agents and their triggers
 - `autoInvoke`: Keywords that trigger this agent
 - `priority`: Execution priority when multiple agents match
@@ -448,25 +485,33 @@ The `.claude-commands.json` file is the central configuration for the entire too
 ### Three Types of Execution
 
 #### 1. **Simple Commands**
+
 Basic commands that execute a single task:
+
 ```
 /prefix:git:commit
 ```
+
 - Runs standalone
 - No agent orchestration
 - Fast and simple
 
 #### 2. **Orchestration Commands**
+
 Commands that coordinate multiple specialized agents:
+
 ```
 /prefix:orchestration:security-audit
 ```
+
 - Invokes specific sub-agents
 - Agents work in their own contexts
 - Results are aggregated
 
 #### 3. **Hybrid Commands**
+
 The most powerful approach, combining parallel scanning with expert analysis:
+
 ```
 /prefix:hybrid:analyze-deep
 ```
@@ -476,18 +521,21 @@ The most powerful approach, combining parallel scanning with expert analysis:
 The hybrid approach uses a three-phase system:
 
 #### Phase 1: Parallel Scanning (5-8 seconds)
+
 - 10+ scanner agents run simultaneously using the Task Tool
 - Each scanner has a specific focus (security, performance, etc.)
 - Produces structured JSON output
 - Optimized for speed and coverage
 
 #### Phase 2: Expert Analysis (10-20 seconds)
+
 - Results from Phase 1 are analyzed
 - Critical issues are delegated to specialized sub-agents
 - Each sub-agent works in isolation for deep analysis
 - Sub-agents have full Claude Code capabilities
 
 #### Phase 3: Synthesis (2-5 seconds)
+
 - All results are combined
 - Duplicate findings are merged
 - Prioritized action plan is generated
@@ -518,12 +566,15 @@ When you run `/global:hybrid:analyze-deep ./my-project`:
 ## For End Users: Configuration Options
 
 ### 1. **Performance Tuning**
+
 Edit `.claude-commands.json` to adjust:
+
 ```json
 "performanceMode": "conservative"  // Change from "balanced"
 ```
 
 ### 2. **Disable Specific Features**
+
 ```json
 "subAgentOrchestration": {
   "enabled": false  // Disable agent orchestration
@@ -531,6 +582,7 @@ Edit `.claude-commands.json` to adjust:
 ```
 
 ### 3. **Custom Command Behavior**
+
 ```json
 "commandOverrides": {
   "orchestration:security-audit": {
@@ -545,9 +597,11 @@ Edit `.claude-commands.json` to adjust:
 ## For Developers: Extending the System
 
 ### 1. **Creating New Agents**
+
 1. Create a markdown file in `agents/`
 2. Define the agent's expertise and persona
 3. Register in `.claude-commands.json`:
+
 ```json
 "agentRegistry": {
   "my-new-agent": {
@@ -560,9 +614,11 @@ Edit `.claude-commands.json` to adjust:
 ```
 
 ### 2. **Creating Hybrid Commands**
+
 1. Design your three phases
 2. Create command in `commands/hybrid/`
 3. Configure in `.claude-commands.json`:
+
 ```json
 "hybridCommands": {
   "my-hybrid-command": {
@@ -574,6 +630,7 @@ Edit `.claude-commands.json` to adjust:
 ```
 
 ### 3. **Performance Optimization**
+
 - Adjust `tokenBudget` for quality vs speed
 - Modify `maxConcurrentAgents` based on system
 - Use `caching` for repeated analyses

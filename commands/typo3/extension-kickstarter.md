@@ -16,6 +16,7 @@ Creates complete TYPO3 extensions using either the stefanfroemken/ext-kickstarte
 ## Command Workflow
 
 This command provides two approaches:
+
 1. Using stefanfroemken/ext-kickstarter (if installed)
 2. Manual scaffolding with best practices
 
@@ -47,6 +48,7 @@ If ext-kickstarter is available:
 ```
 
 ### Kickstarter Options
+
 ```bash
 --with-backend-module    # Add backend module
 --with-plugin           # Add frontend plugin
@@ -124,6 +126,7 @@ ext/{extension_key}/
 ### Core Files
 
 #### composer.json
+
 ```json
 {
     "name": "{vendor}/{extension-key}",
@@ -172,6 +175,7 @@ ext/{extension_key}/
 ```
 
 #### ext_emconf.php
+
 ```php
 <?php
 $EM_CONF[$_EXTKEY] = [
@@ -193,6 +197,7 @@ $EM_CONF[$_EXTKEY] = [
 ```
 
 #### Configuration/Services.yaml
+
 ```yaml
 services:
   _defaults:
@@ -212,6 +217,7 @@ services:
 ### Plugin Extension
 
 #### ext_localconf.php
+
 ```php
 <?php
 defined('TYPO3') || die();
@@ -233,6 +239,7 @@ ExtensionUtility::configurePlugin(
 ```
 
 #### Controller Example
+
 ```php
 <?php
 declare(strict_types=1);
@@ -260,6 +267,7 @@ class {ControllerName}Controller extends ActionController
 ### Backend Module
 
 #### Configuration/Backend/Modules.php
+
 ```php
 <?php
 return [
@@ -284,6 +292,7 @@ return [
 ### Service Extension
 
 #### Service Class Example
+
 ```php
 <?php
 declare(strict_types=1);
@@ -312,6 +321,7 @@ class {ServiceName}Service implements SingletonInterface
 ### Event Listener
 
 #### Classes/EventListener/{EventName}Listener.php
+
 ```php
 <?php
 declare(strict_types=1);
@@ -336,6 +346,7 @@ final class {EventName}Listener
 ### Console Command
 
 #### Classes/Command/{CommandName}Command.php
+
 ```php
 <?php
 declare(strict_types=1);
@@ -375,6 +386,7 @@ class {CommandName}Command extends Command
 ### Testing Setup
 
 #### phpunit.xml
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -398,6 +410,7 @@ class {CommandName}Command extends Command
 ```
 
 #### PHPStan Configuration
+
 ```neon
 # phpstan.neon
 includes:
@@ -417,6 +430,7 @@ parameters:
 If no arguments provided, guide through:
 
 1. **Extension Type**:
+
 ```
 Select extension type:
 1. Basic Extension
@@ -428,6 +442,7 @@ Choice [1-5]:
 ```
 
 2. **Basic Information**:
+
 - Extension key (lowercase, underscores)
 - Vendor name
 - Title
@@ -435,6 +450,7 @@ Choice [1-5]:
 - Author information
 
 3. **Features to Include**:
+
 ```
 Select features to include:
 [ ] Backend Module
@@ -448,6 +464,7 @@ Select features to include:
 ```
 
 4. **Dependencies**:
+
 ```
 Select TYPO3 components:
 [x] Core

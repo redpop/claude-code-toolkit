@@ -30,6 +30,7 @@ This command identifies and removes code duplication by extracting common patter
 ## Duplication Types
 
 ### 1. Exact Duplicates
+
 ```javascript
 // Before: Same code in multiple files
 // file1.js
@@ -56,6 +57,7 @@ import { calculateTax } from './utils/tax';
 ```
 
 ### 2. Similar Logic Patterns
+
 ```javascript
 // Before: Similar validation patterns
 function validateEmail(email) {
@@ -96,6 +98,7 @@ const validatePhone = createValidator([
 ```
 
 ### 3. Repeated Error Handling
+
 ```javascript
 // Before: Duplicate error handling
 async function fetchUser(id) {
@@ -144,6 +147,7 @@ const fetchProduct = (id) => fetchResource('products', id);
    - Calculate similarity scores
 
 2. **Group Duplicates**:
+
    ```
    Duplication Groups Found: 8
    
@@ -175,6 +179,7 @@ const fetchProduct = (id) => fetchResource('products', id);
 ### Phase 3: Code Extraction
 
 1. **Create Shared Modules**:
+
    ```javascript
    // utils/index.js
    export * from './validation';
@@ -198,6 +203,7 @@ const fetchProduct = (id) => fetchResource('products', id);
 ### Phase 4: Verification
 
 1. **Test Coverage**:
+
    ```bash
    # Run tests for affected files
    npm test -- --findRelatedTests
@@ -256,6 +262,7 @@ const fetchProduct = (id) => fetchResource('products', id);
 ## Extraction Patterns
 
 ### Function Extraction
+
 ```javascript
 // Pattern: Extract varying parts as parameters
 function createFormatter(prefix, suffix, transform) {
@@ -270,6 +277,7 @@ const formatPercent = createFormatter('', '%', (n) => Math.round(n));
 ```
 
 ### Configuration Extraction
+
 ```javascript
 // Before: Hardcoded values
 const API_URL = 'https://api.example.com';
@@ -285,6 +293,7 @@ export const apiConfig = {
 ```
 
 ### Component Extraction
+
 ```javascript
 // Before: Duplicate UI patterns
 // After: Reusable component

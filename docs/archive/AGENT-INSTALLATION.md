@@ -42,6 +42,7 @@ curl -fsSL https://raw.githubusercontent.com/redpop/claude-code-toolkit/feature/
 ```
 
 This will:
+
 - Update your existing installation
 - Add agents support
 - Preserve your current setup
@@ -65,6 +66,7 @@ curl -fsSL https://raw.githubusercontent.com/redpop/claude-code-toolkit/feature/
 After installation, you should see:
 
 1. **Agent files in your installation directory:**
+
    ```bash
    ls ~/.claude/commands/global/*-specialist.md
    ls ~/.claude/commands/global/*-optimizer.md
@@ -74,6 +76,7 @@ After installation, you should see:
    ```
 
 2. **Updated commands that use agents:**
+
    ```bash
    # Hybrid commands
    ls ~/.claude/commands/global/hybrid/
@@ -83,6 +86,7 @@ After installation, you should see:
    ```
 
 3. **Test a hybrid command:**
+
    ```bash
    /global:hybrid:analyze-deep . --focus=all
    ```
@@ -123,27 +127,33 @@ The updated installation now includes:
 ### Agents not appearing after update
 
 1. **Check your branch:**
+
    ```bash
    cd ~/.claude/commands/global
    git branch --show-current
    ```
+
    Should show: `feature/sub-agent-orchestration`
 
 2. **Check sparse-checkout configuration:**
+
    ```bash
    cat .git/info/sparse-checkout
    ```
+
    Should include both:
    - `commands/*`
    - `agents/*`
 
 3. **Force re-read of the repository:**
+
    ```bash
    git sparse-checkout reapply
    git read-tree -m -u HEAD
    ```
 
 4. **Check for agents in the repository:**
+
    ```bash
    git ls-tree -r HEAD --name-only | grep "^agents/"
    ```
@@ -153,11 +163,13 @@ The updated installation now includes:
 If hybrid/orchestration commands can't find agents:
 
 1. **Verify agent files are in root:**
+
    ```bash
    ls ~/.claude/commands/global/*-specialist.md
    ```
 
 2. **Check .claude-commands.json:**
+
    ```bash
    cat ~/.claude/commands/global/.claude-commands.json | grep -A5 "agentRegistry"
    ```
@@ -194,6 +206,7 @@ git pull
 ```
 
 The updated post-merge hook (version 6) will automatically:
+
 - Move new agents from `agents/` to root
 - Update existing agents
 - Remove obsolete files

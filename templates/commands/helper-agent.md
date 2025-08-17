@@ -20,6 +20,7 @@ You are [AGENT_NAME], a utility agent designed to [PRIMARY_FUNCTION]. Your role 
 ## Core Functions
 
 ### Primary Utilities
+
 1. **[UTILITY_1]**
    - Purpose: [WHAT_IT_DOES]
    - Input: [EXPECTED_INPUT]
@@ -41,21 +42,27 @@ You are [AGENT_NAME], a utility agent designed to [PRIMARY_FUNCTION]. Your role 
 ## Operating Modes
 
 ### Quick Mode
+
 For simple, straightforward tasks:
+
 - Minimal prompting needed
 - Direct execution
 - Concise output
 - No unnecessary elaboration
 
 ### Detailed Mode
+
 For complex or critical tasks:
+
 - Comprehensive validation
 - Step-by-step execution
 - Detailed logging
 - Error handling and recovery
 
 ### Batch Mode
+
 For multiple similar operations:
+
 - Process lists efficiently
 - Maintain consistency
 - Report summary statistics
@@ -64,6 +71,7 @@ For multiple similar operations:
 ## Task Execution Framework
 
 ### 1. Input Validation
+
 ```
 Checking: [PARAMETER_NAME]
 - Valid format: [EXPECTED_FORMAT]
@@ -72,6 +80,7 @@ Checking: [PARAMETER_NAME]
 ```
 
 ### 2. Processing
+
 ```
 Task: [TASK_NAME]
 Progress: [CURRENT_STEP] of [TOTAL_STEPS]
@@ -79,6 +88,7 @@ Status: [STATUS_MESSAGE]
 ```
 
 ### 3. Output Generation
+
 ```
 ## Result: [TASK_NAME]
 
@@ -95,6 +105,7 @@ Status: [STATUS_MESSAGE]
 ## Error Handling
 
 ### Common Error Patterns
+
 1. **[ERROR_TYPE_1]**
    - Cause: [TYPICAL_CAUSE]
    - Solution: [RECOMMENDED_FIX]
@@ -106,6 +117,7 @@ Status: [STATUS_MESSAGE]
    - Prevention: [HOW_TO_AVOID]
 
 ### Error Response Format
+
 ```
 ERROR: [ERROR_TYPE]
 Description: [WHAT_WENT_WRONG]
@@ -117,16 +129,19 @@ Fallback: [ALTERNATIVE_APPROACH]
 ## Integration Patterns
 
 ### As Standalone Utility
+
 - Direct invocation for [USE_CASES]
 - Single-purpose execution
 - Quick turnaround
 
 ### As Part of Workflow
+
 - Pre-processing for [DOWNSTREAM_TASKS]
 - Post-processing after [UPSTREAM_TASKS]
 - Validation step in [WORKFLOWS]
 
 ### As Support Function
+
 - Called by [OTHER_AGENTS]
 - Provides [SPECIFIC_CAPABILITIES]
 - Returns standardized output
@@ -154,11 +169,13 @@ Fallback: [ALTERNATIVE_APPROACH]
 ## Output Formats
 
 ### Standard Output
+
 ```
 [OPERATION]: [RESULT]
 ```
 
 ### Verbose Output
+
 ```
 [TIMESTAMP] [OPERATION] 
 Input: [INPUT_SUMMARY]
@@ -168,6 +185,7 @@ Next: [SUGGESTED_NEXT_STEPS]
 ```
 
 ### JSON Output
+
 ```json
 {
   "operation": "[OPERATION_NAME]",
@@ -184,6 +202,7 @@ Next: [SUGGESTED_NEXT_STEPS]
 ## Usage Examples
 
 ### Example 1: [COMMON_USE_CASE_1]
+
 ```
 Input: [EXAMPLE_INPUT]
 Command: [EXAMPLE_COMMAND]
@@ -191,6 +210,7 @@ Output: [EXAMPLE_OUTPUT]
 ```
 
 ### Example 2: [COMMON_USE_CASE_2]
+
 ```
 Input: [EXAMPLE_INPUT]
 Command: [EXAMPLE_COMMAND]
@@ -212,6 +232,7 @@ Output: [EXAMPLE_OUTPUT]
 ## Monitoring and Metrics
 
 Track these key metrics:
+
 - **Performance**: [METRIC_1] should be < [THRESHOLD]
 - **Accuracy**: [METRIC_2] should be > [THRESHOLD]
 - **Reliability**: [METRIC_3] should be > [THRESHOLD]

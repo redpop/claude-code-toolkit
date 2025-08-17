@@ -24,6 +24,7 @@ cd claude-code-toolkit
 ```
 
 This will:
+
 - Install hooks to `~/.claude/claude-code-toolkit/hooks/`
 - Configure `~/.claude/settings.json` with the Stop hook
 - Activate sound notifications immediately
@@ -156,19 +157,24 @@ Add additional hooks for different events:
 ### Platform-Specific Setup
 
 #### macOS
+
 - `afplay` is pre-installed
 - System sounds in `/System/Library/Sounds/`
 - No additional setup required
 
 #### Linux
+
 - Install `sox`: `sudo apt-get install sox`
 - Modify script to use `play` command:
+
   ```bash
   play -v "$VOLUME" "$SOUND_FILE" 2>/dev/null &
   ```
 
 #### Windows (WSL)
+
 - Use `powershell.exe` to play sounds:
+
   ```bash
   powershell.exe -c "(New-Object Media.SoundPlayer '$SOUND_FILE').PlaySync()" &
   ```
@@ -178,23 +184,27 @@ Add additional hooks for different events:
 ### No Sound Playing
 
 1. **Check volume settings:**
+
    ```bash
    # Test sound directly
    afplay -v 0.5 /System/Library/Sounds/Glass.aiff
    ```
 
 2. **Verify hook is configured:**
+
    ```bash
    cat ~/.claude/settings.json | grep -A 5 "Stop"
    ```
 
 3. **Check script permissions:**
+
    ```bash
    ls -la ~/.claude/claude-code-toolkit/hooks/stop-notification.sh
    # Should show executable permissions (x)
    ```
 
 4. **Test script manually:**
+
    ```bash
    echo '{"stop_hook_active": false}' | ~/.claude/claude-code-toolkit/hooks/stop-notification.sh
    ```
@@ -204,11 +214,13 @@ Add additional hooks for different events:
 1. **Restart Claude Code** after modifying settings.json
 
 2. **Check for syntax errors** in settings.json:
+
    ```bash
    python -m json.tool ~/.claude/settings.json > /dev/null
    ```
 
 3. **Verify installation path** matches settings:
+
    ```bash
    ls ~/.claude/claude-code-toolkit/hooks/
    ```
@@ -216,6 +228,7 @@ Add additional hooks for different events:
 ### Sound Plays Multiple Times
 
 This can happen if the Stop hook is configured multiple times. Check for duplicates in:
+
 - `~/.claude/settings.json` (global)
 - `.claude/settings.json` (project-specific)
 
@@ -232,11 +245,13 @@ This can happen if the Stop hook is configured multiple times. Check for duplica
 To temporarily disable notifications:
 
 1. **Remove from settings:**
+
    ```bash
    # Comment out or remove the Stop hook section in settings.json
    ```
 
 2. **Or rename the script:**
+
    ```bash
    mv ~/.claude/claude-code-toolkit/hooks/stop-notification.sh{,.disabled}
    ```
@@ -248,6 +263,7 @@ See [hooks/CLAUDE.md](../../hooks/CLAUDE.md) for detailed information on creatin
 ## Support
 
 For issues or suggestions:
+
 - Check [hooks/CLAUDE.md](../../hooks/CLAUDE.md) for technical details
 - Review the [troubleshooting section](#troubleshooting) above
 - Open an issue in the GitHub repository

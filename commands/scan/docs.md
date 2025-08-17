@@ -284,6 +284,7 @@ Project: claude-code-toolkit
    ```
 
 3. **Update Existing** (1-2 hours):
+
    ```bash
    /update-docs . --scope=all --validate
    ```

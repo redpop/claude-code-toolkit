@@ -5,7 +5,7 @@ argument-hint: "[vendor] [package-name] [--include-ddev] [--include-docker] [--a
 
 # TYPO3 v13 SitePackage Generator (Official Template)
 
-Creates a complete TYPO3 v13.4 compatible SitePackage based on the official template from https://get.typo3.org/sitepackage with modern Site Sets configuration and Fluid Styled Content integration.
+Creates a complete TYPO3 v13.4 compatible SitePackage based on the official template from <https://get.typo3.org/sitepackage> with modern Site Sets configuration and Fluid Styled Content integration.
 
 ## Usage
 
@@ -16,11 +16,13 @@ Creates a complete TYPO3 v13.4 compatible SitePackage based on the official temp
 ## Command Workflow
 
 Parse the arguments from $ARGUMENTS to extract:
+
 - Vendor name (e.g., "mycompany")
 - Package name (e.g., "corporate-site")
 - Optional flags like --include-ddev, --include-docker, --author, --email, etc.
 
 If arguments are missing, ask the user for:
+
 1. Vendor name (lowercase, no spaces)
 2. Package name (kebab-case)
 3. Extension title
@@ -96,6 +98,7 @@ packages/{vendor}/{package}/
 ```
 
 ### composer.json
+
 ```json
 {
     "name": "{vendor}/{package}",
@@ -123,6 +126,7 @@ packages/{vendor}/{package}/
 ```
 
 ### ext_emconf.php
+
 ```php
 <?php
 
@@ -156,6 +160,7 @@ $EM_CONF[$_EXTKEY] = [
 ```
 
 ### ext_localconf.php
+
 ```php
 <?php
 
@@ -166,6 +171,7 @@ $GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets']['{extension-key}'] = 'EXT:{extensi
 ```
 
 ### ext_tables.php
+
 ```php
 <?php
 
@@ -173,9 +179,11 @@ defined('TYPO3') or die('Access denied.');
 ```
 
 ### ext_conf_template.txt
+
 Create an empty file for extension configuration.
 
 ### Configuration/Sets/SitePackage/config.yaml
+
 ```yaml
 name: {vendor}/{package}
 label: '{extension-title}'
@@ -185,11 +193,13 @@ dependencies:
 ```
 
 ### Configuration/Sets/SitePackage/setup.typoscript
+
 ```typoscript
 @import './TypoScript/'
 ```
 
 ### Configuration/Sets/SitePackage/settings.yaml
+
 ```yaml
 styles:
   templates:
@@ -222,6 +232,7 @@ config:
 ```
 
 ### Configuration/Sets/SitePackage/page.tsconfig
+
 ```tsconfig
 @import './PageTsConfig/BackendLayouts/'
 
@@ -246,6 +257,7 @@ TCEMAIN {
 ```
 
 ### Configuration/Sets/SitePackage/PageTsConfig/BackendLayouts/default.tsconfig
+
 ```tsconfig
 #
 # BACKENDLAYOUT: DEFAULT
@@ -280,6 +292,7 @@ mod {
 ```
 
 ### Configuration/Sets/SitePackage/TypoScript/config.typoscript
+
 ```typoscript
 ################
 #### CONFIG ####
@@ -320,6 +333,7 @@ config {
 ```
 
 ### Configuration/Sets/SitePackage/TypoScript/page.typoscript
+
 ```typoscript
 ##############
 #### PAGE ####
@@ -388,6 +402,7 @@ page {
 ```
 
 ### Configuration/RTE/Default.yaml
+
 ```yaml
 imports:
     - { resource: "EXT:rte_ckeditor/Configuration/RTE/Processing.yaml" }
@@ -434,6 +449,7 @@ editor:
 ```
 
 ### Resources/Private/PageView/Layouts/Default.html
+
 ```html
 <ul>
     <f:for each="{mainnavigation}" as="mainnavigationItem">
@@ -459,6 +475,7 @@ editor:
 ```
 
 ### Resources/Private/PageView/Pages/Default.html
+
 ```html
 <f:layout name="Default" />
 <f:section name="Main">
@@ -482,6 +499,7 @@ editor:
 ```
 
 ### Resources/Private/PageView/Partials/Content.html
+
 ```html
 <f:for each="{records}" as="record">
     <f:cObject
@@ -493,6 +511,7 @@ editor:
 ```
 
 ### Resources/Private/Language/locallang.xlf
+
 ```xml
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
@@ -508,6 +527,7 @@ editor:
 ```
 
 ### Resources/Private/Language/locallang_be.xlf
+
 ```xml
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
@@ -535,6 +555,7 @@ editor:
 ```
 
 ### Resources/Private/Language/locallang_db.xlf
+
 ```xml
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
@@ -550,6 +571,7 @@ editor:
 ```
 
 ### Resources/Public/Css/layout.css
+
 ```css
 /* Main Layout CSS - Add your styles here */
 body {
@@ -583,6 +605,7 @@ ul li.active a {
 ```
 
 ### Resources/Public/Css/rte.css
+
 ```css
 /* RTE Editor Styles */
 .lead {
@@ -608,6 +631,7 @@ ul li.active a {
 ```
 
 ### Resources/Public/JavaScript/main.js
+
 ```javascript
 console.log('WE LOVE TYPO3');
 
@@ -623,12 +647,15 @@ console.log('WE LOVE TYPO3');
 ```
 
 ### Resources/Public/Icons/Extension.svg
+
 Create a simple SVG icon or copy from an existing source.
 
 ### Resources/Public/Icons/favicon.ico
+
 Create or copy a favicon file.
 
 ### README.md
+
 ```markdown
 # {extension-title}
 
@@ -649,11 +676,13 @@ TYPO3 v13 Sitepackage for {vendor-url}
 ```
 
 2. Install via Composer:
+
 ```bash
 composer require {vendor}/{package}:@dev
 ```
 
 3. Activate extension:
+
 ```bash
 vendor/bin/typo3 extension:setup
 ```
@@ -661,6 +690,7 @@ vendor/bin/typo3 extension:setup
 ## Development
 
 This sitepackage uses:
+
 - TYPO3 v13.4 LTS
 - Site Sets configuration
 - Fluid Styled Content
@@ -669,6 +699,7 @@ This sitepackage uses:
 ## Author
 
 {author-name} <{author-email}>
+
 ```
 
 ## DDEV Configuration (Optional)
@@ -695,6 +726,7 @@ composer_version: "2"
 ## Success Message
 
 After successful creation:
+
 ```
 ✅ TYPO3 v13 SitePackage created successfully!
 
@@ -742,5 +774,5 @@ Happy coding! 🚀
 
 ## Reference
 
-This command creates a sitepackage based on the official TYPO3 v13 template from https://get.typo3.org/sitepackage.
+This command creates a sitepackage based on the official TYPO3 v13 template from <https://get.typo3.org/sitepackage>.
 The complete template reference is documented in `~/.claude/claude-code-toolkit/knowledge-base/typo3/sitepackage-v13-template.md`.

@@ -128,6 +128,7 @@ CHANGELOG.md always uses specialized handling:
    ```
 
 5. **Commit Phase** (if --commit):
+
    ```
    - Stage documentation changes
    - Create descriptive commit message

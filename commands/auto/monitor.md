@@ -309,6 +309,7 @@ class QualityNotifier {
 ## Continuous Improvement Workflows
 
 ### Daily Workflow
+
 ```mermaid
 graph LR
     A[2:00 AM] --> B[Quick Analysis]
@@ -324,6 +325,7 @@ graph LR
 ```
 
 ### Weekly Deep Analysis
+
 ```mermaid
 graph TD
     A[Sunday 3:00 AM] --> B[Comprehensive Analysis]
@@ -336,6 +338,7 @@ graph TD
 ```
 
 ### Commit-Triggered Checks
+
 ```mermaid
 graph LR
     A[Git Push] --> B[Webhook Trigger]
@@ -350,6 +353,7 @@ graph LR
 ## Setup Instructions
 
 ### 1. Initial Setup
+
 ```bash
 # Initialize continuous quality
 /continuous-quality . --init
@@ -362,6 +366,7 @@ graph LR
 ```
 
 ### 2. Configure Schedule
+
 ```bash
 # Set up cron jobs
 crontab -e
@@ -374,6 +379,7 @@ crontab -e
 ```
 
 ### 3. CI/CD Integration
+
 ```yaml
 # .github/workflows/continuous-quality.yml
 name: Continuous Quality
@@ -413,6 +419,7 @@ jobs:
 ## Monitoring & Alerts
 
 ### Alert Rules
+
 ```yaml
 alerts:
   quality_degradation:
@@ -437,6 +444,7 @@ alerts:
 ```
 
 ### Metrics Tracking
+
 - Health score trends
 - Fix success rate
 - Time to resolution

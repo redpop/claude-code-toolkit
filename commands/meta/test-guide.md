@@ -34,6 +34,7 @@ The test guide output behavior:
 ### Auto-generated Filename Convention
 
 When using `--output` without a filename:
+
 - Pattern: `test-guides/YYYY-MM-DD_HH-MM-SS_test-guide[_lang].md`
 - Directory `test-guides/` is created if needed
 - Language suffix added if not English (e.g., `_de` for German)
@@ -346,22 +347,26 @@ Works well with:
 The command supports three output formats:
 
 ### 1. **Markdown** (default)
+
 - Standard markdown formatting
 - Works in most documentation systems
 - Best for GitHub, GitLab, general docs
 
 ### 2. **Checklist**
+
 - Simple checkbox format
 - Quick validation lists
 - Minimal formatting
 
 ### 3. **Jira Wiki Markup**
+
 - Native Jira text formatting
 - Direct copy-paste into Jira tickets
 - No conversion needed
 - Includes panels, tables, and code blocks
 
-#### Jira Format Features:
+#### Jira Format Features
+
 - `h1.` `h2.` `h3.` for headings
 - `*bold*` and `_italic_` text
 - `||header||` for tables

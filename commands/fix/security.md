@@ -28,6 +28,7 @@ This command automatically fixes security vulnerabilities using the best availab
 ## Security Fix Categories
 
 ### 1. Input Validation (A03:2021)
+
 ```javascript
 // Before
 app.post('/user', (req, res) => {
@@ -52,6 +53,7 @@ app.post('/user', (req, res) => {
 ```
 
 ### 2. SQL Injection Prevention (A03:2021)
+
 ```javascript
 // Before
 db.query(`SELECT * FROM users WHERE id = ${userId}`);
@@ -61,6 +63,7 @@ db.query('SELECT * FROM users WHERE id = ?', [userId]);
 ```
 
 ### 3. XSS Protection (A03:2021)
+
 ```javascript
 // Before
 element.innerHTML = userInput;
@@ -72,6 +75,7 @@ element.innerHTML = sanitizeHtml(userInput);
 ```
 
 ### 4. Authentication Checks (A01:2021)
+
 ```javascript
 // Before
 app.get('/admin', (req, res) => {
@@ -85,6 +89,7 @@ app.get('/admin', requireAuth, requireRole('admin'), (req, res) => {
 ```
 
 ### 5. Secure Headers (A05:2021)
+
 ```javascript
 // Add security headers
 app.use(helmet({
@@ -169,6 +174,7 @@ For each security issue:
    - Maintain functionality
 
 3. **Add Security Tests**:
+
    ```javascript
    test('prevents SQL injection', () => {
      const maliciousInput = "'; DROP TABLE users; --";
@@ -202,9 +208,10 @@ For each security issue:
 
 ### Phase 4: Verification
 
-#### With Semgrep MCP:
+#### With Semgrep MCP
 
 1. **Automated Verification**:
+
    ```markdown
    # Use MCP to verify fixes
    - Run mcp__semgrep__security_check on modified files
@@ -212,9 +219,10 @@ For each security issue:
    - Check for new issues introduced
    ```
 
-#### Without Semgrep MCP:
+#### Without Semgrep MCP
 
 1. **Traditional Testing**:
+
    ```bash
    # Run security tests if available
    npm run test:security
@@ -281,6 +289,7 @@ For each security issue:
 ## Security Patterns Library
 
 ### Input Validation
+
 ```javascript
 // Email validation
 const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -296,6 +305,7 @@ const isValidNumber = (num, min, max) => {
 ```
 
 ### Authentication Helpers
+
 ```javascript
 // Middleware for auth check
 const requireAuth = (req, res, next) => {
@@ -315,6 +325,7 @@ const requireRole = (role) => (req, res, next) => {
 ```
 
 ### Secure Defaults
+
 ```javascript
 // Secure cookie settings
 app.use(session({
@@ -333,6 +344,7 @@ app.use(session({
 ## Configuration
 
 Default settings:
+
 - Severity levels: critical, high
 - OWASP Top 10: enabled
 - Auto-fix confidence: 90%
@@ -341,13 +353,15 @@ Default settings:
 
 ## Tool-Specific Benefits
 
-### With Semgrep MCP:
+### With Semgrep MCP
+
 - **Precise AST-based fixes**: No false positives
 - **Semantic understanding**: Context-aware modifications
 - **Automated verification**: Instant validation of fixes
 - **Custom rule support**: Project-specific security patterns
 
-### With Pattern-Based:
+### With Pattern-Based
+
 - **Fast execution**: Quick pattern replacement
 - **Wide coverage**: Works without dependencies
 - **Simple fixes**: Effective for straightforward issues
@@ -374,7 +388,9 @@ Default settings:
 This command helps maintain a secure codebase by automatically applying security best practices and fixing common vulnerabilities.
 
 **💡 Tip**: For best results, install Semgrep MCP:
+
 ```bash
 npm install -g @semgrep/mcp
 ```
+
 This enables AST-based analysis for more accurate and reliable security fixes.

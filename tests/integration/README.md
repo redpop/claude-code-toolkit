@@ -5,6 +5,7 @@ This directory contains end-to-end integration tests.
 ## Purpose
 
 Integration tests verify that:
+
 - Multiple commands work together correctly
 - Data flows properly between commands
 - The toolkit integrates well with external tools

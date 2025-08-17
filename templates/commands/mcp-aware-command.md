@@ -47,6 +47,7 @@ This template demonstrates how to create commands that leverage MCP servers when
 **IF neither MCP nor local tools are available:**
 
 Implement basic functionality using standard tools:
+
 - Use Task Tool agents for parallel processing
 - Use ripgrep for pattern matching
 - Use bash scripts for basic operations
@@ -60,6 +61,7 @@ Regardless of execution method:
    - Ensure consistent data regardless of tool used
 
 2. **Quality Indication**:
+
    ```markdown
    ## Analysis Report
    
@@ -137,6 +139,7 @@ Always indicate tool usage in output:
 ## Testing
 
 Test your command in three scenarios:
+
 1. With MCP server installed and running
 2. With local tools but no MCP
 3. With neither MCP nor local tools
@@ -146,6 +149,7 @@ Ensure graceful handling in all cases.
 ## Documentation
 
 In your command description:
+
 - Mention MCP enhancement capability
 - Don't require MCP for basic function
 - List benefits of MCP when available

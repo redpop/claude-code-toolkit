@@ -17,7 +17,7 @@ The most recommended workflow for any project:
 /prefix:auto:execute --latest
 ```
 
-### What This Does:
+### What This Does
 
 1. **Deep Scan**: Analyzes your entire codebase with multiple specialized agents
 2. **Action Plan**: Creates a prioritized list of improvements with exact fix commands

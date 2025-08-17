@@ -68,7 +68,8 @@
       "WebFetch(domain:docs.anthropic.com)",
       "WebSearch",
       "WebFetch(domain:biomejs.dev)",
-      "Bash(afplay:*)"
+      "Bash(afplay:*)",
+      "Bash(brew list:*)"
     ],
     "deny": []
   }

@@ -157,7 +157,7 @@ claude-code-toolkit/
 /prefix:analysis:analyze-deep . --export-all
 ```
 
-#### What happens internally:
+#### What happens internally
 
 **Step 1: Parallel Scanning (5-8 seconds)**
 
@@ -191,7 +191,7 @@ claude-code-toolkit/
 - Health score calculation (0-100)
 - Export in JSON, Markdown, HTML
 
-#### Example Output:
+#### Example Output
 
 ```
 📊 Analysis Summary:
@@ -216,7 +216,7 @@ Time: 45 seconds
 /prefix:analysis:analyze-report reports/analyze-deep-*.json --generate-action-plan
 ```
 
-#### What is generated:
+#### What is generated
 
 **Structured action plan with:**
 
@@ -227,7 +227,7 @@ Time: 45 seconds
 - Impact descriptions
 - Team allocation (optional)
 
-#### Example Action Plan:
+#### Example Action Plan
 
 ```markdown
 # Action Plan Report
@@ -263,7 +263,7 @@ Time: 45 seconds
 /prefix:workflow:execute-action-plan reports/action-plan-*.md --mode=supervised
 ```
 
-#### Execution Modes:
+#### Execution Modes
 
 **1. Supervised Mode (Default)**
 
@@ -283,7 +283,7 @@ Time: 45 seconds
 - No actual changes
 - Validates all commands
 
-#### What happens:
+#### What happens
 
 1. Loads action plan
 2. Validates all commands
@@ -299,7 +299,7 @@ Time: 45 seconds
 /prefix:workflow:completion-report
 ```
 
-#### Generates comprehensive report with:
+#### Generates comprehensive report with
 
 - **Success rate**: What was achieved
 - **Metrics**: Before/after comparison
@@ -307,7 +307,7 @@ Time: 45 seconds
 - **Errors**: What didn't work
 - **Next steps**: Recommendations
 
-#### Example Output:
+#### Example Output
 
 ```
 Success Rate: 87%
@@ -631,6 +631,7 @@ The central configuration file controls the entire system:
    - Profile with `--performance-metrics`
 
 4. **CI/CD integration**
+
    ```yaml
    - name: Quality Check
      run: |
@@ -712,6 +713,6 @@ The combination makes it the most advanced code quality system for Claude Code.
 
 ---
 
-_Technical Documentation Version 3.0_  
-_Claude Code Toolkit Version 2.4.0_  
-_Last Updated: January 2025_
+*Technical Documentation Version 3.0*  
+*Claude Code Toolkit Version 2.4.0*  
+*Last Updated: January 2025*

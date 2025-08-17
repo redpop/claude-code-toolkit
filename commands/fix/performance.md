@@ -19,19 +19,25 @@ This command automatically identifies and fixes common performance bottlenecks i
 ## Supported Fixes
 
 ### 1. O(n²) Algorithm Optimization
+
 **Target**: `--target=algorithm`
+
 - Identifies nested loops with O(n²) complexity
 - Replaces with Map/Set-based lookups for O(n+m)
 - Optimizes array operations and searching
 
 ### 2. Memory Optimization
+
 **Target**: `--target=memory`
+
 - Fixes memory leaks in React components
 - Optimizes large object allocations
 - Implements proper cleanup in useEffect
 
 ### 3. Database Batching
+
 **Target**: `--target=database`
+
 - Converts sequential DB operations to batch operations
 - Implements transaction wrapping
 - Optimizes query patterns
@@ -39,6 +45,7 @@ This command automatically identifies and fixes common performance bottlenecks i
 ## Implementation
 
 ### Step 1: Analysis Phase
+
 Scan the target files/directory for performance anti-patterns:
 
 ```javascript
@@ -52,6 +59,7 @@ Scan the target files/directory for performance anti-patterns:
 ### Step 2: Automated Fixes
 
 **Algorithm Optimization Example:**
+
 ```javascript
 // BEFORE (O(n²)):
 function integrateSpecialPayments(schedule, payments) {
@@ -81,6 +89,7 @@ function integrateSpecialPayments(schedule, payments) {
 ```
 
 **Database Batching Example:**
+
 ```javascript
 // BEFORE (Sequential):
 async function importPlans(plans) {
@@ -98,7 +107,9 @@ async function importPlans(plans) {
 ```
 
 ### Step 3: Validation
+
 After each fix:
+
 1. Run tests to ensure functionality remains intact
 2. Measure performance improvement
 3. Update performance metrics
@@ -130,6 +141,7 @@ After each fix:
 ## Integration with Action Plans
 
 When called from an ACTION-PLAN.md, this command:
+
 1. Reads the specific issue details from the plan
 2. Applies the appropriate fix based on issue type
 3. Updates the ACTION-PLAN.md checkbox to [x] when complete

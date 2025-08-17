@@ -141,12 +141,14 @@ cd ~/my-project
 ```
 
 This will:
+
 - Scan your entire codebase using 10 parallel agents
 - Analyze security, performance, architecture, testing, and more
 - Generate reports in JSON, Markdown, and HTML formats
 - Take about 30-60 seconds depending on project size
 
 **Expected Output:**
+
 ```
 ⏺ Phase 1: Quick Scan (10 agents working in parallel)...
 ⏺ Phase 2: Deep Analysis with specialized agents...
@@ -181,6 +183,7 @@ In Claude Code, use the deep analysis command:
 ```
 
 The command will:
+
 1. **Phase 1**: Perform parallel scanning of your codebase
 2. **Phase 2**: Delegate findings to specialized AI agents
 3. **Phase 3**: Synthesize results into a comprehensive report
@@ -274,7 +277,9 @@ The deep analysis produces a comprehensive report. Let's break down what you'll 
 > **📊 Pro Tip:** The ROI (Return on Investment) score helps prioritize which issues to tackle first. Focus on High ROI items for maximum impact with minimal effort.
 
 # Generate an action plan with specific fix commands
+
 /tk:analysis:analyze-report reports/analyze-deep-*.json --generate-action-plan
+
 ```
 
 This creates a prioritized todo list with:
@@ -285,10 +290,12 @@ This creates a prioritized todo list with:
 
 **Expected Output:**
 ```
+
 ✅ Action Plan Generated!
 📄 File: reports/action-plan-20250129-103100.md
 
 Summary:
+
 - Total Tasks: 23
 - Estimated Effort: 32h
 - Critical Security: 3 tasks (8h)
@@ -296,9 +303,11 @@ Summary:
 - Enhancements: 12 tasks (12h)
 
 Top 3 Priorities:
+
 1. Input Sanitization (3h) - Prevents XSS attacks
 2. JSON Validation (2h) - Stops injection attacks
 3. Remove Code Duplication (2h) - Saves 140 lines
+
 ```
 
 ### Step 3: Execute the Action Plan
@@ -314,6 +323,7 @@ Now the magic happens - let the toolkit fix the issues:
 ```
 
 In supervised mode, you'll see:
+
 ```
 🔄 Executing: Input Sanitization (3h estimated)
 Command: /tk:fix:security --focus="xss,sanitization" --auto-fix
@@ -338,6 +348,7 @@ After execution completes, view the comprehensive report:
 ```
 
 **Expected Output:**
+
 ```
 # Workflow Completion Report
 
@@ -413,6 +424,7 @@ Comparing to previous report (if available):
 ### Manual Analysis and Fixes
 
 1. **Run targeted analyses:**
+
    ```bash
    /tk:security:audit . --export-json
    /tk:orchestration:performance-scan .
@@ -420,11 +432,13 @@ Comparing to previous report (if available):
    ```
 
 2. **Analyze reports individually:**
+
    ```bash
    /tk:analysis:analyze-report security-audit.json --quick-wins
    ```
 
 3. **Apply specific fixes:**
+
    ```bash
    /tk:fix:security --priority=critical
    /tk:fix:duplicates --threshold=80
@@ -480,6 +494,7 @@ When you're ready, apply the fixes:
 ```
 
 The command will:
+
 1. Create backups of modified files
 2. Apply automated fixes
 3. Run tests (if available)
@@ -522,6 +537,7 @@ After applying fixes, run a focused analysis to see the improvements:
 **Problem:** `/tk:` commands don't appear in Claude Code
 
 **Solution:**
+
 ```bash
 # Check installation
 ls ~/.claude/commands/tk/
@@ -536,10 +552,13 @@ cd ~/projects/claude-code-toolkit
 **Problem:** Deep analysis seems stuck
 
 **Solution:**
+
 - For large codebases, use focused analysis:
+
   ```
   /tk:analyze:deep --focus security --max-files 100
   ```
+
 - Check Claude Code's activity indicator
 - Try analyzing a smaller directory first
 
@@ -548,6 +567,7 @@ cd ~/projects/claude-code-toolkit
 **Problem:** Can't write reports or apply fixes
 
 **Solution:**
+
 ```bash
 # Check permissions
 ls -la ~/.claude/
@@ -561,6 +581,7 @@ chmod -R 755 ~/.claude/
 **Problem:** Analysis seems to miss files or show wrong information
 
 **Solution:**
+
 - Ensure you're in the correct directory
 - Check if files are ignored by `.gitignore`
 - Try clearing Claude Code's context and rerunning
@@ -568,21 +589,27 @@ chmod -R 755 ~/.claude/
 ## Common Questions
 
 ### Q: Is it safe to run fixes automatically?
+
 A: Yes! The toolkit has multiple safety measures:
+
 - Always creates git commits before changes
 - Runs in dry-run mode by default
 - Validates changes don't break tests
 - Supports rollback if needed
 
 ### Q: How long does the full workflow take?
+
 A: Typically:
+
 - Analysis: 30-60 seconds
 - Action plan generation: 5-10 seconds
 - Fix execution: 1-4 hours (depending on scope)
 - Most quick wins complete in under 5 minutes each
 
 ### Q: Can I customize what gets fixed?
+
 A: Absolutely! You can:
+
 - Use `--focus=security` to fix only security issues
 - Set `--max-effort=4h` to limit scope
 - Run specific fix commands manually
@@ -611,6 +638,7 @@ Set up continuous quality monitoring:
 ```
 
 This creates:
+
 - Scheduled analysis runs
 - Automated fix policies
 - Progress tracking dashboards
@@ -646,6 +674,7 @@ Create your own commands:
 ## Summary
 
 You've learned how to:
+
 - ✅ Install the Claude Code Toolkit
 - ✅ Run deep code analysis
 - ✅ Understand analysis reports

@@ -78,20 +78,20 @@ Generate a streamlined, action-focused report:
 <details>
 <summary>📋 Summary of Findings (click to expand)</summary>
 
-### Top Issues Found:
+### Top Issues Found
 
 1. {most_critical_issue} - {impact_description}
 2. {second_critical_issue} - {impact_description}
 3. {third_critical_issue} - {impact_description}
 
-### By Category:
+### By Category
 
 - 🔒 Security: {security_count} issues ({critical_security} critical)
 - ⚡ Performance: {perf_count} bottlenecks ({major_perf} major impact)
 - 🏗️ Architecture: {arch_count} concerns ({refactor_needed} need refactoring)
 - 🧪 Testing: {coverage}% coverage ({untested_critical} critical paths untested)
 
-### Expert Insights:
+### Expert Insights
 
 {2-3 key insights from expert analysis}
 
