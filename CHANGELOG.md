@@ -5,6 +5,52 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.14.0] - 2025-01-17
+
+### Added
+
+- ✨ **Advanced Hook Scripts** - Comprehensive notification and monitoring system
+  - `tool-specific-notification.sh` - Different sounds for different tools (Write→Pop, Bash→Tink, Task→Submarine)
+  - `subagent-notification.sh` - Agent-specific completion sounds (Security→Hero, Tests→Ping, Performance→Funk)
+  - `error-detection.sh` - Critical error alerts with macOS notifications
+  - `success-notification.sh` - Success celebrations for operations and milestones
+  - `system-notification.sh` - macOS system notifications for important events
+  - `command-chain-notification.sh` - Progress tracking through command chains with ascending tones
+  - `session-logger.sh` - Session metrics, JSON summaries, and activity logging
+
+- ✨ **Hook Profile System** - Three configuration profiles for different needs
+  - Basic profile: Simple stop notification only
+  - Minimal profile: Stop notifications + critical error detection
+  - Advanced profile: All hooks active with full notifications and logging
+  - New `--hooks-profile` installation flag to choose configuration level
+
+- ✨ **Advanced Hooks Documentation** - Comprehensive guides for hook system
+  - `docs/guides/ADVANCED-HOOKS.md` - Complete guide for all advanced hooks
+  - Configuration examples for different use cases
+  - Platform-specific setup instructions
+  - Troubleshooting and best practices
+
+### Changed
+
+- 🔄 **Installation Script Enhancement** - Profile-based hook configuration
+  - Added `--hooks-profile` option with basic/minimal/advanced choices
+  - Intelligent settings merging preserves existing configurations
+  - Automatic backup creation when using --force
+  - Profile-specific installation messages showing active features
+  - Renamed `global-settings.json` to `basic-hooks-settings.json` for consistency
+
+- 🔄 **Hook System Architecture** - Improved organization and capabilities
+  - All hooks use silent-fail design to prevent workflow disruption
+  - Background execution for all sound and notification operations
+  - Context-aware notifications based on operation type and outcome
+  - State tracking for command chains and sessions
+
+### Fixed
+
+- 🐛 Settings merge now preserves non-hook configurations when updating
+- 🐛 Hook scripts properly handle JSON input validation
+- 🐛 Installation script creates proper backups before overwriting
+
 ## [3.13.0] - 2025-01-17
 
 ### Added
