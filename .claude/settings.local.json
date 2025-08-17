@@ -64,7 +64,11 @@
       "Bash(if [ -f \"$HOME/.claude/claude-code-toolkit/.installed-version\" ])",
       "Bash(else echo \"No version information found. Toolkit may not be installed or needs reinstallation.\")",
       "Bash(git fetch:*)",
-      "Bash(git rev-list:*)"
+      "Bash(git rev-list:*)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebSearch",
+      "WebFetch(domain:biomejs.dev)",
+      "Bash(afplay:*)"
     ],
     "deny": []
   }
