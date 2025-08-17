@@ -399,6 +399,31 @@ if [ -d "$SCRIPT_DIR/knowledge-base" ]; then
     print_success "Knowledge-base installed to $CLAUDE_TOOLKIT_DIR/knowledge-base"
 fi
 
+# Install markdown config to claude-code-toolkit directory
+if [ -d "$SCRIPT_DIR/markdown" ]; then
+    print_info "Installing markdown config to $CLAUDE_TOOLKIT_DIR..."
+    
+    # Check if markdown directory already exists
+    if [ -d "$CLAUDE_TOOLKIT_DIR/markdown" ]; then
+        if [ "$FORCE_INSTALL" = true ]; then
+            print_info "Force mode: Overwriting existing markdown config..."
+            rm -rf "$CLAUDE_TOOLKIT_DIR/markdown"
+        else
+            print_info "Backing up existing markdown config..."
+            mv "$CLAUDE_TOOLKIT_DIR/markdown" "$CLAUDE_TOOLKIT_DIR/markdown.backup.$(date +%Y%m%d_%H%M%S)"
+        fi
+    fi
+    
+    # Create markdown directory and copy config
+    mkdir -p "$CLAUDE_TOOLKIT_DIR/markdown"
+    # Use find to copy files, handling case where directory might be empty or have hidden files
+    if [ "$(ls -A "$SCRIPT_DIR/markdown/" 2>/dev/null)" ]; then
+        cp -r "$SCRIPT_DIR/markdown/"* "$CLAUDE_TOOLKIT_DIR/markdown/" 2>/dev/null || \
+        cp -r "$SCRIPT_DIR/markdown/".[!.]* "$CLAUDE_TOOLKIT_DIR/markdown/" 2>/dev/null || true
+    fi
+    print_success "Markdown config installed to $CLAUDE_TOOLKIT_DIR/markdown"
+fi
+
 # Install hooks to claude-code-toolkit directory
 if [ "$INSTALL_HOOKS" = true ] && [ -d "$SCRIPT_DIR/hooks" ]; then
     print_info "Installing hooks to $CLAUDE_TOOLKIT_DIR/hooks..."
@@ -419,12 +444,6 @@ if [ "$INSTALL_HOOKS" = true ] && [ -d "$SCRIPT_DIR/hooks" ]; then
     mkdir -p "$CLAUDE_TOOLKIT_DIR/hooks"
     # Copy only shell scripts (not CLAUDE.md)
     find "$SCRIPT_DIR/hooks" -maxdepth 1 -type f -name "*.sh" -exec cp {} "$CLAUDE_TOOLKIT_DIR/hooks/" \; 2>/dev/null || true
-    # Copy markdownlint config to markdown subdirectory
-    if [ -f "$SCRIPT_DIR/.markdownlint-cli2.jsonc" ]; then
-        mkdir -p "$CLAUDE_TOOLKIT_DIR/markdown"
-        cp "$SCRIPT_DIR/.markdownlint-cli2.jsonc" "$CLAUDE_TOOLKIT_DIR/markdown/"
-        print_info "Markdownlint config installed to $CLAUDE_TOOLKIT_DIR/markdown/.markdownlint-cli2.jsonc"
-    fi
     # Ensure scripts are executable
     chmod +x "$CLAUDE_TOOLKIT_DIR/hooks"/*.sh 2>/dev/null || true
     print_success "Hooks installed to $CLAUDE_TOOLKIT_DIR/hooks"
