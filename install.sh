@@ -49,6 +49,7 @@ LOCAL_INSTALL=false
 LOCAL_PROJECT_DIR=""
 INSTALL_HOOKS=false
 INSTALL_SETTINGS=false
+HOOKS_PROFILE="basic"  # basic, minimal, advanced
 
 # Function to show help
 show_help() {
@@ -67,6 +68,10 @@ show_help() {
     echo "  --install <components>  Install specific components (comma-separated)"
     echo "                          Available: commands, agents, hooks, all (default: all)"
     echo "  --with-settings         Also install global settings.json for hooks"
+    echo "  --hooks-profile <name>  Choose hooks configuration profile:"
+    echo "                          basic: Stop notification only (default)"
+    echo "                          minimal: Stop + critical error detection"
+    echo "                          advanced: All hooks (sounds, notifications, logging)"
     echo ""
     echo "Examples:"
     echo "  ./install.sh mytools                     Install everything globally (default)"
@@ -74,7 +79,8 @@ show_help() {
     echo "  ./install.sh mytools --install commands  Install only commands"
     echo "  ./install.sh mytools --install agents    Install only agents"
     echo "  ./install.sh mytools --install commands,agents  Install both (explicit)"
-    echo "  ./install.sh mytools --with-settings     Install with global hook settings"
+    echo "  ./install.sh mytools --with-settings     Install with basic hook settings"
+    echo "  ./install.sh mytools --with-settings --hooks-profile advanced  Full hooks"
     echo "  ./install.sh global --force              Force install without backups"
     echo ""
     echo "After installation, commands will be available as:"
@@ -119,6 +125,23 @@ while [[ $# -gt 0 ]]; do
         --with-settings)
             INSTALL_SETTINGS=true
             shift
+            ;;
+        --hooks-profile)
+            if [ -z "$2" ] || [[ "$2" == --* ]]; then
+                print_error "Option --hooks-profile requires a value"
+                exit 1
+            fi
+            case "$2" in
+                basic|minimal|advanced)
+                    HOOKS_PROFILE="$2"
+                    ;;
+                *)
+                    print_error "Invalid hooks profile: $2"
+                    echo "Available profiles: basic, minimal, advanced"
+                    exit 1
+                    ;;
+            esac
+            shift 2
             ;;
         -*)
             print_error "Unknown option: $1"
@@ -371,25 +394,85 @@ if [ "$INSTALL_HOOKS" = true ] && [ -d "$SCRIPT_DIR/hooks" ]; then
 fi
 
 # Install global settings if requested
-if [ "$INSTALL_SETTINGS" = true ] && [ -f "$SCRIPT_DIR/settings/global-settings.json" ]; then
-    print_info "Installing global settings for hooks..."
+if [ "$INSTALL_SETTINGS" = true ]; then
+    # Determine which settings file to use based on profile
+    case "$HOOKS_PROFILE" in
+        minimal)
+            SETTINGS_SOURCE="$SCRIPT_DIR/settings/minimal-hooks-settings.json"
+            PROFILE_DESC="minimal (stop + critical errors)"
+            ;;
+        advanced)
+            SETTINGS_SOURCE="$SCRIPT_DIR/settings/advanced-hooks-settings.json"
+            PROFILE_DESC="advanced (all hooks active)"
+            ;;
+        basic|*)
+            SETTINGS_SOURCE="$SCRIPT_DIR/settings/basic-hooks-settings.json"
+            PROFILE_DESC="basic (stop notification only)"
+            ;;
+    esac
+    
+    if [ ! -f "$SETTINGS_SOURCE" ]; then
+        print_error "Settings file not found: $SETTINGS_SOURCE"
+        exit 1
+    fi
+    
+    print_info "Installing $PROFILE_DESC hooks settings..."
     
     # Check if settings.json already exists
     if [ -f "$CLAUDE_SETTINGS_FILE" ]; then
         if [ "$FORCE_INSTALL" = true ]; then
-            print_info "Force mode: Overwriting existing settings.json..."
-            cp "$SCRIPT_DIR/settings/global-settings.json" "$CLAUDE_SETTINGS_FILE"
+            print_info "Force mode: Installing $PROFILE_DESC settings..."
+            # Backup existing settings
+            cp "$CLAUDE_SETTINGS_FILE" "${CLAUDE_SETTINGS_FILE}.backup.$(date +%Y%m%d_%H%M%S)"
+            
+            # Use Python to merge if available, preserving non-hook settings
+            if command -v python3 &> /dev/null; then
+                python3 -c "
+import json
+import sys
+
+# Read existing settings
+try:
+    with open('$CLAUDE_SETTINGS_FILE', 'r') as f:
+        existing = json.load(f)
+except:
+    existing = {}
+
+# Read new hook settings
+with open('$SETTINGS_SOURCE', 'r') as f:
+    new_settings = json.load(f)
+
+# Merge settings (hooks get replaced, other settings preserved)
+existing.update(new_settings)
+
+# Ensure schema is present
+if '\$schema' not in existing:
+    existing['\$schema'] = 'https://json.schemastore.org/claude-code-settings.json'
+
+# Write merged settings
+with open('$CLAUDE_SETTINGS_FILE', 'w') as f:
+    json.dump(existing, f, indent=2)
+
+print('Settings merged successfully')
+" && print_success "Hooks profile '$HOOKS_PROFILE' installed" || {
+                    print_info "Python merge failed, using direct copy..."
+                    cp "$SETTINGS_SOURCE" "$CLAUDE_SETTINGS_FILE"
+                }
+            else
+                cp "$SETTINGS_SOURCE" "$CLAUDE_SETTINGS_FILE"
+            fi
         else
             echo -e "${YELLOW}Warning: $CLAUDE_SETTINGS_FILE already exists.${NC}"
-            echo "Manual merge required. Hook configuration to add:"
+            echo "Manual merge required. Hook configuration to add ($PROFILE_DESC):"
             echo
-            cat "$SCRIPT_DIR/settings/global-settings.json"
+            cat "$SETTINGS_SOURCE"
             echo
             echo "You can add this configuration manually to your existing settings.json"
+            echo "Or re-run with --force to overwrite (backup will be created)"
         fi
     else
-        cp "$SCRIPT_DIR/settings/global-settings.json" "$CLAUDE_SETTINGS_FILE"
-        print_success "Global settings installed to $CLAUDE_SETTINGS_FILE"
+        cp "$SETTINGS_SOURCE" "$CLAUDE_SETTINGS_FILE"
+        print_success "Hooks profile '$HOOKS_PROFILE' installed to $CLAUDE_SETTINGS_FILE"
     fi
 fi
 
@@ -457,14 +540,36 @@ fi
 if [ "$INSTALL_HOOKS" = true ]; then
     echo
     echo "Hooks installed:"
-    echo "  - stop-notification.sh (plays sound when Claude finishes responding)"
+    echo "  - stop-notification.sh (basic completion sound)"
+    echo "  - tool-specific-notification.sh (different sounds per tool)"
+    echo "  - subagent-notification.sh (agent-specific sounds)"
+    echo "  - error-detection.sh (critical error alerts)"
+    echo "  - success-notification.sh (success celebrations)"
+    echo "  - system-notification.sh (macOS notifications)"
+    echo "  - command-chain-notification.sh (chain progress tracking)"
+    echo "  - session-logger.sh (session metrics and logging)"
     echo
     if [ "$INSTALL_SETTINGS" = true ]; then
-        echo "✓ Global settings configured - hooks are now active!"
+        echo "✓ Hooks configured with '$HOOKS_PROFILE' profile:"
+        case "$HOOKS_PROFILE" in
+            basic)
+                echo "  → Stop notifications only (simple completion sound)"
+                ;;
+            minimal)
+                echo "  → Stop notifications + critical error detection"
+                ;;
+            advanced)
+                echo "  → All hooks active (full notifications, logging, progress tracking)"
+                ;;
+        esac
+        echo
+        echo "To change hook profile, re-run with:"
+        echo "  ./install.sh $PREFIX --with-settings --hooks-profile [basic|minimal|advanced]"
     else
         echo "To activate hooks, either:"
-        echo "  1. Re-run with --with-settings flag to install global settings"
-        echo "  2. Manually add the configuration from settings/global-settings.json to ~/.claude/settings.json"
+        echo "  1. Re-run with --with-settings flag to install hooks configuration"
+        echo "  2. Re-run with --with-settings --hooks-profile advanced for all features"
+        echo "  3. Manually copy a profile from settings/ to ~/.claude/settings.json"
     fi
 fi
 

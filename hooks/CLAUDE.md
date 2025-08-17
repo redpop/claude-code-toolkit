@@ -8,20 +8,51 @@ The hooks directory contains scripts that integrate with Claude Code's hook syst
 
 ## Available Hooks
 
-### stop-notification.sh
+### Core Notification Hooks
 
-**Purpose**: Plays a notification sound when Claude finishes responding.
+#### stop-notification.sh
+**Purpose**: Basic completion sound when Claude finishes responding  
+**Hook Type**: Stop  
+**Default**: Glass.aiff at 50% volume
 
-**Features**:
-- Uses macOS built-in `afplay` command
-- Configurable sound file and volume
-- Silent failure to avoid disrupting workflow
-- Prevents infinite loops with `stop_hook_active` flag
+#### tool-specific-notification.sh
+**Purpose**: Different sounds based on which tool was used  
+**Hook Type**: PostToolUse  
+**Sounds**: Pop (files), Tink (commands), Submarine (agents), etc.
 
-**Configuration**:
-- Default sound: `/System/Library/Sounds/Glass.aiff`
-- Default volume: 0.5 (range: 0.0 to 1.0)
-- Alternative sounds available (see script comments)
+#### subagent-notification.sh
+**Purpose**: Agent-specific sounds when subagents complete  
+**Hook Type**: SubagentStop  
+**Examples**: Hero (security), Ping (tests), Funk (performance)
+
+### Advanced Monitoring Hooks
+
+#### error-detection.sh
+**Purpose**: Monitors for errors and security issues with alerts  
+**Hook Type**: PostToolUse  
+**Features**: Critical alerts, macOS notifications, success sounds
+
+#### success-notification.sh
+**Purpose**: Celebrates successful operations and milestones  
+**Hook Type**: Stop  
+**Triggers**: Security fixes, clean scans, test passes, commits
+
+#### system-notification.sh
+**Purpose**: macOS system notifications for important events  
+**Hook Type**: PostToolUse  
+**Covers**: Security, builds, tests, deployments, errors
+
+### Workflow Hooks
+
+#### command-chain-notification.sh
+**Purpose**: Tracks progress through command chains  
+**Hook Type**: PostToolUse  
+**Features**: Phase sounds, progress notifications, error alerts
+
+#### session-logger.sh
+**Purpose**: Logs sessions with metrics and summaries  
+**Hook Types**: SessionStart, Stop  
+**Output**: JSON logs, session summaries, duration tracking
 
 ## Installation
 

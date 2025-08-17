@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/claude-code-toolkit/hooks/stop-notification.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/claude-code-toolkit/hooks/success-notification.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/claude-code-toolkit/hooks/session-logger.sh"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/claude-code-toolkit/hooks/subagent-notification.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/claude-code-toolkit/hooks/tool-specific-notification.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/claude-code-toolkit/hooks/error-detection.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/claude-code-toolkit/hooks/command-chain-notification.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/claude-code-toolkit/hooks/system-notification.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/claude-code-toolkit/hooks/session-logger.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
