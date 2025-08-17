@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.12.0] - 2025-01-17
+
+### Added
+
+- ✨ **Distributed Context Management System** - CLAUDE.md files in each directory for focused context
+  - Added context files in agents/, commands/, scripts/, docs/, templates/, knowledge-base/, hooks/
+  - Each file provides specific guidelines for its area
+  - Reduces cognitive load and improves context relevance
+  - Better separation of concerns for Claude Code guidance
+
+- ✨ **Hook System Support** - Integration with Claude Code hooks for sound notifications
+  - New `hooks/` directory with stop-notification script
+  - Global settings.json support with `--with-settings` install flag
+  - Hook scripts for user-prompt-submit and tool-submit events
+  - Sound notification system for task completion feedback
+
+### Changed
+
+- 🔄 **CLAUDE.md Restructuring** - Complete rewrite for clarity and efficiency
+  - Simplified main CLAUDE.md to focus on quick start and essential workflows
+  - Moved detailed instructions to directory-specific context files
+  - Improved workflow documentation with clear pipeline examples
+  - Better organization of quick start commands and patterns
+
+- 🔄 **Installation Script Enhancement** - Additional installation options
+  - Added `--with-settings` flag for global settings.json installation
+  - Support for hooks component installation
+  - Updated help documentation with new options
+  - Better handling of settings and hook configurations
+
+- 🔄 **Documentation Updates** - Comprehensive improvements to command options
+  - Updated README with more detailed flag documentation for all commands
+  - Added missing short flags and options for multiple commands
+  - Improved handoff command documentation with new flag syntax
+  - Better organization of command tables with clearer option descriptions
+
 ## [3.11.2] - 2025-01-16
 
 ### Changed
