@@ -5,6 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.15.0] - 2025-01-17
+
+### Added
+
+- ✨ **Agent Metadata Standardization** - YAML frontmatter for Claude Code compatibility
+  - Added required `name` and `description` fields to all TYPO3 agents
+  - Ensures proper agent parsing and discovery in Claude Code environment
+  - Standardized agent metadata structure across toolkit
+
+### Changed
+
+- 🔄 **Major Documentation Restructure** - Streamlined and consolidated documentation
+  - Reduced total documentation size by ~8,500 lines while preserving essential information
+  - Consolidated overlapping guides into focused, practical documentation
+  - Restructured docs/CLAUDE.md for better navigation and AI context management
+  - Improved cross-references and eliminated redundant content across multiple files
+  - Enhanced FAQ and installation documentation with clearer, more concise information
+
+- 🔄 **Documentation Organization** - Better structure and navigation
+  - Created consolidated ADVANCED-WORKFLOWS.md and HOOKS-AND-NOTIFICATIONS.md guides
+  - Moved deprecated CONTEXT-ENGINEERING-INTEGRATION.md to planning/ directory
+  - Removed outdated workflow guides that overlapped with current documentation
+  - Standardized documentation formatting and structure throughout toolkit
+
+### Removed
+
+- 🗑️ **Outdated Documentation** - Cleaned up obsolete and redundant files
+  - Removed ADVANCED-HOOKS.md, COMPREHENSIVE-WORKFLOW.md, EXPORT-EXAMPLES.md
+  - Removed MODERN-WORKFLOW.md, SOUND-NOTIFICATIONS.md for consolidation
+  - Moved CONTEXT-ENGINEERING-INTEGRATION.md to planning/ for future reference
+
 ## [3.14.1] - 2025-01-17
 
 ### Changed
