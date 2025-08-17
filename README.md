@@ -1,58 +1,73 @@
 # Claude Code Toolkit
 
-The complete toolkit for extending Claude Code with commands, agents, and tools. A comprehensive collection of slash commands, AI agents, and utilities that can be installed in `~/.claude/` with a custom prefix.
+The complete toolkit for extending Claude Code with commands, agents, hooks, and tools. A comprehensive collection of slash commands, AI agents, automation hooks, knowledge base, and utilities that can be installed in `~/.claude/` with a custom prefix.
 
-## 🚀 Quick Start: Transform Your Code Quality
+## 📑 Table of Contents
 
-### Recommended 3-Step Workflow for Project Optimization
+- [🚀 Quick Start](#-quick-start-transform-your-code-quality)
+- [✨ Key Features](#-key-features)
+- [📋 Prerequisites](#prerequisites)
+- [📦 Installation](#installation)
+- [🍴 Forking Guide](#forking-this-repository)
+- [📚 Available Commands](#available-commands)
+- [🤖 AI Agents](#ai-agents)
+- [🔊 Hooks & Automation](#step-3-configure-hooks-optional)
+- [🔧 Configuration](#configuration)
+- [📖 Documentation](#documentation)
+- [🤝 Contributing](#contributing)
+- [📜 License](#license)
 
-```bash
-# Step 1: Deep analysis with automatic report generation
-/prefix:scan:deep . --export-json
-# Creates: analysis-YYYYMMDD-HHMMSS.json
-
-# Step 2: Generate action plan from latest report
-/prefix:scan:report --latest --generate-action-plan
-# Creates: action-plan-YYYYMMDD-HHMMSS.md
-
-# Step 3: Execute the improvements
-/prefix:auto:execute --latest
-```
-
-### Alternative Quick Workflows
-
-**2-Step Quick Check:**
+## 🚀 Quick Start
 
 ```bash
-/prefix:scan:quick . --export-json    # Fast scan
-/prefix:fix:quick-wins --latest       # Apply immediate fixes
+# Install in 30 seconds
+git clone https://github.com/redpop/claude-code-toolkit.git
+cd claude-code-toolkit
+./install.sh global --with-settings
+
+# Transform your code quality
+/global:scan:deep . --export-json        # Analyze codebase
+/global:scan:report --latest             # Generate action plan  
+/global:auto:execute --latest            # Apply improvements
+
+# Or use one-command pipeline
+/global:meta:pipelines deep-quality      # Full optimization
 ```
 
-**One-Command Pipeline:**
+💡 **Pro tip**: Replace `global` with your custom prefix • [Full Guide →](docs/guides/MODERN-WORKFLOW.md)
 
-```bash
-/prefix:meta:pipelines deep-quality    # Complete quality improvement
-```
+## ✨ Key Features
 
-### 💡 Pro Tips
+| Component | Description |
+|-----------|-------------|
+| **60+ Commands** | Code analysis, fixing, generation, workflow automation |
+| **16+ AI Agents** | Security, performance, architecture, debugging experts |
+| **9 Automation Hooks** | Sound notifications, markdown formatting, error detection, session logging |
+| **3 Hook Profiles** | Basic (minimal), Minimal (+ errors), Advanced (full suite) |
+| **Knowledge Base** | TYPO3, UI patterns, framework guides, best practices |
+| **Smart Workflows** | Command chaining, parallel processing, auto-exports |
+| **MCP Support** | Enhanced functionality with optional MCP servers |
 
-- `--export-json` without filename → Auto-generates timestamped files
-- `--latest` → Automatically finds the most recent report
-- Commands can be chained: `/prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}"`
+## Prerequisites
 
-**[See Full Workflow Guide →](docs/guides/MODERN-WORKFLOW.md)**
+### Required
 
-## ✨ Features
+- **Claude Code** (claude.ai/code)
+- **Bash shell** (macOS/Linux/WSL)
+- **Git** for cloning the repository
 
-- **60+ Slash Commands**: Comprehensive toolkit for code analysis, fixing, generation, and workflow automation
-- **16+ Specialized AI Agents**: Domain experts for security, performance, architecture, debugging, and more
-- **Sound Notifications**: Optional audio feedback when Claude finishes responding (macOS)
-- **Hybrid Architecture**: Combines parallel processing with deep expert analysis
-- **Smart Export System**: Automatic timestamping and report management
-- **Command Chaining**: Create complex workflows with data flow between commands
-- **MCP Integration**: Enhanced functionality with optional MCP server support
-- **Custom Prefix Support**: Install multiple toolkits with different namespaces
-- **Automatic Updates**: Track and apply updates from the repository
+### Optional Dependencies
+
+These tools enhance specific features but are not required for basic functionality:
+
+| Tool | Purpose | Installation | Feature |
+|------|---------|--------------|---------|
+| **markdownlint-cli2** | Auto-format Markdown files | `brew install markdownlint-cli2` | Markdown formatting hook |
+| **npx** | Fallback for markdownlint | Comes with Node.js | Auto-installs tools on demand |
+| **afplay** | Sound notifications (macOS) | Built-in on macOS | Completion sounds |
+| **Python 3** | Settings file merging | Usually pre-installed | Hook configuration |
+
+> **Note**: The toolkit will work without these dependencies and gracefully fall back to alternatives or skip the feature.
 
 ## Installation
 
@@ -90,154 +105,53 @@ The installation script will:
 - Display all available commands, agents, and hooks after installation
 - Create backups of existing installations if needed
 
-### Step 3: Sound Notifications (Optional)
+### Step 3: Configure Hooks (Optional)
 
-The toolkit includes sound notifications that play when Claude finishes responding:
+The toolkit includes 9 automation hooks organized in 3 profiles (`settings/`):
 
 ```bash
-# Install with automatic configuration
-./install.sh myprefix --with-settings
-
-# Or manually configure after installation
-# Add to ~/.claude/settings.json the configuration from settings/global-settings.json
+# Choose your automation level
+./install.sh myprefix --with-settings                          # Basic profile
+./install.sh myprefix --with-settings --hooks-profile minimal  # + Error detection
+./install.sh myprefix --with-settings --hooks-profile advanced # Full suite
 ```
+
+#### 🔧 Available Hooks
+
+| Hook | Trigger | Purpose | Profiles |
+|------|---------|---------|----------|
+| `stop-notification.sh` | Claude finishes | Completion sound (Glass.aiff) | ✅ Basic, Minimal, Advanced |
+| `markdown-format.sh` | File edits | Auto-format `.md` files with markdownlint | ✅ Basic, Minimal, Advanced |
+| `error-detection.sh` | Tool errors | Critical alerts & security warnings | ❌ Basic / ✅ Minimal, Advanced |
+| `success-notification.sh` | Successful ops | Celebration sounds for milestones | ❌ Basic, Minimal / ✅ Advanced |
+| `tool-specific-notification.sh` | Tool usage | Different sounds per tool type | ❌ Basic, Minimal / ✅ Advanced |
+| `subagent-notification.sh` | Agent complete | Agent-specific completion sounds | ❌ Basic, Minimal / ✅ Advanced |
+| `system-notification.sh` | Important events | macOS native notifications | ❌ Basic, Minimal / ✅ Advanced |
+| `command-chain-notification.sh` | Chain progress | Track multi-command workflows | ❌ Basic, Minimal / ✅ Advanced |
+| `session-logger.sh` | Session events | JSON logs with metrics | ❌ Basic, Minimal / ✅ Advanced |
+
+#### 📦 Profile Contents
+
+| Profile | Active Hooks | Use Case |
+|---------|-------------|----------|
+| **basic** | stop, markdown | Minimal disruption, essential features |
+| **minimal** | basic + error-detection | Add safety checks |
+| **advanced** | All 9 hooks | Full automation & monitoring |
 
 See [Sound Notifications Guide](docs/guides/SOUND-NOTIFICATIONS.md) for customization options
 
-## Forking This Repository
-
-Forking this repository allows you to:
-
-- Create and maintain your own custom commands
-- Share team-specific tools and workflows
-- Contribute back improvements to the original repository
-- Customize command behaviors for your specific needs
-
-### Step-by-Step Forking Instructions
-
-1. **Fork on GitHub**
-
-   - Visit the [original repository](https://github.com/redpop/claude-code-toolkit)
-   - Click the "Fork" button in the top right
-   - Choose your account/organization as the destination
-
-2. **Clone and Install Your Fork**
-
-   ```bash
-   # Clone your fork
-   git clone https://github.com/YourUsername/your-fork.git
-   cd your-fork
-
-   # Install with your chosen prefix
-   ./install.sh myprefix
-   ```
-
-3. **Verify Installation**
-
-   ```bash
-   # Check that commands are installed
-   ls ~/.claude/commands/myprefix/
-
-   # Check that agents are installed
-   ls ~/.claude/agents/
-   ```
-
-### Benefits of Forking
-
-- **Custom Commands**: Add proprietary or project-specific commands without affecting the original repository
-- **Team Collaboration**: Share standardized workflows across your organization
-- **Experimentation**: Test new command ideas before contributing upstream
-- **Version Control**: Maintain your own release cycle and versioning
-
-## Custom Prefix Support
-
-You can install multiple command sets with different prefixes:
-
-```bash
-# Install the original toolkit
-git clone https://github.com/redpop/claude-code-toolkit.git toolkit-original
-cd toolkit-original
-./install.sh global
-
-# Install your team's fork
-cd ..
-git clone https://github.com/YourTeam/team-commands.git toolkit-team
-cd toolkit-team
-./install.sh team
-```
-
-This allows you to have both the original commands and your fork's commands available simultaneously:
-
-## Usage
-
-After installation, all commands are available with your chosen prefix:
-
-```
-# Original repository commands
-/global:git:commit
-/global:ai:handoff
-/global:project:changelog
-
-# Fork-specific commands
-/team:deploy:staging
-/team:testing:integration
-/team:internal:setup
-```
-
-## Updates
-
-To update your installation:
-
-```bash
-# 1. Pull the latest changes in your cloned repository
-cd /path/to/claude-code-toolkit
-git pull
-
-# 2. Re-run the installation
-./install.sh myprefix
-```
-
-The installation script will:
-
-- Back up your existing installation (if you choose to)
-- Copy the latest versions of all commands and agents
-- Display the updated command list
-
 ## Command Categories
 
-Commands are organized into logical categories for different workflows:
-
-### 🔍 **Scan** - Analysis & Investigation
-
-Deep code analysis, quality metrics, dependency tracing, and comprehensive scanning
-
-### 🔧 **Fix** - Direct Corrections
-
-Automated fixes for security issues, performance problems, code duplication, and documentation
-
-### 🏭 **Gen** - Code & Documentation Generation
-
-Generate tests, documentation, configurations, and other project artifacts
-
-### 🌊 **Flow** - Multi-Agent Workflows
-
-Intelligent problem routing, parallel analysis, and coordinated multi-agent operations
-
-### 🤖 **Auto** - Automation & Orchestration
-
-Sprint planning, continuous monitoring, and automated execution of improvement plans
-
-### 🔒 **Sec** - Security Operations
-
-Security audits, compliance checking, and vulnerability management
-
-### 🗂️ **Git** - Version Control
-
-Enhanced git operations with intelligent commit messages and workflow integration
-
-### 🎯 **Meta** - Project & Toolkit Management
-
-Project health checks, command chaining, export management, and toolkit utilities
+| Category | Purpose | Examples |
+|----------|---------|----------|
+| **🔍 Scan** | Analysis & investigation | `scan:deep`, `scan:quality`, `scan:deps` |
+| **🔧 Fix** | Automated corrections | `fix:security`, `fix:performance`, `fix:duplicates` |
+| **🏭 Gen** | Code & doc generation | `gen:tests`, `gen:docs`, `gen:format` |
+| **🌊 Flow** | Multi-agent workflows | `flow:smart`, `flow:review`, `flow:incident` |
+| **🤖 Auto** | Automation & orchestration | `auto:execute`, `auto:sprint`, `auto:monitor` |
+| **🔒 Sec** | Security operations | `sec:audit`, `sec:baseline`, `sec:comply` |
+| **🗂️ Git** | Version control | `git:commit` (smart commits with emojis) |
+| **🎯 Meta** | Toolkit management | `meta:chain`, `meta:health`, `meta:pipelines` |
 
 ## Available Commands
 
@@ -343,307 +257,92 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 
 <!-- COMMANDS:END -->
 
-## Sub-Agents
+## AI Agents
 
-### Introduction to Sub-Agents
+The toolkit includes 16+ specialized AI agents that work independently or in parallel:
 
-The Sub-Agents feature introduces a powerful new paradigm for complex code analysis and operations. By leveraging Claude's Task Tool capability to spawn multiple specialized AI agents, these commands can perform parallel analysis, cross-reference findings, and deliver comprehensive insights that would be impossible with sequential processing.
+| Agent | Specialization | Key Focus |
+|-------|---------------|----------|
+| **security-specialist** 🔒 | Vulnerability detection | OWASP Top 10, authentication, encryption |
+| **performance-optimizer** ⚡ | Speed & efficiency | Algorithm complexity, memory, caching |
+| **test-engineer** 🧪 | Test quality | Coverage, edge cases, test pyramid |
+| **code-architect** 🏗️ | Design patterns | SOLID principles, coupling, modularity |
+| **refactoring-expert** 🔧 | Code quality | Technical debt, duplication, complexity |
+| **debugging-specialist** 🐛 | Issue resolution | Stack traces, root cause analysis |
+| **frontend-specialist** 🎨 | UI/UX code | React, performance, accessibility |
+| **deployment-specialist** 🚀 | CI/CD & DevOps | Docker, Kubernetes, pipelines |
+| **workflow-optimizer** ⚙️ | Developer productivity | Automation, tooling, efficiency |
+| **report-analyzer** 📊 | Analysis insights | Trends, prioritization, ROI |
 
-Each sub-agent operates independently with its own specialized focus area, then contributes its findings to a coordinated final report. This approach enables:
+### Multi-Agent Commands
 
-- **10x faster analysis** through parallel processing
-- **Deeper insights** from specialized perspectives
-- **Cross-validation** of findings between agents
-- **Comprehensive coverage** of complex codebases
-
-### Available Specialized Sub-Agents
-
-Our sub-agent system includes seven core specialists that can be combined in various ways:
-
-#### 1. Security Specialist 🔒
-
-- **Expertise**: Vulnerability detection, authentication flows, encryption practices
-- **Focus Areas**: SQL injection, XSS, CSRF, authentication bypasses, cryptographic weaknesses
-- **Output**: Security risk matrix, vulnerability reports, remediation recommendations
-
-#### 2. Performance Optimizer ⚡
-
-- **Expertise**: Algorithm complexity, memory management, query optimization
-- **Focus Areas**: O(n) analysis, memory leaks, database bottlenecks, caching opportunities
-- **Output**: Performance hotspots, optimization strategies, benchmark comparisons
-
-#### 3. Test Engineer 🧪
-
-- **Expertise**: Test coverage analysis, edge case identification, test quality assessment
-- **Focus Areas**: Missing tests, flaky tests, test pyramid analysis, mock usage
-- **Output**: Coverage reports, test improvement plans, edge case scenarios
-
-#### 4. Code Architect 🏗️
-
-- **Expertise**: Design patterns, architectural principles, dependency management
-- **Focus Areas**: SOLID violations, coupling analysis, modularity assessment, API design
-- **Output**: Architecture diagrams, refactoring roadmaps, design pattern recommendations
-
-#### 5. Refactoring Expert 🔧
-
-- **Expertise**: Code smells, technical debt, maintainability improvements
-- **Focus Areas**: Duplicate code, complex methods, naming conventions, dead code
-- **Output**: Refactoring priorities, code quality metrics, improvement strategies
-
-#### 6. Documentation Health Specialist 📚
-
-- **Expertise**: Documentation quality, code-doc synchronization, technical writing best practices
-- **Focus Areas**: Parameter validation, cross-reference checking, deprecation tracking, coverage analysis
-- **Output**: Health scores, broken link reports, parameter mismatches, improvement recommendations
-
-#### 7. Report Analyzer 📊
-
-- **Expertise**: Code quality report analysis, trend detection, prioritization strategies
-- **Focus Areas**: ROI analysis, quick wins identification, historical comparisons, sprint planning
-- **Output**: Prioritized action items, trend reports, implementation roadmaps
-
-### Hybrid Commands: Task Tool + Sub-Agents
-
-The true power of sub-agents emerges in hybrid commands that orchestrate multiple specialists for comprehensive analysis:
-
-#### Orchestration Commands
-
-- **`/prefix:orchestration:analyze-parallel`**: Deploys 10 parallel agents for ultra-fast code analysis
-- **`/prefix:orchestration:security-audit`**: 8 security-focused agents for comprehensive vulnerability scanning
-- **`/prefix:orchestration:performance-scan`**: 7 agents profiling different performance aspects
-- **`/prefix:orchestration:test-coverage`**: 5 agents analyzing test quality from multiple angles
-- **`/prefix:orchestration:refactor-impact`**: 6 agents assessing refactoring risks and benefits
-
-#### Research Commands
-
-- **`/prefix:research:deep-dive`**: 8 agents providing different perspectives on technical topics
-- **`/prefix:research:codebase-map`**: 10 agents creating comprehensive codebase documentation
-- **`/prefix:research:dependency-trace`**: 6 agents analyzing dependency chains and impacts
-
-### Example: Using the analyze-deep Hybrid Command
-
-The `analyze-parallel` command demonstrates the power of orchestrated sub-agents:
+Commands that orchestrate multiple agents for comprehensive analysis:
 
 ```bash
-# Analyze a complex module with 10 parallel agents
-/myprefix:orchestration:analyze-parallel src/core --focus=security
+# Deep analysis with 10 parallel agents
+/prefix:scan:deep . --export-json
 
-# Output structure:
-📊 PARALLEL ANALYSIS REPORT
-========================
+# Security audit with 8 specialized agents  
+/prefix:sec:audit . --export-md
 
-🔒 Security Agent Findings:
-- Critical: Unvalidated user input in auth.js:142
-- High: Missing CSRF protection in api/endpoints.js
-- Medium: Weak password hashing algorithm
-
-⚡ Performance Agent Findings:
-- Bottleneck: O(n²) algorithm in data-processor.js
-- Memory leak: Unclosed database connections
-- Optimization: Cache opportunity for repeated API calls
-
-🏗️ Architecture Agent Findings:
-- SOLID Violation: Single Responsibility in UserService
-- High Coupling: Direct database access in controllers
-- Missing abstraction layer for external APIs
-
-[... 7 more agent reports ...]
-
-🎯 CONSOLIDATED RECOMMENDATIONS:
-1. Immediate: Fix security vulnerabilities (2 critical, 5 high)
-2. Short-term: Implement caching layer (30% performance gain)
-3. Long-term: Refactor to hexagonal architecture
+# Performance profiling with 7 agents
+/prefix:scan:perf . --export-all
 ```
 
-### Benefits of Sub-Agent Architecture
+**Benefits**: 10x faster analysis • Specialized expertise • Cross-validation • Comprehensive coverage
 
-1. **Parallel Processing**: Multiple agents work simultaneously, reducing analysis time from hours to minutes
-2. **Specialized Expertise**: Each agent brings deep knowledge in its domain
-3. **Comprehensive Coverage**: No aspect is overlooked when multiple specialists collaborate
-4. **Cross-Validation**: Agents can verify and enhance each other's findings
-5. **Scalability**: Easy to add new specialist agents or create custom combinations
+## Forking & Customization
 
-### Creating Custom Sub-Agent Commands
-
-You can create your own sub-agent orchestrations using the provided templates:
+### Creating Your Own Fork
 
 ```bash
-# Use the analysis template for code analysis scenarios
-/myprefix:project:create-command "Create a sub-agent command that analyzes API endpoints for REST best practices"
+# 1. Fork on GitHub (click Fork button)
+# 2. Clone and install your fork
+git clone https://github.com/YourUsername/your-fork.git
+cd your-fork
+./install.sh myprefix
 
-# Use the research template for information gathering
-/myprefix:project:create-command "Create a research command that investigates modern authentication methods"
+# 3. Install multiple versions
+./install.sh global        # Original toolkit
+./install.sh team          # Your team's fork
 ```
 
-The sub-agent system represents a paradigm shift in how AI assistants approach complex software engineering tasks, enabling unprecedented depth and speed of analysis.
+### Maintaining Your Fork
 
-## Maintaining Your Fork
+```bash
+# Sync with upstream
+git remote add upstream https://github.com/redpop/claude-code-toolkit.git
+git fetch upstream && git merge upstream/main && git push
 
-Keeping your fork up-to-date and contributing back to the community ensures everyone benefits from improvements.
+# Update installation
+cd /path/to/toolkit && git pull && ./install.sh myprefix
+```
 
-### Syncing with Upstream
+### Fork Best Practices
 
-1. **Add the upstream remote** (one-time setup)
-
-   ```bash
-   cd /path/to/your/fork
-   git remote add upstream https://github.com/redpop/claude-code-toolkit.git
-   git remote -v  # Verify remotes
-   ```
-
-2. **Fetch and merge upstream changes**
-
-   ```bash
-   # Fetch upstream changes
-   git fetch upstream
-
-   # Merge into your main branch
-   git checkout main
-   git merge upstream/main
-
-   # Push to your fork
-   git push origin main
-   ```
-
-3. **Update your installations**
-
-   ```bash
-   # Update each installation
-   cd ~/.claude/commands/myprefix
-   git pull
-   ```
-
-### Contributing Back to Upstream
-
-When you've created a useful command that could benefit the community:
-
-1. **Ensure your command is general-purpose**
-
-   - Remove any company-specific or proprietary logic
-   - Use clear, descriptive naming
-   - Include comprehensive documentation
-
-2. **Create a feature branch**
-
-   ```bash
-   git checkout -b feature/new-command
-   git add commands/category/new-command.md
-   git commit -m "✨ feat: add new-command for X functionality"
-   git push origin feature/new-command
-   ```
-
-3. **Submit a pull request**
-   - Visit your fork on GitHub
-   - Click "Compare & pull request"
-   - Describe your command and its use cases
-   - Reference any related issues
-
-### Best Practices for Fork Management
-
-1. **Organize Custom Commands**
-
-   ```
-   commands/
-   ├── team/           # Team-specific commands
-   ├── project/        # Project-specific commands
-   ├── internal/       # Internal tools
-   └── experimental/   # Commands under development
-   ```
-
-2. **Document Your Commands**
-
-   - Always include frontmatter with `description` and `argument-hint`
-   - Add usage examples in the command file
-   - Update your fork's README with team-specific instructions
-
-3. **Version Control Strategy**
-
-   - Tag releases for your team (`v1.0.0-team`)
-   - Maintain a CHANGELOG for your custom commands
-   - Use semantic versioning for breaking changes
-
-4. **Testing Commands**
-
-   ```bash
-   # Test in isolation
-   ~/.claude/commands/test-prefix/
-
-   # Validate command structure
-   ./scripts/update-readme.sh
-   ```
-
-5. **Security Considerations**
-   - Never commit sensitive data or credentials
-   - Use environment variables for configuration
-   - Review commands before sharing with your team
+| Area | Practice |
+|------|----------|
+| **Organization** | Use folders: `team/`, `project/`, `internal/`, `experimental/` |
+| **Documentation** | Include frontmatter, examples, team-specific README |
+| **Versioning** | Tag releases (`v1.0-team`), maintain CHANGELOG |
+| **Security** | No credentials in code, use environment variables |
+| **Contributing** | Remove proprietary code before submitting PRs |
 
 ## Adding Custom Commands
 
-1. Create a new folder under `commands/` for your category
-2. Create a `.md` file with your command name
-3. Write your command logic as a Markdown prompt
+Create new commands by adding `.md` files to the `commands/` directory:
 
-### Example structure for a new command
-
-```
-# In original repository or fork
+```bash
 commands/
-└── my-category/
-    └── my-command.md
-
-# Fork-specific organization
-commands/
-├── team/              # Team-specific commands
-│   └── deploy.md     # Available as: /team:team:deploy
-├── project/           # Project tools
-│   └── setup.md      # Available as: /team:project:setup
-└── my-category/       # General commands
-    └── my-command.md  # Available as: /team:my-category:my-command
+├── category/          # Command category
+│   └── command.md    # Available as: /prefix:category:command
+├── team/             # Team-specific commands
+│   └── deploy.md     # Available as: /prefix:team:deploy
+└── project/          # Project tools
+    └── setup.md      # Available as: /prefix:project:setup
 ```
 
-## Command Naming Conventions
-
-- Use descriptive names in lowercase
-- Separate words with hyphens (`-`)
-- Group related commands in common folders
-
-## Maintaining Commands
-
-When adding or modifying commands:
-
-1. Ensure each command has proper frontmatter with `description` and optional `argument-hint`
-2. Run `./scripts/update-readme.sh` to update the command list below
-3. The "Available Commands" section is auto-generated - do not edit manually
-
-## Key Features
-
-### 🚀 Intelligent Multi-Agent System
-
-- **Parallel Processing**: Run up to 10 specialized agents simultaneously
-- **Smart Routing**: AI automatically determines which agents to use
-- **Cross-Validation**: Agents validate each other's findings
-- **Deep Expertise**: Each agent has specialized domain knowledge
-
-### 🔄 Advanced Command Chaining
-
-- **Data Flow**: Automatic output passing between commands
-- **Error Handling**: Intelligent error recovery and fallbacks
-- **Conditional Logic**: Execute commands based on results
-- **Pipeline Templates**: Pre-built workflows for common tasks
-
-### 📊 Comprehensive Analysis
-
-- **Multi-Dimensional**: Security, performance, architecture, and quality
-- **Trend Detection**: Track improvements over time
-- **ROI Prioritization**: Focus on high-impact changes
-- **Export Flexibility**: Multiple formats (MD, JSON, HTML, PDF)
-
-### 🤖 Automation First
-
-- **Action Plans**: Executable improvement plans
-- **Progress Tracking**: Real-time status updates
-- **Batch Operations**: Fix multiple issues automatically
-- **Quality Gates**: Enforce standards in CI/CD
+**Requirements**: Include frontmatter with `description` and optional `argument-hint`. Run `./scripts/update-readme.sh` after adding commands.
 
 ## Contributing
 
