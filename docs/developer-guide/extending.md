@@ -1,571 +1,235 @@
-# Extending the Claude Code Toolkit
+# Extending Guide
 
-This guide shows you how to create new commands, agents, and extend the toolkit's functionality.
+Create new commands, agents, and workflows for the Claude Code Toolkit.
 
-## 🎯 Quick Start
-
-### Create a New Command (Automated)
+## Quick Start
 
 ```bash
+# Create multi-agent command
 ./scripts/create-sub-agent-command.sh \
-  --name "my-analyzer" \
+  --name "analyzer" \
   --agents 6 \
-  --category scan \
-  --description "Analyzes specific patterns"
-```
+  --category scan
 
-### Create a New Agent
-
-Copy a template and modify:
-
-```bash
+# Create agent from template
 cp agents/security-specialist.md agents/my-specialist.md
-# Edit the new agent file
 ```
 
-## 📝 Creating Commands
+## Creating Commands
 
 ### Command Structure
 
-Every command is a Markdown file with this structure:
+Every command is a Markdown file in `commands/{category}/{name}.md`:
 
 ```markdown
 ---
-allowed-tools: Task, Read, Grep, Bash, Write
-description: Brief description for command listing
+allowed-tools: Task, Read, Grep, Bash(cmd:*)
+description: Brief description
 argument-hint: <directory> [--options]
+mcp-enhanced: mcp__tool1  # Optional
 ---
 
 # Command Name
 
-Description of what the command does.
-
-## Implementation
-
-[Command logic here]
-```
-
-### Step-by-Step Guide
-
-#### 1. Choose the Right Category
-
-```
-commands/
-├── scan/      # Analysis and investigation
-├── fix/       # Direct corrections
-├── gen/       # Code generation
-├── flow/      # Multi-agent workflows
-├── auto/      # Automation
-├── sec/       # Security operations
-├── meta/      # Toolkit management
-└── custom/    # Your custom category
-```
-
-#### 2. Create the Command File
-
-```bash
-# Create new command
-touch commands/scan/my-analyzer.md
-```
-
-#### 3. Define Frontmatter
-
-```yaml
----
-allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*)
-description: Analyzes code for specific patterns
-argument-hint: <directory> [--pattern=regex] [--export]
----
-```
-
-**Frontmatter Fields**:
-
-- `allowed-tools`: Tools available to agents
-- `description`: Shows in command lists
-- `argument-hint`: Usage hint for users
-- `mcp-enhanced`: Optional MCP tools
-
-#### 4. Write Command Logic
-
-```markdown
-# Pattern Analyzer
-
-Analyzes codebase for specific patterns using parallel agents.
-
-## Execution
-
-Target: $ARGUMENTS
-
-### Phase 1: Pattern Detection
-
+## Phase 1: Parallel Scanning
 Use Task tool with subagent_type="general-purpose":
-"Search for pattern X in $ARGUMENTS using ripgrep.
-Focus on: [specific files/patterns].
-Return: JSON with findings."
+"Scan for X in $ARGUMENTS. Return JSON."
 
-### Phase 2: Analysis
-
-[Process results]
-
-### Phase 3: Report
-
-## Analysis Results
-
-[Format output]
+## Phase 2: Synthesis
+[Process results and generate report]
 
 ## Next Steps
-
-Recommend:
-
-1. `/global:fix:pattern-issues findings.json`
-2. `/global:scan:deep . --focus=patterns`
+1. `/prefix:fix:issues report.json`
+2. `/prefix:scan:deep --verify`
 ```
 
-### Command Best Practices
+### Command Categories
 
-#### 1. Clear Phases
+| Category | Purpose | Example Commands |
+|----------|---------|------------------|
+| `scan` | Analysis & investigation | `deep`, `quick`, `report` |
+| `fix` | Direct corrections | `security`, `quick-wins` |
+| `gen` | Code generation | `tests`, `docs` |
+| `flow` | Multi-agent workflows | `smart`, `continuous` |
+| `auto` | Automation | `execute`, `monitor` |
+| `sec` | Security operations | `audit`, `compliance` |
+| `meta` | Toolkit management | `chain`, `pipelines` |
 
-```markdown
-### Phase 1: Discovery
+### Best Practices
 
-[What to find]
+1. **Clear phases** - Scan → Analyze → Report
+2. **Structured output** - JSON for machines, Markdown for humans
+3. **Export capability** - Support `--export-json` and `--export-md`
+4. **Next steps** - Always suggest follow-up commands
 
-### Phase 2: Analysis
-
-[How to analyze]
-
-### Phase 3: Synthesis
-
-[How to report]
-```
-
-#### 2. Structured Output
-
-```markdown
-## Results
-
-- **Found**: X issues
-- **Critical**: Y items
-- **Suggestions**: Z improvements
-
-### Details
-
-[Structured findings]
-```
-
-#### 3. Next Steps
-
-```markdown
-## 🎯 Next Steps
-
-Based on findings:
-
-1. **Quick Fix** (5 min):
-   `/global:fix:quick-wins report.json`
-
-2. **Deep Dive** (30 min):
-   `/global:flow:smart "investigate pattern X"`
-```
-
-#### 4. Export Capability
-
-```markdown
-## Export
-
-Results saved to: pattern-analysis-{timestamp}.json
-
-Use in next commands:
-`/global:fix:patterns pattern-analysis-*.json`
-```
-
-## 🤖 Creating Agents
+## Creating Agents
 
 ### Agent Structure
 
+Agents are Markdown files in `agents/{name}.md`:
+
 ```markdown
 ---
-name: my-specialist
-description: Domain expertise description
+name: domain-specialist
+description: Expert in specific domain
+mcp-enhanced: mcp__context7  # Optional
 ---
 
-You are an expert in [specific domain].
+You are an expert in [domain].
 
-## Core Expertise Areas
-
-1. **Area 1**: Detailed knowledge
-2. **Area 2**: Specific skills
-3. **Area 3**: Deep understanding
+## Core Expertise
+- Area 1: Specific knowledge
+- Area 2: Deep understanding
 
 ## Analysis Approach
-
-[How you analyze problems]
+1. Identify patterns
+2. Analyze issues
+3. Suggest improvements
 
 ## Output Format
-
-[Expected structure]
+Return JSON with:
+- findings: array of issues
+- severity: critical|high|medium|low
+- recommendations: actionable fixes
 ```
 
 ### Agent Types
 
-#### 1. Analysis Agent
+| Type | Focus | Example |
+|------|-------|---------|
+| **Analysis** | Pattern detection | `pattern-analyzer` |
+| **Fix** | Remediation | `security-fixer` |
+| **Generation** | Code creation | `test-generator` |
+| **Review** | Quality assessment | `code-reviewer` |
 
-````markdown
----
-name: pattern-analyzer
-description: Analyzes code patterns and architecture
----
+### Agent Guidelines
 
-You are an expert in code pattern analysis.
+- **Single responsibility** - One domain per agent
+- **Clear output** - Specify exact format
+- **Actionable results** - Specific recommendations
 
-## Expertise
+## Creating Workflows
 
-- Design patterns detection
-- Anti-pattern identification
-- Architecture assessment
-
-## Analysis Method
-
-1. Scan for common patterns
-2. Identify violations
-3. Suggest improvements
-
-## Output
-
-```json
-{
-  "patterns": [...],
-  "antiPatterns": [...],
-  "suggestions": [...]
-}
-```
-````
-
-````
-
-#### 2. Fix Agent
-```markdown
----
-name: pattern-fixer
-description: Fixes pattern-related issues
----
-
-You are an expert in refactoring code patterns.
-
-## Capabilities
-- Safe refactoring
-- Pattern implementation
-- Code transformation
-
-## Fix Approach
-1. Validate the issue
-2. Plan the fix
-3. Apply safely
-4. Verify results
-````
-
-#### 3. Generation Agent
-
-```markdown
----
-name: pattern-generator
-description: Generates code following patterns
----
-
-You are an expert in code generation.
-
-## Skills
-
-- Pattern-based generation
-- Framework compliance
-- Best practices
-
-## Generation Process
-
-1. Understand requirements
-2. Select patterns
-3. Generate code
-4. Add tests
-```
-
-### Agent Best Practices
-
-#### 1. Single Responsibility
-
-Each agent should focus on one domain:
-
-- ❌ "Security and performance expert"
-- ✅ "Security vulnerability expert"
-
-#### 2. Clear Output Format
-
-Always specify expected output:
-
-```markdown
-## Output Format
-
-Return JSON with:
-
-- findings: array of issues
-- severity: critical|high|medium|low
-- suggestions: actionable fixes
-```
-
-#### 3. Actionable Results
-
-Provide specific, actionable advice:
-
-- ❌ "Improve security"
-- ✅ "Add input validation to UserController.login() method"
-
-## 🔗 Creating Workflows
-
-### Simple Workflow
-
-Chain existing commands:
+### Simple Chain
 
 ```bash
-/global:meta:chain \
-  "scan:pattern ." -> \
-  "fix:patterns {output}" -> \
-  "scan:pattern . --verify"
+/prefix:meta:chain \
+  "scan:deep ." -> \
+  "fix:quick-wins {output}" -> \
+  "scan:deep . --verify"
 ```
 
-### Complex Workflow
+### Complex Flow
 
-Create a flow command:
+Create `commands/flow/my-workflow.md`:
 
 ```markdown
 ---
-description: Complete pattern improvement workflow
+allowed-tools: Task, Read, Write
+description: Complete workflow
 ---
 
-# Pattern Improvement Flow
+# My Workflow
 
 ## Step 1: Analyze
+[Analysis logic]
 
-Use Task tool: "Analyze patterns in $ARGUMENTS"
+## Step 2: Fix Critical
+[Fix high-priority items]
 
-## Step 2: Prioritize
-
-[Logic to prioritize fixes]
-
-## Step 3: Fix
-
-[Apply fixes systematically]
-
-## Step 4: Verify
-
-[Ensure improvements]
+## Step 3: Verify
+[Ensure fixes work]
 ```
 
-## 🧩 Integration Points
+## Templates
 
-### 1. Command Registry
+| Template | Location | Use Case |
+|----------|----------|----------|
+| Basic command | `templates/commands/basic-sub-agent.md` | Simple analysis |
+| Multi-agent | `templates/commands/orchestration-template.md` | Complex workflows |
+| Agent | `templates/agents/specialist-template.md` | Domain expert |
 
-Commands are auto-discovered from the file system:
+## Testing Extensions
 
+```bash
+# Install locally
+./install.sh test --force
+
+# Test command
+/test:category:command ./test-project
+
+# Verify output
+cat command-*.json | jq .
+
+# Run tests
+./tests/commands/test-my-command.sh
 ```
-~/.claude/commands/prefix/category/command.md
-→ /prefix:category:command
+
+## Integration Points
+
+### Command Discovery
+```
+commands/{category}/{name}.md
+→ /prefix:category:name
 ```
 
-### 2. Agent Registry
-
-Agents are loaded from:
-
-```
-~/.claude/agents/agent-name.md
-```
-
-### 3. Configuration Hooks
-
-Add to `.claude-commands.json`:
-
+### Configuration Override
 ```json
 {
   "commandOverrides": {
-    "scan:my-analyzer": {
+    "category:name": {
       "performanceMode": "aggressive",
-      "customSettings": {
-        "patterns": ["pattern1", "pattern2"]
-      }
+      "tokenBudget": 5000
     }
   }
 }
 ```
 
-## 📚 Templates
-
-### Basic Command Template
-
-```bash
-cp templates/commands/basic-sub-agent.md \
-   commands/scan/my-command.md
+### MCP Enhancement
+```yaml
+mcp-enhanced: mcp__tool1, mcp__tool2
 ```
 
-### Analysis Command Template
+## Extension Checklist
 
-```bash
-cp templates/commands/analysis-sub-agent.md \
-   commands/scan/my-analyzer.md
-```
+- [ ] Clear, descriptive name
+- [ ] Proper frontmatter
+- [ ] Structured output format
+- [ ] Export support
+- [ ] Next steps guidance
+- [ ] Test coverage
+- [ ] Documentation updated
+- [ ] Added to README
 
-### Multi-Agent Command Template
+## Contributing
 
-```bash
-cp templates/commands/orchestration-template.md \
-   commands/flow/my-flow.md
-```
+1. Fork repository
+2. Create feature branch
+3. Add extension with tests
+4. Update documentation
+5. Submit pull request
 
-## 🧪 Testing Your Extensions
-
-### 1. Install Locally
-
-```bash
-./install.sh global --force
-```
-
-### 2. Test Command
-
-```bash
-/global:scan:my-analyzer ./test-project
-```
-
-### 3. Verify Output
-
-```bash
-# Check exports
-ls -la my-analyzer-*.json
-
-# Validate JSON
-cat my-analyzer-*.json | jq .
-```
-
-### 4. Test Error Cases
-
-```bash
-# Empty directory
-/global:scan:my-analyzer /tmp/empty
-
-# Invalid arguments
-/global:scan:my-analyzer --invalid-flag
-
-# Large codebase
-/global:scan:my-analyzer /large/project
-```
-
-## 🚀 Advanced Extensions
-
-### Custom Tool Integration
-
-```markdown
----
-allowed-tools: Task, Read, CustomTool
-mcp-enhanced: mcp__custom__tool
----
-
-# Uses custom MCP tool when available
-```
-
-### Dynamic Agent Selection
-
-```markdown
-## Select Agents Based on Findings
-
-If security issues found:
-Use Task tool with subagent_type="security-specialist"
-
-If performance issues found:
-Use Task tool with subagent_type="performance-optimizer"
-```
-
-### Conditional Execution
-
-```markdown
-## Conditional Logic
-
-If $ARGUMENTS contains "--deep":
-Run comprehensive analysis
-Else:
-Run quick scan
-```
-
-## 📋 Extension Checklist
-
-Before releasing your extension:
-
-- [ ] **Naming**: Clear, descriptive command name
-- [ ] **Documentation**: Updated README with new command
-- [ ] **Examples**: Usage examples in command file
-- [ ] **Testing**: Tested on various projects
-- [ ] **Error Handling**: Graceful failure modes
-- [ ] **Performance**: Reasonable execution time
-- [ ] **Output**: Structured, parseable results
-- [ ] **Next Steps**: Clear recommendations
-
-## 🤝 Contributing Back
-
-### 1. Fork the Repository
-
-```bash
-git fork https://github.com/original/claude-code-toolkit
-```
-
-### 2. Create Feature Branch
-
-```bash
-git checkout -b feature/add-pattern-analyzer
-```
-
-### 3. Add Your Extension
-
-```bash
-# Add files
-git add commands/scan/pattern-analyzer.md
-git add agents/pattern-specialist.md
-```
-
-### 4. Update Documentation
-
-- Add to README.md command list
-- Update relevant guides
-- Add usage examples
-
-### 5. Submit Pull Request
-
-- Clear description
-- Usage examples
-- Test results
-
-## 💡 Ideas for Extensions
+## Ideas for Extensions
 
 ### Commands
-
-- Database schema analyzer
-- API endpoint scanner
+- Database analyzer
+- API scanner
 - Localization checker
 - Accessibility auditor
-- Performance profiler
 
 ### Agents
-
-- Database optimization expert
-- API design specialist
-- i18n/l10n expert
 - DevOps specialist
-- Mobile app expert
+- Mobile expert
+- Cloud architect
+- i18n expert
 
 ### Workflows
-
 - Full-stack analysis
-- Microservice health check
-- CI/CD pipeline optimizer
+- Microservice health
 - Migration assistant
 
----
+## Related Documentation
 
-Ready to extend? Start with:
-
-```bash
-./scripts/create-sub-agent-command.sh --name "your-idea"
-```
+- [Architecture](architecture.md) - System design
+- [Configuration](configuration.md) - Settings
+- [Testing](testing.md) - Test requirements

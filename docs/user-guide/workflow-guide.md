@@ -1,404 +1,199 @@
-# Claude Code Toolkit - Workflow Guide
+# Workflow Guide
 
-This guide shows you how to use the Claude Code Toolkit effectively for different scenarios. Each workflow is designed to guide you step-by-step to achieve specific goals.
+Essential workflow patterns for getting the most out of Claude Code Toolkit.
 
-## 🎯 Choose Your Workflow Approach
+## Quick Workflow Selection
 
-### 1. Smart Problem Solving (Fastest) 🤖
+| Scenario | Best Approach | Command |
+|----------|---------------|---------|
+| **Any Problem** | Smart routing | `/prefix:flow:smart "describe issue"` |
+| **Pre-commit** | Quick check | `/prefix:scan:quick . --export-json` |
+| **Deep Analysis** | Full pipeline | `/prefix:scan:deep . --export-json` |
+| **Fix Issues** | Auto-fix | `/prefix:fix:quick-wins report.json` |
+| **Security Focus** | Security audit | `/prefix:sec:audit . --compliance=owasp` |
 
-Let AI analyze your problem and automatically route to the right solution:
+## Core Workflows
 
-```bash
-/global:flow:smart "describe your problem here"
-```
+### 1. Smart Problem Solving
 
-**Best for:**
-
-- Complex, multi-faceted problems
-- When you're not sure where to start
-- Quick problem resolution
-- Incident response
-
-### 2. Pre-Built Pipelines (Structured) 🚀
-
-Use tested workflow sequences for common tasks:
+Let AI handle complex problems automatically:
 
 ```bash
-/global:meta:pipelines [workflow-name]
+# Examples
+/prefix:flow:smart "my tests are slow and flaky"
+/prefix:flow:smart "production errors in authentication"
+/prefix:flow:smart "need to improve performance"
 ```
 
-**Available pipelines:**
+**Result**: AI analyzes, routes to specialists, provides solutions.
 
-- `quick-quality` - 30-second pre-commit check
-- `deep-quality` - Comprehensive analysis with fixes
-- `security-hardening` - Find and fix vulnerabilities
-- `refactoring-sprint` - Improve code structure
-- `release-prep` - Ensure code is production-ready
+### 2. Quality Improvement Cycle
 
-### 3. Command Chaining (Flexible) 🔗
-
-Build custom workflows by chaining commands:
+Standard improvement workflow:
 
 ```bash
-/global:meta:chain "cmd1" -> "cmd2 {output}" -> "cmd3"
+# 1. Analyze
+/prefix:scan:deep . --export-json
+
+# 2. Fix high-impact issues  
+/prefix:fix:quick-wins analysis-*.json
+
+# 3. Verify improvements
+/prefix:scan:quality . --compare=baseline.json
 ```
 
-**Features:**
+### 3. Security Hardening
 
-- Sequential execution with `->`
-- Parallel execution with `[cmd1, cmd2]`
-- Data passing with `{output}`
-- Conditional execution with `?>`
-
-### 4. Manual Control (Granular) 🔧
-
-Execute individual commands for specific tasks:
-
-```bash
-/global:scan:deep .
-/global:fix:security critical-issues.json
-/global:gen:tests uncovered-code.json
-```
-
-## 📊 Common Workflows
-
-### 🚦 Before Committing Code
-
-**Goal**: Ensure code quality before committing
-
-#### Quick Check (30 seconds)
-
-```bash
-/global:meta:pipelines quick-quality
-```
-
-#### Or Manual Steps
-
-```bash
-# 1. Fast analysis
-/global:scan:quick . --export-json=pre-commit.json
-
-# 2. Review findings
-/global:scan:report pre-commit.json --quick-wins
-
-# 3. Fix if needed
-/global:fix:quick-wins pre-commit.json
-```
-
-### 🐛 Debugging Performance Issues
-
-**Goal**: Find and fix performance bottlenecks
-
-#### Smart Approach
-
-```bash
-/global:flow:smart "application is slow, especially database queries"
-```
-
-#### Or Structured Approach
-
-```bash
-# 1. Performance analysis
-/global:scan:perf . --export-json=perf-analysis.json
-
-# 2. Generate optimization plan
-/global:scan:report perf-analysis.json --focus=performance
-
-# 3. Apply optimizations
-/global:fix:performance perf-analysis.json --target=critical
-```
-
-### 🔒 Security Audit & Hardening
-
-**Goal**: Find and fix security vulnerabilities
-
-#### Pipeline Approach
-
-```bash
-/global:meta:pipelines security-hardening
-```
-
-#### Or Step-by-Step
+Security-focused workflow:
 
 ```bash
 # 1. Security audit
-/global:sec:audit . --export-json=security-audit.json
+/prefix:sec:audit . --compliance=owasp --export-json
 
-# 2. Review vulnerabilities
-/global:scan:report security-audit.json --severity=critical,high
+# 2. Fix critical vulnerabilities
+/prefix:fix:security audit-*.json --severity=critical,high
 
-# 3. Fix critical issues first
-/global:fix:security security-audit.json --severity=critical
-
-# 4. Verify compliance
-/global:sec:comply . --standard=owasp
+# 3. Verify fixes
+/prefix:sec:audit . --verify
 ```
 
-### 🏗️ Major Refactoring
+### 4. Performance Optimization
 
-**Goal**: Safely refactor code with confidence
+Performance-focused workflow:
 
 ```bash
-# 1. Analyze refactoring opportunities
-/global:flow:refactor . --export=refactor-plan.md
+# 1. Performance analysis
+/prefix:scan:perf . --profile --export-json
 
-# 2. Execute safe refactorings
-/global:flow:refactor . --safety=conservative --execute
+# 2. Apply optimizations
+/prefix:fix:performance perf-*.json --safe-only
 
-# 3. Verify no regressions
-/global:scan:quality . --compare=baseline.json
+# 3. Benchmark improvements
+/prefix:scan:perf . --compare=baseline.json
 ```
 
-### 📈 Weekly Quality Improvement
+### 5. Command Chaining
 
-**Goal**: Continuous code quality improvement
+Chain commands for automation:
 
 ```bash
-# Run the continuous improvement pipeline
-/global:meta:pipelines continuous-improvement
+# Simple chain
+/prefix:meta:chain "scan:quick ." -> "fix:quick-wins {output}"
 
-# Or custom weekly workflow:
-/global:meta:chain \
-  "scan:quality . --baseline" -> \
-  "auto:sprint . --duration=1w" -> \
-  "scan:quality . --compare-baseline"
+# Multi-step workflow
+/prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}" -> "scan:quality . --verify"
 ```
 
-### 🚨 Incident Response
+For advanced chaining patterns, see [Advanced Workflows](../guides/ADVANCED-WORKFLOWS.md).
 
-**Goal**: Quickly diagnose and fix production issues
+## Working with Results
+
+### Automatic File Management
+
+Commands automatically create timestamped files:
 
 ```bash
-# Smart incident response
-/global:flow:incident "API returning 500 errors after deployment"
+# Analysis creates: analysis-20250117-143022.json
+/prefix:scan:deep . --export-json
 
-# This will:
-# 1. Analyze recent changes
-# 2. Check logs and errors
-# 3. Identify root cause
-# 4. Suggest immediate fixes
-# 5. Provide rollback options
+# Use latest results
+/prefix:fix:quick-wins --latest
+/prefix:scan:report --latest --generate-action-plan
 ```
 
-### 📚 Documentation Update
+### Comparing Progress
 
-**Goal**: Keep documentation in sync with code
-
-```bash
-# 1. Check documentation health
-/global:scan:docs . --export=doc-health.json
-
-# 2. Fix documentation issues
-/global:fix:documentation doc-health.json
-
-# 3. Generate missing docs
-/global:gen:docs --update-all
-```
-
-## 🔄 Working with Results
-
-### Context Preservation
-
-All commands export results that can be used in subsequent commands:
-
-```bash
-# Results are automatically saved with timestamps
-analysis-20250201-143022.json
-action-plan-20250201-143122.md
-security-audit-20250201-143222.json
-
-# Use in next command
-/global:fix:quick-wins analysis-*.json
-
-# Or reference specific file
-/global:scan:report analysis-20250201-143022.json
-```
-
-### Comparing Results
-
-Track progress over time:
+Track improvements over time:
 
 ```bash
 # Create baseline
-/global:scan:quality . --export=baseline.json
+/prefix:scan:quality . --export-json
+mv analysis-*.json baseline.json
 
-# After improvements
-/global:scan:quality . --compare=baseline.json
-
-# View trends
-/global:scan:report *.json --trends
+# Compare after changes
+/prefix:scan:quality . --export-json
+/prefix:scan:report --latest --compare=baseline.json
 ```
 
-## 🎯 Next Steps Pattern
+## Best Practices
 
-Every command provides recommended next steps. Follow the wizard-like guidance:
+### 1. Start Smart
 
-```markdown
-## 🎯 Next Steps
-
-Based on the analysis, I recommend:
-
-1. **Quick Fix** (5 min):
-   `/global:fix:quick-wins report.json`
-
-2. **Comprehensive** (30 min):
-   `/global:meta:workflow quality-sprint`
-
-3. **Custom Approach**:
-   - [ ] Security: `/global:sec:audit`
-   - [ ] Performance: `/global:scan:perf`
-   - [ ] Tests: `/global:gen:tests`
-```
-
-## 💡 Best Practices
-
-### 1. Start with Baselines
+Always try `flow:smart` first for complex problems:
 
 ```bash
-# Before any major work
-/global:scan:deep . --export=baseline.json
-/global:sec:baseline --save
+/prefix:flow:smart "help me understand what's wrong with my code"
 ```
 
-### 2. Use Smart Commands for Complex Problems
+### 2. Export Everything
+
+Always use `--export-json` to track progress:
 
 ```bash
-# Instead of figuring out commands yourself
-/global:flow:smart "help me improve test coverage to 80%"
+/prefix:scan:deep . --export-json  # Creates timestamped file
 ```
 
-### 3. Chain Commands for Automation
+### 3. Verify Changes
+
+Test fixes with comparison scans:
 
 ```bash
-# Create reusable workflows
-/global:meta:chain \
-  "scan:deep ." -> \
-  "fix:quick-wins {output}" -> \
-  "gen:tests {output}" -> \
-  "scan:tests . --verify"
+/prefix:scan:quality . --compare=before-fix.json
 ```
 
-### 4. Export Everything
+### 4. Use Incremental Approach
+
+Fix high-impact issues first:
 
 ```bash
-# Always use --export flags
-/global:scan:deep . --export-all
+/prefix:fix:quick-wins report.json --threshold=8  # Only high-ROI fixes
 ```
 
-### 5. Verify Changes
+## Common Issues
+
+### Commands Not Found
 
 ```bash
-# After fixes, always verify
-/global:scan:quality . --compare=before.json
+# Verify installation
+ls ~/.claude/commands/yourprefix/
+
+# Check command exists
+/prefix:meta:find-cmd "scan deep analysis"
 ```
 
-## 🔗 Advanced Patterns
-
-### Conditional Workflows
+### Analysis Takes Too Long
 
 ```bash
-# Only proceed if issues found
-/global:meta:chain \
-  "scan:security ." ?> \
-  "fix:security {output}" ?> \
-  "sec:comply --verify"
+# Focus on specific areas
+/prefix:scan:deep . --focus=security
+
+# Use quick scan instead
+/prefix:scan:quick . --export-json
 ```
 
-### Parallel Analysis
+### No Issues Found
 
 ```bash
-# Run multiple scans simultaneously
-/global:meta:chain \
-  ["scan:security .", "scan:perf .", "scan:tests ."] -> \
-  "scan:report {outputs} --unified"
+# Lower thresholds
+/prefix:fix:quick-wins report.json --threshold=5
+
+# Try different focus areas
+/prefix:scan:deep . --focus=performance
 ```
 
-### Custom Pipelines
+### Results Not Clear
 
 ```bash
-# Define your own pipeline
-/global:meta:chain --save="my-pipeline" \
-  "scan:deep . --focus=critical" -> \
-  "fix:quick-wins {output}" -> \
-  "gen:tests {output}" -> \
-  "meta:health --verify"
+# Get help interpreting results
+/prefix:flow:smart "explain my analysis results"
 
-# Reuse later
-/global:meta:pipelines my-pipeline
+# Generate action plan
+/prefix:scan:report report.json --generate-action-plan
 ```
 
-## 📊 Progress Tracking
+## Next Steps
 
-### Daily Progress
-
-```bash
-# Morning check
-/global:meta:health --compare=yesterday
-
-# Evening review
-/global:auto:report --today
-```
-
-### Sprint Progress
-
-```bash
-# Start of sprint
-/global:auto:sprint . --duration=2w --start
-
-# Daily updates
-/global:auto:sprint --status
-
-# Sprint review
-/global:auto:sprint --complete
-```
-
-## 🆘 When Things Go Wrong
-
-### Rollback Changes
-
-```bash
-# If automated fixes cause issues
-/global:meta:rollback --to=checkpoint
-
-# Or use git
-git stash
-git checkout .
-```
-
-### Debug Mode
-
-```bash
-# Run commands with debug output
-/global:scan:deep . --debug --verbose
-```
-
-### Get Help
-
-```bash
-# Ask for help
-/global:flow:smart "help me understand why this command failed"
-
-# Check command documentation
-/global:meta:help scan:deep
-```
-
-## 📋 Workflow Cheat Sheet
-
-| Goal                 | Command                                  |
-| -------------------- | ---------------------------------------- |
-| Quick quality check  | `/global:meta:pipelines quick-quality`   |
-| Find security issues | `/global:sec:audit .`                    |
-| Fix performance      | `/global:flow:smart "app is slow"`       |
-| Improve tests        | `/global:gen:tests --coverage-target=80` |
-| Refactor safely      | `/global:flow:refactor . --safe`         |
-| Update docs          | `/global:fix:documentation`              |
-| Full analysis        | `/global:scan:deep .`                    |
-| Execute fixes        | `/global:auto:execute plan.md`           |
-
----
-
-**Remember**: The toolkit is designed to guide you. When in doubt, use:
-
-```bash
-/global:flow:smart "what should I do next?"
-```
+- **Basics**: See [Quick Start Guide](../guides/QUICK-START.md)
+- **Advanced**: See [Advanced Workflows](../guides/ADVANCED-WORKFLOWS.md)  
+- **Syntax**: See [Command Reference](command-reference.md)
+- **Issues**: See [Troubleshooting](troubleshooting.md)

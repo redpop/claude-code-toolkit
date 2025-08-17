@@ -1,295 +1,242 @@
-# Installation Guide: Claude Code Toolkit
+# Installation Guide
 
-Complete guide for installing and configuring the Claude Code Toolkit with all its commands and agents.
+Complete setup instructions for the Claude Code Toolkit.
 
 ## Prerequisites
 
-- Git installed on your system
-- Access to your home directory (`~/.claude/`)
-- Claude Code (claude.ai/code) installed and configured
+See the [main README](../README.md) for system requirements. Ensure you have Claude Code installed and configured.
 
 ## Quick Install
 
 ```bash
-# Clone the repository
 git clone https://github.com/redpop/claude-code-toolkit.git
 cd claude-code-toolkit
-
-# Install with your chosen prefix
-./install.sh myprefix
+./install.sh global
 ```
 
-That's it! All commands are now available as `/myprefix:category:command`
+All commands are now available as `/global:category:command`
 
 ## Installation Options
 
-### Basic Installation
+### Standard Installation
 
 ```bash
-./install.sh myprefix
+./install.sh <prefix>
 ```
 
-This will:
+- Installs commands to `~/.claude/commands/<prefix>/`
+- Installs agents to `~/.claude/agents/`
+- No hooks or notifications
 
-- Install all commands to `~/.claude/commands/myprefix/`
-- Install all agents to `~/.claude/agents/`
-- Display all available commands after installation
-
-### Force Installation (Skip Backup)
+### Enhanced Installation (Recommended)
 
 ```bash
-./install.sh myprefix --force
+./install.sh <prefix> --with-settings
 ```
 
-Overwrites existing installation without creating backups.
+- Includes sound notifications and enhanced hooks
+- Better user experience with progress feedback
+- Configurable notification profiles
 
-### Selective Installation
+### Hooks Profiles
 
-Install only specific components:
-
-```bash
-# Commands only
-./install.sh myprefix --components=commands
-
-# Agents only
-./install.sh myprefix --components=agents
-```
-
-### Local Project Installation
-
-Install commands for a specific project:
-
-```bash
-./install.sh myprefix --local=/path/to/project
-```
-
-This creates project-specific commands in `/path/to/project/.claude/`
-
-## Directory Structure After Installation
-
-```
-~/.claude/
-├── commands/
-│   └── myprefix/
-│       ├── auto/
-│       │   ├── execute.md
-│       │   ├── monitor.md
-│       │   ├── report.md
-│       │   └── sprint.md
-│       ├── fix/
-│       │   ├── documentation.md
-│       │   ├── duplicates.md
-│       │   ├── performance.md
-│       │   ├── quick-wins.md
-│       │   ├── security.md
-│       │   └── shell.md
-│       ├── flow/
-│       │   ├── incident.md
-│       │   ├── parallel.md
-│       │   ├── refactor.md
-│       │   ├── review.md
-│       │   └── smart.md
-│       ├── gen/
-│       │   ├── docs.md
-│       │   └── tests.md
-│       ├── git/
-│       │   └── commit.md
-│       ├── meta/
-│       │   ├── chain.md
-│       │   ├── changelog.md
-│       │   ├── create-cmd.md
-│       │   ├── export.md
-│       │   ├── handoff.md
-│       │   ├── health.md
-│       │   ├── pipelines.md
-│       │   └── update-docs.md
-│       ├── scan/
-│       │   ├── deep.md
-│       │   ├── deps.md
-│       │   ├── docs.md
-│       │   ├── explore.md
-│       │   ├── map.md
-│       │   ├── perf.md
-│       │   ├── quality.md
-│       │   ├── refactor.md
-│       │   ├── report.md
-│       │   ├── root-cause.md
-│       │   └── tests.md
-│       └── sec/
-│           ├── audit.md
-│           ├── baseline.md
-│           └── comply.md
-└── agents/
-    ├── code-architect.md
-    ├── documentation-health-specialist.md
-    ├── performance-optimizer.md
-    ├── refactoring-expert.md
-    ├── report-analyzer.md
-    ├── security-specialist.md
-    └── test-engineer.md
-```
+| Profile | Features | Command |
+|---------|----------|---------|
+| **Basic** | Stop notifications | `--hooks-profile basic` |
+| **Minimal** | + Error detection | `--hooks-profile minimal` |
+| **Advanced** | + Sounds, logging | `--hooks-profile advanced` |
 
 ## Multiple Installations
 
-You can install multiple versions with different prefixes:
+Install with different prefixes for different workflows:
 
 ```bash
-# Install main toolkit
-git clone https://github.com/redpop/claude-code-toolkit.git toolkit-main
-cd toolkit-main
-./install.sh main
-
-# Install your fork
-cd ..
-git clone https://github.com/YourName/your-fork.git toolkit-custom
-cd toolkit-custom
-./install.sh custom
-
-# Install team version
-cd ..
-git clone https://github.com/YourTeam/team-toolkit.git toolkit-team
-cd toolkit-team
-./install.sh team
+./install.sh global     # Main installation
+./install.sh team       # Team-specific commands  
+./install.sh testing    # Testing environment
 ```
 
-Now you have access to:
+Each installation is completely independent.
 
-- `/main:scan:deep` - From main toolkit
-- `/custom:scan:deep` - From your fork
-- `/team:scan:deep` - From team toolkit
+## Hooks System
 
-## Updating Your Installation
+The toolkit includes an optional hooks system for enhanced functionality:
 
-To update to the latest version:
+### Hook Types
+
+- **Session Management**: Logs command usage and sessions
+- **Notifications**: Sound alerts for command completion/errors
+- **Error Detection**: Automatic error pattern recognition
+- **Command Chaining**: Enhanced workflow notifications
+
+### Enabling Hooks
 
 ```bash
-cd /path/to/claude-code-toolkit
-git pull
-./install.sh myprefix
+# Install with advanced hooks
+./install.sh global --with-settings --hooks-profile advanced
 ```
 
-The installer will:
+### Hook Profiles
 
-1. Detect existing installation
-2. Offer to create a backup
-3. Update all commands and agents
-4. Show what's new
+**Basic Profile** (`basic-hooks-settings.json`):
+- Stop notifications only
+- Minimal system integration
 
-## Verifying Installation
+**Minimal Profile** (`minimal-hooks-settings.json`):
+- Stop notifications
+- Error detection and alerts
+- Session logging
 
-After installation, verify everything works:
+**Advanced Profile** (`advanced-hooks-settings.json`):
+- All features enabled
+- Sound notifications (requires `afplay` on macOS)
+- Comprehensive logging
+- Command chain notifications
+- Sub-agent progress tracking
+
+### Hook Configuration
+
+Hooks are configured in `~/.claude/claude-code-toolkit/settings/` with these files:
+- `basic-hooks-settings.json`
+- `minimal-hooks-settings.json` 
+- `advanced-hooks-settings.json`
+
+You can customize any profile by editing the corresponding JSON file.
+
+## Installation Structure
+
+After installation, you'll have:
+
+```
+~/.claude/
+├── commands/<prefix>/     # Your toolkit commands
+├── agents/               # Shared analysis agents
+└── claude-code-toolkit/  # Toolkit data and hooks
+    ├── settings/         # Hook configuration files
+    ├── hooks/           # Hook scripts
+    └── .installed-version # Version tracking
+```
+
+## Verification
+
+Test your installation:
 
 ```bash
-# Test a simple command
-/myprefix:meta:health
+# Check installation
+ls ~/.claude/commands/global/
 
-# List all commands (in Claude Code)
-ls ~/.claude/commands/myprefix/
+# Test a command
+/global:meta:health
 
-# Check agents
-ls ~/.claude/agents/
+# Test smart routing
+/global:flow:smart "help me get started"
+```
+
+## Updating
+
+### Update to Latest Version
+
+```bash
+cd claude-code-toolkit
+git pull origin main
+./install.sh global  # Reinstall with same prefix
+```
+
+### Update with Settings Preservation
+
+Your hook settings are automatically preserved during updates.
+
+### Version Checking
+
+```bash
+# Check current version
+/global:meta:version
+
+# Check for updates
+/global:meta:version --check-updates
 ```
 
 ## Troubleshooting
 
-### Command Not Found
+### Commands Not Found
 
-If commands aren't recognized:
+- Verify installation: `ls ~/.claude/commands/global/`
+- Check Claude Code configuration
+- Ensure correct prefix: `/global:category:command`
 
-1. Ensure you're using the correct prefix
-2. Check the installation directory exists
-3. Restart Claude Code if needed
+### Installation Fails
 
-### Permission Errors
+- Check write permissions to `~/.claude/`
+- Ensure Git repository is accessible
+- Verify disk space availability
+
+### Hooks Not Working
+
+- Check hook files exist: `ls ~/.claude/claude-code-toolkit/hooks/`
+- Verify settings file: `ls ~/.claude/claude-code-toolkit/settings/`
+- Test sound system (macOS): `afplay /System/Library/Sounds/Glass.aiff`
+
+### Permission Issues
 
 ```bash
 # Fix permissions
-chmod +x install.sh
-chmod -R u+rw ~/.claude/
+chmod -R 755 ~/.claude/claude-code-toolkit/
+chmod +x ~/.claude/claude-code-toolkit/hooks/*.sh
 ```
-
-### Installation Conflicts
-
-If you have conflicts with existing commands:
-
-1. Choose a unique prefix
-2. Use `--force` to overwrite
-3. Manually backup important customizations
 
 ## Customization
 
-### Adding Custom Commands
+### Custom Installation Directory
 
-1. Create new command in your fork:
+```bash
+# Install to custom location (advanced)
+CLAUDE_DIR="/custom/path" ./install.sh global
+```
 
-   ```bash
-   mkdir -p commands/custom
-   echo "Your command content" > commands/custom/mycommand.md
-   ```
+### Custom Hook Scripts
 
-2. Reinstall:
+Copy and modify existing hooks:
 
-   ```bash
-   ./install.sh myprefix
-   ```
+```bash
+cp ~/.claude/claude-code-toolkit/hooks/success-notification.sh ~/.claude/claude-code-toolkit/hooks/my-custom-hook.sh
+# Edit the copied file
+```
 
-### Modifying Existing Commands
-
-1. Edit command in your fork
-2. Reinstall to apply changes
-3. Changes persist through updates
+Then reference your custom hook in the settings JSON.
 
 ## Best Practices
 
-1. **Use Descriptive Prefixes**: Choose prefixes that indicate the source
+### Prefix Selection
 
-   - `main` - Main toolkit
-   - `team` - Team commands
-   - `proj` - Project-specific
+- **global**: General development work
+- **team**: Team-specific workflows  
+- **project**: Project-specific commands
+- **test**: Testing and experimentation
 
-2. **Regular Updates**: Pull and reinstall weekly for latest features
+### Hook Profiles
 
-3. **Backup Custom Work**: Before updating, backup any customizations
+- **Basic**: Minimal distraction, essential feedback only
+- **Minimal**: Good balance of features and simplicity
+- **Advanced**: Full experience with all features
 
-4. **Test After Updates**: Run a few commands to ensure everything works
+### Maintenance
 
-## Uninstalling
-
-To remove an installation:
-
-```bash
-# Remove commands
-rm -rf ~/.claude/commands/myprefix/
-
-# Remove agents (careful - may be shared)
-rm -rf ~/.claude/agents/
-```
-
-## Getting Help
-
-- Check [CLAUDE.md](../CLAUDE.md) for development guidelines
-- See [README.md](../README.md) for command documentation
-- Report issues on GitHub
-- Join community discussions
+- Update regularly: `git pull && ./install.sh global`
+- Clean old reports: `/global:meta:export reports/ --archive`
+- Check system health: `/global:meta:analyze-toolkit`
 
 ## Next Steps
 
-1. Try the quick start workflow:
+After installation:
 
-   ```bash
-   /myprefix:flow:smart "Help me improve my code quality"
-   ```
+1. **Get Started**: Read the [Quick Start Guide](guides/QUICK-START.md)
+2. **Learn Workflows**: Check the [Workflow Guide](user-guide/workflow-guide.md)
+3. **Try Smart Commands**: Run `/global:flow:smart "analyze my project"`
+4. **Explore**: See [Command Reference](user-guide/command-reference.md)
 
-2. Explore pre-built pipelines:
+## Support
 
-   ```bash
-   /myprefix:meta:pipelines deep-quality
-   ```
-
-3. Create command chains:
-
-   ```bash
-   /myprefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}"
-   ```
-
-Happy coding with Claude Code Toolkit! 🚀
+- **Quick Help**: `/global:flow:smart "help with [your question]"`
+- **Documentation**: [docs/README.md](README.md)
+- **Issues**: GitHub repository
+- **FAQ**: [FAQ.md](FAQ.md)

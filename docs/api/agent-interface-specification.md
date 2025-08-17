@@ -551,169 +551,59 @@ Structure your assessment as:
 - Report confidence levels
 - Identify when other agents needed
 
-## Implementation Examples
+## Examples
 
-### Example 1: Security Analysis Task
+### Security Analysis
 
-**Command invokes agent:**
-
+**Invocation:**
 ```markdown
 Delegate to @security-specialist:
-"READ-ONLY ANALYSIS. DO NOT MODIFY ANY FILES.
-Perform deep security analysis on: src/api/auth/\*
-Focus on: Authentication bypass vulnerabilities
-Provide remediation strategies with secure code examples."
+"READ-ONLY. Analyze: src/api/auth/* Focus: Authentication vulnerabilities"
 ```
 
-**Agent processes and responds:**
+**Response:**
+```markdown
+# Security Report
 
-````markdown
-# Security Assessment Report
+## Summary
+- Method: Semgrep MCP
+- Critical: 2, High: 3
 
-## Executive Summary
+## Findings
+### Session Validation Issue
+- Severity: Critical
+- Location: auth/session.js:45
+- Fix: Validate session properly
+```
 
-- **Analysis Method**: Semgrep MCP (High Accuracy)
-- **Files Analyzed**: 5 files in src/api/auth/
-- **Critical Findings**: 2
-- **High Findings**: 3
+### Performance Analysis
 
-## Critical Vulnerabilities
-
-### 1. Insufficient Session Validation
-
-- **Severity**: Critical
-- **CWE**: CWE-287
-- **Location**: src/api/auth/session.js:45
-- **Impact**: Authentication bypass possible
-- **Remediation**:
-  ```javascript
-  // Secure implementation
-  if (!session || !session.userId || !session.isValid()) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
-  ```
-````
-
-````
-
-### Example 2: Hybrid Command Integration
-
-**Phase 1 scanner finds issues:**
-```json
-{
-  "scanner": "performance",
-  "findings": [
-    {
-      "type": "algorithm",
-      "severity": "high",
-      "location": "src/utils/search.js",
-      "complexity": "O(n²)"
-    }
-  ]
-}
-````
-
-**Command delegates to expert:**
-
+**Invocation:**
 ```markdown
 Delegate to @performance-optimizer:
-"READ-ONLY ANALYSIS. DO NOT MODIFY ANY FILES.
-Analyze performance issues in: src/utils/search.js
-Focus on: O(n²) algorithm at line 42
-Provide optimization strategies with benchmarks."
+"Analyze O(n²) algorithm in search.js:42"
 ```
 
-**Agent provides deep analysis:**
-
-````markdown
-# Performance Analysis Report
-
-## Algorithm Optimization Opportunity
-
-### Current Implementation Analysis
-
-- **Complexity**: O(n²) due to nested loops
-- **Performance Impact**: 2.5s for 1000 items, 25s for 10000 items
-- **Memory Usage**: Excessive due to intermediate arrays
-
-### Recommended Optimization
-
-```javascript
-// O(n log n) solution using divide-and-conquer
-function optimizedSearch(items, criteria) {
-  // Implementation details...
-}
-```
-````
-
-### Performance Comparison
-
-| Input Size | Current | Optimized | Improvement |
-| ---------- | ------- | --------- | ----------- |
-| 1,000      | 2.5s    | 0.05s     | 50x         |
-| 10,000     | 25s     | 0.7s      | 35x         |
-
-````
-
-### Example 3: Report Analysis Flow
-
-**Command provides report:**
+**Response:**
 ```markdown
-Delegate to @report-analyzer:
-"Analyze the following JSON reports and provide insights:
-- Current report: analyze-deep-20250129.json
-- Previous report: analyze-deep-20250115.json
-Focus on: Trend analysis and ROI-based prioritization
-Generate: Sprint planning recommendations"
-````
+# Performance Report
 
-**Agent analyzes and responds:**
+## Issue
+- Complexity: O(n²) nested loops
+- Impact: 25s for 10k items
 
-```markdown
-# Report Analysis Summary
-
-## Trend Analysis
-
-- **Period**: Jan 15 - Jan 29, 2025
-- **Overall Improvement**: +12% health score
-- **Issues Resolved**: 23
-- **New Issues**: 8
-- **Net Progress**: +15 issues resolved
-
-## Sprint Planning (2-week sprint, 3 developers)
-
-### Week 1 - Quick Wins (ROI > 8.0)
-
-1. **Fix SQL Injection in UserAPI**
-
-   - Effort: 2 hours
-   - Impact: Critical security fix
-   - Assigned to: Senior Dev
-
-2. **Optimize SearchAlgorithm**
-   - Effort: 4 hours
-   - Impact: 50x performance gain
-   - Assigned to: Dev 2
-
-### Week 2 - Strategic Improvements
-
-1. **Refactor Authentication Module**
-   - Effort: 3 days
-   - Impact: Resolves 5 security issues
-   - Assigned to: Senior Dev + Dev 3
+## Solution
+- Use O(n log n) algorithm
+- Expected: 50x improvement
 ```
 
-## Conclusion
+## Summary
 
-The Claude Code Toolkit Agent Interface provides a robust framework for creating specialized AI agents that enhance code analysis capabilities. By following these specifications, developers can create consistent, reliable agents that integrate seamlessly with the toolkit's command system while maintaining clear boundaries and providing high-quality insights.
+Claude Code Toolkit agents are specialized AI personas providing domain expertise:
 
-Key success factors:
+- **Format**: Markdown files with YAML frontmatter (`name` and `description` required)
+- **Capabilities**: Read-only analysis, structured reporting, MCP tool integration
+- **Integration**: Via commands (`Delegate to @agent`) or Task Tool
+- **Best Practices**: Clear boundaries, structured output, graceful fallbacks
 
-1. Clear role definition and boundaries
-2. Structured input/output formats
-3. Consistent communication protocols
-4. Tool-aware implementation
-5. Quality-focused output
-6. Seamless command integration
-
-For additional examples and templates, see the `/commands/templates/` directory in the toolkit repository.
+For templates, see `/templates/` in the repository.

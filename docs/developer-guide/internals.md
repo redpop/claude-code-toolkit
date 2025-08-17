@@ -1,611 +1,248 @@
 # Internals Guide
 
-This document explains the internal workings of the Claude Code Toolkit for developers who want to understand, debug, or modify the core system.
+How the Claude Code Toolkit works under the hood.
 
-## 🎯 System Overview
-
-The toolkit operates as a command interpreter layer on top of Claude Code, transforming user commands into orchestrated AI agent executions.
+## System Flow
 
 ```
-User Input → Command Parser → Orchestration Engine → Agent Execution → Result Synthesis → Output
+User Input → Command Resolution → Agent Orchestration → Result Synthesis → Output
 ```
 
-## 🔍 Command Resolution
+## Command Resolution
 
-### Path Resolution
-
+### Path Mapping
 ```
-/prefix:category:command arguments --options
+/prefix:category:command arguments
          ↓
 ~/.claude/commands/prefix/category/command.md
 ```
 
-### Resolution Process
-
+### Loading Process
 ```javascript
 function resolveCommand(input) {
   const [prefix, category, command] = input.split(":");
   const path = `~/.claude/commands/${prefix}/${category}/${command}.md`;
-
+  
   if (exists(path)) {
-    return loadCommand(path);
+    const { frontmatter, body } = parseFrontmatter(readFile(path));
+    return {
+      metadata: frontmatter,
+      instructions: body,
+      tools: parseTools(frontmatter.allowedTools),
+      args: parseArguments()
+    };
   }
-
-  // Fallback to aliases
   return resolveAlias(input);
 }
 ```
 
-### Command Loading
-
-```javascript
-function loadCommand(path) {
-  const content = readFile(path);
-  const { frontmatter, body } = parseFrontmatter(content);
-
-  return {
-    metadata: frontmatter,
-    instructions: body,
-    tools: parseTools(frontmatter.allowedTools),
-    args: parseArguments(),
-  };
-}
-```
-
-## 🎭 Agent Orchestration
-
-### Task Tool Integration
-
-The Task Tool enables parallel execution:
-
-```javascript
-// Conceptual implementation
-async function executeTaskAgents(agents) {
-  const promises = agents.map((agent) =>
-    TaskTool.run({
-      description: agent.description,
-      prompt: agent.prompt,
-      subagent_type: "general-purpose",
-      timeout: config.timeout,
-      tokenBudget: config.tokenBudget,
-    })
-  );
-
-  return Promise.all(promises);
-}
-```
-
-### Sub-Agent Loading
-
-```javascript
-function loadSubAgent(name) {
-  const path = `~/.claude/agents/${name}.md`;
-  const content = readFile(path);
-
-  return {
-    name: name,
-    expertise: parseExpertise(content),
-    approach: parseApproach(content),
-    outputFormat: parseOutputFormat(content),
-  };
-}
-```
+## Agent Orchestration
 
 ### Execution Strategies
 
-#### Parallel Execution
+| Strategy | Implementation | Use Case |
+|----------|---------------|----------|
+| **Parallel** | `Promise.all(agents.map(execute))` | Phase 1 scanning |
+| **Sequential** | `for await (agent of agents)` | Dependent operations |
+| **Hybrid** | Parallel scan → Sequential analysis | Full workflows |
 
+### Task Tool Pattern
 ```javascript
-// Used in Phase 1 scanning
-async function parallelScan(scanners) {
-  const results = await Promise.all(
-    scanners.map((scanner) => executeWithTimeout(scanner, config.timeout))
-  );
-
-  return mergeResults(results);
-}
+// Parallel execution with Task Tool
+const results = await Promise.all(
+  agents.map(agent => 
+    TaskTool.execute({
+      prompt: agent.prompt,
+      subagent_type: "general-purpose",
+      tokenBudget: config.tokenBudget,
+      timeout: config.timeout
+    })
+  )
+);
 ```
 
-#### Sequential Execution
+## Token Management
 
-```javascript
-// Used for dependent operations
-async function sequentialExecute(tasks) {
-  const results = [];
-
-  for (const task of tasks) {
-    const result = await execute(task);
-    results.push(result);
-
-    // Pass result to next task
-    if (task.passResult) {
-      tasks[index + 1].context = result;
-    }
-  }
-
-  return results;
-}
-```
-
-#### Hybrid Execution
-
-```javascript
-// Combines parallel and sequential
-async function hybridExecute(phases) {
-  const scanResults = await parallelScan(phases.scan);
-  const analysis = await delegateToExperts(scanResults);
-  const synthesis = await synthesize(scanResults, analysis);
-
-  return synthesis;
-}
-```
-
-## 📊 Data Flow
-
-### Input Processing Pipeline
-
-```
-Raw Input
-    ↓
-Argument Parser
-    ↓
-Variable Substitution ($ARGUMENTS)
-    ↓
-Context Injection
-    ↓
-Agent Instructions
-```
-
-### Result Aggregation Pipeline
-
-```
-Individual Agent Results
-    ↓
-Format Normalization
-    ↓
-Deduplication
-    ↓
-Priority Scoring
-    ↓
-Categorization
-    ↓
-Synthesis
-    ↓
-Export Formatting
-```
-
-### Context Preservation
-
-```javascript
-class ContextManager {
-  constructor() {
-    this.results = new Map();
-    this.timestamps = new Map();
-  }
-
-  saveResult(command, result) {
-    const filename = `${command}-${timestamp()}.json`;
-    writeFile(filename, result);
-    this.results.set(command, filename);
-    return filename;
-  }
-
-  getLastResult(command) {
-    return this.results.get(command);
-  }
-
-  chainContext(previousResult) {
-    return {
-      previous: previousResult,
-      timestamp: new Date(),
-      chain_id: generateId(),
-    };
-  }
-}
-```
-
-## 🔧 Configuration System
-
-### Configuration Loading Hierarchy
-
-```javascript
-function loadConfiguration() {
-  // 1. System defaults
-  let config = loadSystemDefaults();
-
-  // 2. Global configuration
-  const globalConfig = loadFile("~/.claude-commands.json");
-  config = merge(config, globalConfig);
-
-  // 3. Project configuration
-  const projectConfig = loadFile("./.claude-commands.json");
-  config = merge(config, projectConfig);
-
-  // 4. Environment variables
-  config = mergeEnvironment(config);
-
-  // 5. Runtime arguments
-  config = mergeRuntimeArgs(config);
-
-  return config;
-}
-```
-
-### Performance Mode Implementation
-
-```javascript
-const PERFORMANCE_MODES = {
-  conservative: {
-    maxConcurrentAgents: 5,
-    tokenBudgetPerAgent: 2000,
-    timeout: 20000,
-    retryPolicy: "conservative",
-  },
-  balanced: {
-    maxConcurrentAgents: 10,
-    tokenBudgetPerAgent: 3000,
-    timeout: 30000,
-    retryPolicy: "standard",
-  },
-  aggressive: {
-    maxConcurrentAgents: 20,
-    tokenBudgetPerAgent: 4000,
-    timeout: 45000,
-    retryPolicy: "aggressive",
-  },
-};
-
-function applyPerformanceMode(mode) {
-  return PERFORMANCE_MODES[mode] || PERFORMANCE_MODES.balanced;
-}
-```
-
-## 🧠 Token Management
-
-### Token Budget Distribution
+### Budget Distribution
 
 ```javascript
 class TokenBudgetManager {
-  constructor(totalBudget, agentCount) {
-    this.totalBudget = totalBudget;
-    this.agentCount = agentCount;
-    this.used = 0;
-  }
-
   allocate(strategy = "equal") {
     switch (strategy) {
       case "equal":
         return this.totalBudget / this.agentCount;
-
       case "weighted":
-        return this.weightedAllocation();
-
+        // Complex agents get more tokens
+        return this.calculateWeighted();
       case "dynamic":
-        return this.dynamicAllocation();
+        // Runtime adjustment based on feedback
+        return this.adjustDynamic();
     }
-  }
-
-  weightedAllocation() {
-    // Complex agents get more tokens
-    const weights = this.calculateWeights();
-    return weights.map((w) => this.totalBudget * w);
   }
 }
 ```
 
-### Token Usage Tracking
+### Usage Tracking
+- Track per-agent consumption
+- Monitor total usage
+- Throw `TokenLimitExceeded` when exceeded
+- Generate efficiency reports
 
-```javascript
-class TokenTracker {
-  track(agentName, tokens) {
-    this.usage[agentName] = (this.usage[agentName] || 0) + tokens;
-    this.total += tokens;
+## Result Processing
 
-    if (this.total > this.limit) {
-      throw new TokenLimitExceeded();
-    }
-  }
+### Synthesis Pipeline
 
-  getReport() {
-    return {
-      total: this.total,
-      limit: this.limit,
-      byAgent: this.usage,
-      efficiency: this.calculateEfficiency(),
-    };
-  }
-}
-```
-
-## 🔄 Result Synthesis
+1. **Aggregate** - Collect all agent results
+2. **Normalize** - Convert to common format
+3. **Deduplicate** - Remove redundant findings
+4. **Prioritize** - Score by impact/effort
+5. **Categorize** - Group by type/severity
+6. **Export** - Format for output
 
 ### Deduplication Algorithm
-
 ```javascript
-function deduplicateFindings(results) {
+function deduplicate(findings) {
   const seen = new Map();
-
-  return results.filter((finding) => {
-    const key = generateFindingKey(finding);
+  return findings.filter(finding => {
+    const key = `${finding.file}:${finding.line}:${finding.type}`;
     if (seen.has(key)) {
-      // Merge with existing
-      const existing = seen.get(key);
-      existing.occurrences++;
-      existing.agents.push(finding.agent);
+      seen.get(key).occurrences++;
       return false;
     }
-
     seen.set(key, finding);
     return true;
   });
 }
-
-function generateFindingKey(finding) {
-  return `${finding.file}:${finding.line}:${finding.type}`;
-}
 ```
 
 ### Priority Scoring
-
 ```javascript
 function calculatePriority(finding) {
-  const impactScore = calculateImpact(finding);
-  const effortScore = calculateEffort(finding);
-  const riskScore = calculateRisk(finding);
-
-  // ROI-based scoring
-  const roi = (impactScore * 10) / effortScore;
-
-  // Weighted priority
+  const impact = calculateImpact(finding);
+  const effort = calculateEffort(finding);
+  const roi = (impact * 10) / effort;
+  
   return {
-    roi: roi,
-    priority: roi * 0.5 + riskScore * 0.3 + impactScore * 0.2,
-    breakdown: { impact, effort, risk },
+    roi,
+    priority: roi * 0.5 + finding.risk * 0.3 + impact * 0.2
   };
 }
 ```
 
-### Report Generation
+## Configuration Loading
 
+### Hierarchy Resolution
 ```javascript
-class ReportGenerator {
-  generate(results, format = "markdown") {
-    const synthesized = this.synthesize(results);
-
-    switch (format) {
-      case "markdown":
-        return this.generateMarkdown(synthesized);
-      case "json":
-        return this.generateJSON(synthesized);
-      case "html":
-        return this.generateHTML(synthesized);
-    }
-  }
-
-  synthesize(results) {
-    return {
-      summary: this.generateSummary(results),
-      critical: this.filterCritical(results),
-      quickWins: this.identifyQuickWins(results),
-      trends: this.analyzeTrends(results),
-      recommendations: this.generateRecommendations(results),
-    };
-  }
+function loadConfiguration() {
+  let config = loadSystemDefaults();
+  config = merge(config, loadGlobal());
+  config = merge(config, loadProject());
+  config = mergeEnvironment(config);
+  config = mergeRuntimeArgs(config);
+  return config;
 }
 ```
 
-## 🐛 Debugging System
-
-### Debug Logging
-
+### Performance Mode Application
 ```javascript
-class DebugLogger {
-  constructor(enabled = false) {
-    this.enabled = enabled || process.env.CLAUDE_DEBUG;
-    this.logFile = "~/.claude/logs/debug.log";
-  }
+const MODES = {
+  conservative: { maxAgents: 5, tokenBudget: 2000 },
+  balanced: { maxAgents: 10, tokenBudget: 3000 },
+  aggressive: { maxAgents: 20, tokenBudget: 4000 }
+};
 
-  log(level, message, data) {
-    if (!this.enabled) return;
-
-    const entry = {
-      timestamp: new Date().toISOString(),
-      level,
-      message,
-      data,
-      stack: new Error().stack,
-    };
-
-    this.writeLog(entry);
-  }
-
-  performance(operation, duration) {
-    this.log("PERF", `${operation} took ${duration}ms`);
-  }
+function applyMode(mode) {
+  return MODES[mode] || MODES.balanced;
 }
 ```
 
-### Error Handling
+## Error Handling
 
+### Recovery Strategies
+
+| Error Type | Recovery Method |
+|------------|-----------------|
+| `TIMEOUT` | Retry with longer timeout |
+| `TOKEN_LIMIT` | Reduce agents or budget |
+| `AGENT_FAILURE` | Continue with partial results |
+| `PARSE_ERROR` | Fallback to text output |
+
+### Error Handler Pattern
 ```javascript
-class ErrorHandler {
-  handle(error, context) {
-    // Log error
-    logger.error(error, context);
-
-    // Determine severity
-    const severity = this.classifyError(error);
-
-    // Handle based on severity
-    switch (severity) {
-      case "critical":
-        return this.handleCritical(error);
-      case "recoverable":
-        return this.attemptRecovery(error, context);
-      case "warning":
-        return this.logWarning(error);
-    }
+try {
+  const results = await executeAgents(tasks);
+  return synthesize(results);
+} catch (error) {
+  if (error.recoverable) {
+    return attemptRecovery(error);
   }
-
-  attemptRecovery(error, context) {
-    if (error.type === "TIMEOUT") {
-      return this.retryWithLongerTimeout(context);
-    }
-
-    if (error.type === "TOKEN_LIMIT") {
-      return this.retryWithFewerAgents(context);
-    }
-  }
+  throw error;
 }
 ```
 
-## 📈 Performance Monitoring
+## Debugging
+
+### Enable Debug Mode
+```bash
+export CLAUDE_DEBUG=true
+export CLAUDE_LOG_LEVEL=debug
+```
+
+### Debug Output
+- Command resolution steps
+- Agent execution times
+- Token usage per agent
+- Error stack traces
+- Performance metrics
+
+### Common Issues
+
+| Issue | Cause | Solution |
+|-------|-------|----------|
+| Token exceeded | High agent count/budget | Reduce agents or use conservative |
+| Timeout | Complex task | Increase timeout or simplify |
+| Parsing failure | Invalid command syntax | Check frontmatter format |
+| Agent failure | Missing dependencies | Verify agent definition |
+
+## Performance Monitoring
 
 ### Metrics Collection
+- Execution time per command
+- Token usage efficiency
+- Success/failure rates
+- Agent performance distribution
 
-```javascript
-class MetricsCollector {
-  constructor() {
-    this.metrics = {
-      commands: new Map(),
-      agents: new Map(),
-      operations: [],
-    };
-  }
+### Optimization Points
+- Cache frequently used results
+- Pool agent connections
+- Batch similar operations
+- Progressive loading for large files
 
-  recordCommand(command, duration, result) {
-    const stats = this.metrics.commands.get(command) || {
-      count: 0,
-      totalDuration: 0,
-      failures: 0,
-    };
+## Security Model
 
-    stats.count++;
-    stats.totalDuration += duration;
-    if (!result.success) stats.failures++;
-
-    this.metrics.commands.set(command, stats);
-  }
-
-  getPerformanceReport() {
-    return {
-      averageExecutionTime: this.calculateAverage(),
-      slowestCommands: this.getSlowest(),
-      failureRate: this.getFailureRate(),
-      tokenEfficiency: this.getTokenEfficiency(),
-    };
-  }
-}
-```
-
-### Memory Management
-
-```javascript
-class MemoryManager {
-  constructor(limit = 500 * 1024 * 1024) {
-    // 500MB
-    this.limit = limit;
-    this.checkInterval = 5000;
-    this.startMonitoring();
-  }
-
-  startMonitoring() {
-    setInterval(() => {
-      const usage = process.memoryUsage();
-
-      if (usage.heapUsed > this.limit) {
-        this.handleMemoryPressure();
-      }
-    }, this.checkInterval);
-  }
-
-  handleMemoryPressure() {
-    // Clear caches
-    CacheManager.clear();
-
-    // Reduce concurrent operations
-    config.maxConcurrentAgents = Math.floor(config.maxConcurrentAgents / 2);
-
-    // Force garbage collection if available
-    if (global.gc) global.gc();
-  }
-}
-```
-
-## 🔐 Security Considerations
-
-### Tool Permission System
-
-```javascript
-class ToolPermissionManager {
-  constructor(allowedTools) {
-    this.allowed = new Set(allowedTools);
-  }
-
-  validate(requestedTool) {
-    // Check exact match
-    if (this.allowed.has(requestedTool)) return true;
-
-    // Check wildcards
-    for (const pattern of this.allowed) {
-      if (this.matchesPattern(requestedTool, pattern)) {
-        return true;
-      }
-    }
-
-    throw new UnauthorizedToolError(requestedTool);
-  }
-
-  matchesPattern(tool, pattern) {
-    // e.g., "Bash(fd:*)" matches "Bash(fd:find)"
-    const regex = pattern.replace("*", ".*");
-    return new RegExp(`^${regex}$`).test(tool);
-  }
-}
+### Tool Permissions
+```yaml
+# Levels of access
+allowed-tools: Read, Grep              # Read-only
+allowed-tools: Read, Grep, Bash(git:*) # Git access
+allowed-tools: Task, Read, Write, Edit # Full access
 ```
 
 ### Sandboxing
+- Isolated execution contexts
+- No persistent state
+- Controlled file system access
+- Network restrictions
 
-```javascript
-class Sandbox {
-  constructor(restrictions) {
-    this.restrictions = restrictions;
-  }
+## Memory Management
 
-  execute(operation) {
-    // Validate operation
-    this.validate(operation);
+- Monitor heap usage
+- Clear caches on pressure
+- Reduce concurrent operations
+- Force garbage collection when needed
 
-    // Apply restrictions
-    const sandboxed = this.applySandbox(operation);
+## Related Documentation
 
-    // Execute with monitoring
-    return this.monitoredExecute(sandboxed);
-  }
-
-  applySandbox(operation) {
-    return {
-      ...operation,
-      filesystem: this.restrictFilesystem(operation),
-      network: this.restrictNetwork(operation),
-      timeout: this.enforceTimeout(operation),
-    };
-  }
-}
-```
-
-## 🏁 Summary
-
-Understanding these internals helps you:
-
-- Debug complex issues
-- Optimize performance
-- Extend functionality
-- Contribute to core development
-
-The system is designed to be:
-
-- **Modular**: Easy to extend and modify
-- **Performant**: Parallel execution where possible
-- **Reliable**: Comprehensive error handling
-- **Secure**: Controlled tool access and sandboxing
+- [Architecture](architecture.md) - High-level design
+- [Configuration](configuration.md) - Settings details
+- [Extending](extending.md) - Adding functionality
