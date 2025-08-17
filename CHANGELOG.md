@@ -7,6 +7,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.13.0] - 2025-01-17
+
+### Added
+
+- ✨ **Distributed Context Management System** - CLAUDE.md files in each directory for focused context
+  - Added context files in agents/, commands/, scripts/, docs/, templates/, knowledge-base/, hooks/
+  - Each file provides specific guidelines for its area
+  - Reduces cognitive load and improves context relevance
+  - Better separation of concerns for Claude Code guidance
+
+- ✨ **Hook System Support** - Integration with Claude Code hooks for sound notifications
+  - New `hooks/` directory with stop-notification script
+  - Global settings.json support with `--with-settings` install flag
+  - Hook scripts for user-prompt-submit and tool-submit events
+  - Sound notification system for task completion feedback
+
+- ✨ **Settings Management System** - Global settings configuration for Claude Code
+  - New `settings/` directory with template settings.json
+  - Support for customizing tool permissions and behaviors
+  - Integration with hook system for enhanced functionality
+  - Automatic settings installation with `--with-settings` flag
+
+### Changed
+
+- 🔄 **CLAUDE.md Restructuring** - Complete rewrite for clarity and efficiency
+  - Simplified main CLAUDE.md to focus on quick start and essential workflows
+  - Moved detailed instructions to directory-specific context files
+  - Improved workflow documentation with clear pipeline examples
+  - Better organization of quick start commands and patterns
+
+- 🔄 **Installation Script Enhancement** - Additional installation options
+  - Added `--with-settings` flag for global settings.json installation
+  - Support for hooks component installation
+  - Updated help documentation with new options
+  - Better handling of settings and hook configurations
+
+- 🔄 **Documentation Updates** - Comprehensive improvements to command options
+  - Updated README with more detailed flag documentation for all commands
+  - Added missing short flags and options for multiple commands
+  - Improved handoff command documentation with new flag syntax
+  - Better organization of command tables with clearer option descriptions
+
+### Removed
+
+- 🗑️ **.claude-commands.json** - No longer needed as repository metadata
+
 ## [3.12.0] - 2025-01-17
 
 ### Added
@@ -907,6 +953,19 @@ This release marks the transition from a commands-only repository to a full tool
 
 - 🐛 Update instructions in README now reflect actual Git-based workflow
 
+[3.13.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.12.0...v3.13.0
+[3.12.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.11.2...v3.12.0
+[3.11.2]: https://github.com/redpop/claude-code-toolkit/compare/v3.11.1...v3.11.2
+[3.11.1]: https://github.com/redpop/claude-code-toolkit/compare/v3.11.0...v3.11.1
+[3.11.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.10.0...v3.11.0
+[3.10.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.9.0...v3.10.0
+[3.9.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.8.0...v3.9.0
+[3.8.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.7.0...v3.8.0
+[3.7.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.6.5...v3.7.0
+[3.6.5]: https://github.com/redpop/claude-code-toolkit/compare/v3.6.4...v3.6.5
+[3.6.4]: https://github.com/redpop/claude-code-toolkit/compare/v3.6.3...v3.6.4
+[3.6.3]: https://github.com/redpop/claude-code-toolkit/compare/v3.6.2...v3.6.3
+[3.6.2]: https://github.com/redpop/claude-code-toolkit/compare/v3.6.1...v3.6.2
 [3.6.1]: https://github.com/redpop/claude-code-toolkit/compare/v3.6.0...v3.6.1
 [3.6.0]: https://github.com/redpop/claude-code-toolkit/compare/v3.5.3...v3.6.0
 [3.5.3]: https://github.com/redpop/claude-code-toolkit/compare/v3.5.2...v3.5.3
