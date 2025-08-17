@@ -1,0 +1,14 @@
+{
+	"hooks": {
+		"Stop": [
+			{
+				"hooks": [
+					{
+						"type": "command",
+						"command": "~/.claude/claude-code-toolkit/hooks/stop-notification.sh"
+					}
+				]
+			}
+		]
+	}
+}

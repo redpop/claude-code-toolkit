@@ -61,6 +61,7 @@ This command intelligently manages your project's CHANGELOG.md file by analyzing
    - Groups changes by type with emoji prefixes
    - Maintains proper Keep a Changelog formatting
    - Preserves existing changelog content
+   - No [Unreleased] section (continuous deployment workflow)
 
 4. **Optional Actions**:
    - **--analyze**: Preview mode to see what would happen
@@ -90,8 +91,6 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
-## [Unreleased]
 
 ## [1.2.0] - 2024-01-15
 
@@ -143,6 +142,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
    - Add new version section with current date
    - Insert categorized entries
    - Maintain proper formatting and structure
+   - Skip [Unreleased] section for continuous deployment
 
 5. **Update Version Files** (if --update-version):
 

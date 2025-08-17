@@ -42,10 +42,13 @@ fi
 CLAUDE_COMMANDS_DIR="$HOME/.claude/commands"
 CLAUDE_AGENTS_DIR="$HOME/.claude/agents"
 CLAUDE_TOOLKIT_DIR="$HOME/.claude/claude-code-toolkit"
+CLAUDE_SETTINGS_FILE="$HOME/.claude/settings.json"
 FORCE_INSTALL=false
 INSTALL_COMPONENTS="all"
 LOCAL_INSTALL=false
 LOCAL_PROJECT_DIR=""
+INSTALL_HOOKS=false
+INSTALL_SETTINGS=false
 
 # Function to show help
 show_help() {
@@ -62,7 +65,8 @@ show_help() {
     echo "  --local <path>          Install in specific project directory (.claude/)"
     echo "                          Required: path to target project directory"
     echo "  --install <components>  Install specific components (comma-separated)"
-    echo "                          Available: commands, agents, all (default: all)"
+    echo "                          Available: commands, agents, hooks, all (default: all)"
+    echo "  --with-settings         Also install global settings.json for hooks"
     echo ""
     echo "Examples:"
     echo "  ./install.sh mytools                     Install everything globally (default)"
@@ -70,6 +74,7 @@ show_help() {
     echo "  ./install.sh mytools --install commands  Install only commands"
     echo "  ./install.sh mytools --install agents    Install only agents"
     echo "  ./install.sh mytools --install commands,agents  Install both (explicit)"
+    echo "  ./install.sh mytools --with-settings     Install with global hook settings"
     echo "  ./install.sh global --force              Force install without backups"
     echo ""
     echo "After installation, commands will be available as:"
@@ -111,6 +116,10 @@ while [[ $# -gt 0 ]]; do
             INSTALL_COMPONENTS="$2"
             shift 2
             ;;
+        --with-settings)
+            INSTALL_SETTINGS=true
+            shift
+            ;;
         -*)
             print_error "Unknown option: $1"
             echo "Run './install.sh --help' for more information."
@@ -147,6 +156,7 @@ for component in "${COMPONENTS[@]}"; do
         all)
             INSTALL_COMMANDS=true
             INSTALL_AGENTS=true
+            INSTALL_HOOKS=true
             ;;
         commands)
             INSTALL_COMMANDS=true
@@ -154,18 +164,21 @@ for component in "${COMPONENTS[@]}"; do
         agents)
             INSTALL_AGENTS=true
             ;;
+        hooks)
+            INSTALL_HOOKS=true
+            ;;
         *)
             print_error "Unknown component: $component"
-            echo "Available components: commands, agents, all"
+            echo "Available components: commands, agents, hooks, all"
             exit 1
             ;;
     esac
 done
 
 # Check if at least one component is selected
-if [ "$INSTALL_COMMANDS" = false ] && [ "$INSTALL_AGENTS" = false ]; then
+if [ "$INSTALL_COMMANDS" = false ] && [ "$INSTALL_AGENTS" = false ] && [ "$INSTALL_HOOKS" = false ]; then
     print_error "No components selected for installation."
-    echo "Use --install with one or more of: commands, agents, all"
+    echo "Use --install with one or more of: commands, agents, hooks, all"
     exit 1
 fi
 
@@ -335,6 +348,51 @@ if [ -d "$SCRIPT_DIR/knowledge-base" ]; then
     print_success "Knowledge-base installed to $CLAUDE_TOOLKIT_DIR/knowledge-base"
 fi
 
+# Install hooks to claude-code-toolkit directory
+if [ "$INSTALL_HOOKS" = true ] && [ -d "$SCRIPT_DIR/hooks" ]; then
+    print_info "Installing hooks to $CLAUDE_TOOLKIT_DIR/hooks..."
+    mkdir -p "$CLAUDE_TOOLKIT_DIR"
+    
+    # Check if hooks already exist
+    if [ -d "$CLAUDE_TOOLKIT_DIR/hooks" ]; then
+        if [ "$FORCE_INSTALL" = true ]; then
+            print_info "Force mode: Overwriting existing hooks..."
+            rm -rf "$CLAUDE_TOOLKIT_DIR/hooks"
+        else
+            print_info "Backing up existing hooks..."
+            mv "$CLAUDE_TOOLKIT_DIR/hooks" "$CLAUDE_TOOLKIT_DIR/hooks.backup.$(date +%Y%m%d_%H%M%S)"
+        fi
+    fi
+    
+    cp -r "$SCRIPT_DIR/hooks" "$CLAUDE_TOOLKIT_DIR/"
+    # Ensure scripts are executable
+    chmod +x "$CLAUDE_TOOLKIT_DIR/hooks"/*.sh 2>/dev/null || true
+    print_success "Hooks installed to $CLAUDE_TOOLKIT_DIR/hooks"
+fi
+
+# Install global settings if requested
+if [ "$INSTALL_SETTINGS" = true ] && [ -f "$SCRIPT_DIR/settings/global-settings.json" ]; then
+    print_info "Installing global settings for hooks..."
+    
+    # Check if settings.json already exists
+    if [ -f "$CLAUDE_SETTINGS_FILE" ]; then
+        if [ "$FORCE_INSTALL" = true ]; then
+            print_info "Force mode: Overwriting existing settings.json..."
+            cp "$SCRIPT_DIR/settings/global-settings.json" "$CLAUDE_SETTINGS_FILE"
+        else
+            echo -e "${YELLOW}Warning: $CLAUDE_SETTINGS_FILE already exists.${NC}"
+            echo "Manual merge required. Hook configuration to add:"
+            echo
+            cat "$SCRIPT_DIR/settings/global-settings.json"
+            echo
+            echo "You can add this configuration manually to your existing settings.json"
+        fi
+    else
+        cp "$SCRIPT_DIR/settings/global-settings.json" "$CLAUDE_SETTINGS_FILE"
+        print_success "Global settings installed to $CLAUDE_SETTINGS_FILE"
+    fi
+fi
+
 # Save version information from source repository
 print_info "Saving version information..."
 mkdir -p "$CLAUDE_TOOLKIT_DIR"
@@ -392,6 +450,21 @@ if [ "$INSTALL_AGENTS" = true ]; then
                 echo "  - $agent_name"
             fi
         done
+    fi
+fi
+
+# Display hooks information
+if [ "$INSTALL_HOOKS" = true ]; then
+    echo
+    echo "Hooks installed:"
+    echo "  - stop-notification.sh (plays sound when Claude finishes responding)"
+    echo
+    if [ "$INSTALL_SETTINGS" = true ]; then
+        echo "✓ Global settings configured - hooks are now active!"
+    else
+        echo "To activate hooks, either:"
+        echo "  1. Re-run with --with-settings flag to install global settings"
+        echo "  2. Manually add the configuration from settings/global-settings.json to ~/.claude/settings.json"
     fi
 fi
 
