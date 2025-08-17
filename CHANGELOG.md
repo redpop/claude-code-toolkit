@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.14.1] - 2025-01-17
+
+### Changed
+
+- 🔄 **Documentation Formatting** - Improved markdown consistency across entire codebase
+  - Added proper line breaks after list headers in all documentation files
+  - Enhanced readability of agents, commands, and knowledge base documentation
+  - Standardized markdown formatting patterns throughout the toolkit
+
+### Fixed
+
+- 🐛 Removed obsolete test-project directory containing example code files
+
 ## [3.14.0] - 2025-01-17
 
 ### Added
