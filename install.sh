@@ -53,42 +53,63 @@ HOOKS_PROFILE="basic"  # basic, minimal, advanced
 
 # Function to show help
 show_help() {
-    echo "Claude Code Toolkit Installation Script"
-    echo ""
-    echo "Usage: ./install.sh <prefix> [options]"
-    echo ""
-    echo "Arguments:"
-    echo "  <prefix>    The prefix for your commands (e.g., 'mytools', 'global', 'team')"
-    echo ""
-    echo "Options:"
-    echo "  --help, -h              Show this help message"
-    echo "  --force                 Force installation without creating backups"
-    echo "  --local <path>          Install in specific project directory (.claude/)"
-    echo "                          Required: path to target project directory"
-    echo "  --install <components>  Install specific components (comma-separated)"
-    echo "                          Available: commands, agents, hooks, all (default: all)"
-    echo "  --with-settings         Also install global settings.json for hooks"
-    echo "  --hooks-profile <name>  Choose hooks configuration profile:"
-    echo "                          basic: Stop notification only (default)"
-    echo "                          minimal: Stop + critical error detection"
-    echo "                          advanced: All hooks (sounds, notifications, logging)"
-    echo ""
-    echo "Examples:"
-    echo "  ./install.sh mytools                     Install everything globally (default)"
-    echo "  ./install.sh mytools --local /path/to/project  Install in specific project"
-    echo "  ./install.sh mytools --install commands  Install only commands"
-    echo "  ./install.sh mytools --install agents    Install only agents"
-    echo "  ./install.sh mytools --install commands,agents  Install both (explicit)"
-    echo "  ./install.sh mytools --with-settings     Install with basic hook settings"
-    echo "  ./install.sh mytools --with-settings --hooks-profile advanced  Full hooks"
-    echo "  ./install.sh global --force              Force install without backups"
-    echo ""
-    echo "After installation, commands will be available as:"
-    echo "  /<prefix>:<category>:<command>"
-    echo ""
-    echo "For example, with prefix 'mytools':"
-    echo "  /mytools:git:commit"
-    echo "  /mytools:project:changelog"
+    echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${GREEN}                       Claude Code Toolkit Installation                          ${NC}"
+    echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo
+    echo -e "${YELLOW}USAGE${NC}"
+    echo -e "  ${GREEN}./install.sh${NC} <prefix> [options]"
+    echo
+    echo -e "${YELLOW}ARGUMENTS${NC}"
+    printf "  ${GREEN}%-20s${NC} %s\n" "<prefix>" "Your command prefix (e.g., 'mytools', 'global', 'team')"
+    echo
+    echo -e "${YELLOW}OPTIONS${NC}"
+    printf "  ${GREEN}%-20s${NC} %s\n" "--help, -h" "Show this help message"
+    printf "  ${GREEN}%-20s${NC} %s\n" "--force" "Force installation without creating backups"
+    printf "  ${GREEN}%-20s${NC} %s\n" "--local <path>" "Install in specific project directory (.claude/)"
+    printf "  ${GREEN}%-20s${NC} %s\n" "--install <items>" "Install specific components (comma-separated)"
+    printf "  %-20s %s\n" "" "Available: ${YELLOW}commands${NC}, ${YELLOW}agents${NC}, ${YELLOW}hooks${NC}, ${YELLOW}all${NC} (default)"
+    printf "  ${GREEN}%-20s${NC} %s\n" "--with-settings" "Install global settings.json for hooks"
+    printf "  ${GREEN}%-20s${NC} %s\n" "--hooks-profile <p>" "Choose hooks configuration profile:"
+    printf "  %-20s %s\n" "" "${YELLOW}basic${NC}    → Stop notification only (default)"
+    printf "  %-20s %s\n" "" "${YELLOW}minimal${NC}  → Stop + critical error detection + markdown"
+    printf "  %-20s %s\n" "" "${YELLOW}advanced${NC} → All hooks (sounds, notifications, logging)"
+    echo
+    echo -e "${YELLOW}EXAMPLES${NC}"
+    echo
+    echo -e "  ${GREEN}Quick Start:${NC}"
+    printf "  %-60s %s\n" "./install.sh mytools" "# Standard installation"
+    printf "  %-60s %s\n" "./install.sh mytools --with-settings" "# With hooks enabled"
+    printf "  %-60s %s\n" "./install.sh global --with-settings --hooks-profile advanced" "# Full featured"
+    echo
+    echo -e "  ${GREEN}Component Selection:${NC}"
+    printf "  %-60s %s\n" "./install.sh mytools --install commands" "# Commands only"
+    printf "  %-60s %s\n" "./install.sh mytools --install agents" "# Agents only"
+    printf "  %-60s %s\n" "./install.sh mytools --install commands,agents" "# Multiple components"
+    printf "  %-60s %s\n" "./install.sh mytools --install hooks" "# Hooks only"
+    echo
+    echo -e "  ${GREEN}Advanced Usage:${NC}"
+    printf "  %-60s %s\n" "./install.sh mytools --local /path/to/project" "# Project-specific"
+    printf "  %-60s %s\n" "./install.sh global --force" "# Force reinstall"
+    printf "  %-60s %s\n" "./install.sh mytools --with-settings --hooks-profile minimal" "# Minimal hooks"
+    echo
+    echo -e "${YELLOW}COMMAND FORMAT${NC}"
+    echo -e "  After installation, use commands as:"
+    echo -e "  ${GREEN}/<prefix>:<category>:<command>${NC}"
+    echo
+    echo -e "  Examples with prefix '${YELLOW}mytools${NC}':"
+    echo -e "  • /mytools:scan:deep     ${GREEN}→${NC} Deep code analysis"
+    echo -e "  • /mytools:fix:security  ${GREEN}→${NC} Security fixes"
+    echo -e "  • /mytools:git:commit    ${GREEN}→${NC} Smart git commits"
+    echo
+    echo -e "${YELLOW}COMPONENTS${NC}"
+    echo -e "  ${GREEN}Commands${NC}  → 50+ development commands"
+    echo -e "  ${GREEN}Agents${NC}    → 15+ specialized AI agents"
+    echo -e "  ${GREEN}Hooks${NC}     → 9 automation scripts"
+    echo
+    echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "  📚 Docs: ${GREEN}github.com/redpop/claude-code-toolkit${NC}"
+    echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 }
 
 # Parse command line arguments
@@ -300,7 +321,10 @@ if [ "$INSTALL_COMMANDS" = true ]; then
     if [ "$INSTALL_COMMANDS" = true ]; then
         print_info "Installing commands to $COMMANDS_INSTALL_PATH..."
         mkdir -p "$COMMANDS_INSTALL_PATH"
-        cp -r "$SCRIPT_DIR/commands/"* "$COMMANDS_INSTALL_PATH/" 2>/dev/null || true
+        # Copy all files except CLAUDE.md
+        find "$SCRIPT_DIR/commands" -type f -name "*.md" ! -name "CLAUDE.md" -exec cp {} "$COMMANDS_INSTALL_PATH/" \; 2>/dev/null || true
+        # Copy subdirectories
+        find "$SCRIPT_DIR/commands" -mindepth 1 -type d -exec cp -r {} "$COMMANDS_INSTALL_PATH/" \; 2>/dev/null || true
     fi
 fi
 
@@ -347,7 +371,8 @@ if [ "$INSTALL_AGENTS" = true ]; then
     # Copy agents
     if [ "$INSTALL_AGENTS" = true ]; then
         print_info "Installing agents to $CLAUDE_AGENTS_DIR..."
-        cp "$SCRIPT_DIR/agents/"*.md "$CLAUDE_AGENTS_DIR/" 2>/dev/null || true
+        # Copy all MD files except CLAUDE.md
+        find "$SCRIPT_DIR/agents" -maxdepth 1 -type f -name "*.md" ! -name "CLAUDE.md" -exec cp {} "$CLAUDE_AGENTS_DIR/" \; 2>/dev/null || true
     fi
 fi
 
@@ -367,7 +392,10 @@ if [ -d "$SCRIPT_DIR/knowledge-base" ]; then
         fi
     fi
     
-    cp -r "$SCRIPT_DIR/knowledge-base" "$CLAUDE_TOOLKIT_DIR/"
+    # Create knowledge-base directory structure
+    mkdir -p "$CLAUDE_TOOLKIT_DIR/knowledge-base"
+    # Copy all files except CLAUDE.md while preserving directory structure
+    (cd "$SCRIPT_DIR" && find knowledge-base -type f ! -name "CLAUDE.md" -exec bash -c 'dest="$1/${2#./}"; mkdir -p "$(dirname "$dest")"; cp "$2" "$dest"' _ "$CLAUDE_TOOLKIT_DIR" {} \;)
     print_success "Knowledge-base installed to $CLAUDE_TOOLKIT_DIR/knowledge-base"
 fi
 
@@ -387,7 +415,16 @@ if [ "$INSTALL_HOOKS" = true ] && [ -d "$SCRIPT_DIR/hooks" ]; then
         fi
     fi
     
-    cp -r "$SCRIPT_DIR/hooks" "$CLAUDE_TOOLKIT_DIR/"
+    # Create hooks directory
+    mkdir -p "$CLAUDE_TOOLKIT_DIR/hooks"
+    # Copy only shell scripts (not CLAUDE.md)
+    find "$SCRIPT_DIR/hooks" -maxdepth 1 -type f -name "*.sh" -exec cp {} "$CLAUDE_TOOLKIT_DIR/hooks/" \; 2>/dev/null || true
+    # Copy markdownlint config to markdown subdirectory
+    if [ -f "$SCRIPT_DIR/.markdownlint-cli2.jsonc" ]; then
+        mkdir -p "$CLAUDE_TOOLKIT_DIR/markdown"
+        cp "$SCRIPT_DIR/.markdownlint-cli2.jsonc" "$CLAUDE_TOOLKIT_DIR/markdown/"
+        print_info "Markdownlint config installed to $CLAUDE_TOOLKIT_DIR/markdown/.markdownlint-cli2.jsonc"
+    fi
     # Ensure scripts are executable
     chmod +x "$CLAUDE_TOOLKIT_DIR/hooks"/*.sh 2>/dev/null || true
     print_success "Hooks installed to $CLAUDE_TOOLKIT_DIR/hooks"
@@ -453,7 +490,7 @@ if '\$schema' not in existing:
 with open('$CLAUDE_SETTINGS_FILE', 'w') as f:
     json.dump(existing, f, indent=2)
 
-print('Settings merged successfully')
+print('\033[0;32m✓ Settings merged successfully\033[0m')
 " && print_success "Hooks profile '$HOOKS_PROFILE' installed" || {
                     print_info "Python merge failed, using direct copy..."
                     cp "$SETTINGS_SOURCE" "$CLAUDE_SETTINGS_FILE"
@@ -524,13 +561,16 @@ fi
 # List available agents
 if [ "$INSTALL_AGENTS" = true ]; then
     echo
-    echo "Available sub-agents:"
+    echo -e "${GREEN}Available sub-agents:${NC}"
     echo
     if [ -d "$CLAUDE_AGENTS_DIR" ]; then
         for agent_file in "$CLAUDE_AGENTS_DIR"/*.md; do
             if [ -f "$agent_file" ]; then
                 agent_name=$(basename "$agent_file" .md)
-                echo "  - $agent_name"
+                # Skip CLAUDE.md files
+                if [ "$agent_name" != "CLAUDE" ]; then
+                    echo -e "  ${YELLOW}→${NC} $agent_name"
+                fi
             fi
         done
     fi
@@ -541,6 +581,7 @@ if [ "$INSTALL_HOOKS" = true ]; then
     echo
     echo "Hooks installed:"
     echo "  - stop-notification.sh (basic completion sound)"
+    echo "  - markdown-format.sh (auto-format Markdown files)"
     echo "  - tool-specific-notification.sh (different sounds per tool)"
     echo "  - subagent-notification.sh (agent-specific sounds)"
     echo "  - error-detection.sh (critical error alerts)"
@@ -549,17 +590,37 @@ if [ "$INSTALL_HOOKS" = true ]; then
     echo "  - command-chain-notification.sh (chain progress tracking)"
     echo "  - session-logger.sh (session metrics and logging)"
     echo
+    
+    # Check for markdownlint-cli2 installation
+    if ! command -v markdownlint-cli2 &> /dev/null; then
+        echo -e "${YELLOW}Note: markdownlint-cli2 is not installed${NC}"
+        echo "  The markdown-format.sh hook requires markdownlint-cli2"
+        echo "  Install with: brew install markdownlint-cli2"
+        echo "  Or it will use npx as fallback (slower)"
+        echo
+    fi
     if [ "$INSTALL_SETTINGS" = true ]; then
-        echo "✓ Hooks configured with '$HOOKS_PROFILE' profile:"
+        echo -e "${GREEN}✓ Hooks configured with '$HOOKS_PROFILE' profile:${NC}"
         case "$HOOKS_PROFILE" in
             basic)
-                echo "  → Stop notifications only (simple completion sound)"
+                echo -e "${YELLOW}Active hooks:${NC}"
+                echo "  • Stop: stop-notification.sh (completion sound)"
+                echo "  • PostToolUse: markdown-format.sh (auto-format .md files)"
                 ;;
             minimal)
-                echo "  → Stop notifications + critical error detection"
+                echo -e "${YELLOW}Active hooks:${NC}"
+                echo "  • Stop: stop-notification.sh (completion sound)"
+                echo "  • PostToolUse: error-detection.sh (security/audit/vulnerability)"
+                echo "  • PostToolUse: markdown-format.sh (auto-format .md files)"
                 ;;
             advanced)
-                echo "  → All hooks active (full notifications, logging, progress tracking)"
+                echo -e "${YELLOW}Active hooks:${NC}"
+                echo "  • Stop: stop-notification.sh, success-notification.sh, session-logger.sh"
+                echo "  • SubagentStop: subagent-notification.sh"
+                echo "  • PostToolUse: tool-specific-notification.sh, error-detection.sh,"
+                echo "                 command-chain-notification.sh, system-notification.sh,"
+                echo "                 markdown-format.sh"
+                echo "  • SessionStart: session-logger.sh (startup/resume)"
                 ;;
         esac
         echo

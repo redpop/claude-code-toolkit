@@ -1,5 +1,4 @@
 {
-  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "hooks": {
     "Stop": [
       {
@@ -49,10 +48,29 @@
             "command": "~/.claude/claude-code-toolkit/hooks/system-notification.sh"
           }
         ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/claude-code-toolkit/hooks/markdown-format.sh"
+          }
+        ]
       }
     ],
     "SessionStart": [
       {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/claude-code-toolkit/hooks/session-logger.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "resume",
         "hooks": [
           {
             "type": "command",
