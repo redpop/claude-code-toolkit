@@ -321,10 +321,19 @@ if [ "$INSTALL_COMMANDS" = true ]; then
     if [ "$INSTALL_COMMANDS" = true ]; then
         print_info "Installing commands to $COMMANDS_INSTALL_PATH..."
         mkdir -p "$COMMANDS_INSTALL_PATH"
-        # Copy all files except CLAUDE.md
-        find "$SCRIPT_DIR/commands" -type f -name "*.md" ! -name "CLAUDE.md" -exec cp {} "$COMMANDS_INSTALL_PATH/" \; 2>/dev/null || true
-        # Copy subdirectories
-        find "$SCRIPT_DIR/commands" -mindepth 1 -type d -exec cp -r {} "$COMMANDS_INSTALL_PATH/" \; 2>/dev/null || true
+        
+        # Copy the entire commands directory structure (excluding CLAUDE.md files)
+        # This preserves the directory hierarchy properly
+        cd "$SCRIPT_DIR/commands"
+        find . -type f -name "*.md" ! -name "CLAUDE.md" | while IFS= read -r file; do
+            # Get the directory path for this file
+            dir=$(dirname "$file")
+            # Create the target directory if needed
+            mkdir -p "$COMMANDS_INSTALL_PATH/$dir"
+            # Copy the file preserving the directory structure
+            cp "$file" "$COMMANDS_INSTALL_PATH/$file"
+        done
+        cd - > /dev/null
     fi
 fi
 
