@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.15.1] - 2025-01-18
+
+### Fixed
+
+- 🐛 **Installation Script** - Fixed duplicate file issue during command installation
+  - Corrected file copying logic to preserve directory structure properly
+  - Prevented creation of duplicate command files in target directory
+  - Commands now correctly install in their hierarchical subdirectories
+
 ## [3.15.0] - 2025-01-17
 
 ### Added
