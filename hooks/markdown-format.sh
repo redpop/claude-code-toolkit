@@ -7,16 +7,21 @@
 # Read JSON input from stdin (provided by Claude Code)
 INPUT=$(cat)
 
-# Extract tool name from JSON
-TOOL_NAME=$(echo "$INPUT" | grep -oE '"tool":"[^"]*"' | cut -d'"' -f4)
+# Extract tool name from JSON - Claude Code uses "tool_name" not "tool"
+TOOL_NAME=$(echo "$INPUT" | grep -oE '"tool_name":"[^"]*"' | cut -d'"' -f4)
 
 # Only run for file modification tools
 if [[ ! "$TOOL_NAME" =~ ^(Write|Edit|MultiEdit)$ ]]; then
     exit 0
 fi
 
-# Extract file path from JSON
-FILE_PATH=$(echo "$INPUT" | grep -oE '"file_path":"[^"]*"' | cut -d'"' -f4)
+# Extract file path from tool_input object
+FILE_PATH=$(echo "$INPUT" | python3 -c "import sys, json; data = json.load(sys.stdin); print(data.get('tool_input', {}).get('file_path', ''))" 2>/dev/null)
+
+# If that doesn't work, try the old way
+if [ -z "$FILE_PATH" ]; then
+    FILE_PATH=$(echo "$INPUT" | grep -oE '"file_path":"[^"]*"' | cut -d'"' -f4)
+fi
 
 # Only process Markdown files
 if [[ ! "$FILE_PATH" =~ \.md$ ]]; then
@@ -63,12 +68,12 @@ fi
 # Try to format the file using markdownlint-cli2
 # First check for Homebrew installation (faster)
 if command -v markdownlint-cli2 &> /dev/null; then
-    # Run markdownlint-cli2 with fix option in background
-    eval "markdownlint-cli2 --fix $CONFIG_ARGS \"$FILE_PATH\" 2>/dev/null &"
+    # Run markdownlint-cli2 with fix option SYNCHRONOUSLY (removed &)
+    eval "markdownlint-cli2 --fix $CONFIG_ARGS \"$FILE_PATH\" 2>/dev/null"
 elif command -v npx &> /dev/null; then
     # Fallback to npx (slower but doesn't require installation)
     # -y flag automatically installs if needed
-    eval "npx -y markdownlint-cli2 --fix $CONFIG_ARGS \"$FILE_PATH\" 2>/dev/null &"
+    eval "npx -y markdownlint-cli2 --fix $CONFIG_ARGS \"$FILE_PATH\" 2>/dev/null"
 fi
 
 # Always exit successfully to avoid disrupting Claude Code
