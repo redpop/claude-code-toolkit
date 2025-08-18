@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.15.2] - 2025-01-18
+
+### Fixed
+
+- 🐛 **Markdown Format Hook** - Fixed JSON parsing for Claude Code compatibility
+  - Updated to use "tool_name" instead of "tool" field in JSON structure
+  - Added Python fallback for extracting file_path from tool_input object
+  - Made markdownlint-cli2 run synchronously to prevent race conditions
+  - Removed background execution to ensure formatting completes before file use
+
 ## [3.15.1] - 2025-01-18
 
 ### Fixed
