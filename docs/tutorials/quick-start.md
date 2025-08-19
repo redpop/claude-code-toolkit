@@ -5,6 +5,7 @@ This tutorial has been consolidated with the main Quick Start guide.
 Please see: **[/docs/guides/QUICK-START.md](../guides/QUICK-START.md)**
 
 The guide provides:
+
 - Installation instructions
 - The 3-step workflow
 - Common workflows and command chaining

@@ -44,6 +44,7 @@ export CLAUDE_PERFORMANCE_MODE=aggressive
 ## Configuration Reference
 
 ### Minimal Configuration
+
 ```json
 {
   "performanceMode": "balanced"
@@ -51,6 +52,7 @@ export CLAUDE_PERFORMANCE_MODE=aggressive
 ```
 
 ### Standard Configuration
+
 ```json
 {
   "version": "3.0.0",
@@ -67,6 +69,7 @@ export CLAUDE_PERFORMANCE_MODE=aggressive
 ```
 
 ### Advanced Configuration
+
 ```json
 {
   "subAgentOrchestration": {
@@ -133,6 +136,7 @@ Create `.claude-commands.json` in your project root:
 ## Common Configurations
 
 ### Security-Focused
+
 ```json
 {
   "performanceMode": "conservative",
@@ -148,6 +152,7 @@ Create `.claude-commands.json` in your project root:
 ```
 
 ### CI/CD Pipeline
+
 ```json
 {
   "cicdMode": {
@@ -161,6 +166,7 @@ Create `.claude-commands.json` in your project root:
 ```
 
 ### Large Codebase
+
 ```json
 {
   "performanceMode": "aggressive",

@@ -79,15 +79,18 @@ The toolkit includes an optional hooks system for enhanced functionality:
 ### Hook Profiles
 
 **Basic Profile** (`basic-hooks-settings.json`):
+
 - Stop notifications only
 - Minimal system integration
 
 **Minimal Profile** (`minimal-hooks-settings.json`):
+
 - Stop notifications
 - Error detection and alerts
 - Session logging
 
 **Advanced Profile** (`advanced-hooks-settings.json`):
+
 - All features enabled
 - Sound notifications (requires `afplay` on macOS)
 - Comprehensive logging
@@ -97,8 +100,9 @@ The toolkit includes an optional hooks system for enhanced functionality:
 ### Hook Configuration
 
 Hooks are configured in `~/.claude/claude-code-toolkit/settings/` with these files:
+
 - `basic-hooks-settings.json`
-- `minimal-hooks-settings.json` 
+- `minimal-hooks-settings.json`
 - `advanced-hooks-settings.json`
 
 You can customize any profile by editing the corresponding JSON file.

@@ -3,6 +3,7 @@
 ## System Components
 
 ### 1. Commands (`/commands/`)
+
 Markdown files with YAML frontmatter defining reusable operations.
 
 ```yaml
@@ -17,6 +18,7 @@ mcp-enhanced: mcp__tool1, mcp__tool2
 ```
 
 ### 2. Agents (`/agents/`)
+
 Specialized AI personas with domain expertise.
 
 ```yaml
@@ -51,6 +53,7 @@ mcp-enhanced: mcp__tools  # OPTIONAL
 ### Creating Commands
 
 #### Using Helper Script
+
 ```bash
 ./scripts/create-sub-agent-command.sh \
   --name "command-name" \
@@ -59,6 +62,7 @@ mcp-enhanced: mcp__tools  # OPTIONAL
 ```
 
 #### Manual Creation
+
 1. Copy template from `/commands/templates/`
 2. Define agent tasks and prompts
 3. Implement synthesis logic
@@ -67,6 +71,7 @@ mcp-enhanced: mcp__tools  # OPTIONAL
 ### Command Patterns
 
 #### Parallel Analysis
+
 ```markdown
 **START N PARALLEL AGENTS:**
 
@@ -78,6 +83,7 @@ mcp-enhanced: mcp__tools  # OPTIONAL
 ```
 
 #### Conditional Delegation
+
 ```markdown
 If severity >= high:
   Delegate to @specialist:
@@ -85,6 +91,7 @@ If severity >= high:
 ```
 
 #### Synthesis
+
 ```markdown
 ## Combine Results
 - Deduplicate findings

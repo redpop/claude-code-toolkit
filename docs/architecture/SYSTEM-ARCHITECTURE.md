@@ -23,11 +23,13 @@ The Claude Code Toolkit is a comprehensive collection of commands, agents, and t
 ## Core Concepts
 
 ### 1. Zero-Friction Workflow
+
 - **Analysis → Action Plan → Execution → Report**
 - ROI-based prioritization for maximum efficiency
 - Automated execution with supervision options
 
 ### 2. Hybrid Architecture
+
 | Phase | Duration | Description |
 |-------|----------|-------------|
 | **Scan** | 5-8s | Parallel scanning (10-20 agents) |
@@ -35,6 +37,7 @@ The Claude Code Toolkit is a comprehensive collection of commands, agents, and t
 | **Synthesize** | 2-5s | Report generation |
 
 ### 3. Sub-Agent Specialization
+
 | Agent | Focus Area |
 |-------|------------|
 | `code-architect` | System design, patterns |
@@ -47,6 +50,7 @@ The Claude Code Toolkit is a comprehensive collection of commands, agents, and t
 ## Directory Structure
 
 ### Repository Layout
+
 ```
 claude-code-toolkit/
 ├── commands/        # Command definitions
@@ -61,6 +65,7 @@ claude-code-toolkit/
 ```
 
 ### Installation Target
+
 ```
 ~/.claude/
 ├── commands/[prefix]/  # Installed commands by category
@@ -81,6 +86,7 @@ claude-code-toolkit/
 | **meta/** | Management | `chain`, `pipelines`, `install` |
 
 ### Command Structure
+
 ```yaml
 ---
 description: Command purpose
@@ -107,11 +113,13 @@ graph LR
 ### Agent Types
 
 **Task Agents** (Parallel)
+
 - Fast, focused scanning
 - JSON output for processing
 - Shared context window
 
 **Sub-Agents** (Sequential)
+
 - Deep domain expertise
 - Markdown reports
 - Isolated contexts
@@ -119,6 +127,7 @@ graph LR
 ## Configuration
 
 ### Core Configuration
+
 ```json
 {
   "version": "3.0.0",
@@ -154,6 +163,7 @@ cd claude-code-toolkit
 ```
 
 ### Installation Options
+
 - `--components="scan,fix"` - Install specific categories
 - `--use-symlinks` - Development mode
 - `--with-settings` - Include sound notifications
@@ -161,12 +171,14 @@ cd claude-code-toolkit
 ## Best Practices
 
 ### For Users
+
 1. Start with the automated workflow
 2. Focus on ROI > 8 quick wins
 3. Use supervised mode initially
 4. Create baselines for comparison
 
 ### For Developers
+
 1. Use templates for new commands
 2. Test with `--dry-run` first
 3. Profile with `--performance-metrics`

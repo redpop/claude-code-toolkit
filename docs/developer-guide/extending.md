@@ -168,12 +168,14 @@ cat command-*.json | jq .
 ## Integration Points
 
 ### Command Discovery
+
 ```
 commands/{category}/{name}.md
 → /prefix:category:name
 ```
 
 ### Configuration Override
+
 ```json
 {
   "commandOverrides": {
@@ -186,6 +188,7 @@ commands/{category}/{name}.md
 ```
 
 ### MCP Enhancement
+
 ```yaml
 mcp-enhanced: mcp__tool1, mcp__tool2
 ```
@@ -212,18 +215,21 @@ mcp-enhanced: mcp__tool1, mcp__tool2
 ## Ideas for Extensions
 
 ### Commands
+
 - Database analyzer
 - API scanner
 - Localization checker
 - Accessibility auditor
 
 ### Agents
+
 - DevOps specialist
 - Mobile expert
 - Cloud architect
 - i18n expert
 
 ### Workflows
+
 - Full-stack analysis
 - Microservice health
 - Migration assistant

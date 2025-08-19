@@ -11,6 +11,7 @@ User Input → Command Resolution → Agent Orchestration → Result Synthesis �
 ## Command Resolution
 
 ### Path Mapping
+
 ```
 /prefix:category:command arguments
          ↓
@@ -18,6 +19,7 @@ User Input → Command Resolution → Agent Orchestration → Result Synthesis �
 ```
 
 ### Loading Process
+
 ```javascript
 function resolveCommand(input) {
   const [prefix, category, command] = input.split(":");
@@ -47,6 +49,7 @@ function resolveCommand(input) {
 | **Hybrid** | Parallel scan → Sequential analysis | Full workflows |
 
 ### Task Tool Pattern
+
 ```javascript
 // Parallel execution with Task Tool
 const results = await Promise.all(
@@ -83,6 +86,7 @@ class TokenBudgetManager {
 ```
 
 ### Usage Tracking
+
 - Track per-agent consumption
 - Monitor total usage
 - Throw `TokenLimitExceeded` when exceeded
@@ -100,6 +104,7 @@ class TokenBudgetManager {
 6. **Export** - Format for output
 
 ### Deduplication Algorithm
+
 ```javascript
 function deduplicate(findings) {
   const seen = new Map();
@@ -116,6 +121,7 @@ function deduplicate(findings) {
 ```
 
 ### Priority Scoring
+
 ```javascript
 function calculatePriority(finding) {
   const impact = calculateImpact(finding);
@@ -132,6 +138,7 @@ function calculatePriority(finding) {
 ## Configuration Loading
 
 ### Hierarchy Resolution
+
 ```javascript
 function loadConfiguration() {
   let config = loadSystemDefaults();
@@ -144,6 +151,7 @@ function loadConfiguration() {
 ```
 
 ### Performance Mode Application
+
 ```javascript
 const MODES = {
   conservative: { maxAgents: 5, tokenBudget: 2000 },
@@ -168,6 +176,7 @@ function applyMode(mode) {
 | `PARSE_ERROR` | Fallback to text output |
 
 ### Error Handler Pattern
+
 ```javascript
 try {
   const results = await executeAgents(tasks);
@@ -183,12 +192,14 @@ try {
 ## Debugging
 
 ### Enable Debug Mode
+
 ```bash
 export CLAUDE_DEBUG=true
 export CLAUDE_LOG_LEVEL=debug
 ```
 
 ### Debug Output
+
 - Command resolution steps
 - Agent execution times
 - Token usage per agent
@@ -207,12 +218,14 @@ export CLAUDE_LOG_LEVEL=debug
 ## Performance Monitoring
 
 ### Metrics Collection
+
 - Execution time per command
 - Token usage efficiency
 - Success/failure rates
 - Agent performance distribution
 
 ### Optimization Points
+
 - Cache frequently used results
 - Pool agent connections
 - Batch similar operations
@@ -221,6 +234,7 @@ export CLAUDE_LOG_LEVEL=debug
 ## Security Model
 
 ### Tool Permissions
+
 ```yaml
 # Levels of access
 allowed-tools: Read, Grep              # Read-only
@@ -229,6 +243,7 @@ allowed-tools: Task, Read, Write, Edit # Full access
 ```
 
 ### Sandboxing
+
 - Isolated execution contexts
 - No persistent state
 - Controlled file system access

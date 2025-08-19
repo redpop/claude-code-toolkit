@@ -162,6 +162,7 @@ Combine findings into report:
 - Immediate: [fixes]
 - Short-term: [improvements]
 ```
+
 ```
 
 ## Testing Commands

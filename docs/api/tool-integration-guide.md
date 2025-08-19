@@ -49,16 +49,19 @@ The `mcp-enhanced` field documents which MCP tools enhance a command (optional, 
 ### Three-Tier Strategy
 
 **Tier 1: MCP-Enhanced**
+
 - AST-based analysis
 - Semantic understanding
 - Lowest false positives
 
 **Tier 2: Local Tools**
+
 ```bash
 semgrep --config=auto --json .
 ```
 
 **Tier 3: Pattern-Based**
+
 - Ripgrep patterns
 - Task Tool agents
 - Basic heuristics
@@ -92,6 +95,7 @@ which semgrep >/dev/null 2>&1 && echo "available" || echo "not found"
 ### Common Patterns
 
 **1. Conditional Usage**
+
 ```markdown
 IF MCP available: Use enhanced features
 ELSE IF local tool: Use standard features
@@ -99,16 +103,19 @@ ELSE: Use pattern fallback
 ```
 
 **2. Progressive Enhancement**
+
 - Base: Pattern detection (always works)
 - Enhanced: Semantic analysis (with tools)
 - Advanced: AST analysis (with MCP)
 
 **3. Hybrid Approach**
+
 - Phase 1: Parallel scanning
 - Phase 2: Deep analysis with best tools
 - Phase 3: Synthesize results
 
 **4. Tool-Specific Features**
+
 - MCP: AST, custom rules, CI/CD integration
 - Local: Flexible config, offline operation
 - Basic: Patterns, parallel execution

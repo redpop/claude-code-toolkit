@@ -105,13 +105,16 @@ Brief description and primary use case.
 ```
 
 ## Workflow
+
 1. **Phase 1**: Initial step description
 2. **Phase 2**: Main execution logic  
 3. **Phase 3**: Output generation
 
 ## Options
+
 - `--option=value`: Description
 - `--flag`: Description
+
 ```
 
 ### Key Patterns
@@ -124,12 +127,14 @@ Brief description and primary use case.
 ```
 
 **Parallel Execution:**
+
 ```markdown
 Use Task Tool with multiple agents:
 - Task(description="...", prompt="...", subagent_type="...")
 ```
 
 **Sub-Agent Delegation:**
+
 ```markdown
 Delegate to @specialist-agent:
 "READ-ONLY ANALYSIS. Analyze: [areas] Focus: [concerns]"
@@ -182,6 +187,7 @@ The `$ARGUMENTS` placeholder receives all user input after the command:
 ### Export Formats
 
 **JSON Export (`--export-json`):**
+
 ```json
 {
   "metadata": { "timestamp": "...", "command": "..." },
@@ -191,6 +197,7 @@ The `$ARGUMENTS` placeholder receives all user input after the command:
 ```
 
 **Auto-generated filenames:**
+
 - Pattern: `command-YYYYMMDD-HHMMSS.ext`
 - Default directory: `reports/`
 
@@ -207,6 +214,7 @@ The `$ARGUMENTS` placeholder receives all user input after the command:
 ```
 
 Claude Code:
+
 1. Parses command path
 2. Loads `.md` file
 3. Extracts frontmatter
@@ -216,6 +224,7 @@ Claude Code:
 ### Tool Access Control
 
 Commands only use tools in `allowed-tools`:
+
 - `Task` - Parallel sub-agent execution
 - `Read/Write/Edit` - File operations
 - `Grep` - Pattern searching
@@ -224,11 +233,13 @@ Commands only use tools in `allowed-tools`:
 ### Sub-Agent & MCP Integration
 
 **Sub-agents:** Delegate specialized tasks
+
 ```markdown
 Delegate to @agent-name: "Task description"
 ```
 
 **MCP Enhancement:** Progressive enhancement
+
 ```markdown
 If mcp__tool available: Use enhanced features
 Else: Fall back to traditional methods

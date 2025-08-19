@@ -97,6 +97,7 @@ Generate prioritized report
 ## When to Use Hybrid
 
 ### Ideal For
+
 - Comprehensive code analyses
 - Security audits with remediation
 - Architecture reviews
@@ -104,6 +105,7 @@ Generate prioritized report
 - Pre-release checks
 
 ### Less Suitable For
+
 - Single-file analysis
 - Quick metrics collection
 - Simple pattern searches
@@ -111,16 +113,19 @@ Generate prioritized report
 ## Best Practices
 
 ### Phase Design
+
 1. **Scanners**: Many fast agents (10-20)
 2. **Experts**: Few thorough agents (1-5)
 3. **Total Time**: Target < 30 seconds
 
 ### Output Strategy
+
 - Scanners → Structured JSON
 - Experts → Detailed Markdown
 - Synthesis → Unified report
 
 ### Delegation Criteria
+
 ```javascript
 if (finding.severity >= "high" || 
     finding.confidence < 0.5 ||
@@ -154,11 +159,13 @@ Phase 3: Combined report
 ## Migration Guide
 
 ### From Pure Task Commands
+
 1. Identify analysis needing depth
 2. Add delegation logic for critical findings
 3. Extend synthesis with expert inputs
 
 ### From Sequential Analysis
+
 1. Extract parallelizable scanning
 2. Keep deep analysis for critical items
 3. Add intelligent orchestration

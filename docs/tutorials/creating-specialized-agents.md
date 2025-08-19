@@ -92,9 +92,11 @@ CREATE INDEX idx_name ON table(columns);
 ```
 
 ## Priorities
+
 - Immediate: Add indexes, adjust pool
 - Short-term: Implement caching
 - Long-term: Architecture changes
+
 ```
 
 ## Example: Code Complexity Analyzer
@@ -136,6 +138,7 @@ Analyzes cyclomatic/cognitive complexity and maintainability.
 | auth.ts | validateToken | 35 | 10 | 2h |
 | api.ts | handleRequest | 28 | 12 | 3h |
 ```
+
 ```
 
 ## Integration with Commands
@@ -155,7 +158,6 @@ Phase 3: Synthesize results
 ```
 
 See [Sub-Agent Orchestration Guide](../architecture/SUB-AGENT-ORCHESTRATION.md) for patterns.
-
 
 ## Testing Agents
 
@@ -195,9 +197,6 @@ if tool_available:
 else:
     use_fallback_patterns()
 ```
-
-
-
 
 ## Best Practices
 
