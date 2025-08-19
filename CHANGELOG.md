@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.16.0] - 2025-08-19
+
+### Added
+
+- ✨ **Git Review Command** - New `/git:review` command for comprehensive pre-commit quality checks
+  - Analyzes all staged and unstaged changes before committing
+  - Checks for code quality issues, redundancies, and potential problems
+  - Provides structured report with severity levels (Good/Warning/Issues/Recommendations)
+  - Supports `--staged-only` and `--detailed` options for focused reviews
+  - Includes commit organization analysis and splitting recommendations
+  - Updated README documentation with new command reference
+
 ## [3.15.2] - 2025-01-18
 
 ### Fixed
