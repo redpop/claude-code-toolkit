@@ -556,12 +556,14 @@ Structure your assessment as:
 ### Security Analysis
 
 **Invocation:**
+
 ```markdown
 Delegate to @security-specialist:
 "READ-ONLY. Analyze: src/api/auth/* Focus: Authentication vulnerabilities"
 ```
 
 **Response:**
+
 ```markdown
 # Security Report
 
@@ -579,12 +581,14 @@ Delegate to @security-specialist:
 ### Performance Analysis
 
 **Invocation:**
+
 ```markdown
 Delegate to @performance-optimizer:
 "Analyze O(n²) algorithm in search.js:42"
 ```
 
 **Response:**
+
 ```markdown
 # Performance Report
 

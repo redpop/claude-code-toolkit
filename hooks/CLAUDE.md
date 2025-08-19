@@ -111,6 +111,7 @@ The SessionStart hook requires a `matcher` property to specify when it should ru
 ```
 
 This is useful for:
+
 - Loading development context at startup
 - Restoring state when resuming sessions
 - Cleaning up when clearing sessions
@@ -177,6 +178,7 @@ The hook intelligently selects the configuration file:
 ### Customizing for Your Project
 
 To override the default configuration for a specific project:
+
 1. Create a `.markdownlint-cli2.jsonc` file in your project root
 2. Define your preferred rules
 3. The hook will automatically use your project's config

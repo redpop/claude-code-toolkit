@@ -24,12 +24,14 @@ graph LR
 ## Command System
 
 ### File Structure
+
 ```
 commands/{category}/{command}.md
 → /prefix:category:command
 ```
 
 ### Frontmatter Schema
+
 ```yaml
 ---
 allowed-tools: Task, Read, Grep, Bash(cmd:*)

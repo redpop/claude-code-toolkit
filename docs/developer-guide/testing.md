@@ -22,6 +22,7 @@ tests/                  # Test scripts
 ## Running Tests
 
 ### With Claude CLI
+
 ```bash
 # Auto-detects claude command and uses programmatic mode
 ./tests/run-all.sh
@@ -32,12 +33,15 @@ export CLAUDE_CMD=claude
 ```
 
 ### Without Claude CLI
+
 Falls back to structural validation:
+
 - Verifies file existence
 - Checks installation structure
 - Creates mock outputs
 
 ### Test Specific Components
+
 ```bash
 # Test single command
 ./tests/commands/test-scan-deep.sh
@@ -122,18 +126,21 @@ echo "✅ Agent test passed!"
 ## Test Maintenance
 
 ### When Adding Commands
+
 1. Create test script in `tests/commands/`
 2. Add test cases to `test-project/` if needed
 3. Update `tests/run-all.sh`
 4. Document expected behavior
 
 ### When Modifying Commands
+
 1. Run existing tests for baseline
 2. Update test expectations
 3. Add tests for new functionality
 4. Ensure backward compatibility
 
 ### When Adding Agents
+
 1. Create test in `tests/agents/`
 2. Add triggering scenarios
 3. Validate agent selection
@@ -180,6 +187,7 @@ jobs:
 | Timeout | Increase timeout or use `--quick` |
 
 ### Debug Mode
+
 ```bash
 DEBUG=1 ./tests/commands/test-scan-deep.sh
 ```
@@ -194,6 +202,7 @@ DEBUG=1 ./tests/commands/test-scan-deep.sh
 ## Contributing Tests
 
 When contributing:
+
 1. Write tests for new features
 2. Update tests for changes
 3. Document test purpose

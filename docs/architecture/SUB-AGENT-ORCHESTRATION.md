@@ -73,6 +73,7 @@ graph TD
 ### Each Agent's Focus
 
 **Deep Analysis (`scan:deep`):**
+
 - Code complexity
 - Duplicate detection
 - Style violations  
@@ -127,6 +128,7 @@ Combine results and generate report
 ### When to Use Sub-Agents
 
 ✅ **Use for:**
+
 - Multi-file analyses
 - Code quality checks
 - Security audits
@@ -134,6 +136,7 @@ Combine results and generate report
 - Documentation tasks
 
 ❌ **Avoid for:**
+
 - Single-file edits
 - Sequential changes
 - Direct modifications
@@ -159,6 +162,7 @@ Combine results and generate report
 ```
 
 **Agent Count Guidelines:**
+
 - 2-4: Simple analysis
 - 5-8: Standard tasks
 - 9-12: Comprehensive review
@@ -227,12 +231,14 @@ export CLAUDE_LOG_LEVEL=debug
 ## Performance Metrics
 
 Commands automatically track:
+
 - Execution time per agent
 - Token usage
 - Success/failure rates
 - Speedup vs sequential
 
 Example output:
+
 ```
 [PERF] scan:deep completed:
 - Total time: 6.2s

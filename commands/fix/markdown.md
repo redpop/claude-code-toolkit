@@ -38,6 +38,7 @@ This command provides comprehensive markdown linting with automatic detection of
 ## Execution
 
 Parse the arguments to understand:
+
 1. Target file or directory
 2. Whether to fix issues (`--fix`)
 3. Custom config path (`--config`)
@@ -144,6 +145,7 @@ The command intelligently detects the best available runner:
 ### Recursive Processing
 
 When given a directory:
+
 - Automatically finds all `.md` files
 - Processes subdirectories recursively
 - Uses glob patterns for efficient scanning
@@ -151,6 +153,7 @@ When given a directory:
 ### Configuration Support
 
 Supports custom markdownlint configuration with intelligent defaults:
+
 - **Toolkit Default**: Uses `~/.claude/claude-code-toolkit/markdown/.markdownlint-cli2.jsonc` if installed
 - **Project Config**: Falls back to local `.markdownlint-cli2.jsonc`, `.markdownlint-cli2.json`, or `.markdownlint.json`
 - **Custom**: Override with `--config path/to/config`
@@ -159,6 +162,7 @@ Supports custom markdownlint configuration with intelligent defaults:
 ### Common Rules
 
 Markdownlint checks for:
+
 - Heading styles and hierarchy
 - List formatting consistency
 - Line length limits

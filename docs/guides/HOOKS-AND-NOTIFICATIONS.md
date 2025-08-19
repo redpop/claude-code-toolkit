@@ -29,18 +29,24 @@ ln -sf "$(pwd)/settings/hooks/settings-minimal.json" ~/.claude/settings/settings
 ## Hook Profiles
 
 ### Basic Profile
+
 Minimal hooks for essential feedback:
+
 - User prompt submission validation
 - Basic error handling
 
 ### Minimal Profile (Recommended)
+
 Adds sound notifications:
+
 - Success sounds for completed tasks
 - Error alerts for failures
 - Completion chimes
 
 ### Advanced Profile
+
 Full automation suite:
+
 - Git integration
 - File modification tracking
 - Performance monitoring
@@ -81,6 +87,7 @@ Edit `~/.claude/settings/settings.json`:
 ### Available Sounds
 
 #### macOS System Sounds
+
 ```bash
 ls /System/Library/Sounds/*.aiff
 # Glass.aiff - Success/completion
@@ -90,6 +97,7 @@ ls /System/Library/Sounds/*.aiff
 ```
 
 #### Linux Sounds
+
 ```bash
 ls /usr/share/sounds/freedesktop/stereo/*.oga
 # complete.oga - Task completion
