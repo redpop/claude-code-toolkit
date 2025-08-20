@@ -4,14 +4,14 @@
 
 | Symptom | Likely Cause | Solution | Reference |
 |---------|--------------|----------|-----------|
-| Content not showing in frontend | Cache not cleared | `ddev exec typo3 cache:flush` | [Commands Reference](./references/commands-reference.md#cache-management) |
+| Content not showing in frontend | Cache not cleared | `ddev exec typo3 cache:flush` | [TYPO3 Commands Reference](./references/typo3-ddev-commands-reference.md#cache-management) |
 | Table doesn't exist error | Generic collection name | Use descriptive names like `accordion_items` | [Field Naming Reference](./references/field-naming-reference.md#collection-fields-special-rules) |
 | JavaScript syntax errors | Fluid/JS mixing | Use data attributes pattern | [Alpine.js Integration](../frameworks/alpine-js-integration.md#fluidalpine-integration-patterns) |
 | Field data not accessible | Wrong field naming | Check prefix pattern: `{vendor}_{block}_{field}` | [Field Naming Reference](./references/field-naming-reference.md) |
 | Collection items empty | Wrong access pattern | Use `item.fieldname` not prefixed version | [Field Naming Reference](./references/field-naming-reference.md#field-access-in-collections) |
 | Backend preview broken | Missing template | Create `backend-preview.html` | [Backend Preview Reference](./references/backend-preview-reference.md) |
 | Assets not loading | Wrong inclusion method | Use `f:asset.script` for JS/CSS CDN | [Alpine.js Integration](../frameworks/alpine-js-integration.md#setup) |
-| Changes not reflecting | Aggressive caching | `rm -rf var/cache/*` + flush | [Commands Reference](./references/commands-reference.md#cache-management) |
+| Changes not reflecting | Aggressive caching | `rm -rf var/cache/*` + flush | [TYPO3 Commands Reference](./references/typo3-ddev-commands-reference.md#cache-management) |
 
 ## Detailed Troubleshooting
 
@@ -43,7 +43,7 @@ Table 'db.punktde_items' doesn't exist
 
 #### Verification
 
-See [Commands Reference](./references/commands-reference.md#database-commands) for table verification.
+See [TYPO3 Commands Reference](./references/typo3-ddev-commands-reference.md#database-commands) for table verification.
 
 ---
 
@@ -112,7 +112,7 @@ See [Field Naming Reference](./references/field-naming-reference.md#complete-acc
 
 #### Progressive Solutions
 
-See [Commands Reference](./references/commands-reference.md#cache-management) for all cache clearing levels.
+See [TYPO3 Commands Reference](./references/typo3-ddev-commands-reference.md#cache-management) for all cache clearing levels.
 
 ---
 
@@ -225,4 +225,4 @@ See [Alpine.js Integration Guide](../frameworks/alpine-js-integration.md#common-
 
 ### Debug Commands
 
-See [Commands Reference](./references/commands-reference.md) for all debugging commands.
+See [TYPO3 Commands Reference](./references/typo3-ddev-commands-reference.md) for all debugging commands.

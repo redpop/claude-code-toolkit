@@ -495,6 +495,8 @@ mod.wizards.newContentElement.wizardItems {
 
 ## RTE Configuration
 
+> **Note**: For comprehensive CKEditor configuration in TYPO3 v13+, see the dedicated [CKEditor Configuration Guide](./ckeditor-configuration-guide.md) and [CKEditor Examples Reference](./references/ckeditor-examples-reference.md).
+
 ### Configuration/RTE/Default.yaml
 
 ```yaml
