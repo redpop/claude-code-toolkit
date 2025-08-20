@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.16.1] - 2025-08-20
+
+### Changed
+
+- 🔄 **Documentation** - Improved README formatting and structure
+  - Added validation warnings for commit command behavior
+  - Enhanced command documentation clarity
+
+### Removed
+
+- 🗑️ **Git Conflict Resolver** - Removed experimental conflict resolution feature
+  - Removed git-conflict-specialist agent
+  - Removed conflict-resolver command
+  - Feature needs further refinement before reintroduction
+
 ## [3.16.0] - 2025-08-19
 
 ### Added
