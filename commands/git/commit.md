@@ -199,7 +199,12 @@ Example of splitting commits:
 - Before committing, the command will review the diff to identify if multiple commits would be more appropriate
 - If suggesting multiple commits, it will help you stage and commit the changes separately
 - Always reviews the commit diff to ensure the message matches the changes
-- No Claude co-authorship footer is added
+- **CRITICAL**: Before each commit, validate message does NOT contain:
+  - "Generated with Claude Code" footer
+  - "Co-Authored-By: Claude" lines
+  - Project-specific forbidden content (check project commit guidelines)
+- Display validation warning: "⚠️ COMMIT VALIDATION: Clean message (no forbidden footers/metadata)"
+- No Claude co-authorship footer is added unless explicitly required by project
 - If `--push` is used, the commit will be pushed to the remote repository automatically
 
 ### Fast Mode (--fast)
@@ -210,7 +215,9 @@ Example of splitting commits:
 - Automatically uses the first suggestion without asking
 - No interactive prompts or confirmations
 - Ideal for simple, straightforward commits where you trust the auto-generated message
-- No Claude co-authorship footer is added
+- **CRITICAL**: Auto-validate selected message does NOT contain forbidden footers/metadata
+- Display validation: "⚠️ FAST MODE VALIDATION: Clean message confirmed"
+- No Claude co-authorship footer is added unless explicitly required by project
 - Can be combined with `--push` for a complete commit-and-push workflow
 
 ### Push Mode (--push)
