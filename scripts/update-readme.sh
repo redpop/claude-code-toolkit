@@ -47,6 +47,18 @@ extract_frontmatter() {
     ' "$file"
 }
 
+# Function to check if command has help support (options field)
+has_help_support() {
+    local file=$1
+    
+    # Check if frontmatter contains "options:" field
+    awk '
+        /^---$/ { if (in_fm) exit; in_fm = 1; next }
+        in_fm && /^options:/ { found = 1; exit }
+        END { exit !found }
+    ' "$file"
+}
+
 # Function to extract first paragraph after frontmatter as fallback description
 extract_first_paragraph() {
     local file=$1
@@ -73,8 +85,10 @@ cat > "$TEMP_FILE" << 'EOF'
 <!-- COMMANDS:START - DO NOT EDIT -->
 EOF
 
-# Track if we have any commands
+# Track if we have any commands and help system usage
 has_commands=false
+has_help_system=false
+help_commands_list=""
 
 # Process each category directory
 for category_dir in "$COMMANDS_DIR"/*; do
@@ -100,11 +114,24 @@ for category_dir in "$COMMANDS_DIR"/*; do
                 
                 argument_hint=$(extract_frontmatter "$cmd_file" "argument-hint")
                 
+                # Check if command has help support
+                help_support=""
+                if has_help_support "$cmd_file"; then
+                    help_support="✓"
+                    has_help_system=true
+                    if [ -n "$help_commands_list" ]; then
+                        help_commands_list+=", "
+                    fi
+                    help_commands_list+="/prefix:${category_name}:${cmd_name}"
+                else
+                    help_support="-"
+                fi
+                
                 # Build command entry
                 if [ "$category_has_commands" = false ]; then
                     category_content+="\n### ${category_title} Commands\n\n"
-                    category_content+="| Command | Description | Options |\n"
-                    category_content+="|---------|-------------|---------|"
+                    category_content+="| Command | Description | Options | Help |\n"
+                    category_content+="|---------|-------------|---------|------|\n"
                     category_has_commands=true
                     has_commands=true
                 fi
@@ -131,7 +158,7 @@ for category_dir in "$COMMANDS_DIR"/*; do
                 fi
                 
                 # Add command row
-                category_content+="\n| \`/prefix:${category_name}:${cmd_name}\` | ${description:-No description} | ${options:--} |"
+                category_content+="\n| \`/prefix:${category_name}:${cmd_name}\` | ${description:-No description} | ${options:--} | ${help_support} |"
             fi
         done
         
@@ -142,6 +169,56 @@ for category_dir in "$COMMANDS_DIR"/*; do
         fi
     fi
 done
+
+# Add help system section if any commands support help
+if [ "$has_help_system" = true ]; then
+    cat >> "$TEMP_FILE" << 'EOF'
+
+## Help System
+
+Some commands provide detailed help information when called with the `--help` option. Commands with help support are marked with ✓ in the Help column above.
+
+### Usage
+
+To get detailed help for any supported command:
+
+```bash
+/prefix:category:command --help
+```
+
+This will show:
+- Detailed description and usage
+- All available options with explanations  
+- Examples with real use cases
+- Related commands and workflows
+- MCP enhancement information (if applicable)
+
+### Example
+
+```bash
+/prefix:git:conflict-resolver --help
+```
+
+Shows comprehensive guide for Git conflict resolution including strategies, workflows, and team best practices.
+
+EOF
+
+    # Add note about generate-help.sh script if it exists
+    if [ -f "$SCRIPT_DIR/generate-help.sh" ]; then
+        cat >> "$TEMP_FILE" << 'EOF'
+### Generate Help Documentation
+
+You can also generate formatted help output using the helper script:
+
+```bash
+./scripts/generate-help.sh <category>/<command>.md
+```
+
+This provides additional formatting options and can be used for documentation generation.
+
+EOF
+    fi
+fi
 
 # Close the commands section
 # No need to add END marker to temp file since it's already in README

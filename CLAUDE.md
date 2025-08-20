@@ -35,10 +35,10 @@ Designed to be installed into `~/.claude/` with a custom prefix, making all tool
 **One-Command Pipelines**:
 
 ```bash
-/prefix:meta:pipelines deep-quality
+/prefix:meta:chain "scan:deep . --export-json" -> "scan:report --latest --generate-action-plan" -> "auto:execute --latest"
 ```
 
-💡 See `/prefix:meta:pipelines` for pre-defined workflows.
+💡 See `/prefix:meta:chain` for command chaining and workflow automation.
 
 ## Context Distribution
 
@@ -63,7 +63,7 @@ Each CLAUDE.md file provides focused context for its specific area, reducing cog
 Commands follow a hierarchical namespace pattern:
 
 - Structure: `/prefix:category:command`
-- Categories: `scan`, `fix`, `gen`, `flow`, `auto`, `sec`, `git`, `meta`, `typo3`
+- Categories: `scan`, `fix`, `gen`, `flow`, `auto`, `sec`, `git`, `meta`, `typo3`, `css`
 - Example: `/prefix:scan:deep` for deep code analysis
 
 See **[commands/CLAUDE.md](commands/CLAUDE.md)** for detailed command documentation.

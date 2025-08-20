@@ -10,7 +10,7 @@ Commands are organized hierarchically by category, with each command being a mar
 
 - Commands are organized in subdirectories under `commands/`
 - Directory structure determines command namespace: `commands/category/command.md` → `/prefix:category:command`
-- Categories follow clear purposes: `scan`, `fix`, `gen`, `flow`, `auto`, `sec`, `git`, `meta`
+- Categories follow clear purposes: `scan`, `fix`, `gen`, `flow`, `auto`, `sec`, `git`, `meta`, `typo3`, `css`
 - Use short, action-oriented names (e.g., `deep` not `analyze-deep`)
 - Maximum 2 words per command name
 - Use verbs for clarity
@@ -65,6 +65,7 @@ Commands that make direct fixes to code:
 - **duplicates** - Code duplication removal
 - **documentation** - Documentation fixes
 - **shell** - Shell script improvements
+- **markdown** - Markdown formatting fixes
 
 ### flow/ - Multi-Agent Workflows
 
@@ -106,23 +107,27 @@ Security-focused commands:
 Git workflow commands:
 
 - **commit** - Smart commit generation
+- **review** - Git-based code review
+- **conflict-resolver** - Git merge conflict resolution
 
 ### meta/ - Project & Toolkit Management
 
 Meta-commands for project and toolkit:
 
 - **health** - Project health assessment
-- **chain** - Command chaining
+- **chain** - Command chaining and workflow automation
 - **changelog** - Changelog updates
 - **create** - Create new commands
 - **export** - Export management
 - **handoff** - AI handoff preparation
+- **help** - Interactive help system
 - **summary** - Chat summary generation
 - **test-guide** - Interactive test guidance
 - **update-docs** - Documentation updates
 - **version** - Version information
 - **find-cmd** - Find commands by capability
 - **analyze-toolkit** - Analyze toolkit usage
+- **docs-sync** - Verify and sync all documentation with codebase
 
 ### typo3/ - TYPO3 Specific Commands
 
@@ -133,6 +138,12 @@ TYPO3 development commands:
 - **fluid-components** - Fluid component generation
 - **make-content-block** - Individual block creation
 - **sitepackage** - Sitepackage setup
+
+### css/ - CSS & Styling Operations
+
+CSS and styling-related commands:
+
+- **tailwind-optimize** - Tailwind CSS optimization and utility management
 
 ## Key Patterns
 

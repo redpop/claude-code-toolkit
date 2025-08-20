@@ -1,11 +1,94 @@
 ---
 description: Chain commands or execute pre-defined pipelines with intelligent data flow
 argument-hint: <pipeline-name | command-chain> [--list] [--save-as=name] [--dry-run]
+options:
+  --parallel: Execute commands in parallel where possible
+  --stop-on-error: Stop chain if any command fails (default: continue on error)
+  --help: Show help message with syntax examples and available pipelines
+  --list: List all available pre-defined pipelines
+  --save-as: Save custom chain as named pipeline for reuse
+  --dry-run: Preview execution without running commands
+examples:
+  - description: Run pre-defined pipeline
+    command: /prefix:meta:chain deep-quality
+  - description: Sequential execution with output passing
+    command: /prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}"
+  - description: Parallel execution of multiple commands
+    command: /prefix:meta:chain ["scan:security .", "scan:quality .", "scan:tests ."] -> "meta:export {outputs} --merge"
+  - description: Conditional execution based on results
+    command: /prefix:meta:chain "scan:deep ." ?> "fix:all {output}" -> "meta:health"
+  - description: Error fallback with recovery command
+    command: /prefix:meta:chain "risky:command" !> "fallback:command" -> "continue:normally"
+  - description: Stop chain on any error
+    command: /prefix:meta:chain --stop-on-error "critical:scan ." -> "deploy:production"
+  - description: Save custom pipeline for reuse
+    command: /prefix:meta:chain --save-as="my-workflow" "scan:deep ." -> "fix:all" -> "scan:verify"
+see-also:
+  - meta:pipelines: Discover pre-defined workflow templates
+  - auto:execute: Execute analysis reports automatically
+  - scan:report: Generate comprehensive analysis reports
+  - flow:review: Perform code reviews with recommendations
 ---
 
 # Command Chaining & Pipelines
 
 Execute commands in sequence, run pre-defined pipelines, or create your own workflows with automatic data passing and intelligent error handling.
+
+```bash
+# Help detection
+if [[ "$ARGUMENTS" == "--help" ]] || [[ "$ARGUMENTS" == "-h" ]]; then
+    echo "Command Chaining & Pipelines"
+    echo "=============================="
+    echo ""
+    echo "USAGE:"
+    echo "  /prefix:meta:chain <pipeline-name | command-chain> [options]"
+    echo ""
+    echo "OPTIONS:"
+    echo "  --parallel         Execute commands in parallel where possible"
+    echo "  --stop-on-error    Stop chain if any command fails (default: continue on error)"
+    echo "  --help             Show this help message"
+    echo "  --list             List all available pre-defined pipelines"
+    echo "  --save-as=name     Save custom chain as named pipeline for reuse"
+    echo "  --dry-run          Preview execution without running commands"
+    echo ""
+    echo "CHAIN SYNTAX:"
+    echo "  ->     Sequential execution (pass output to next command)"
+    echo "  ?>     Conditional execution (continue if previous succeeded)"
+    echo "  !>     Error fallback (run if previous failed)"
+    echo "  [a,b]  Parallel execution (run commands simultaneously)"
+    echo ""
+    echo "EXAMPLES:"
+    echo "  # Run pre-defined pipeline"
+    echo "  /prefix:meta:chain deep-quality"
+    echo ""
+    echo "  # Sequential execution with output passing"
+    echo "  /prefix:meta:chain \"scan:deep .\" -> \"fix:quick-wins {output}\""
+    echo ""
+    echo "  # Parallel execution"
+    echo "  /prefix:meta:chain [\"scan:security .\", \"scan:quality .\"] -> \"meta:export {outputs}\""
+    echo ""
+    echo "  # Conditional execution"
+    echo "  /prefix:meta:chain \"scan:deep .\" ?> \"fix:all {output}\" -> \"meta:health\""
+    echo ""
+    echo "  # Error fallback"
+    echo "  /prefix:meta:chain \"risky:command\" !> \"fallback:command\" -> \"continue:normally\""
+    echo ""
+    echo "AVAILABLE PIPELINES:"
+    echo "  quick-quality         Fast quality assessment (~30s)"
+    echo "  deep-quality          Comprehensive analysis (~5m)"
+    echo "  security-hardening    Security audit and fixes (~10m)"
+    echo "  refactoring-sprint    Systematic code improvements (~30m)"
+    echo "  release-prep          Release readiness check (~20m)"
+    echo "  continuous-improvement Weekly quality improvement (~2h)"
+    echo ""
+    echo "SEE ALSO:"
+    echo "  /prefix:meta:pipelines    Discover workflow templates"
+    echo "  /prefix:auto:execute      Execute analysis reports"
+    echo "  /prefix:scan:report       Generate analysis reports"
+    echo "  /prefix:flow:review       Code review with recommendations"
+    exit 0
+fi
+```
 
 ## Quick Start
 
