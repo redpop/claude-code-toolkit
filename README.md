@@ -168,7 +168,6 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:auto:report` | Generate comprehensive completion report after action plan execution, showing results, metrics, and next steps | `--action-plan=<file>`, `--execution-log=<file>`, `--compare-baseline`, `--baseline=<file>`, `--current=<file>`, `--export-formats=md,json,html`, `--export-all`, `--export-json=<file>`, `--include-metrics`, `--include-git-log`, `--team-report`, `--recommendations` |
 | `/prefix:auto:sprint` | Plan and execute a complete code quality improvement sprint with analysis, prioritization, fixes, and tracking | `directory`, `--duration=1w\|2w\|1m`, `--team-size=N`, `--focus=security\|performance\|quality\|all` |
 
-
 ### Fix Commands
 
 | Command | Description | Options |
@@ -181,7 +180,6 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:fix:security` | Fix security vulnerabilities with MCP-enhanced analysis or traditional pattern matching | `report.json`, `--severity=critical,high,medium`, `--dry-run`, `--interactive`, `--owasp-top10` |
 | `/prefix:fix:shell` | Automatically fix shell script issues using shellcheck analysis | `path/file`, `--check-only`, `--strict`, `--summary-only` |
 
-
 ### Flow Commands
 
 | Command | Description | Options |
@@ -192,7 +190,6 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:flow:review` | Comprehensive code review using multiple specialized agents for different perspectives | `<file-or-directory>`, `--focus=security\|performance\|architecture\|all` |
 | `/prefix:flow:smart` | Intelligently analyze and route problems to the most appropriate specialized agents | `<problem-description>`, `--verbose`, `--suggest-only` |
 
-
 ### Gen Commands
 
 | Command | Description | Options |
@@ -201,14 +198,12 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:gen:format` | Create or convert content into various formats (HTML, Markdown, Confluence, Plain Text) | `<request-or-file>`, `--html\|--html-simple\|--markdown\|--confluence\|--text` |
 | `/prefix:gen:tests` | Generate comprehensive test suites for uncovered code, including unit tests, integration tests, and edge cases | `report.json\|file\|directory`, `--coverage-target=80`, `--framework=auto`, `--types=unit,integration`, `--mock-externals` |
 
-
 ### Git Commands
 
 | Command | Description | Options |
 |---------|-------------|---------|
 | `/prefix:git:commit` | Creates structured Git commits with Conventional Commit format and emojis | `--no-verify`, `--fast`, `--push` |
 | `/prefix:git:review` | Reviews all Git changes before commit to ensure code quality and identify issues | `--staged-only`, `--detailed` |
-
 
 ### Meta Commands
 
@@ -227,7 +222,6 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:meta:update-docs` | Intelligently updates project documentation based on code changes and implementation status | `--scope=<type>`, `--analyze`, `--commit` |
 | `/prefix:meta:version` | Check installed toolkit version and available updates | `check\|update` |
 
-
 ### Scan Commands
 
 | Command | Description | Options |
@@ -245,7 +239,6 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:scan:root-cause` | Deep root cause analysis with ultra intensive reasoning | `issue_description` |
 | `/prefix:scan:tests` | Comprehensive test coverage analysis with 5 specialized agents for test quality | `directory`, `--framework=jest\|pytest\|go-test\|cargo-test`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
 
-
 ### Sec Commands
 
 | Command | Description | Options |
@@ -253,7 +246,6 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:sec:audit` | Comprehensive security audit with MCP-enhanced scanning or traditional fallback methods | `directory`, `--severity=critical\|high\|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
 | `/prefix:sec:baseline` | Establish and track security baseline with MCP-enhanced scanning or traditional methods | `directory`, `--export-baseline`, `--compare=previous-baseline.json`, `--track-improvements` |
 | `/prefix:sec:comply` | Run compliance checks for OWASP, PCI-DSS, GDPR, and custom security policies | `directory`, `--standard=owasp\|pci-dss\|gdpr\|all`, `--custom-rules=rules.yaml`, `--export-report` |
-
 
 ### Typo3 Commands
 
