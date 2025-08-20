@@ -89,6 +89,26 @@ UNDERSTANDING THE CONFLICT:
 - Target Intent: [what target branch is trying to achieve]
 - Root Cause: [why this conflict occurred]
 
+RAW CONFLICT VIEW:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+[line#]: [code before conflict]
+[line#]: <<<<<<< HEAD
+[line#]: [our changes]
+[line#]: =======
+[line#]: [their changes]
+[line#]: >>>>>>> [branch-name]
+[line#]: [code after conflict]
+
+```
+
+SIDE-BY-SIDE COMPARISON:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OURS (HEAD/main):          | THEIRS (feature):
+[summarized change]         | [summarized change]
+[key difference]            | [key difference]
+
 RESOLUTION OPTIONS:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -105,6 +125,15 @@ Side Effects: [any implications]
 Option 2: [ALTERNATIVE]
 Strategy: [alternative approach]
 Trade-offs: [pros and cons]
+
+CONTEXT COMMANDS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+To see more context, use:
+
+- `git show :1:[file]` - View common ancestor
+- `git show :2:[file]` - View our version
+- `git show :3:[file]` - View their version
+- `git blame -L [start],[end] [file]` - See who made changes
 
 SAFETY CONSIDERATIONS:
 ⚠️ [any warnings or things to test]
