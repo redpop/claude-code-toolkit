@@ -1,10 +1,59 @@
 ---
 allowed-tools: Task, Read, Edit, MultiEdit, Grep, Bash(npm:*), Bash(yarn:*), Bash(git:*)
 description: Apply high-ROI fixes from analysis reports - quick wins with maximum impact and minimal effort
-argument-hint: [report.json] [--dry-run] [--category=security|performance|quality] [--max-effort=4h] [--min-roi=5]
+argument-hint: [report.json] [--dry-run] [--category=security|performance|quality] [--max-effort=4h] [--min-roi=5] [--help]
+options:
+  --dry-run: Preview changes without applying them - shows what would be fixed
+  --category: Filter fixes by category (security, performance, quality)
+  --max-effort: Maximum effort threshold in hours (default: 4h)
+  --min-roi: Minimum ROI score threshold (default: 5)
+  --help: Show this help message
+examples:
+  - "/prefix:fix:quick-wins report.json --dry-run" - Preview all quick wins
+  - "/prefix:fix:quick-wins report.json --category=security" - Apply only security fixes
+  - "/prefix:fix:quick-wins report.json --max-effort=2h --min-roi=8" - High-ROI, low-effort fixes
+  - "/prefix:fix:quick-wins --latest --dry-run" - Preview fixes from latest report
+see-also:
+  - /prefix:scan:deep - Generate comprehensive analysis reports
+  - /prefix:scan:report - Analyze and summarize findings
+  - /prefix:fix:security - Apply security-focused fixes
+  - /prefix:verify:fixes - Validate applied fixes
 ---
 
 # Fix Quick Wins Command
+
+**Check for help request**
+
+```bash
+if [[ "$ARGUMENTS" == *"--help"* ]]; then
+    echo "# Fix Quick Wins Help"
+    echo ""
+    echo "Apply high-ROI fixes from analysis reports - quick wins with maximum impact and minimal effort."
+    echo ""
+    echo "## Usage:"
+    echo "  /prefix:fix:quick-wins [report.json] [options]"
+    echo ""
+    echo "## Options:"
+    echo "  --dry-run             Preview changes without applying them"
+    echo "  --category=TYPE       Filter by fix category (security|performance|quality)"
+    echo "  --max-effort=HOURS    Maximum effort threshold (default: 4h)"
+    echo "  --min-roi=SCORE       Minimum ROI score threshold (default: 5)"
+    echo "  --help                Show this help message"
+    echo ""
+    echo "## Examples:"
+    echo "  /prefix:fix:quick-wins report.json --dry-run"
+    echo "  /prefix:fix:quick-wins report.json --category=security"
+    echo "  /prefix:fix:quick-wins report.json --max-effort=2h --min-roi=8"
+    echo "  /prefix:fix:quick-wins --latest --dry-run"
+    echo ""
+    echo "## See Also:"
+    echo "  /prefix:scan:deep     - Generate comprehensive analysis reports"
+    echo "  /prefix:scan:report   - Analyze and summarize findings"
+    echo "  /prefix:fix:security  - Apply security-focused fixes"
+    echo "  /prefix:verify:fixes  - Validate applied fixes"
+    exit 0
+fi
+```
 
 This command automatically applies high-ROI (Return on Investment) fixes identified in analysis reports. It focuses on issues that can be resolved quickly (< 4 hours) while providing significant impact.
 

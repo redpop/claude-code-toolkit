@@ -24,6 +24,8 @@ Sub-Agents are specialized AI agents that provide domain-specific expertise for 
 - **deployment-specialist**: CI/CD and deployment expert for automated pipelines and production troubleshooting
 - **documentation-health-specialist**: Analyzes documentation quality and code-doc synchronization
 - **frontend-specialist**: Frontend development expert specializing in modern JavaScript frameworks
+- **git-conflict-specialist**: Git merge conflict resolution expert specializing in conflict analysis and resolution strategies
+- **tailwind-css-specialist**: Tailwind CSS optimization expert for utility-first CSS framework optimization
 - **workflow-optimizer**: Developer workflow expert focused on productivity and reducing friction
 
 ### TYPO3 Specific Agents

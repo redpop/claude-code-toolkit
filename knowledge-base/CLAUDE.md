@@ -10,9 +10,23 @@ The knowledge base contains specialized documentation, patterns, and reference m
 
 ### Main Categories
 
+- **css/** - CSS patterns and utility framework optimizations
 - **frameworks/** - Framework-specific patterns and integrations
 - **typo3/** - TYPO3 CMS development resources
 - **ui-patterns/** - Reusable UI component patterns
+
+## CSS Resources
+
+The CSS section contains patterns and optimization strategies:
+
+### Tailwind CSS Patterns
+
+- `css/tailwind-patterns.md` - Tailwind CSS patterns, optimization strategies, and best practices
+
+### Related CSS Tools
+
+- **Agent**: `tailwind-css-specialist` - Tailwind CSS optimization expert
+- **Command**: `/prefix:css:tailwind-optimize` - Optimize Tailwind CSS utilities
 
 ## TYPO3 Resources
 
@@ -33,7 +47,7 @@ The TYPO3 section is particularly comprehensive:
 ### Reference Materials (`typo3/references/`)
 
 - `backend-preview-reference.md` - Backend preview configuration
-- `commands-reference.md` - TYPO3 CLI commands
+- `typo3-ddev-commands-reference.md` - TYPO3 v13 CLI commands (DDEV & non-DDEV)
 - `field-naming-reference.md` - Field naming conventions
 
 ### Related TYPO3 Agents

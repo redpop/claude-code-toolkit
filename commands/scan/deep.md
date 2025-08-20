@@ -2,7 +2,44 @@
 allowed-tools: Task, Read, Grep, Bash(fd:*), Bash(rg:*), Write
 description: Deep code analysis with streamlined output and clear workflow guidance
 argument-hint: <directory> [--focus=security|performance|architecture|all] [--export-md] [--export-json]
+options:
+  - name: "--focus"
+    description: "Focus analysis on specific aspect"
+    values: "security|performance|architecture|all"
+    default: "all"
+  - name: "--export-md"
+    description: "Export analysis results as timestamped Markdown report"
+    type: "flag"
+  - name: "--export-json"
+    description: "Export analysis results as timestamped JSON report"
+    type: "flag"
+examples:
+  - command: "/prefix:scan:deep src/"
+    description: "Basic deep scan of source directory"
+  - command: "/prefix:scan:deep . --focus=security --export-json"
+    description: "Security-focused analysis with JSON export"
+  - command: "/prefix:scan:deep . --export-md"
+    description: "Comprehensive analysis with Markdown report"
+  - command: "/prefix:scan:deep backend/ --focus=performance"
+    description: "Performance-focused analysis of backend code"
+see-also:
+  - "/prefix:scan:report - Generate action plan from analysis results"
+  - "/prefix:scan:quick - Fast code quality check"
+  - "/prefix:fix:quick-wins - Apply easy fixes from analysis"
+  - "/prefix:meta:pipelines deep-quality - Complete quality pipeline"
 ---
+
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+Display:
+
+- Command name and description
+- Usage syntax
+- All arguments and options
+- Examples
+- Related commands
+Then exit without executing analysis.
 
 # Deep Code Analysis
 

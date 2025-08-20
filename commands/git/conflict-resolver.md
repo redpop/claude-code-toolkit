@@ -1,8 +1,70 @@
 ---
 description: Interactive Git conflict resolution with step-by-step guidance and recommendations
-argument-hint: [source-branch] [target-branch] [--strategy:merge|rebase|theirs|ours] [--rebase-feature]
+argument-hint: [source-branch] [target-branch] [--strategy:merge|rebase|theirs|ours] [--rebase-feature] [--test-command="npm test"] [--help]
 mcp-enhanced: mcp__github__pull_request, mcp__gitlab__merge_request
+options:
+  --strategy: "Conflict resolution strategy - merge (default), rebase, theirs (prefer source), ours (prefer target)"
+  --test-command: "Command to run tests after resolution (e.g., 'npm test', 'pytest')"
+  --rebase-feature: "Rebase current feature branch onto main (team workflow)"
+  --help: "Show detailed help message with examples and strategies"
+examples:
+  - description: "Detect and resolve current conflicts interactively"
+    command: "/conflict-resolver"
+  - description: "Resolve conflicts when merging feature-branch into main"
+    command: "/conflict-resolver feature-branch main"
+  - description: "Resolve conflicts preferring source branch changes"
+    command: "/conflict-resolver feature-branch main --strategy:theirs"
+  - description: "Rebase feature branch with conflict resolution"
+    command: "/conflict-resolver --rebase-feature"
+  - description: "Resolve conflicts and run tests after"
+    command: "/conflict-resolver --test-command='npm test'"
+see-also:
+  - "/git:review - Review changes before committing merge"
+  - "/scan:quick - Verify code quality after resolution"
+  - "/git:commit - Create merge commit with proper message"
 ---
+
+# Help Detection
+
+if [[ "$ARGUMENTS" == *"--help"* ]]; then
+    echo "🔧 Git Conflict Resolver - Interactive conflict resolution with expert guidance"
+    echo ""
+    echo "USAGE:"
+    echo "  /conflict-resolver [source-branch] [target-branch] [options]"
+    echo ""
+    echo "OPTIONS:"
+    echo "  --strategy:merge     Standard merge (default) - preserves commit history"
+    echo "  --strategy:rebase    Rebase approach - creates linear history"
+    echo "  --strategy:theirs    Prefer source branch changes in conflicts"
+    echo "  --strategy:ours      Prefer target branch changes in conflicts"
+    echo "  --rebase-feature     Rebase current feature branch onto main"
+    echo "  --test-command=CMD   Run specified test command after resolution"
+    echo "  --help               Show this help message"
+    echo ""
+    echo "EXAMPLES:"
+    echo "  /conflict-resolver                           # Resolve current conflicts"
+    echo "  /conflict-resolver feature main              # Merge feature into main"
+    echo "  /conflict-resolver --strategy:theirs         # Prefer source changes"
+    echo "  /conflict-resolver --rebase-feature          # Team rebase workflow"
+    echo "  /conflict-resolver --test-command='npm test' # Run tests after resolution"
+    echo ""
+    echo "STRATEGIES:"
+    echo "  merge    - Standard merge preserving history (default)"
+    echo "  rebase   - Linear history by replaying commits"
+    echo "  theirs   - Prefer source branch in conflicts"
+    echo "  ours     - Prefer target branch in conflicts"
+    echo ""
+    echo "WORKFLOW:"
+    echo "  1. Detect conflicts and analyze context"
+    echo "  2. Present conflicts with recommendations"
+    echo "  3. Interactive resolution with guided options"
+    echo "  4. Verify resolution and run tests"
+    echo "  5. Complete merge/rebase process"
+    echo ""
+    echo "See full documentation below for detailed examples and advanced features."
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+fi
 
 # Claude Command: Interactive Git Conflict Resolver
 

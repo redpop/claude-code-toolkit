@@ -31,7 +31,7 @@ cd claude-code-toolkit
 /global:auto:execute --latest            # Apply improvements
 
 # Or use one-command pipeline
-/global:meta:pipelines deep-quality      # Full optimization
+/global:meta:chain "scan:deep . --export-json" -> "scan:report --latest" -> "auto:execute --latest"  # Full optimization
 ```
 
 💡 **Pro tip**: Replace `global` with your custom prefix • [Full Guide →](docs/guides/MODERN-WORKFLOW.md)
@@ -150,8 +150,10 @@ See [Sound Notifications Guide](docs/guides/SOUND-NOTIFICATIONS.md) for customiz
 | **🌊 Flow** | Multi-agent workflows | `flow:smart`, `flow:review`, `flow:incident` |
 | **🤖 Auto** | Automation & orchestration | `auto:execute`, `auto:sprint`, `auto:monitor` |
 | **🔒 Sec** | Security operations | `sec:audit`, `sec:baseline`, `sec:comply` |
-| **🗂️ Git** | Version control | `git:commit` (smart commits with emojis) |
-| **🎯 Meta** | Toolkit management | `meta:chain`, `meta:health`, `meta:pipelines` |
+| **🗂️ Git** | Version control | `git:commit`, `git:review`, `git:conflict-resolver` |
+| **🎨 CSS** | CSS & styling operations | `css:tailwind-optimize` |
+| **🏛️ TYPO3** | TYPO3 CMS development | `typo3:content-blocks`, `typo3:sitepackage` |
+| **🎯 Meta** | Toolkit management | `meta:chain`, `meta:health`, `meta:help` |
 
 ## Available Commands
 
@@ -161,102 +163,158 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 
 ### Auto Commands
 
-| Command | Description | Options |
-|---------|-------------|---------|
-| `/prefix:auto:execute` | Execute action plans systematically with progress tracking and smart error handling | `<action-plan.md>\|--latest`, `--mode=supervised\|auto`, `--dry-run`, `--parallel=N`, `--focus=category`, `--force-all`, `--min-roi=threshold`, `--max-roi=threshold` |
-| `/prefix:auto:monitor` | Set up and manage continuous code quality monitoring with automated analysis, fixes, and reporting | `directory`, `--schedule=daily\|weekly\|commit`, `--auto-fix=safe\|all\|none`, `--notify=email\|slack\|github`, `--init` |
-| `/prefix:auto:report` | Generate comprehensive completion report after action plan execution, showing results, metrics, and next steps | `--action-plan=<file>`, `--execution-log=<file>`, `--compare-baseline`, `--baseline=<file>`, `--current=<file>`, `--export-formats=md,json,html`, `--export-all`, `--export-json=<file>`, `--include-metrics`, `--include-git-log`, `--team-report`, `--recommendations` |
-| `/prefix:auto:sprint` | Plan and execute a complete code quality improvement sprint with analysis, prioritization, fixes, and tracking | `directory`, `--duration=1w\|2w\|1m`, `--team-size=N`, `--focus=security\|performance\|quality\|all` |
+| Command | Description | Options | Help |
+|---------|-------------|---------|------|
+
+| `/prefix:auto:execute` | Execute action plans systematically with progress tracking and smart error handling | `<action-plan.md>\|--latest`, `--mode=supervised\|auto`, `--dry-run`, `--parallel=N`, `--focus=category`, `--force-all`, `--min-roi=threshold`, `--max-roi=threshold` | - |
+| `/prefix:auto:monitor` | Set up and manage continuous code quality monitoring with automated analysis, fixes, and reporting | `directory`, `--schedule=daily\|weekly\|commit`, `--auto-fix=safe\|all\|none`, `--notify=email\|slack\|github`, `--init` | - |
+| `/prefix:auto:report` | Generate comprehensive completion report after action plan execution, showing results, metrics, and next steps | `--action-plan=<file>`, `--execution-log=<file>`, `--compare-baseline`, `--baseline=<file>`, `--current=<file>`, `--export-formats=md,json,html`, `--export-all`, `--export-json=<file>`, `--include-metrics`, `--include-git-log`, `--team-report`, `--recommendations` | - |
+| `/prefix:auto:sprint` | Plan and execute a complete code quality improvement sprint with analysis, prioritization, fixes, and tracking | `directory`, `--duration=1w\|2w\|1m`, `--team-size=N`, `--focus=security\|performance\|quality\|all` | - |
+
+### Css Commands
+
+| Command | Description | Options | Help |
+|---------|-------------|---------|------|
+
+| `/prefix:css:tailwind-optimize` | Analyze and optimize Tailwind CSS implementation with v4 best practices | `path`, `--check-migration`, `--export-json\|--export-md` | - |
 
 ### Fix Commands
 
-| Command | Description | Options |
-|---------|-------------|---------|
-| `/prefix:fix:documentation` | Fix documentation issues including broken links, parameter mismatches, missing cross-references, and outdated content | `report.json\|directory`, `--fix-links`, `--fix-params`, `--add-deprecation`, `--dry-run`, `--interactive` |
-| `/prefix:fix:duplicates` | Remove code duplication by extracting common functions, creating shared utilities, and applying DRY principles | `report.json\|directory`, `--threshold=80`, `--min-lines=5`, `--dry-run`, `--create-utils`, `--group-by`, `--preserve-comments` |
-| `/prefix:fix:markdown` | Lint and fix markdown files using markdownlint-cli2 | `<file-or-directory>`, `--fix`, `--config`, `<path>` |
-| `/prefix:fix:performance` | Automated performance issue fixes including O(n²) algorithms, memory optimization, and database batching | `--target=algorithm\|memory\|database\|all`, `--file=path`, `--dry-run` |
-| `/prefix:fix:quick-wins` | Apply high-ROI fixes from analysis reports - quick wins with maximum impact and minimal effort | `report.json`, `--dry-run`, `--category=security\|performance\|quality`, `--max-effort=4h`, `--min-roi=5` |
-| `/prefix:fix:security` | Fix security vulnerabilities with MCP-enhanced analysis or traditional pattern matching | `report.json`, `--severity=critical,high,medium`, `--dry-run`, `--interactive`, `--owasp-top10` |
-| `/prefix:fix:shell` | Automatically fix shell script issues using shellcheck analysis | `path/file`, `--check-only`, `--strict`, `--summary-only` |
+| Command | Description | Options | Help |
+|---------|-------------|---------|------|
+
+| `/prefix:fix:documentation` | Fix documentation issues including broken links, parameter mismatches, missing cross-references, and outdated content | `report.json\|directory`, `--fix-links`, `--fix-params`, `--add-deprecation`, `--dry-run`, `--interactive` | - |
+| `/prefix:fix:duplicates` | Remove code duplication by extracting common functions, creating shared utilities, and applying DRY principles | `report.json\|directory`, `--threshold=80`, `--min-lines=5`, `--dry-run`, `--create-utils`, `--group-by`, `--preserve-comments` | - |
+| `/prefix:fix:markdown` | Lint and fix markdown files using markdownlint-cli2 | `<file-or-directory>`, `--fix`, `--config`, `<path>` | - |
+| `/prefix:fix:performance` | Automated performance issue fixes including O(n²) algorithms, memory optimization, and database batching | `--target=algorithm\|memory\|database\|all`, `--file=path`, `--dry-run` | - |
+| `/prefix:fix:quick-wins` | Apply high-ROI fixes from analysis reports - quick wins with maximum impact and minimal effort | `report.json`, `--dry-run`, `--category=security\|performance\|quality`, `--max-effort=4h`, `--min-roi=5`, `--help` | ✓ |
+| `/prefix:fix:security` | Fix security vulnerabilities with MCP-enhanced analysis or traditional pattern matching | `report.json`, `--severity=critical,high,medium`, `--dry-run`, `--interactive`, `--owasp-top10` | - |
+| `/prefix:fix:shell` | Automatically fix shell script issues using shellcheck analysis | `path/file`, `--check-only`, `--strict`, `--summary-only` | - |
 
 ### Flow Commands
 
-| Command | Description | Options |
-|---------|-------------|---------|
-| `/prefix:flow:debug-mode` | Switch to intensive debugging mode for current problem | `--verbose`, `--trace` |
-| `/prefix:flow:incident` | Rapid incident response workflow for production issues with root cause analysis | `<incident-description>`, `--severity=critical\|high\|medium`, `--system=component` |
-| `/prefix:flow:refactor` | Intelligent refactoring suggestions with impact analysis and step-by-step guidance | `<file-or-pattern>`, `--type=extract\|rename\|restructure`, `--safety=conservative\|balanced\|aggressive` |
-| `/prefix:flow:review` | Comprehensive code review using multiple specialized agents for different perspectives | `<file-or-directory>`, `--focus=security\|performance\|architecture\|all` |
-| `/prefix:flow:smart` | Intelligently analyze and route problems to the most appropriate specialized agents | `<problem-description>`, `--verbose`, `--suggest-only` |
+| Command | Description | Options | Help |
+|---------|-------------|---------|------|
+
+| `/prefix:flow:debug-mode` | Switch to intensive debugging mode for current problem | `--verbose`, `--trace` | - |
+| `/prefix:flow:incident` | Rapid incident response workflow for production issues with root cause analysis | `<incident-description>`, `--severity=critical\|high\|medium`, `--system=component` | - |
+| `/prefix:flow:refactor` | Intelligent refactoring suggestions with impact analysis and step-by-step guidance | `<file-or-pattern>`, `--type=extract\|rename\|restructure`, `--safety=conservative\|balanced\|aggressive` | - |
+| `/prefix:flow:review` | Comprehensive code review using multiple specialized agents for different perspectives | `<file-or-directory>`, `--focus=security\|performance\|architecture\|all` | - |
+| `/prefix:flow:smart` | Intelligently analyze and route problems to the most appropriate specialized agents | `<problem-description>`, `--verbose`, `--suggest-only` | - |
 
 ### Gen Commands
 
-| Command | Description | Options |
-|---------|-------------|---------|
-| `/prefix:gen:docs` | Generate comprehensive documentation including API docs, README files, code comments, and architecture diagrams | `directory\|file`, `--types=api,readme,comments,diagrams`, `--format=markdown,html`, `--update-existing` |
-| `/prefix:gen:format` | Create or convert content into various formats (HTML, Markdown, Confluence, Plain Text) | `<request-or-file>`, `--html\|--html-simple\|--markdown\|--confluence\|--text` |
-| `/prefix:gen:tests` | Generate comprehensive test suites for uncovered code, including unit tests, integration tests, and edge cases | `report.json\|file\|directory`, `--coverage-target=80`, `--framework=auto`, `--types=unit,integration`, `--mock-externals` |
+| Command | Description | Options | Help |
+|---------|-------------|---------|------|
+
+| `/prefix:gen:docs` | Generate comprehensive documentation including API docs, README files, code comments, and architecture diagrams | `directory\|file`, `--types=api,readme,comments,diagrams`, `--format=markdown,html`, `--update-existing` | - |
+| `/prefix:gen:format` | Create or convert content into various formats (HTML, Markdown, Confluence, Plain Text) | `<request-or-file>`, `--html\|--html-simple\|--markdown\|--confluence\|--text` | - |
+| `/prefix:gen:tests` | Generate comprehensive test suites for uncovered code, including unit tests, integration tests, and edge cases | `report.json\|file\|directory`, `--coverage-target=80`, `--framework=auto`, `--types=unit,integration`, `--mock-externals` | - |
 
 ### Git Commands
 
-| Command | Description | Options |
-|---------|-------------|---------|
-| `/prefix:git:commit` | Creates structured Git commits with Conventional Commit format and emojis | `--no-verify`, `--fast`, `--push` |
-| `/prefix:git:conflict-resolver` | Interactive Git conflict resolution with step-by-step guidance and recommendations | `source-branch`, `target-branch`, `--strategy:merge\|rebase\|theirs\|ours` |
-| `/prefix:git:review` | Reviews all Git changes before commit to ensure code quality and identify issues | `--staged-only`, `--detailed` |
+| Command | Description | Options | Help |
+|---------|-------------|---------|------|
+
+| `/prefix:git:commit` | Creates structured Git commits with Conventional Commit format and emojis | `--no-verify`, `--fast`, `--push` | - |
+| `/prefix:git:conflict-resolver` | Interactive Git conflict resolution with step-by-step guidance and recommendations | `source-branch`, `target-branch`, `--strategy:merge\|rebase\|theirs\|ours`, `--rebase-feature`, `--test-command="npm`, `test"`, `--help` | ✓ |
+| `/prefix:git:review` | Reviews all Git changes before commit to ensure code quality and identify issues | `--staged-only`, `--detailed` | - |
 
 ### Meta Commands
 
-| Command | Description | Options |
-|---------|-------------|---------|
-| `/prefix:meta:analyze-toolkit` | Analyze toolkit commands and agents for redundancies, inconsistencies, and refactoring opportunities | `--fix`, `--export-json`, `--export-md`, `--focus=<area>` |
-| `/prefix:meta:chain` | Chain commands or execute pre-defined pipelines with intelligent data flow | `<pipeline-name`, `\|`, `command-chain>`, `--list`, `--save-as=name`, `--dry-run` |
-| `/prefix:meta:changelog` | AI-powered CHANGELOG.md management that automatically determines version based on changes | `--analyze`, `--commit`, `--push`, `--update-version` |
-| `/prefix:meta:create` | Intelligently create commands, agents, or workflows from your description | `<what`, `you`, `need>`, `--type=auto\|command\|agent\|workflow` |
-| `/prefix:meta:export` | Unified export management for all analysis results with format conversion | `<report-files...>`, `--format=md\|json\|html\|pdf`, `--merge`, `--template=name` |
-| `/prefix:meta:find-cmd` | Find the best command for your task from all available commands (global and local) | `<task-description>`, `--all`, `--local-only`, `--global-only` |
-| `/prefix:meta:handoff` | Documents current problem context for handoff to another AI assistant | `output-file`, `-c\|--compact`, `-t\|--technical`, `--focus`, `topic`, `--skip`, `topic`, `--include`, `topic`, `"instructions"` |
-| `/prefix:meta:health` | Comprehensive project health check with actionable insights and trend analysis | `--verbose`, `--compare=last-check.json`, `--export` |
-| `/prefix:meta:summary` | Creates a chat summary for another AI with complete context | `summaries/` |
-| `/prefix:meta:test-guide` | Generates interactive test guides for recent changes, suitable for both end-users and technical reviewers | `--type=all\|user\|technical`, `--format=md\|checklist\|jira`, `--lang=en\|de\|es\|fr`, `--output=file.md` |
-| `/prefix:meta:update-docs` | Intelligently updates project documentation based on code changes and implementation status | `--scope=<type>`, `--analyze`, `--commit` |
-| `/prefix:meta:version` | Check installed toolkit version and available updates | `check\|update` |
+| Command | Description | Options | Help |
+|---------|-------------|---------|------|
+
+| `/prefix:meta:analyze-toolkit` | Analyze toolkit commands and agents for redundancies, inconsistencies, and refactoring opportunities | `--fix`, `--export-json`, `--export-md`, `--focus=<area>` | - |
+| `/prefix:meta:chain` | Chain commands or execute pre-defined pipelines with intelligent data flow | `<pipeline-name`, `\|`, `command-chain>`, `--list`, `--save-as=name`, `--dry-run` | ✓ |
+| `/prefix:meta:changelog` | AI-powered CHANGELOG.md management that automatically determines version based on changes | `--analyze`, `--commit`, `--push`, `--update-version` | - |
+| `/prefix:meta:create` | Intelligently create commands, agents, or workflows from your description | `<what`, `you`, `need>`, `--type=auto\|command\|agent\|workflow` | - |
+| `/prefix:meta:docs-sync` | Verify and synchronize all documentation files with actual codebase structure | `--fix`, `--export-json`, `--export-md` | - |
+| `/prefix:meta:export` | Unified export management for all analysis results with format conversion | `<report-files...>`, `--format=md\|json\|html\|pdf`, `--merge`, `--template=name` | - |
+| `/prefix:meta:find-cmd` | Find the best command for your task from all available commands (global and local) | `<task-description>`, `--all`, `--local-only`, `--global-only` | - |
+| `/prefix:meta:handoff` | Documents current problem context for handoff to another AI assistant | `output-file`, `-c\|--compact`, `-t\|--technical`, `--focus`, `topic`, `--skip`, `topic`, `--include`, `topic`, `"instructions"` | - |
+| `/prefix:meta:health` | Comprehensive project health check with actionable insights and trend analysis | `--verbose`, `--compare=last-check.json`, `--export` | - |
+| `/prefix:meta:help` | Display help for commands or list available commands | `command-name`, `--list`, `--search`, `<keyword>`, `--categories` | - |
+| `/prefix:meta:summary` | Creates a chat summary for another AI with complete context | `summaries/` | - |
+| `/prefix:meta:test-guide` | Generates interactive test guides for recent changes, suitable for both end-users and technical reviewers | `--type=all\|user\|technical`, `--format=md\|checklist\|jira`, `--lang=en\|de\|es\|fr`, `--output=file.md` | - |
+| `/prefix:meta:update-docs` | Intelligently updates project documentation based on code changes and implementation status | `--scope=<type>`, `--analyze`, `--commit` | - |
+| `/prefix:meta:version` | Check installed toolkit version and available updates | `check\|update` | - |
 
 ### Scan Commands
 
-| Command | Description | Options |
-|---------|-------------|---------|
-| `/prefix:scan:deep` | Deep code analysis with streamlined output and clear workflow guidance | `<directory>`, `--focus=security\|performance\|architecture\|all`, `--export-md`, `--export-json` |
-| `/prefix:scan:deps` | In-depth dependency analysis with 6 specialized agents for complete transparency | `package-name\|file`, `--depth=direct\|transitive\|full`, `--check=security\|licenses\|all` |
-| `/prefix:scan:docs` | Analyze documentation health, validate code-doc synchronization, check cross-references, and identify outdated content | `directory`, `--scope=readme\|api\|all`, `--check-links`, `--validate-params`, `--export-report` |
-| `/prefix:scan:explore` | Multi-Perspective Deep Research with 8 different viewpoints on a topic | `topic`, `--depth=surface\|medium\|deep`, `--focus=technical\|business\|all` |
-| `/prefix:scan:map` | Creates a comprehensive codebase mapping with 10 agents for different aspects | `directory`, `--format=markdown\|json\|mermaid`, `--depth=overview\|detailed\|full` |
-| `/prefix:scan:perf` | Deep Performance Profiling with 7 Agents for Bottleneck Identification and Optimization | `directory`, `--profile=cpu\|memory\|io\|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
-| `/prefix:scan:quality` | Comprehensive code quality metrics with trend analysis and improvement roadmap | `<directory>`, `--baseline=previous.json`, `--threshold=80`, `--export` |
-| `/prefix:scan:quick` | Quick parallel code analysis for rapid feedback (30 seconds) | `<directory>`, `--focus=area`, `--export-json` |
-| `/prefix:scan:refactor` | Analyzes the impact of refactoring changes using 6 specialized agents | `file-or-pattern`, `--change-type=rename\|move\|signature\|structure` |
-| `/prefix:scan:report` | Intelligent analysis of code quality reports with trend detection, prioritization, and actionable insights | `report.json`, `--latest`, `--compare=other-report.json`, `--history`, `--trends`, `--quick-wins`, `--export-md`, `--generate-action-plan` |
-| `/prefix:scan:root-cause` | Deep root cause analysis with ultra intensive reasoning | `issue_description` |
-| `/prefix:scan:tests` | Comprehensive test coverage analysis with 5 specialized agents for test quality | `directory`, `--framework=jest\|pytest\|go-test\|cargo-test`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
+| Command | Description | Options | Help |
+|---------|-------------|---------|------|
+
+| `/prefix:scan:deep` | Deep code analysis with streamlined output and clear workflow guidance | `<directory>`, `--focus=security\|performance\|architecture\|all`, `--export-md`, `--export-json` | ✓ |
+| `/prefix:scan:deps` | In-depth dependency analysis with 6 specialized agents for complete transparency | `package-name\|file`, `--depth=direct\|transitive\|full`, `--check=security\|licenses\|all` | - |
+| `/prefix:scan:docs` | Analyze documentation health, validate code-doc synchronization, check cross-references, and identify outdated content | `directory`, `--scope=readme\|api\|all`, `--check-links`, `--validate-params`, `--export-report` | - |
+| `/prefix:scan:explore` | Multi-Perspective Deep Research with 8 different viewpoints on a topic | `topic`, `--depth=surface\|medium\|deep`, `--focus=technical\|business\|all` | - |
+| `/prefix:scan:map` | Creates a comprehensive codebase mapping with 10 agents for different aspects | `directory`, `--format=markdown\|json\|mermaid`, `--depth=overview\|detailed\|full` | - |
+| `/prefix:scan:perf` | Deep Performance Profiling with 7 Agents for Bottleneck Identification and Optimization | `directory`, `--profile=cpu\|memory\|io\|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` | - |
+| `/prefix:scan:quality` | Comprehensive code quality metrics with trend analysis and improvement roadmap | `<directory>`, `--baseline=previous.json`, `--threshold=80`, `--export` | - |
+| `/prefix:scan:quick` | Quick parallel code analysis for rapid feedback (30 seconds) | `<directory>`, `--focus=area`, `--export-json` | - |
+| `/prefix:scan:refactor` | Analyzes the impact of refactoring changes using 6 specialized agents | `file-or-pattern`, `--change-type=rename\|move\|signature\|structure` | - |
+| `/prefix:scan:report` | Intelligent analysis of code quality reports with trend detection, prioritization, and actionable insights | `report.json`, `--latest`, `--compare=other-report.json`, `--history`, `--trends`, `--quick-wins`, `--export-md`, `--generate-action-plan` | - |
+| `/prefix:scan:root-cause` | Deep root cause analysis with ultra intensive reasoning | `issue_description` | - |
+| `/prefix:scan:tests` | Comprehensive test coverage analysis with 5 specialized agents for test quality | `directory`, `--framework=jest\|pytest\|go-test\|cargo-test`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` | - |
 
 ### Sec Commands
 
-| Command | Description | Options |
-|---------|-------------|---------|
-| `/prefix:sec:audit` | Comprehensive security audit with MCP-enhanced scanning or traditional fallback methods | `directory`, `--severity=critical\|high\|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` |
-| `/prefix:sec:baseline` | Establish and track security baseline with MCP-enhanced scanning or traditional methods | `directory`, `--export-baseline`, `--compare=previous-baseline.json`, `--track-improvements` |
-| `/prefix:sec:comply` | Run compliance checks for OWASP, PCI-DSS, GDPR, and custom security policies | `directory`, `--standard=owasp\|pci-dss\|gdpr\|all`, `--custom-rules=rules.yaml`, `--export-report` |
+| Command | Description | Options | Help |
+|---------|-------------|---------|------|
+
+| `/prefix:sec:audit` | Comprehensive security audit with MCP-enhanced scanning or traditional fallback methods | `directory`, `--severity=critical\|high\|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` | ✓ |
+| `/prefix:sec:baseline` | Establish and track security baseline with MCP-enhanced scanning or traditional methods | `directory`, `--export-baseline`, `--compare=previous-baseline.json`, `--track-improvements` | - |
+| `/prefix:sec:comply` | Run compliance checks for OWASP, PCI-DSS, GDPR, and custom security policies | `directory`, `--standard=owasp\|pci-dss\|gdpr\|all`, `--custom-rules=rules.yaml`, `--export-report` | - |
 
 ### Typo3 Commands
 
-| Command | Description | Options |
-|---------|-------------|---------|
-| `/prefix:typo3:content-blocks` | Generate TYPO3 Content Blocks v1.3 with modern field configurations | `name`, `--type=element\|page`, `--fields=...`, `--sitepackage=path` |
-| `/prefix:typo3:extension-kickstarter` | Create TYPO3 extensions using ext-kickstarter or manual scaffolding | `extension-key`, `--type=...`, `--use-kickstarter`, `--composer-name=...` |
-| `/prefix:typo3:fluid-components` | Generate Fluid v4 Components for TYPO3 v13 with Atomic Design patterns | `component-name`, `--type=atom\|molecule\|organism`, `--sitepackage=path` |
-| `/prefix:typo3:make-content-block` | Wrapper for TYPO3 make:content-block command with intelligent defaults | `--vendor=...`, `--type=...`, `--skeleton-path=...`, `--config-path=...` |
-| `/prefix:typo3:sitepackage` | Create a TYPO3 v13.4 SitePackage based on official template with Site Sets | `vendor`, `package-name`, `--include-ddev`, `--include-docker`, `--author=name`, `--email=address` |
+| Command | Description | Options | Help |
+|---------|-------------|---------|------|
+
+| `/prefix:typo3:content-blocks` | Generate TYPO3 Content Blocks v1.3 with modern field configurations | `name`, `--type=element\|page`, `--fields=...`, `--sitepackage=path` | - |
+| `/prefix:typo3:extension-kickstarter` | Create TYPO3 extensions using ext-kickstarter or manual scaffolding | `extension-key`, `--type=...`, `--use-kickstarter`, `--composer-name=...` | - |
+| `/prefix:typo3:fluid-components` | Generate Fluid v4 Components for TYPO3 v13 with Atomic Design patterns | `component-name`, `--type=atom\|molecule\|organism`, `--sitepackage=path` | - |
+| `/prefix:typo3:make-content-block` | Wrapper for TYPO3 make:content-block command with intelligent defaults | `--vendor=...`, `--type=...`, `--skeleton-path=...`, `--config-path=...` | - |
+| `/prefix:typo3:sitepackage` | Create a TYPO3 v13.4 SitePackage based on official template with Site Sets | `vendor`, `package-name`, `--include-ddev`, `--include-docker`, `--author=name`, `--email=address` | - |
+
+## Help System
+
+Some commands provide detailed help information when called with the `--help` option. Commands with help support are marked with ✓ in the Help column above.
+
+### Usage
+
+To get detailed help for any supported command:
+
+```bash
+/prefix:category:command --help
+```
+
+This will show:
+
+- Detailed description and usage
+- All available options with explanations  
+- Examples with real use cases
+- Related commands and workflows
+- MCP enhancement information (if applicable)
+
+### Example
+
+```bash
+/prefix:git:conflict-resolver --help
+```
+
+Shows comprehensive guide for Git conflict resolution including strategies, workflows, and team best practices.
+
+### Generate Help Documentation
+
+You can also generate formatted help output using the helper script:
+
+```bash
+./scripts/generate-help.sh <category>/<command>.md
+```
+
+This provides additional formatting options and can be used for documentation generation.
 
 <!-- COMMANDS:END -->
 
