@@ -13,7 +13,7 @@ This command provides interactive, step-by-step guidance for resolving Git confl
 ```
 /conflict-resolver                                    # Detect and resolve current conflicts
 /conflict-resolver feature-branch main                # Resolve conflicts when merging feature-branch into main
-/conflict-resolver PHK-466 main --strategy:theirs    # Resolve giving priority to source branch
+/conflict-resolver feature-branch main --strategy:theirs    # Resolve giving priority to source branch
 /conflict-resolver --strategy:rebase                 # Use rebase strategy for conflict resolution
 /conflict-resolver --rebase-feature                  # Rebase current feature branch onto main (team workflow)
 /conflict-resolver feature-branch --rebase-onto main # Explicit rebase feature onto main
@@ -76,6 +76,33 @@ For each conflicted file, present:
    │ + }                                           │
    └─────────────────────────────────────────────┘
 
+📋 Raw Conflict View (as in file):
+   ┌─────────────────────────────────────────────┐
+   │ 42:  function authenticate(user) {          │
+   │ 43:    validateUser(user);                  │
+   │ 44: <<<<<<< HEAD                            │
+   │ 45:    // OAuth2 authentication             │
+   │ 46:    async function authenticateOAuth2() {│
+   │ 47:      const provider = getProvider();    │
+   │ 48:      return provider.validate(token);   │
+   │ 49:    }                                     │
+   │ 50: =======                                  │
+   │ 51:    // Enhanced password validation      │
+   │ 52:    function validatePassword(password) {│
+   │ 53:      if (password.length < 12) return;  │
+   │ 54:      return /[A-Z].*[0-9]/.test(pass);  │
+   │ 55:    }                                     │
+   │ 56: >>>>>>> main                            │
+   │ 57:  }                                       │
+   └─────────────────────────────────────────────┘
+
+📊 Side-by-Side Comparison:
+   ┌──────── THEIRS (feature) ────────┬──────── OURS (main) ──────────┐
+   │ async function authenticateOAuth2│ function validatePassword()    │
+   │   const provider = getProvider();│   if (password.length < 12)    │
+   │   return provider.validate();    │   return /[A-Z].*[0-9]/.test();│
+   └───────────────────────────────────┴─────────────────────────────────┘
+
 💡 Recommendation:
    Both changes serve different purposes and can coexist.
    Suggested resolution: KEEP BOTH
@@ -110,8 +137,12 @@ How would you like to resolve this conflict?
 5. 💭 Skip for now (resolve later)
 6. 🔍 Show more context (surrounding code)
 7. 📚 Explain changes in detail
+8. 📄 Show full file with conflicts highlighted
+9. 🔎 Show 10 lines before/after conflict
+10. 📦 Show entire function/class containing conflict
+11. 🕐 Show git blame for conflict lines
 
-Choose [1-7]: _
+Choose [1-11]: _
 ```
 
 ### Phase 4: Conflict Resolution Execution
@@ -221,7 +252,7 @@ For teams preferring linear Git history, this command offers special rebase supp
 
 ```bash
 # 1. START: Work on your feature
-git checkout -b PHK-466_IntegrateBasisStyles
+git checkout -b feature/integrate-new-styles
 
 # 2. DURING DEVELOPMENT: Main was updated
 # Instead of merge, do rebase:
@@ -229,7 +260,7 @@ git checkout -b PHK-466_IntegrateBasisStyles
 
 # The command guides you through:
 ┌─────────────────────────────────────────────────┐
-│ 🔄 REBASE: PHK-466 onto origin/main            │
+│ 🔄 REBASE: feature/integrate-new-styles onto origin/main │
 │                                                 │
 │ Replaying commit 1/3: "Add OAuth setup"        │
 │ ⚔️ CONFLICT in: src/auth.js                    │
@@ -243,7 +274,7 @@ git checkout -b PHK-466_IntegrateBasisStyles
 └─────────────────────────────────────────────────┘
 
 # 3. AFTER REBASE: Force-push with safety
-git push --force-with-lease origin PHK-466_IntegrateBasisStyles
+git push --force-with-lease origin feature/integrate-new-styles
 ```
 
 ### Rebase-Specific Conflict Handling
@@ -261,6 +292,31 @@ Conflicts during rebase differ from merge conflicts:
 - Communicate with your team when rebasing
 
 ## Advanced Features
+
+### Git Commands for Code Extraction
+
+The command uses various Git commands to extract and display conflict information:
+
+```bash
+# Show conflict markers in file
+git diff --check                    # Lists files with conflict markers
+
+# Extract different versions of conflicted file
+git show :1:path/to/file           # Common ancestor (base)
+git show :2:path/to/file           # Our version (HEAD/main)
+git show :3:path/to/file           # Their version (feature branch)
+
+# Show context around conflicts
+git diff --no-index --no-prefix \
+  <(git show :2:file) <(git show :3:file)  # Direct comparison
+
+# Get detailed conflict information
+git ls-files -u                    # List unmerged files with stages
+git diff --name-only --diff-filter=U  # List only conflicted files
+
+# Show blame information for conflict context
+git blame -L 40,60 path/to/file    # Show who changed lines 40-60
+```
 
 ### Intelligent Conflict Analysis
 
@@ -315,7 +371,7 @@ Works seamlessly with:
 
 ```bash
 # User reports MR conflict in GitLab
-/conflict-resolver PHK-466_IntegrateBasisStyles main --strategy:theirs
+/conflict-resolver feature/auth-integration main --strategy:theirs
 
 # Command will:
 # 1. Fetch both branches
@@ -342,22 +398,22 @@ Works seamlessly with:
 # 5. Feature branch has linear history on top of main
 
 # Alternative explicit syntax:
-/conflict-resolver PHK-466_IntegrateBasisStyles --rebase-onto main
+/conflict-resolver feature/auth-integration --rebase-onto main
 ```
 
 ### Scenario 2b: Team Rebase Workflow
 
 ```bash
 # Typical team workflow:
-# 1. You're working on PHK-466_IntegrateBasisStyles
+# 1. You're working on feature/new-integration
 # 2. Main has received new commits
 # 3. Update your branch via rebase:
 
-git checkout PHK-466_IntegrateBasisStyles
+git checkout feature/new-integration
 /conflict-resolver --rebase-feature
 
 # After conflict resolution:
-git push --force-with-lease origin PHK-466_IntegrateBasisStyles
+git push --force-with-lease origin feature/new-integration
 
 # GitLab MR shows: "No conflicts, linear history ✅"
 ```
