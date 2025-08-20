@@ -108,7 +108,7 @@ TYPO3 checks paths in descending numerical order:
 
 ### Cache Clearing
 
-See [Commands Reference](./references/commands-reference.md#cache-management) for cache clearing after TypoScript changes.
+See [TYPO3 Commands Reference](./references/typo3-ddev-commands-reference.md#cache-management) for cache clearing after TypoScript changes.
 
 ### Error: "The Fluid template files could not be loaded"
 

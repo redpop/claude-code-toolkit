@@ -20,13 +20,19 @@ This knowledge base contains comprehensive documentation for TYPO3 v13 developme
 - **[Shared Partials Configuration](./content-blocks-shared-partials.md)** - Component sharing strategies
 - **[Troubleshooting Matrix](./troubleshooting-matrix.md)** - Quick diagnosis and solutions
 
+### ✏️ CKEditor/RTE Documentation
+
+- **[CKEditor Configuration Guide](./ckeditor-configuration-guide.md)** - Comprehensive CKEditor v13+ configuration
+- **[CKEditor Examples Reference](./references/ckeditor-examples-reference.md)** - Ready-to-use configuration examples
+
 ### 📖 Reference Guides
 
 Quick lookup references for common tasks:
 
-- **[Commands Reference](./references/commands-reference.md)** - All TYPO3 CLI commands in one place
+- **[TYPO3 Commands Reference](./references/typo3-ddev-commands-reference.md)** - TYPO3 v13 CLI commands for DDEV and non-DDEV environments
 - **[Field Naming Reference](./references/field-naming-reference.md)** - Complete guide to field naming patterns
 - **[Backend Preview Reference](./references/backend-preview-reference.md)** - Backend preview template examples
+- **[CKEditor Examples Reference](./references/ckeditor-examples-reference.md)** - Ready-to-use CKEditor configuration examples
 
 ## Document Organization
 
@@ -82,6 +88,7 @@ Centralized references to eliminate redundancy:
 - **Commands** - All CLI commands for cache, database, debugging
 - **Field Naming** - Patterns, examples, debugging field names
 - **Backend Preview** - Templates, ViewHelpers, best practices
+- **CKEditor Examples** - Configuration snippets, presets, toolbar setups
 
 ## Quick Start Guides
 
@@ -89,12 +96,12 @@ Centralized references to eliminate redundancy:
 
 1. Start with [Sitepackage v13 Template](./sitepackage-v13-template.md)
 2. Review [Content Blocks Core Patterns](./content-blocks-core-patterns.md)
-3. Keep [Commands Reference](./references/commands-reference.md) handy
+3. Keep [TYPO3 Commands Reference](./references/typo3-ddev-commands-reference.md) handy
 
 ### Debugging Issues?
 
 1. Check [Troubleshooting Matrix](./troubleshooting-matrix.md) first
-2. Use [Commands Reference](./references/commands-reference.md#debugging-commands)
+2. Use [TYPO3 Commands Reference](./references/typo3-ddev-commands-reference.md#debugging-commands)
 3. Review [Field Naming Reference](./references/field-naming-reference.md#debug-field-names)
 
 ### Building Content Blocks?
@@ -102,6 +109,12 @@ Centralized references to eliminate redundancy:
 1. Follow [Content Blocks Core Patterns](./content-blocks-core-patterns.md)
 2. Use [Shared Partials](./content-blocks-shared-partials.md) for components
 3. Reference [Backend Preview Templates](./references/backend-preview-reference.md)
+
+### Configuring RTE/CKEditor?
+
+1. Start with [CKEditor Configuration Guide](./ckeditor-configuration-guide.md)
+2. Browse [CKEditor Examples Reference](./references/ckeditor-examples-reference.md)
+3. Check [Sitepackage Configuration Guide](./sitepackage-configuration-guide.md#rte-configuration)
 
 ## Key Concepts
 

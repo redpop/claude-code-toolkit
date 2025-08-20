@@ -154,11 +154,11 @@ See [Field Naming Reference](./references/field-naming-reference.md#debug-field-
 
 ### 2. Cache Clearing
 
-See [Commands Reference](./references/commands-reference.md#cache-management) for all cache clearing options.
+See [TYPO3 Commands Reference](./references/typo3-ddev-commands-reference.md#cache-management) for all cache clearing options.
 
 ### 3. Database Verification
 
-See [Commands Reference](./references/commands-reference.md#database-commands) for database inspection commands.
+See [TYPO3 Commands Reference](./references/typo3-ddev-commands-reference.md#database-commands) for database inspection commands.
 
 ### 4. TCA Inspection
 
@@ -182,7 +182,7 @@ Check generated TCA in:
 ### 3. Cache Not Clearing
 
 **Problem:** Changes not reflecting
-**Solution:** See [Commands Reference](./references/commands-reference.md#cache-management)
+**Solution:** See [TYPO3 Commands Reference](./references/typo3-ddev-commands-reference.md#cache-management)
 
 ### 4. Missing Backend Preview
 
