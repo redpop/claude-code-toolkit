@@ -5,6 +5,47 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.17.0] - 2025-08-20
+
+### Added
+
+- ✨ **Help System** - Comprehensive help command with dynamic generation
+  - New `/meta:help` command for interactive help and command discovery
+  - Generate-help.sh script for automated help documentation
+  - Support for multiple help formats: list, search, category, and detail views
+  - Help output template for consistent formatting
+  - Complete documentation and implementation guide
+
+- ✨ **Tailwind CSS Support** - CSS optimization and analysis tools
+  - New tailwind-css-specialist agent for CSS optimization
+  - `/css:tailwind-optimize` command for Tailwind analysis
+  - Comprehensive Tailwind patterns knowledge base
+  - JIT optimization and unused class removal support
+
+- ✨ **Documentation Synchronization** - New `/meta:docs-sync` command for maintaining documentation consistency
+
+### Changed
+
+- 🔄 **Command Documentation** - Enhanced all commands with argument-hint metadata
+  - Added argument-hint to all command files for better usage guidance
+  - Updated update-readme.sh to support argument-hint display
+  - Improved chain command with detailed examples and error handling
+
+- 🔄 **TYPO3 Knowledge Base** - Significant documentation expansion
+  - Added comprehensive CKEditor configuration guide with examples
+  - Created CKEditor examples reference with toolbar configurations
+  - Added TYPO3 DDEV commands reference for local development
+  - Updated existing documentation with improved organization
+
+- 🔄 **CLAUDE.md Strategy** - Implemented distributed context approach
+  - Updated all CLAUDE.md files with focused, directory-specific context
+  - Improved context management and reduced cognitive load
+  - Better separation of concerns across different toolkit areas
+
+### Fixed
+
+- 🐛 **Security Audit** - Enhanced sec:audit command with MCP integration support
+
 ## [3.16.1] - 2025-08-20
 
 ### Changed
