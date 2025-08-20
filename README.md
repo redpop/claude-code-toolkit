@@ -203,6 +203,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | Command | Description | Options |
 |---------|-------------|---------|
 | `/prefix:git:commit` | Creates structured Git commits with Conventional Commit format and emojis | `--no-verify`, `--fast`, `--push` |
+| `/prefix:git:conflict-resolver` | Interactive Git conflict resolution with step-by-step guidance and recommendations | `source-branch`, `target-branch`, `--strategy:merge\|rebase\|theirs\|ours` |
 | `/prefix:git:review` | Reviews all Git changes before commit to ensure code quality and identify issues | `--staged-only`, `--detailed` |
 
 ### Meta Commands
