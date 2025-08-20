@@ -1,6 +1,6 @@
 ---
 description: Interactive Git conflict resolution with step-by-step guidance and recommendations
-argument-hint: [source-branch] [target-branch] [--strategy:merge|rebase|theirs|ours]
+argument-hint: [source-branch] [target-branch] [--strategy:merge|rebase|theirs|ours] [--rebase-feature]
 mcp-enhanced: mcp__github__pull_request, mcp__gitlab__merge_request
 ---
 
