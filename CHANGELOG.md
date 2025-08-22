@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.18.0] - 2025-08-22
+
+### Added
+
+- ✨ **Simplified Commit Command** - New `/git:commit-simple` for clean commits without emojis
+  - Intelligent branch prefix extraction for ticket/issue references
+  - Smart commit grouping for atomic, logical commits
+  - Support for single commits with `--single` flag
+  - Brief mode for concise messages with `--brief` flag
+  - Fast mode with automatic first suggestion selection
+
+### Changed
+
+- 🔄 **Commit Command Improvements** - Enhanced existing commit command documentation
+  - Cleaner example commit messages
+  - Silent validation without verbose output
+  - Improved formatting and consistency
+
 ## [3.17.0] - 2025-08-20
 
 ### Added
