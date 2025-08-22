@@ -109,6 +109,12 @@ This intelligent command helps you find the most suitable Claude Code command fo
 **Commands**: typo3:content-blocks, typo3:sitepackage, typo3:extension-kickstarter, typo3:make-content-block
 **Agents**: typo3-content-blocks-specialist, typo3-architect, typo3-typoscript-expert, typo3-extension-developer
 
+### 🎨 CSS & Styling
+
+**Keywords**: css, styles, styling, postcss, tailwind, responsive, breakpoints, mixins, modular css, figma, design system, design tokens
+**Commands**: css:tailwind-optimize, css:figma-to-styles
+**Focus**: CSS architecture, responsive design, component styling, design system implementation
+
 ## Workflow
 
 **CRITICAL**: This is a DISCOVERY command only. Do NOT analyze code or execute tasks!
