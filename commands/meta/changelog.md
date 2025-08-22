@@ -1,6 +1,6 @@
 ---
 description: AI-powered CHANGELOG.md management that automatically determines version based on changes
-argument-hint: [--analyze] [--commit] [--push] [--update-version]
+argument-hint: [--commit] [--push] [--fast] [--update-version]
 ---
 
 # Claude Command: Changelog
@@ -11,9 +11,8 @@ This command intelligently manages your project's CHANGELOG.md file by analyzing
 
 ```
 /changelog                              # AI determines version and updates changelog
-/changelog --analyze                    # Preview what version would be chosen without making changes
 /changelog --commit                     # Update changelog and commit using git commit command
-/changelog --push                       # Update changelog, commit, and push to remote
+/changelog --fast                       # Update changelog, commit, and push in one command
 /changelog --update-version             # Also update version in package files
 /changelog --commit --update-version    # Full automated workflow
 /changelog --commit --push              # Update, commit, and push in one command
@@ -21,19 +20,20 @@ This command intelligently manages your project's CHANGELOG.md file by analyzing
 
 ### Arguments
 
-- `--analyze`: Preview mode - shows what version would be chosen and what changes would be added
 - `--commit`: Automatically commit the changelog update (uses `/git/commit` command if available)
 - `--push`: Also push the commit to the remote repository (requires --commit)
+- `--fast`: Shortcut for --commit --push (update, commit, and push in one command)
 - `--update-version`: Update version in package files (package.json, pyproject.toml, etc.)
 
 ## Examples
 
 ```
 /changelog                                    # Basic usage - AI analyzes and updates changelog
-/changelog --analyze                          # See what would happen without changes
 /changelog --commit                           # Update and commit with proper message
+/changelog --fast                             # Quick release: update, commit, and push
 /changelog --commit --push                    # Update, commit, and push to remote
 /changelog --commit --update-version          # Full release workflow
+/changelog --fast --update-version            # Fast mode with version update
 /changelog --commit --update-version --push   # Complete release with push
 ```
 
@@ -64,7 +64,7 @@ This command intelligently manages your project's CHANGELOG.md file by analyzing
    - No [Unreleased] section (continuous deployment workflow)
 
 4. **Optional Actions**:
-   - **--analyze**: Preview mode to see what would happen
+   - **--fast**: Quick workflow - combines commit and push in one command
    - **--update-version**: Updates version in all detected package files
    - **--commit**: Integrates with `/git/commit` command for proper commit workflow
    - **--push**: Pushes the commit to remote repository (requires --commit)
@@ -113,7 +113,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Workflow Steps
 
-1. **Analyze Repository State**:
+1. **Analyze Repository State** (always done automatically):
 
    - Get current version from CHANGELOG.md or package files
    - List all commits since last version tag
@@ -195,7 +195,7 @@ The AI analyzes your codebase to determine the appropriate version bump:
   - `feat:` for new features
   - `fix:` for bug fixes
   - `BREAKING CHANGE:` for breaking changes
-- **Review Before Committing**: Use `--analyze` to preview changes first
+- **Quick Release**: Use `--fast` for rapid update-commit-push workflow
 
 - **Full Release Workflow**: Use `--commit --update-version` for complete automation
 
@@ -328,14 +328,13 @@ After commits:
 - `BREAKING CHANGE: remove deprecated v1 endpoints`
 - `fix: update error handling`
 
-Running `/changelog --analyze` shows:
+Running `/changelog` (with `--fast` for quick workflow) will:
 
-```
-Version bump: 1.1.0 → 2.0.0 (MAJOR - breaking changes detected)
-Changes to be added:
-- Breaking: Redesign API endpoints, remove deprecated v1 endpoints
-- Fixed: Update error handling
-```
+- Detect version bump: 1.1.0 → 2.0.0 (MAJOR - breaking changes detected)
+- Add these changes:
+  - Breaking: Redesign API endpoints, remove deprecated v1 endpoints
+  - Fixed: Update error handling
+- Commit and push automatically with `--fast`
 
 ### Example 3: Patch Release
 
@@ -364,19 +363,19 @@ Running `/changelog --commit --update-version --push`:
 - Pushes to remote repository
 - Shows: `✅ Successfully pushed v1.2.0 to origin/main`
 
-### Example 4: Preview Mode
+### Example 4: Fast Mode
 
-Running `/changelog --analyze` without making changes:
+Running `/changelog --fast` for quick release:
 
+```bash
+/changelog --fast
 ```
-Current version: 1.0.0
-Analyzing changes since last release...
 
-Proposed version: 1.1.0 (MINOR)
-Detected changes:
-- Added: New dashboard feature
-- Changed: Improved performance metrics
-- Fixed: Navigation bug on mobile
+This single command will:
 
-No files will be modified (preview mode)
-```
+1. Analyze all changes since last version
+2. Determine version bump (e.g., 1.0.0 → 1.1.0)
+3. Update CHANGELOG.md with categorized entries
+4. Commit with message: `📝 docs: update changelog for v1.1.0`
+5. Push to remote repository automatically
+6. Show: `✅ Successfully pushed v1.1.0 to origin/main`
