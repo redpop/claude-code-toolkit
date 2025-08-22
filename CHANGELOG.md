@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.21.0] - 2025-08-22
+
+### Added
+
+- ✨ **Universal Linting Command** - New `/fix:lint` command for comprehensive linting across all languages
+  - Automatic detection of project linters (ESLint, Prettier, Ruff, Black, etc.)
+  - Multi-language support with intelligent orchestration
+  - Smart agent routing for complex fixes that can't be auto-fixed
+  - Parallel execution for performance optimization
+  - Natural language instructions support for focused fixes
+
 ## [3.20.0] - 2025-08-22
 
 ### Added
