@@ -216,6 +216,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | Command | Description | Options | Help |
 |---------|-------------|---------|------|
 
+| `/prefix:git:commit-simple` | Creates clean Git commits with optional branch prefix extraction and intelligent grouping | `--no-verify`, `--fast`, `--push`, `--single`, `--brief` | - |
 | `/prefix:git:commit` | Creates structured Git commits with Conventional Commit format and emojis | `--no-verify`, `--fast`, `--push` | - |
 | `/prefix:git:conflict-resolver` | Interactive Git conflict resolution with step-by-step guidance and recommendations | `source-branch`, `target-branch`, `--strategy:merge\|rebase\|theirs\|ours`, `--rebase-feature`, `--test-command="npm`, `test"`, `--help` | ✓ |
 | `/prefix:git:review` | Reviews all Git changes before commit to ensure code quality and identify issues | `--staged-only`, `--detailed` | - |
