@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.20.0] - 2025-08-22
+
+### Added
+
+- ✨ **Fast Mode for Changelog Command** - New `--fast` option for quick commit-push workflow
+  - Single argument combines commit and push operations
+  - Streamlines release process with one command
+  - Removes need for `--commit --push` combination
+  - Automatic analysis without separate `--analyze` flag
+
+- ✨ **Interactive Settings Installation** - Enhanced installer with user-friendly settings management
+  - Interactive prompt when settings file exists
+  - Automatic timestamped backups before replacement
+  - Intelligent Python-based merging preserves non-hook settings
+  - Skip option for users who prefer manual configuration
+
+### Changed
+
+- 🔄 **Installation Flow Improvements** - Better handling of existing configurations
+  - Skip settings backup when using `--force` flag
+  - Graceful fallback to direct copy if Python merge fails
+  - Clear user prompts for configuration decisions
+
 ## [3.19.1] - 2025-08-22
 
 ### Changed
