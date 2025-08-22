@@ -486,9 +486,7 @@ if [ "$INSTALL_SETTINGS" = true ]; then
     # Check if settings.json already exists
     if [ -f "$CLAUDE_SETTINGS_FILE" ]; then
         if [ "$FORCE_INSTALL" = true ]; then
-            print_info "Force mode: Installing $PROFILE_DESC settings..."
-            # Backup existing settings
-            cp "$CLAUDE_SETTINGS_FILE" "${CLAUDE_SETTINGS_FILE}.backup.$(date +%Y%m%d_%H%M%S)"
+            print_info "Force mode: Installing $PROFILE_DESC settings without backup..."
             
             # Use Python to merge if available, preserving non-hook settings
             if command -v python3 &> /dev/null; then
