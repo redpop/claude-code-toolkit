@@ -526,12 +526,52 @@ print('\033[0;32m✓ Settings merged successfully\033[0m')
             fi
         else
             echo -e "${YELLOW}Warning: $CLAUDE_SETTINGS_FILE already exists.${NC}"
-            echo "Manual merge required. Hook configuration to add ($PROFILE_DESC):"
+            read -p "Replace existing settings? (y/N) " -n 1 -r
             echo
-            cat "$SETTINGS_SOURCE"
-            echo
-            echo "You can add this configuration manually to your existing settings.json"
-            echo "Or re-run with --force to overwrite (backup will be created)"
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+                print_info "Backing up existing settings..."
+                cp "$CLAUDE_SETTINGS_FILE" "${CLAUDE_SETTINGS_FILE}.backup.$(date +%Y%m%d_%H%M%S)"
+                print_info "Old settings backed up"
+                
+                # Use Python to merge if available, preserving non-hook settings
+                if command -v python3 &> /dev/null; then
+                    python3 -c "
+import json
+import sys
+
+# Read existing settings
+try:
+    with open('$CLAUDE_SETTINGS_FILE', 'r') as f:
+        existing = json.load(f)
+except:
+    existing = {}
+
+# Read new hook settings
+with open('$SETTINGS_SOURCE', 'r') as f:
+    new_settings = json.load(f)
+
+# Merge settings (hooks get replaced, other settings preserved)
+existing.update(new_settings)
+
+# Ensure schema is present
+if '\$schema' not in existing:
+    existing['\$schema'] = 'https://json.schemastore.org/claude-code-settings.json'
+
+# Write merged settings
+with open('$CLAUDE_SETTINGS_FILE', 'w') as f:
+    json.dump(existing, f, indent=2)
+
+print('\033[0;32m✓ Settings merged successfully\033[0m')
+" && print_success "Hooks profile '$HOOKS_PROFILE' installed" || {
+                        print_info "Python merge failed, using direct copy..."
+                        cp "$SETTINGS_SOURCE" "$CLAUDE_SETTINGS_FILE"
+                    }
+                else
+                    cp "$SETTINGS_SOURCE" "$CLAUDE_SETTINGS_FILE"
+                fi
+            else
+                print_info "Skipping settings installation."
+            fi
         fi
     else
         cp "$SETTINGS_SOURCE" "$CLAUDE_SETTINGS_FILE"
