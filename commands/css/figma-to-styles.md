@@ -5,22 +5,50 @@ argument-hint: "component-name [--css|--tailwind|--scss]"
 
 # Figma to Styles Command
 
-Analyzes Figma designs and generates precise CSS/Tailwind/SCSS implementations based on exact design specifications.
+Generates precise CSS/Tailwind/SCSS implementations from Figma designs using MCP integration.
+
+## Primary Usage - Figma Integration
+
+```bash
+# Select element in Figma, then run:
+/prefix:css:figma-to-styles button-primary --tailwind
+/prefix:css:figma-to-styles navigation-header --scss
+/prefix:css:figma-to-styles product-card --css
+```
+
+**Requires**:
+
+- Figma Desktop App with element selected
+- MCP Figma Dev Mode server configured
+
+## Alternative Mode - Manual Specs
+
+If Figma MCP is not available, you can provide specifications manually:
+
+```bash
+/prefix:css:figma-to-styles button "primary button with blue background #007AFF, white text, 16px padding, 8px border-radius"
+```
 
 ## Core Principles
 
 **CRITICAL**:
 
-- **Only implement what is visible in Figma** - Do NOT add extra styles, effects, or enhancements
-- **Ask before assuming** - Always ask about responsive variants if not specified
-- **Exact values only** - Use precise values from Figma, never approximate or "improve"
-- **No creative additions** - Strictly follow the design without adding hover states, transitions, or other effects unless explicitly shown in Figma
+- **Implement exactly what is specified** - Do NOT add extra styles, effects, or enhancements
+- **Ask before assuming** - Always ask about unclear requirements or responsive variants
+- **Use exact values** - When specific values are given, use them precisely
+- **No creative additions** - Don't add hover states, transitions, or other effects unless explicitly requested
 
 ## Workflow
 
-### Step 1: Determine Output Format
+### Step 1: Check Figma Connection
 
-First, determine the styling approach:
+1. **Try to connect to Figma MCP server**
+2. **Check if element is selected in Figma**
+3. **If no connection**: Fall back to manual mode (ask for specs)
+
+### Step 2: Determine Output Format
+
+If no format flag provided:
 
 1. **Check project for existing patterns**:
    - Look for Tailwind configuration files
@@ -29,7 +57,7 @@ First, determine the styling approach:
 
 2. **Ask user if unclear**:
 
-   ```
+   ```text
    "I found [evidence of framework]. Should I generate:
    - Tailwind CSS classes
    - SCSS/Sass
@@ -38,44 +66,59 @@ First, determine the styling approach:
    - Other?"
    ```
 
-### Step 2: Analyze Figma Design
+### Step 3: Extract Design Information
 
-1. Check if user has selected a Figma element
-2. Use MCP Figma tools to extract design information:
-   - `mcp__figma-dev-mode-mcp-server__get_code` for component structure
-   - `mcp__figma-dev-mode-mcp-server__get_image` for visual reference
-   - `mcp__figma-dev-mode-mcp-server__get_variable_defs` for design tokens
+#### Primary: From Figma (if connected)
 
-3. **Ask about variants**:
+Use MCP Figma tools to extract:
 
-   ```
-   "I see the [component] design. Are there:
-   - Responsive variants (mobile, tablet, desktop)?
-   - State variants (hover, active, disabled)?
-   - Theme variants (light/dark)?
-   Please select them in Figma if you want them included."
-   ```
+- `mcp__figma-dev-mode-mcp-server__get_code` for component structure
+- `mcp__figma-dev-mode-mcp-server__get_image` for visual reference
+- `mcp__figma-dev-mode-mcp-server__get_variable_defs` for design tokens
 
-### Step 3: Extract EXACT Design Values
+Ask about variants:
 
-Extract ONLY what is defined in Figma:
+```text
+"I see the [component] design. Are there:
+- Responsive variants (mobile, tablet, desktop)?
+- State variants (hover, active, disabled)?
+- Theme variants (light/dark)?
+Please select them in Figma if you want them included."
+```
 
-- Typography (exact font-size, line-height, font-weight, font-family)
-- Spacing (exact padding, margin, gap values)
-- Colors (exact hex/rgb values)
-- Layout (exact dimensions, flex/grid properties)
-- Borders (exact width, style, color)
-- Shadows (exact values if present)
+#### Fallback: Manual specification
 
-**DO NOT ADD**:
+If Figma not available, ask for specifications:
 
-- Hover effects not in Figma
-- Transitions/animations not specified
-- Focus states not designed
-- Additional spacing for "better UX"
-- Color variations not in the design
+```text
+"Figma connection not available. Please provide design specs:
+- Colors (background, text, borders)
+- Spacing (padding, margin)
+- Typography (font-size, weight)
+- Dimensions (width, height)
+- Other properties?"
+```
 
-### Step 4: Generate Implementation
+### Step 4: Extract Design Values
+
+Extract design values based on input:
+
+- Typography (font-size, line-height, font-weight, font-family)
+- Spacing (padding, margin, gap values)
+- Colors (hex/rgb values)
+- Layout (dimensions, flex/grid properties)
+- Borders (width, style, color)
+- Shadows (if specified)
+
+**DO NOT ADD unless requested**:
+
+- Hover effects not specified
+- Transitions/animations
+- Focus states
+- Additional spacing
+- Color variations
+
+### Step 5: Generate Implementation
 
 Based on the chosen format:
 
@@ -112,35 +155,32 @@ Based on the chosen format:
 }
 ```
 
-### Step 5: Handle Responsive Design
+### Step 6: Handle Responsive Design
 
-If responsive variants are provided:
+If responsive variants are mentioned or needed:
 
-1. **Request each breakpoint design**:
+1. **Ask about breakpoints**:
 
+   ```text
+   "Should I include responsive styles for:
+   - Mobile (< 768px)
+   - Tablet (768px - 1024px)
+   - Desktop (> 1024px)
+   - Custom breakpoints?"
    ```
-   "Please select the tablet version in Figma"
-   "Please select the mobile version in Figma"
-   ```
 
-2. **Extract exact differences** per breakpoint
-3. **Generate only the changes** that differ from base
+2. **Get specifications per breakpoint**
+3. **Generate responsive code** with appropriate media queries
 
-### Step 6: Verification
+### Step 7: Final Review
 
-Present the implementation and ask:
+Present the implementation:
 
-```
-"This implementation includes ONLY what I found in the Figma design:
+```text
+"Generated [component-name] styles with:
 [list of implemented properties]
 
-Not included (not found in design):
-- Hover states
-- Focus styles
-- Transitions
-- [other common properties]
-
-Is this correct, or did I miss something in the Figma design?"
+Ready to create the file or would you like adjustments?"
 ```
 
 ## Agent Integration
@@ -164,46 +204,51 @@ Target format: [CSS/Tailwind/SCSS]"
 ## Usage Examples
 
 ```bash
-# Basic conversion with auto-detection
-/prefix:css:figma-to-styles button
+# Primary usage - from Figma
+/prefix:css:figma-to-styles button-primary
+/prefix:css:figma-to-styles navigation-header --tailwind
+/prefix:css:figma-to-styles product-card --scss
 
-# Specify Tailwind output
-/prefix:css:figma-to-styles card --tailwind
-
-# Specify SCSS output
-/prefix:css:figma-to-styles navigation --scss
-
-# Vanilla CSS output
-/prefix:css:figma-to-styles header --css
+# Fallback - manual specs (when Figma not available)
+/prefix:css:figma-to-styles button "blue button with white text, 12px padding, 6px rounded corners"
+/prefix:css:figma-to-styles card "product card with shadow, 16px padding, white background" --tailwind
 ```
 
 ## Prerequisites
 
-1. MCP Figma Dev Mode server must be configured
-2. Figma element should be selected in Figma desktop app
-3. Clear on output format (CSS/Tailwind/SCSS)
+**Primary (Figma mode)**:
+
+- Figma Desktop App running
+- Element selected in Figma
+- MCP Figma Dev Mode server configured
+
+**Fallback (manual mode)**:
+
+- Design specifications ready
+- Clear understanding of required styles
 
 ## Output
 
 The command will:
 
-1. Generate styles using ONLY Figma values
-2. Ask about missing variants/states
-3. Produce clean, maintainable code
-4. Never add unrequested enhancements
+1. Connect to Figma and extract exact design values
+2. Or ask for manual specs if Figma unavailable
+3. Generate clean, maintainable CSS/Tailwind/SCSS
+4. Create component files in appropriate location
+5. Only implement what's in the design - no extras
 
 ## Best Practices
 
-1. **Exact fidelity** - Never deviate from Figma values
-2. **Ask, don't assume** - Query about responsive/state variants
-3. **Document what's missing** - List what wasn't implemented
-4. **Use design tokens** - When available in Figma
-5. **Maintain simplicity** - Don't over-engineer
+1. **Be specific** - Provide clear values when possible (e.g., "16px padding" not "some padding")
+2. **Ask for clarification** - Command will ask about ambiguous requirements
+3. **Specify format** - Use --css, --tailwind, or --scss flags to avoid prompts
+4. **Include states** - Mention hover/focus states if needed
+5. **Think responsive** - Specify mobile/tablet differences upfront
 
 ## Error Handling
 
-- If no Figma element selected: "Please select an element in Figma first"
-- If MCP tools unavailable: Provide manual extraction guidance
-- If output format unclear: Ask user to specify
-- If design values ambiguous: Ask for clarification
-- If variants might exist: Prompt to check for them
+- If description unclear: Ask for specific values
+- If no format specified: Check project and ask
+- If Figma not configured: Suggest using description mode
+- If image unreadable: Ask for manual specs
+- If conflicting requirements: Request clarification
