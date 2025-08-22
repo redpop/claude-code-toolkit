@@ -148,31 +148,31 @@ When analyzing the diff, consider splitting commits based on these criteria:
 Good commit messages:
 
 - ✨ feat: add user authentication system
-- 🐛 fix: resolve memory leak in rendering process
+- 🐛 fix: resolve memory leak in data processing
 - 📝 docs: update API documentation with new endpoints
-- ♻️ refactor: simplify error handling logic in parser
-- 🚨 fix: resolve linter warnings in component files
-- 🧑‍💻 chore: improve developer tooling setup process
-- 👔 feat: implement business logic for transaction validation
-- 🩹 fix: address minor styling inconsistency in header
-- 🚑️ fix: patch critical security vulnerability in auth flow
-- 🎨 style: reorganize component structure for better readability
+- ♻️ refactor: simplify error handling logic
+- 🚨 fix: resolve linter warnings in components
+- 🧑‍💻 chore: improve developer tooling setup
+- 👔 feat: implement business logic for validation
+- 🩹 fix: address minor styling inconsistency
+- 🚑️ fix: patch critical security vulnerability
+- 🎨 style: reorganize component structure
 - 🔥 fix: remove deprecated legacy code
-- 🦺 feat: add input validation for user registration form
+- 🦺 feat: add input validation for forms
 - 💚 fix: resolve failing CI pipeline tests
-- 📈 feat: implement analytics tracking for user engagement
-- 🔒️ fix: strengthen authentication password requirements
-- ♿️ feat: improve form accessibility for screen readers
+- 📈 feat: implement analytics tracking
+- 🔒️ fix: strengthen password requirements
+- ♿️ feat: improve accessibility for screen readers
 
 Example of splitting commits:
 
-- First commit: ✨ feat: add new solc version type definitions
-- Second commit: 📝 docs: update documentation for new solc versions
+- First commit: ✨ feat: add user authentication module
+- Second commit: 📝 docs: update API documentation for auth endpoints
 - Third commit: 🔧 chore: update package.json dependencies
-- Fourth commit: 🏷️ feat: add type definitions for new API endpoints
-- Fifth commit: 🧵 feat: improve concurrency handling in worker threads
+- Fourth commit: 🏷️ feat: add type definitions for auth interfaces
+- Fifth commit: 🧵 feat: improve concurrency handling in request processing
 - Sixth commit: 🚨 fix: resolve linting issues in new code
-- Seventh commit: ✅ test: add unit tests for new solc version features
+- Seventh commit: ✅ test: add unit tests for authentication features
 - Eighth commit: 🔒️ fix: update dependencies with security vulnerabilities
 
 ## Command Options
@@ -203,7 +203,8 @@ Example of splitting commits:
   - "Generated with Claude Code" footer
   - "Co-Authored-By: Claude" lines
   - Project-specific forbidden content (check project commit guidelines)
-- Display validation warning: "⚠️ COMMIT VALIDATION: Clean message (no forbidden footers/metadata)"
+  - Any validation messages or warnings
+- Silently validate message without displaying any validation output
 - No Claude co-authorship footer is added unless explicitly required by project
 - If `--push` is used, the commit will be pushed to the remote repository automatically
 
@@ -216,7 +217,7 @@ Example of splitting commits:
 - No interactive prompts or confirmations
 - Ideal for simple, straightforward commits where you trust the auto-generated message
 - **CRITICAL**: Auto-validate selected message does NOT contain forbidden footers/metadata
-- Display validation: "⚠️ FAST MODE VALIDATION: Clean message confirmed"
+- Silently validate message without displaying any validation output
 - No Claude co-authorship footer is added unless explicitly required by project
 - Can be combined with `--push` for a complete commit-and-push workflow
 
