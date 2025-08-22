@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.19.0] - 2025-08-22
+
+### Added
+
+- ✨ **Figma to CSS Conversion** - New `/css:figma-to-styles` command for design-to-code workflow
+  - Convert Figma designs to CSS, Tailwind, or SCSS with exact specifications
+  - MCP Figma Dev Mode integration for precise value extraction
+  - Support for responsive breakpoints and design variants
+  - Strict fidelity to Figma values without creative additions
+
 ## [3.18.0] - 2025-08-22
 
 ### Added
