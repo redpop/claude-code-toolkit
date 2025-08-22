@@ -171,6 +171,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:auto:report` | Generate comprehensive completion report after action plan execution, showing results, metrics, and next steps | `--action-plan=<file>`, `--execution-log=<file>`, `--compare-baseline`, `--baseline=<file>`, `--current=<file>`, `--export-formats=md,json,html`, `--export-all`, `--export-json=<file>`, `--include-metrics`, `--include-git-log`, `--team-report`, `--recommendations` | - |
 | `/prefix:auto:sprint` | Plan and execute a complete code quality improvement sprint with analysis, prioritization, fixes, and tracking | `directory`, `--duration=1w\|2w\|1m`, `--team-size=N`, `--focus=security\|performance\|quality\|all` | - |
 
+
 ### Css Commands
 
 | Command | Description | Options | Help |
@@ -178,6 +179,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 
 | `/prefix:css:figma-to-styles` | Convert Figma designs to modular CSS architecture with responsive breakpoints | `component-name`, `--css\|--tailwind\|--scss` | - |
 | `/prefix:css:tailwind-optimize` | Analyze and optimize Tailwind CSS implementation with v4 best practices | `path`, `--check-migration`, `--export-json\|--export-md` | - |
+
 
 ### Fix Commands
 
@@ -192,6 +194,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:fix:security` | Fix security vulnerabilities with MCP-enhanced analysis or traditional pattern matching | `report.json`, `--severity=critical,high,medium`, `--dry-run`, `--interactive`, `--owasp-top10` | - |
 | `/prefix:fix:shell` | Automatically fix shell script issues using shellcheck analysis | `path/file`, `--check-only`, `--strict`, `--summary-only` | - |
 
+
 ### Flow Commands
 
 | Command | Description | Options | Help |
@@ -203,6 +206,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:flow:review` | Comprehensive code review using multiple specialized agents for different perspectives | `<file-or-directory>`, `--focus=security\|performance\|architecture\|all` | - |
 | `/prefix:flow:smart` | Intelligently analyze and route problems to the most appropriate specialized agents | `<problem-description>`, `--verbose`, `--suggest-only` | - |
 
+
 ### Gen Commands
 
 | Command | Description | Options | Help |
@@ -211,6 +215,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:gen:docs` | Generate comprehensive documentation including API docs, README files, code comments, and architecture diagrams | `directory\|file`, `--types=api,readme,comments,diagrams`, `--format=markdown,html`, `--update-existing` | - |
 | `/prefix:gen:format` | Create or convert content into various formats (HTML, Markdown, Confluence, Plain Text) | `<request-or-file>`, `--html\|--html-simple\|--markdown\|--confluence\|--text` | - |
 | `/prefix:gen:tests` | Generate comprehensive test suites for uncovered code, including unit tests, integration tests, and edge cases | `report.json\|file\|directory`, `--coverage-target=80`, `--framework=auto`, `--types=unit,integration`, `--mock-externals` | - |
+
 
 ### Git Commands
 
@@ -222,6 +227,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:git:conflict-resolver` | Interactive Git conflict resolution with step-by-step guidance and recommendations | `source-branch`, `target-branch`, `--strategy:merge\|rebase\|theirs\|ours`, `--rebase-feature`, `--test-command="npm`, `test"`, `--help` | ✓ |
 | `/prefix:git:review` | Reviews all Git changes before commit to ensure code quality and identify issues | `--staged-only`, `--detailed` | - |
 
+
 ### Meta Commands
 
 | Command | Description | Options | Help |
@@ -229,7 +235,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 
 | `/prefix:meta:analyze-toolkit` | Analyze toolkit commands and agents for redundancies, inconsistencies, and refactoring opportunities | `--fix`, `--export-json`, `--export-md`, `--focus=<area>` | - |
 | `/prefix:meta:chain` | Chain commands or execute pre-defined pipelines with intelligent data flow | `<pipeline-name`, `\|`, `command-chain>`, `--list`, `--save-as=name`, `--dry-run` | ✓ |
-| `/prefix:meta:changelog` | AI-powered CHANGELOG.md management that automatically determines version based on changes | `--analyze`, `--commit`, `--push`, `--update-version` | - |
+| `/prefix:meta:changelog` | AI-powered CHANGELOG.md management that automatically determines version based on changes | `--commit`, `--push`, `--fast`, `--update-version` | - |
 | `/prefix:meta:create` | Intelligently create commands, agents, or workflows from your description | `<what`, `you`, `need>`, `--type=auto\|command\|agent\|workflow` | - |
 | `/prefix:meta:docs-sync` | Verify and synchronize all documentation files with actual codebase structure | `--fix`, `--export-json`, `--export-md` | - |
 | `/prefix:meta:export` | Unified export management for all analysis results with format conversion | `<report-files...>`, `--format=md\|json\|html\|pdf`, `--merge`, `--template=name` | - |
@@ -241,6 +247,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:meta:test-guide` | Generates interactive test guides for recent changes, suitable for both end-users and technical reviewers | `--type=all\|user\|technical`, `--format=md\|checklist\|jira`, `--lang=en\|de\|es\|fr`, `--output=file.md` | - |
 | `/prefix:meta:update-docs` | Intelligently updates project documentation based on code changes and implementation status | `--scope=<type>`, `--analyze`, `--commit` | - |
 | `/prefix:meta:version` | Check installed toolkit version and available updates | `check\|update` | - |
+
 
 ### Scan Commands
 
@@ -260,6 +267,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:scan:root-cause` | Deep root cause analysis with ultra intensive reasoning | `issue_description` | - |
 | `/prefix:scan:tests` | Comprehensive test coverage analysis with 5 specialized agents for test quality | `directory`, `--framework=jest\|pytest\|go-test\|cargo-test`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` | - |
 
+
 ### Sec Commands
 
 | Command | Description | Options | Help |
@@ -268,6 +276,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:sec:audit` | Comprehensive security audit with MCP-enhanced scanning or traditional fallback methods | `directory`, `--severity=critical\|high\|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` | ✓ |
 | `/prefix:sec:baseline` | Establish and track security baseline with MCP-enhanced scanning or traditional methods | `directory`, `--export-baseline`, `--compare=previous-baseline.json`, `--track-improvements` | - |
 | `/prefix:sec:comply` | Run compliance checks for OWASP, PCI-DSS, GDPR, and custom security policies | `directory`, `--standard=owasp\|pci-dss\|gdpr\|all`, `--custom-rules=rules.yaml`, `--export-report` | - |
+
 
 ### Typo3 Commands
 
@@ -279,6 +288,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | `/prefix:typo3:fluid-components` | Generate Fluid v4 Components for TYPO3 v13 with Atomic Design patterns | `component-name`, `--type=atom\|molecule\|organism`, `--sitepackage=path` | - |
 | `/prefix:typo3:make-content-block` | Wrapper for TYPO3 make:content-block command with intelligent defaults | `--vendor=...`, `--type=...`, `--skeleton-path=...`, `--config-path=...` | - |
 | `/prefix:typo3:sitepackage` | Create a TYPO3 v13.4 SitePackage based on official template with Site Sets | `vendor`, `package-name`, `--include-ddev`, `--include-docker`, `--author=name`, `--email=address` | - |
+
 
 ## Help System
 
@@ -293,7 +303,6 @@ To get detailed help for any supported command:
 ```
 
 This will show:
-
 - Detailed description and usage
 - All available options with explanations  
 - Examples with real use cases
