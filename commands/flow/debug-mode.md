@@ -7,6 +7,21 @@ argument-hint: "[--verbose] [--trace]"
 
 Instantly switch Claude Code into intensive debugging mode for the current problem being worked on. No need to describe the issue - Claude Code will use the current context to understand what needs to be debugged.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: [Show frontmatter description field]
+- **Usage**: [Show frontmatter argument-hint field]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```bash

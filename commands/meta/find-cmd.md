@@ -9,6 +9,21 @@ argument-hint: <task-description> [--all] [--local-only] [--global-only]
 
 This intelligent command helps you find the most suitable Claude Code command for your specific task by analyzing all available commands (both globally installed and project-local).
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: [Show frontmatter description field]
+- **Usage**: [Show frontmatter argument-hint field]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ⚠️ **IMPORTANT INSTRUCTION FOR AI**:
 
 - This is a DISCOVERY command only

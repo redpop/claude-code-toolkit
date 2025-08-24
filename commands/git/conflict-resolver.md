@@ -70,6 +70,30 @@ fi
 
 This command provides interactive, step-by-step guidance for resolving Git conflicts, especially useful for merge requests with conflicts in GitLab or GitHub.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Interactive Git conflict resolution with step-by-step guidance and recommendations
+- **Usage**: [source-branch] [target-branch] [--strategy:merge|rebase|theirs|ours] [--rebase-feature] [--test-command="npm test"] [--help]
+- **Options**:
+  - `--strategy`: Conflict resolution strategy - merge (default), rebase, theirs (prefer source), ours (prefer target)
+  - `--test-command`: Command to run tests after resolution (e.g., 'npm test', 'pytest')
+  - `--rebase-feature`: Rebase current feature branch onto main (team workflow)
+  - `--help`: Show detailed help message with examples and strategies
+- **Examples**:
+  - Detect and resolve current conflicts interactively: `/conflict-resolver`
+  - Resolve conflicts when merging feature-branch into main: `/conflict-resolver feature-branch main`
+  - Resolve conflicts preferring source branch changes: `/conflict-resolver feature-branch main --strategy:theirs`
+  - Rebase feature branch with conflict resolution: `/conflict-resolver --rebase-feature`
+  - Resolve conflicts and run tests after: `/conflict-resolver --test-command='npm test'`
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```

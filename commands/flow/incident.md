@@ -7,6 +7,22 @@ argument-hint: <incident-description> [--severity=critical|high|medium] [--syste
 
 This command provides rapid incident response for production issues, coordinating multiple agents to diagnose, mitigate, and resolve problems quickly while maintaining a clear audit trail.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Rapid incident response workflow for production issues with root cause analysis
+- **Usage**: <incident-description> [--severity=critical|high|medium] [--system=component]
+- **Options**:
+  - `--severity`: Set incident severity level (critical/high/medium)
+  - `--system`: Specify affected system/component for focused analysis
+
+Then exit without executing the main command.
+
+---
+
 ## Incident Response Phases
 
 ### 🚨 Phase 1: Immediate Assessment (0-5 minutes)

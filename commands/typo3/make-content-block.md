@@ -7,6 +7,21 @@ argument-hint: "[--vendor=...] [--type=...] [--skeleton-path=...] [--config-path
 
 Intelligent wrapper for the native TYPO3 `make:content-block` command with sensible defaults and configuration management.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Wrapper for TYPO3 make:content-block command with intelligent defaults
+- **Usage**: [--vendor=...] [--type=...] [--skeleton-path=...] [--config-path=...]
+- **Options**: --vendor, --type, --skeleton-path, --config-path, --create-skeleton, --batch, --migrate-from
+- **Examples**: See the skeleton examples and command execution flow below
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```bash

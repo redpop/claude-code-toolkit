@@ -7,6 +7,22 @@ argument-hint: [--staged-only] [--detailed]
 
 This command performs a comprehensive review of all Git changes before committing, checking for code quality issues, redundancies, and potential problems.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Reviews all Git changes before commit to ensure code quality and identify issues
+- **Usage**: [--staged-only] [--detailed]
+- **Options**:
+  - `--staged-only`: Review only staged changes
+  - `--detailed`: Include detailed code analysis
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```

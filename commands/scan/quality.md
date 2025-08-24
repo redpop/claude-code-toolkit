@@ -7,6 +7,21 @@ argument-hint: <directory> [--baseline=previous.json] [--threshold=80] [--export
 
 Measure and track code quality metrics with actionable improvement recommendations.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Comprehensive code quality metrics with trend analysis and improvement roadmap
+- **Usage**: <directory> [--baseline=previous.json] [--threshold=80] [--export]
+- **Options**: See options section below
+- **Examples**: See usage examples section below
+
+Then exit without executing the main command.
+
+---
+
 ## Quality Dimensions
 
 1. **Maintainability**: How easy to modify and extend

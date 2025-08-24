@@ -25,6 +25,14 @@ Generate detailed refactoring steps with safety checks.
 
 **Target**: $ARGUMENTS
 
+### Check for Help Request
+
+If "$ARGUMENTS" contains "--help":
+
+- Display this command's full documentation
+- Show usage examples
+- Exit without executing analysis
+
 ### Step 1: Initial Analysis
 
 Use Task tool with subagent_type="general-purpose":

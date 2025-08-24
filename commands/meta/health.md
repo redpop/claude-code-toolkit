@@ -7,6 +7,21 @@ argument-hint: [--verbose] [--compare=last-check.json] [--export]
 
 Holistic assessment of your project's health across development, operations, and maintenance dimensions.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: [Show frontmatter description field]
+- **Usage**: [Show frontmatter argument-hint field]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Health Dimensions
 
 ### 🏗️ Development Health
