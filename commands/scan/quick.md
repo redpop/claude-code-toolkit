@@ -8,6 +8,21 @@ argument-hint: <directory> [--focus=area] [--export-json]
 
 Lightning-fast code analysis using parallel agents, perfect for pre-commit checks and rapid feedback. Gets you 80% of insights in 20% of the time.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Quick parallel code analysis for rapid feedback (30 seconds)
+- **Usage**: <directory> [--focus=area] [--export-json]
+- **Options**: See options section below
+- **Examples**: See usage examples section below
+
+Then exit without executing the main command.
+
+---
+
 ## How It Works
 
 All 10 agents run simultaneously, each scanning for specific issues. Results are then consolidated and prioritized.

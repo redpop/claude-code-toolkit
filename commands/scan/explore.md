@@ -10,6 +10,21 @@ argument-hint: [topic] [--depth=surface|medium|deep] [--focus=technical|business
 
 This command conducts in-depth research on a topic by having 8 specialized agents investigate different perspectives in parallel.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Multi-Perspective Deep Research with 8 different viewpoints on a topic
+- **Usage**: [topic] [--depth=surface|medium|deep] [--focus=technical|business|all]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Execution
 
 **IMMEDIATELY START 8 PARALLEL RESEARCH AGENTS:**

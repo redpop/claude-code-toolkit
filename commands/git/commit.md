@@ -7,6 +7,21 @@ argument-hint: [--no-verify] [--fast] [--push]
 
 This command helps you create well-formatted commits with conventional commit messages and emoji.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Creates structured Git commits with Conventional Commit format and emojis
+- **Usage**: [--no-verify] [--fast] [--push]
+- **Options**: See options section below
+- **Examples**: See usage examples section below
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 To create a commit, just type:

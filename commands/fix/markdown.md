@@ -7,6 +7,21 @@ argument-hint: <file-or-directory> [--fix] [--config <path>]
 
 Analyzes and optionally fixes markdown formatting issues using markdownlint-cli2.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: [Show frontmatter description field]
+- **Usage**: [Show frontmatter argument-hint field]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Core Functionality
 
 This command provides comprehensive markdown linting with automatic detection of the best available runner:

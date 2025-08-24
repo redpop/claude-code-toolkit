@@ -7,6 +7,21 @@ argument-hint: [summaries/]
 
 This command analyzes the entire chat history and creates a structured summary with an automatically generated, meaningful filename.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: [Show frontmatter description field]
+- **Usage**: [Show frontmatter argument-hint field]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```

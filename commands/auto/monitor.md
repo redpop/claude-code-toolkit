@@ -8,6 +8,21 @@ argument-hint: [directory] [--schedule=daily|weekly|commit] [--auto-fix=safe|all
 
 This command establishes an automated continuous quality improvement system that monitors code health, applies safe fixes, and maintains high standards without manual intervention.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Set up and manage continuous code quality monitoring with automated analysis, fixes, and reporting
+- **Usage**: [directory] [--schedule=daily|weekly|commit] [--auto-fix=safe|all|none] [--notify=email|slack|github] [--init]
+- **Options**: See options section below
+- **Examples**: See usage examples section below
+
+Then exit without executing the main command.
+
+---
+
 ## Usage Examples
 
 ```bash

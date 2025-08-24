@@ -8,6 +8,23 @@ argument-hint: [directory|file] [--types=api,readme,comments,diagrams] [--format
 
 This command automatically generates comprehensive documentation for your codebase, including API documentation, README files, inline comments, and architecture diagrams. It analyzes code structure and creates clear, maintainable documentation.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Generate comprehensive documentation including API docs, README files, code comments, and architecture diagrams
+- **Usage**: [directory|file] [--types=api,readme,comments,diagrams] [--format=markdown,html] [--update-existing]
+- **Options**:
+  - `--types`: Documentation types to generate (api, readme, comments, diagrams)
+  - `--format`: Output format (markdown, html)
+  - `--update-existing`: Update existing documentation files
+
+Then exit without executing the main command.
+
+---
+
 ## Usage Examples
 
 ```bash

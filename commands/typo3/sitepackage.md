@@ -7,6 +7,21 @@ argument-hint: "[vendor] [package-name] [--include-ddev] [--include-docker] [--a
 
 Creates a complete TYPO3 v13.4 compatible SitePackage based on the official template from <https://get.typo3.org/sitepackage> with modern Site Sets configuration and Fluid Styled Content integration.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Create a TYPO3 v13.4 SitePackage based on official template with Site Sets
+- **Usage**: [vendor] [package-name] [--include-ddev] [--include-docker] [--author=name] [--email=address]
+- **Options**: --include-ddev, --include-docker, --author, --email
+- **Examples**: See the complete file structure and configuration examples below
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```bash

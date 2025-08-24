@@ -10,6 +10,21 @@ argument-hint: [file-or-pattern] [--change-type=rename|move|signature|structure]
 
 This command analyzes the impact of planned refactoring changes through 6 parallel working agents. Ideal before major code restructuring.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Analyzes the impact of refactoring changes using 6 specialized agents
+- **Usage**: [file-or-pattern] [--change-type=rename|move|signature|structure]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Execution
 
 **IMMEDIATELY START 6 PARALLEL IMPACT AGENTS:**

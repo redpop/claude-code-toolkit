@@ -8,6 +8,21 @@ argument-hint: [--action-plan=<file>] [--execution-log=<file>] [--compare-baseli
 
 This command generates a comprehensive report after executing an action plan, analyzing what was accomplished, what failed, and providing recommendations for next steps. It can compare against baselines and export in multiple formats.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: [Show frontmatter description field]
+- **Usage**: [Show frontmatter argument-hint field]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Usage Patterns
 
 ### 1. Basic Completion Report

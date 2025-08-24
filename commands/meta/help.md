@@ -7,6 +7,21 @@ argument-hint: [command-name] [--list] [--search <keyword>] [--categories]
 
 Comprehensive help system for discovering and learning about Claude Code Toolkit commands.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Display help for commands or list available commands
+- **Usage**: [command-name] [--list] [--search <keyword>] [--categories]
+- **Options**: See options section below
+- **Examples**: See usage examples section below
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```bash

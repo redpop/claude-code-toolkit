@@ -7,6 +7,21 @@ argument-hint: "[path or custom instructions]"
 
 Automatically detects your project's linters and fixes all linting errors across JavaScript, TypeScript, Python, Go, Rust, Ruby, PHP, and more. Uses specialized agents for complex fixes and can orchestrate multiple agents in parallel for maximum efficiency.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Automatically detect and fix linting errors across multiple languages with intelligent agent orchestration
+- **Usage**: [path or custom instructions]
+- **Options**: See natural language options section below
+- **Examples**: See usage examples section below
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```bash
