@@ -7,6 +7,24 @@ argument-hint: [--fix] [--export-json] [--export-md] [--focus=<area>]
 
 This command performs a comprehensive analysis of the Claude Code Toolkit itself, identifying redundancies, inconsistencies, and refactoring opportunities across all commands and agents.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Analyze toolkit commands and agents for redundancies, inconsistencies, and refactoring opportunities
+- **Usage**: [--fix] [--export-json] [--export-md] [--focus=<area>]
+- **Options**:
+  - `--fix`: Apply automated fixes where possible
+  - `--export-json`: Export analysis results as JSON
+  - `--export-md`: Export analysis results as Markdown
+  - `--focus`: Focus analysis on specific area
+
+Then exit without executing the main command.
+
+---
+
 ## Purpose
 
 As the toolkit grows with new commands and agents, it's essential to periodically analyze the codebase for:

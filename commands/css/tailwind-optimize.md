@@ -5,6 +5,24 @@ argument-hint: "[path] [--check-migration] [--export-json|--export-md]"
 
 # Tailwind CSS Optimization Command
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+📚 **Command Help**
+
+Display this command's documentation:
+
+- **Description**: Extract from frontmatter `description` field
+- **Usage**: Extract from frontmatter `argument-hint` field
+- **Options**: Extract from frontmatter `options` field if present
+- **Examples**: Extract from frontmatter `examples` field if present
+- **Related**: Extract from frontmatter `see-also` field if present
+
+Format the help output clearly and exit without executing the main command.
+
+---
+
 This command analyzes your Tailwind CSS implementation and provides optimization recommendations based on v4 best practices.
 
 ## Workflow

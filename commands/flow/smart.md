@@ -7,6 +7,21 @@ argument-hint: <problem-description> [--verbose] [--suggest-only]
 
 This command intelligently analyzes your problem and automatically routes it to the most appropriate specialized agents for resolution. It's like having an expert consultant who knows exactly which specialist to call for each type of issue.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Intelligently analyze and route problems to the most appropriate specialized agents
+- **Usage**: <problem-description> [--verbose] [--suggest-only]
+- **Options**: See options section below
+- **Examples**: See usage examples section below
+
+Then exit without executing the main command.
+
+---
+
 ## How It Works
 
 1. **Problem Analysis**: First, I analyze your problem description to understand:

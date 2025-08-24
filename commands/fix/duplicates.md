@@ -8,6 +8,21 @@ argument-hint: [report.json|directory] [--threshold=80] [--min-lines=5] [--dry-r
 
 This command identifies and removes code duplication by extracting common patterns into reusable functions, creating shared utilities, and applying the DRY (Don't Repeat Yourself) principle.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: [Show frontmatter description field]
+- **Usage**: [Show frontmatter argument-hint field]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Usage Examples
 
 ```bash

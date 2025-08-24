@@ -7,6 +7,21 @@ argument-hint: [--type=all|user|technical] [--format=md|checklist|jira] [--lang=
 
 This command analyzes recent implementations and generates comprehensive test guides that help both end-users and technical reviewers validate changes effectively.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: [Show frontmatter description field]
+- **Usage**: [Show frontmatter argument-hint field]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```bash

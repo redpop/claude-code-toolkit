@@ -8,6 +8,21 @@ argument-hint: [directory] [--scope=readme|api|all] [--check-links] [--validate-
 
 This command performs a comprehensive health check of your project's documentation, validating synchronization with code, checking cross-references, identifying outdated content, and providing actionable improvement recommendations.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Analyze documentation health, validate code-doc synchronization, check cross-references, and identify outdated content
+- **Usage**: [directory] [--scope=readme|api|all] [--check-links] [--validate-params] [--export-report]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Usage Examples
 
 ```bash

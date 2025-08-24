@@ -7,6 +7,24 @@ argument-hint: <file-or-directory> [--focus=security|performance|architecture|al
 
 This command performs a comprehensive code review by coordinating multiple specialized agents, each providing their unique perspective on code quality, security, performance, and architecture.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Comprehensive code review using multiple specialized agents for different perspectives
+- **Usage**: <file-or-directory> [--focus=security|performance|architecture|all]
+- **Options**:
+  - `--focus=security`: Emphasize security aspects
+  - `--focus=performance`: Deep dive into performance
+  - `--focus=architecture`: Architectural analysis priority
+  - `--focus=all`: Equal weight to all aspects (default)
+
+Then exit without executing the main command.
+
+---
+
 ## Review Process
 
 ### Phase 1: Parallel Analysis

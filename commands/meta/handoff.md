@@ -7,6 +7,21 @@ argument-hint: [output-file] [-c|--compact] [-t|--technical] [--focus topic] [--
 
 This command analyzes the current chat history to extract and document the latest unresolved problem, providing comprehensive context for another AI assistant to continue the work.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: [Show frontmatter description field]
+- **Usage**: [Show frontmatter argument-hint field]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ⚠️ **IMPORTANT SAFETY NOTICE**: This is a READ-ONLY analysis command that:
 
 - **NEVER modifies any code or files** (except creating the handoff document)

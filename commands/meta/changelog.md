@@ -7,6 +7,24 @@ argument-hint: [--commit] [--push] [--fast] [--update-version]
 
 This command intelligently manages your project's CHANGELOG.md file by analyzing your changes and automatically determining the appropriate version bump following [Keep a Changelog](https://keepachangelog.com/) format and [Semantic Versioning](https://semver.org/) conventions.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: AI-powered CHANGELOG.md management that automatically determines version based on changes
+- **Usage**: [--commit] [--push] [--fast] [--update-version]
+- **Options**:
+  - `--commit`: Automatically commit the changelog update
+  - `--push`: Also push the commit to the remote repository (requires --commit)
+  - `--fast`: Shortcut for --commit --push (update, commit, and push in one command)
+  - `--update-version`: Also update version in package files
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```

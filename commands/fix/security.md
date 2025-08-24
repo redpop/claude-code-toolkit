@@ -9,6 +9,21 @@ argument-hint: [report.json] [--severity=critical,high,medium] [--dry-run] [--in
 
 This command automatically fixes security vulnerabilities using the best available analysis tools. It leverages Semgrep MCP when available for precise AST-based fixes, with fallback to pattern-based approaches.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: [Show frontmatter description field]
+- **Usage**: [Show frontmatter argument-hint field]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Usage Examples
 
 ```bash

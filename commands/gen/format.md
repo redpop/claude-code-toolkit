@@ -8,6 +8,25 @@ argument-hint: <request-or-file> [--html|--html-simple|--markdown|--confluence|-
 
 Creates or converts content into the desired format. Simple, focused, and practical.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Create or convert content into various formats (HTML, Markdown, Confluence, Plain Text)
+- **Usage**: <request-or-file> [--html|--html-simple|--markdown|--confluence|--text]
+- **Options**:
+  - `--html`: Clean, semantic HTML (no CSS/JS)
+  - `--html-simple`: Simple HTML fragment (no head/body, no wrapper elements)
+  - `--markdown`: Standard Markdown
+  - `--confluence`: Simple Confluence Wiki Markup (basic formatting for easy copy-paste)
+  - `--text`: Formatted plain text
+
+Then exit without executing the main command.
+
+---
+
 ## Core Functionality
 
 This command does ONE thing well: **Creates or converts content into your desired format**

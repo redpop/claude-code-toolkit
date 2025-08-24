@@ -9,6 +9,21 @@ argument-hint: "[issue_description]"
 
 Apply the Five Whys root cause analysis technique to systematically investigate issues and identify their root causes. This command helps you drill down from surface-level symptoms to the fundamental reasons behind problems.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Deep root cause analysis with ultra intensive reasoning
+- **Usage**: [issue_description]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```

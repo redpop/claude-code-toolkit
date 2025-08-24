@@ -10,6 +10,21 @@ argument-hint: [package-name|file] [--depth=direct|transitive|full] [--check=sec
 
 This command performs a comprehensive dependency analysis, with 6 specialized agents that examine different aspects of dependencies in parallel.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: In-depth dependency analysis with 6 specialized agents for complete transparency
+- **Usage**: [package-name|file] [--depth=direct|transitive|full] [--check=security|licenses|all]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Execution
 
 **IMMEDIATELY START 6 PARALLEL DEPENDENCY AGENTS:**

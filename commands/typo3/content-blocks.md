@@ -11,6 +11,21 @@ documentation-sources:
 
 Generates Content Blocks v1.3 compatible configurations for TYPO3 v13.4.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Generate TYPO3 Content Blocks v1.3 with modern field configurations
+- **Usage**: [name] [--type=element|page] [--fields=...] [--sitepackage=path]
+- **Options**: --type, --with-components, --component-type, --fields
+- **Examples**: See the command workflow and structure sections below
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```bash

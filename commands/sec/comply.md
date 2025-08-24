@@ -9,6 +9,21 @@ argument-hint: [directory] [--standard=owasp|pci-dss|gdpr|all] [--custom-rules=r
 
 This command runs comprehensive compliance checks against industry standards and custom security policies. It leverages Semgrep MCP when available for accurate compliance validation.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Run compliance checks for OWASP, PCI-DSS, GDPR, and custom security policies
+- **Usage**: [directory] [--standard=owasp|pci-dss|gdpr|all] [--custom-rules=rules.yaml] [--export-report]
+- **Options**: --standard, --custom-rules, --export-report
+- **Examples**: See the supported standards and compliance report examples below
+
+Then exit without executing the main command.
+
+---
+
 ## Tool Detection
 
 **FIRST, CHECK AVAILABLE TOOLS:**

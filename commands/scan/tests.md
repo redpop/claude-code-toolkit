@@ -10,6 +10,21 @@ argument-hint: [directory] [--framework=jest|pytest|go-test|cargo-test] [--expor
 
 This command analyzes test coverage and test quality with 5 parallel working agents. Identifies gaps in test coverage and suggests improvements.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Comprehensive test coverage analysis with 5 specialized agents for test quality
+- **Usage**: [directory] [--framework=jest|pytest|go-test|cargo-test] [--export-md] [--export-json] [--export-html] [--export-all] [--export-dir=path]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Execution
 
 **IMMEDIATELY START 5 PARALLEL TEST AGENTS:**

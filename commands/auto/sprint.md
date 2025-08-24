@@ -8,6 +8,21 @@ argument-hint: [directory] [--duration=1w|2w|1m] [--team-size=N] [--focus=securi
 
 This command orchestrates a complete code quality improvement sprint, from initial analysis through implementation and verification. It generates sprint plans, tracks progress, and ensures systematic quality improvements.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: [Show frontmatter description field]
+- **Usage**: [Show frontmatter argument-hint field]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Usage Examples
 
 ```bash

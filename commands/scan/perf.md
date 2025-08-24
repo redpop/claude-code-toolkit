@@ -10,6 +10,21 @@ argument-hint: [directory] [--profile=cpu|memory|io|all] [--export-md] [--export
 
 This command performs deep performance profiling with 7 specialized agents. Identifies performance bottlenecks and suggests concrete optimizations.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Deep Performance Profiling with 7 Agents for Bottleneck Identification and Optimization
+- **Usage**: [directory] [--profile=cpu|memory|io|all] [--export-md] [--export-json] [--export-html] [--export-all] [--export-dir=path]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Execution
 
 **IMMEDIATELY START 7 PARALLEL PERFORMANCE AGENTS:**

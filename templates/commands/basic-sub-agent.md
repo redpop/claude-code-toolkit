@@ -8,6 +8,24 @@ argument-hint: [expected-arguments]
 
 [Detailed description of what this command does and when it should be used]
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+📚 **Command Help**
+
+Display the command's full documentation including:
+
+- Description from frontmatter
+- Usage syntax from argument-hint
+- Available options
+- Examples if provided
+- Related commands
+
+Then exit without executing the main command workflow.
+
+---
+
 ## Execution
 
 **IMMEDIATELY START [N] PARALLEL AGENTS:**
