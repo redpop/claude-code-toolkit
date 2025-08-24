@@ -8,6 +8,24 @@ argument-hint: [report.json|file|directory] [--coverage-target=80] [--framework=
 
 This command automatically generates comprehensive test suites for code lacking test coverage. It analyzes code structure, identifies test scenarios, and creates tests following best practices for your testing framework.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Generate comprehensive test suites for uncovered code, including unit tests, integration tests, and edge cases
+- **Usage**: [report.json|file|directory] [--coverage-target=80] [--framework=auto] [--types=unit,integration] [--mock-externals]
+- **Options**:
+  - `--coverage-target`: Target coverage percentage (default: 80)
+  - `--framework`: Testing framework to use (auto-detected if not specified)
+  - `--types`: Types of tests to generate (unit, integration)
+  - `--mock-externals`: Mock external dependencies in tests
+
+Then exit without executing the main command.
+
+---
+
 ## Usage Examples
 
 ```bash

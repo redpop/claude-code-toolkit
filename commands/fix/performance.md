@@ -8,6 +8,21 @@ argument-hint: [--target=algorithm|memory|database|all] [--file=path] [--dry-run
 
 This command automatically identifies and fixes common performance bottlenecks in codebases, with specific focus on algorithmic complexity, memory usage, and database operations.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: [Show frontmatter description field]
+- **Usage**: [Show frontmatter argument-hint field]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```bash

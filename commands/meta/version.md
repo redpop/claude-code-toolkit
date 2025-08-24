@@ -7,6 +7,21 @@ argument-hint: "[check|update]"
 
 Check the installed Claude Code Toolkit version and see if updates are available.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Check installed toolkit version and available updates
+- **Usage**: [check|update]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 - `/$PREFIX:meta:version` - Show installed version information

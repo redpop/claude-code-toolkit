@@ -7,6 +7,21 @@ argument-hint: [--scope=<type>] [--analyze] [--commit]
 
 This command analyzes your project and intelligently updates documentation to reflect the current state of your codebase, ensuring documentation stays synchronized with implementation.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: [Show frontmatter description field]
+- **Usage**: [Show frontmatter argument-hint field]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```

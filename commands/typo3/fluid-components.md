@@ -11,6 +11,21 @@ documentation-sources:
 
 Generates Fluid v4 Components for TYPO3 v13.3+ projects using modern component-based architecture.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Generate Fluid v4 Components for TYPO3 v13 with Atomic Design patterns
+- **Usage**: [component-name] [--type=atom|molecule|organism] [--sitepackage=path]
+- **Options**: --type, --sitepackage
+- **Examples**: See the component examples and usage sections below
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```bash

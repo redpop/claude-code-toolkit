@@ -7,6 +7,21 @@ argument-hint: "[extension-key] [--type=...] [--use-kickstarter] [--composer-nam
 
 Creates complete TYPO3 extensions using either the stefanfroemken/ext-kickstarter package or manual scaffolding.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Create TYPO3 extensions using ext-kickstarter or manual scaffolding
+- **Usage**: [extension-key] [--type=...] [--use-kickstarter] [--composer-name=...]
+- **Options**: --type, --use-kickstarter, --composer-name, --with-backend-module, --with-plugin, etc.
+- **Examples**: See the command workflow and skeleton examples below
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```bash

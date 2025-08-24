@@ -7,6 +7,25 @@ argument-hint: [--no-verify] [--fast] [--push] [--single] [--brief]
 
 A streamlined Git commit command that extracts ticket prefixes from branch names and intelligently groups related changes into atomic commits.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Creates clean Git commits with optional branch prefix extraction and intelligent grouping
+- **Usage**: [--no-verify] [--fast] [--push] [--single] [--brief]
+- **Options**:
+  - `--no-verify`: Skip pre-commit hooks
+  - `--fast`: Fast mode: auto-select first suggestion
+  - `--push`: Push to remote after commit
+  - `--single`: Single commit for all changes
+  - `--brief`: Single-line messages only
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```bash

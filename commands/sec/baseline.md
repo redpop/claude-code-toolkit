@@ -9,6 +9,21 @@ argument-hint: [directory] [--export-baseline] [--compare=previous-baseline.json
 
 This command establishes a security baseline for your project, allowing you to track security improvements and regressions over time. It leverages Semgrep MCP when available for comprehensive analysis.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Establish and track security baseline with MCP-enhanced scanning or traditional methods
+- **Usage**: [directory] [--export-baseline] [--compare=previous-baseline.json] [--track-improvements]
+- **Options**: --export-baseline, --compare, --track-improvements
+- **Examples**: See the execution workflow and baseline comparison sections below
+
+Then exit without executing the main command.
+
+---
+
 ## Tool Detection
 
 **FIRST, CHECK AVAILABLE TOOLS:**

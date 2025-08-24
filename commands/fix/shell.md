@@ -7,6 +7,21 @@ argument-hint: [path/file] [--check-only] [--strict] [--summary-only]
 
 This command automatically fixes shell script issues using shellcheck analysis. By default, all safe fixes are applied automatically. Use --check-only to preview issues without making changes.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: [Show frontmatter description field]
+- **Usage**: [Show frontmatter argument-hint field]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Usage
 
 ```

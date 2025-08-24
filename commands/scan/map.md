@@ -10,6 +10,21 @@ argument-hint: [directory] [--format=markdown|json|mermaid] [--depth=overview|de
 
 This command creates a comprehensive mapping of the entire codebase with 10 specialized agents that analyze different aspects in parallel.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Creates a comprehensive codebase mapping with 10 agents for different aspects
+- **Usage**: [directory] [--format=markdown|json|mermaid] [--depth=overview|detailed|full]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Execution
 
 **IMMEDIATELY START 10 PARALLEL MAPPING AGENTS:**

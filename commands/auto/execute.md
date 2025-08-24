@@ -8,6 +8,21 @@ argument-hint: <action-plan.md>|--latest [--mode=supervised|auto] [--dry-run] [-
 
 Systematically execute fix commands from an action plan, with progress tracking and intelligent error handling.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Execute action plans systematically with progress tracking and smart error handling
+- **Usage**: <action-plan.md>|--latest [--mode=supervised|auto] [--dry-run] [--parallel=N] [--focus=category] [--force-all] [--min-roi=threshold] [--max-roi=threshold]
+- **Options**: See options section below
+- **Examples**: See usage examples section below
+
+Then exit without executing the main command.
+
+---
+
 ## Execution Modes
 
 - **Supervised** (default): Confirms each action before execution

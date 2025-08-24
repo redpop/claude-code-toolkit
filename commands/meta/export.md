@@ -7,6 +7,21 @@ argument-hint: <report-files...> [--format=md|json|html|pdf] [--merge] [--templa
 
 Centralized export handling for all toolkit reports with format conversion and templating.
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: [Show frontmatter description field]
+- **Usage**: [Show frontmatter argument-hint field]
+- **Options**: [Show frontmatter options if present]
+- **Examples**: [Show frontmatter examples if present]
+
+Then exit without executing the main command.
+
+---
+
 ## Export Capabilities
 
 ### Supported Formats
