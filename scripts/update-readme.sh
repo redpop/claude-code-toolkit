@@ -131,7 +131,7 @@ for category_dir in "$COMMANDS_DIR"/*; do
                 if [ "$category_has_commands" = false ]; then
                     category_content+="\n### ${category_title} Commands\n\n"
                     category_content+="| Command | Description | Options | Help |\n"
-                    category_content+="|---------|-------------|---------|------|\n"
+                    category_content+="|---------|-------------|---------|------|"
                     category_has_commands=true
                     has_commands=true
                 fi
@@ -157,8 +157,9 @@ for category_dir in "$COMMANDS_DIR"/*; do
                     fi
                 fi
                 
-                # Add command row
-                category_content+="\n| \`/prefix:${category_name}:${cmd_name}\` | ${description:-No description} | ${options:--} | ${help_support} |"
+                # Add command row  
+                category_content+="
+| \`/prefix:${category_name}:${cmd_name}\` | ${description:-No description} | ${options:--} | ${help_support} |"
             fi
         done
         
