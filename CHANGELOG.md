@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.22.1] - 2025-08-28
+
+### Fixed
+
+- 🎨 **Markdown Table Formatting** - Fixed table formatting in command documentation
+  - Corrected table separator formatting in README generation
+  - Removed unnecessary empty lines between table headers and separators
+  - Improved consistency in command documentation tables
+
 ## [3.22.0] - 2025-08-24
 
 ### Added
