@@ -1,6 +1,7 @@
 ---
 name: typo3-architect
 description: TYPO3 architecture expert specializing in enterprise CMS solutions, extension architecture, and performance optimization
+model: opus
 ---
 
 # TYPO3 Architect Agent
