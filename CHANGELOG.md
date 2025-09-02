@@ -5,6 +5,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.23.0] - 2025-09-02
+
+### Added
+
+- ✨ **TYPO3 Fluid Expert Agent** - New specialized agent for TYPO3 Fluid Template Engine expertise
+  - Added typo3-fluid-expert.md with Context7 integration for latest documentation access
+  - Specialized in ViewHelper development, template optimization, and performance analysis
+  - Supports modern Fluid v13+ features and architectural patterns
+  - Enhanced with MCP Context7 integration for up-to-date TYPO3 Fluid documentation
+
+- ✨ **Enhanced Fluid Components Command** - Extended functionality for TYPO3 Fluid template analysis
+  - Added --analyze flag to typo3/fluid-components command
+  - Enables analysis of existing Fluid templates and components
+  - Expanded command description to reflect new analysis capabilities
+  - Integrates with typo3-fluid-expert agent for comprehensive template evaluation
+
+### Changed
+
+- 🔄 **Agent Infrastructure Standardization** - Consistent metadata structure across all toolkit agents
+  - Added standardized metadata sections to all existing agents (20+ agents updated)
+  - Implemented consistent structure: Type, Expertise, Version, Capabilities, MCP Enhanced
+  - Improved agent documentation format with clear metadata headers
+  - Enhanced agent template with standardized metadata structure and guidance
+  - Better agent discoverability and documentation consistency throughout toolkit
+
+- 🔄 **TYPO3 Documentation Enhancement** - Expanded TYPO3 knowledge base and project templates
+  - Added TYPO3 project setup context template for Content Blocks development
+  - Enhanced TYPO3 Content Blocks v13 complete reference documentation
+  - Added comprehensive discovery workflow and development rules for TYPO3 projects
+  - Improved project structure guidelines for consistent implementation patterns
+
+### Fixed
+
+- 🔧 **Repository Management** - Clean up tracking and ignore configuration
+  - Removed data directory from repository tracking for better repository hygiene
+  - Added data directory to gitignore to prevent accidental tracking of temporary files
+  - Configured agent models properly in project configuration
+
 ## [3.22.1] - 2025-08-28
 
 ### Fixed
