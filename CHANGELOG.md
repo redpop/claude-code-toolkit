@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.23.1] - 2025-09-02
+
+### Changed
+
+- 🔄 **Git Conflict Resolver Documentation** - Enhanced interactive workflow requirements
+  - Improved conflict resolver documentation to enforce mandatory interactive behavior
+  - Added critical instructions to prevent automatic AI-based conflict resolution
+  - Clarified step-by-step workflow and user choice requirements for all conflict scenarios
+  - Enhanced safety guidelines to ensure user control over all conflict resolution decisions
+
 ## [3.23.0] - 2025-09-02
 
 ### Added
