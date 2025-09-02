@@ -268,7 +268,7 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 |---------|-------------|---------|------|
 | `/prefix:typo3:content-blocks` | Generate TYPO3 Content Blocks v1.3 with modern field configurations | `name`, `--type=element\|page`, `--fields=...`, `--sitepackage=path` | - |
 | `/prefix:typo3:extension-kickstarter` | Create TYPO3 extensions using ext-kickstarter or manual scaffolding | `extension-key`, `--type=...`, `--use-kickstarter`, `--composer-name=...` | - |
-| `/prefix:typo3:fluid-components` | Generate Fluid v4 Components for TYPO3 v13 with Atomic Design patterns | `component-name`, `--type=atom\|molecule\|organism`, `--sitepackage=path` | - |
+| `/prefix:typo3:fluid-components` | Generate Fluid v4 Components for TYPO3 v13 with Atomic Design patterns and Fluid analysis | `component-name`, `--type=atom\|molecule\|organism`, `--sitepackage=path`, `--analyze` | - |
 | `/prefix:typo3:make-content-block` | Wrapper for TYPO3 make:content-block command with intelligent defaults | `--vendor=...`, `--type=...`, `--skeleton-path=...`, `--config-path=...` | - |
 | `/prefix:typo3:sitepackage` | Create a TYPO3 v13.4 SitePackage based on official template with Site Sets | `vendor`, `package-name`, `--include-ddev`, `--include-docker`, `--author=name`, `--email=address` | - |
 

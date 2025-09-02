@@ -33,6 +33,7 @@ Sub-Agents are specialized AI agents that provide domain-specific expertise for 
 - **typo3-architect**: TYPO3 system architecture specialist
 - **typo3-content-blocks-specialist**: Content Blocks implementation expert
 - **typo3-extension-developer**: Extension development specialist
+- **typo3-fluid-expert**: Fluid Template Engine expert with Context7 integration
 - **typo3-typoscript-expert**: TypoScript and configuration expert
 
 ## Sub-Agent Structure

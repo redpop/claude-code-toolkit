@@ -1,15 +1,15 @@
 ---
-description: Generate Fluid v4 Components for TYPO3 v13 with Atomic Design patterns
-argument-hint: "[component-name] [--type=atom|molecule|organism] [--sitepackage=path]"
+description: Generate Fluid v4 Components for TYPO3 v13 with Atomic Design patterns and Fluid analysis
+argument-hint: "[component-name] [--type=atom|molecule|organism] [--sitepackage=path] [--analyze]"
 mcp-enhanced: mcp__context7__get-library-docs
 documentation-sources:
   - https://docs.typo3.org/p/typo3fluid/fluid/main/en-us/
   - https://github.com/TYPO3/Fluid
 ---
 
-# TYPO3 Fluid v4 Components Generator
+# TYPO3 Fluid v4 Components Generator & Analyzer
 
-Generates Fluid v4 Components for TYPO3 v13.3+ projects using modern component-based architecture.
+Generates Fluid v4 Components for TYPO3 v13.3+ projects using modern component-based architecture. Also provides comprehensive Fluid template analysis and optimization recommendations.
 
 ## Help Check
 
@@ -17,10 +17,10 @@ If "$ARGUMENTS" contains "--help" or "-h":
 
 Display this command's documentation:
 
-- **Description**: Generate Fluid v4 Components for TYPO3 v13 with Atomic Design patterns
-- **Usage**: [component-name] [--type=atom|molecule|organism] [--sitepackage=path]
-- **Options**: --type, --sitepackage
-- **Examples**: See the component examples and usage sections below
+- **Description**: Generate Fluid v4 Components for TYPO3 v13 with Atomic Design patterns and analyze existing Fluid templates
+- **Usage**: [component-name] [--type=atom|molecule|organism] [--sitepackage=path] [--analyze]
+- **Options**: --type, --sitepackage, --analyze
+- **Examples**: See the component examples, analysis examples, and usage sections below
 
 Then exit without executing the main command.
 
@@ -29,7 +29,11 @@ Then exit without executing the main command.
 ## Usage
 
 ```bash
+# Generate new Fluid component
 /prefix:typo3:fluid-components [component-name] [options]
+
+# Analyze existing Fluid templates
+/prefix:typo3:fluid-components --analyze [path]
 ```
 
 ## Documentation & Context Enhancement
@@ -78,9 +82,36 @@ See: Content Blocks Shared Partials Documentation at ~/.claude/claude-code-toolk
 
 ## Command Workflow
 
+### Analysis Mode (--analyze flag)
+
+If "$ARGUMENTS" contains "--analyze":
+
+1. **Initialize Fluid Analysis**:
+
+Use Task tool with subagent_type="typo3-fluid-expert":
+"Perform comprehensive TYPO3 Fluid template analysis on the project. Focus on:
+
+- Template architecture and organization (layouts, templates, partials)
+- ViewHelper usage patterns and custom ViewHelper quality
+- Performance optimization opportunities (caching, rendering efficiency)
+- Modern Fluid v13+ convention compliance
+- Template maintainability and code quality
+- Integration patterns with TYPO3 ecosystem
+
+Analyze the codebase at {path or current directory} and provide:
+
+1. Executive summary with scores and critical issues
+2. Detailed analysis of template structure, ViewHelper implementation, and performance
+3. Prioritized recommendations for immediate, short-term, and long-term improvements
+4. Context7 documentation status (whether latest conventions were used)
+
+Export results to JSON format with timestamp for action plan generation."
+
+### Component Generation Mode (default)
+
 Parse the arguments from $ARGUMENTS to extract:
 
-- Component name (e.g., "button", "card", "product-grid")
+- Component name (e.g., "button", "card", "product-grid")  
 - Type: atom (default), molecule, or organism
 - SitePackage path (optional, defaults to ./packages/sitepackage)
 - Additional options (icon support, slots, etc.)
@@ -267,6 +298,73 @@ Purpose: {description}
         <!-- Optional footer slot -->
     </f:slot>
 </section>
+```
+
+## Fluid Analysis Examples
+
+### Analyze Current Project
+
+```bash
+/prefix:typo3:fluid-components --analyze
+```
+
+Output example:
+
+```markdown
+# TYPO3 Fluid Template Analysis Results
+
+## Executive Summary
+- **Fluid Architecture Score**: 7/10
+- **Template Performance**: Good
+- **ViewHelper Quality**: 8/10
+- **Convention Compliance**: 6/10
+- **Critical Issues**: 3
+
+## Key Findings
+- 15 Fluid templates found
+- 3 custom ViewHelpers detected
+- 2 performance optimization opportunities
+- 4 convention compliance issues
+
+## Recommendations
+### Immediate Actions (< 1 day)
+1. **Fix deprecated f:cObject usage** - Replace with modern data processing
+2. **Add missing f:argument type declarations** - Improve template reliability
+
+### Template Architecture Enhancements (1-5 days) 
+1. **Reorganize partial structure** - Better component separation
+2. **Implement consistent naming** - Follow TYPO3 v13 conventions
+```
+
+### Analyze Specific Directory
+
+```bash
+/prefix:typo3:fluid-components --analyze packages/sitepackage/Resources/Private/
+```
+
+Focuses analysis on specific template directory.
+
+### Analysis Output Formats
+
+The analysis automatically exports results in JSON format for further processing:
+
+```json
+{
+  "timestamp": "2024-01-15T10:30:00Z",
+  "analysis_type": "fluid_templates",
+  "summary": {
+    "architecture_score": 7,
+    "performance_rating": "good",
+    "viewhelper_quality": 8,
+    "convention_compliance": 6,
+    "critical_issues": 3
+  },
+  "recommendations": {
+    "immediate": [...],
+    "short_term": [...],
+    "long_term": [...]
+  }
+}
 ```
 
 ## Specific Component Examples
