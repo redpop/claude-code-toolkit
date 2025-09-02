@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.24.0] - 2025-09-02
+
+### Added
+
+- ✨ **Cipher Memory Integration** - Enhanced Claude Code Toolkit with memory capabilities
+  - Added comprehensive Cipher memory integration system for better context retention
+  - Enhanced project setup workflows with memory usage instructions
+  - Improved toolkit capabilities through intelligent memory management
+  - Better agent context awareness and learning from previous interactions
+
+### Changed
+
+- 🔄 **Git Commit Command Documentation** - Enhanced documentation for intelligent change splitting
+  - Updated commit command documentation to reflect new intelligent multi-commit functionality
+  - Improved README formatting and help section structure consistency  
+  - Enhanced commit-simple.md to document automatic commit splitting behavior in fast mode
+  - Clarified how fast mode analyzes changes and creates appropriate number of commits
+  - Updated documentation to show auto-selection of first suggestion for each commit group
+
 ## [3.23.1] - 2025-09-02
 
 ### Changed
