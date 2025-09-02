@@ -66,31 +66,26 @@ if [[ "$ARGUMENTS" == *"--help"* ]]; then
     echo ""
 fi
 
-# Claude Command: Interactive Git Conflict Resolver
+# INTERACTIVE Git Conflict Resolution Command
 
-This command provides interactive, step-by-step guidance for resolving Git conflicts, especially useful for merge requests with conflicts in GitLab or GitHub.
+**CRITICAL INSTRUCTION**: This command MUST be fully interactive. Never resolve conflicts automatically or use AI agents for conflict resolution.
 
-## Help Check
+## MANDATORY INTERACTIVE BEHAVIOR
 
-If "$ARGUMENTS" contains "--help" or "-h":
+**When conflicts are detected:**
 
-Display this command's documentation:
+1. **STOP all automatic processing**
+2. **Show conflict details to user**
+3. **Present clear resolution options**
+4. **WAIT for explicit user choice**
+5. **Apply ONLY the user's chosen resolution**
 
-- **Description**: Interactive Git conflict resolution with step-by-step guidance and recommendations
-- **Usage**: [source-branch] [target-branch] [--strategy:merge|rebase|theirs|ours] [--rebase-feature] [--test-command="npm test"] [--help]
-- **Options**:
-  - `--strategy`: Conflict resolution strategy - merge (default), rebase, theirs (prefer source), ours (prefer target)
-  - `--test-command`: Command to run tests after resolution (e.g., 'npm test', 'pytest')
-  - `--rebase-feature`: Rebase current feature branch onto main (team workflow)
-  - `--help`: Show detailed help message with examples and strategies
-- **Examples**:
-  - Detect and resolve current conflicts interactively: `/conflict-resolver`
-  - Resolve conflicts when merging feature-branch into main: `/conflict-resolver feature-branch main`
-  - Resolve conflicts preferring source branch changes: `/conflict-resolver feature-branch main --strategy:theirs`
-  - Rebase feature branch with conflict resolution: `/conflict-resolver --rebase-feature`
-  - Resolve conflicts and run tests after: `/conflict-resolver --test-command='npm test'`
+**NEVER:**
 
-Then exit without executing the main command.
+- ❌ Use Task tool with git-conflict-specialist  
+- ❌ Make automatic conflict resolution decisions
+- ❌ Apply "recommended" solutions without user approval
+- ❌ Resolve multiple conflicts at once
 
 ---
 
@@ -231,53 +226,41 @@ How would you like to resolve this conflict?
 Choose [1-11]: _
 ```
 
-### Phase 4: Conflict Resolution Execution
+### Step 4: Complete Operation
 
-Based on user choices:
+After user has resolved all conflicts (or chosen to skip remaining files):
 
-1. **Apply Resolution**:
-   - Edit the file to implement chosen resolution
-   - Remove conflict markers
-   - Preserve intended functionality
-   - Maintain code style consistency
+```bash
+# For rebase operations:
+git rebase --continue
 
-2. **Verify Resolution**:
-   - Show the resolved code
-   - Check for syntax errors
-   - Identify potential logic issues
-   - Suggest testing commands if applicable
+# For merge operations:
+git commit -m "Resolve merge conflicts"
+```
 
-3. **Stage Resolved Files**:
-   - After user confirmation, stage the resolved file
-   - Update conflict status
+### Step 5: Optional Testing
 
-### Phase 5: Completion &amp; Next Steps
+If `--test-command` parameter was provided:
 
-After all conflicts resolved:
+```bash
+# Run user's specified test command
+{test-command}
+```
+
+### Success Summary
 
 ```
 ✅ Conflict Resolution Complete!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 📊 Resolution Summary:
-   Files resolved: 5
-   - Kept both: 3 files
-   - Used theirs: 1 file
-   - Custom merge: 1 file
-   
-🔍 Recommended Quality Checks:
-   1. Run tests: npm test
-   2. Check linting: npm run lint
-   3. Build project: npm run build
+   Files processed: {X}
+   User choices applied: {list user's actual choices}
    
 📝 Next Steps:
-   1. Review all changes: git diff --cached
-   2. Complete the merge: git commit
-   3. Push to remote: git push
-   
-💡 For GitLab MR:
-   After pushing, the MR should update automatically.
-   Conflicts will be marked as resolved.
+   1. Review changes: git diff --cached
+   2. Continue development
+   3. Push when ready: git push
 ```
 
 ## Strategy Options
@@ -404,35 +387,89 @@ git diff --name-only --diff-filter=U  # List only conflicted files
 git blame -L 40,60 path/to/file    # Show who changed lines 40-60
 ```
 
-### Intelligent Conflict Analysis
+## MANDATORY INTERACTIVE WORKFLOW
 
-The command uses Task Tool to invoke specialized analysis:
+**CRITICAL**: This command MUST be interactive. Never use automatic resolution.
+
+### Step 1: Conflict Detection
+
+```bash
+# Check for existing conflicts
+git status --porcelain | grep "^UU\|^AA\|^DD"
+```
+
+If `--rebase-feature` and no conflicts exist:
+
+```bash
+git fetch origin main  
+git rebase origin/main
+```
+
+### Step 2: For Each Conflicted File (One at a Time)
+
+**Extract conflict versions:**
+
+```bash
+# Their version: git show :3:filename
+# Our version: git show :2:filename  
+# Conflict markers: grep -n -A5 -B5 "<<<<<<< HEAD" filename
+```
+
+**Display to user:**
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📁 CONFLICT: {filename}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 THEIRS (incoming):
+{show their version}
+
+🎯 OURS (current):
+{show our version}
+
+📋 Raw conflict:
+{show conflict markers with line numbers}
+
+HOW DO YOU WANT TO RESOLVE THIS?
+
+1. ✅ Keep THEIRS (incoming changes)
+2. ✅ Keep OURS (current changes)
+3. ✅ Keep BOTH (manual merge)
+4. ✏️ Edit manually
+5. 🔍 Show context 
+6. ❌ Skip this file
+
+Your choice [1-6]: 
+```
+
+**WAIT FOR USER INPUT - Do not proceed without user response**
+
+### Step 3: Apply User Choice
+
+- **Choice 1**: `git checkout --theirs filename && git add filename`
+- **Choice 2**: `git checkout --ours filename && git add filename`
+- **Choice 3**: Help user merge both sections manually
+- **Choice 4**: Interactive editing session with user
+- **Choice 5**: Show context using git-conflict-specialist for analysis only
+- **Choice 6**: Skip file (leave conflicted)
+
+### Optional Expert Analysis (Only When User Chooses Option 5)
+
+When user requests context, use git-conflict-specialist for analysis only:
 
 ```markdown
 Use Task tool with subagent_type="git-conflict-specialist":
-"Analyze this Git conflict and provide resolution recommendations:
+"Analyze this specific conflict and explain technical implications:
 [conflict details]
-Consider code semantics, test coverage, and architectural impact."
+
+Provide context about:
+- What each side changes
+- Technical impact of each choice
+- Potential risks
+
+Do NOT recommend a solution - only provide analysis."
 ```
-
-### Pattern Recognition
-
-Identifies common conflict patterns:
-
-- **Import conflicts**: Merges import statements intelligently
-- **Version bumps**: Suggests using higher version number
-- **Formatting conflicts**: Applies consistent formatting
-- **Feature flags**: Preserves both flags when possible
-- **Configuration merges**: Combines configuration entries
-
-### Safety Checks
-
-Before applying any resolution:
-
-- Backs up current state
-- Validates syntax for file type
-- Checks for potential runtime errors
-- Warns about semantic conflicts
 
 ## Integration with Other Commands
 
