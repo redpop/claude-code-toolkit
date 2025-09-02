@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Grep
 description: Creates a chat summary for another AI with complete context
 argument-hint: [summaries/]
 ---

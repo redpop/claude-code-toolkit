@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Write, Grep
 description: Verify and synchronize all documentation files with actual codebase structure
 argument-hint: "[--fix] [--export-json] [--export-md]"
 ---

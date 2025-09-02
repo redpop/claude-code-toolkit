@@ -1,4 +1,5 @@
 ---
+allowed-tools: Write, Bash(mkdir:*), Bash(composer:*)
 description: Create a TYPO3 v13.4 SitePackage based on official template with Site Sets
 argument-hint: "[vendor] [package-name] [--include-ddev] [--include-docker] [--author=name] [--email=address]"
 ---

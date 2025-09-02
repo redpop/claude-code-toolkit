@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Write
 description: Unified export management for all analysis results with format conversion
 argument-hint: <report-files...> [--format=md|json|html|pdf] [--merge] [--template=name]
 ---

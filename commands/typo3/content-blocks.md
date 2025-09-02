@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Write, Bash(mkdir:*)
 description: Generate TYPO3 Content Blocks v1.3 with modern field configurations
 argument-hint: "[name] [--type=element|page] [--fields=...] [--sitepackage=path]"
 mcp-enhanced: mcp__context7__get-library-docs

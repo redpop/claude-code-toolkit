@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Write, Task
 description: Intelligent refactoring suggestions with impact analysis and step-by-step guidance
 argument-hint: <file-or-pattern> [--type=extract|rename|restructure] [--safety=conservative|balanced|aggressive]
 ---

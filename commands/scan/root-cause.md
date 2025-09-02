@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Grep, Task
 description: Deep root cause analysis with ultra intensive reasoning
 argument-hint: "[issue_description]"
 ---

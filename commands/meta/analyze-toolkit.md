@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Grep, Task
 description: Analyze toolkit commands and agents for redundancies, inconsistencies, and refactoring opportunities
 argument-hint: [--fix] [--export-json] [--export-md] [--focus=<area>]
 ---

@@ -1,4 +1,5 @@
 ---
+allowed-tools: Task, Read
 description: Chain commands or execute pre-defined pipelines with intelligent data flow
 argument-hint: <pipeline-name | command-chain> [--list] [--save-as=name] [--dry-run]
 options:

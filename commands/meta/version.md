@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Bash(git:*)
 description: Check installed toolkit version and available updates
 argument-hint: "[check|update]"
 ---

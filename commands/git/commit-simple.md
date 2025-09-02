@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Bash(git:*)
 description: Creates clean Git commits with optional branch prefix extraction and intelligent grouping
 argument-hint: [--no-verify] [--fast] [--push] [--single] [--brief]
 ---

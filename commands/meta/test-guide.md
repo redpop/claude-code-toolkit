@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Write
 description: Generates interactive test guides for recent changes, suitable for both end-users and technical reviewers
 argument-hint: [--type=all|user|technical] [--format=md|checklist|jira] [--lang=en|de|es|fr] [--output[=file.md]]
 ---

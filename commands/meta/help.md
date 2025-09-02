@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Grep
 description: Display help for commands or list available commands
 argument-hint: [command-name] [--list] [--search <keyword>] [--categories]
 ---

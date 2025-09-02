@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Write, Bash(tailwind:*)
 description: Analyze and optimize Tailwind CSS implementation with v4 best practices
 argument-hint: "[path] [--check-migration] [--export-json|--export-md]"
 ---

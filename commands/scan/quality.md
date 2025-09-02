@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Grep, Task
 description: Comprehensive code quality metrics with trend analysis and improvement roadmap
 argument-hint: <directory> [--baseline=previous.json] [--threshold=80] [--export]
 ---

@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Write, Bash(git:*)
 description: AI-powered CHANGELOG.md management that automatically determines version based on changes
 argument-hint: [--commit] [--push] [--fast] [--update-version]
 ---
