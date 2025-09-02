@@ -62,11 +62,17 @@ When using `--fast` option, the workflow changes:
 1. Pre-commit checks run unless `--no-verify` is also specified
 2. Checks which files are staged (requires files to be already staged)
 3. Performs a `git diff --cached` to understand staged changes
-4. Generates 3 commit message suggestions following conventional commit format
-5. Automatically selects the first suggestion without user confirmation
-6. Immediately executes `git commit -m` with the selected message
+4. Analyzes changes to determine if multiple distinct logical changes are present
+5. If multiple distinct changes detected:
+   - Automatically splits into multiple commits
+   - For each group: generates message suggestion and commits immediately
+   - Uses first suggestion for each commit without user confirmation
+6. If changes form single cohesive unit:
+   - Generates 3 commit message suggestions following conventional commit format
+   - Automatically selects the first suggestion without user confirmation
+   - Immediately executes single `git commit -m` with the selected message
 7. No Claude co-authorship footer is added
-8. If `--push` is specified, automatically pushes to the remote repository
+8. If `--push` is specified, automatically pushes all commits to the remote repository
 
 ## Best Practices for Commits
 
@@ -194,8 +200,10 @@ Example of splitting commits:
 ## Command Options
 
 - `--no-verify`: Skip running any pre-commit checks or hooks
-- `--fast`: Fast mode - generates 3 suggestions and auto-selects the first one without confirmation
+- `--fast`: Fast mode - intelligently analyzes changes and creates appropriate number of commits
   - Requires files to be already staged
+  - Automatically splits into multiple commits if distinct logical changes detected
+  - Auto-selects first message suggestion for each commit without confirmation
   - No automatic staging of unstaged files
   - No Claude co-authorship footer
 - `--push`: Automatically push to remote repository after successful commit
@@ -228,10 +236,12 @@ Example of splitting commits:
 
 - Pre-commit checks or hooks still run by default (use `--no-verify` to skip)
 - Files must be already staged - no automatic staging
-- Generates exactly 3 commit message suggestions
-- Automatically uses the first suggestion without asking
+- Analyzes staged changes to determine if multiple commits are needed
+- If multiple distinct logical changes detected: automatically creates multiple commits
+- If single cohesive change: generates exactly 3 commit message suggestions
+- Automatically uses the first suggestion for each commit without asking
 - No interactive prompts or confirmations
-- Ideal for simple, straightforward commits where you trust the auto-generated message
+- Ideal for both simple commits and complex changes that need logical grouping
 - **CRITICAL**: Auto-validate selected message does NOT contain forbidden footers/metadata
 - Silently validate message without displaying any validation output
 - No Claude co-authorship footer is added unless explicitly required by project

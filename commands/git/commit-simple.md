@@ -101,11 +101,16 @@ TICKET-123 Implement user authentication system
 
 1. Extract ticket prefix from branch
 2. Require files to be already staged
-3. Analyze staged changes
-4. Generate 3 commit message suggestions
-5. Automatically use first suggestion
-6. Create commit immediately
-7. If `--push` specified, push to remote
+3. Analyze staged changes for logical groupings
+4. If multiple distinct logical groups detected:
+   - Create multiple commits automatically
+   - For each group: generate message suggestion and commit
+   - Use first suggestion for each group without user confirmation
+5. If changes form single cohesive unit:
+   - Generate 3 commit message suggestions
+   - Automatically use first suggestion
+   - Create single commit immediately
+6. If `--push` specified, push all commits to remote
 
 ## Examples
 
@@ -182,9 +187,10 @@ Skip any configured pre-commit hooks or checks. Use when you need to commit quic
 Fast mode for quick commits:
 
 - Requires files to be pre-staged
-- Auto-selects first message suggestion
-- No interactive prompts
-- Ideal for simple, straightforward changes
+- Analyzes changes and intelligently groups into multiple commits if needed
+- Auto-selects first message suggestion for each commit
+- No interactive prompts or confirmations
+- Ideal for complex changes that need automatic logical grouping
 
 ### --push
 
