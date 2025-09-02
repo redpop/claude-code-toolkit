@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Write, Bash(eslint:*), Bash(prettier:*)
 description: Automatically detect and fix linting errors across multiple languages with intelligent agent orchestration
 argument-hint: "[path or custom instructions]"
 ---

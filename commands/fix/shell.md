@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Write, Bash(shellcheck:*)
 description: Automatically fix shell script issues using shellcheck analysis
 argument-hint: [path/file] [--check-only] [--strict] [--summary-only]
 ---

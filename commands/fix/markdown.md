@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Write
 description: Lint and fix markdown files using markdownlint-cli2
 argument-hint: <file-or-directory> [--fix] [--config <path>]
 ---

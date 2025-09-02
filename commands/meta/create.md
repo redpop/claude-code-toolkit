@@ -1,4 +1,5 @@
 ---
+allowed-tools: Write, Read
 description: Intelligently create commands, agents, or workflows from your description
 argument-hint: "<what you need> [--type=auto|command|agent|workflow]"
 mcp-enhanced: mcp__context7__get-library-docs

@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Write, Task
 description: Rapid incident response workflow for production issues with root cause analysis
 argument-hint: <incident-description> [--severity=critical|high|medium] [--system=component]
 ---

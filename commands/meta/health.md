@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Grep, Task
 description: Comprehensive project health check with actionable insights and trend analysis
 argument-hint: [--verbose] [--compare=last-check.json] [--export]
 ---

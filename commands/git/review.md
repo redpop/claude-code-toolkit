@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Bash(git:*)
 description: Reviews all Git changes before commit to ensure code quality and identify issues
 argument-hint: [--staged-only] [--detailed]
 ---

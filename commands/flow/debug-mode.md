@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Write
 description: Switch to intensive debugging mode for current problem
 argument-hint: "[--verbose] [--trace]"
 ---

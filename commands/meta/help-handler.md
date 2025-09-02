@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Grep
 description: Display help information for any toolkit command
 argument-hint: <command-path> [--verbose]
 ---

@@ -61,6 +61,3 @@ coverage/
 dist/
 build/
 out/
-
-# Cipher
-/data

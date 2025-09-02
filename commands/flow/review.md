@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Task
 description: Comprehensive code review using multiple specialized agents for different perspectives
 argument-hint: <file-or-directory> [--focus=security|performance|architecture|all]
 ---

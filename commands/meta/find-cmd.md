@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Grep
 description: Find the best command for your task from all available commands (global and local)
 argument-hint: <task-description> [--all] [--local-only] [--global-only]
 ---

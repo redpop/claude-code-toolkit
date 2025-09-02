@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Task
 description: Intelligently analyze and route problems to the most appropriate specialized agents
 argument-hint: <problem-description> [--verbose] [--suggest-only]
 ---

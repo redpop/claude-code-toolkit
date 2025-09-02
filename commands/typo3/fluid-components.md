@@ -1,4 +1,5 @@
 ---
+allowed-tools: Task, Write, Read, Bash(mkdir:*)
 description: Generate Fluid v4 Components for TYPO3 v13 with Atomic Design patterns and Fluid analysis
 argument-hint: "[component-name] [--type=atom|molecule|organism] [--sitepackage=path] [--analyze]"
 mcp-enhanced: mcp__context7__get-library-docs

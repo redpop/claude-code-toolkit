@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Write, Bash(git:*)
 description: Creates structured Git commits with Conventional Commit format and emojis
 argument-hint: [--no-verify] [--fast] [--push]
 ---

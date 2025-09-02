@@ -1,4 +1,5 @@
 ---
+allowed-tools: Write
 description: Convert Figma designs to modular CSS architecture with responsive breakpoints
 argument-hint: "component-name [--css|--tailwind|--scss]"
 ---

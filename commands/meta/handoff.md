@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Write
 description: Documents current problem context for handoff to another AI assistant
 argument-hint: [output-file] [-c|--compact] [-t|--technical] [--focus topic] [--skip topic] [--include topic] ["instructions"]
 ---

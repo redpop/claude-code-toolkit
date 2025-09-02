@@ -1,4 +1,5 @@
 ---
+allowed-tools: Read, Write, Grep
 description: Intelligently updates project documentation based on code changes and implementation status
 argument-hint: [--scope=<type>] [--analyze] [--commit]
 ---
