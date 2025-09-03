@@ -110,14 +110,67 @@ Replace placeholders with detected information:
 - `[DETECTED TECH STACK]`: Framework, language, build tools found
 - `[DETECTED NPM SCRIPTS]`: Key commands from package.json
 
-### 6. Success Confirmation
+### 6. Natural Conversation Test Examples
+
+Provide user-friendly test suggestions that demonstrate Cipher's memory capabilities:
+
+**Universal Tests (for all projects):**
+
+```text
+User: "Help me understand the project structure"
+Expected: Claude searches memory first, then analyzes
+
+User: "Remember that we use [MAIN_TECHNOLOGY] for this project"
+Expected: Claude stores this context for future reference
+```
+
+**Project-Type Specific Tests:**
+
+**Frontend Projects (React/Vue/Angular):**
+
+```text
+User: "What component patterns have we used before?"
+Expected: Claude searches memory for past component implementations
+
+User: "How do we handle state management in this project?"
+Expected: Claude recalls stored state management decisions
+```
+
+**Backend/API Projects:**
+
+```text
+User: "What authentication patterns have we used before?"
+Expected: Claude searches memory for past auth implementations
+
+User: "How do we structure database queries here?"
+Expected: Claude recalls stored database patterns
+```
+
+**Full-Stack Projects:**
+
+```text
+User: "How do we deploy this application?"
+Expected: Claude searches memory for deployment configurations
+
+User: "What's our API integration pattern?"
+Expected: Claude recalls stored integration approaches
+```
+
+**Expected Results for all tests:**
+
+- ✅ Claude Code automatically searches memory before answering
+- ✅ Claude Code stores successful solutions without prompting
+- ✅ Memory persists across sessions in PostgreSQL
+- ✅ Project-specific context is maintained
+
+### 7. Success Confirmation
 
 Display completion message with:
 
 - Location of created/modified CLAUDE.md
 - Auto-detected project information used
 - Next steps for the user (restart Claude Code, run /init)
-- Verification commands to test integration
+- Natural conversation tests from above examples to verify memory integration
 
 ## Command Flow Summary
 
@@ -127,7 +180,8 @@ Display completion message with:
 4. **Backup** existing CLAUDE.md if needed
 5. **Enhance** CLAUDE.md with Cipher integration instructions
 6. **Auto-populate** detected project information
-7. **Report** success with next steps
+7. **Select** appropriate test examples based on project type
+8. **Report** success with project-specific next steps
 
 ## Error Handling
 
