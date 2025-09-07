@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.24.2] - 2025-09-07
+
+### Added
+
+- ✨ **NPM Migration Documentation** - Comprehensive migration plan for toolkit deployment
+  - Added detailed NPM publishing strategy documentation
+  - Includes package structure, versioning, and distribution guidelines
+  - Provides complete roadmap for toolkit evolution to NPM-based distribution
+
+### Changed
+
+- 🔧 **Domain Access Configuration** - Enhanced web access capabilities
+  - Added permission for npmjs.com domain access
+  - Enables better integration with NPM ecosystem
+  - Improved toolkit web resource accessibility
+
+### Removed
+
+- 🗑️ **Cipher Memory Integration Features** - Cleanup of experimental functionality
+  - Removed `/prefix:cipher:setup-project` command and related infrastructure
+  - Deleted cipher integration documentation and template files
+  - Simplified toolkit focus by removing underutilized experimental features
+  - Enhanced README.md formatting and organization
+
 ## [3.24.1] - 2025-09-03
 
 ### Changed
