@@ -183,6 +183,7 @@ Für jeden Command erfassen wir:
 
 - **Frontmatter straffen**: Nur essenzielle Informationen
 - **Parameter reduzieren**: Sinnvolle Defaults, weniger Optionen
+- **Argument-hints vollständig**: Alle verfügbaren Parameter sichtbar machen (z.B. [type] [input] [--dry-run] [--help])
 - **Beschreibungen kürzen**: Präzise statt ausführlich
 - **Beispiele fokussieren**: Ein gutes Beispiel statt viele
 
