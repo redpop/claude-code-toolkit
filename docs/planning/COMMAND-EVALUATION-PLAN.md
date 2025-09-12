@@ -288,6 +288,13 @@ Choose a command to continue, or type your own goal.
 
 **Review-Checkpoint**: Testen der neuen Commands mit typischen Use-Cases
 
+#### 🔄 Phase 1 Git Workflow
+
+- **Nach Phase 1a Completion**: `git add . && git commit -m "feat: implement analyze and fix commands (Phase 1a complete)"`
+- **Nach Phase 1b Completion**: `git add . && git commit -m "feat: implement core commands (Phase 1b complete)"`  
+- **Nach Phase 1c Completion**: `git add . && git commit -m "feat: complete command consolidation (Phase 1 complete)"`
+- **User Review Required**: Jeder Commit braucht User-Approval vor nächster Phase
+
 ### 🧠 Phase 2: Smart Next-Steps System (2-3 Tage)
 
 **Ziel**: Workflow-Complexity durch intelligente Empfehlungen ersetzen
@@ -323,6 +330,11 @@ Choose a command to continue, or type your own goal.
 
 **Review-Checkpoint**: User-Experience Test mit typischen Aufgaben
 
+#### 🔄 Phase 2 Git Workflow
+
+- **Nach Completion**: `git add . && git commit -m "feat: implement smart next-steps system (Phase 2 complete)"`
+- **User Review Required**: Testing und Approval vor Phase 3
+
 ### 📝 Phase 3: AI-Effizienz Optimization (1-2 Tage)
 
 **Ziel**: Commands für KI-Verständnis optimieren
@@ -352,6 +364,11 @@ Choose a command to continue, or type your own goal.
 
 **Review-Checkpoint**: KI-Effizienz Test mit Token-Verbrauch Messung
 
+#### 🔄 Phase 3 Git Workflow
+
+- **Nach Completion**: `git add . && git commit -m "feat: optimize AI efficiency for all commands (Phase 3 complete)"`
+- **User Review Required**: Token-Effizienz Validation vor finaler Phase
+
 ### 📚 Phase 4: Documentation & Validation (1 Tag)
 
 **Ziel**: Alles dokumentieren und final validieren
@@ -380,6 +397,12 @@ Choose a command to continue, or type your own goal.
 - [ ] Final Review Bericht mit Gesamt-Metriken erstellt
 
 **Review-Checkpoint**: Final Review mit Gesamtbewertung
+
+#### 🔄 Phase 4 Git Workflow
+
+- **Nach Completion**: `git add . && git commit -m "docs: complete project transformation documentation (Phase 4 complete)"`
+- **Final User Review**: Komplette Transformation validation
+- **Merge Ready**: `git push origin feature/command-consolidation-2025` → Pull Request für main branch
 
 ## Zugehörige Planungsdokumente
 

@@ -253,6 +253,8 @@ Jeder Command endet mit intelligenten Empfehlungen:
 - [ ] Next-step recommendations in beide Commands eingebaut
 - [ ] Core-Workflow getestet: `/prefix:analyze full` → `/prefix:fix quick`
 - [ ] Token-Effizienz gemessen (alte vs. neue Commands)
+- [ ] **Git Commit**: `git add . && git commit -m "feat: implement analyze and fix commands (Phase 1a complete)"`
+- [ ] **User Review & Approval**: Bestätigung vor Phase 1b
 
 ### Phase 1b: Core Commands (morgen)  
 
@@ -277,6 +279,8 @@ Jeder Command endet mit intelligenten Empfehlungen:
 - [ ] `commands/toolkit.md` erstellt (konsolidiert 16→3 meta functions)
 - [ ] Alle neuen Commands mit Next-step recommendations
 - [ ] Integration zwischen Commands getestet
+- [ ] **Git Commit**: `git add . && git commit -m "feat: implement core commands (Phase 1b complete)"`
+- [ ] **User Review & Approval**: Bestätigung vor Phase 1c
 
 ### Phase 1c: Specialized (übermorgen)
 
@@ -299,6 +303,8 @@ Jeder Command endet mit intelligenten Empfehlungen:
 - [ ] Full Integration Tests für alle Workflows
 - [ ] Performance Benchmarks erstellt  
 - [ ] Migration-Dokumentation aktualisiert
+- [ ] **Git Commit**: `git add . && git commit -m "feat: complete command consolidation (Phase 1 complete)"`
+- [ ] **User Review & Final Approval**: Phase 1 komplett validiert
 
 ## Zugehörige Planungsdokumente
 
