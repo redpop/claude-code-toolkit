@@ -1,79 +1,46 @@
 # Claude Code Toolkit Documentation
 
-Welcome to the Claude Code Toolkit documentation. This directory contains comprehensive guides for both end users and developers.
+Essential documentation for the Claude Code Toolkit's 6-command architecture.
 
-## 📚 Documentation Structure
+## Quick Start
 
-### 🎯 Start Here
+1. **[Installation Guide](INSTALLATION-GUIDE.md)** - Setup instructions
+2. **[Usage Guide](USAGE.md)** - Complete command reference
+3. **[FAQ](FAQ.md)** - Common questions and troubleshooting
 
-- **[QUICK START GUIDE](guides/QUICK-START.md)** - The fastest way to get productive
-- **[INSTALLATION GUIDE](INSTALLATION-GUIDE.md)** - Complete setup instructions
+## Documentation
 
-### For End Users
+### 📚 User Documentation
 
-- **[User Guide](user-guide/)** - Everything you need to use the toolkit effectively
-  - [Quick Start](user-guide/README.md) - Get started in 5 minutes
-  - [Workflow Guide](user-guide/workflow-guide.md) - Common workflows and patterns
-  - [Command Reference](user-guide/command-reference.md) - All commands explained
-  - [Troubleshooting](user-guide/troubleshooting.md) - Solve common issues
+- **[Usage Guide](USAGE.md)** - All commands and workflows
+- **[Installation Guide](INSTALLATION-GUIDE.md)** - Setup and configuration
+- **[FAQ](FAQ.md)** - Troubleshooting and common issues
 
-### For Developers
+### 🔧 Developer Documentation
 
-- **[Developer Guide](developer-guide/)** - Technical documentation for extending and maintaining
-  - [Overview](developer-guide/README.md) - Technical introduction
-  - [Architecture](developer-guide/architecture.md) - System design and patterns
-  - [Configuration](developer-guide/configuration.md) - Settings and customization
-  - [Extending](developer-guide/extending.md) - Create commands and agents
-  - [Agent Creation Workflow](guides/AGENT-CREATION-WORKFLOW.md) - **NEW** Standardized agent creation process
-  - [Testing](developer-guide/testing.md) - Test infrastructure and writing tests
-  - [Internals](developer-guide/internals.md) - How everything works
+- **[Development Guide](DEVELOPMENT.md)** - Extending the toolkit
+- **[MCP Integration](guides/MCP-INTEGRATION.md)** - Optional enhancements
+- **[Security Guide](guides/SECURITY-GUIDE.md)** - Security best practices
 
-### Additional Resources
+### 📁 Archive
 
-- **[Tutorials](tutorials/)** - Step-by-step guides (coming soon)
-- **[Archive](archive/)** - Historical documentation
+- **[Archive](archive/)** - Historical documentation from pre-refactoring
 
-## 🚀 Quick Links
+## Core Concepts
 
-### Getting Started
+- **6 Core Commands**: understand, improve, create, secure, ship, git
+- **Extensions**: meta/* and typo3/* specialized commands
+- **AI Agents**: 22+ specialized agents for domain expertise
+- **Learning**: Basic Memory integration with graceful fallback
 
-1. [Install the toolkit](INSTALLATION-GUIDE.md)
-2. [Get started quickly](guides/QUICK-START.md)
-3. [Learn workflows](user-guide/workflow-guide.md)
+## Getting Help
 
-### Common Tasks
+- Use `--help` with any command
+- Check [FAQ](FAQ.md) for common issues
+- Review [troubleshooting](USAGE.md#troubleshooting) section
 
-- [Improve code quality](user-guide/workflow-guide.md#common-workflows)
-- [Fix security issues](user-guide/command-reference.md#sec-commands)
-- [Generate tests](user-guide/command-reference.md#gen-commands)
-- [Create custom commands](developer-guide/extending.md)
+## Maintenance
 
-## 📖 Additional Resources
-
-- **[FAQ](FAQ.md)** - Frequently asked questions
-- **[Troubleshooting](user-guide/troubleshooting.md)** - Common issues and solutions
-- **[API Reference](api/)** - Technical specifications
-
-## 🤝 Contributing to Documentation
-
-When contributing:
-
-1. Keep language clear and concise
-2. Include practical examples
-3. Update the appropriate guide
-4. Cross-reference related topics
-5. Test all code examples
-
-## 📞 Need Help?
-
-- **Quick questions**: Use `/global:flow:smart "your question"`
-- **Bug reports**: GitHub Issues
-- **Feature requests**: GitHub Discussions
-- **Community**: Discord/Slack channel
-
----
-
-Choose your path:
-
-- 👤 **[I'm a user](user-guide/)** - Learn how to use the toolkit
-- 🔧 **[I'm a developer](developer-guide/)** - Understand and extend the toolkit
+- Update README: `./scripts/update-readme.sh`
+- Keep examples using your chosen prefix
+- Focus on practical utility over complexity

@@ -1,46 +1,52 @@
 # CLAUDE.md - Documentation Context
 
-Provides Claude Code AI with documentation structure and navigation context.
+Provides Claude Code AI with documentation structure and navigation context for the 6-command architecture.
 
 ## Documentation Organization
 
-- **guides/** - Practical workflows and how-to documentation
-- **user-guide/** - End-user command reference and workflows  
-- **developer-guide/** - Development and contribution guides
-- **architecture/** - Technical design and system documentation
-- **api/** - API specifications and integration guides
-- **tutorials/** - Learning-oriented materials
+- **USAGE.md** - Complete command reference and workflows
+- **DEVELOPMENT.md** - Development and contribution guide
+- **INSTALLATION-GUIDE.md** - Setup instructions
+- **FAQ.md** - Common questions and troubleshooting
+- **guides/** - Essential guides (MCP, security)
 - **archive/** - Historical and deprecated content
 
 ## AI Context Guidelines
 
 When working with documentation:
 
-1. **Consistency**: Use "global" prefix in all examples
-2. **Cross-references**: Link to related sections appropriately  
-3. **Single source**: Avoid duplicating content between files
-4. **Installation**: Reference [INSTALLATION-GUIDE.md](INSTALLATION-GUIDE.md) for setup
-5. **Current**: Keep examples and commands up to date
+1. **Consistency**: Use user's chosen prefix in all examples
+2. **Simplicity**: Focus on essential information only
+3. **6-Command Focus**: Emphasize core commands (understand, improve, create, secure, ship, git)
+4. **Extensions**: Document meta/* and typo3/* as extensions
+5. **Current**: Keep aligned with new architecture
 
 ## Quick Navigation
 
 | User Type | Start Here | Then See |
 |-----------|------------|----------|
-| **New Users** | [Quick Start](guides/QUICK-START.md) | [Workflow Guide](user-guide/workflow-guide.md) |
-| **Developers** | [Developer Guide](developer-guide/README.md) | [Agent Creation](guides/AGENT-CREATION-WORKFLOW.md) |
-| **Contributors** | [Contributing](../CONTRIBUTING.md) | [Extending](developer-guide/extending.md) |
+| **New Users** | [USAGE.md](USAGE.md) | [FAQ.md](FAQ.md) |
+| **Developers** | [DEVELOPMENT.md](DEVELOPMENT.md) | [MCP Integration](guides/MCP-INTEGRATION.md) |
+| **Contributors** | [DEVELOPMENT.md](DEVELOPMENT.md) | [../CONTRIBUTING.md](../CONTRIBUTING.md) |
 
 ## Cross-References
 
 - **Commands**: [/commands/CLAUDE.md](../commands/CLAUDE.md)
 - **Agents**: [/agents/CLAUDE.md](../agents/CLAUDE.md)
 - **Scripts**: [/scripts/CLAUDE.md](../scripts/CLAUDE.md)
-- **Templates**: [/templates/CLAUDE.md](../templates/CLAUDE.md)
 - **Installation**: [INSTALLATION-GUIDE.md](INSTALLATION-GUIDE.md)
+
+## Core Architecture
+
+The documentation reflects the Knowledge-Driven Revolution:
+- **6 Core Commands**: understand, improve, create, secure, ship, git
+- **Extensions**: meta/*, typo3/*
+- **22+ AI Agents**: Specialized domain expertise
+- **Learning Integration**: Basic Memory with graceful fallback
 
 ## Maintenance
 
-- Update command tables: `./scripts/update-readme.sh`
-- Test all code examples before documenting
-- Use consistent "global" prefix in examples
-- Link to appropriate guides instead of duplicating content
+- Update README: `./scripts/update-readme.sh`
+- Keep documentation minimal and essential
+- Use consistent prefix in examples
+- Focus on practical utility over complexity
