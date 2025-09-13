@@ -38,4 +38,11 @@ Use Task tool with subagent_type="code-understanding-specialist":
 
 Focus areas: code structure, logic explanation, performance patterns, security implications, architectural decisions, dependencies, testing strategies, documentation gaps, or modernization opportunities based on type.
 
-Export results with timestamped filenames and provide enhanced insights when possible, comprehensive analysis guaranteed."
+Export results with timestamped filenames and provide enhanced insights when possible, comprehensive analysis guaranteed.
+
+**Phase 3 Enhancement - Automatic Learning & Next-Steps:**
+
+- Automatically extract key insights and architectural patterns for knowledge persistence
+- Generate intelligent next-step recommendations based on analysis results
+- Cross-reference findings with related knowledge entries and similar analyses
+- Create structured knowledge entries linking analysis patterns to successful outcomes"

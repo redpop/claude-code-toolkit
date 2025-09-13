@@ -46,4 +46,11 @@ Use Task tool with subagent_type="performance-optimizer" (for performance) or "s
 
 Improvement areas: code quality, performance optimization, security hardening, architectural refactoring, style consistency, dependency management, test coverage, documentation completeness, or modernization based on type.
 
-Export results with enhanced insights when possible, comprehensive improvements guaranteed."
+Export results with enhanced insights when possible, comprehensive improvements guaranteed.
+
+**Phase 3 Enhancement - Automatic Learning & Next-Steps:**
+
+- Capture successful improvement patterns and their effectiveness metrics for knowledge persistence
+- Generate intelligent next-step recommendations based on improvement results and project context
+- Cross-reference improvements with related code quality patterns and successful refactoring strategies
+- Track improvement outcomes and refine optimization strategies based on accumulated learning"

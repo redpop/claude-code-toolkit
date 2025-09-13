@@ -46,4 +46,11 @@ Use Task tool with subagent_type="security-specialist":
 
 Security focus areas: vulnerability scanning, compliance checking, threat modeling, security architecture review, penetration testing insights, or security monitoring based on type.
 
-Export results with enhanced threat intelligence when possible, comprehensive security analysis guaranteed."
+Export results with enhanced threat intelligence when possible, comprehensive security analysis guaranteed.
+
+**Phase 3 Enhancement - Automatic Learning & Next-Steps:**
+
+- Capture emerging threat patterns and successful remediation strategies for security knowledge enhancement
+- Generate intelligent recommendations for security improvements and compliance next steps
+- Cross-reference security findings with similar vulnerability patterns and proven mitigation approaches
+- Track security improvement outcomes and evolve threat detection strategies based on accumulated intelligence"

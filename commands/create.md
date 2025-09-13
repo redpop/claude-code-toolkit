@@ -46,4 +46,11 @@ Use Task tool with subagent_type="documentation-specialist" (for docs) or "test-
 
 Generation areas: comprehensive documentation, thorough test coverage, component scaffolding, API specifications, configuration files, template creation, mock data, or schema definitions based on type.
 
-Export results with enhanced templates when possible, professional generation guaranteed."
+Export results with enhanced templates when possible, professional generation guaranteed.
+
+**Phase 3 Enhancement - Automatic Learning & Next-Steps:**
+
+- Persist successful generation patterns and template effectiveness for knowledge enhancement
+- Provide intelligent recommendations for related content creation and documentation strategies
+- Cross-reference generated content with similar successful implementations and best practices
+- Learn from content creation outcomes to improve future generation quality and consistency"

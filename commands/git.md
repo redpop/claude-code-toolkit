@@ -46,4 +46,11 @@ Use Task tool with subagent_type="git-workflow-specialist":
 
 Focus: intelligent commit creation, change analysis, conflict resolution, or code review based on operation.
 
-Export results with enhanced project context when possible, professional Git workflows guaranteed."
+Export results with enhanced project context when possible, professional Git workflows guaranteed.
+
+**Phase 3 Enhancement - Automatic Learning & Next-Steps:**
+
+- Capture successful Git workflow patterns and commit strategies for version control knowledge enhancement
+- Generate intelligent recommendations for workflow optimizations and team collaboration improvements
+- Cross-reference Git operations with similar successful projects and workflow outcomes
+- Track commit quality and workflow effectiveness to evolve Git practices based on team learning"

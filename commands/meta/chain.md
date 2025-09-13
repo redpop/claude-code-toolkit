@@ -1,507 +1,264 @@
 ---
-allowed-tools: Task, Read
-description: Chain commands or execute pre-defined pipelines with intelligent data flow
-argument-hint: <pipeline-name | command-chain> [--list] [--save-as=name] [--dry-run]
-options:
-  --parallel: Execute commands in parallel where possible
-  --stop-on-error: Stop chain if any command fails (default: continue on error)
-  --help: Show help message with syntax examples and available pipelines
-  --list: List all available pre-defined pipelines
-  --save-as: Save custom chain as named pipeline for reuse
-  --dry-run: Preview execution without running commands
+allowed-tools: Task, mcp__basic-memory__search_notes, mcp__basic-memory__write_note
+description: Workflow automation with 6-command architecture and intelligent next-steps
+argument-hint: [workflow-name | command-chain] [--list] [--help] [--dry-run]
 examples:
-  - description: Run pre-defined pipeline
-    command: /prefix:meta:chain deep-quality
-  - description: Sequential execution with output passing
-    command: /prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}"
-  - description: Parallel execution of multiple commands
-    command: /prefix:meta:chain ["scan:security .", "scan:quality .", "scan:tests ."] -> "meta:export {outputs} --merge"
-  - description: Conditional execution based on results
-    command: /prefix:meta:chain "scan:deep ." ?> "fix:all {output}" -> "meta:health"
-  - description: Error fallback with recovery command
-    command: /prefix:meta:chain "risky:command" !> "fallback:command" -> "continue:normally"
-  - description: Stop chain on any error
-    command: /prefix:meta:chain --stop-on-error "critical:scan ." -> "deploy:production"
-  - description: Save custom pipeline for reuse
-    command: /prefix:meta:chain --save-as="my-workflow" "scan:deep ." -> "fix:all" -> "scan:verify"
+  - description: Run intelligent analysis workflow
+    command: /prefix:meta:chain analyze
+  - description: Complete improvement workflow
+    command: /prefix:meta:chain improve-cycle
+  - description: Security hardening workflow
+    command: /prefix:meta:chain security
+  - description: Simple command chain
+    command: /prefix:meta:chain "understand ." -> "improve {insights}"
+  - description: Custom workflow with git integration
+    command: /prefix:meta:chain "secure . --audit" -> "ship . --check" -> "git commit"
 see-also:
-  - meta:pipelines: Discover pre-defined workflow templates
-  - auto:execute: Execute analysis reports automatically
-  - scan:report: Generate comprehensive analysis reports
-  - flow:review: Perform code reviews with recommendations
+  - understand: Deep codebase analysis and insights
+  - improve: Code improvements and fixes
+  - create: Generate documentation and tests
+  - secure: Security analysis and hardening
+  - ship: Deployment readiness checks
+  - git: Smart Git operations
 ---
 
-# Command Chaining & Pipelines
+# Chain
 
-Execute commands in sequence, run pre-defined pipelines, or create your own workflows with automatic data passing and intelligent error handling.
+Workflow automation: "Run analysis then improvements, then commit."
 
-```bash
-# Help detection
-if [[ "$ARGUMENTS" == "--help" ]] || [[ "$ARGUMENTS" == "-h" ]]; then
-    echo "Command Chaining & Pipelines"
-    echo "=============================="
-    echo ""
-    echo "USAGE:"
-    echo "  /prefix:meta:chain <pipeline-name | command-chain> [options]"
-    echo ""
-    echo "OPTIONS:"
-    echo "  --parallel         Execute commands in parallel where possible"
-    echo "  --stop-on-error    Stop chain if any command fails (default: continue on error)"
-    echo "  --help             Show this help message"
-    echo "  --list             List all available pre-defined pipelines"
-    echo "  --save-as=name     Save custom chain as named pipeline for reuse"
-    echo "  --dry-run          Preview execution without running commands"
-    echo ""
-    echo "CHAIN SYNTAX:"
-    echo "  ->     Sequential execution (pass output to next command)"
-    echo "  ?>     Conditional execution (continue if previous succeeded)"
-    echo "  !>     Error fallback (run if previous failed)"
-    echo "  [a,b]  Parallel execution (run commands simultaneously)"
-    echo ""
-    echo "EXAMPLES:"
-    echo "  # Run pre-defined pipeline"
-    echo "  /prefix:meta:chain deep-quality"
-    echo ""
-    echo "  # Sequential execution with output passing"
-    echo "  /prefix:meta:chain \"scan:deep .\" -> \"fix:quick-wins {output}\""
-    echo ""
-    echo "  # Parallel execution"
-    echo "  /prefix:meta:chain [\"scan:security .\", \"scan:quality .\"] -> \"meta:export {outputs}\""
-    echo ""
-    echo "  # Conditional execution"
-    echo "  /prefix:meta:chain \"scan:deep .\" ?> \"fix:all {output}\" -> \"meta:health\""
-    echo ""
-    echo "  # Error fallback"
-    echo "  /prefix:meta:chain \"risky:command\" !> \"fallback:command\" -> \"continue:normally\""
-    echo ""
-    echo "AVAILABLE PIPELINES:"
-    echo "  quick-quality         Fast quality assessment (~30s)"
-    echo "  deep-quality          Comprehensive analysis (~5m)"
-    echo "  security-hardening    Security audit and fixes (~10m)"
-    echo "  refactoring-sprint    Systematic code improvements (~30m)"
-    echo "  release-prep          Release readiness check (~20m)"
-    echo "  continuous-improvement Weekly quality improvement (~2h)"
-    echo ""
-    echo "SEE ALSO:"
-    echo "  /prefix:meta:pipelines    Discover workflow templates"
-    echo "  /prefix:auto:execute      Execute analysis reports"
-    echo "  /prefix:scan:report       Generate analysis reports"
-    echo "  /prefix:flow:review       Code review with recommendations"
-    exit 0
-fi
-```
+## Execution
+
+Parse arguments: `$ARGUMENTS`
+
+Extract workflow, options, and chain syntax:
+
+- If first argument matches workflow names (analyze, improve-cycle, security, deploy), use as workflow
+- If argument contains `->`, parse as command chain
+- Default: workflow="analyze"
+- Handle --list, --help, and --dry-run flags
+
+Route to knowledge-enhanced workflow automation:
+
+Use Task tool with subagent_type="workflow-optimizer":
+"Execute workflow automation for '$ARGUMENTS' using Knowledge-Enhanced approach with graceful fallback:
+
+**Enhanced Workflow (when Basic Memory MCP available):**
+
+1. **Workflow Intelligence**: Search Basic Memory for successful workflow patterns and automation strategies
+2. **Smart Sequencing**: Apply learned command sequences and timing patterns from project history
+3. **Context-Aware Execution**: Use workflow context and previous automation decisions for optimization
+4. **Pattern Learning**: Capture successful automation patterns and workflow outcomes to Basic Memory
+
+**Standard Workflow (always available - no MCP required):**
+
+1. **Expert Workflows**: Apply established workflow patterns and automation best practices
+2. **Intelligent Sequencing**: Use workflow optimization expertise for efficient command execution
+3. **Professional Automation**: Execute workflows using proven development and deployment patterns
+4. **Standard Execution**: Run workflows with established timing and error handling
+
+**Universal Capabilities (always included):**
+
+- Pre-defined intelligent workflows for common development tasks
+- Command chaining with automatic output passing and data flow
+- Error handling and recovery strategies for workflow reliability
+- Integration with all 6 core commands (understand, improve, create, secure, ship, git)
+
+Focus: workflow automation, intelligent sequencing, command chaining, or pre-defined workflows based on arguments.
+
+Export results with enhanced workflow intelligence when possible, professional automation guaranteed.
+
+**Phase 3 Enhancement - Automatic Learning & Next-Steps:**
+
+- Capture successful workflow patterns and automation strategies for development efficiency enhancement
+- Generate intelligent recommendations for workflow optimizations and automation improvements  
+- Cross-reference workflow outcomes with similar successful automation patterns and timing strategies
+- Track automation effectiveness and evolve workflow strategies based on development team learning"
 
 ## Quick Start
 
-### Pre-defined Pipelines
+### Pre-defined Workflows
 
-Run optimized workflows with a single command:
+Simple one-command workflows for common tasks:
 
 ```bash
-# Run a pre-defined pipeline
-/prefix:meta:chain deep-quality
-/prefix:meta:chain security-hardening
-/prefix:meta:chain release-prep
+# Complete analysis and improvement cycle
+/prefix:meta:chain analyze          # understand -> improve -> create docs
 
-# List all available pipelines
-/prefix:meta:chain --list
+# Security hardening workflow  
+/prefix:meta:chain security         # secure -> improve -> git commit
+
+# Deployment readiness check
+/prefix:meta:chain deploy           # secure -> ship -> git tag
+
+# Full improvement cycle
+/prefix:meta:chain improve-cycle    # understand -> improve -> create -> ship
 ```
 
 ### Custom Command Chains
 
-Create ad-hoc command sequences:
+Create specific workflows with automatic data flow:
 
 ```bash
-# Simple chain
-/prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}"
+# Simple analysis to improvement
+/prefix:meta:chain "understand ." -> "improve {insights}"
 
-# Save as reusable pipeline
-/prefix:meta:chain --save-as="my-workflow" "scan:deep ." -> "fix:all"
+# Security to deployment
+/prefix:meta:chain "secure . --audit" -> "ship . --check" -> "git commit"
+
+# Full documentation workflow
+/prefix:meta:chain "understand . --docs" -> "create docs {analysis}" -> "git commit"
 ```
 
-## Intelligent Detection
+## Workflow Intelligence
 
-The command automatically detects what you want:
+The chain command learns from successful patterns and suggests optimal workflows:
 
-1. **Pipeline name** (no arrows) → Runs pre-defined pipeline
-2. **Chain syntax** (contains `->`) → Creates ad-hoc chain
-3. **Pipeline + extension** → Runs pipeline then additional steps
+### Intelligent Detection
 
-## Pre-defined Pipelines
+The command automatically detects what you need:
 
-### 🚀 quick-quality
+1. **Workflow name** → Runs pre-defined intelligent workflow
+2. **Chain syntax** (contains `->`) → Creates custom command sequence  
+3. **Context analysis** → Suggests best workflow based on project state
 
-**Purpose**: Fast quality assessment before commits (~30 seconds)
+### Pre-defined Intelligent Workflows
+
+#### 🔍 analyze
+
+**Purpose**: Complete codebase analysis and insights
 
 ```bash
-/prefix:meta:chain quick-quality
-# Executes:
-# - scan:quick . --export-json
-# - scan:report --latest --quick-wins
+/prefix:meta:chain analyze
+# Executes: understand . -> create docs {insights}
 ```
 
-### 🔍 deep-quality
+#### 🔧 improve-cycle  
 
-**Purpose**: Comprehensive analysis with actionable fixes (~5 minutes)
+**Purpose**: Full improvement workflow with validation
 
 ```bash
-/prefix:meta:chain deep-quality
-# Executes:
-# - scan:deep . --export-json
-# - scan:report --latest --generate-action-plan  
-# - auto:execute --latest --dry-run
+/prefix:meta:chain improve-cycle
+# Executes: understand . -> improve {analysis} -> create tests -> ship . --check
 ```
 
-### 🛡️ security-hardening
+#### 🛡️ security
 
-**Purpose**: Find and fix security vulnerabilities (~10 minutes)
+**Purpose**: Security hardening with automated fixes
 
 ```bash
-/prefix:meta:chain security-hardening
-# Executes:
-# - sec:audit . --export-json
-# - fix:security --latest --severity=critical,high
-# - sec:comply . --standard=owasp
+/prefix:meta:chain security  
+# Executes: secure . --audit -> improve {findings} -> git commit
 ```
 
-### 🏗️ refactoring-sprint
+#### 🚀 deploy
 
-**Purpose**: Improve code structure systematically (~30 minutes)
+**Purpose**: Deployment readiness validation
 
-```bash
-/prefix:meta:chain refactoring-sprint
-# Executes:
-# - flow:refactor . --export=refactor-plan.md
-# - flow:refactor . --safety=conservative --execute
-# - test:run --all
-# - scan:quality . --compare=baseline.json
-```
-
-### 📈 release-prep
-
-**Purpose**: Ensure code is release-ready (~20 minutes)
-
-```bash
-/prefix:meta:chain release-prep
-# Executes:
-# - scan:deep . --export-all
-# - fix:quick-wins analysis.json
-# - gen:docs --update-all
-# - meta:changelog --update-version
-# - meta:health --export=release-health.json
-```
-
-### 🔄 continuous-improvement
-
-**Purpose**: Weekly code quality improvement (~2 hours)
-
-```bash
-/prefix:meta:chain continuous-improvement
-# Executes:
-# - scan:quality . --export=week-start.json
-# - auto:sprint . --duration=1w --focus=quality
-# - scan:quality . --baseline=week-start.json
-# - auto:report --compare-baseline
+```bash  
+/prefix:meta:chain deploy
+# Executes: secure . -> ship . --readiness -> git tag
 ```
 
 ## Custom Chaining Syntax
 
+Simple chaining with the 6 core commands:
+
 ### Sequential Execution
 
-Commands execute one after another, passing data forward:
+Commands execute in order, passing insights forward:
 
 ```bash
-/prefix:meta:chain "scan:deep ." -> "scan:report {output} --generate-action-plan" -> "auto:execute {output}"
+/prefix:meta:chain "understand . --focus=performance" -> "improve {insights}"
 ```
 
-### Parallel Groups
+### Complete Workflows
 
-Execute independent commands simultaneously:
-
-```bash
-/prefix:meta:chain ["scan:security .", "scan:quality .", "scan:tests ."] -> "meta:export {outputs} --merge"
-```
-
-### Conditional Chains
-
-Continue based on previous results:
+Multi-step workflows for comprehensive results:
 
 ```bash
-/prefix:meta:chain "scan:deep . --export-json" -> "fix:quick-wins {output}" ?> "meta:health"
+/prefix:meta:chain "understand ." -> "secure {analysis}" -> "ship . --check" -> "git commit"
 ```
 
 ## Data Flow
 
-### Automatic Output Capture
+### Automatic Output Passing
 
-Each command's output is automatically:
+Commands automatically pass insights to the next command:
 
-1. Captured and stored
-2. Made available to next command as `{output}`
-3. Accumulated in `{outputs}` array
-4. Logged for debugging
+- `{insights}` - Previous command's analysis and insights
+- `{analysis}` - Detailed analysis results  
+- `{findings}` - Security or quality findings
+- `{output}` - General command output
 
-### Variable Substitution
-
-- `{output}` - Previous command's output file/data
-- `{outputs}` - All previous outputs
-- `{output.1}` - Specific command's output by index
-- `{timestamp}` - Current timestamp
-- `{date}` - Current date
-
-## Error Handling
-
-### Default Behavior
-
-- Log error and continue to next command
-- Mark failed commands in final report
-- Return partial success status
-
-### Stop on Error
+### Example Data Flow
 
 ```bash
-/prefix:meta:chain --stop-on-error "critical:command" -> "dependent:command"
-```
+# Analysis insights flow to improvement suggestions
+/prefix:meta:chain "understand . --focus=security" -> "improve {insights}"
 
-### Error Recovery
-
-```bash
-/prefix:meta:chain "risky:command" !> "fallback:command" -> "continue:normally"
+# Security findings inform deployment checks  
+/prefix:meta:chain "secure . --audit" -> "ship . --security-check {findings}"
 ```
 
 ## Common Patterns
 
-### Analysis → Fix → Verify
+### Analysis → Improvement → Verification
 
 ```bash
-/prefix:meta:chain \
-  "scan:deep . --export-json" -> \
-  "fix:quick-wins {output}" -> \
-  "scan:deep . --compare={output.1}"
+/prefix:meta:chain "understand ." -> "improve {analysis}" -> "ship . --check"
 ```
 
-### Parallel Analysis → Merge
+### Security → Fix → Commit
 
 ```bash
-/prefix:meta:chain \
-  ["scan:security .", "scan:quality .", "scan:perf ."] -> \
-  "meta:export {outputs} --merge --format=md"
+/prefix:meta:chain "secure . --audit" -> "improve {findings}" -> "git commit"
 ```
 
-### Conditional Improvement
+### Documentation Workflow
 
 ```bash
-/prefix:meta:chain \
-  "scan:quality . --export" -> \
-  "fix:quality {output} --if-score<80" ?> \
-  "meta:health --verify"
+/prefix:meta:chain "understand . --docs" -> "create docs {insights}" -> "git commit"
 ```
 
-## Advanced Features
+## Best Practices
 
-### Named Outputs
-
-Assign names to outputs for clarity:
-
-```bash
-/prefix:meta:chain \
-  "scan:deep . --export-json" as baseline -> \
-  "auto:sprint . --week" -> \
-  "scan:deep . --compare={baseline}"
-```
-
-### Loop Execution
-
-Repeat until condition met:
-
-```bash
-/prefix:meta:chain \
-  "scan:tests ." -> \
-  "gen:tests --coverage-target=90" -> \
-  "scan:tests ." \
-  --repeat-until="coverage>=90" \
-  --max-iterations=5
-```
-
-### Scheduled Chains
-
-```bash
-/prefix:meta:chain \
-  --schedule="daily@09:00" \
-  "scan:quality ." -> \
-  "meta:export {output} --format=html" -> \
-  "notify:slack quality-report"
-```
+1. **Start Simple**: Use pre-defined workflows for common tasks
+2. **Chain Logically**: Follow natural development flow (understand → improve → verify)
+3. **Use Context**: Let commands pass relevant insights to the next step
+4. **Test First**: Use `--dry-run` to preview complex workflows
 
 ## Integration Examples
 
 ### CI/CD Pipeline
 
 ```yaml
+# GitHub Actions
 - name: Quality Gate
-  run: |
-    /prefix:meta:chain \
-      "scan:quick . --export-json" -> \
-      "scan:report {output} --threshold=85" \
-      --stop-on-error
+  run: /prefix:meta:chain security
+
+- name: Deployment Check
+  run: /prefix:meta:chain deploy
 ```
 
 ### Git Hooks
 
 ```bash
 # pre-commit
-/prefix:meta:chain \
-  "scan:quick . --staged-only" -> \
-  "fix:style {files} --auto" \
-  --stop-on-error
+/prefix:meta:chain "secure . --quick" -> "improve {findings}"
+
+# pre-push  
+/prefix:meta:chain "understand . --quick" -> "ship . --check"
 ```
 
 ### Development Workflow
 
 ```bash
-# Before PR
-/prefix:meta:chain \
-  "flow:review . --focus=changes" -> \
-  "gen:docs --update-changed" -> \
-  "git:commit --message='Ready for review'"
-```
+# Daily development workflow
+/prefix:meta:chain analyze
 
-## Execution Report
+# Before pull request
+/prefix:meta:chain improve-cycle
 
-After chain execution:
-
-```markdown
-# Chain Execution Report
-
-**Started**: 2024-01-30 10:00:00
-**Completed**: 2024-01-30 10:05:23
-**Duration**: 5m 23s
-
-## Command Results
-
-✅ scan:deep . --export-json
-Output: analysis-20240130.json
-Duration: 45s
-
-✅ fix:quick-wins analysis-20240130.json  
- Fixed: 23 issues
-Duration: 2m 10s
-
-✅ scan:deep . --compare=analysis-20240130.json
-Improvement: +15 quality points
-Duration: 48s
-
-## Summary
-
-- Commands executed: 3/3
-- Success rate: 100%
-- Total improvement: +15 points
-```
-
-## Best Practices
-
-1. **Test First**: Dry-run complex chains
-2. **Name Outputs**: Use meaningful names for clarity
-3. **Handle Errors**: Plan for failure scenarios
-4. **Log Results**: Keep execution history
-5. **Modularize**: Create reusable chain templates
-
-## Usage Examples
-
-### Pipeline Operations
-
-```bash
-# Run pre-defined pipeline
-/prefix:meta:chain deep-quality
-
-# Extend a pipeline
-/prefix:meta:chain deep-quality -> "git:commit --message='Quality improvements'"
-
-# Preview pipeline execution
-/prefix:meta:chain release-prep --dry-run
-
-# List all pipelines
-/prefix:meta:chain --list
-```
-
-### Custom Chains
-
-```bash
-# Quick quality fix
-/prefix:meta:chain "scan:quick ." -> "fix:quick-wins {output}"
-
-# Full analysis pipeline
-/prefix:meta:chain \
-  "scan:deep . --export-all" -> \
-  "flow:review {output}" -> \
-  "meta:export {outputs} --merge --template=technical"
-
-# Save custom pipeline
-/prefix:meta:chain --save-as="my-analysis" \
-  "scan:deep ." -> "fix:all" -> "scan:verify"
-```
-
-### Hybrid Usage
-
-```bash
-# Start with pipeline, add custom steps
-/prefix:meta:chain quick-quality -> "notify:slack 'Quality check complete'"
-
-# Chain multiple pipelines
-/prefix:meta:chain security-hardening -> refactoring-sprint
-```
-
-## Creating Custom Pipelines
-
-### Save for Reuse
-
-```bash
-# Define and save
-/prefix:meta:chain --save-as="test-improvement" \
-  "scan:tests ." -> \
-  "gen:tests --coverage-target=90" -> \
-  "scan:tests . --verify"
-
-# Use saved pipeline
-/prefix:meta:chain test-improvement
-```
-
-### Define with Task Tool
-
-For complex pipelines:
-
-Use Task tool with subagent_type="general-purpose":
-"Create a command pipeline for: $ARGUMENTS. Include: 1) Analysis phase, 2) Action phase, 3) Verification phase. Output as chain syntax."
-
-## Integration Examples
-
-### CI/CD
-
-```yaml
-# GitHub Actions
-- name: Quality Gate
-  run: /prefix:meta:chain deep-quality --stop-on-error
-
-- name: Security Check  
-  run: /prefix:meta:chain security-hardening
-```
-
-### Git Hooks
-
-```bash
-# pre-commit
-/prefix:meta:chain quick-quality || exit 1
-
-# pre-push
-/prefix:meta:chain release-prep --dry-run
-```
-
-### Scheduled Tasks
-
-```bash
-# Daily quality check (cron)
-0 9 * * * /prefix:meta:chain deep-quality
-
-# Weekly improvement
-0 9 * * MON /prefix:meta:chain continuous-improvement
+# Weekly maintenance
+/prefix:meta:chain "understand . --health" -> "improve {insights}" -> "git commit"
 ```
