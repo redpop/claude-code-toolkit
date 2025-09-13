@@ -200,7 +200,7 @@ scanning_agents = [
 ## Usage
 
 ```bash
-/yourprefix:category:[Command Name] /path/to/analyze
+/yourprefix:[command-name] [target] [options]
 ```
 
 ## Performance

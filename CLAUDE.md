@@ -17,19 +17,19 @@ Designed to be installed into `~/.claude/` with a custom prefix, making all tool
 
 ### 🎯 Essential Workflows
 
-**Deep Analysis Pipeline** (Recommended):
+**6-Command Architecture** (Recommended):
 
 ```bash
-/prefix:scan:deep . --export-json
-/prefix:scan:report --latest --generate-action-plan
-/prefix:auto:execute --latest
+/prefix:understand . --comprehensive
+/prefix:improve . --apply-insights
+/prefix:ship . --readiness-check
 ```
 
-**Quick Quality Check**:
+**Quick Development Workflow**:
 
 ```bash
-/prefix:scan:quick . --export-json
-/prefix:fix:quick-wins --latest
+/prefix:understand . --quick
+/prefix:secure . --audit
 ```
 
 **Individual Command Usage**:
@@ -64,9 +64,10 @@ Each CLAUDE.md file provides focused context for its specific area, reducing cog
 
 Commands follow a hierarchical namespace pattern:
 
-- Structure: `/prefix:category:command`
-- Categories: `scan`, `fix`, `gen`, `flow`, `auto`, `sec`, `git`, `meta`, `typo3`, `css`
-- Example: `/prefix:scan:deep` for deep code analysis
+- Structure: `/prefix:command` (6-command architecture) or `/prefix:category:command` (specialized)
+- Core Commands: `understand`, `improve`, `create`, `secure`, `ship`, `git`
+- Specialized Categories: `typo3`, `meta` (for specific domains)
+- Example: `/prefix:understand .` for codebase analysis
 
 See **[commands/CLAUDE.md](commands/CLAUDE.md)** for detailed command documentation.
 

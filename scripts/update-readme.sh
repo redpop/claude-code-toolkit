@@ -90,7 +90,71 @@ has_commands=false
 has_help_system=false
 help_commands_list=""
 
-# Process each category directory
+# First, process core commands (direct .md files in commands/)
+core_commands_content=""
+core_commands_found=false
+
+for cmd_file in "$COMMANDS_DIR"/*.md; do
+    if [ -f "$cmd_file" ] && [ "$(basename "$cmd_file")" != "CLAUDE.md" ]; then
+        cmd_name=$(basename "$cmd_file" .md)
+
+        # Extract metadata
+        description=$(extract_frontmatter "$cmd_file" "description")
+        if [ -z "$description" ]; then
+            description=$(extract_first_paragraph "$cmd_file")
+        fi
+
+        argument_hint=$(extract_frontmatter "$cmd_file" "argument-hint")
+
+        # Check if command has help support
+        help_support=""
+        if has_help_support "$cmd_file"; then
+            help_support="✓"
+            has_help_system=true
+            if [ -n "$help_commands_list" ]; then
+                help_commands_list+=", "
+            fi
+            help_commands_list+="/prefix:${cmd_name}"
+        else
+            help_support="-"
+        fi
+
+        # Build core commands section
+        if [ "$core_commands_found" = false ]; then
+            core_commands_content+="\n### Core Commands (6-Command Architecture)\n\n"
+            core_commands_content+="| Command | Description | Options | Help |\n"
+            core_commands_content+="|---------|-------------|---------|------|\n"
+            core_commands_found=true
+            has_commands=true
+        fi
+
+        # Format options from argument-hint
+        options=""
+        if [ -n "$argument_hint" ]; then
+            cleaned=$(echo "$argument_hint" | sed 's/\[//g; s/\]//g')
+            if [ -n "$cleaned" ]; then
+                options=$(echo "$cleaned" | awk '{
+                    for(i=1; i<=NF; i++) {
+                        if(i>1) printf ", "
+                        gsub(/\|/, "\\|", $i)
+                        printf "`%s`", $i
+                    }
+                }')
+            fi
+        fi
+
+        # Add core command row
+        core_commands_content+="\n| \`/prefix:${cmd_name}\` | ${description:-No description} | ${options:--} | ${help_support} |"
+    fi
+done
+
+# Add core commands to output if found
+if [ "$core_commands_found" = true ]; then
+    echo -e "$core_commands_content" >> "$TEMP_FILE"
+    echo "" >> "$TEMP_FILE"
+fi
+
+# Then process each category directory
 for category_dir in "$COMMANDS_DIR"/*; do
     if [ -d "$category_dir" ]; then
         category_name=$(basename "$category_dir")

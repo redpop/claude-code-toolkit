@@ -6,7 +6,7 @@ This file provides context for Claude Code when working with utility scripts in 
 
 ### Core Scripts
 
-**install.sh**
+**install.sh** (Located in repository root)
 
 - Main installation script for the toolkit
 - Copies commands and agents to `~/.claude/`
@@ -32,17 +32,13 @@ This file provides context for Claude Code when working with utility scripts in 
 - Uses templates for consistency
 - Validates agent names and types
 
-**create-sub-agent.sh**
+**create-command.sh**
 
-- Creates new sub-agent definitions
-- Generates proper structure
-- Includes boilerplate code
-
-**create-sub-agent-command.sh**
-
-- Scaffolds new sub-agent orchestration commands
-- Generates boilerplate with proper structure
-- Ensures consistent command format
+- Creates new commands for 6-Command Architecture
+- Usage: `./scripts/create-command.sh --name "command-name" --type core|typo3|meta`
+- Supports core, TYPO3, and meta command types
+- Generates proper frontmatter and structure
+- Includes help system integration
 
 ### Analysis Scripts
 
@@ -57,6 +53,13 @@ This file provides context for Claude Code when working with utility scripts in 
 - Analyzes code quality trends over time
 - Compares metrics across reports
 - Generates trend visualizations
+
+**generate-help.sh**
+
+- Generates formatted help output for commands
+- Processes command metadata and frontmatter
+- Creates consistent help documentation
+- Usage: `./scripts/generate-help.sh <command-file>`
 
 ## Installation Script Details
 
@@ -142,6 +145,17 @@ The `update-readme.sh` script maintains command documentation:
 - After modifying command frontmatter
 - Before committing command changes
 - As part of release process
+
+### Archived Scripts
+
+Legacy scripts have been moved to `scripts/archive/`:
+
+- `create-sub-agent-command.sh` - Old command creation with category system
+- `create-sub-agent.sh` - Legacy sub-agent creation patterns
+- `add-help-to-commands.sh` - Bulk help addition for old architecture
+- `simple-add-help.sh` - Simple help addition tool
+
+These were designed for the 56-command architecture and are no longer compatible with the 6-Command Architecture.
 
 ## Script Development Guidelines
 

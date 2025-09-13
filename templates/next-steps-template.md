@@ -7,11 +7,11 @@ Based on the analysis, I recommend:
 **Quick fixes with high impact:**
 
 ```bash
-# Fix critical issues
-/global:fix:quick-wins {export-file}
+# Apply intelligent improvements
+/global:improve . --priority=high
 
-# Or specific fixes
-/global:fix:security {export-file} --severity=critical
+# Or security-focused improvements
+/global:secure . --fix-critical
 ```
 
 ### 2. **Comprehensive Improvement** (30-60 min)
@@ -23,25 +23,25 @@ Based on the analysis, I recommend:
 /global:meta:workflow quality-sprint
 
 # Or deep analysis with action plan
-/global:scan:report {export-file} --generate-action-plan
-/global:auto:execute action-plan-*.md
+/global:understand {export-file} --generate-action-plan
+/global:ship action-plan-*.md --execute
 ```
 
 ### 3. **Focused Approach**
 
 **Choose based on your priorities:**
 
-- [ ] 🔒 **Security Focus**: `/global:sec:audit . --comprehensive`
-- [ ] ⚡ **Performance**: `/global:scan:perf . --profile`
-- [ ] 🧪 **Testing**: `/global:gen:tests --coverage-target=80`
-- [ ] 🏗️ **Architecture**: `/global:flow:refactor . --analyze`
-- [ ] 📚 **Documentation**: `/global:fix:documentation --sync`
+- [ ] 🔒 **Security Focus**: `/global:secure . --audit --comprehensive`
+- [ ] ⚡ **Performance**: `/global:improve . --performance --profile`
+- [ ] 🧪 **Testing**: `/global:create tests --coverage-target=80`
+- [ ] 🏗️ **Architecture**: `/global:improve . --refactor --analyze`
+- [ ] 📚 **Documentation**: `/global:create docs --sync`
 
 ### 4. **Track Progress**
 
 ```bash
 # Compare with baseline
-/global:scan:quality . --compare={export-file}
+/global:understand . --quality --compare={export-file}
 
 # View improvement metrics
 /global:meta:health --verbose

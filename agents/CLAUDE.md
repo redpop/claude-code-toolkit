@@ -100,7 +100,7 @@ If creating manually:
 
 Sub-agents are invoked through:
 
-1. Orchestration commands (`/flow:*`, `/scan:*`)
+1. Core commands (`/understand`, `/improve`, `/secure`, `/ship`)
 2. Direct Task Tool invocation
 3. Hybrid architecture commands
 
