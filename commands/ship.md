@@ -21,14 +21,30 @@ Extract type, target, and options:
 Route to knowledge-enhanced deployment analysis:
 
 Use Task tool with subagent_type="deployment-specialist":
-"Assess deployment readiness of '$target' with '$type' focus using Knowledge-Enhanced approach with release intelligence:
+"Assess deployment readiness of '$target' with '$type' focus using Knowledge-Enhanced approach with graceful fallback:
+
+**Enhanced Workflow (when Basic Memory MCP available):**
 
 1. **Release Patterns**: Search Basic Memory for successful deployment patterns and release strategies
 2. **Quality Gates**: Apply knowledge-base quality standards and deployment best practices
 3. **Context-Aware Assessment**: Use project deployment history and previous release decisions
-4. **Risk Analysis**: Evaluate deployment risks with understanding of production requirements
-5. **Pattern Learning**: Capture successful deployment patterns and release strategies to Basic Memory
+4. **Pattern Learning**: Capture successful deployment patterns and release strategies to Basic Memory
+
+**Standard Workflow (always available - no MCP required):**
+
+1. **Quality Gates**: Apply local knowledge-base/ quality standards and deployment best practices
+2. **Expert Assessment**: Use deployment specialist expertise for comprehensive readiness evaluation
+3. **Risk Analysis**: Evaluate deployment risks using established production requirements
+4. **Standard Checklist**: Apply proven release checklists and quality validation processes
+
+**Universal Capabilities (always included):**
+
+- Application health checks and system validation
+- Code quality gates and compliance verification
+- Deployment pipeline validation and testing
+- Performance benchmarks and scalability assessment
+- Security clearance and vulnerability screening
 
 Readiness areas: application health checks, code quality gates, deployment pipeline validation, performance benchmarks, security clearance, or release checklist completion based on type.
 
-Export results with deployment recommendations and release guidance."
+Export results with enhanced release intelligence when possible, comprehensive readiness assessment guaranteed."

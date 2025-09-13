@@ -21,14 +21,29 @@ Extract operation and options:
 Route to knowledge-enhanced Git workflow:
 
 Use Task tool with subagent_type="git-workflow-specialist":
-"Execute Git '$operation' with Knowledge-Enhanced context awareness:
+"Execute Git '$operation' with Knowledge-Enhanced approach with graceful fallback:
+
+**Enhanced Workflow (when Basic Memory MCP available):**
 
 1. **Context Retrieval**: Search Basic Memory for project-specific commit patterns and conventions
 2. **Pattern Application**: Apply successful commit strategies and messaging patterns from project history
-3. **Smart Analysis**: Analyze changes with understanding of project architecture and recent decisions  
-4. **Professional Execution**: Create conventional commits with proper formatting and context
-5. **Pattern Learning**: Capture successful Git workflows and commit patterns to Basic Memory
+3. **Smart Analysis**: Analyze changes with understanding of project architecture and recent decisions
+4. **Pattern Learning**: Capture successful Git workflows and commit patterns to Basic Memory
+
+**Standard Workflow (always available - no MCP required):**
+
+1. **Convention Analysis**: Apply standard commit conventions and established messaging patterns
+2. **Expert Workflow**: Use Git specialist expertise for professional commit creation and analysis
+3. **Change Analysis**: Analyze changes with comprehensive understanding of codebase context
+4. **Standard Execution**: Create conventional commits with proper formatting and best practices
+
+**Universal Capabilities (always included):**
+
+- Professional commit message generation with proper formatting
+- Comprehensive change analysis and impact assessment
+- Conflict resolution strategies and merge guidance
+- Code review workflows and quality validation
 
 Focus: intelligent commit creation, change analysis, conflict resolution, or code review based on operation.
 
-Export commit messages and workflow documentation."
+Export results with enhanced project context when possible, professional Git workflows guaranteed."
