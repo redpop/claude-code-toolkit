@@ -1,101 +1,171 @@
 # Command Evaluation & Optimization Plan
 
-## 🚀 **MAJOR ARCHITECTURE REVISION - Option A: Developer-Centered Design**
+## 🧠 **KNOWLEDGE-DRIVEN REVOLUTION - Claude Code Integration Architecture**
 
-**Status**: APPROVED - Problem-zentrierte 6-Command Architektur
+**Status**: APPROVED - Knowledge-Enhanced 4-Layer Architecture
 
-## Projektverständnis
+### 🏗️ **Revolutionary 4-Layer Architecture**
 
-Das Claude Code Toolkit wurde **fundamental neu konzipiert** basierend auf:
-
-- **Developer Psychology Analysis** - Wie Entwickler tatsächlich denken und arbeiten
-- **Problem-First Design** - Nicht Tool-zentriert, sondern Problem-zentriert  
-- **Cognitive Load Optimization** - 5±2 Command Limit für maximale Usability
-- **Intuitive Naming** - Commands die Entwickler instinktiv verstehen
-
-**Ursprüngliches System**: 56 Commands in 10 Kategorien → **Neue Vision**: 6 intuitive Commands
-
-## 🎯 **Neue 6-Command Architektur (Developer-Centered)**
-
-### **Core Commands (Problem-zentriert)**
-
-```bash
-# Was Entwickler TATSÄCHLICH denken:
-/prefix:understand [target]    # "Was macht das?" - Code-Analyse & Verständnis
-/prefix:improve [target]       # "Mach das besser" - Fixes, Refactoring, Performance  
-/prefix:create [type] [target] # "Baue mir xyz" - Generation (Docs, Tests, Components)
-/prefix:secure [target]        # "Ist das sicher?" - Security & Compliance
-/prefix:ship [target]          # "Kann ich das deployen?" - Readiness & Quality Gates
-/prefix:git [operation]        # "Git-Workflow" - Commits, Merges, Conflicts (essentiell!)
+```
+Layer 1: Interface (Slash Commands)     → Claude Code Compliant (15-30 lines)
+Layer 2: Intelligence (Sub-Agents)      → Knowledge-Enhanced Specialists  
+Layer 3: Knowledge (Multi-Source)       → Local KB + Basic Memory + Context
+Layer 4: Execution (Tools + MCP)        → Enhanced Tool Integration
 ```
 
-### **Neue Kern-Workflows (Intuitiv)**
+**Transformation**: Von Tool-zentriert zu **Knowledge-Driven Developer Experience**
 
-**1. Verstehen → Verbessern → Shippen**
+## 🎯 **Knowledge-Driven Architecture Vision**
+
+Das Claude Code Toolkit wurde **fundamental neu konzipiert** für:
+
+### **Multi-Layer Intelligence Integration**
+
+- **Claude Code Best Practices** - Kurze, fokussierte Commands (15-30 Zeilen)
+- **Sub-Agent Orchestration** - Spezialisierte Domain-Experten mit Knowledge-Zugriff
+- **Persistent Learning** - Basic Memory für projektübergreifendes Wissen
+- **Local Knowledge Base** - Domänen-spezifische Expertise im Projekt
+- **Developer Psychology** - Intuitive Problem-zentrierte Interface
+
+**Transformation**:
+
+- **56 Commands → 6 Intuitive Commands** (Interface Layer)
+- **Basic Agents → Knowledge-Enhanced Specialists** (Intelligence Layer)
+- **Static Knowledge → Dynamic Learning System** (Knowledge Layer)
+- **Tool Usage → MCP-Enhanced Execution** (Execution Layer)
+
+## 🚀 **Knowledge-Enhanced 6-Command Architecture**
+
+### **Layer 1: Interface Commands (Claude Code Compliant)**
 
 ```bash
-/prefix:understand legacy-auth.js    # Code-Analyse
-/prefix:improve security            # Security-Fixes  
-/prefix:ship readiness             # Deployment-Check
+# Developer-Intuitive Interface → Knowledge-Enhanced Execution:
+/prefix:understand [type] [target]     # Code-Analyse mit Knowledge-Integration
+/prefix:improve [type] [target]        # Verbesserungen mit Learning-Persistence  
+/prefix:create [type] [target]         # Generation mit Pattern-Knowledge
+/prefix:secure [type] [target]         # Security mit Compliance-Knowledge
+/prefix:ship [type] [target]           # Deployment mit Best-Practice Knowledge
+/prefix:git [operation]                # Git-Workflows mit Projekt-Context
 ```
 
-**2. Quick Development Cycle**
+### **Layer 2: Knowledge-Enhanced Sub-Agents**
 
 ```bash
-/prefix:create tests user-service   # Test-Generation
-/prefix:improve performance         # Performance-Optimierung
-/prefix:git commit                 # Smart Commit
+# Spezialisierte Agents mit Multi-Source Knowledge:
+code-understanding-specialist     → KB + Basic Memory + Analysis History
+performance-optimizer            → KB + Basic Memory + Performance Patterns
+security-specialist              → KB + Basic Memory + Vulnerability Database
+architecture-expert              → KB + Basic Memory + Design Patterns
 ```
 
-**3. Security-First Workflow**
+### **Layer 3: Multi-Source Knowledge Integration**
 
 ```bash
-/prefix:secure audit               # Security-Analyse
-/prefix:improve security           # Vulnerability-Fixes
-/prefix:git commit --security      # Security-Commit
+Local Knowledge Base:            knowledge-base/{domain}/*.md
+Basic Memory Global:             Persistent cross-project learning
+Basic Memory Project:            Project-specific context & decisions  
+Real-Time Context:               Current session & analysis results
 ```
 
-## 🧠 **Developer Psychology Insights (Basis für neue Architektur)**
+### **Knowledge-Enhanced Workflows (Learning & Context-Aware)**
 
-### **5 Kernaktionen die Entwickler täglich machen:**
+**1. Understanding mit Knowledge-Accumulation**
 
-1. **UNDERSTAND** - "Was macht das?" (häufigste Aktivität)
-2. **IMPROVE** - "Mach das besser" (zweithäufigste)
-3. **CREATE** - "Baue mir xyz" (regelmäßig aber spezifisch)
-4. **SECURE** - "Ist das sicher?" (periodisch aber kritisch)
-5. **SHIP** - "Kann ich das deployen?" (ziel-orientiert)
-6. **GIT** - Git-Workflows (essentiell für jeden Dev)
+```bash
+/prefix:understand performance api.js   # Analyse + KB Patterns + Basic Memory
+# → Automatic: Persist insights to Basic Memory
+# → Reference: Similar performance analyses from history
+# → Apply: Knowledge-base performance optimization patterns
+```
 
-### **Neue Evaluationskriterien (Developer-Centered)**
+**2. Improvement mit Pattern-Learning**
 
-#### **Primäre Kriterien (UX-Fokussiert)**
+```bash
+/prefix:improve security auth-system    # Enhancement mit Security KB
+# → Reference: Previous security fixes from Basic Memory
+# → Apply: Security patterns from knowledge-base/security/
+# → Learn: New security patterns discovered → Basic Memory
+```
 
-1. **Intuition Score** - Würde ein Entwickler diesen Command sofort verstehen?
-2. **Mental Model Match** - Passt zur Art wie Entwickler über Probleme denken?
-3. **Cognitive Load** - Wie viele Commands muss man sich merken? (Max 7±2)
-4. **Discovery Ease** - Wie einfach findet man den richtigen Command?
-5. **Daily Usage Potential** - Wird das täglich genutzt oder nur selten?
+**3. Creation mit Template-Knowledge**
 
-#### **Sekundäre Kriterien (Technical)**
+```bash
+/prefix:create tests user-service       # Generation mit Test-Patterns
+# → Reference: Test patterns from knowledge-base/frameworks/
+# → Apply: Previous successful test strategies from Basic Memory
+# → Adapt: Patterns to current project context
+```
 
-6. **Smart Routing Capability** - Kann automatisch den richtigen Agent finden?
-7. **Context Awareness** - Versteht den Entwicklungskontext?
-8. **Progressive Disclosure** - Einfach zu starten, mächtig für Power-User?
-9. **Workflow Integration** - Passt in natürliche Dev-Workflows?
-10. **Expert Agent Orchestration** - Nutzt spezialisierte AI-Agents effektiv?
+## 🧠 **Knowledge-Driven Development Psychology**
 
-## 🗺️ **Command-Mapping: Alt → Neu (56→6 Konsolidierung)**
+### **6 Core Developer Actions Enhanced by Knowledge:**
 
-### **Command-Konsolidierungs-Matrix**
+1. **UNDERSTAND** - "Was macht das?" → **Mit accumulated learning & patterns**
+2. **IMPROVE** - "Mach das besser" → **Mit best-practice knowledge & history**
+3. **CREATE** - "Baue mir xyz" → **Mit template knowledge & successful patterns**
+4. **SECURE** - "Ist das sicher?" → **Mit vulnerability database & compliance patterns**
+5. **SHIP** - "Kann ich das deployen?" → **Mit deployment knowledge & quality gates**
+6. **GIT** - Git-Workflows → **Mit project context & commit patterns**
 
-| Neue Command | Alte Commands (Konsolidiert) | Hauptfunktion |
-|--------------|------------------------------|---------------|
-| **understand** | scan:deep, scan:quick, scan:explore, scan:map, scan:root-cause, scan:perf, scan:deps, scan:docs, scan:tests, flow:smart, flow:debug-mode, meta:analyze-toolkit | Code-Analyse & Problemverständnis |
-| **improve** | fix:quick-wins, fix:security, fix:performance, fix:duplicates, fix:documentation, fix:shell, fix:markdown, flow:refactor | Fixes, Refactoring, Optimierung |
-| **create** | gen:docs, gen:tests, gen:format | Generation (Docs, Tests, Code) |
-| **secure** | sec:audit, sec:baseline, sec:comply | Security & Compliance |
-| **ship** | scan:report, meta:health, auto:monitor, auto:report | Deployment-Readiness & Quality |
-| **git** | git:commit, git:commit-simple, git:review, git:conflict-resolver | Git-Operationen |
+### **Knowledge-Enhancement Benefits:**
+
+- 🧠 **Persistent Learning**: System wird klüger über Zeit
+- 🔄 **Context Awareness**: Versteht Projekthistorie und Entscheidungen
+- 📚 **Pattern Application**: Nutzt bewährte Lösungsmuster automatisch
+- 🚀 **Accelerated Development**: Schnellere Problemlösung durch akkumuliertes Wissen
+
+### **Knowledge-Driven Evaluation Criteria**
+
+#### **Layer 1 Criteria (Interface/Commands)**
+
+1. **Claude Code Compliance** - Kurze, fokussierte Commands (15-30 Zeilen)?
+2. **Intuitive Developer Interface** - Sofort verständlich für Entwickler?
+3. **Smart Argument Parsing** - Intelligente Default-Behandlung?
+4. **Tool Permission Optimization** - Spezifische, sichere Tool-Zugriffe?
+
+#### **Layer 2 Criteria (Sub-Agents)**
+
+5. **Knowledge Integration** - Zugriff auf alle Knowledge-Quellen?
+6. **Learning Capability** - Persistiert neue Erkenntnisse automatisch?
+7. **Context Synthesis** - Kombiniert multiple Knowledge-Quellen intelligent?
+8. **Specialized Expertise** - Fokussierte Domain-Kompetenz?
+
+#### **Layer 3 Criteria (Knowledge)**
+
+9. **Knowledge Persistence** - Automatic capture of learnings?
+10. **Cross-Project Learning** - Patterns transferable between projects?
+11. **Local Expertise Integration** - Nutzt knowledge-base effectively?
+12. **Real-Time Context** - Current session awareness?
+
+#### **Layer 4 Criteria (Execution)**
+
+13. **MCP Enhancement** - Leverages available MCP tools optimally?
+14. **Traditional Tool Integration** - Seamless fallback to standard tools?
+15. **Result Synthesis** - Intelligente Kombination aller Ergebnisse?
+
+## 🗺️ **Knowledge-Enhanced Command Architecture**
+
+### **Layer 1: Interface Commands (Claude Code Compliant)**
+
+| Command | Consolidates | Knowledge Sources | Agent Routing |
+|---------|-------------|------------------|---------------|
+| **understand** | 15+ scan/flow commands | KB + Basic Memory + Context | code-understanding-specialist |
+| **improve** | 10+ fix/flow commands | KB + Basic Memory + Patterns | performance-optimizer, security-specialist |
+| **create** | 5+ gen commands | KB + Templates + History | documentation-specialist, test-engineer |
+| **secure** | 3+ sec commands | KB + Vuln-DB + Compliance | security-specialist |
+| **ship** | 5+ health/report commands | KB + Quality-Gates + History | deployment-specialist |
+| **git** | 4+ git commands | KB + Commit-Patterns + Context | git-workflow-specialist |
+
+### **Layer 2: Knowledge-Enhanced Sub-Agents**
+
+| Agent | Knowledge Integration | Capabilities |
+|-------|----------------------|-------------|
+| **code-understanding-specialist** | KB patterns + Basic Memory analysis history | Deep code analysis with accumulated learning |
+| **performance-optimizer** | KB optimization patterns + performance history | Pattern-based optimizations with learning |
+| **security-specialist** | KB security patterns + vulnerability database | Comprehensive security with threat intelligence |
+| **architecture-expert** | KB design patterns + architectural decisions | System design with pattern knowledge |
+| **test-engineer** | KB test patterns + successful test strategies | Test creation with proven methodologies |
+| **documentation-specialist** | KB doc patterns + documentation standards | Documentation with style consistency |
 
 ### **Spezialisierte Commands (Optional/Power-User)**
 
@@ -162,29 +232,100 @@ Das Claude Code Toolkit wurde **fundamental neu konzipiert** basierend auf:
 - [ ] Command Alias System für sanfte Transition
 - [ ] Comprehensive Testing mit echten Developer Workflows
 
-## 💡 **Success-Kriterien für 6-Command Architektur**
+## 💡 **Success-Kriterien für Knowledge-Driven Architecture**
 
-### **User Experience Ziele**
+### **Layer 1 Success Criteria (Commands)**
 
-1. **Zero Learning Curve** - Entwickler sollen Commands sofort verstehen
-2. **Intuitive Discovery** - "Was würde ich als Entwickler versuchen?"
-3. **Cognitive Load < 7** - Maximal 6 Commands + power-user Erweiterungen
-4. **Daily Usage High** - Commands die täglich genutzt werden
-5. **Problem-First Design** - Denke über Problem, nicht über Tool-Kategorien
+1. **Claude Code Compliance** - Alle Commands 15-30 Zeilen, fokussiert
+2. **Intuitive Developer Interface** - Sofort verständlich ohne Dokumentation
+3. **Smart Defaults** - Funktioniert ohne Parameter-Tuning
+4. **MCP Integration** - Nutzt Basic Memory und andere MCP Tools
 
-### **Technical Excellence Standards**
+### **Layer 2 Success Criteria (Sub-Agents)**
 
-1. **Smart Routing** - Automatische Weiterleitung zum richtigen Agent
-2. **Context Awareness** - Versteht Projektkontext und Dev-Situation
-3. **Progressive Disclosure** - Einfach zu starten, mächtig für Experten
-4. **Expert Orchestration** - Nutzt spezialisierte AI-Agents optimal
-5. **Consistent Patterns** - Alle Commands folgen gleichen UX-Patterns
+5. **Knowledge Integration** - Zugriff auf alle Knowledge-Quellen gleichzeitig
+6. **Learning Capability** - Automatische Persistierung neuer Erkenntnisse
+7. **Context Synthesis** - Intelligente Kombination multiple Wissensquellen
+8. **Specialized Expertise** - Fokussierte Domain-Kompetenz mit Knowledge-Backing
 
-### **Elimination of Redundancy**
+### **Layer 3 Success Criteria (Knowledge)**
 
-1. **No Conceptual Overlap** - Jeder Command hat klare, einzigartige Rolle
-2. **Function-First Architecture** - Organisiert nach Aktionen, nicht Domains
-3. **Natural Workflows** - Spiegelt tatsächliche Developer-Denkprozesse wider
+9. **Persistent Learning** - System wird messbar klüger über Zeit
+10. **Cross-Project Transfer** - Patterns erfolgreich zwischen Projekten übertragen
+11. **Knowledge Quality** - Hohe Relevanz und Genauigkeit des gespeicherten Wissens
+12. **Real-Time Enhancement** - Dynamische Knowledge-Updates während Nutzung
+
+### **Layer 4 Success Criteria (Execution)**
+
+13. **MCP Enhancement** - Messbare Verbesserung durch MCP Tool Integration
+14. **Seamless Fallback** - Funktioniert auch ohne MCP Tools
+15. **Enhanced Results** - Bessere Ergebnisse durch Knowledge-Integration
+
+### **Knowledge-Driven Excellence**
+
+16. **Learning Acceleration** - Entwickler lösen Probleme schneller durch akkumuliertes Wissen
+17. **Pattern Recognition** - Automatische Anwendung erfolgreicher Lösungsmuster
+18. **Context Awareness** - Verständnis für Projekthistorie und Entscheidungskontext
+19. **Intelligence Compounding** - System-Intelligence wächst exponentiell mit Nutzung
+
+## 🧠 **Knowledge Integration Strategy**
+
+### **Multi-Source Knowledge Architecture**
+
+```yaml
+Knowledge Sources:
+  Local KB (knowledge-base/):
+    - Technology-specific patterns (typo3/, css/, frameworks/)
+    - Reference materials and troubleshooting
+    - Project-maintained expertise
+    
+  Basic Memory Global:
+    - Cross-project learnings and patterns
+    - Successful problem-solution mappings  
+    - Accumulated development insights
+    
+  Basic Memory Project:
+    - Project-specific decisions and context
+    - Architecture choices and rationale
+    - Team preferences and patterns
+    
+  Real-Time Context:
+    - Current session analysis results
+    - Active file contents and changes
+    - Command execution history
+```
+
+### **Knowledge Flow Patterns**
+
+**1. Knowledge Retrieval Pattern**
+
+```markdown
+Command → Sub-Agent → Multi-Source Knowledge Search:
+1. Search Basic Memory for similar patterns
+2. Reference Local KB for domain expertise  
+3. Combine with real-time context
+4. Apply enhanced analysis with full knowledge
+```
+
+**2. Knowledge Persistence Pattern**
+
+```markdown
+Analysis → Insights → Automatic Knowledge Capture:
+1. Extract key insights from analysis
+2. Create structured knowledge entries
+3. Link to related patterns and decisions
+4. Store in appropriate knowledge repository
+```
+
+**3. Knowledge Enhancement Pattern**
+
+```markdown
+Usage → Learning → System Intelligence Growth:
+1. Track successful problem-solution patterns
+2. Identify reusable insights across projects
+3. Enhance knowledge-base with proven patterns
+4. Cross-reference related knowledge entries
+```
 
 ## 🔧 **Argument-Hint Standards für 6-Command Architektur**
 
@@ -207,31 +348,59 @@ git: [operation] [--push] [--no-verify] [--help]  # operation: commit|review|res
 - ✅ **Discoverability**: Hints helfen bei Command-Discovery
 - ✅ **Predictability**: User kann pattern zwischen Commands vorhersagen
 
-## 🎯 **Nächste Schritte: Revolution starten**
+## 🎯 **Nächste Schritte: Knowledge-Driven Revolution**
 
-### **Sofortige Aktion**
+### **Phase 1: Command Transformation (Immediate Action)**
 
-1. **understand** Command implementieren (konsolidiert 15+ alte Commands)
-2. **improve** Command implementieren (konsolidiert 10+ alte Commands)
-3. **git** Command optimieren (bereits existiert, aber Verbesserung nötig)
+1. **Commands zu Claude Code Standards kürzen** (15-30 Zeilen)
+   - understand.md: 300 → 25 Zeilen mit Task tool delegation  
+   - improve.md: 270 → 30 Zeilen mit MCP integration
+   - git.md: Bereits optimiert, kleine Verbesserungen
 
-### **Git Workflow für Revolution**
+2. **MCP Integration hinzufügen**
+
+   ```yaml
+   allowed-tools: 
+     - Task
+     - mcp__basic-memory__search_notes
+     - mcp__basic-memory__write_note  
+     - mcp__basic-memory__build_context
+   ```
+
+3. **Sub-Agents mit Knowledge-Enhancement erweitern**
+   - Multi-source knowledge access patterns
+   - Automatic learning persistence workflows
+   - Cross-project pattern transfer capabilities
+
+### **Git Workflow für Knowledge-Revolution**
 
 ```bash
-git checkout -b feature/6-command-revolution
-# Implement understand + improve + optimized git
-git commit -m "feat: implement developer-centered 6-command architecture"
+# Already on: feature/command-consolidation-2025
+git add .
+git commit -m "feat: implement knowledge-driven architecture with Basic Memory integration"
 ```
 
-### **Legacy Command Cleanup**: (Nach User-Testing)
+### **Knowledge-Enhanced Development Cycle**
 
-- Deprecation Warnings für überlappende Commands
-- Migration Guide für existierende User
-- Graduelle Entfernung redundanter Commands
+```bash
+# 1. Analyze with accumulated knowledge
+/prefix:understand performance api.js    
+# → References previous performance analyses from Basic Memory
+# → Applies patterns from knowledge-base/frameworks/
+
+# 2. Improve with learning persistence  
+/prefix:improve security auth-system
+# → Uses security patterns from knowledge-base/security/
+# → Persists new insights to Basic Memory for future use
+
+# 3. Verify and ship with quality intelligence
+/prefix:git commit                       
+# → Smart commit with project context awareness
+```
 
 ---
 
-**🚀 REVOLUTION APPROVED: 56→6 Commands mit maximaler Developer Intuition!**
+**🧠 KNOWLEDGE-DRIVEN REVOLUTION APPROVED: Commands + Agents + Knowledge Integration!**
 
 - `auto:execute` - Action-Plan Executor
 - `auto:report` - Execution Report Generator
