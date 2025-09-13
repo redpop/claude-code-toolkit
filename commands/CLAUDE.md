@@ -115,7 +115,6 @@ Git workflow commands:
 Meta-commands for project and toolkit:
 
 - **health** - Project health assessment
-- **chain** - Command chaining and workflow automation
 - **changelog** - Changelog updates
 - **create** - Create new commands
 - **export** - Export management
@@ -163,22 +162,23 @@ This pattern ensures:
 - Predictable behavior
 - Better error handling
 
-### Command Chaining Architecture
+### 6-Command Architecture
 
-Commands can be chained with automatic data flow:
+Individual commands provide transparency and control:
 
 ```bash
-/prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}" -> "scan:quality . --compare"
+/prefix:understand . --comprehensive
+/prefix:improve . --apply-insights  
+/prefix:ship . --readiness-check
 ```
 
-Features:
+Benefits:
 
-- `{output}` - Previous command's output
-- `{outputs}` - All previous outputs array
-- `->` - Sequential execution
-- `[cmd1, cmd2]` - Parallel execution
-- `?>` - Conditional execution
-- `!>` - Error fallback
+- **Full Transparency**: See exactly what each command does
+- **Developer Control**: Make decisions at each step
+- **Clear Understanding**: No black-box automation
+- **Easy Debugging**: Isolate issues to specific commands
+- **Flexible Workflows**: Adapt based on results
 
 ### Hybrid Architecture
 

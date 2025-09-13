@@ -30,8 +30,8 @@ cd claude-code-toolkit
 /global:scan:report --latest             # Generate action plan  
 /global:auto:execute --latest            # Apply improvements
 
-# Or use one-command pipeline
-/global:meta:chain "scan:deep . --export-json" -> "scan:report --latest" -> "auto:execute --latest"  # Full optimization
+# New 6-command architecture for maximum transparency  
+/global:understand . --comprehensive && /global:improve . --apply-insights                           # Individual commands with full control
 ```
 
 💡 **Pro tip**: Replace `global` with your custom prefix • [Full Guide →](docs/guides/MODERN-WORKFLOW.md)
@@ -153,7 +153,7 @@ See [Sound Notifications Guide](docs/guides/SOUND-NOTIFICATIONS.md) for customiz
 | **🗂️ Git** | Version control | `git:commit`, `git:review`, `git:conflict-resolver` |
 | **🎨 CSS** | CSS & styling operations | `css:tailwind-optimize` |
 | **🏛️ TYPO3** | TYPO3 CMS development | `typo3:content-blocks`, `typo3:sitepackage` |
-| **🎯 Meta** | Toolkit management | `meta:chain`, `meta:health`, `meta:help` |
+| **🎯 Meta** | Toolkit management | `meta:health`, `meta:help`, `meta:export` |
 
 ## Available Commands
 
@@ -222,7 +222,6 @@ All commands require your chosen prefix (e.g., `myprefix`). Commands follow a co
 | Command | Description | Options | Help |
 |---------|-------------|---------|------|
 | `/prefix:meta:analyze-toolkit` | Analyze toolkit commands and agents for redundancies, inconsistencies, and refactoring opportunities | `--fix`, `--export-json`, `--export-md`, `--focus=<area>` | - |
-| `/prefix:meta:chain` | Chain commands or execute pre-defined pipelines with intelligent data flow | `<pipeline-name`, `\|`, `command-chain>`, `--list`, `--save-as=name`, `--dry-run` | ✓ |
 | `/prefix:meta:changelog` | AI-powered CHANGELOG.md management that automatically determines version based on changes | `--commit`, `--push`, `--fast`, `--update-version` | - |
 | `/prefix:meta:create` | Intelligently create commands, agents, or workflows from your description | `<what`, `you`, `need>`, `--type=auto\|command\|agent\|workflow` | - |
 | `/prefix:meta:docs-sync` | Verify and synchronize all documentation files with actual codebase structure | `--fix`, `--export-json`, `--export-md` | - |

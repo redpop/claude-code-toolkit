@@ -32,13 +32,15 @@ Designed to be installed into `~/.claude/` with a custom prefix, making all tool
 /prefix:fix:quick-wins --latest
 ```
 
-**One-Command Pipelines**:
+**Individual Command Usage**:
 
 ```bash
-/prefix:meta:chain "scan:deep . --export-json" -> "scan:report --latest --generate-action-plan" -> "auto:execute --latest"
+/prefix:understand . --deep-analysis
+/prefix:improve . --apply-insights  
+/prefix:ship . --readiness-check
 ```
 
-💡 See `/prefix:meta:chain` for command chaining and workflow automation.
+💡 Use individual commands for maximum transparency and control over your development workflow.
 
 ## Context Distribution
 
@@ -87,10 +89,12 @@ Use Task tool with subagent_type="security-specialist":
 "Perform security audit focusing on OWASP Top 10"
 ```
 
-**Command Chaining**:
+**6-Command Architecture**:
 
 ```bash
-/prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}"
+/prefix:understand . --comprehensive
+/prefix:improve . --apply-recommendations
+/prefix:create docs --update-all
 ```
 
 **Export Parameters**:
