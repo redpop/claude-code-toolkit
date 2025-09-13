@@ -1,106 +1,237 @@
 # Command Evaluation & Optimization Plan
 
+## 🚀 **MAJOR ARCHITECTURE REVISION - Option A: Developer-Centered Design**
+
+**Status**: APPROVED - Problem-zentrierte 6-Command Architektur
+
 ## Projektverständnis
 
-Das Claude Code Toolkit ist ein umfassendes System mit:
+Das Claude Code Toolkit wurde **fundamental neu konzipiert** basierend auf:
 
-- **56 Commands** in 10 Kategorien
-- **16+ spezialisierte AI Agents**
-- **Workflow-basierte Architektur** mit Command-Chaining
-- **Export/Import-System** für Datenfluss zwischen Commands
-- **ROI-basierte Priorisierung**
+- **Developer Psychology Analysis** - Wie Entwickler tatsächlich denken und arbeiten
+- **Problem-First Design** - Nicht Tool-zentriert, sondern Problem-zentriert  
+- **Cognitive Load Optimization** - 5±2 Command Limit für maximale Usability
+- **Intuitive Naming** - Commands die Entwickler instinktiv verstehen
 
-## Kern-Workflows (zu berücksichtigen)
+**Ursprüngliches System**: 56 Commands in 10 Kategorien → **Neue Vision**: 6 intuitive Commands
 
-### 1. Deep Analysis Pipeline (Empfohlen)
+## 🎯 **Neue 6-Command Architektur (Developer-Centered)**
 
-```bash
-/prefix:scan:deep . --export-json
-/prefix:scan:report --latest --generate-action-plan  
-/prefix:auto:execute --latest
-```
-
-### 2. Quick Quality Check
+### **Core Commands (Problem-zentriert)**
 
 ```bash
-/prefix:scan:quick . --export-json
-/prefix:fix:quick-wins --latest
+# Was Entwickler TATSÄCHLICH denken:
+/prefix:understand [target]    # "Was macht das?" - Code-Analyse & Verständnis
+/prefix:improve [target]       # "Mach das besser" - Fixes, Refactoring, Performance  
+/prefix:create [type] [target] # "Baue mir xyz" - Generation (Docs, Tests, Components)
+/prefix:secure [target]        # "Ist das sicher?" - Security & Compliance
+/prefix:ship [target]          # "Kann ich das deployen?" - Readiness & Quality Gates
+/prefix:git [operation]        # "Git-Workflow" - Commits, Merges, Conflicts (essentiell!)
 ```
 
-### 3. Command Chaining
+### **Neue Kern-Workflows (Intuitiv)**
+
+**1. Verstehen → Verbessern → Shippen**
 
 ```bash
-/prefix:meta:chain "scan:deep . --export-json" -> "scan:report --latest --generate-action-plan" -> "auto:execute --latest"
+/prefix:understand legacy-auth.js    # Code-Analyse
+/prefix:improve security            # Security-Fixes  
+/prefix:ship readiness             # Deployment-Check
 ```
 
-## Evaluationskriterien
+**2. Quick Development Cycle**
 
-### Primäre Kriterien
+```bash
+/prefix:create tests user-service   # Test-Generation
+/prefix:improve performance         # Performance-Optimierung
+/prefix:git commit                 # Smart Commit
+```
 
-1. **Workflow-Integration** - Passt der Command in etablierte Pipelines?
-2. **Datenfluss-Kompatibilität** - Unterstützt --export/--latest Pattern?
-3. **Unique Value Proposition** - Bietet einzigartige Funktionalität?
-4. **ROI-Potential** - Hoher Impact bei geringem Aufwand?
-5. **Agent-Orchestrierung** - Nutzt spezialisierte Agents effektiv?
+**3. Security-First Workflow**
 
-### Sekundäre Kriterien
+```bash
+/prefix:secure audit               # Security-Analyse
+/prefix:improve security           # Vulnerability-Fixes
+/prefix:git commit --security      # Security-Commit
+```
 
-6. **AI-Effizienz** - Kompakt und kontextsparsam für KI-Verständnis?
-7. **Code-Qualität** - Gut strukturiert und wartbar?
-8. **Dokumentation** - Klar beschrieben mit Beispielen?
-9. **Team-Eignung** - Für verschiedene Entwickler-Level?
-10. **MCP-Integration** - Nutzt moderne Protokolle?
-11. **Maintenance-Aufwand** - Wie pflegeintensiv?
+## 🧠 **Developer Psychology Insights (Basis für neue Architektur)**
 
-## Aktionsmatrix
+### **5 Kernaktionen die Entwickler täglich machen:**
 
-| Status | Kriterium | Aktion |
-|--------|-----------|---------|
-| ✅ **Optimize** | Core workflow command, high ROI | Verbessern, erweitern |
-| 🔄 **Consolidate** | Funktional überlappend | Mit anderem Command mergen |
-| 📦 **Refactor** | Gute Idee, schlechte Umsetzung | Neu implementieren |
-| ❌ **Remove** | Obsolet oder redundant | Aus Toolkit entfernen |
-| 🆕 **Missing** | Workflow-Gap identifiziert | Neuen Command erstellen |
+1. **UNDERSTAND** - "Was macht das?" (häufigste Aktivität)
+2. **IMPROVE** - "Mach das besser" (zweithäufigste)
+3. **CREATE** - "Baue mir xyz" (regelmäßig aber spezifisch)
+4. **SECURE** - "Ist das sicher?" (periodisch aber kritisch)
+5. **SHIP** - "Kann ich das deployen?" (ziel-orientiert)
+6. **GIT** - Git-Workflows (essentiell für jeden Dev)
 
-## Command-Kategorien Analyse
+### **Neue Evaluationskriterien (Developer-Centered)**
 
-### Meta (16 Commands) - Toolkit-Management
+#### **Primäre Kriterien (UX-Fokussiert)**
 
-**Kritisch für Kern-Workflows:**
+1. **Intuition Score** - Würde ein Entwickler diesen Command sofort verstehen?
+2. **Mental Model Match** - Passt zur Art wie Entwickler über Probleme denken?
+3. **Cognitive Load** - Wie viele Commands muss man sich merken? (Max 7±2)
+4. **Discovery Ease** - Wie einfach findet man den richtigen Command?
+5. **Daily Usage Potential** - Wird das täglich genutzt oder nur selten?
 
-- `meta:chain` - Command-Chaining-Engine
-- `meta:export` - Datenfluss-Management  
-- `meta:help` - Dokumentations-System
-- `meta:health` - System-Monitoring
+#### **Sekundäre Kriterien (Technical)**
 
-**Möglicherweise konsolidierbar:**
+6. **Smart Routing Capability** - Kann automatisch den richtigen Agent finden?
+7. **Context Awareness** - Versteht den Entwicklungskontext?
+8. **Progressive Disclosure** - Einfach zu starten, mächtig für Power-User?
+9. **Workflow Integration** - Passt in natürliche Dev-Workflows?
+10. **Expert Agent Orchestration** - Nutzt spezialisierte AI-Agents effektiv?
 
-- `meta:help` vs `meta:help-handler`
-- `meta:summary` vs `meta:handoff`
-- `meta:docs-sync` vs `meta:update-docs`
+## 🗺️ **Command-Mapping: Alt → Neu (56→6 Konsolidierung)**
 
-### Scan (12 Commands) - Analysesystem  
+### **Command-Konsolidierungs-Matrix**
 
-**Kern-Pipeline Commands:**
+| Neue Command | Alte Commands (Konsolidiert) | Hauptfunktion |
+|--------------|------------------------------|---------------|
+| **understand** | scan:deep, scan:quick, scan:explore, scan:map, scan:root-cause, scan:perf, scan:deps, scan:docs, scan:tests, flow:smart, flow:debug-mode, meta:analyze-toolkit | Code-Analyse & Problemverständnis |
+| **improve** | fix:quick-wins, fix:security, fix:performance, fix:duplicates, fix:documentation, fix:shell, fix:markdown, flow:refactor | Fixes, Refactoring, Optimierung |
+| **create** | gen:docs, gen:tests, gen:format | Generation (Docs, Tests, Code) |
+| **secure** | sec:audit, sec:baseline, sec:comply | Security & Compliance |
+| **ship** | scan:report, meta:health, auto:monitor, auto:report | Deployment-Readiness & Quality |
+| **git** | git:commit, git:commit-simple, git:review, git:conflict-resolver | Git-Operationen |
 
-- `scan:deep` - Hauptanalyse-Engine
-- `scan:quick` - Schnelle Qualitätsprüfung
-- `scan:report` - Report-Generator mit Action-Plan
+### **Spezialisierte Commands (Optional/Power-User)**
 
-**Spezialisierte Analysen:**
+| Command | Begründung | Zielgruppe |
+|---------|------------|------------|
+| **chain** | Workflow-Automation für komplexe Pipelines | Power-User, DevOps |
+| **typo3** | Domain-spezifische TYPO3-Entwicklung | TYPO3-Entwickler |
 
-- `scan:deps`, `scan:perf`, `scan:tests`, `scan:security`
+### **Eliminierte Redundanzen**
 
-### Fix (8 Commands) - Automatisierte Korrekturen
+| Eliminiert | Grund | Neue Alternative |
+|------------|-------|------------------|
+| work:* | Komplett redundant zu understand/improve | understand + improve |
+| toolkit:health | Überschneidung mit ship | ship readiness |
+| style:* (teilweise) | Analyse gehört zu understand | understand style |
+| meta:export, meta:summary | Nicht täglich genutzt | Automatischer Export |
 
-**Workflow-kritisch:**
+## 🚀 **Implementierungs-Roadmap: Revolution zur 6-Command Architektur**
 
-- `fix:quick-wins` - ROI-optimierte Fixes
-- `fix:security` - Sicherheitskritische Fixes
+### **Phase 1: Core Command Creation (Woche 1-2)**
 
-### Auto (4 Commands) - Orchestrierung & Ausführung  
+#### **Phase 1a: Understand + Improve Commands** ✅ **IN PROGRESS**
 
-**Pipeline-essentiell:**
+- [x] Analyze developer psychology and usage patterns  
+- [x] Define 6-command architecture with Git inclusion
+- [ ] **understand** Command implementieren (konsolidiert 15+ scan/flow commands)
+- [ ] **improve** Command implementieren (konsolidiert 10+ fix/flow commands)
+- [ ] Smart routing mit agent orchestration
+- [ ] Git-Integration in **git** Command behalten und optimieren
+
+#### **Phase 1b: Create + Secure + Ship Commands**
+
+- [ ] **create** Command implementieren (gen:* commands → unified generation)
+- [ ] **secure** Command behalten und optimieren (bereits gut konzipiert)
+- [ ] **ship** Command implementieren (health + readiness + quality gates)
+- [ ] **git** Command optimieren (commit + review + conflict resolution)
+
+#### **Phase 1c: Power-User Commands**
+
+- [ ] **chain** Command behalten (für Workflow-Automation)
+- [ ] **typo3** Command-Set als spezialisierte Erweiterung
+
+### **Phase 2: Smart Routing Implementation (Woche 3)**
+
+#### **Intelligente Agent-Orchestrierung**
+
+- [ ] Natural Language Intent Detection
+- [ ] Context-Aware Problem Routing  
+- [ ] Progressive Disclosure System
+- [ ] Auto-Export mit Smart Naming
+
+#### **Enhanced User Experience**
+
+- [ ] Interactive Help System
+- [ ] Command Discovery durch Problem-Beschreibung
+- [ ] Real-time Suggestions basierend auf Kontext
+
+### **Phase 3: Migration & Testing (Woche 4)**
+
+#### **Backward Compatibility & Migration**
+
+- [ ] Legacy Command Deprecation Warnings
+- [ ] Migration Guide für User
+- [ ] Command Alias System für sanfte Transition
+- [ ] Comprehensive Testing mit echten Developer Workflows
+
+## 💡 **Success-Kriterien für 6-Command Architektur**
+
+### **User Experience Ziele**
+
+1. **Zero Learning Curve** - Entwickler sollen Commands sofort verstehen
+2. **Intuitive Discovery** - "Was würde ich als Entwickler versuchen?"
+3. **Cognitive Load < 7** - Maximal 6 Commands + power-user Erweiterungen
+4. **Daily Usage High** - Commands die täglich genutzt werden
+5. **Problem-First Design** - Denke über Problem, nicht über Tool-Kategorien
+
+### **Technical Excellence Standards**
+
+1. **Smart Routing** - Automatische Weiterleitung zum richtigen Agent
+2. **Context Awareness** - Versteht Projektkontext und Dev-Situation
+3. **Progressive Disclosure** - Einfach zu starten, mächtig für Experten
+4. **Expert Orchestration** - Nutzt spezialisierte AI-Agents optimal
+5. **Consistent Patterns** - Alle Commands folgen gleichen UX-Patterns
+
+### **Elimination of Redundancy**
+
+1. **No Conceptual Overlap** - Jeder Command hat klare, einzigartige Rolle
+2. **Function-First Architecture** - Organisiert nach Aktionen, nicht Domains
+3. **Natural Workflows** - Spiegelt tatsächliche Developer-Denkprozesse wider
+
+## 🔧 **Argument-Hint Standards für 6-Command Architektur**
+
+### **Standard Pattern**: `[type] [target] [--key-option] [--help]`
+
+```bash
+# Core Commands mit konsistenten argument-hints:
+understand: [type] [target] [--help]              # type: code|performance|security|architecture
+improve: [type] [target] [--dry-run] [--help]     # type: performance|security|quality|refactor  
+create: [type] [target] [--format] [--help]       # type: docs|tests|component|api
+secure: [type] [target] [--standard] [--help]     # type: audit|baseline|comply
+ship: [type] [target] [--check] [--help]          # type: readiness|quality|health
+git: [operation] [--push] [--no-verify] [--help]  # operation: commit|review|resolve
+```
+
+### **Quality Requirements**
+
+- ✅ **Consistency**: Alle nutzen `[type]` Pattern für Haupt-Parameter
+- ✅ **Specificity**: Zeigt wichtigste Optionen, nicht generische `[options]`
+- ✅ **Discoverability**: Hints helfen bei Command-Discovery
+- ✅ **Predictability**: User kann pattern zwischen Commands vorhersagen
+
+## 🎯 **Nächste Schritte: Revolution starten**
+
+### **Sofortige Aktion**
+
+1. **understand** Command implementieren (konsolidiert 15+ alte Commands)
+2. **improve** Command implementieren (konsolidiert 10+ alte Commands)
+3. **git** Command optimieren (bereits existiert, aber Verbesserung nötig)
+
+### **Git Workflow für Revolution**
+
+```bash
+git checkout -b feature/6-command-revolution
+# Implement understand + improve + optimized git
+git commit -m "feat: implement developer-centered 6-command architecture"
+```
+
+### **Legacy Command Cleanup**: (Nach User-Testing)
+
+- Deprecation Warnings für überlappende Commands
+- Migration Guide für existierende User
+- Graduelle Entfernung redundanter Commands
+
+---
+
+**🚀 REVOLUTION APPROVED: 56→6 Commands mit maximaler Developer Intuition!**
 
 - `auto:execute` - Action-Plan Executor
 - `auto:report` - Execution Report Generator
