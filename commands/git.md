@@ -1,6 +1,6 @@
 ---
 description: Smart Git operations with intelligent commit creation and change review
-argument-hint: [type] [options] [--help]
+argument-hint: [type] [--push] [--no-verify] [--help]
 allowed-tools: Read, Write, Bash(git:*)
 ---
 

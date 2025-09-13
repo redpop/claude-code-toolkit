@@ -302,11 +302,34 @@ Choose a command to continue, or type your own goal.
 
 #### 📝 Wichtiger Prozess: Nach jeder abgeschlossenen Phase
 
-1. Checklist-Items als `[x]` markieren
-2. Phase-Status als **✅ COMPLETED** kennzeichnen  
-3. Kurze Results-Summary hinzufügen
-4. Git commit mit User-Approval
-5. Nächste Phase beginnen
+1. **Argument-Hint Quality Check**: Jeder neue Command muss korrekte argument-hint haben
+2. Checklist-Items als `[x]` markieren
+3. Phase-Status als **✅ COMPLETED** kennzeichnen  
+4. Kurze Results-Summary hinzufügen
+5. Git commit mit User-Approval
+6. Nächste Phase beginnen
+
+#### 🔧 Argument-Hint Qualitätsstandards (KRITISCH für UX)
+
+**Standard Format**: `[type] [target] [--common-option] [--help]`
+
+**Qualitätskriterien für argument-hint**:
+
+- ✅ **Vollständigkeit**: Zeigt ALLE wichtigsten Parameter/Optionen
+- ✅ **Genauigkeit**: Parameter-Namen stimmen mit Dokumentation überein  
+- ✅ **Konsistenz**: Nutzt einheitliche Begriffe (`type` nicht `operation`, `target` nicht `source`)
+- ✅ **User Experience**: Zeigt häufig genutzte Optionen, nicht nur Basis-Parameter
+- ✅ **Spezifität**: Vermeidet generische Begriffe wie `[options]`
+
+**Beispiele korrekte argument-hint**:
+
+- ✅ `[type] [target] [--help]` (Standard-Pattern)
+- ✅ `[type] [target] [--dry-run] [--help]` (mit wichtiger Option)
+- ✅ `[type] [--push] [--no-verify] [--help]` (spezifische häufige Optionen)
+- ❌ `[type] [options] [--help]` (zu generisch)
+- ❌ `[operation] [source] [--help]` (inkonsistente Begriffe)
+
+**KI-Hinweis**: Verwende Sub-Agents für argument-hint Quality Checks bei Command-Erstellung!
 
 ### 🧠 Phase 2: Smart Next-Steps System (2-3 Tage)
 

@@ -1,6 +1,6 @@
 ---
 description: Smart export management with format conversion, documentation sync, and handoff preparation
-argument-hint: [type] [source] [--help]
+argument-hint: [type] [target] [--format] [--help]
 allowed-tools: Task, Read, Write, Grep
 ---
 

@@ -1,6 +1,6 @@
 ---
 description: Smart conflict resolution and merge analysis with expert guidance
-argument-hint: [type] [branches] [--help]
+argument-hint: [type] [target] [--strategy] [--help]
 allowed-tools: Task, Read, Write, Bash(git:*)
 mcp-enhanced: mcp__github__pull_request, mcp__gitlab__merge_request
 ---

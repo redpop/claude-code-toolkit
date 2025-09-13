@@ -1,6 +1,6 @@
 ---
 description: Smart toolkit management with health monitoring, help system, and command assistance
-argument-hint: [operation] [target] [--help]
+argument-hint: [type] [target] [--help]
 allowed-tools: Task, Read, Grep, Write
 ---
 
