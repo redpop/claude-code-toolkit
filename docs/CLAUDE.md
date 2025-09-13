@@ -18,7 +18,7 @@ When working with documentation:
 1. **Consistency**: Use user's chosen prefix in all examples
 2. **Simplicity**: Focus on essential information only
 3. **6-Command Focus**: Emphasize core commands (understand, improve, create, secure, ship, git)
-4. **Extensions**: Document meta/* and typo3/* as extensions
+4. **Extensions**: Document meta/*and typo3/* as extensions
 5. **Current**: Keep aligned with new architecture
 
 ## Quick Navigation
@@ -39,6 +39,7 @@ When working with documentation:
 ## Core Architecture
 
 The documentation reflects the Knowledge-Driven Revolution:
+
 - **6 Core Commands**: understand, improve, create, secure, ship, git
 - **Extensions**: meta/*, typo3/*
 - **22+ AI Agents**: Specialized domain expertise

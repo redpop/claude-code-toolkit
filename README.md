@@ -53,14 +53,12 @@ The toolkit uses the **6-Command Architecture** for core operations, plus specia
 | `/prefix:ship` | Deployment readiness and quality gates with release pattern learning | `type`, `target`, `--check`, `--help` | - |
 | `/prefix:understand` | Code analysis and comprehension with intelligent problem routing | `type`, `target` | - |
 
-
 ### Meta Commands
 
 | Command | Description | Options | Help |
 |---------|-------------|---------|------|
 | `/prefix:meta:changelog` | AI-powered CHANGELOG.md management that automatically determines version based on changes | `--commit`, `--push`, `--fast`, `--update-version` | - |
 | `/prefix:meta:handoff` | Documents current problem context for handoff to another AI assistant | `output-file`, `-c\|--compact`, `-t\|--technical`, `--focus`, `topic`, `--skip`, `topic`, `--include`, `topic`, `"instructions"` | - |
-
 
 ### Typo3 Commands
 
@@ -104,6 +102,21 @@ The toolkit uses the **6-Command Architecture** for core operations, plus specia
 /myprefix:git smart-commit              # Intelligent commit with analysis
 /myprefix:git conflict-resolver         # Resolve merge conflicts
 /myprefix:understand . --git-history    # Analyze code changes over time
+```
+
+### Hook Management
+
+```bash
+# Intelligent development experience
+./scripts/manage-hooks.sh list                    # View all available hooks
+./scripts/manage-hooks.sh enable session-end-summary  # Smart session summaries
+./scripts/manage-hooks.sh doctor                  # System health check
+
+# Enhanced features automatically provide:
+# - Session summaries with Basic Memory integration
+# - Command statistics and usage patterns
+# - Context preservation across sessions
+# - Smart notifications and project insights
 ```
 
 ## 🤖 AI Agents

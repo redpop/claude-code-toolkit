@@ -26,7 +26,23 @@ All commands are now available as `/global:category:command`
 
 - Installs commands to `~/.claude/commands/<prefix>/`
 - Installs agents to `~/.claude/agents/`
-- No hooks or notifications
+- Installs basic hooks (markdown formatting, error detection)
+- No sound notifications or advanced hooks
+
+### Enhanced Installation (Recommended)
+
+```bash
+./install.sh <prefix> --with-settings
+```
+
+- All standard installation features
+- **Enhanced hook system** with intelligent features:
+  - Session-end summaries with Basic Memory integration
+  - Command statistics tracking and pattern recognition
+  - Context refresh for session continuity
+  - Sound notifications and system alerts
+- Hook management CLI
+- Advanced productivity features
 
 ### Enhanced Installation (Recommended)
 
@@ -58,29 +74,79 @@ Install with different prefixes for different workflows:
 
 Each installation is completely independent.
 
-## Hooks System
+## Enhanced Hook System
 
-The toolkit includes an optional hooks system for enhanced functionality:
+The toolkit includes an intelligent hook system that transforms your development workflow:
 
-### Hook Types
+### Hook Categories
 
-- **Session Management**: Logs command usage and sessions
-- **Notifications**: Sound alerts for command completion/errors
-- **Error Detection**: Automatic error pattern recognition
-- **Command Chaining**: Enhanced workflow notifications
+#### **Intelligence Hooks**
 
-### Enabling Hooks
+- **session-end-summary**: Smart session summaries with Basic Memory integration
+- **enhanced-command-logger**: Advanced command statistics and pattern recognition
+- **context-refresh**: Automatic context preservation across sessions
+
+#### **Productivity Hooks**
+
+- **session-start-enhanced**: Enhanced session initialization with project insights
+- **markdown-format**: Auto-format markdown files after modifications
+- **error-detection**: Intelligent error pattern recognition
+
+#### **Notification Hooks**
+
+- **stop-notification**: Sound alerts when Claude stops responding
+- **success-notification**: Success notifications with context
+- **system-notification**: System-level notifications for important events
+
+### Hook Management
+
+After installation, manage hooks with the CLI:
 
 ```bash
-# Install with advanced hooks
-./install.sh global --with-settings --hooks-profile advanced
+# List all available hooks
+./scripts/manage-hooks.sh list
+
+# Enable enhanced features
+./scripts/manage-hooks.sh enable session-end-summary
+./scripts/manage-hooks.sh enable enhanced-command-logger
+./scripts/manage-hooks.sh enable context-refresh
+
+# System health check
+./scripts/manage-hooks.sh doctor
+
+# View usage statistics
+./scripts/manage-hooks.sh stats
 ```
 
-### Hook Profiles
+### Hook Installation Options
 
-**Basic Profile** (`basic-hooks-settings.json`):
+**Standard Installation**:
 
-- Stop notifications only
+```bash
+./install.sh <prefix>
+# Includes: markdown-format, error-detection, basic notifications
+```
+
+**Enhanced Installation**:
+
+```bash
+./install.sh <prefix> --with-settings
+# Includes: All standard hooks + intelligence hooks + sound notifications
+```
+
+### Hook Dependencies
+
+Some enhanced hooks require additional tools:
+
+```bash
+# Install hook dependencies
+brew install jq                    # Command statistics
+npm install -g markdownlint-cli2   # Markdown formatting
+
+# Optional: Install Basic Memory MCP for enhanced context features
+# See MCP Integration guide for details
+```
+
 - Minimal system integration
 
 **Minimal Profile** (`minimal-hooks-settings.json`):

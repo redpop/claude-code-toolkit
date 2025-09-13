@@ -5,8 +5,9 @@ Technical documentation for extending and maintaining the Claude Code Toolkit.
 ## Architecture
 
 The toolkit uses a **6-Command Core Architecture** with specialized extensions:
+
 - **Core Commands**: understand, improve, create, secure, ship, git
-- **Extensions**: meta/* (changelog, handoff), typo3/* (content-blocks, etc.)
+- **Extensions**: meta/*(changelog, handoff), typo3/* (content-blocks, etc.)
 - **Agents**: 22+ specialized AI agents for domain expertise
 - **Knowledge Base**: Basic Memory integration with graceful fallback
 
@@ -56,8 +57,10 @@ Use Task tool with subagent_type="specialist-name":
 ## Learning Integration
 
 This command integrates with the Knowledge-Driven Revolution:
+
 1. **Intelligent Routing** - Automatically selects best agents
 2. **Learning Persistence** - Builds knowledge over time
+
 ```
 
 ## Adding Agents
@@ -88,11 +91,13 @@ Invoked through Task tool:
 Use Task tool with subagent_type="agent-name":
 "Specific task description"
 ```
+
 ```
 
 ## Repository Structure
 
 ```
+
 claude-code-toolkit/
 ├── commands/           # Core commands (understand, improve, etc.)
 ├── commands/meta/      # Meta commands (changelog, handoff)
@@ -101,6 +106,7 @@ claude-code-toolkit/
 ├── scripts/           # Utility scripts
 ├── templates/         # Command/agent templates
 └── docs/             # Essential documentation only
+
 ```
 
 ## Development Workflow

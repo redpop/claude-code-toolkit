@@ -19,6 +19,7 @@ Essential documentation for the Claude Code Toolkit's 6-command architecture.
 ### 🔧 Developer Documentation
 
 - **[Development Guide](DEVELOPMENT.md)** - Extending the toolkit
+- **[Enhanced Hooks](guides/ENHANCED-HOOKS.md)** - Intelligent hook system with Basic Memory integration
 - **[MCP Integration](guides/MCP-INTEGRATION.md)** - Optional enhancements
 - **[Security Guide](guides/SECURITY-GUIDE.md)** - Security best practices
 
@@ -29,7 +30,7 @@ Essential documentation for the Claude Code Toolkit's 6-command architecture.
 ## Core Concepts
 
 - **6 Core Commands**: understand, improve, create, secure, ship, git
-- **Extensions**: meta/* and typo3/* specialized commands
+- **Extensions**: meta/*and typo3/* specialized commands
 - **AI Agents**: 22+ specialized agents for domain expertise
 - **Learning**: Basic Memory integration with graceful fallback
 

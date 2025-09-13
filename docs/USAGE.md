@@ -5,6 +5,7 @@ Simple guide for using the Claude Code Toolkit's 6 core commands plus extensions
 ## Core Commands
 
 ### understand
+
 Analyze and comprehend code structure, patterns, and issues.
 
 ```bash
@@ -12,10 +13,12 @@ Analyze and comprehend code structure, patterns, and issues.
 ```
 
 **Examples:**
+
 - `/myprefix:understand . --comprehensive` - Deep analysis of entire project
 - `/myprefix:understand src/auth --quick` - Quick analysis of auth module
 
 ### improve
+
 Apply improvements with intelligent routing and learning persistence.
 
 ```bash
@@ -23,10 +26,12 @@ Apply improvements with intelligent routing and learning persistence.
 ```
 
 **Examples:**
+
 - `/myprefix:improve . --dry-run` - Show what would be improved
 - `/myprefix:improve src/ --severity=high` - Fix high-priority issues only
 
 ### create
+
 Generate code and content with intelligent templating.
 
 ```bash
@@ -34,10 +39,12 @@ Generate code and content with intelligent templating.
 ```
 
 **Examples:**
+
 - `/myprefix:create component UserProfile` - Create new component
 - `/myprefix:create docs --format=api` - Generate API documentation
 
 ### secure
+
 Security analysis and vulnerability detection.
 
 ```bash
@@ -45,10 +52,12 @@ Security analysis and vulnerability detection.
 ```
 
 **Examples:**
+
 - `/myprefix:secure . --standard=owasp` - OWASP security scan
 - `/myprefix:secure api/ --audit` - Security audit of API
 
 ### ship
+
 Deployment readiness and quality gates.
 
 ```bash
@@ -56,10 +65,12 @@ Deployment readiness and quality gates.
 ```
 
 **Examples:**
+
 - `/myprefix:ship . --check=all` - Complete readiness check
 - `/myprefix:ship dist/ --readiness` - Check deployment readiness
 
 ### git
+
 Smart Git operations with project context.
 
 ```bash
@@ -67,6 +78,7 @@ Smart Git operations with project context.
 ```
 
 **Examples:**
+
 - `/myprefix:git commit --push` - Smart commit with push
 - `/myprefix:git status` - Enhanced git status
 
@@ -75,11 +87,13 @@ Smart Git operations with project context.
 ### Meta Commands
 
 **changelog** - AI-powered CHANGELOG.md management
+
 ```bash
 /prefix:meta:changelog [--commit] [--push] [--fast]
 ```
 
 **handoff** - Document problem context for AI handoff
+
 ```bash
 /prefix:meta:handoff [filename] [--compact] [--technical]
 ```
@@ -87,16 +101,19 @@ Smart Git operations with project context.
 ### TYPO3 Commands
 
 **content-blocks** - Generate TYPO3 Content Blocks v1.3
+
 ```bash
 /prefix:typo3:content-blocks <name> [--type=element|page]
 ```
 
 **fluid-components** - Generate Fluid v4 Components
+
 ```bash
 /prefix:typo3:fluid-components <name> [--type=atom|molecule|organism]
 ```
 
 **sitepackage** - Create TYPO3 sitepackages
+
 ```bash
 /prefix:typo3:sitepackage <name> [--composer-name=...]
 ```
@@ -106,6 +123,7 @@ Plus: extension-kickstarter, make-content-block
 ## Quick Workflows
 
 **Deep Analysis Pipeline:**
+
 ```bash
 /prefix:understand . --comprehensive
 /prefix:improve . --apply-insights
@@ -113,6 +131,7 @@ Plus: extension-kickstarter, make-content-block
 ```
 
 **Quick Quality Check:**
+
 ```bash
 /prefix:understand . --quick
 /prefix:improve . --dry-run
@@ -120,6 +139,7 @@ Plus: extension-kickstarter, make-content-block
 ```
 
 **Release Workflow:**
+
 ```bash
 /prefix:meta:changelog --fast
 /prefix:ship . --readiness
@@ -130,10 +150,52 @@ Plus: extension-kickstarter, make-content-block
 
 See [INSTALLATION-GUIDE.md](INSTALLATION-GUIDE.md) for setup instructions.
 
+## Hook Management
+
+The toolkit includes an intelligent hook system for enhanced development experience:
+
+### Managing Hooks
+
+```bash
+# List all available hooks with status
+./scripts/manage-hooks.sh list
+
+# Show detailed hook information
+./scripts/manage-hooks.sh info session-end-summary
+
+# Enable/disable specific hooks
+./scripts/manage-hooks.sh enable enhanced-command-logger
+./scripts/manage-hooks.sh disable stop-notification
+
+# System health check
+./scripts/manage-hooks.sh doctor
+
+# View usage statistics
+./scripts/manage-hooks.sh stats
+```
+
+### Key Hooks
+
+- **session-end-summary** - Intelligent session summaries with Basic Memory
+- **enhanced-command-logger** - Command statistics and pattern tracking
+- **context-refresh** - Automatic context preservation
+- **markdown-format** - Auto-format markdown files
+- **stop-notification** - Sound notifications
+
+### Hook Features
+
+- **Basic Memory Integration** - Context preservation across sessions
+- **Command Statistics** - Usage analytics and efficiency insights
+- **Smart Notifications** - Context-aware alerts and summaries
+- **Project Intelligence** - Automatic project type detection and suggestions
+
+See [Enhanced Hooks Guide](guides/ENHANCED-HOOKS.md) for detailed documentation.
+
 ## Troubleshooting
 
 **Command not found**: Verify installation and prefix configuration
 **Permission errors**: Check file permissions and git repository status
 **MCP issues**: Commands work without MCP, but enhanced with it
+**Hook issues**: Run `./scripts/manage-hooks.sh doctor` for diagnostics
 
-For additional help, use `--help` with any command.
+For additional help, use `--help` with any command or check the hook management CLI.
