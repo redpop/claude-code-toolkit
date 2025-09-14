@@ -11,8 +11,9 @@ Sub-Agents are specialized AI agents that provide domain-specific expertise for 
 ### Core Analysis Agents
 
 - **ai-specialist**: AI integration expert specializing in prompt engineering and LLM optimization
-- **code-architect**: Analyzes system architecture and design patterns  
+- **code-architect**: Analyzes system architecture and design patterns
 - **performance-optimizer**: Identifies performance bottlenecks and optimizations
+- **project-planner**: Strategic development planning expert specializing in task decomposition and resource allocation
 - **refactoring-expert**: Suggests code improvements and refactoring strategies
 - **report-analyzer**: Analyzes code quality reports and provides prioritized insights
 - **security-specialist**: Performs security audits and vulnerability detection
