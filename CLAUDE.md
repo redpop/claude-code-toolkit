@@ -177,6 +177,8 @@ See [docs/guides/MCP-INTEGRATION.md](docs/guides/MCP-INTEGRATION.md) for details
 ## Resources
 
 - **Documentation**: [docs/README.md](docs/README.md)
-- **Quick Start**: [docs/guides/QUICK-START.md](docs/guides/QUICK-START.md)
-- **Architecture**: [docs/architecture/](docs/architecture/)
+- **PRP Methodology**: [docs/guides/PRP-METHODOLOGY.md](docs/guides/PRP-METHODOLOGY.md)
+- **Project Planning**: [docs/guides/PROJECT-PLANNING-GUIDE.md](docs/guides/PROJECT-PLANNING-GUIDE.md)
+- **Security Guide**: [docs/guides/SECURITY-GUIDE.md](docs/guides/SECURITY-GUIDE.md)
+- **Enhanced Hooks**: [docs/guides/ENHANCED-HOOKS.md](docs/guides/ENHANCED-HOOKS.md)
 - **Contributing**: [CONTRIBUTING.md](CONTRIBUTING.md)

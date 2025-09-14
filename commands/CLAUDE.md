@@ -4,14 +4,47 @@ This file provides context for Claude Code when working with commands in this di
 
 ## Command Structure
 
-Commands are organized hierarchically by category, with each command being a markdown file containing instructions for Claude Code.
+The Claude Code Toolkit implements a **6-Command Architecture** with additional specialized commands organized hierarchically by category. Each command is a markdown file containing instructions for Claude Code.
+
+## Actual Command Structure
+
+Based on the codebase, the following commands exist:
+
+### Core Commands (6-Command Architecture)
+
+The toolkit's primary workflow is built around 6 core commands:
+
+- **understand** - Code analysis and comprehension with intelligent problem routing
+- **improve** - Code improvement with intelligent routing and learning persistence
+- **create** - Content and code generation with template-driven creation
+- **secure** - Security analysis and vulnerability assessment
+- **ship** - Production readiness assessment and deployment preparation
+- **git** - Git operations and workflow management
+
+### Specialized Command Categories
+
+#### meta/ - Project & Toolkit Management
+
+Project and toolkit management commands:
+
+- **changelog** - Changelog generation and updates
+- **handoff** - AI handoff preparation and knowledge transfer
+
+#### typo3/ - TYPO3 Development Commands
+
+TYPO3-specific development tools:
+
+- **content-blocks** - Content Blocks creation and management
+- **extension-kickstarter** - Extension scaffolding and setup
+- **fluid-components** - Fluid component generation
+- **make-content-block** - Individual content block creation
+- **sitepackage** - Sitepackage setup and configuration
 
 ## Command Naming Convention
 
-- Commands are organized in subdirectories under `commands/`
-- Directory structure determines command namespace: `commands/category/command.md` → `/prefix:category:command`
-- Categories follow clear purposes: `scan`, `fix`, `gen`, `flow`, `auto`, `sec`, `git`, `meta`, `typo3`, `css`
-- Use short, action-oriented names (e.g., `deep` not `analyze-deep`)
+- Core commands are in the root `commands/` directory: `commands/command.md` → `/prefix:command`
+- Specialized commands are in subdirectories: `commands/category/command.md` → `/prefix:category:command`
+- Use short, action-oriented names (e.g., `understand` not `analyze-codebase`)
 - Maximum 2 words per command name
 - Use verbs for clarity
 
@@ -25,6 +58,7 @@ Each command is a Markdown file containing:
    ---
    description: Brief command description
    argument-hint: Expected arguments for auto-completion
+   allowed-tools: List of allowed tools for this command
    mcp-enhanced: Optional MCP tools that enhance this command
    ---
    ```
@@ -36,123 +70,62 @@ Each command is a Markdown file containing:
    - Best practices and guidelines
    - Examples of expected output
 
-## Command Categories
+## 6-Command Architecture
 
-### scan/ - Analysis & Investigation
+The core workflow provides transparency and developer control:
 
-Analysis and investigation commands for understanding codebases:
+```bash
+/prefix:understand . --comprehensive    # Analysis phase
+/prefix:improve . --apply-insights     # Improvement phase
+/prefix:create docs --update-all       # Creation phase
+/prefix:secure . --audit               # Security phase
+/prefix:ship . --readiness-check       # Deployment phase
+/prefix:git commit --smart             # Version control
+```
 
-- **deep** - Comprehensive analysis with parallel scanning
-- **quality** - Code quality metrics and trends
-- **perf** - Performance profiling
-- **deps** - Dependency analysis
-- **docs** - Documentation health
-- **tests** - Test coverage analysis
-- **quick** - Fast parallel analysis
-- **refactor** - Refactoring opportunities
-- **report** - Report analysis and generation
-- **root-cause** - Root cause analysis
-- **explore** - Deep codebase exploration
-- **map** - Codebase structure mapping
+### Benefits
 
-### fix/ - Direct Corrections
+- **Full Transparency**: See exactly what each command does
+- **Developer Control**: Make decisions at each step
+- **Clear Understanding**: No black-box automation
+- **Easy Debugging**: Isolate issues to specific commands
+- **Flexible Workflows**: Adapt based on results
 
-Commands that make direct fixes to code:
+### Usage Patterns
 
-- **quick-wins** - High-ROI fixes from reports
-- **security** - Security vulnerability fixes
-- **performance** - Performance optimizations
-- **duplicates** - Code duplication removal
-- **documentation** - Documentation fixes
-- **shell** - Shell script improvements
-- **markdown** - Markdown formatting fixes
+**Quick Development Cycle**:
 
-### flow/ - Multi-Agent Workflows
+```bash
+/prefix:understand . --quick
+/prefix:improve . --apply-insights
+/prefix:ship . --readiness-check
+```
 
-Intelligent multi-agent coordination:
+**Comprehensive Analysis**:
 
-- **smart** - Intelligent problem routing
-- **review** - Multi-perspective code review
-- **incident** - Rapid incident response
-- **refactor** - Refactoring workflow
-- **debug-mode** - Interactive debugging
+```bash
+/prefix:understand . --comprehensive --export-json
+/prefix:secure . --audit
+/prefix:improve . --from-analysis
+```
 
-### auto/ - Automation & Orchestration
+**PRP (Project Requirements Proposal) Workflow**:
 
-Automated workflow execution:
-
-- **execute** - Execute action plans
-- **monitor** - Continuous monitoring
-- **report** - Completion reports
-- **sprint** - Quality improvement sprints
-
-### gen/ - Generation Commands
-
-Code and content generation:
-
-- **docs** - Generate documentation
-- **tests** - Generate test files
-- **format** - Format code consistently
-
-### sec/ - Security Operations
-
-Security-focused commands:
-
-- **audit** - Security audit
-- **baseline** - Security baseline establishment
-- **comply** - Compliance checking
-
-### git/ - Git Operations
-
-Git workflow commands:
-
-- **commit** - Smart commit generation
-- **review** - Git-based code review
-- **conflict-resolver** - Git merge conflict resolution
-
-### meta/ - Project & Toolkit Management
-
-Meta-commands for project and toolkit:
-
-- **health** - Project health assessment
-- **changelog** - Changelog updates
-- **create** - Create new commands
-- **export** - Export management
-- **handoff** - AI handoff preparation
-- **help** - Interactive help system
-- **summary** - Chat summary generation
-- **test-guide** - Interactive test guidance
-- **update-docs** - Documentation updates
-- **version** - Version information
-- **find-cmd** - Find commands by capability
-- **analyze-toolkit** - Analyze toolkit usage
-- **docs-sync** - Verify and sync all documentation with codebase
-
-### typo3/ - TYPO3 Specific Commands
-
-TYPO3 development commands:
-
-- **content-blocks** - Content Blocks creation
-- **extension-kickstarter** - Extension scaffolding
-- **fluid-components** - Fluid component generation
-- **make-content-block** - Individual block creation
-- **sitepackage** - Sitepackage setup
-
-### css/ - CSS & Styling Operations
-
-CSS and styling-related commands:
-
-- **tailwind-optimize** - Tailwind CSS optimization and utility management
+```bash
+/prefix:understand . --prp --requirements="OAuth2 authentication"
+/prefix:create . --prp --from-analysis
+/prefix:ship . --prp --quality-gates
+```
 
 ## Key Patterns
 
 ### Explicit Task Tool Syntax
 
-All multi-agent commands use explicit Task tool invocation:
+Commands use explicit Task tool invocation for multi-agent coordination:
 
 ```markdown
-Use Task tool with subagent_type="general-purpose":
-"Your detailed prompt here with specific instructions and expected output format."
+Use Task tool with subagent_type="security-specialist":
+"Perform comprehensive security audit focusing on OWASP Top 10 vulnerabilities"
 ```
 
 This pattern ensures:
@@ -162,73 +135,61 @@ This pattern ensures:
 - Predictable behavior
 - Better error handling
 
-### 6-Command Architecture
+### PRP Integration
 
-Individual commands provide transparency and control:
+Commands support Project Requirements Proposal methodology:
 
-```bash
-/prefix:understand . --comprehensive
-/prefix:improve . --apply-insights  
-/prefix:ship . --readiness-check
-```
+- `--prp` → Activate PRP methodology
+- `--prp=research` → Focus on external research
+- `--prp=patterns` → Focus on internal patterns
+- `--from-analysis` → Use existing analysis results
 
-Benefits:
+### Export Capabilities
 
-- **Full Transparency**: See exactly what each command does
-- **Developer Control**: Make decisions at each step
-- **Clear Understanding**: No black-box automation
-- **Easy Debugging**: Isolate issues to specific commands
-- **Flexible Workflows**: Adapt based on results
+Commands support structured output:
 
-### Hybrid Architecture
-
-The hybrid architecture combines parallel processing with specialized expertise:
-
-**Phase 1: Parallel Scanning**
-
-- Uses Task Tool for rapid parallel execution
-- Multiple scanner agents work simultaneously
-- Optimized for speed and broad coverage
-- Produces structured JSON output
-
-**Phase 2: Expert Analysis**
-
-- Results from Phase 1 are intelligently delegated
-- Specialized Sub-Agents provide deep analysis
-- Each agent has domain-specific expertise
-- Agents work in isolated contexts
-
-**Phase 3: Synthesis**
-
-- Results from all agents are combined
-- Final report integrates all perspectives
-- Provides actionable recommendations
-
-### Smart Problem Routing
-
-The `/flow:smart` command analyzes problems and routes to appropriate specialists:
-
-1. Problem analysis and categorization
-2. Multi-agent task distribution
-3. Parallel execution where possible
-4. Consolidated results with action plan
+- `--export-json` → Generate timestamped JSON reports
+- `--export-md` → Generate timestamped Markdown reports
+- `--latest` → Use most recent analysis results
 
 ## Command Design Principles
 
+- **Focused functionality**: Each command does one thing well
 - **Maximum 200-300 lines**: Keep commands focused and maintainable
 - **Clear phase structure**: Organize complex workflows into phases
 - **Explicit Task syntax**: Use clear agent invocation patterns
-- **Focused functionality**: Each command does one thing well
 - **Reusable patterns**: Build on established patterns
+- **Self-contained**: Include all necessary context
 
 ## Adding New Commands
 
-1. Create appropriate category directory under `commands/` if needed
-2. Create `.md` file with descriptive command name
-3. Add frontmatter with at minimum a `description` field
-4. Write command as detailed Markdown prompt with clear instructions
-5. Include usage examples and expected behaviors
-6. Run `./scripts/update-readme.sh` to update README documentation
+1. **Determine category**: Core command or specialized category
+2. **Create file**: `.md` file in appropriate directory
+3. **Add frontmatter**: Include description and allowed-tools
+4. **Write content**: Detailed instructions with examples
+5. **Update documentation**: Run `./scripts/update-readme.sh`
+6. **Test locally**: Verify command works as expected
+
+### File Structure
+
+```
+commands/
+├── understand.md           # Core: /prefix:understand
+├── improve.md             # Core: /prefix:improve
+├── create.md              # Core: /prefix:create
+├── secure.md              # Core: /prefix:secure
+├── ship.md                # Core: /prefix:ship
+├── git.md                 # Core: /prefix:git
+├── meta/
+│   ├── changelog.md       # Meta: /prefix:meta:changelog
+│   └── handoff.md         # Meta: /prefix:meta:handoff
+└── typo3/
+    ├── content-blocks.md  # TYPO3: /prefix:typo3:content-blocks
+    ├── extension-kickstarter.md
+    ├── fluid-components.md
+    ├── make-content-block.md
+    └── sitepackage.md
+```
 
 ## MCP Enhancement
 
@@ -236,7 +197,7 @@ Commands can leverage MCP (Model Context Protocol) tools when available:
 
 ```yaml
 ---
-mcp-enhanced: mcp__semgrep__security_check, mcp__github__create_pr
+allowed-tools: Task, mcp__basic-memory__search_notes, mcp__semgrep__security_check
 ---
 ```
 
@@ -251,10 +212,11 @@ Implementation should:
 
 After adding a command:
 
-1. Install locally: `~/.claude/commands/test/`
+1. Install locally: Copy to `~/.claude/commands/test/`
 2. Verify command appears with correct namespace
 3. Test command execution in a sample project
-4. Document in user guide if significant
+4. Validate frontmatter and argument hints
+5. Document in user guide if significant
 
 ## Important Notes
 
@@ -263,3 +225,5 @@ After adding a command:
 - Avoid creating example or demo commands
 - Focus on practical, reusable tools
 - Commands work best when they follow established patterns
+- Always include proper frontmatter with description
+- Use allowed-tools to specify required Claude Code tools
