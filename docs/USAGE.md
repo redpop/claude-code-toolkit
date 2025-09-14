@@ -187,6 +187,7 @@ The toolkit includes an intelligent hook system for enhanced development experie
 - **Basic Memory Integration** - Context preservation across sessions
 - **Command Statistics** - Usage analytics and efficiency insights
 - **Smart Notifications** - Context-aware alerts and summaries
+- **Smart Suggestions** - Intelligent workflow recommendations based on file modifications
 - **Project Intelligence** - Automatic project type detection and suggestions
 
 See [Enhanced Hooks Guide](guides/ENHANCED-HOOKS.md) for detailed documentation.

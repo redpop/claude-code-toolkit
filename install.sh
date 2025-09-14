@@ -694,6 +694,7 @@ if [ "$INSTALL_HOOKS" = true ]; then
                 echo "  • Stop: stop-notification.sh (completion sound)"
                 echo "  • PostToolUse: error-detection.sh (security/audit/vulnerability)"
                 echo "  • PostToolUse: markdown-format.sh (auto-format .md files)"
+                echo "  • PostToolUse: smart-suggestions.sh (intelligent workflow suggestions)"
                 ;;
             advanced)
                 echo -e "${YELLOW}Active hooks:${NC}"
@@ -701,7 +702,7 @@ if [ "$INSTALL_HOOKS" = true ]; then
                 echo "  • SubagentStop: subagent-notification.sh"
                 echo "  • PostToolUse: tool-specific-notification.sh, error-detection.sh,"
                 echo "                 command-chain-notification.sh, system-notification.sh,"
-                echo "                 markdown-format.sh"
+                echo "                 markdown-format.sh, smart-suggestions.sh"
                 echo "  • SessionStart: session-logger.sh (startup/resume)"
                 ;;
         esac

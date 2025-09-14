@@ -117,6 +117,7 @@ The toolkit uses the **6-Command Architecture** for core operations, plus specia
 # - Command statistics and usage patterns
 # - Context preservation across sessions
 # - Smart notifications and project insights
+# - Intelligent workflow suggestions based on file modifications
 ```
 
 ## 🤖 AI Agents
@@ -134,10 +135,24 @@ The toolkit uses the **6-Command Architecture** for core operations, plus specia
 Three automation profiles available:
 
 - **basic**: Essential notifications only
-- **minimal**: + Error detection
-- **advanced**: Full notification suite
+- **minimal**: + Error detection + Smart suggestions
+- **advanced**: Full notification suite + Smart suggestions
 
 Configure during installation with `--with-settings`
+
+## 💡 Smart Suggestions
+
+The toolkit provides intelligent workflow recommendations:
+
+- **Context-Aware**: Suggestions based on file types (security, tests, docs, etc.)
+- **Learning Tool**: Helps users discover relevant commands in the 6-command architecture
+- **Customizable**: JSON configuration for patterns and suggestions
+- **Non-Intrusive**: 30-second cooldown prevents suggestion spam
+
+**Examples:**
+
+- Edit `auth.py` → `💡 Security code modified. Consider: /prefix:secure . --quick`
+- Create `test_user.py` → `💡 Test file created. Consider: /prefix:understand . --test-coverage`
 
 ## 🔧 Configuration
 

@@ -44,20 +44,18 @@ Integration of Project Requirements Proposal (PRP) methodology into the Claude C
 ### PRP-Enhanced Architecture
 
 ```bash
-# Analysis Phase (Enhanced /understand)
-/prefix:understand . --prp-analysis          # Complete requirements + codebase + external research
-/prefix:understand . --research-external     # Framework/API documentation research
-/prefix:understand . --patterns-internal     # Codebase pattern discovery
+# Simplified PRP Integration with 6-Command Architecture
+/prefix:understand . --prp                  # Complete analysis: requirements + codebase + external research
+/prefix:create . --prp                      # Comprehensive blueprint creation with pattern validation
+/prefix:ship . --prp                        # Blueprint-driven implementation with quality gates
 
-# Blueprint Phase (Enhanced /create)
-/prefix:create . --prp-blueprint            # Comprehensive implementation planning
-/prefix:create . --from-template             # Template-based blueprint creation
-/prefix:create . --pattern-validation        # Blueprint pattern consistency check
-
-# Execution Phase (Enhanced /ship)
-/prefix:ship . --prp-execute                # Blueprint-driven implementation
-/prefix:ship . --pattern-consistent         # Pattern-aware code generation
-/prefix:ship . --quality-gates              # Integrated testing and validation
+# Optional specific modes (for advanced users)
+/prefix:understand . --prp=research         # Focus on external research
+/prefix:understand . --prp=patterns         # Focus on internal pattern discovery
+/prefix:create . --prp=template            # Template-based blueprint creation
+/prefix:create . --prp=validation          # Blueprint pattern consistency check
+/prefix:ship . --prp=fast                  # Fast-track execution
+/prefix:ship . --prp=quality               # Enhanced quality validation
 
 # Traditional commands remain unchanged for backward compatibility
 ```
@@ -80,9 +78,9 @@ core_capabilities:
   - Dependency Analysis
 
 integration_points:
-  - "/understand --prp-analysis"
-  - "/understand --patterns-internal"
-  - "/create --pattern-validation"
+  - "/understand --prp"
+  - "/understand --prp=patterns"
+  - "/create --prp=validation"
 ```
 
 ### 2. External Research Specialist
@@ -101,9 +99,9 @@ core_capabilities:
   - API Documentation Analysis
 
 integration_points:
-  - "/understand --prp-analysis"
-  - "/understand --research-external"
-  - "/create --best-practices"
+  - "/understand --prp"
+  - "/understand --prp=research"
+  - "/create --prp"
 ```
 
 ### 3. Requirements Analyst
@@ -122,9 +120,9 @@ core_capabilities:
   - Risk Assessment
 
 integration_points:
-  - "/understand --prp-analysis"
-  - "/create --requirements-validation"
-  - "/ship --acceptance-criteria"
+  - "/understand --prp"
+  - "/create --prp"
+  - "/ship --prp"
 ```
 
 ### 4. Blueprint Architect
@@ -143,9 +141,9 @@ core_capabilities:
   - Template Generation
 
 integration_points:
-  - "/create --prp-blueprint"
-  - "/create --from-template"
-  - "/ship --blueprint-execution"
+  - "/create --prp"
+  - "/create --prp=template"
+  - "/ship --prp"
 ```
 
 ## 📊 PRP Workflow Integration
@@ -155,7 +153,7 @@ integration_points:
 #### 1.1 PRP Analysis Command
 
 ```bash
-/prefix:understand . --prp-analysis --requirements="OAuth2 authentication with MFA"
+/prefix:understand . --prp --requirements="OAuth2 authentication with MFA"
 ```
 
 **Orchestration Sequence:**
@@ -239,10 +237,10 @@ quality_requirements:
 
 ```bash
 # External research focus
-/prefix:understand . --research-external --framework="Express.js" --topic="OAuth2"
+/prefix:understand . --prp=research --framework="Express.js" --topic="OAuth2"
 
 # Internal pattern discovery
-/prefix:understand . --patterns-internal --domain="authentication"
+/prefix:understand . --prp=patterns --domain="authentication"
 ```
 
 ### Phase 2: Blueprint Creation (Enhanced /create)
@@ -250,7 +248,7 @@ quality_requirements:
 #### 2.1 Blueprint Generation Command
 
 ```bash
-/prefix:create . --prp-blueprint --from-analysis="auth-prp-2024-001"
+/prefix:create . --prp --from-analysis="auth-prp-2024-001"
 ```
 
 **Orchestration Sequence:**
@@ -340,10 +338,10 @@ task_breakdown:
       - "Performance requirements met (<200ms)"
 
     claude_toolkit_workflow: |
-      /prefix:understand . --oauth2-requirements
+      /prefix:understand . --prp --requirements="OAuth2 with security"
       /prefix:secure . --oauth2-security-design
-      /prefix:create auth --oauth2-providers
-      /prefix:ship . --security-validation
+      /prefix:create auth --prp=template --pattern="oauth2-providers"
+      /prefix:ship . --prp --security-validation
 
 quality_gates:
   - gate: "Security Validation"
@@ -374,10 +372,10 @@ templates_created:
 
 ```bash
 # Create from existing template
-/prefix:create . --from-template --pattern="rest-api" --customization="OAuth2 endpoints"
+/prefix:create . --prp=template --pattern="rest-api" --customization="OAuth2 endpoints"
 
 # Validate blueprint against patterns
-/prefix:create . --pattern-validation --blueprint="auth-blueprint-2024-001"
+/prefix:create . --prp=validation --blueprint="auth-blueprint-2024-001"
 ```
 
 ### Phase 3: Execution (Enhanced /ship)
@@ -385,7 +383,7 @@ templates_created:
 #### 3.1 Blueprint Execution Command
 
 ```bash
-/prefix:ship . --prp-execute --blueprint="auth-blueprint-2024-001"
+/prefix:ship . --prp --blueprint="auth-blueprint-2024-001"
 ```
 
 **Orchestration Sequence:**
@@ -408,10 +406,10 @@ execution_plan:
       status: "ready"
       agent: "security-specialist"
       command_sequence:
-        - "/prefix:understand . --oauth2-requirements"
+        - "/prefix:understand . --prp --requirements='OAuth2 authentication'"
         - "/prefix:secure . --oauth2-security-design"
-        - "/prefix:create auth --oauth2-providers"
-        - "/prefix:ship . --security-validation"
+        - "/prefix:create auth --prp=template --pattern='oauth2-providers'"
+        - "/prefix:ship . --prp --security-validation"
 
       quality_validation:
         - gate: "Pattern Consistency Check"
@@ -441,10 +439,10 @@ automated_rollback:
 
 ```bash
 # Execute with pattern awareness
-/prefix:ship . --pattern-consistent --blueprint="auth-blueprint-2024-001"
+/prefix:ship . --prp --blueprint="auth-blueprint-2024-001"
 
 # Fast-track for simple features
-/prefix:ship . --prp-execute --fast-track --template="crud-operations"
+/prefix:ship . --prp=fast --template="crud-operations"
 ```
 
 ## 🗂️ Documentation Structure Enhancement
@@ -535,9 +533,9 @@ memory_integration:
 #### Week 2: Command Integration
 
 - [ ] **Day 8-10**: Enhanced /understand commands
-  - [ ] `--prp-analysis` parameter implementation
-  - [ ] `--research-external` parameter
-  - [ ] `--patterns-internal` parameter
+  - [ ] `--prp` parameter implementation
+  - [ ] `--prp=research` parameter mode
+  - [ ] `--prp=patterns` parameter mode
   - [ ] Agent orchestration logic
 
 - [ ] **Day 11-14**: Testing and Validation
@@ -556,7 +554,7 @@ memory_integration:
 
 #### Success Criteria
 
-- [ ] `/prefix:understand . --prp-analysis` works end-to-end
+- [ ] `/prefix:understand . --prp` works end-to-end
 - [ ] Pattern discovery accuracy >80%
 - [ ] Requirements validation catches major gaps
 - [ ] Performance impact <5% on existing commands
@@ -582,9 +580,9 @@ memory_integration:
 #### Week 4: Blueprint Commands
 
 - [ ] **Day 22-24**: Enhanced /create commands
-  - [ ] `--prp-blueprint` parameter implementation
-  - [ ] `--from-template` functionality
-  - [ ] `--pattern-validation` checks
+  - [ ] `--prp` parameter implementation
+  - [ ] `--prp=template` functionality
+  - [ ] `--prp=validation` checks
   - [ ] Blueprint storage and retrieval
 
 - [ ] **Day 25-28**: Template System
@@ -603,7 +601,7 @@ memory_integration:
 
 #### Success Criteria
 
-- [ ] `/prefix:create . --prp-blueprint` generates comprehensive plans
+- [ ] `/prefix:create . --prp` generates comprehensive plans
 - [ ] Template system creates 90% accurate code scaffolds
 - [ ] Blueprint validation catches architectural inconsistencies
 - [ ] External research provides relevant framework guidance
@@ -615,9 +613,9 @@ memory_integration:
 #### Week 5: Execution Framework
 
 - [ ] **Day 29-31**: Enhanced /ship commands
-  - [ ] `--prp-execute` parameter implementation
-  - [ ] `--pattern-consistent` validation
-  - [ ] `--quality-gates` enforcement
+  - [ ] `--prp` parameter implementation
+  - [ ] `--prp=quality` validation mode
+  - [ ] `--prp=fast` execution mode
   - [ ] Real-time execution monitoring
 
 - [ ] **Day 32-35**: Quality Integration
@@ -650,7 +648,7 @@ memory_integration:
 
 #### Success Criteria
 
-- [ ] `/prefix:ship . --prp-execute` implements blueprints accurately
+- [ ] `/prefix:ship . --prp` implements blueprints accurately
 - [ ] Quality gates prevent substandard implementations
 - [ ] Execution monitoring provides real-time feedback
 - [ ] Pattern consistency >95% across implementations
@@ -708,28 +706,28 @@ memory_integration:
 
 ```bash
 # Current approach enhanced with PRP analysis
-/prefix:understand . --comprehensive-analysis
+/prefix:understand . --comprehensive
 # Enhanced with PRP
-/prefix:understand . --prp-analysis --deep-research
+/prefix:understand . --prp --requirements="OAuth2 with MFA"
 
 # Traditional implementation
 /prefix:create auth --oauth2
 # Enhanced with blueprint
-/prefix:create . --prp-blueprint --requirements="OAuth2 with MFA"
-/prefix:ship . --prp-execute --quality-gates
+/prefix:create . --prp --requirements="OAuth2 with MFA"
+/prefix:ship . --prp
 ```
 
 ### Pattern 2: Full PRP Workflow
 
 ```bash
 # Complete PRP methodology
-/prefix:understand . --prp-analysis --requirements="E-commerce checkout system"
+/prefix:understand . --prp --requirements="E-commerce checkout system"
 # → Generates comprehensive analysis with patterns and research
 
-/prefix:create . --prp-blueprint --from-analysis --validate-patterns
+/prefix:create . --prp --from-analysis
 # → Creates detailed implementation blueprint
 
-/prefix:ship . --prp-execute --monitor-progress --quality-validation
+/prefix:ship . --prp
 # → Executes blueprint with real-time monitoring
 ```
 
@@ -737,18 +735,18 @@ memory_integration:
 
 ```bash
 # Quick development using established patterns
-/prefix:understand . --patterns-internal --domain="API development"
-/prefix:create . --from-template --pattern="rest-api-crud" --customize="user-management"
-/prefix:ship . --fast-track --pattern-consistent
+/prefix:understand . --prp=patterns --domain="API development"
+/prefix:create . --prp=template --pattern="rest-api-crud" --customize="user-management"
+/prefix:ship . --prp=fast
 ```
 
 ### Pattern 4: Research-Heavy Implementation
 
 ```bash
 # For cutting-edge or complex integrations
-/prefix:understand . --research-external --framework="Next.js 14" --topic="Server Actions"
-/prefix:create . --prp-blueprint --research-driven --validate-best-practices
-/prefix:ship . --prp-execute --monitor-compliance --document-decisions
+/prefix:understand . --prp=research --framework="Next.js 14" --topic="Server Actions"
+/prefix:create . --prp --research-driven
+/prefix:ship . --prp=quality --document-decisions
 ```
 
 ## 🎯 Success Metrics & Monitoring
@@ -1058,7 +1056,7 @@ install_prp_system() {
     initialize_prp_memory_integration
 
     echo "PRP system installed successfully!"
-    echo "Use /prefix:understand . --prp-analysis to get started"
+    echo "Use /prefix:understand . --prp to get started"
 }
 ```
 
