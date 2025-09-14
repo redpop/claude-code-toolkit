@@ -449,10 +449,25 @@ if [ "$INSTALL_HOOKS" = true ] && [ -d "$SCRIPT_DIR/hooks" ]; then
         fi
     fi
     
-    # Create hooks directory
+    # Create hooks directory and subdirectories
     mkdir -p "$CLAUDE_TOOLKIT_DIR/hooks"
-    # Copy only shell scripts (not CLAUDE.md)
+    mkdir -p "$CLAUDE_TOOLKIT_DIR/hooks/config"
+    mkdir -p "$CLAUDE_TOOLKIT_DIR/hooks/lib"
+
+    # Copy shell scripts (not CLAUDE.md)
     find "$SCRIPT_DIR/hooks" -maxdepth 1 -type f -name "*.sh" -exec cp {} "$CLAUDE_TOOLKIT_DIR/hooks/" \; 2>/dev/null || true
+
+    # Copy smart suggestions system files
+    if [ -f "$SCRIPT_DIR/hooks/config/suggestions-config.json" ]; then
+        cp "$SCRIPT_DIR/hooks/config/suggestions-config.json" "$CLAUDE_TOOLKIT_DIR/hooks/config/" 2>/dev/null || true
+        print_info "Installed smart suggestions configuration"
+    fi
+
+    if [ -f "$SCRIPT_DIR/hooks/lib/suggestion-engine.sh" ]; then
+        cp "$SCRIPT_DIR/hooks/lib/suggestion-engine.sh" "$CLAUDE_TOOLKIT_DIR/hooks/lib/" 2>/dev/null || true
+        print_info "Installed smart suggestions engine"
+    fi
+
     # Ensure scripts are executable
     chmod +x "$CLAUDE_TOOLKIT_DIR/hooks"/*.sh 2>/dev/null || true
     print_success "Hooks installed to $CLAUDE_TOOLKIT_DIR/hooks"
@@ -652,6 +667,7 @@ if [ "$INSTALL_HOOKS" = true ]; then
     echo "  - subagent-notification.sh (agent-specific sounds)"
     echo "  - error-detection.sh (critical error alerts)"
     echo "  - success-notification.sh (success celebrations)"
+    echo "  - smart-suggestions.sh (intelligent workflow suggestions)"
     echo "  - system-notification.sh (macOS notifications)"
     echo "  - command-chain-notification.sh (chain progress tracking)"
     echo "  - session-logger.sh (session metrics and logging)"
