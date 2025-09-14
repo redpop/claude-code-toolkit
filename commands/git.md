@@ -21,7 +21,9 @@ Extract operation and options:
 Route to knowledge-enhanced Git workflow:
 
 Use Task tool with subagent_type="git-workflow-specialist":
-"Execute Git '$operation' with Knowledge-Enhanced approach with graceful fallback:
+"Execute Git '$operation' with Knowledge-Enhanced approach with graceful fallback.
+
+**IMPORTANT**: NEVER include Claude Code signature or Co-Authored-By lines in commit messages. This command creates commits without automation signatures.
 
 **Enhanced Workflow (when Basic Memory MCP available):**
 
