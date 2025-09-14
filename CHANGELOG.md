@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.1.0] - 2025-09-14
+
+### Changed
+
+- 🔄 **Enhanced Git Workflow Specialist** - Transformed from analysis-only to active execution agent
+  - Git workflow specialist agent now directly executes commit operations with intelligent grouping
+  - Added automatic change analysis and atomic commit execution capabilities
+  - Enhanced professional messaging without automation signatures for clean Git history
+  - Streamlined agent definition focused on practical workflow patterns over verbose documentation
+
+### Fixed
+
+- 🐛 **Git Command Documentation** - Enhanced clean commit message enforcement
+  - Added explicit instructions to prevent automation signatures in commits
+  - Ensures purely professional, human-style commit messages without tool attribution
+  - Maintains clean Git history without Claude Code signatures or Co-Authored-By lines
+
 ## [5.0.0] - 2025-09-14
 
 ### Added
