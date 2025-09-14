@@ -51,13 +51,13 @@ The toolkit uses the **6-Command Architecture** for core operations, plus specia
 
 | Command | Description | Options | Help |
 |---------|-------------|---------|------|
-
 | `/prefix:create` | Code and content generation with intelligent templating and pattern learning | `type`, `target`, `--format`, `--help` | - |
 | `/prefix:git` | Smart Git operations with project context and commit pattern learning | `operation`, `--push`, `--no-verify` | - |
 | `/prefix:improve` | Code improvement with intelligent routing and learning persistence | `type`, `target`, `--dry-run`, `--severity` | - |
 | `/prefix:secure` | Security analysis and vulnerability detection with threat intelligence learning | `type`, `target`, `--standard`, `--help` | - |
 | `/prefix:ship` | Deployment readiness and quality gates with release pattern learning | `type`, `target`, `--check`, `--help` | - |
 | `/prefix:understand` | Code analysis and comprehension with intelligent problem routing | `type`, `target` | - |
+
 
 ### Meta Commands
 
@@ -66,7 +66,8 @@ The toolkit uses the **6-Command Architecture** for core operations, plus specia
 | `/prefix:meta:changelog` | AI-powered CHANGELOG.md management that automatically determines version based on changes | `--commit`, `--push`, `--fast`, `--update-version` | - |
 | `/prefix:meta:handoff` | Documents current problem context for handoff to another AI assistant | `output-file`, `-c\|--compact`, `-t\|--technical`, `--focus`, `topic`, `--skip`, `topic`, `--include`, `topic`, `"instructions"` | - |
 
-### Typo3 Commands
+
+### TYPO3 Commands
 
 | Command | Description | Options | Help |
 |---------|-------------|---------|------|
