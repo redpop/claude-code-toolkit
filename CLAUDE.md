@@ -7,9 +7,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 The Claude Code Toolkit is a comprehensive collection of commands, agents, and tools for extending Claude Code capabilities:
 
 - **Commands**: Reusable slash commands for common development tasks
-- **Agents**: Specialized AI agents for code analysis and operations  
+- **Agents**: Specialized AI agents for code analysis and operations
 - **Tools**: Utilities and scripts for enhanced productivity
 - **Knowledge Base**: Domain-specific patterns and references
+- **PRP System**: Project Requirements Proposal methodology for blueprint-driven development
 
 Designed to be installed into `~/.claude/` with a custom prefix, making all toolkit capabilities available for use in any project.
 
@@ -25,6 +26,14 @@ Designed to be installed into `~/.claude/` with a custom prefix, making all tool
 /prefix:ship . --readiness-check
 ```
 
+**PRP Methodology - Blueprint-Driven Development**:
+
+```bash
+/prefix:understand . --prp --requirements="OAuth2 authentication"
+/prefix:create . --prp --from-analysis
+/prefix:ship . --prp --quality-gates
+```
+
 **Quick Development Workflow**:
 
 ```bash
@@ -36,7 +45,7 @@ Designed to be installed into `~/.claude/` with a custom prefix, making all tool
 
 ```bash
 /prefix:understand . --deep-analysis
-/prefix:improve . --apply-insights  
+/prefix:improve . --apply-insights
 /prefix:ship . --readiness-check
 ```
 
@@ -78,6 +87,7 @@ Specialized AI agents provide domain expertise:
 - Located in `/agents/` directory
 - Each agent has specific focus area
 - Invoked through commands or Task Tool
+- **PRP Agents**: codebase-research-specialist, external-research-specialist, requirements-analyst, blueprint-architect
 
 See **[agents/CLAUDE.md](agents/CLAUDE.md)** for agent details.
 
@@ -97,6 +107,13 @@ Use Task tool with subagent_type="security-specialist":
 /prefix:improve . --apply-recommendations
 /prefix:create docs --update-all
 ```
+
+**PRP Parameters**:
+
+- `--prp` → Activate Project Requirements Proposal methodology
+- `--prp=research` → Focus on external research and best practices
+- `--prp=patterns` → Focus on internal codebase pattern discovery
+- `--prp=template` → Create from existing template patterns
 
 **Export Parameters**:
 
@@ -122,6 +139,7 @@ This installs:
 - Commands to `~/.claude/commands/myproject/`
 - Agents to `~/.claude/agents/`
 - Hooks to `~/.claude/claude-code-toolkit/hooks/`
+- PRP System to `~/.claude/claude-code-toolkit/prp/`
 - Creates backup if updating existing installation
 
 For sound notifications:

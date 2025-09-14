@@ -389,7 +389,7 @@ fi
 if [ -d "$SCRIPT_DIR/knowledge-base" ]; then
     print_info "Installing knowledge-base to $CLAUDE_TOOLKIT_DIR..."
     mkdir -p "$CLAUDE_TOOLKIT_DIR"
-    
+
     # Check if knowledge-base already exists
     if [ -d "$CLAUDE_TOOLKIT_DIR/knowledge-base" ]; then
         if [ "$FORCE_INSTALL" = true ]; then
@@ -400,12 +400,44 @@ if [ -d "$SCRIPT_DIR/knowledge-base" ]; then
             mv "$CLAUDE_TOOLKIT_DIR/knowledge-base" "$CLAUDE_TOOLKIT_DIR/knowledge-base.backup.$(date +%Y%m%d_%H%M%S)"
         fi
     fi
-    
+
     # Create knowledge-base directory structure
     mkdir -p "$CLAUDE_TOOLKIT_DIR/knowledge-base"
     # Copy all files except CLAUDE.md while preserving directory structure
     (cd "$SCRIPT_DIR" && find knowledge-base -type f ! -name "CLAUDE.md" -exec bash -c 'dest="$1/${2#./}"; mkdir -p "$(dirname "$dest")"; cp "$2" "$dest"' _ "$CLAUDE_TOOLKIT_DIR" {} \;)
     print_success "Knowledge-base installed to $CLAUDE_TOOLKIT_DIR/knowledge-base"
+fi
+
+# Install PRP system to claude-code-toolkit directory
+if [ -d "$SCRIPT_DIR/templates/prp" ]; then
+    print_info "Installing PRP system to $CLAUDE_TOOLKIT_DIR..."
+    mkdir -p "$CLAUDE_TOOLKIT_DIR"
+
+    # Check if PRP directory already exists
+    if [ -d "$CLAUDE_TOOLKIT_DIR/prp" ]; then
+        if [ "$FORCE_INSTALL" = true ]; then
+            print_info "Force mode: Overwriting existing PRP system..."
+            rm -rf "$CLAUDE_TOOLKIT_DIR/prp"
+        else
+            print_info "Backing up existing PRP system..."
+            mv "$CLAUDE_TOOLKIT_DIR/prp" "$CLAUDE_TOOLKIT_DIR/prp.backup.$(date +%Y%m%d_%H%M%S)"
+        fi
+    fi
+
+    # Create PRP directory structure
+    mkdir -p "$CLAUDE_TOOLKIT_DIR/prp"/{analysis,blueprints,patterns,research,execution}/{templates,library}
+
+    # Copy PRP templates
+    cp -r "$SCRIPT_DIR/templates/prp/"* "$CLAUDE_TOOLKIT_DIR/prp/" 2>/dev/null || true
+
+    # Install PRP configuration
+    if [ -f "$SCRIPT_DIR/templates/prp/prp-config-template.yaml" ]; then
+        cp "$SCRIPT_DIR/templates/prp/prp-config-template.yaml" "$CLAUDE_TOOLKIT_DIR/prp/config.yaml"
+        print_info "PRP configuration template installed"
+    fi
+
+    print_success "PRP system installed to $CLAUDE_TOOLKIT_DIR/prp"
+    print_info "Use /prefix:understand . --prp to get started with PRP workflow"
 fi
 
 # Install markdown config to claude-code-toolkit directory

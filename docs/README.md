@@ -1,6 +1,6 @@
 # Claude Code Toolkit Documentation
 
-Essential documentation for the Claude Code Toolkit's 6-command architecture.
+Essential documentation for the Claude Code Toolkit's 6-command architecture with PRP methodology integration.
 
 ## Quick Start
 
@@ -19,6 +19,7 @@ Essential documentation for the Claude Code Toolkit's 6-command architecture.
 ### 🔧 Developer Documentation
 
 - **[Development Guide](DEVELOPMENT.md)** - Extending the toolkit
+- **[PRP Methodology](guides/PRP-METHODOLOGY.md)** - Blueprint-driven development guide
 - **[Enhanced Hooks](guides/ENHANCED-HOOKS.md)** - Intelligent hook system with Basic Memory integration
 - **[MCP Integration](guides/MCP-INTEGRATION.md)** - Optional enhancements
 - **[Security Guide](guides/SECURITY-GUIDE.md)** - Security best practices

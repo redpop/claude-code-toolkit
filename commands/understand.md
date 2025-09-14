@@ -17,7 +17,23 @@ Extract type and target:
 - If first argument matches analysis types (code, performance, security, architecture, debug, flow, dependencies, tests, docs, legacy), use as type
 - Default: type="code", target="."
 
-Route to knowledge-enhanced analysis:
+**PRP Enhancement - Project Requirements Proposal Integration:**
+
+If arguments contain "--prp" flag, activate PRP (Project Requirements Proposal) methodology:
+
+- `--prp` alone: Full PRP analysis (requirements + patterns + research)
+- `--prp=research`: Focus on external research and best practices
+- `--prp=patterns`: Focus on internal codebase pattern discovery
+- `--prp=requirements`: Focus on requirements analysis and gap identification
+
+**PRP Workflow:**
+
+1. **Requirements Analysis**: Use requirements-analyst agent for requirement validation
+2. **Pattern Discovery**: Use codebase-research-specialist for pattern identification
+3. **External Research**: Use external-research-specialist for framework guidance
+4. **Synthesis**: Generate comprehensive PRP analysis document
+
+Route to enhanced analysis:
 
 Use Task tool with subagent_type="code-understanding-specialist":
 "Perform comprehensive analysis of '$target' with '$type' focus using Knowledge-Enhanced approach with graceful fallback:

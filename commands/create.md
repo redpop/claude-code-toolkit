@@ -18,7 +18,23 @@ Extract type, target, and options:
 - Default: type="docs", target="."
 - Handle --format and other generation options
 
-Route to knowledge-enhanced generation:
+**PRP Enhancement - Blueprint-Driven Creation:**
+
+If arguments contain "--prp" flag, activate PRP blueprint creation methodology:
+
+- `--prp` alone: Generate comprehensive implementation blueprint
+- `--prp=template`: Create from existing template patterns
+- `--prp=validation`: Validate blueprint against codebase patterns
+- `--prp=fast`: Quick blueprint generation for simple features
+
+**PRP Blueprint Workflow:**
+
+1. **Requirements Integration**: Use requirements from PRP analysis phase
+2. **Pattern Application**: Apply discovered patterns via codebase-research-specialist
+3. **Architecture Planning**: Create detailed implementation blueprint via blueprint-architect
+4. **Quality Gate Definition**: Define comprehensive validation and testing strategies
+
+Route to enhanced generation:
 
 Use Task tool with subagent_type="documentation-specialist" (for docs) or "test-engineer" (for tests) or "frontend-specialist" (for components):
 "Generate '$target' with '$type' focus using Knowledge-Enhanced approach with graceful fallback:

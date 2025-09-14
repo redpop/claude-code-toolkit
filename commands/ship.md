@@ -18,7 +18,23 @@ Extract type, target, and options:
 - Default: type="readiness", target="."
 - Handle --check and other deployment options
 
-Route to knowledge-enhanced deployment analysis:
+**PRP Enhancement - Blueprint-Driven Execution:**
+
+If arguments contain "--prp" flag, activate PRP blueprint execution methodology:
+
+- `--prp` alone: Execute implementation blueprint with quality gates
+- `--prp=fast`: Fast-track execution for tested patterns
+- `--prp=quality`: Enhanced quality validation during execution
+- `--prp=monitor`: Real-time execution monitoring with progress tracking
+
+**PRP Execution Workflow:**
+
+1. **Blueprint Validation**: Validate blueprint completeness via blueprint-architect
+2. **Pattern-Consistent Implementation**: Execute using established patterns via specialized agents
+3. **Quality Gate Enforcement**: Validate against defined quality criteria during execution
+4. **Real-Time Monitoring**: Track progress and validate successful completion
+
+Route to enhanced deployment analysis:
 
 Use Task tool with subagent_type="deployment-specialist":
 "Assess deployment readiness of '$target' with '$type' focus using Knowledge-Enhanced approach with graceful fallback:

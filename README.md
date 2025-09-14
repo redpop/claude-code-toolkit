@@ -13,12 +13,18 @@ cd claude-code-toolkit
 /myprefix:understand . --comprehensive    # Deep analysis
 /myprefix:improve . --apply-insights      # Fix issues
 /myprefix:secure . --audit               # Security scan
+
+# NEW: PRP Blueprint-Driven Development
+/myprefix:understand . --prp --requirements="OAuth2 auth"
+/myprefix:create . --prp --from-analysis
+/myprefix:ship . --prp --quality-gates
 ```
 
 ## ✨ Features
 
 - **6 Core Commands**: understand, improve, create, secure, ship, git
-- **16+ AI Agents**: Security, performance, architecture specialists
+- **20+ AI Agents**: Security, performance, architecture specialists + PRP agents
+- **PRP Methodology**: Blueprint-driven development with pattern learning
 - **Sound Notifications**: Audio feedback for command completion
 - **TYPO3 Integration**: Specialized CMS development tools
 - **MCP Compatible**: Enhanced with optional MCP servers
@@ -33,7 +39,7 @@ cd claude-code-toolkit
 ./install.sh myprefix --with-settings
 ```
 
-Installs to `~/.claude/commands/myprefix/` and `~/.claude/agents/`
+Installs to `~/.claude/commands/myprefix/`, `~/.claude/agents/`, and `~/.claude/claude-code-toolkit/prp/`
 
 ## Available Commands
 
@@ -53,12 +59,14 @@ The toolkit uses the **6-Command Architecture** for core operations, plus specia
 | `/prefix:ship` | Deployment readiness and quality gates with release pattern learning | `type`, `target`, `--check`, `--help` | - |
 | `/prefix:understand` | Code analysis and comprehension with intelligent problem routing | `type`, `target` | - |
 
+
 ### Meta Commands
 
 | Command | Description | Options | Help |
 |---------|-------------|---------|------|
 | `/prefix:meta:changelog` | AI-powered CHANGELOG.md management that automatically determines version based on changes | `--commit`, `--push`, `--fast`, `--update-version` | - |
 | `/prefix:meta:handoff` | Documents current problem context for handoff to another AI assistant | `output-file`, `-c\|--compact`, `-t\|--technical`, `--focus`, `topic`, `--skip`, `topic`, `--include`, `topic`, `"instructions"` | - |
+
 
 ### Typo3 Commands
 

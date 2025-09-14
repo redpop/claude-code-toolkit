@@ -8,7 +8,7 @@ Provides Claude Code AI with documentation structure and navigation context for 
 - **DEVELOPMENT.md** - Development and contribution guide
 - **INSTALLATION-GUIDE.md** - Setup instructions
 - **FAQ.md** - Common questions and troubleshooting
-- **guides/** - Essential guides (MCP, security)
+- **guides/** - Essential guides (MCP, security, PRP methodology)
 - **archive/** - Historical and deprecated content
 
 ## AI Context Guidelines
@@ -38,11 +38,12 @@ When working with documentation:
 
 ## Core Architecture
 
-The documentation reflects the Knowledge-Driven Revolution:
+The documentation reflects the Knowledge-Driven Revolution with PRP Integration:
 
 - **6 Core Commands**: understand, improve, create, secure, ship, git
+- **PRP Methodology**: Blueprint-driven development with --prp parameters
 - **Extensions**: meta/*, typo3/*
-- **22+ AI Agents**: Specialized domain expertise
+- **25+ AI Agents**: Specialized domain expertise + PRP agents
 - **Learning Integration**: Basic Memory with graceful fallback
 
 ## Maintenance

@@ -1,0 +1,62 @@
+# PRP Requirements Analysis Template
+# This template provides a structured format for requirements analysis output
+
+analysis_id: "${ANALYSIS_ID}"
+project_context:
+  name: "${PROJECT_NAME}"
+  description: "${PROJECT_DESCRIPTION}"
+  requirements:
+    functional:
+      - "${FUNCTIONAL_REQUIREMENT_1}"
+      - "${FUNCTIONAL_REQUIREMENT_2}"
+    non_functional:
+      - "${NON_FUNCTIONAL_REQUIREMENT_1}"
+      - "${NON_FUNCTIONAL_REQUIREMENT_2}"
+
+codebase_analysis:
+  existing_patterns:
+    - pattern: "${PATTERN_NAME}"
+      locations: ["${FILE_PATH_1}", "${FILE_PATH_2}"]
+      confidence: ${CONFIDENCE_SCORE}
+      template_extractable: ${EXTRACTABLE_BOOLEAN}
+
+  architecture_decisions:
+    - decision: "${ARCHITECTURE_DECISION}"
+      rationale: "${DECISION_RATIONALE}"
+      impact: "${IMPLEMENTATION_IMPACT}"
+
+  dependencies:
+    relevant: ["${EXISTING_DEPENDENCY_1}", "${EXISTING_DEPENDENCY_2}"]
+    potential_conflicts: ["${POTENTIAL_CONFLICT_1}"]
+    recommendations: ["${RECOMMENDED_DEPENDENCY_1}"]
+
+external_research:
+  best_practices:
+    - source: "${AUTHORITATIVE_SOURCE}"
+      recommendations: ["${BEST_PRACTICE_1}", "${BEST_PRACTICE_2}"]
+    - source: "${FRAMEWORK_DOCUMENTATION}"
+      security_requirements: ["${SECURITY_REQUIREMENT_1}"]
+
+  framework_patterns:
+    - framework: "${FRAMEWORK_NAME}"
+      implementation_examples: ["${EXAMPLE_PATTERN_1}"]
+      estimated_effort: "${EFFORT_LEVEL}"
+
+gaps_identified:
+  - gap: "${GAP_DESCRIPTION}"
+    impact: "${IMPACT_LEVEL}"
+    recommendation: "${RECOMMENDED_SOLUTION}"
+
+risk_assessment:
+  technical_risks:
+    - risk: "${TECHNICAL_RISK}"
+      mitigation: "${MITIGATION_STRATEGY}"
+
+  business_risks:
+    - risk: "${BUSINESS_RISK}"
+      mitigation: "${MITIGATION_APPROACH}"
+
+quality_requirements:
+  testing_strategy: "${TESTING_APPROACH}"
+  documentation_needs: "${DOCUMENTATION_REQUIREMENTS}"
+  performance_targets: ["${PERFORMANCE_METRIC_1}", "${PERFORMANCE_METRIC_2}"]
