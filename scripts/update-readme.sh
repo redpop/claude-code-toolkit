@@ -13,6 +13,13 @@ NC='\033[0m' # No Color
 # Function to capitalize first letter of a word
 capitalize_first() {
     local word="$1"
+
+    # Special case for typo3
+    if [ "$word" = "typo3" ]; then
+        echo "TYPO3"
+        return
+    fi
+
     local first_letter
     local rest
     first_letter=$(echo "$word" | cut -c1 | tr '[:lower:]' '[:upper:]')
@@ -123,7 +130,7 @@ for cmd_file in "$COMMANDS_DIR"/*.md; do
         if [ "$core_commands_found" = false ]; then
             core_commands_content+="\n### Core Commands (6-Command Architecture)\n\n"
             core_commands_content+="| Command | Description | Options | Help |\n"
-            core_commands_content+="|---------|-------------|---------|------|\n"
+            core_commands_content+="|---------|-------------|---------|------|"
             core_commands_found=true
             has_commands=true
         fi
@@ -144,7 +151,8 @@ for cmd_file in "$COMMANDS_DIR"/*.md; do
         fi
 
         # Add core command row
-        core_commands_content+="\n| \`/prefix:${cmd_name}\` | ${description:-No description} | ${options:--} | ${help_support} |"
+        core_commands_content+="
+| \`/prefix:${cmd_name}\` | ${description:-No description} | ${options:--} | ${help_support} |"
     fi
 done
 
