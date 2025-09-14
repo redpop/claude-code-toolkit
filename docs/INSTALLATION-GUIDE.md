@@ -89,6 +89,7 @@ The toolkit includes an intelligent hook system that transforms your development
 #### **Productivity Hooks**
 
 - **session-start-enhanced**: Enhanced session initialization with project insights
+- **command-chain-notification**: Progress tracking for command chains with audio feedback
 - **markdown-format**: Auto-format markdown files after modifications
 - **error-detection**: Intelligent error pattern recognition
 
@@ -109,6 +110,7 @@ After installation, manage hooks with the CLI:
 # Enable enhanced features
 ./scripts/manage-hooks.sh enable session-end-summary
 ./scripts/manage-hooks.sh enable enhanced-command-logger
+./scripts/manage-hooks.sh enable command-chain-notification
 ./scripts/manage-hooks.sh enable context-refresh
 
 # System health check

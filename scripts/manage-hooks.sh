@@ -24,7 +24,7 @@ NC='\033[0m' # No Color
 # Hook definitions with metadata
 declare -A HOOKS=(
     ["markdown-format"]="Auto-format MD files after modifications|PostToolUse|markdownlint-cli2"
-    ["stop-notification"]="Sound notification when Claude stops responding|Stop|afplay"
+    ["stop-notification"]="Sound notification when Claude stops|Stop|afplay"
     ["session-logger"]="Log session activity and metrics|SessionStart/Stop|jq"
     ["error-detection"]="Detect and highlight error patterns|PostToolUse|none"
     ["system-notification"]="System notifications for Claude events|Multiple|osascript"
@@ -32,7 +32,7 @@ declare -A HOOKS=(
     ["subagent-notification"]="Notifications for sub-agent activities|PostToolUse|afplay"
     ["success-notification"]="Success notifications with sound|PostToolUse|afplay"
     ["tool-specific-notification"]="Tool-specific notification system|PostToolUse|afplay"
-    ["session-end-summary"]="Intelligent session summaries with Basic Memory|Stop|jq,Basic Memory MCP"
+    ["session-end-summary"]="Intelligent session summaries w/ Memory|Stop|jq,Basic Memory MCP"
     ["enhanced-command-logger"]="Enhanced command statistics tracking|PostToolUse|jq"
 )
 
@@ -46,34 +46,32 @@ print_header() {
 }
 
 print_usage() {
-    cat << EOF
-${BOLD}USAGE:${NC}
-  ./scripts/manage-hooks.sh <command> [options]
-
-${BOLD}COMMANDS:${NC}
-  ${GREEN}list${NC}                    Show all available hooks with status
-  ${GREEN}enable${NC} <hook>           Enable a specific hook
-  ${GREEN}disable${NC} <hook>          Disable a specific hook
-  ${GREEN}info${NC} <hook>             Show detailed information about a hook
-  ${GREEN}doctor${NC}                  Run diagnostic checks on hook system
-  ${GREEN}create${NC} <name>           Create a new custom hook (interactive)
-  ${GREEN}stats${NC}                   Show hook usage statistics
-  ${GREEN}cleanup${NC}                 Clean up old logs and temporary files
-  ${GREEN}backup${NC}                  Backup current hook configuration
-
-${BOLD}EXAMPLES:${NC}
-  ./scripts/manage-hooks.sh list
-  ./scripts/manage-hooks.sh enable session-end-summary
-  ./scripts/manage-hooks.sh info markdown-format
-  ./scripts/manage-hooks.sh doctor
-  ./scripts/manage-hooks.sh stats
-
-${BOLD}HOOKS DIRECTORY:${NC}
-  $HOOKS_DIR
-
-${BOLD}DOCUMENTATION:${NC}
-  https://github.com/yourusername/claude-code-toolkit/docs/hooks.md
-EOF
+    echo -e "${BOLD}USAGE:${NC}"
+    echo "  ./scripts/manage-hooks.sh <command> [options]"
+    echo ""
+    echo -e "${BOLD}COMMANDS:${NC}"
+    echo -e "  ${GREEN}list${NC}                    Show all available hooks with status"
+    echo -e "  ${GREEN}enable${NC} <hook>           Enable a specific hook"
+    echo -e "  ${GREEN}disable${NC} <hook>          Disable a specific hook"
+    echo -e "  ${GREEN}info${NC} <hook>             Show detailed information about a hook"
+    echo -e "  ${GREEN}doctor${NC}                  Run diagnostic checks on hook system"
+    echo -e "  ${GREEN}create${NC} <name>           Create a new custom hook (interactive)"
+    echo -e "  ${GREEN}stats${NC}                   Show hook usage statistics"
+    echo -e "  ${GREEN}cleanup${NC}                 Clean up old logs and temporary files"
+    echo -e "  ${GREEN}backup${NC}                  Backup current hook configuration"
+    echo ""
+    echo -e "${BOLD}EXAMPLES:${NC}"
+    echo "  ./scripts/manage-hooks.sh list"
+    echo "  ./scripts/manage-hooks.sh enable session-end-summary"
+    echo "  ./scripts/manage-hooks.sh info markdown-format"
+    echo "  ./scripts/manage-hooks.sh doctor"
+    echo "  ./scripts/manage-hooks.sh stats"
+    echo ""
+    echo -e "${BOLD}HOOKS DIRECTORY:${NC}"
+    echo "  $HOOKS_DIR"
+    echo ""
+    echo -e "${BOLD}DOCUMENTATION:${NC}"
+    echo "  https://github.com/yourusername/claude-code-toolkit/docs/hooks.md"
 }
 
 # Check if hook exists and is executable
@@ -104,10 +102,10 @@ get_hook_info() {
 list_hooks() {
     print_header
     echo -e "${BOLD}AVAILABLE HOOKS:${NC}"
-    echo "────────────────────────────────────────────────────────────────"
+    echo "────────────────────────────────────────────────────────────────────────────────"
 
-    printf "%-25s %-35s %s\n" "HOOK NAME" "DESCRIPTION" "STATUS"
-    echo "────────────────────────────────────────────────────────────────"
+    printf "%-28s %-40s %s\n" "HOOK NAME" "DESCRIPTION" "STATUS"
+    echo "────────────────────────────────────────────────────────────────────────────────"
 
     for hook_name in "${!HOOKS[@]}"; do
         local info=$(get_hook_info "$hook_name")
@@ -116,23 +114,23 @@ list_hooks() {
 
         case "$status" in
             "enabled")
-                printf "%-25s %-35s ${GREEN}✅ ENABLED${NC}\n" "$hook_name" "$description"
+                printf "%-28s %-40s ${GREEN}✅ ENABLED${NC}\n" "$hook_name" "$description"
                 ;;
             "disabled")
-                printf "%-25s %-35s ${YELLOW}❌ DISABLED${NC}\n" "$hook_name" "$description"
+                printf "%-28s %-40s ${YELLOW}❌ DISABLED${NC}\n" "$hook_name" "$description"
                 ;;
             "not_found")
-                printf "%-25s %-35s ${RED}🚫 NOT FOUND${NC}\n" "$hook_name" "$description"
+                printf "%-28s %-40s ${RED}🚫 NOT FOUND${NC}\n" "$hook_name" "$description"
                 ;;
         esac
     done
 
     echo ""
     echo -e "${BOLD}COMMANDS:${NC}"
-    echo "  ${GREEN}enable <hook>${NC}     Enable a specific hook"
-    echo "  ${GREEN}disable <hook>${NC}    Disable a specific hook"
-    echo "  ${GREEN}info <hook>${NC}       Show detailed hook information"
-    echo "  ${GREEN}doctor${NC}            Diagnose hook system health"
+    echo -e "  ${GREEN}enable <hook>${NC}     Enable a specific hook"
+    echo -e "  ${GREEN}disable <hook>${NC}    Disable a specific hook"
+    echo -e "  ${GREEN}info <hook>${NC}       Show detailed hook information"
+    echo -e "  ${GREEN}doctor${NC}            Diagnose hook system health"
     echo ""
 }
 

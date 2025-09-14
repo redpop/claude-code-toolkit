@@ -162,7 +162,68 @@ Edit the hook file to customize:
 cat ~/.claude/claude-code-toolkit/stats/command-stats.json | jq '.daily'
 ```
 
-## 🛠️ 3. Hook Management CLI
+## 🔗 3. Command Chain Notification
+
+**File**: `~/.claude/claude-code-toolkit/hooks/command-chain-notification.sh`
+
+### Features
+
+- **Progress Tracking**: Visual and audio feedback for command sequences
+- **Ascending Tones**: Different sounds for each step in a command chain
+- **Pattern Recognition**: Detects common development workflows
+- **Chain Completion**: Special celebration sounds for completed patterns
+
+### Recognized Patterns
+
+The hook automatically detects and celebrates these development workflows:
+
+- **understand-improve**: Analysis → Improvement
+- **understand-create**: Analysis → Creation
+- **understand-secure**: Analysis → Security
+- **improve-ship**: Improvement → Deployment
+- **secure-ship**: Security → Deployment
+- **understand-improve-ship**: Full Development Cycle
+- **understand-secure-ship**: Security-First Deployment
+
+### Sound Progression
+
+Command chains use ascending tones to indicate progress:
+
+1. **First command**: Tink.aiff (start of chain)
+2. **Second command**: Pop.aiff (building momentum)
+3. **Third command**: Ping.aiff (mid-chain progress)
+4. **Fourth command**: Purr.aiff (approaching completion)
+5. **Fifth+ commands**: Hero.aiff (achievement unlocked)
+
+### Chain State Management
+
+- **Auto-reset**: Chains reset after 10 minutes of inactivity
+- **Pattern completion**: Glass.aiff plays when recognized patterns complete
+- **State persistence**: Chain progress survives individual command failures
+- **Log tracking**: All chain activity logged to `command-chains.log`
+
+### Example Usage
+
+```bash
+# Enable the hook
+./scripts/manage-hooks.sh enable command-chain-notification
+
+# Example chain that triggers pattern recognition:
+/global:understand . --comprehensive    # Tink.aiff (start)
+/global:improve . --apply-insights      # Pop.aiff (chain building)
+/global:ship . --readiness-check        # Ping.aiff + Glass.aiff (pattern complete!)
+```
+
+### Configuration
+
+Edit the hook file to customize:
+
+- **Volume levels**: Adjust `VOLUME` parameter
+- **Chain timeouts**: Modify 10-minute reset timer
+- **Sound mappings**: Change sound files for different chain positions
+- **Pattern definitions**: Add custom workflow patterns
+
+## 🛠️ 4. Hook Management CLI
 
 **File**: `./scripts/manage-hooks.sh`
 
@@ -219,6 +280,7 @@ $ ./scripts/manage-hooks.sh info session-end-summary
 |------|-------------|------|--------------|
 | `session-end-summary` | Intelligent session summaries with Basic Memory | Stop | jq, Basic Memory MCP |
 | `enhanced-command-logger` | Enhanced command statistics tracking | PostToolUse | jq |
+| `command-chain-notification` | Progress tracking for command chains | PostToolUse | jq, afplay |
 | `context-refresh` | Automatic context preservation | PostToolUse | Basic Memory MCP |
 | `session-start-enhanced` | Enhanced session initialization | SessionStart | Basic Memory MCP |
 | `markdown-format` | Auto-format MD files | PostToolUse | markdownlint-cli2 |

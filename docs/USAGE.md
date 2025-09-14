@@ -178,6 +178,7 @@ The toolkit includes an intelligent hook system for enhanced development experie
 
 - **session-end-summary** - Intelligent session summaries with Basic Memory
 - **enhanced-command-logger** - Command statistics and pattern tracking
+- **command-chain-notification** - Progress tracking for command chains
 - **context-refresh** - Automatic context preservation
 - **markdown-format** - Auto-format markdown files
 - **stop-notification** - Sound notifications
