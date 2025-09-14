@@ -5,6 +5,75 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.0] - 2025-09-14
+
+### Added
+
+- 🚀 **PRP (Project Requirements Proposal) Methodology System** - Revolutionary blueprint-driven development framework
+  - Complete implementation of advanced software development methodology
+  - 4 new specialized PRP agents: blueprint-architect, codebase-research-specialist, external-research-specialist, requirements-analyst
+  - Enhanced core commands (understand, create, ship) with `--prp` parameter support
+  - Comprehensive template system with YAML templates for analysis, blueprints, execution, and patterns
+  - Professional software development workflows with quality gates and validation
+
+- 🧠 **Intelligent Smart Suggestions System** - Context-aware workflow recommendations
+  - Real-time intelligent workflow suggestions based on file modifications
+  - 8 file pattern categories with contextual command recommendations
+  - Smart suggestions engine with pattern matching and cooldown management
+  - Seamless integration with existing hook system for enhanced user experience
+  - Rate limiting and configuration system to prevent suggestion spam
+
+- 📋 **Strategic Project Planner Agent** - Comprehensive development planning capabilities
+  - Task decomposition and resource allocation expertise
+  - Strategic development roadmap creation optimized for 6-command architecture
+  - Integration with Basic Memory for knowledge-enhanced planning
+  - Blueprint-driven development workflow optimization
+
+### Changed
+
+- 🔄 **Enhanced Hook System Integration** - Smart suggestions integrated across all hooks
+  - Updated error-detection.sh, success-notification.sh, tool-specific-notification.sh
+  - Background execution for non-intrusive workflow recommendations
+  - Enhanced install.sh to deploy smart suggestions configuration and libraries
+
+- 🔄 **Documentation Revolution** - Comprehensive documentation updates for PRP integration
+  - Updated all CLAUDE.md files to reflect PRP methodology and 25+ agent ecosystem
+  - Enhanced README.md with PRP workflow examples and smart suggestions overview
+  - Created PRP-METHODOLOGY.md guide with complete workflow documentation
+  - Agent registry updates to include all new PRP-specialized agents
+
+- 🔄 **Template System Enhancement** - Complete PRP template deployment system
+  - New templates/prp/ directory with analysis, blueprint, execution, and pattern templates
+  - Install.sh enhanced to deploy PRP system to ~/.claude/claude-code-toolkit/prp/
+  - YAML-based template system for structured development workflows
+
+### Breaking Changes
+
+- **BREAKING**: Agent count expanded from 22 to 25+ specialized agents
+- **BREAKING**: New PRP methodology parameters (--prp, --prp=research, --prp=patterns, --prp=template) added to core commands
+- **BREAKING**: Smart suggestions system adds new user interaction patterns
+
+### Migration Guide
+
+**New PRP Workflow Patterns**:
+
+- Traditional: `/prefix:understand . --comprehensive` → Enhanced: `/prefix:understand . --prp --requirements="OAuth2 auth"`
+- Traditional: `/prefix:create auth` → PRP: `/prefix:create . --prp --from-analysis`
+- Traditional: `/prefix:ship .` → PRP: `/prefix:ship . --prp --quality-gates`
+
+**Smart Suggestions Benefits**:
+
+- Automatic workflow recommendations based on file context
+- Intelligent pattern recognition for development workflows
+- Contextual guidance for toolkit adoption and learning
+
+**PRP Methodology Benefits**:
+
+- Blueprint-driven development with pattern learning
+- External research integration for best practices
+- Quality-gated execution with real-time monitoring
+- Requirements validation with comprehensive gap analysis
+
 ## [4.0.0] - 2025-01-29
 
 ### Added
