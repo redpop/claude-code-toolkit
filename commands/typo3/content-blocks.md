@@ -1,7 +1,7 @@
 ---
 allowed-tools: Read, Write, Bash(mkdir:*)
 description: Generate TYPO3 Content Blocks v1.3 with modern field configurations
-argument-hint: "[name] [--type=element|page] [--fields=...] [--sitepackage=path]"
+argument-hint: "[name] [--type=element|page] [--fields=...] [--sitepackage=path] [--with-components] [--component-type=inline|external]"
 mcp-enhanced: mcp__context7__get-library-docs
 documentation-sources:
   - https://docs.typo3.org/p/content-blocks/content-blocks/main/en-us/

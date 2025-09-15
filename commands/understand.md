@@ -1,12 +1,35 @@
 ---
 description: Code analysis and comprehension with intelligent problem routing
-argument-hint: [type] [target]
+argument-hint: [type] [target] [--prp] [--comprehensive] [--quick] [--export-json] [--export-md] [--help]
 allowed-tools: Task, mcp__basic-memory__search_notes, mcp__basic-memory__write_note, mcp__basic-memory__build_context
 ---
 
 # Understand
 
 Analyze code: "What does this code do?"
+
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Code analysis and comprehension with intelligent problem routing
+- **Usage**: [type] [target] [--prp] [--comprehensive] [--quick] [--export-json] [--export-md]
+- **Types**: code, performance, security, architecture, debug, flow, dependencies, tests, docs, legacy
+- **Options**:
+  - `--prp`: Activate Project Requirements Proposal methodology
+  - `--prp=research`: Focus on external research and best practices
+  - `--prp=patterns`: Focus on internal codebase pattern discovery
+  - `--prp=requirements`: Focus on requirements analysis and gap identification
+  - `--comprehensive`: Deep analysis with full context
+  - `--quick`: Fast analysis for immediate insights
+  - `--export-json`: Generate timestamped JSON report
+  - `--export-md`: Generate timestamped Markdown report
+
+Then exit without executing the main command.
+
+---
 
 ## Execution
 

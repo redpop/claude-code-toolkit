@@ -4,22 +4,21 @@ This file provides context for Claude Code when working with commands in this di
 
 ## Command Structure
 
-The Claude Code Toolkit implements a **6-Command Architecture** with additional specialized commands organized hierarchically by category. Each command is a markdown file containing instructions for Claude Code.
+The Claude Code Toolkit implements a **5-Command Architecture** with additional specialized commands organized hierarchically by category. Each command is a markdown file containing instructions for Claude Code.
 
 ## Actual Command Structure
 
 Based on the codebase, the following commands exist:
 
-### Core Commands (6-Command Architecture)
+### Core Commands (5-Command Architecture)
 
-The toolkit's primary workflow is built around 6 core commands:
+The toolkit's primary workflow is built around 5 core commands:
 
 - **understand** - Code analysis and comprehension with intelligent problem routing
 - **improve** - Code improvement with intelligent routing and learning persistence
 - **create** - Content and code generation with template-driven creation
 - **secure** - Security analysis and vulnerability assessment
 - **ship** - Production readiness assessment and deployment preparation
-- **git** - Git operations and workflow management
 
 ### Specialized Command Categories
 
@@ -29,6 +28,12 @@ Project and toolkit management commands:
 
 - **changelog** - Changelog generation and updates
 - **handoff** - AI handoff preparation and knowledge transfer
+
+#### git/ - Git Operations
+
+Version control and workflow management:
+
+- **operations** - Git operations and workflow management
 
 #### typo3/ - TYPO3 Development Commands
 
@@ -70,7 +75,7 @@ Each command is a Markdown file containing:
    - Best practices and guidelines
    - Examples of expected output
 
-## 6-Command Architecture
+## 5-Command Architecture
 
 The core workflow provides transparency and developer control:
 
@@ -80,7 +85,14 @@ The core workflow provides transparency and developer control:
 /prefix:create docs --update-all       # Creation phase
 /prefix:secure . --audit               # Security phase
 /prefix:ship . --readiness-check       # Deployment phase
-/prefix:git commit --smart             # Version control
+```
+
+Specialized commands support the core workflow:
+
+```bash
+/prefix:git:operations commit --smart   # Version control
+/prefix:meta:changelog --fast          # Project management
+/prefix:typo3:sitepackage mysite       # Domain-specific tools
 ```
 
 ### Benefits
@@ -99,6 +111,7 @@ The core workflow provides transparency and developer control:
 /prefix:understand . --quick
 /prefix:improve . --apply-insights
 /prefix:ship . --readiness-check
+/prefix:git:operations commit --smart
 ```
 
 **Comprehensive Analysis**:
@@ -218,6 +231,62 @@ After adding a command:
 4. Validate frontmatter and argument hints
 5. Document in user guide if significant
 
+## Command Documentation
+
+Each core command has detailed documentation in the `docs/commands/` directory:
+
+- **[docs/commands/understand.md](../docs/commands/understand.md)** - Code analysis and comprehension
+- **[docs/commands/improve.md](../docs/commands/improve.md)** - Code improvement with intelligent routing
+- **[docs/commands/create.md](../docs/commands/create.md)** - Content and code generation
+- **[docs/commands/secure.md](../docs/commands/secure.md)** - Security analysis and vulnerability detection
+- **[docs/commands/ship.md](../docs/commands/ship.md)** - Deployment readiness and quality gates
+
+### Specialized Command Documentation
+
+Additional command categories have their own documentation directories:
+
+#### Git Commands
+
+- **[docs/commands/git/README.md](../docs/commands/git/README.md)** - Version control and workflow management
+- **[docs/commands/git/operations.md](../docs/commands/git/operations.md)** - Smart Git operations with AI-powered commits
+
+#### Meta Commands
+
+- **[docs/commands/meta/README.md](../docs/commands/meta/README.md)** - Project and toolkit management commands
+- **[docs/commands/meta/changelog.md](../docs/commands/meta/changelog.md)** - AI-powered CHANGELOG.md management
+- **[docs/commands/meta/handoff.md](../docs/commands/meta/handoff.md)** - AI assistant handoff preparation
+
+#### TYPO3 Commands
+
+- **[docs/commands/typo3/README.md](../docs/commands/typo3/README.md)** - TYPO3-specific development tools
+- **[docs/commands/typo3/content-blocks.md](../docs/commands/typo3/content-blocks.md)** - Content Blocks generation
+- **[docs/commands/typo3/extension-kickstarter.md](../docs/commands/typo3/extension-kickstarter.md)** - Extension scaffolding
+- **[docs/commands/typo3/fluid-components.md](../docs/commands/typo3/fluid-components.md)** - Fluid component generation
+- **[docs/commands/typo3/make-content-block.md](../docs/commands/typo3/make-content-block.md)** - Content block creation wrapper
+- **[docs/commands/typo3/sitepackage.md](../docs/commands/typo3/sitepackage.md)** - Sitepackage creation
+
+The documentation includes:
+
+- Complete syntax and arguments
+- All available options with descriptions
+- Practical examples and workflows
+- Integration patterns with other commands
+- PRP methodology integration where applicable
+
+### Documentation Structure
+
+Each command documentation follows a consistent structure:
+
+1. **Purpose** - Brief description of what the command does
+2. **Syntax** - Complete command syntax with brackets notation
+3. **Arguments** - Table of positional arguments with defaults
+4. **Options** - Table of all flags and options
+5. **Examples** - Practical usage examples
+6. **Workflows** - Integration with other commands
+7. **See Also** - Cross-references to related commands
+
+This ensures users can quickly understand and use any command effectively.
+
 ## Important Notes
 
 - The `$ARGUMENTS` placeholder receives user input after command invocation
@@ -227,3 +296,4 @@ After adding a command:
 - Commands work best when they follow established patterns
 - Always include proper frontmatter with description
 - Use allowed-tools to specify required Claude Code tools
+- **Command documentation is automatically linked in README**: Core commands in the main README table are automatically linked to their documentation

@@ -1,6 +1,6 @@
 ---
 description: Code and content generation with intelligent templating and pattern learning
-argument-hint: [type] [target] [--format] [--help]
+argument-hint: [type] [target] [--format] [--prp] [--from-analysis] [--template] [--help]
 allowed-tools: Task, mcp__basic-memory__search_notes, mcp__basic-memory__write_note, mcp__basic-memory__build_context
 ---
 

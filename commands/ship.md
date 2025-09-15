@@ -1,6 +1,6 @@
 ---
 description: Deployment readiness and quality gates with release pattern learning
-argument-hint: [type] [target] [--check] [--help]
+argument-hint: [type] [target] [--check] [--prp] [--readiness-check] [--quality-gates] [--help]
 allowed-tools: Task, mcp__basic-memory__search_notes, mcp__basic-memory__write_note, mcp__basic-memory__build_context
 ---
 

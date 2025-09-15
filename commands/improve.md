@@ -1,12 +1,33 @@
 ---
 description: Code improvement with intelligent routing and learning persistence
-argument-hint: [type] [target] [--dry-run] [--severity]
+argument-hint: [type] [target] [--dry-run] [--severity] [--apply-insights] [--from-analysis] [--export-json] [--export-md] [--help]
 allowed-tools: Task, mcp__basic-memory__search_notes, mcp__basic-memory__write_note, mcp__basic-memory__build_context, Read
 ---
 
 # Improve
 
 Improve code: "Make this code better."
+
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Code improvement with intelligent routing and learning persistence
+- **Usage**: [type] [target] [--dry-run] [--severity] [--apply-insights] [--from-analysis]
+- **Types**: quality, performance, security, architecture, style, dependencies, tests, docs, modernize
+- **Options**:
+  - `--dry-run`: Show proposed changes without applying them
+  - `--severity`: Filter improvements by severity level (low, medium, high, critical)
+  - `--apply-insights`: Apply recommendations from previous analysis
+  - `--from-analysis`: Use existing analysis results for targeted improvements
+  - `--export-json`: Generate timestamped JSON report
+  - `--export-md`: Generate timestamped Markdown report
+
+Then exit without executing the main command.
+
+---
 
 ## Execution
 
