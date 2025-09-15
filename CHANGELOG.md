@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.2.0] - 2025-09-16
+
+### Added
+
+- ✨ **Comprehensive Documentation Structure** - Complete overhaul of documentation organization
+  - Added structured documentation framework for better navigation and maintenance
+  - Enhanced knowledge management with improved cross-references and accessibility
+  - Streamlined documentation workflow for consistent formatting and structure
+
+### Changed
+
+- 🔄 **Agent Organization System** - Implemented category-based agent organization
+  - Enhanced agent classification and discovery with improved categorization
+  - Streamlined agent management with better structural organization
+  - Improved agent accessibility and workflow integration
+
+- 🔄 **Build Scripts and Templates Enhancement** - Updated build infrastructure
+  - Modernized build scripts for improved reliability and performance
+  - Enhanced template system with better consistency and usability
+  - Updated command documentation structure for clearer guidance
+
+### Removed
+
+- 🗑️ **Deprecated Files Cleanup** - Consolidated project structure
+  - Removed obsolete files and consolidated overlapping functionality
+  - Streamlined codebase by eliminating redundant components
+  - Enhanced project maintainability through structural cleanup
+
 ## [5.1.0] - 2025-09-14
 
 ### Changed
