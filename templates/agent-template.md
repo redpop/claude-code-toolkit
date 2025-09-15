@@ -1,6 +1,7 @@
 ---
 name: [AGENT_NAME] # REQUIRED - Unique identifier (lowercase-hyphenated)
 description: [AGENT_DESCRIPTION] # REQUIRED - Brief description of agent's purpose
+category: [CATEGORY] # REQUIRED - Agent category (analysis|architecture|documentation|frontend|git|operations|research|security|testing|typo3)
 tools: Read, Grep, Task # Optional - Tools the agent can use (comma-separated)
 model: [sonnet|opus|haiku] # Optional - Preferred Claude model (evaluated by Claude Code)
 ---
