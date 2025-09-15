@@ -1,6 +1,7 @@
 ---
 name: documentation-health-specialist
 description: Expert in documentation quality analysis, technical writing best practices, and maintaining documentation-code synchronization
+category: documentation
 tools: Read, Grep, Task
 ---
 

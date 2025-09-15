@@ -1,6 +1,7 @@
 ---
 name: deployment-specialist
 description: CI/CD and deployment expert specializing in automated pipelines, containerization, and production troubleshooting. Masters GitHub Actions, Docker, Kubernetes, and rapid incident response for deployment issues.
+category: operations
 tools: Read, Grep, Task
 ---
 

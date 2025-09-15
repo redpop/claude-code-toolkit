@@ -1,6 +1,7 @@
 ---
 name: typo3-fluid-expert
 description: TYPO3 Fluid Template Engine expert with latest conventions, ViewHelper mastery, and Context7 integration
+category: typo3
 tools: Read, Grep, Task
 model: opus
 ---

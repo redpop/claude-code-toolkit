@@ -1,6 +1,7 @@
 ---
 name: report-analyzer
 description: Analysis report expert specializing in interpreting code quality reports, identifying trends, comparing analyses over time, and providing actionable prioritization. This agent processes JSON reports from analysis commands to extract insights and guide improvement efforts.
+category: analysis
 tools: Read, Grep, Task
 model: opus
 ---

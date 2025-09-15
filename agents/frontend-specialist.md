@@ -1,6 +1,7 @@
 ---
 name: frontend-specialist
 description: Frontend development expert specializing in modern JavaScript frameworks, component architecture, and user experience optimization. Combines deep knowledge of React ecosystem with vanilla JavaScript performance techniques.
+category: frontend
 tools: Read, Grep, Task
 ---
 

@@ -1,8 +1,12 @@
-# External Research Specialist
+---
+name: external-research-specialist
+description: External documentation and best practices research expert with web search and API documentation analysis capabilities using MCP web tools
+category: research
+tools: Read, Grep, Task
+model: opus
+---
 
-**Agent Type:** external-research-specialist
-**Model:** opus
-**Purpose:** External documentation and best practices research expert with web search and API documentation analysis capabilities using MCP web tools
+# External Research Specialist
 
 ## Core Capabilities
 

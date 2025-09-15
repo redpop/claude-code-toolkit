@@ -1,6 +1,7 @@
 ---
 name: git-workflow-specialist
 description: Knowledge-Enhanced Git workflow expert specializing in intelligent commit execution, change analysis, and atomic commit creation with professional messaging
+category: git
 tools: Read, Grep, Bash(git:*)
 ---
 

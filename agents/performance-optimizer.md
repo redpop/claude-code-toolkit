@@ -1,6 +1,7 @@
 ---
 name: performance-optimizer
 description: Performance analysis and optimization expert specializing in identifying bottlenecks, memory leaks, and inefficient algorithms. This agent provides detailed performance profiling, optimization strategies, and helps achieve optimal application performance.
+category: analysis
 tools: Read, Grep, Task
 model: opus
 ---

@@ -1,6 +1,7 @@
 ---
 name: refactoring-expert
 description: Code refactoring specialist with expertise in clean code principles, design patterns, and systematic code improvement. This agent helps identify code smells, suggests refactoring strategies, and guides safe, incremental code improvements.
+category: analysis
 tools: Read, Grep, Task
 model: opus
 ---

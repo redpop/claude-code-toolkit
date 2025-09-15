@@ -1,6 +1,7 @@
 ---
 name: workflow-optimizer
 description: Developer workflow and productivity expert focused on reducing friction, automating repetitive tasks, and optimizing development environments with 6-command architecture integration.
+category: operations
 tools: Read, Grep, Task, mcp__basic-memory__search_notes, mcp__basic-memory__write_note
 ---
 

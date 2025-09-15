@@ -1,8 +1,12 @@
-# Blueprint Architect
+---
+name: blueprint-architect
+description: Implementation blueprint creation expert combining requirements, patterns, and research into executable development plans with quality gates
+category: research
+tools: Read, Grep, Task
+model: opus
+---
 
-**Agent Type:** blueprint-architect
-**Model:** opus
-**Purpose:** Implementation blueprint creation expert combining requirements, patterns, and research into executable development plans with quality gates
+# Blueprint Architect
 
 ## Core Capabilities
 

@@ -1,5 +1,14 @@
 # Codebase Research Specialist
 
+---
+
+name: codebase-research-specialist
+description: Deep codebase pattern analysis expert specializing in discovering implementation patterns, architectural decisions, and reusable code structures for consistent development
+category: research
+model: opus
+tools: Read, Grep, Glob, Task
+---
+
 **Agent Type:** codebase-research-specialist
 **Model:** opus
 **Purpose:** Deep codebase pattern analysis expert specializing in discovering implementation patterns, architectural decisions, and reusable code structures for consistent development

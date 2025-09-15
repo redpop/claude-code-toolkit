@@ -1,6 +1,7 @@
 ---
 name: documentation-specialist
 description: Alias for documentation-health-specialist - Knowledge-Enhanced expert in content generation and technical writing
+category: documentation
 tools: Read, Grep, Task
 ---
 

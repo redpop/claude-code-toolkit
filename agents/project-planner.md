@@ -1,6 +1,7 @@
 ---
 name: project-planner
 description: Strategic development planning expert specializing in project architecture, comprehensive task decomposition, and intelligent resource allocation. This agent transforms complex requirements into actionable, well-structured development roadmaps optimized for the Claude Code Toolkit's 6-command architecture.
+category: architecture
 tools: Read, Grep, Task, TodoWrite
 model: opus
 ---

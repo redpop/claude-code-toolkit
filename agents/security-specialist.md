@@ -1,6 +1,7 @@
 ---
 name: security-specialist
 description: Deep security analysis expert specializing in vulnerability detection, OWASP compliance, and security best practices. This agent performs thorough security audits, identifies potential vulnerabilities, and provides remediation strategies. Ideal for security reviews, threat modeling, and compliance checks.
+category: security
 tools: Read, Grep, Task
 model: opus
 ---

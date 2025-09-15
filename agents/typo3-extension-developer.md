@@ -1,6 +1,7 @@
 ---
 name: typo3-extension-developer
 description: TYPO3 extension development expert specializing in creating, maintaining, and optimizing TYPO3 extensions
+category: typo3
 tools: Read, Grep, Task
 ---
 

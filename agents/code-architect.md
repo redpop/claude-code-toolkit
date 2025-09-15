@@ -1,6 +1,7 @@
 ---
 name: code-architect
 description: Software architecture expert specializing in system design, code structure analysis, and architectural patterns. This agent helps evaluate architectural decisions, identify design improvements, and ensure scalable, maintainable software architecture.
+category: architecture
 tools: Read, Grep, Task
 model: opus
 ---
