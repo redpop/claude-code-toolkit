@@ -8,6 +8,38 @@ allowed-tools: Task, mcp__basic-memory__search_notes, mcp__basic-memory__write_n
 
 Check deployment readiness: "Is my app ready to ship?"
 
+## Help Check
+
+If "$ARGUMENTS" contains "--help" or "-h":
+
+Display this command's documentation:
+
+- **Description**: Deployment readiness and quality gates with release pattern learning
+- **Usage**: [type] [target] [--check] [--prp] [--readiness-check] [--quality-gates]
+- **Types**: readiness, deploy, release, validate, monitor, quality, health, checklist
+- **Options**:
+  - `--check=type`        Specific check: tests, build, security, performance
+  - `--prp`               Activate PRP blueprint execution methodology
+  - `--prp=fast`          Fast-track execution for tested patterns
+  - `--prp=quality`       Enhanced quality validation during execution
+  - `--prp=monitor`       Real-time execution monitoring with progress tracking
+  - `--readiness-check`   Comprehensive deployment readiness assessment
+  - `--quality-gates`     Apply quality gates before deployment
+
+**Examples:**
+
+/ prefix:ship
+/ prefix:ship . --readiness-check
+/ prefix:ship . --quality-gates
+/ prefix:ship . --check=tests
+/ prefix:ship . --prp=monitor
+/ prefix:ship components/ --prp=fast
+/ prefix:ship . --check=security
+
+Then exit without executing the main command.
+
+---
+
 ## Execution
 
 Parse arguments: `$ARGUMENTS`
