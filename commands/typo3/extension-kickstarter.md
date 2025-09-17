@@ -1,7 +1,7 @@
 ---
 allowed-tools: Write, Bash(mkdir:*), Bash(composer:*)
 description: Create TYPO3 extensions using ext-kickstarter or manual scaffolding
-argument-hint: "[extension-key] [--type=...] [--use-kickstarter] [--composer-name=...]"
+argument-hint: "[extension-key] [--type=...] [--use-kickstarter] [--composer-name=...] [--with-backend-module] [--with-plugin] [--with-middleware] [--with-command] [--with-event-listener] [--with-tests]"
 ---
 
 # TYPO3 Extension Kickstarter

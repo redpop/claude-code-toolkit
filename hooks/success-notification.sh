@@ -121,5 +121,10 @@ if echo "$CONTEXT" | grep -qi "workflow.*complete\|pipeline.*success\|all.*steps
     exit 0
 fi
 
+# Smart suggestions integration
+if [ -f "$HOME/.claude/claude-code-toolkit/hooks/smart-suggestions.sh" ]; then
+    echo "$INPUT" | "$HOME/.claude/claude-code-toolkit/hooks/smart-suggestions.sh" 2>&1 &
+fi
+
 # Always exit successfully
 exit 0

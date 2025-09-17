@@ -1,0 +1,80 @@
+# PRP Pattern Template
+# This template provides a structured format for discovered code patterns
+
+pattern:
+  id: "${PATTERN_ID}"
+  name: "${PATTERN_NAME}"
+  category: "${PATTERN_CATEGORY}"  # architectural, implementation, integration
+  confidence: ${CONFIDENCE_SCORE}  # 0-100
+  discovered_date: "${DISCOVERY_DATE}"
+
+  description:
+    summary: "${PATTERN_DESCRIPTION}"
+    use_cases: ["${USE_CASE_1}", "${USE_CASE_2}"]
+    benefits: ["${BENEFIT_1}", "${BENEFIT_2}"]
+
+  locations:
+    - file: "${FILE_PATH_1}"
+      lines: "${LINE_RANGE}"
+      role: "${PATTERN_ROLE}"  # primary, variant, example
+
+    - file: "${FILE_PATH_2}"
+      lines: "${LINE_RANGE}"
+      role: "${PATTERN_ROLE}"
+
+  structure:
+    components:
+      - component: "${COMPONENT_NAME}"
+        purpose: "${COMPONENT_PURPOSE}"
+        implementation: "${IMPLEMENTATION_APPROACH}"
+
+    dependencies:
+      internal: ["${INTERNAL_DEPENDENCY_1}"]
+      external: ["${EXTERNAL_DEPENDENCY_1}"]
+
+    conventions:
+      naming: "${NAMING_CONVENTION}"
+      structure: "${STRUCTURAL_CONVENTION}"
+      configuration: "${CONFIGURATION_APPROACH}"
+
+  implementation_guide:
+    prerequisites: ["${PREREQUISITE_1}", "${PREREQUISITE_2}"]
+
+    steps:
+      - step: 1
+        description: "${IMPLEMENTATION_STEP_1}"
+        code_example: |
+          ${CODE_EXAMPLE_1}
+
+      - step: 2
+        description: "${IMPLEMENTATION_STEP_2}"
+        code_example: |
+          ${CODE_EXAMPLE_2}
+
+    configuration:
+      required: ["${REQUIRED_CONFIG_1}"]
+      optional: ["${OPTIONAL_CONFIG_1}"]
+
+  template_extractable: ${IS_EXTRACTABLE}
+  template_complexity: "${TEMPLATE_COMPLEXITY}"  # simple, medium, complex
+
+  quality_metrics:
+    reusability: ${REUSABILITY_SCORE}  # 0-100
+    maintainability: ${MAINTAINABILITY_SCORE}  # 0-100
+    performance_impact: "${PERFORMANCE_IMPACT}"  # low, medium, high
+
+  variations:
+    - variation: "${VARIATION_NAME}"
+      description: "${VARIATION_DESCRIPTION}"
+      use_case: "${VARIATION_USE_CASE}"
+      implementation_diff: "${IMPLEMENTATION_DIFFERENCE}"
+
+  anti_patterns:
+    - anti_pattern: "${ANTI_PATTERN_NAME}"
+      description: "${ANTI_PATTERN_DESCRIPTION}"
+      why_avoid: "${AVOIDANCE_REASON}"
+
+  related_patterns:
+    - pattern: "${RELATED_PATTERN_NAME}"
+      relationship: "${RELATIONSHIP_TYPE}"  # extends, complements, alternatives
+      description: "${RELATIONSHIP_DESCRIPTION}"

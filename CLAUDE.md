@@ -7,9 +7,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 The Claude Code Toolkit is a comprehensive collection of commands, agents, and tools for extending Claude Code capabilities:
 
 - **Commands**: Reusable slash commands for common development tasks
-- **Agents**: Specialized AI agents for code analysis and operations  
+- **Agents**: Specialized AI agents for code analysis and operations
 - **Tools**: Utilities and scripts for enhanced productivity
 - **Knowledge Base**: Domain-specific patterns and references
+- **PRP System**: Project Requirements Proposal methodology for blueprint-driven development
 
 Designed to be installed into `~/.claude/` with a custom prefix, making all toolkit capabilities available for use in any project.
 
@@ -17,28 +18,38 @@ Designed to be installed into `~/.claude/` with a custom prefix, making all tool
 
 ### 🎯 Essential Workflows
 
-**Deep Analysis Pipeline** (Recommended):
+**6-Command Architecture** (Recommended):
 
 ```bash
-/prefix:scan:deep . --export-json
-/prefix:scan:report --latest --generate-action-plan
-/prefix:auto:execute --latest
+/prefix:understand . --comprehensive
+/prefix:improve . --apply-insights
+/prefix:ship . --readiness-check
 ```
 
-**Quick Quality Check**:
+**PRP Methodology - Blueprint-Driven Development**:
 
 ```bash
-/prefix:scan:quick . --export-json
-/prefix:fix:quick-wins --latest
+/prefix:understand . --prp --requirements="OAuth2 authentication"
+/prefix:create . --prp --from-analysis
+/prefix:ship . --prp --quality-gates
 ```
 
-**One-Command Pipelines**:
+**Quick Development Workflow**:
 
 ```bash
-/prefix:meta:chain "scan:deep . --export-json" -> "scan:report --latest --generate-action-plan" -> "auto:execute --latest"
+/prefix:understand . --quick
+/prefix:secure . --audit
 ```
 
-💡 See `/prefix:meta:chain` for command chaining and workflow automation.
+**Individual Command Usage**:
+
+```bash
+/prefix:understand . --deep-analysis
+/prefix:improve . --apply-insights
+/prefix:ship . --readiness-check
+```
+
+💡 Use individual commands for maximum transparency and control over your development workflow.
 
 ## Context Distribution
 
@@ -62,9 +73,10 @@ Each CLAUDE.md file provides focused context for its specific area, reducing cog
 
 Commands follow a hierarchical namespace pattern:
 
-- Structure: `/prefix:category:command`
-- Categories: `scan`, `fix`, `gen`, `flow`, `auto`, `sec`, `git`, `meta`, `typo3`, `css`
-- Example: `/prefix:scan:deep` for deep code analysis
+- Structure: `/prefix:command` (6-command architecture) or `/prefix:category:command` (specialized)
+- Core Commands: `understand`, `improve`, `create`, `secure`, `ship`, `git`
+- Specialized Categories: `typo3`, `meta` (for specific domains)
+- Example: `/prefix:understand .` for codebase analysis
 
 See **[commands/CLAUDE.md](commands/CLAUDE.md)** for detailed command documentation.
 
@@ -75,6 +87,7 @@ Specialized AI agents provide domain expertise:
 - Located in `/agents/` directory
 - Each agent has specific focus area
 - Invoked through commands or Task Tool
+- **PRP Agents**: codebase-research-specialist, external-research-specialist, requirements-analyst, blueprint-architect
 
 See **[agents/CLAUDE.md](agents/CLAUDE.md)** for agent details.
 
@@ -87,11 +100,20 @@ Use Task tool with subagent_type="security-specialist":
 "Perform security audit focusing on OWASP Top 10"
 ```
 
-**Command Chaining**:
+**6-Command Architecture**:
 
 ```bash
-/prefix:meta:chain "scan:deep ." -> "fix:quick-wins {output}"
+/prefix:understand . --comprehensive
+/prefix:improve . --apply-recommendations
+/prefix:create docs --update-all
 ```
+
+**PRP Parameters**:
+
+- `--prp` → Activate Project Requirements Proposal methodology
+- `--prp=research` → Focus on external research and best practices
+- `--prp=patterns` → Focus on internal codebase pattern discovery
+- `--prp=template` → Create from existing template patterns
 
 **Export Parameters**:
 
@@ -117,6 +139,7 @@ This installs:
 - Commands to `~/.claude/commands/myproject/`
 - Agents to `~/.claude/agents/`
 - Hooks to `~/.claude/claude-code-toolkit/hooks/`
+- PRP System to `~/.claude/claude-code-toolkit/prp/`
 - Creates backup if updating existing installation
 
 For sound notifications:
@@ -154,6 +177,8 @@ See [docs/guides/MCP-INTEGRATION.md](docs/guides/MCP-INTEGRATION.md) for details
 ## Resources
 
 - **Documentation**: [docs/README.md](docs/README.md)
-- **Quick Start**: [docs/guides/QUICK-START.md](docs/guides/QUICK-START.md)
-- **Architecture**: [docs/architecture/](docs/architecture/)
+- **PRP Methodology**: [docs/guides/PRP-METHODOLOGY.md](docs/guides/PRP-METHODOLOGY.md)
+- **Project Planning**: [docs/guides/PROJECT-PLANNING-GUIDE.md](docs/guides/PROJECT-PLANNING-GUIDE.md)
+- **Security Guide**: [docs/guides/SECURITY-GUIDE.md](docs/guides/SECURITY-GUIDE.md)
+- **Enhanced Hooks**: [docs/guides/ENHANCED-HOOKS.md](docs/guides/ENHANCED-HOOKS.md)
 - **Contributing**: [CONTRIBUTING.md](CONTRIBUTING.md)

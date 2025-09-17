@@ -1,6 +1,7 @@
 ---
 name: typo3-typoscript-expert
 description: TYPO3 TypoScript expert specializing in template configuration, setup optimization, and TypoScript debugging
+category: typo3
 tools: Read, Grep, Task
 ---
 

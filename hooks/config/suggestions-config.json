@@ -1,0 +1,90 @@
+{
+  "enabled": true,
+  "verbosity": "normal",
+  "cooldown_seconds": 30,
+  "max_suggestions": 2,
+
+  "file_patterns": {
+    "security": {
+      "patterns": ["*auth*", "*login*", "*password*", "*crypto*", "*security*", "*session*", "*token*", "*jwt*", "*oauth*"],
+      "suggestions": [
+        "💡 Security code modified. Consider: /prefix:secure . --quick",
+        "💡 Or run comprehensive audit: /prefix:secure . --audit"
+      ]
+    },
+    "tests": {
+      "patterns": ["*test*", "*spec*", "*.test.*", "*__tests__*", "*testing*", "test_*", "*_test.*"],
+      "suggestions": [
+        "💡 Test modified. Consider: /prefix:understand . --test-coverage",
+        "💡 Run tests: /prefix:ship . --test"
+      ]
+    },
+    "dependencies": {
+      "patterns": ["package.json", "requirements.txt", "composer.json", "pom.xml", "Cargo.toml", "Pipfile", "yarn.lock", "package-lock.json", "Gemfile", "go.mod"],
+      "suggestions": [
+        "💡 Dependencies updated. Consider: /prefix:secure . --dependencies",
+        "💡 Check readiness: /prefix:ship . --readiness-check"
+      ]
+    },
+    "infrastructure": {
+      "patterns": ["*.yml", "*.yaml", "Dockerfile", "docker-compose.*", "*.conf", "*.ini", ".env*", "*.config", "nginx.conf", "apache.conf"],
+      "suggestions": [
+        "💡 Config changed. Consider: /prefix:secure . --infrastructure",
+        "💡 Test deployment readiness: /prefix:ship . --deployment-check"
+      ]
+    },
+    "documentation": {
+      "patterns": ["*.md", "*.rst", "*.txt", "README*", "CHANGELOG*", "CONTRIBUTING*", "LICENSE*", "*.adoc"],
+      "suggestions": [
+        "💡 Documentation updated. Consider: /prefix:create docs --sync",
+        "💡 Update project docs: /prefix:create docs --comprehensive"
+      ]
+    },
+    "database": {
+      "patterns": ["*migration*", "*schema*", "*model*", "*entity*", "*.sql", "*database*", "*db*"],
+      "suggestions": [
+        "💡 Database changes detected. Consider: /prefix:secure . --data-security",
+        "💡 Review impact: /prefix:understand . --database-analysis"
+      ]
+    },
+    "api": {
+      "patterns": ["*api*", "*endpoint*", "*route*", "*controller*", "*handler*", "*service*"],
+      "suggestions": [
+        "💡 API changes detected. Consider: /prefix:secure . --api-security",
+        "💡 Check compatibility: /prefix:understand . --api-analysis"
+      ]
+    },
+    "frontend": {
+      "patterns": ["*.js", "*.jsx", "*.ts", "*.tsx", "*.vue", "*.html", "*.css", "*.scss", "*.less"],
+      "suggestions": [
+        "💡 Frontend modified. Consider: /prefix:secure . --frontend",
+        "💡 Test user experience: /prefix:ship . --frontend-check"
+      ]
+    }
+  },
+
+  "contextual_triggers": {
+    "error_detected": [
+      "💡 Errors found. Consider: /prefix:improve . --fix-issues"
+    ],
+    "large_change": [
+      "💡 Large change detected. Consider: /prefix:understand . --impact-analysis"
+    ],
+    "security_sensitive": [
+      "💡 Security-sensitive area modified. Run: /prefix:secure . --comprehensive"
+    ]
+  },
+
+  "tool_specific": {
+    "MultiEdit": {
+      "suggestions": [
+        "💡 Multiple files changed. Consider: /prefix:understand . --impact-analysis"
+      ]
+    },
+    "Write": {
+      "suggestions": [
+        "💡 New file created. Consider: /prefix:understand . --new-file-analysis"
+      ]
+    }
+  }
+}

@@ -1,173 +1,152 @@
 #!/bin/bash
 
-# Claude Code PostToolUse Hook - Command Chain Progress Notifications
-# Tracks progress through command chains (meta:chain) and provides audio feedback
-# Plays different sounds for each phase and final completion
+# Command Chain Notification - Progress tracking for command chains
+# Provides audio feedback and progress notifications for command sequences
+# Tracks command chains and plays ascending tones for progress indication
 
 # Configuration
-VOLUME="0.4"  # Moderate volume for progress sounds
+LOG_DIR="$HOME/.claude/claude-code-toolkit/logs"
+CHAIN_STATE_FILE="$LOG_DIR/command-chain-state.json"
+VOLUME="0.4"
 
-# Progress sounds (ascending tones for progression)
-PHASE_SOUNDS=(
-    "/System/Library/Sounds/Tink.aiff"      # Phase 1
-    "/System/Library/Sounds/Pop.aiff"       # Phase 2  
-    "/System/Library/Sounds/Ping.aiff"      # Phase 3
-    "/System/Library/Sounds/Purr.aiff"      # Phase 4
-    "/System/Library/Sounds/Blow.aiff"      # Phase 5
+# Create log directory if it doesn't exist
+mkdir -p "$LOG_DIR"
+
+# Sound progression for command chains (ascending tones)
+declare -A CHAIN_SOUNDS=(
+    [1]="/System/Library/Sounds/Tink.aiff"      # First command in chain
+    [2]="/System/Library/Sounds/Pop.aiff"       # Second command
+    [3]="/System/Library/Sounds/Ping.aiff"      # Third command
+    [4]="/System/Library/Sounds/Purr.aiff"      # Fourth command
+    [5]="/System/Library/Sounds/Hero.aiff"      # Fifth command (achievement)
 )
-COMPLETE_SOUND="/System/Library/Sounds/Glass.aiff"  # Chain complete
-ERROR_SOUND="/System/Library/Sounds/Basso.aiff"     # Chain error
 
-# State file to track chain progress (in temp directory)
-STATE_FILE="/tmp/claude_chain_state_$$"
+# Command chain patterns to recognize
+declare -A CHAIN_PATTERNS=(
+    ["understand-improve"]="Analysis→Improvement"
+    ["understand-create"]="Analysis→Creation"
+    ["understand-secure"]="Analysis→Security"
+    ["improve-ship"]="Improvement→Deployment"
+    ["secure-ship"]="Security→Deployment"
+    ["understand-improve-ship"]="Full Development Cycle"
+    ["understand-secure-ship"]="Security-First Deployment"
+)
 
 # Read JSON input from stdin
 INPUT=$(cat)
+TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+UNIX_TIME=$(date +%s)
+
+# Extract tool information
+TOOL_NAME=$(echo "$INPUT" | jq -r '.tool_name // "unknown"' 2>/dev/null)
+COMMAND_NAME=""
+
+# Try to extract command name from various sources
+if echo "$INPUT" | jq -r '.command_name // empty' 2>/dev/null | grep -q .; then
+    COMMAND_NAME=$(echo "$INPUT" | jq -r '.command_name')
+elif echo "$INPUT" | jq -r '.command // empty' 2>/dev/null | grep -q .; then
+    COMMAND_NAME=$(echo "$INPUT" | jq -r '.command')
+elif echo "$INPUT" | jq -r '.content // empty' 2>/dev/null | grep -q "/"; then
+    # Extract command from content if it looks like a slash command
+    COMMAND_NAME=$(echo "$INPUT" | jq -r '.content' | grep -o '/[a-zA-Z0-9:_-]*' | head -1 | sed 's|^/[^:]*:||')
+fi
+
+# Skip if no command name found or not a toolkit command
+if [ -z "$COMMAND_NAME" ] || ! echo "$COMMAND_NAME" | grep -qE "(understand|improve|create|secure|ship|git)"; then
+    exit 0
+fi
+
+# Skip if jq not available
+if ! command -v jq &> /dev/null; then
+    exit 0
+fi
 
 # Function to play sound
 play_sound() {
     local sound_file="$1"
-    local volume="${2:-$VOLUME}"
-    
     if [ -f "$sound_file" ] && command -v afplay &> /dev/null; then
-        afplay -v "$volume" "$sound_file" 2>/dev/null &
+        afplay -v "$VOLUME" "$sound_file" 2>/dev/null &
     fi
 }
 
-# Function to update chain state
-update_state() {
-    local phase="$1"
-    local total="$2"
-    echo "PHASE=$phase" > "$STATE_FILE"
-    echo "TOTAL=$total" >> "$STATE_FILE"
-    echo "TIME=$(date +%s)" >> "$STATE_FILE"
-}
-
-# Function to read chain state
-read_state() {
-    if [ -f "$STATE_FILE" ]; then
-        source "$STATE_FILE"
-        
-        # Clean up old state files (older than 1 hour)
-        local current_time=$(date +%s)
-        local state_age=$((current_time - TIME))
-        if [ "$state_age" -gt 3600 ]; then
-            rm -f "$STATE_FILE"
-            PHASE=0
-            TOTAL=0
-        fi
-    else
-        PHASE=0
-        TOTAL=0
-    fi
-}
-
-# Detect command chain execution
-if echo "$INPUT" | grep -qi "/meta:chain\|command.*chain\|chain.*execution"; then
-    
-    # Check if this is chain initialization
-    if echo "$INPUT" | grep -qi "starting.*chain\|initializing.*chain\|chain.*started"; then
-        # Count total commands in chain
-        TOTAL_COMMANDS=$(echo "$INPUT" | grep -o '->' | wc -l | tr -d ' ')
-        TOTAL_COMMANDS=$((TOTAL_COMMANDS + 1))
-        
-        # Initialize state
-        update_state 1 "$TOTAL_COMMANDS"
-        
-        # Play start sound
-        play_sound "${PHASE_SOUNDS[0]}" "$VOLUME"
-        
-        # Send notification
-        if command -v osascript &> /dev/null; then
-            osascript -e "display notification \"Starting chain with $TOTAL_COMMANDS commands\" with title \"🔗 Command Chain Started\"" 2>/dev/null &
-        fi
-        exit 0
-    fi
-    
-    # Check for phase completion
-    if echo "$INPUT" | grep -qi "phase.*complete\|step.*complete\|command.*executed"; then
-        # Read current state
-        read_state
-        
-        # Increment phase
-        PHASE=$((PHASE + 1))
-        update_state "$PHASE" "$TOTAL"
-        
-        # Select appropriate sound
-        if [ "$PHASE" -le "${#PHASE_SOUNDS[@]}" ]; then
-            SOUND_INDEX=$((PHASE - 1))
-            play_sound "${PHASE_SOUNDS[$SOUND_INDEX]}" "$VOLUME"
-        else
-            # Use cycling sounds for long chains
-            SOUND_INDEX=$(( (PHASE - 1) % ${#PHASE_SOUNDS[@]} ))
-            play_sound "${PHASE_SOUNDS[$SOUND_INDEX]}" "$VOLUME"
-        fi
-        
-        # Show progress notification for milestones
-        if [ "$TOTAL" -gt 0 ]; then
-            PERCENT=$((PHASE * 100 / TOTAL))
-            
-            if [ "$PERCENT" -eq 25 ] || [ "$PERCENT" -eq 50 ] || [ "$PERCENT" -eq 75 ]; then
-                if command -v osascript &> /dev/null; then
-                    osascript -e "display notification \"$PHASE of $TOTAL commands complete ($PERCENT%)\" with title \"🔗 Chain Progress\"" 2>/dev/null &
-                fi
-            fi
-        fi
-        exit 0
-    fi
-    
-    # Check for chain completion
-    if echo "$INPUT" | grep -qi "chain.*complete\|all.*commands.*executed\|chain.*finished.*successfully"; then
-        # Play completion sound
-        play_sound "$COMPLETE_SOUND" "0.6"
-        
-        # Read final state
-        read_state
-        
-        # Send completion notification
-        if command -v osascript &> /dev/null; then
-            osascript -e "display notification \"All $TOTAL commands executed successfully\" with title \"✅ Chain Complete\"" 2>/dev/null &
-        fi
-        
-        # Clean up state file
-        rm -f "$STATE_FILE"
-        exit 0
-    fi
-    
-    # Check for chain errors
-    if echo "$INPUT" | grep -qi "chain.*failed\|chain.*error\|execution.*stopped"; then
-        # Play error sound
-        play_sound "$ERROR_SOUND" "0.6"
-        
-        # Read state to get failure point
-        read_state
-        
-        # Send error notification
-        if command -v osascript &> /dev/null; then
-            osascript -e "display notification \"Chain failed at command $PHASE of $TOTAL\" with title \"❌ Chain Error\"" 2>/dev/null &
-        fi
-        
-        # Clean up state file
-        rm -f "$STATE_FILE"
-        exit 0
-    fi
+# Initialize chain state if it doesn't exist
+if [ ! -f "$CHAIN_STATE_FILE" ]; then
+    echo '{"current_chain": [], "last_command_time": 0, "chain_count": 0}' > "$CHAIN_STATE_FILE"
 fi
 
-# Detect parallel execution markers
-if echo "$INPUT" | grep -qi "parallel.*execution\|concurrent.*tasks\|\[.*,.*\].*executing"; then
-    # Play a chord-like sound for parallel execution
-    play_sound "/System/Library/Sounds/Submarine.aiff" "0.3"
-    exit 0
+# Read current chain state
+CURRENT_CHAIN=$(jq -r '.current_chain[]?' "$CHAIN_STATE_FILE" 2>/dev/null | tr '\n' '-' | sed 's/-$//')
+LAST_COMMAND_TIME=$(jq -r '.last_command_time // 0' "$CHAIN_STATE_FILE" 2>/dev/null)
+CHAIN_COUNT=$(jq -r '.chain_count // 0' "$CHAIN_STATE_FILE" 2>/dev/null)
+
+# Check if this is part of a command chain (within 10 minutes of last command)
+TIME_DIFF=$((UNIX_TIME - LAST_COMMAND_TIME))
+if [ $TIME_DIFF -gt 600 ]; then
+    # Reset chain if too much time has passed
+    CURRENT_CHAIN=""
+    CHAIN_COUNT=0
 fi
 
-# Detect conditional execution
-if echo "$INPUT" | grep -qi "condition.*met\|conditional.*execution\|?>.*executing"; then
-    play_sound "/System/Library/Sounds/Bottle.aiff" "0.3"
-    exit 0
+# Update chain state
+TEMP_FILE=$(mktemp)
+if [ -n "$CURRENT_CHAIN" ]; then
+    NEW_CHAIN="${CURRENT_CHAIN}-${COMMAND_NAME}"
+    NEW_COUNT=$((CHAIN_COUNT + 1))
+else
+    NEW_CHAIN="$COMMAND_NAME"
+    NEW_COUNT=1
 fi
 
-# Clean up old state files on any execution
-find /tmp -name "claude_chain_state_*" -mmin +60 -delete 2>/dev/null
+# Update state file
+jq --arg chain "$NEW_CHAIN" \
+   --arg command "$COMMAND_NAME" \
+   --arg timestamp "$UNIX_TIME" \
+   --arg count "$NEW_COUNT" \
+   '
+   .current_chain = ($chain | split("-")) |
+   .last_command_time = ($timestamp | tonumber) |
+   .chain_count = ($count | tonumber)
+   ' "$CHAIN_STATE_FILE" > "$TEMP_FILE" && mv "$TEMP_FILE" "$CHAIN_STATE_FILE"
 
-# Always exit successfully
+# Play appropriate sound based on position in chain
+SOUND_FILE="${CHAIN_SOUNDS[$NEW_COUNT]}"
+if [ -z "$SOUND_FILE" ]; then
+    # For longer chains, cycle through the sounds
+    SOUND_INDEX=$(((NEW_COUNT - 1) % 5 + 1))
+    SOUND_FILE="${CHAIN_SOUNDS[$SOUND_INDEX]}"
+fi
+
+# Play the sound
+play_sound "$SOUND_FILE"
+
+# Check for recognized patterns
+for pattern in "${!CHAIN_PATTERNS[@]}"; do
+    if [ "$NEW_CHAIN" = "$pattern" ]; then
+        echo "[$TIMESTAMP] 🎯 Completed chain: ${CHAIN_PATTERNS[$pattern]} ($NEW_CHAIN)" >> "$LOG_DIR/command-chains.log"
+
+        # Play special completion sound for recognized patterns
+        sleep 0.5  # Brief pause
+        play_sound "/System/Library/Sounds/Glass.aiff" &
+        break
+    fi
+done
+
+# Log the command chain progress
+{
+    echo "[$TIMESTAMP] Command Chain Progress:"
+    echo "  Command: $COMMAND_NAME"
+    echo "  Chain: $NEW_CHAIN"
+    echo "  Count: $NEW_COUNT"
+    echo "  Tool: $TOOL_NAME"
+    echo ""
+} >> "$LOG_DIR/command-chains.log"
+
+# Cleanup old logs (keep last 30 days)
+find "$LOG_DIR" -name "command-chains.log" -mtime +30 -delete 2>/dev/null || true
+
+# Clean up state if chain gets too long (prevent memory issues)
+if [ "$NEW_COUNT" -gt 10 ]; then
+    echo '{"current_chain": [], "last_command_time": 0, "chain_count": 0}' > "$CHAIN_STATE_FILE"
+fi
+
 exit 0

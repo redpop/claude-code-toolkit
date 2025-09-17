@@ -1,7 +1,7 @@
 ---
 allowed-tools: Read, Write
 description: Documents current problem context for handoff to another AI assistant
-argument-hint: [output-file] [-c|--compact] [-t|--technical] [--focus topic] [--skip topic] [--include topic] ["instructions"]
+argument-hint: [output-file] [-c|--compact|--brief] [-t|--technical] [--focus topic] [--skip topic] [--include topic] ["instructions"]
 ---
 
 # Claude Command: AI Handoff
@@ -37,23 +37,23 @@ If you see any code being modified, STOP immediately - this is a bug!
 
 ```bash
 # Standard handoff
-/handoff                                    # Creates handoff.md
-/handoff problem-context.md                 # Custom filename
+/prefix:meta:handoff                                    # Creates handoff.md
+/prefix:meta:handoff problem-context.md                 # Custom filename
 
 # Compact mode
-/handoff --compact                          # Compact handoff.md
-/handoff brief.md --compact                 # Compact with custom name
-/handoff -c                                 # Short flag for compact
+/prefix:meta:handoff --compact                          # Compact handoff.md
+/prefix:meta:handoff brief.md --compact                 # Compact with custom name
+/prefix:meta:handoff -c                                 # Short flag for compact
 
 # With focus flags
-/handoff --focus "database errors"          # Focus on specific topic
-/handoff --skip "UI issues"                 # Skip certain topics
-/handoff --include "error logs"             # Explicitly include
+/prefix:meta:handoff --focus "database errors"          # Focus on specific topic
+/prefix:meta:handoff --skip "UI issues"                 # Skip certain topics
+/prefix:meta:handoff --include "error logs"             # Explicitly include
 
 # Combinations
-/handoff debug.md --compact --technical     # Compact with tech details
-/handoff --compact --focus "blockers" "emphasize workarounds"
-/handoff migration.md -c --skip "resolved" --include "SQL errors"
+/prefix:meta:handoff debug.md --compact --technical     # Compact with tech details
+/prefix:meta:handoff --compact --focus "blockers" "emphasize workarounds"
+/prefix:meta:handoff migration.md -c --skip "resolved" --include "SQL errors"
 ```
 
 ## What This Command Does
@@ -304,7 +304,7 @@ The user mentioned this is blocking a production release scheduled for next week
 The command accepts arguments in the following format:
 ```
 
-/handoff [filename] [flags] ["additional instructions"]
+/prefix:meta:handoff [filename] [flags] ["additional instructions"]
 
 ````
 
@@ -345,27 +345,27 @@ The command intelligently parses `$ARGUMENTS`:
 
 ```bash
 # Standard mode
-/handoff                                    # Default handoff.md
-/handoff websocket-issue.md                 # Custom filename
+/prefix:meta:handoff                                    # Default handoff.md
+/prefix:meta:handoff websocket-issue.md                 # Custom filename
 
 # Compact mode examples
-/handoff --compact                          # Compact handoff.md
-/handoff -c                                 # Using short flag
-/handoff brief.md --compact                 # Compact with filename
+/prefix:meta:handoff --compact                          # Compact handoff.md
+/prefix:meta:handoff -c                                 # Using short flag
+/prefix:meta:handoff brief.md --compact                 # Compact with filename
 
 # Using focus flags
-/handoff --focus "database"                 # Focus on database issues
-/handoff --skip "UI" --skip "styling"       # Skip multiple topics
-/handoff --include "errors" --include "logs" # Include specific items
+/prefix:meta:handoff --focus "database"                 # Focus on database issues
+/prefix:meta:handoff --skip "UI" --skip "styling"       # Skip multiple topics
+/prefix:meta:handoff --include "errors" --include "logs" # Include specific items
 
 # Complex combinations
-/handoff debug.md --compact --technical --focus "performance"
-/handoff --compact --skip "resolved" "emphasize untested solutions"
-/handoff migration.md -c --focus "SQL" --include "error traces"
+/prefix:meta:handoff debug.md --compact --technical --focus "performance"
+/prefix:meta:handoff --compact --skip "resolved" "emphasize untested solutions"
+/prefix:meta:handoff migration.md -c --focus "SQL" --include "error traces"
 
 # Backward compatible (still works)
-/handoff "focus on database migration errors"
-/handoff debug.md "include profiling data"
+/prefix:meta:handoff "focus on database migration errors"
+/prefix:meta:handoff debug.md "include profiling data"
 ````
 
 ## Processing Instructions & Flags

@@ -5,6 +5,188 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.2.0] - 2025-09-16
+
+### Added
+
+- ✨ **Comprehensive Documentation Structure** - Complete overhaul of documentation organization
+  - Added structured documentation framework for better navigation and maintenance
+  - Enhanced knowledge management with improved cross-references and accessibility
+  - Streamlined documentation workflow for consistent formatting and structure
+
+### Changed
+
+- 🔄 **Agent Organization System** - Implemented category-based agent organization
+  - Enhanced agent classification and discovery with improved categorization
+  - Streamlined agent management with better structural organization
+  - Improved agent accessibility and workflow integration
+
+- 🔄 **Build Scripts and Templates Enhancement** - Updated build infrastructure
+  - Modernized build scripts for improved reliability and performance
+  - Enhanced template system with better consistency and usability
+  - Updated command documentation structure for clearer guidance
+
+### Removed
+
+- 🗑️ **Deprecated Files Cleanup** - Consolidated project structure
+  - Removed obsolete files and consolidated overlapping functionality
+  - Streamlined codebase by eliminating redundant components
+  - Enhanced project maintainability through structural cleanup
+
+## [5.1.0] - 2025-09-14
+
+### Changed
+
+- 🔄 **Enhanced Git Workflow Specialist** - Transformed from analysis-only to active execution agent
+  - Git workflow specialist agent now directly executes commit operations with intelligent grouping
+  - Added automatic change analysis and atomic commit execution capabilities
+  - Enhanced professional messaging without automation signatures for clean Git history
+  - Streamlined agent definition focused on practical workflow patterns over verbose documentation
+
+### Fixed
+
+- 🐛 **Git Command Documentation** - Enhanced clean commit message enforcement
+  - Added explicit instructions to prevent automation signatures in commits
+  - Ensures purely professional, human-style commit messages without tool attribution
+  - Maintains clean Git history without Claude Code signatures or Co-Authored-By lines
+
+## [5.0.0] - 2025-09-14
+
+### Added
+
+- 🚀 **PRP (Project Requirements Proposal) Methodology System** - Revolutionary blueprint-driven development framework
+  - Complete implementation of advanced software development methodology
+  - 4 new specialized PRP agents: blueprint-architect, codebase-research-specialist, external-research-specialist, requirements-analyst
+  - Enhanced core commands (understand, create, ship) with `--prp` parameter support
+  - Comprehensive template system with YAML templates for analysis, blueprints, execution, and patterns
+  - Professional software development workflows with quality gates and validation
+
+- 🧠 **Intelligent Smart Suggestions System** - Context-aware workflow recommendations
+  - Real-time intelligent workflow suggestions based on file modifications
+  - 8 file pattern categories with contextual command recommendations
+  - Smart suggestions engine with pattern matching and cooldown management
+  - Seamless integration with existing hook system for enhanced user experience
+  - Rate limiting and configuration system to prevent suggestion spam
+
+- 📋 **Strategic Project Planner Agent** - Comprehensive development planning capabilities
+  - Task decomposition and resource allocation expertise
+  - Strategic development roadmap creation optimized for 6-command architecture
+  - Integration with Basic Memory for knowledge-enhanced planning
+  - Blueprint-driven development workflow optimization
+
+### Changed
+
+- 🔄 **Enhanced Hook System Integration** - Smart suggestions integrated across all hooks
+  - Updated error-detection.sh, success-notification.sh, tool-specific-notification.sh
+  - Background execution for non-intrusive workflow recommendations
+  - Enhanced install.sh to deploy smart suggestions configuration and libraries
+
+- 🔄 **Documentation Revolution** - Comprehensive documentation updates for PRP integration
+  - Updated all CLAUDE.md files to reflect PRP methodology and 25+ agent ecosystem
+  - Enhanced README.md with PRP workflow examples and smart suggestions overview
+  - Created PRP-METHODOLOGY.md guide with complete workflow documentation
+  - Agent registry updates to include all new PRP-specialized agents
+
+- 🔄 **Template System Enhancement** - Complete PRP template deployment system
+  - New templates/prp/ directory with analysis, blueprint, execution, and pattern templates
+  - Install.sh enhanced to deploy PRP system to ~/.claude/claude-code-toolkit/prp/
+  - YAML-based template system for structured development workflows
+
+### Breaking Changes
+
+- **BREAKING**: Agent count expanded from 22 to 25+ specialized agents
+- **BREAKING**: New PRP methodology parameters (--prp, --prp=research, --prp=patterns, --prp=template) added to core commands
+- **BREAKING**: Smart suggestions system adds new user interaction patterns
+
+### Migration Guide
+
+**New PRP Workflow Patterns**:
+
+- Traditional: `/prefix:understand . --comprehensive` → Enhanced: `/prefix:understand . --prp --requirements="OAuth2 auth"`
+- Traditional: `/prefix:create auth` → PRP: `/prefix:create . --prp --from-analysis`
+- Traditional: `/prefix:ship .` → PRP: `/prefix:ship . --prp --quality-gates`
+
+**Smart Suggestions Benefits**:
+
+- Automatic workflow recommendations based on file context
+- Intelligent pattern recognition for development workflows
+- Contextual guidance for toolkit adoption and learning
+
+**PRP Methodology Benefits**:
+
+- Blueprint-driven development with pattern learning
+- External research integration for best practices
+- Quality-gated execution with real-time monitoring
+- Requirements validation with comprehensive gap analysis
+
+## [4.0.0] - 2025-01-29
+
+### Added
+
+- 🎯 **Knowledge-Driven Revolution Complete** - Revolutionary transformation to 6-command architecture
+  - New streamlined commands: understand, improve, create, secure, ship, git
+  - Intelligent agent orchestration replaces manual command selection
+  - 89% command reduction in core complexity (56 → 6 core + extensions) while maintaining full functionality through AI specialization
+  - Modern command creation script for 6-command architecture (core, typo3, meta types)
+  - Comprehensive project cleanup with all documentation aligned to new architecture
+
+- ✨ **Legacy Archive System** - Proper preservation of historical implementations
+  - Archived obsolete tests directory to docs/archive/legacy-tests/ with comprehensive documentation
+  - Archived legacy scripts (4 command creation tools) to scripts/archive/ with historical context
+  - Complete archive documentation explaining Knowledge-Driven Revolution transformation
+
+### Changed
+
+- 🔄 **Complete Documentation Overhaul** - Streamlined and modernized all documentation
+  - README reduced from 290 lines to 175 lines (40% more compact)
+  - All templates updated for 6-command architecture alignment
+  - CLAUDE.md updated with new workflow patterns and command references
+  - All help templates modernized with understand/improve/create/secure/ship/git examples
+
+- 🔄 **Template System Modernization** - All templates aligned with new architecture
+  - Updated action-plan-template.md with 17 command reference changes
+  - Modernized help-output.md with new command examples
+  - Updated next-steps-template.md for post-analysis workflows
+  - All command templates now support 6-command architecture patterns
+
+- 🔄 **Agent System Optimization** - 22 specialized agents perfectly aligned
+  - All agents validated for 6-command architecture compatibility
+  - Agent orchestration patterns updated in workflow-optimizer.md
+  - CLAUDE.md updated to reflect core command invocation patterns
+
+### Removed
+
+- 🗑️ **Legacy Command Architecture** - Clean removal of obsolete 56-command system
+  - Removed chain command for maximum transparency and developer control
+  - Archived legacy tests (scan:deep, fix:security, flow:smart references)
+  - Cleaned advanced-hooks-settings.json of chain command references
+  - Removed legacy script creation tools (create-sub-agent-command.sh, create-sub-agent.sh)
+
+### Breaking Changes
+
+- **BREAKING**: Command architecture completely transformed from 56 commands to 6 core commands
+- **BREAKING**: Chain command removed - users must now use individual commands for transparency
+- **BREAKING**: All old command references (scan:, fix:, gen:, flow:, auto:, sec:) no longer valid
+- **BREAKING**: Legacy tests and scripts archived - new patterns required for command creation
+
+### Migration Guide
+
+**Old Command Pattern** → **New Command Pattern**:
+
+- `/prefix:scan:deep` → `/prefix:understand . --comprehensive`
+- `/prefix:fix:security` → `/prefix:secure . --fix`
+- `/prefix:gen:tests` → `/prefix:create tests`
+- `/prefix:flow:refactor` → `/prefix:improve . --refactor`
+- `/prefix:auto:execute` → Use individual commands with agent orchestration
+
+**Benefits of New Architecture**:
+
+- 89% reduction in cognitive load
+- Intelligent agent routing eliminates command selection complexity
+- Maximum transparency - see exactly what each command does
+- Enhanced developer control - no hidden automation
+- Future-proof design with AI-powered specialization
+
 ## [3.24.2] - 2025-09-07
 
 ### Added

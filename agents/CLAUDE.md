@@ -11,8 +11,9 @@ Sub-Agents are specialized AI agents that provide domain-specific expertise for 
 ### Core Analysis Agents
 
 - **ai-specialist**: AI integration expert specializing in prompt engineering and LLM optimization
-- **code-architect**: Analyzes system architecture and design patterns  
+- **code-architect**: Analyzes system architecture and design patterns
 - **performance-optimizer**: Identifies performance bottlenecks and optimizations
+- **project-planner**: Strategic development planning expert specializing in task decomposition and resource allocation
 - **refactoring-expert**: Suggests code improvements and refactoring strategies
 - **report-analyzer**: Analyzes code quality reports and provides prioritized insights
 - **security-specialist**: Performs security audits and vulnerability detection
@@ -27,6 +28,13 @@ Sub-Agents are specialized AI agents that provide domain-specific expertise for 
 - **git-conflict-specialist**: Git merge conflict resolution expert specializing in conflict analysis and resolution strategies
 - **tailwind-css-specialist**: Tailwind CSS optimization expert for utility-first CSS framework optimization
 - **workflow-optimizer**: Developer workflow expert focused on productivity and reducing friction
+
+### PRP Methodology Agents
+
+- **blueprint-architect**: Implementation blueprint creation expert combining requirements, patterns, and research into executable development plans
+- **codebase-research-specialist**: Deep codebase pattern analysis expert specializing in discovering implementation patterns and architectural decisions
+- **external-research-specialist**: External documentation and best practices research expert with web search and API documentation analysis
+- **requirements-analyst**: Requirements validation and completeness expert specializing in gap analysis and acceptance criteria definition
 
 ### TYPO3 Specific Agents
 
@@ -100,7 +108,7 @@ If creating manually:
 
 Sub-agents are invoked through:
 
-1. Orchestration commands (`/flow:*`, `/scan:*`)
+1. Core commands (`/understand`, `/improve`, `/secure`, `/ship`)
 2. Direct Task Tool invocation
 3. Hybrid architecture commands
 

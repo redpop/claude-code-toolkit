@@ -1,414 +1,271 @@
 # Claude Code Toolkit
 
-The complete toolkit for extending Claude Code with commands, agents, hooks, and tools. A comprehensive collection of slash commands, AI agents, automation hooks, knowledge base, and utilities that can be installed in `~/.claude/` with a custom prefix.
-
-## 📑 Table of Contents
-
-- [🚀 Quick Start](#-quick-start-transform-your-code-quality)
-- [✨ Key Features](#-key-features)
-- [📋 Prerequisites](#prerequisites)
-- [📦 Installation](#installation)
-- [🍴 Forking Guide](#forking-this-repository)
-- [📚 Available Commands](#available-commands)
-- [🤖 AI Agents](#ai-agents)
-- [🔊 Hooks & Automation](#step-3-configure-hooks-optional)
-- [🔧 Configuration](#configuration)
-- [📖 Documentation](#documentation)
-- [🤝 Contributing](#contributing)
-- [📜 License](#license)
+Complete extension for Claude Code with commands, agents, and automation. Transform your development workflow with 6 core commands plus specialized extensions, all backed by intelligent AI agents.
 
 ## 🚀 Quick Start
 
 ```bash
-# Install in 30 seconds
 git clone https://github.com/redpop/claude-code-toolkit.git
 cd claude-code-toolkit
-./install.sh global --with-settings
+./install.sh myprefix --with-settings
 
-# Transform your code quality
-/global:scan:deep . --export-json        # Analyze codebase
-/global:scan:report --latest             # Generate action plan  
-/global:auto:execute --latest            # Apply improvements
+# Use anywhere in your projects
+/myprefix:understand --comprehensive      # Deep analysis (. is default)
+/myprefix:improve --apply-insights        # Fix issues
+/myprefix:secure --audit                  # Security scan
 
-# Or use one-command pipeline
-/global:meta:chain "scan:deep . --export-json" -> "scan:report --latest" -> "auto:execute --latest"  # Full optimization
+# PRP Blueprint-Driven Development
+/myprefix:understand --prp --requirements="OAuth2 auth"
+/myprefix:create --prp --from-analysis
+/myprefix:ship --prp --quality-gates
 ```
 
-💡 **Pro tip**: Replace `global` with your custom prefix • [Full Guide →](docs/guides/MODERN-WORKFLOW.md)
+## ✨ Features
 
-## ✨ Key Features
+- **5 Core Commands**: understand, improve, create, secure, ship
+- **20+ AI Agents**: Security, performance, architecture specialists + PRP agents
+- **PRP Methodology**: Blueprint-driven development with pattern learning
+- **Sound Notifications**: Audio feedback for command completion
+- **TYPO3 Integration**: Specialized CMS development tools
+- **MCP Compatible**: Enhanced with optional MCP servers
 
-| Component | Description |
-|-----------|-------------|
-| **60+ Commands** | Code analysis, fixing, generation, workflow automation |
-| **16+ AI Agents** | Security, performance, architecture, debugging experts |
-| **9 Automation Hooks** | Sound notifications, markdown formatting, error detection, session logging |
-| **3 Hook Profiles** | Basic (minimal), Minimal (+ errors), Advanced (full suite) |
-| **Knowledge Base** | TYPO3, UI patterns, framework guides, best practices |
-| **Smart Workflows** | Command chaining, parallel processing, auto-exports |
-| **MCP Support** | Enhanced functionality with optional MCP servers |
-
-## Prerequisites
-
-### Required
-
-- **Claude Code** (claude.ai/code)
-- **Bash shell** (macOS/Linux/WSL)
-- **Git** for cloning the repository
-
-### Optional Dependencies
-
-These tools enhance specific features but are not required for basic functionality:
-
-| Tool | Purpose | Installation | Feature |
-|------|---------|--------------|---------|
-| **markdownlint-cli2** | Auto-format Markdown files | `brew install markdownlint-cli2` | Markdown formatting hook |
-| **npx** | Fallback for markdownlint | Comes with Node.js | Auto-installs tools on demand |
-| **afplay** | Sound notifications (macOS) | Built-in on macOS | Completion sounds |
-| **Python 3** | Settings file merging | Usually pre-installed | Hook configuration |
-
-> **Note**: The toolkit will work without these dependencies and gracefully fall back to alternatives or skip the feature.
-
-## Installation
-
-### Step 1: Clone the Repository
-
-```bash
-# Clone the official repository
-git clone https://github.com/redpop/claude-code-toolkit.git
-cd claude-code-toolkit
-
-# Or clone your fork
-git clone https://github.com/YourUsername/your-fork.git
-cd your-fork
-```
-
-### Step 2: Install with Your Prefix
+## 📦 Installation
 
 ```bash
 # Basic installation
 ./install.sh myprefix
 
-# Install with sound notifications (recommended)
+# With notifications (recommended) - adds sound feedback and smart suggestions
 ./install.sh myprefix --with-settings
-
-# Install specific components only
-./install.sh myprefix --install commands,agents,hooks
 ```
 
-The installation script will:
-
-- Copy command files to `~/.claude/commands/myprefix/`
-- Install AI agents to `~/.claude/agents/`
-- Install hooks for notifications to `~/.claude/claude-code-toolkit/hooks/`
-- Optionally configure global settings for hooks (with `--with-settings`)
-- Display all available commands, agents, and hooks after installation
-- Create backups of existing installations if needed
-
-### Step 3: Configure Hooks (Optional)
-
-The toolkit includes 9 automation hooks organized in 3 profiles (`settings/`):
-
-```bash
-# Choose your automation level
-./install.sh myprefix --with-settings                          # Basic profile
-./install.sh myprefix --with-settings --hooks-profile minimal  # + Error detection
-./install.sh myprefix --with-settings --hooks-profile advanced # Full suite
-```
-
-#### 🔧 Available Hooks
-
-| Hook | Trigger | Purpose | Profiles |
-|------|---------|---------|----------|
-| `stop-notification.sh` | Claude finishes | Completion sound (Glass.aiff) | ✅ Basic, Minimal, Advanced |
-| `markdown-format.sh` | File edits | Auto-format `.md` files with markdownlint | ✅ Basic, Minimal, Advanced |
-| `error-detection.sh` | Tool errors | Critical alerts & security warnings | ❌ Basic / ✅ Minimal, Advanced |
-| `success-notification.sh` | Successful ops | Celebration sounds for milestones | ❌ Basic, Minimal / ✅ Advanced |
-| `tool-specific-notification.sh` | Tool usage | Different sounds per tool type | ❌ Basic, Minimal / ✅ Advanced |
-| `subagent-notification.sh` | Agent complete | Agent-specific completion sounds | ❌ Basic, Minimal / ✅ Advanced |
-| `system-notification.sh` | Important events | macOS native notifications | ❌ Basic, Minimal / ✅ Advanced |
-| `command-chain-notification.sh` | Chain progress | Track multi-command workflows | ❌ Basic, Minimal / ✅ Advanced |
-| `session-logger.sh` | Session events | JSON logs with metrics | ❌ Basic, Minimal / ✅ Advanced |
-
-#### 📦 Profile Contents
-
-| Profile | Active Hooks | Use Case |
-|---------|-------------|----------|
-| **basic** | stop, markdown | Minimal disruption, essential features |
-| **minimal** | basic + error-detection | Add safety checks |
-| **advanced** | All 9 hooks | Full automation & monitoring |
-
-See [Sound Notifications Guide](docs/guides/SOUND-NOTIFICATIONS.md) for customization options
-
-## Command Categories
-
-| Category | Purpose | Examples |
-|----------|---------|----------|
-| **🔍 Scan** | Analysis & investigation | `scan:deep`, `scan:quality`, `scan:deps` |
-| **🔧 Fix** | Automated corrections | `fix:security`, `fix:performance`, `fix:duplicates` |
-| **🏭 Gen** | Code & doc generation | `gen:tests`, `gen:docs`, `gen:format` |
-| **🌊 Flow** | Multi-agent workflows | `flow:smart`, `flow:review`, `flow:incident` |
-| **🤖 Auto** | Automation & orchestration | `auto:execute`, `auto:sprint`, `auto:monitor` |
-| **🔒 Sec** | Security operations | `sec:audit`, `sec:baseline`, `sec:comply` |
-| **🗂️ Git** | Version control | `git:commit`, `git:review`, `git:conflict-resolver` |
-| **🎨 CSS** | CSS & styling operations | `css:tailwind-optimize` |
-| **🏛️ TYPO3** | TYPO3 CMS development | `typo3:content-blocks`, `typo3:sitepackage` |
-| **🎯 Meta** | Toolkit management | `meta:chain`, `meta:health`, `meta:help` |
+Installs to `~/.claude/commands/myprefix/`, `~/.claude/agents/`, and `~/.claude/claude-code-toolkit/`
 
 ## Available Commands
 
-All commands require your chosen prefix (e.g., `myprefix`). Commands follow a consistent pattern: `/prefix:category:command`
+The toolkit uses the **5-Command Architecture** for core operations, plus specialized commands for specific domains. Use your custom prefix (e.g., `myprefix`):
+
+> 💡 **Click any command** for detailed documentation with syntax, examples, and workflows.
 
 <!-- COMMANDS:START - DO NOT EDIT -->
 
-### Auto Commands
+### Core Commands (5-Command Architecture)
 
-| Command | Description | Options | Help |
-|---------|-------------|---------|------|
-| `/prefix:auto:execute` | Execute action plans systematically with progress tracking and smart error handling | `<action-plan.md>\|--latest`, `--mode=supervised\|auto`, `--dry-run`, `--parallel=N`, `--focus=category`, `--force-all`, `--min-roi=threshold`, `--max-roi=threshold` | - |
-| `/prefix:auto:monitor` | Set up and manage continuous code quality monitoring with automated analysis, fixes, and reporting | `directory`, `--schedule=daily\|weekly\|commit`, `--auto-fix=safe\|all\|none`, `--notify=email\|slack\|github`, `--init` | - |
-| `/prefix:auto:report` | Generate comprehensive completion report after action plan execution, showing results, metrics, and next steps | `--action-plan=<file>`, `--execution-log=<file>`, `--compare-baseline`, `--baseline=<file>`, `--current=<file>`, `--export-formats=md,json,html`, `--export-all`, `--export-json=<file>`, `--include-metrics`, `--include-git-log`, `--team-report`, `--recommendations` | - |
-| `/prefix:auto:sprint` | Plan and execute a complete code quality improvement sprint with analysis, prioritization, fixes, and tracking | `directory`, `--duration=1w\|2w\|1m`, `--team-size=N`, `--focus=security\|performance\|quality\|all` | - |
+| Command | Description | Options |
+|---------|-------------|---------|
+| [`/prefix:create`](docs/commands/create.md) | Code and content generation with intelligent templating and pattern learning | `type`, `target`, `--format`, `--prp`, `--from-analysis`, `--template`, `--help` |
+| [`/prefix:improve`](docs/commands/improve.md) | Code improvement with intelligent routing and learning persistence | `type`, `target`, `--dry-run`, `--severity`, `--apply-insights`, `--from-analysis`, `--export-json`, `--export-md`, `--help` |
+| [`/prefix:secure`](docs/commands/secure.md) | Security analysis and vulnerability detection with threat intelligence learning | `type`, `target`, `--standard`, `--help` |
+| [`/prefix:ship`](docs/commands/ship.md) | Deployment readiness and quality gates with release pattern learning | `type`, `target`, `--check`, `--prp`, `--readiness-check`, `--quality-gates`, `--help` |
+| [`/prefix:understand`](docs/commands/understand.md) | Code analysis and comprehension with intelligent problem routing | `type`, `target`, `--prp`, `--comprehensive`, `--quick`, `--export-json`, `--export-md`, `--help` |
 
-### Css Commands
-
-| Command | Description | Options | Help |
-|---------|-------------|---------|------|
-| `/prefix:css:figma-to-styles` | Convert Figma designs to modular CSS architecture with responsive breakpoints | `component-name`, `--css\|--tailwind\|--scss` | - |
-| `/prefix:css:tailwind-optimize` | Analyze and optimize Tailwind CSS implementation with v4 best practices | `path`, `--check-migration`, `--export-json\|--export-md` | - |
-
-### Fix Commands
-
-| Command | Description | Options | Help |
-|---------|-------------|---------|------|
-| `/prefix:fix:documentation` | Fix documentation issues including broken links, parameter mismatches, missing cross-references, and outdated content | `report.json\|directory`, `--fix-links`, `--fix-params`, `--add-deprecation`, `--dry-run`, `--interactive` | - |
-| `/prefix:fix:duplicates` | Remove code duplication by extracting common functions, creating shared utilities, and applying DRY principles | `report.json\|directory`, `--threshold=80`, `--min-lines=5`, `--dry-run`, `--create-utils`, `--group-by`, `--preserve-comments` | - |
-| `/prefix:fix:lint` | Automatically detect and fix linting errors across multiple languages with intelligent agent orchestration | `path`, `or`, `custom`, `instructions` | - |
-| `/prefix:fix:markdown` | Lint and fix markdown files using markdownlint-cli2 | `<file-or-directory>`, `--fix`, `--config`, `<path>` | - |
-| `/prefix:fix:performance` | Automated performance issue fixes including O(n²) algorithms, memory optimization, and database batching | `--target=algorithm\|memory\|database\|all`, `--file=path`, `--dry-run` | - |
-| `/prefix:fix:quick-wins` | Apply high-ROI fixes from analysis reports - quick wins with maximum impact and minimal effort | `report.json`, `--dry-run`, `--category=security\|performance\|quality`, `--max-effort=4h`, `--min-roi=5`, `--help` | ✓ |
-| `/prefix:fix:security` | Fix security vulnerabilities with MCP-enhanced analysis or traditional pattern matching | `report.json`, `--severity=critical,high,medium`, `--dry-run`, `--interactive`, `--owasp-top10` | - |
-| `/prefix:fix:shell` | Automatically fix shell script issues using shellcheck analysis | `path/file`, `--check-only`, `--strict`, `--summary-only` | - |
-
-### Flow Commands
-
-| Command | Description | Options | Help |
-|---------|-------------|---------|------|
-| `/prefix:flow:debug-mode` | Switch to intensive debugging mode for current problem | `--verbose`, `--trace` | - |
-| `/prefix:flow:incident` | Rapid incident response workflow for production issues with root cause analysis | `<incident-description>`, `--severity=critical\|high\|medium`, `--system=component` | - |
-| `/prefix:flow:refactor` | Intelligent refactoring suggestions with impact analysis and step-by-step guidance | `<file-or-pattern>`, `--type=extract\|rename\|restructure`, `--safety=conservative\|balanced\|aggressive` | - |
-| `/prefix:flow:review` | Comprehensive code review using multiple specialized agents for different perspectives | `<file-or-directory>`, `--focus=security\|performance\|architecture\|all` | - |
-| `/prefix:flow:smart` | Intelligently analyze and route problems to the most appropriate specialized agents | `<problem-description>`, `--verbose`, `--suggest-only` | - |
-
-### Gen Commands
-
-| Command | Description | Options | Help |
-|---------|-------------|---------|------|
-| `/prefix:gen:docs` | Generate comprehensive documentation including API docs, README files, code comments, and architecture diagrams | `directory\|file`, `--types=api,readme,comments,diagrams`, `--format=markdown,html`, `--update-existing` | - |
-| `/prefix:gen:format` | Create or convert content into various formats (HTML, Markdown, Confluence, Plain Text) | `<request-or-file>`, `--html\|--html-simple\|--markdown\|--confluence\|--text` | - |
-| `/prefix:gen:tests` | Generate comprehensive test suites for uncovered code, including unit tests, integration tests, and edge cases | `report.json\|file\|directory`, `--coverage-target=80`, `--framework=auto`, `--types=unit,integration`, `--mock-externals` | - |
 
 ### Git Commands
 
-| Command | Description | Options | Help |
-|---------|-------------|---------|------|
-| `/prefix:git:commit-simple` | Creates clean Git commits with optional branch prefix extraction and intelligent grouping | `--no-verify`, `--fast`, `--push`, `--single`, `--brief` | - |
-| `/prefix:git:commit` | Creates structured Git commits with Conventional Commit format and emojis | `--no-verify`, `--fast`, `--push` | - |
-| `/prefix:git:conflict-resolver` | Interactive Git conflict resolution with step-by-step guidance and recommendations | `source-branch`, `target-branch`, `--strategy:merge\|rebase\|theirs\|ours`, `--rebase-feature`, `--test-command="npm`, `test"`, `--help` | ✓ |
-| `/prefix:git:review` | Reviews all Git changes before commit to ensure code quality and identify issues | `--staged-only`, `--detailed` | - |
+| Command | Description | Options |
+|---------|-------------|---------|
+| [`/prefix:git:operations`](docs/commands/git/operations.md) | Smart Git operations with project context and commit pattern learning | `operation`, `--push`, `--no-verify`, `--smart`, `--pattern-learn`, `--interactive`, `--dry-run`, `--help` |
+
 
 ### Meta Commands
 
-| Command | Description | Options | Help |
-|---------|-------------|---------|------|
-| `/prefix:meta:analyze-toolkit` | Analyze toolkit commands and agents for redundancies, inconsistencies, and refactoring opportunities | `--fix`, `--export-json`, `--export-md`, `--focus=<area>` | - |
-| `/prefix:meta:chain` | Chain commands or execute pre-defined pipelines with intelligent data flow | `<pipeline-name`, `\|`, `command-chain>`, `--list`, `--save-as=name`, `--dry-run` | ✓ |
-| `/prefix:meta:changelog` | AI-powered CHANGELOG.md management that automatically determines version based on changes | `--commit`, `--push`, `--fast`, `--update-version` | - |
-| `/prefix:meta:create` | Intelligently create commands, agents, or workflows from your description | `<what`, `you`, `need>`, `--type=auto\|command\|agent\|workflow` | - |
-| `/prefix:meta:docs-sync` | Verify and synchronize all documentation files with actual codebase structure | `--fix`, `--export-json`, `--export-md` | - |
-| `/prefix:meta:export` | Unified export management for all analysis results with format conversion | `<report-files...>`, `--format=md\|json\|html\|pdf`, `--merge`, `--template=name` | - |
-| `/prefix:meta:find-cmd` | Find the best command for your task from all available commands (global and local) | `<task-description>`, `--all`, `--local-only`, `--global-only` | - |
-| `/prefix:meta:handoff` | Documents current problem context for handoff to another AI assistant | `output-file`, `-c\|--compact`, `-t\|--technical`, `--focus`, `topic`, `--skip`, `topic`, `--include`, `topic`, `"instructions"` | - |
-| `/prefix:meta:health` | Comprehensive project health check with actionable insights and trend analysis | `--verbose`, `--compare=last-check.json`, `--export` | - |
-| `/prefix:meta:help-handler` | Display help information for any toolkit command | `<command-path>`, `--verbose` | - |
-| `/prefix:meta:help` | Display help for commands or list available commands | `command-name`, `--list`, `--search`, `<keyword>`, `--categories` | - |
-| `/prefix:meta:summary` | Creates a chat summary for another AI with complete context | `summaries/` | - |
-| `/prefix:meta:test-guide` | Generates interactive test guides for recent changes, suitable for both end-users and technical reviewers | `--type=all\|user\|technical`, `--format=md\|checklist\|jira`, `--lang=en\|de\|es\|fr`, `--output=file.md` | - |
-| `/prefix:meta:update-docs` | Intelligently updates project documentation based on code changes and implementation status | `--scope=<type>`, `--analyze`, `--commit` | - |
-| `/prefix:meta:version` | Check installed toolkit version and available updates | `check\|update` | - |
+| Command | Description | Options |
+|---------|-------------|---------|
+| [`/prefix:meta:changelog`](docs/commands/meta/changelog.md) | AI-powered CHANGELOG.md management that automatically determines version based on changes | `--commit`, `--push`, `--fast`, `--update-version` |
+| [`/prefix:meta:handoff`](docs/commands/meta/handoff.md) | Documents current problem context for handoff to another AI assistant | `output-file`, `-c\|--compact\|--brief`, `-t\|--technical`, `--focus`, `topic`, `--skip`, `topic`, `--include`, `topic`, `"instructions"` |
 
-### Scan Commands
 
-| Command | Description | Options | Help |
-|---------|-------------|---------|------|
-| `/prefix:scan:deep` | Deep code analysis with streamlined output and clear workflow guidance | `<directory>`, `--focus=security\|performance\|architecture\|all`, `--export-md`, `--export-json` | ✓ |
-| `/prefix:scan:deps` | In-depth dependency analysis with 6 specialized agents for complete transparency | `package-name\|file`, `--depth=direct\|transitive\|full`, `--check=security\|licenses\|all` | - |
-| `/prefix:scan:docs` | Analyze documentation health, validate code-doc synchronization, check cross-references, and identify outdated content | `directory`, `--scope=readme\|api\|all`, `--check-links`, `--validate-params`, `--export-report` | - |
-| `/prefix:scan:explore` | Multi-Perspective Deep Research with 8 different viewpoints on a topic | `topic`, `--depth=surface\|medium\|deep`, `--focus=technical\|business\|all` | - |
-| `/prefix:scan:map` | Creates a comprehensive codebase mapping with 10 agents for different aspects | `directory`, `--format=markdown\|json\|mermaid`, `--depth=overview\|detailed\|full` | - |
-| `/prefix:scan:perf` | Deep Performance Profiling with 7 Agents for Bottleneck Identification and Optimization | `directory`, `--profile=cpu\|memory\|io\|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` | - |
-| `/prefix:scan:quality` | Comprehensive code quality metrics with trend analysis and improvement roadmap | `<directory>`, `--baseline=previous.json`, `--threshold=80`, `--export` | - |
-| `/prefix:scan:quick` | Quick parallel code analysis for rapid feedback (30 seconds) | `<directory>`, `--focus=area`, `--export-json` | - |
-| `/prefix:scan:refactor` | Analyzes the impact of refactoring changes using 6 specialized agents | `file-or-pattern`, `--change-type=rename\|move\|signature\|structure` | - |
-| `/prefix:scan:report` | Intelligent analysis of code quality reports with trend detection, prioritization, and actionable insights | `report.json`, `--latest`, `--compare=other-report.json`, `--history`, `--trends`, `--quick-wins`, `--export-md`, `--generate-action-plan` | - |
-| `/prefix:scan:root-cause` | Deep root cause analysis with ultra intensive reasoning | `issue_description` | - |
-| `/prefix:scan:tests` | Comprehensive test coverage analysis with 5 specialized agents for test quality | `directory`, `--framework=jest\|pytest\|go-test\|cargo-test`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` | - |
+### TYPO3 Commands
 
-### Sec Commands
+| Command | Description | Options |
+|---------|-------------|---------|
+| [`/prefix:typo3:content-blocks`](docs/commands/typo3/content-blocks.md) | Generate TYPO3 Content Blocks v1.3 with modern field configurations | `name`, `--type=element\|page`, `--fields=...`, `--sitepackage=path`, `--with-components`, `--component-type=inline\|external` |
+| [`/prefix:typo3:extension-kickstarter`](docs/commands/typo3/extension-kickstarter.md) | Create TYPO3 extensions using ext-kickstarter or manual scaffolding | `extension-key`, `--type=...`, `--use-kickstarter`, `--composer-name=...`, `--with-backend-module`, `--with-plugin`, `--with-middleware`, `--with-command`, `--with-event-listener`, `--with-tests` |
+| [`/prefix:typo3:fluid-components`](docs/commands/typo3/fluid-components.md) | Generate Fluid v4 Components for TYPO3 v13 with Atomic Design patterns and Fluid analysis | `component-name`, `--type=atom\|molecule\|organism`, `--sitepackage=path`, `--analyze` |
+| [`/prefix:typo3:make-content-block`](docs/commands/typo3/make-content-block.md) | Wrapper for TYPO3 make:content-block command with intelligent defaults | `--vendor=...`, `--type=...`, `--skeleton-path=...`, `--config-path=...`, `--create-skeleton`, `--batch=...`, `--migrate-from=...` |
+| [`/prefix:typo3:sitepackage`](docs/commands/typo3/sitepackage.md) | Create a TYPO3 v13.4 SitePackage based on official template with Site Sets | `vendor`, `package-name`, `--include-ddev`, `--include-docker`, `--author=name`, `--email=address` |
 
-| Command | Description | Options | Help |
-|---------|-------------|---------|------|
-| `/prefix:sec:audit` | Comprehensive security audit with MCP-enhanced scanning or traditional fallback methods | `directory`, `--severity=critical\|high\|all`, `--export-md`, `--export-json`, `--export-html`, `--export-all`, `--export-dir=path` | ✓ |
-| `/prefix:sec:baseline` | Establish and track security baseline with MCP-enhanced scanning or traditional methods | `directory`, `--export-baseline`, `--compare=previous-baseline.json`, `--track-improvements` | - |
-| `/prefix:sec:comply` | Run compliance checks for OWASP, PCI-DSS, GDPR, and custom security policies | `directory`, `--standard=owasp\|pci-dss\|gdpr\|all`, `--custom-rules=rules.yaml`, `--export-report` | - |
-
-### Typo3 Commands
-
-| Command | Description | Options | Help |
-|---------|-------------|---------|------|
-| `/prefix:typo3:content-blocks` | Generate TYPO3 Content Blocks v1.3 with modern field configurations | `name`, `--type=element\|page`, `--fields=...`, `--sitepackage=path` | - |
-| `/prefix:typo3:extension-kickstarter` | Create TYPO3 extensions using ext-kickstarter or manual scaffolding | `extension-key`, `--type=...`, `--use-kickstarter`, `--composer-name=...` | - |
-| `/prefix:typo3:fluid-components` | Generate Fluid v4 Components for TYPO3 v13 with Atomic Design patterns and Fluid analysis | `component-name`, `--type=atom\|molecule\|organism`, `--sitepackage=path`, `--analyze` | - |
-| `/prefix:typo3:make-content-block` | Wrapper for TYPO3 make:content-block command with intelligent defaults | `--vendor=...`, `--type=...`, `--skeleton-path=...`, `--config-path=...` | - |
-| `/prefix:typo3:sitepackage` | Create a TYPO3 v13.4 SitePackage based on official template with Site Sets | `vendor`, `package-name`, `--include-ddev`, `--include-docker`, `--author=name`, `--email=address` | - |
 
 ## Help System
 
-Some commands provide detailed help information when called with the `--help` option. Commands with help support are marked with ✓ in the Help column above.
-
-### Usage
-
-To get detailed help for any supported command:
+Most commands provide detailed help information when called with `--help` or `-h`:
 
 ```bash
-/prefix:category:command --help
+/prefix:command --help
+/prefix:category:command -h
 ```
 
-This will show:
+This shows detailed descriptions, all options, examples, and related workflows.
 
-- Detailed description and usage
-- All available options with explanations  
-- Examples with real use cases
-- Related commands and workflows
-- MCP enhancement information (if applicable)
-
-### Example
-
+**Example:**
 ```bash
-/prefix:git:conflict-resolver --help
+/prefix:understand --help
 ```
-
-Shows comprehensive guide for Git conflict resolution including strategies, workflows, and team best practices.
-
-### Generate Help Documentation
-
-You can also generate formatted help output using the helper script:
-
-```bash
-./scripts/generate-help.sh <category>/<command>.md
-```
-
-This provides additional formatting options and can be used for documentation generation.
 
 <!-- COMMANDS:END -->
 
-## AI Agents
+## 🤖 AI Agents
 
-The toolkit includes 16+ specialized AI agents that work independently or in parallel:
+<!-- AGENTS:START -->
+<!-- This section is auto-generated by scripts/update-agents.sh - DO NOT EDIT MANUALLY -->
 
-| Agent | Specialization | Key Focus |
-|-------|---------------|----------|
-| **security-specialist** 🔒 | Vulnerability detection | OWASP Top 10, authentication, encryption |
-| **performance-optimizer** ⚡ | Speed & efficiency | Algorithm complexity, memory, caching |
-| **test-engineer** 🧪 | Test quality | Coverage, edge cases, test pyramid |
-| **code-architect** 🏗️ | Design patterns | SOLID principles, coupling, modularity |
-| **refactoring-expert** 🔧 | Code quality | Technical debt, duplication, complexity |
-| **debugging-specialist** 🐛 | Issue resolution | Stack traces, root cause analysis |
-| **frontend-specialist** 🎨 | UI/UX code | React, performance, accessibility |
-| **deployment-specialist** 🚀 | CI/CD & DevOps | Docker, Kubernetes, pipelines |
-| **workflow-optimizer** ⚙️ | Developer productivity | Automation, tooling, efficiency |
-| **report-analyzer** 📊 | Analysis insights | Trends, prioritization, ROI |
+### 📋 Agent Catalog
 
-### Multi-Agent Commands
+Specialized AI agents provide domain expertise for various development tasks. Each agent name links to detailed documentation.
 
-Commands that orchestrate multiple agents for comprehensive analysis:
+#### Analysis Agents
+
+| Agent | Purpose | Tools |
+|-------|---------|-------|
+| [ai-specialist](docs/agents/analysis/ai-specialist.md) | AI integration expert specializing in prompt engineering, LLM optimization, and AI-powered featur... | Read,Grep,Task |
+| [code-understanding-specialist](docs/agents/analysis/code-understanding-specialist.md) | Expert in comprehensive code analysis, architecture comprehension, and pattern recognition with p... | Read,Grep,Glob,Task |
+| [performance-optimizer](docs/agents/analysis/performance-optimizer.md) | Performance analysis and optimization expert specializing in identifying bottlenecks, memory leak... | Read,Grep,Task |
+| [refactoring-expert](docs/agents/analysis/refactoring-expert.md) | Code refactoring specialist with expertise in clean code principles, design patterns, and systema... | Read,Grep,Task |
+| [report-analyzer](docs/agents/analysis/report-analyzer.md) | Analysis report expert specializing in interpreting code quality reports, identifying trends, com... | Read,Grep,Task |
+
+#### Architecture Agents
+
+| Agent | Purpose | Tools |
+|-------|---------|-------|
+| [code-architect](docs/agents/architecture/code-architect.md) | Software architecture expert specializing in system design, code structure analysis, and architec... | Read,Grep,Task |
+| [project-planner](docs/agents/architecture/project-planner.md) | Strategic development planning expert specializing in project architecture, comprehensive task de... | Read,Grep,Task,TodoWrite |
+
+#### Documentation Agents
+
+| Agent | Purpose | Tools |
+|-------|---------|-------|
+| [documentation-health-specialist](docs/agents/documentation/documentation-health-specialist.md) | Expert in documentation quality analysis, technical writing best practices, and maintaining docum... | Read,Grep,Task |
+| [documentation-specialist](docs/agents/documentation/documentation-specialist.md) | Alias for documentation-health-specialist - Knowledge-Enhanced expert in content generation and t... | Read,Grep,Task |
+
+#### Frontend Agents
+
+| Agent | Purpose | Tools |
+|-------|---------|-------|
+| [frontend-specialist](docs/agents/frontend/frontend-specialist.md) | Frontend development expert specializing in modern JavaScript frameworks, component architecture,... | Read,Grep,Task |
+| [tailwind-css-specialist](docs/agents/frontend/tailwind-css-specialist.md) | Tailwind CSS v4 expert specializing in best practices, installation, configuration, and integrati... | Read,Grep,Glob,WebFetch,WebSearch,Task |
+
+#### Git Agents
+
+| Agent | Purpose | Tools |
+|-------|---------|-------|
+| [git-conflict-specialist](docs/agents/git/git-conflict-specialist.md) | Expert in Git conflict analysis, resolution strategies, and merge semantics | Read,Grep,Task |
+| [git-workflow-specialist](docs/agents/git/git-workflow-specialist.md) | Knowledge-Enhanced Git workflow expert specializing in intelligent commit execution, change analy... | Read,Grep,Bash(git:*) |
+
+#### Operations Agents
+
+| Agent | Purpose | Tools |
+|-------|---------|-------|
+| [deployment-specialist](docs/agents/operations/deployment-specialist.md) | CI/CD and deployment expert specializing in automated pipelines, containerization, and production... | Read,Grep,Task |
+| [workflow-optimizer](docs/agents/operations/workflow-optimizer.md) | Developer workflow and productivity expert focused on reducing friction, automating repetitive ta... | Read,Grep,Task,mcp__basic-memory__search_notes,... |
+
+#### Research Agents
+
+| Agent | Purpose | Tools |
+|-------|---------|-------|
+| [blueprint-architect](docs/agents/research/blueprint-architect.md) | Implementation blueprint creation expert combining requirements, patterns, and research into exec... | Read,Grep,Task |
+| [codebase-research-specialist](docs/agents/research/codebase-research-specialist.md) | Deep codebase pattern analysis expert specializing in discovering implementation patterns, archit... | Read,Grep,Glob,Task |
+| [external-research-specialist](docs/agents/research/external-research-specialist.md) | External documentation and best practices research expert with web search and API documentation a... | Read,Grep,Task |
+| [requirements-analyst](docs/agents/research/requirements-analyst.md) | Requirements validation and completeness expert specializing in gap analysis, stakeholder require... | Read,Grep,Glob,Task |
+
+#### Security Agents
+
+| Agent | Purpose | Tools |
+|-------|---------|-------|
+| [debugging-specialist](docs/agents/security/debugging-specialist.md) | Expert in systematic debugging, log analysis, and root cause identification. This agent helps tra... | Read,Grep,Task |
+| [security-specialist](docs/agents/security/security-specialist.md) | Deep security analysis expert specializing in vulnerability detection, OWASP compliance, and secu... | Read,Grep,Task |
+
+#### TYPO3 Agents
+
+| Agent | Purpose | Tools |
+|-------|---------|-------|
+| [typo3-architect](docs/agents/typo3/typo3-architect.md) | TYPO3 architecture expert specializing in enterprise CMS solutions, extension architecture, and p... | Read,Grep,Task |
+| [typo3-content-blocks-specialist](docs/agents/typo3/typo3-content-blocks-specialist.md) | TYPO3 Content Blocks expert specializing in creating, configuring, and optimizing content blocks ... | Read,Grep,Task |
+| [typo3-extension-developer](docs/agents/typo3/typo3-extension-developer.md) | TYPO3 extension development expert specializing in creating, maintaining, and optimizing TYPO3 ex... | Read,Grep,Task |
+| [typo3-fluid-expert](docs/agents/typo3/typo3-fluid-expert.md) | TYPO3 Fluid Template Engine expert with latest conventions, ViewHelper mastery, and Context7 inte... | Read,Grep,Task |
+| [typo3-typoscript-expert](docs/agents/typo3/typo3-typoscript-expert.md) | TYPO3 TypoScript expert specializing in template configuration, setup optimization, and TypoScrip... | Read,Grep,Task |
+
+**Total Agents**: 26 across 9 categories
+
+<!-- AGENTS:END -->
+
+## 🔊 Sound Notifications
+
+Three automation profiles available:
+
+- **basic**: Essential notifications only
+- **minimal**: + Error detection + Smart suggestions
+- **advanced**: Full notification suite + Smart suggestions
+
+Configure during installation with `--with-settings`
+
+## 💡 Smart Suggestions
+
+The toolkit provides intelligent workflow recommendations:
+
+- **Context-Aware**: Suggestions based on file types (security, tests, docs, etc.)
+- **Learning Tool**: Helps users discover relevant commands in the 6-command architecture
+- **Customizable**: JSON configuration for patterns and suggestions
+- **Non-Intrusive**: 30-second cooldown prevents suggestion spam
+
+**Examples:**
+
+- Edit `auth.py` → `💡 Security code modified. Consider: /prefix:secure . --quick`
+- Create `test_user.py` → `💡 Test file created. Consider: /prefix:understand . --test-coverage`
+
+## 🔧 Configuration
+
+### Prerequisites
+
+- **Claude Code** (claude.ai/code)
+- **Bash shell** (macOS/Linux/WSL)
+- **Git**
+
+### Optional Enhancements
+
+- **markdownlint-cli2**: Auto-format markdown files
+- **afplay** (macOS): Sound notifications
+- **MCP servers**: Enhanced functionality (Semgrep, GitHub, GitLab)
+
+## 📁 Directory Structure
 
 ```bash
-# Deep analysis with 10 parallel agents
-/prefix:scan:deep . --export-json
-
-# Security audit with 8 specialized agents  
-/prefix:sec:audit . --export-md
-
-# Performance profiling with 7 agents
-/prefix:scan:perf . --export-all
+claude-code-toolkit/
+├── commands/         # Core 6-command architecture
+├── agents/          # Specialized AI agents
+├── hooks/           # Automation hooks
+├── knowledge-base/  # Domain expertise
+├── templates/       # Command templates
+└── settings/        # Hook profiles
 ```
 
-**Benefits**: 10x faster analysis • Specialized expertise • Cross-validation • Comprehensive coverage
-
-## Forking & Customization
-
-### Creating Your Own Fork
+## 🍴 Forking & Customization
 
 ```bash
-# 1. Fork on GitHub (click Fork button)
-# 2. Clone and install your fork
+# Fork on GitHub, then:
 git clone https://github.com/YourUsername/your-fork.git
 cd your-fork
-./install.sh myprefix
+./install.sh myteam
 
-# 3. Install multiple versions
-./install.sh global        # Original toolkit
-./install.sh team          # Your team's fork
+# Install multiple versions
+./install.sh global    # Official toolkit
+./install.sh myteam    # Your customizations
 ```
 
-### Maintaining Your Fork
+## 📚 Documentation
 
-```bash
-# Sync with upstream
-git remote add upstream https://github.com/redpop/claude-code-toolkit.git
-git fetch upstream && git merge upstream/main && git push
+- [Architecture Overview](docs/architecture/)
+- [Command Development](docs/guides/)
+- [Agent Creation](agents/CLAUDE.md)
+- [Hook Configuration](hooks/CLAUDE.md)
 
-# Update installation
-cd /path/to/toolkit && git pull && ./install.sh myprefix
-```
-
-### Fork Best Practices
-
-| Area | Practice |
-|------|----------|
-| **Organization** | Use folders: `team/`, `project/`, `internal/`, `experimental/` |
-| **Documentation** | Include frontmatter, examples, team-specific README |
-| **Versioning** | Tag releases (`v1.0-team`), maintain CHANGELOG |
-| **Security** | No credentials in code, use environment variables |
-| **Contributing** | Remove proprietary code before submitting PRs |
-
-## Adding Custom Commands
-
-Create new commands by adding `.md` files to the `commands/` directory:
-
-```bash
-commands/
-├── category/          # Command category
-│   └── command.md    # Available as: /prefix:category:command
-├── team/             # Team-specific commands
-│   └── deploy.md     # Available as: /prefix:team:deploy
-└── project/          # Project tools
-    └── setup.md      # Available as: /prefix:project:setup
-```
-
-**Requirements**: Include frontmatter with `description` and optional `argument-hint`. Run `./scripts/update-readme.sh` after adding commands.
-
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Add your commands with proper frontmatter
-4. Run `./scripts/update-readme.sh` to update documentation
-5. Create a pull request
+2. Create feature branch
+3. Add commands with proper frontmatter
+4. Run `./scripts/update-readme.sh`
+5. Submit pull request
 
-See [CLAUDE.md](CLAUDE.md) for development guidelines.
-
-## License
+## 📜 License
 
 MIT License - see [LICENSE](LICENSE) file for details.

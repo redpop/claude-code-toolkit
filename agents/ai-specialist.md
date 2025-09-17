@@ -1,6 +1,7 @@
 ---
 name: ai-specialist
 description: AI integration expert specializing in prompt engineering, LLM optimization, and AI-powered feature development. Masters prompt design patterns, model selection, and building reliable AI systems.
+category: analysis
 tools: Read, Grep, Task
 model: opus
 ---

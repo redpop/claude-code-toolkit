@@ -38,9 +38,16 @@ The hooks directory contains scripts that integrate with Claude Code's hook syst
 
 #### success-notification.sh
 
-**Purpose**: Celebrates successful operations and milestones  
-**Hook Type**: Stop  
+**Purpose**: Celebrates successful operations and milestones
+**Hook Type**: Stop
 **Triggers**: Security fixes, clean scans, test passes, commits
+
+#### smart-suggestions.sh
+
+**Purpose**: Provides intelligent workflow suggestions based on file modifications
+**Hook Type**: Integrated with PostToolUse hooks
+**Features**: Context-aware suggestions, pattern matching, rate limiting
+**Examples**: Security files → `/prefix:secure . --quick`, Tests → `/prefix:understand . --test-coverage`
 
 #### system-notification.sh
 
@@ -76,6 +83,49 @@ Hooks are installed by the main `install.sh` script:
 2. Settings template is optionally installed to `~/.claude/settings.json`
 3. Existing settings are preserved during installation
 
+## Smart Suggestions System
+
+### Overview
+
+The Smart Suggestions system provides intelligent workflow recommendations based on file modifications. It analyzes file patterns and suggests relevant toolkit commands to help users learn the 6-command architecture.
+
+### Features
+
+- **Context-Aware**: Suggestions based on file types and modification patterns
+- **Rate Limited**: 30-second cooldown prevents suggestion spam
+- **Customizable**: JSON configuration allows pattern and suggestion customization
+- **Non-Invasive**: Integrates seamlessly with existing hooks
+
+### File Pattern Categories
+
+- **Security**: `*auth*`, `*login*`, `*password*`, `*crypto*`, etc. → `/prefix:secure . --quick`
+- **Tests**: `*test*`, `*.test.*`, `*spec*` → `/prefix:understand . --test-coverage`
+- **Dependencies**: `package.json`, `requirements.txt` → `/prefix:secure . --dependencies`
+- **Infrastructure**: `*.yml`, `Dockerfile`, `.env*` → `/prefix:secure . --infrastructure`
+- **Documentation**: `*.md`, `README*` → `/prefix:create docs --sync`
+- **Database**: `*migration*`, `*schema*`, `*.sql` → `/prefix:secure . --data-security`
+- **API**: `*api*`, `*endpoint*`, `*route*` → `/prefix:secure . --api-security`
+- **Frontend**: `*.js`, `*.ts`, `*.html`, `*.css` → `/prefix:secure . --frontend`
+
+### Configuration
+
+Customize suggestions in `~/.claude/claude-code-toolkit/hooks/config/suggestions-config.json`:
+
+```json
+{
+  "enabled": true,
+  "verbosity": "normal",
+  "cooldown_seconds": 30,
+  "max_suggestions": 2,
+  "file_patterns": {
+    "security": {
+      "patterns": ["*auth*", "*login*"],
+      "suggestions": ["💡 Security code modified. Consider: /prefix:secure . --quick"]
+    }
+  }
+}
+```
+
 ## Hook Types Supported
 
 Claude Code supports these hook types:
@@ -83,7 +133,7 @@ Claude Code supports these hook types:
 - **Stop**: Runs when main agent finishes responding (implemented)
 - **SubagentStop**: Runs when subagent finishes
 - **PreToolUse**: Before tool calls
-- **PostToolUse**: After tool completion
+- **PostToolUse**: After tool completion (Smart Suggestions integrated here)
 - **Notification**: For permission requests
 - **UserPromptSubmit**: When user submits prompt
 - **PreCompact**: Before context compaction

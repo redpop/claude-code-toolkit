@@ -105,8 +105,8 @@ This template defines the standard format for command help output in the Claude 
 
 | Placeholder | Description | Example |
 |------------|-------------|---------|
-| `{{COMMAND_NAMESPACE}}` | Command category | `scan`, `fix`, `gen` |
-| `{{COMMAND_NAME}}` | Specific command name | `deep`, `quick-wins`, `component` |
+| `{{COMMAND_NAMESPACE}}` | Command category | `understand`, `improve`, `create` |
+| `{{COMMAND_NAME}}` | Specific command name | `comprehensive`, `apply-insights`, `docs` |
 | `{{PREFIX}}` | Installation prefix | `myproject`, `toolkit` |
 | `{{BRIEF_DESCRIPTION}}` | One-line command summary | "Perform deep code analysis with security focus" |
 | `{{USAGE_SYNTAX}}` | Command syntax pattern | `[PATH] [OPTIONS]` |
@@ -126,7 +126,7 @@ This template defines the standard format for command help output in the Claude 
 ## Formatting Guidelines
 
 ### Command References
-- Use backticks for command names: `/prefix:scan:deep`
+- Use backticks for command names: `/prefix:understand`
 - Use code blocks for command examples
 - Use bold for option flags: **--export-json**
 
@@ -150,14 +150,14 @@ This template defines the standard format for command help output in the Claude 
 ## Example Implementation
 
 ```markdown
-# scan:deep
+# understand
 
-Perform comprehensive code analysis with security and quality focus
+Perform comprehensive code analysis with intelligent problem routing
 
 ## SYNOPSIS
 
 ```bash
-/myproject:scan:deep [PATH] [OPTIONS]
+/myproject:understand [PATH] [OPTIONS]
 ```
 
 ## DESCRIPTION
@@ -194,15 +194,15 @@ Default: `.` (current directory)
 ### Basic Analysis
 
 ```bash
-/myproject:scan:deep
+/myproject:understand .
 ```
 
 Analyze current directory with default settings.
 
-### Focused Security Scan
+### Focused Security Analysis
 
 ```bash
-/myproject:scan:deep src/ --focus security --export-json
+/myproject:understand src/ --focus security --export-json
 ```
 
 Analyze only the src/ directory for security issues and export results.
@@ -210,7 +210,7 @@ Analyze only the src/ directory for security issues and export results.
 ### Comprehensive Project Analysis
 
 ```bash
-/myproject:scan:deep . --export-md --verbose --exclude "node_modules/*"
+/myproject:understand . --comprehensive --export-md --verbose
 ```
 
 Full project analysis excluding dependencies, with detailed output.
@@ -223,10 +223,10 @@ Full project analysis excluding dependencies, with detailed output.
 
 ## SEE ALSO
 
-- `/myproject:scan:quick` - Fast basic code scan
-- `/myproject:scan:report` - Generate report from previous scan
-- `/myproject:fix:quick-wins` - Apply automated fixes
-- `/myproject:auto:execute` - Execute action plan from scan
+- `/myproject:improve` - Apply code improvements
+- `/myproject:secure` - Security analysis and fixes
+- `/myproject:create` - Generate code and documentation
+- `/myproject:ship` - Deployment readiness checks
 
 ## AGENT INFORMATION
 

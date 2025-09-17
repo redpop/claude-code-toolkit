@@ -1,6 +1,7 @@
 ---
 name: debugging-specialist
 description: Expert in systematic debugging, log analysis, and root cause identification. This agent helps trace errors across systems, analyze stack traces, and provide actionable debugging strategies. Essential for production issues and complex bug investigations.
+category: security
 tools: Read, Grep, Task
 model: opus
 ---

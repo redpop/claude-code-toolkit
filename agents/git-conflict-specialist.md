@@ -1,6 +1,7 @@
 ---
 name: git-conflict-specialist
 description: Expert in Git conflict analysis, resolution strategies, and merge semantics
+category: git
 tools: Read, Grep, Task
 ---
 

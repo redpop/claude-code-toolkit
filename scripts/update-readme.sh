@@ -13,6 +13,13 @@ NC='\033[0m' # No Color
 # Function to capitalize first letter of a word
 capitalize_first() {
     local word="$1"
+
+    # Special case for typo3
+    if [ "$word" = "typo3" ]; then
+        echo "TYPO3"
+        return
+    fi
+
     local first_letter
     local rest
     first_letter=$(echo "$word" | cut -c1 | tr '[:lower:]' '[:upper:]')
@@ -47,16 +54,12 @@ extract_frontmatter() {
     ' "$file"
 }
 
-# Function to check if command has help support (options field)
+# Function to check if command has help support (help implementation)
 has_help_support() {
     local file=$1
-    
-    # Check if frontmatter contains "options:" field
-    awk '
-        /^---$/ { if (in_fm) exit; in_fm = 1; next }
-        in_fm && /^options:/ { found = 1; exit }
-        END { exit !found }
-    ' "$file"
+
+    # Check if content contains help implementation or --help in argument-hint
+    grep -q "contains.*--help\|argument-hint.*--help" "$file"
 }
 
 # Function to extract first paragraph after frontmatter as fallback description
@@ -90,7 +93,68 @@ has_commands=false
 has_help_system=false
 help_commands_list=""
 
-# Process each category directory
+# First, process core commands (direct .md files in commands/)
+core_commands_content=""
+core_commands_found=false
+
+for cmd_file in "$COMMANDS_DIR"/*.md; do
+    if [ -f "$cmd_file" ] && [ "$(basename "$cmd_file")" != "CLAUDE.md" ]; then
+        cmd_name=$(basename "$cmd_file" .md)
+
+        # Extract metadata
+        description=$(extract_frontmatter "$cmd_file" "description")
+        if [ -z "$description" ]; then
+            description=$(extract_first_paragraph "$cmd_file")
+        fi
+
+        argument_hint=$(extract_frontmatter "$cmd_file" "argument-hint")
+
+        # Track help system usage
+        if has_help_support "$cmd_file"; then
+            has_help_system=true
+            if [ -n "$help_commands_list" ]; then
+                help_commands_list+=", "
+            fi
+            help_commands_list+="/prefix:${cmd_name}"
+        fi
+
+        # Build core commands section
+        if [ "$core_commands_found" = false ]; then
+            core_commands_content+="\n### Core Commands (5-Command Architecture)\n\n"
+            core_commands_content+="| Command | Description | Options |\n"
+            core_commands_content+="|---------|-------------|---------|"
+            core_commands_found=true
+            has_commands=true
+        fi
+
+        # Format options from argument-hint
+        options=""
+        if [ -n "$argument_hint" ]; then
+            cleaned=$(echo "$argument_hint" | sed 's/\[//g; s/\]//g')
+            if [ -n "$cleaned" ]; then
+                options=$(echo "$cleaned" | awk '{
+                    for(i=1; i<=NF; i++) {
+                        if(i>1) printf ", "
+                        gsub(/\|/, "\\|", $i)
+                        printf "`%s`", $i
+                    }
+                }')
+            fi
+        fi
+
+        # Add core command row with link to documentation
+        core_commands_content+="
+| [\`/prefix:${cmd_name}\`](docs/commands/${cmd_name}.md) | ${description:-No description} | ${options:--} |"
+    fi
+done
+
+# Add core commands to output if found
+if [ "$core_commands_found" = true ]; then
+    echo -e "$core_commands_content" >> "$TEMP_FILE"
+    echo "" >> "$TEMP_FILE"
+fi
+
+# Then process each category directory
 for category_dir in "$COMMANDS_DIR"/*; do
     if [ -d "$category_dir" ]; then
         category_name=$(basename "$category_dir")
@@ -114,24 +178,20 @@ for category_dir in "$COMMANDS_DIR"/*; do
                 
                 argument_hint=$(extract_frontmatter "$cmd_file" "argument-hint")
                 
-                # Check if command has help support
-                help_support=""
+                # Track help system usage
                 if has_help_support "$cmd_file"; then
-                    help_support="✓"
                     has_help_system=true
                     if [ -n "$help_commands_list" ]; then
                         help_commands_list+=", "
                     fi
                     help_commands_list+="/prefix:${category_name}:${cmd_name}"
-                else
-                    help_support="-"
                 fi
                 
                 # Build command entry
                 if [ "$category_has_commands" = false ]; then
                     category_content+="\n### ${category_title} Commands\n\n"
-                    category_content+="| Command | Description | Options | Help |\n"
-                    category_content+="|---------|-------------|---------|------|"
+                    category_content+="| Command | Description | Options |\n"
+                    category_content+="|---------|-------------|---------|"
                     category_has_commands=true
                     has_commands=true
                 fi
@@ -157,9 +217,9 @@ for category_dir in "$COMMANDS_DIR"/*; do
                     fi
                 fi
                 
-                # Add command row  
+                # Add command row with link to documentation
                 category_content+="
-| \`/prefix:${category_name}:${cmd_name}\` | ${description:-No description} | ${options:--} | ${help_support} |"
+| [\`/prefix:${category_name}:${cmd_name}\`](docs/commands/${category_name}/${cmd_name}.md) | ${description:-No description} | ${options:--} |"
             fi
         done
         
@@ -177,30 +237,19 @@ if [ "$has_help_system" = true ]; then
 
 ## Help System
 
-Some commands provide detailed help information when called with the `--help` option. Commands with help support are marked with ✓ in the Help column above.
-
-### Usage
-
-To get detailed help for any supported command:
+Most commands provide detailed help information when called with `--help` or `-h`:
 
 ```bash
-/prefix:category:command --help
+/prefix:command --help
+/prefix:category:command -h
 ```
 
-This will show:
-- Detailed description and usage
-- All available options with explanations  
-- Examples with real use cases
-- Related commands and workflows
-- MCP enhancement information (if applicable)
+This shows detailed descriptions, all options, examples, and related workflows.
 
-### Example
-
+**Example:**
 ```bash
-/prefix:git:conflict-resolver --help
+/prefix:understand --help
 ```
-
-Shows comprehensive guide for Git conflict resolution including strategies, workflows, and team best practices.
 
 EOF
 
@@ -267,3 +316,20 @@ rm "$TEMP_FILE"
 rm "${README_FILE}.bak"
 
 echo -e "${GREEN}✓ README.md updated successfully!${NC}"
+
+# Update agent documentation as well
+echo ""
+echo -e "${YELLOW}Updating agent documentation...${NC}"
+
+# Check if update-agents.sh exists and is executable
+AGENTS_SCRIPT="$SCRIPT_DIR/update-agents.sh"
+if [ -x "$AGENTS_SCRIPT" ]; then
+    "$AGENTS_SCRIPT"
+    echo -e "${GREEN}✓ Agent documentation updated successfully!${NC}"
+else
+    echo -e "${YELLOW}Warning: update-agents.sh not found or not executable${NC}"
+fi
+
+echo ""
+echo -e "${GREEN}=== Update Complete ===${NC}"
+echo "Both commands and agents documentation have been updated."

@@ -70,5 +70,10 @@ fi
 # Run in background to avoid blocking Claude Code
 afplay -v "$VOLUME" "$SOUND_FILE" 2>/dev/null &
 
+# Smart suggestions integration
+if [ -f "$HOME/.claude/claude-code-toolkit/hooks/smart-suggestions.sh" ]; then
+    echo "$INPUT" | "$HOME/.claude/claude-code-toolkit/hooks/smart-suggestions.sh" 2>&1 &
+fi
+
 # Always exit successfully to avoid disrupting Claude Code
 exit 0

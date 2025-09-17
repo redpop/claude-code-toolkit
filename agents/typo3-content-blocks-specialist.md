@@ -1,6 +1,7 @@
 ---
 name: typo3-content-blocks-specialist
 description: TYPO3 Content Blocks expert specializing in creating, configuring, and optimizing content blocks for TYPO3 v13
+category: typo3
 tools: Read, Grep, Task
 ---
 

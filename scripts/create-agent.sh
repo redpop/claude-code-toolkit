@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Create Agent Script - Generate new agents from template with proper validation
-# Usage: ./scripts/create-agent.sh <agent-name> <type> "<description>"
+# Usage: ./scripts/create-agent.sh <agent-name> <type> <category> "<description>"
 
 set -e
 
@@ -19,17 +19,18 @@ AGENTS_DIR="$PROJECT_ROOT/agents"
 
 # Function to display usage
 show_usage() {
-    echo "Usage: $0 <agent-name> <type> \"<description>\""
+    echo "Usage: $0 <agent-name> <type> <category> \"<description>\""
     echo ""
     echo "Arguments:"
     echo "  agent-name    : Unique identifier for the agent (lowercase, hyphenated)"
     echo "  type          : Agent type (specialist|analyzer|helper|research)"
+    echo "  category      : Agent category (analysis|architecture|documentation|frontend|git|operations|research|security|testing|typo3)"
     echo "  description   : Brief description of the agent's purpose"
     echo ""
     echo "Examples:"
-    echo "  $0 database-optimizer specialist \"Database performance optimization expert\""
-    echo "  $0 code-reviewer analyzer \"Automated code review and quality analysis\""
-    echo "  $0 api-tester helper \"API testing and validation assistant\""
+    echo "  $0 database-optimizer specialist operations \"Database performance optimization expert\""
+    echo "  $0 code-reviewer analyzer security \"Automated code review and quality analysis\""
+    echo "  $0 api-tester helper testing \"API testing and validation assistant\""
     exit 1
 }
 
@@ -49,6 +50,16 @@ validate_agent_type() {
     if [[ ! "$type" =~ ^(specialist|analyzer|helper|research)$ ]]; then
         echo -e "${RED}Error: Agent type must be one of: specialist, analyzer, helper, research${NC}"
         echo -e "${RED}Invalid type: $type${NC}"
+        exit 1
+    fi
+}
+
+# Function to validate agent category
+validate_agent_category() {
+    local category="$1"
+    if [[ ! "$category" =~ ^(analysis|architecture|documentation|frontend|git|operations|research|security|testing|typo3)$ ]]; then
+        echo -e "${RED}Error: Agent category must be one of: analysis, architecture, documentation, frontend, git, operations, research, security, testing, typo3${NC}"
+        echo -e "${RED}Invalid category: $category${NC}"
         exit 1
     fi
 }
@@ -126,7 +137,8 @@ determine_expertise() {
 create_agent() {
     local name="$1"
     local type="$2"
-    local description="$3"
+    local category="$3"
+    local description="$4"
     local expertise
     expertise=$(determine_expertise "$name" "$type")
     
@@ -148,6 +160,7 @@ create_agent() {
         # macOS
         sed -i '' "s/\[AGENT_NAME\]/$name/g" "$output_file"
         sed -i '' "s/\[AGENT_DESCRIPTION\]/$description/g" "$output_file"
+        sed -i '' "s/\[CATEGORY\]/$category/g" "$output_file"
         sed -i '' "s/\[specialist|analyzer|helper|research\]/$type/g" "$output_file"
         sed -i '' "s/\[PRIMARY_DOMAIN\]/$expertise/g" "$output_file"
         sed -i '' "s/\[AGENT_TITLE\]/$title Agent/g" "$output_file"
@@ -156,6 +169,7 @@ create_agent() {
         # Linux
         sed -i "s/\[AGENT_NAME\]/$name/g" "$output_file"
         sed -i "s/\[AGENT_DESCRIPTION\]/$description/g" "$output_file"
+        sed -i "s/\[CATEGORY\]/$category/g" "$output_file"
         sed -i "s/\[specialist|analyzer|helper|research\]/$type/g" "$output_file"
         sed -i "s/\[PRIMARY_DOMAIN\]/$expertise/g" "$output_file"
         sed -i "s/\[AGENT_TITLE\]/$title Agent/g" "$output_file"
@@ -183,18 +197,20 @@ main() {
     fi
     
     # Check arguments
-    if [[ $# -lt 3 ]]; then
+    if [[ $# -lt 4 ]]; then
         show_usage
     fi
-    
+
     # Parse arguments
     AGENT_NAME="$1"
     AGENT_TYPE="$2"
-    AGENT_DESCRIPTION="$3"
-    
+    AGENT_CATEGORY="$3"
+    AGENT_DESCRIPTION="$4"
+
     # Validate inputs
     validate_agent_name "$AGENT_NAME"
     validate_agent_type "$AGENT_TYPE"
+    validate_agent_category "$AGENT_CATEGORY"
     
     # Check if agent already exists
     check_agent_exists "$AGENT_NAME"
@@ -202,10 +218,11 @@ main() {
     # Create the agent
     echo -e "${GREEN}Creating agent: $AGENT_NAME${NC}"
     echo "Type: $AGENT_TYPE"
+    echo "Category: $AGENT_CATEGORY"
     echo "Description: $AGENT_DESCRIPTION"
     echo ""
-    
-    create_agent "$AGENT_NAME" "$AGENT_TYPE" "$AGENT_DESCRIPTION"
+
+    create_agent "$AGENT_NAME" "$AGENT_TYPE" "$AGENT_CATEGORY" "$AGENT_DESCRIPTION"
 }
 
 # Run main function

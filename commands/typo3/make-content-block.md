@@ -1,7 +1,7 @@
 ---
 allowed-tools: Bash(php:*)
 description: Wrapper for TYPO3 make:content-block command with intelligent defaults
-argument-hint: "[--vendor=...] [--type=...] [--skeleton-path=...] [--config-path=...]"
+argument-hint: "[--vendor=...] [--type=...] [--skeleton-path=...] [--config-path=...] [--create-skeleton] [--batch=...] [--migrate-from=...]"
 ---
 
 # TYPO3 Make Content Block Command Wrapper

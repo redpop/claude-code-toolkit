@@ -29,12 +29,12 @@ Then exit without executing the main command.
 ## Usage
 
 ```
-/changelog                              # AI determines version and updates changelog
-/changelog --commit                     # Update changelog and commit using git commit command
-/changelog --fast                       # Update changelog, commit, and push in one command
-/changelog --update-version             # Also update version in package files
-/changelog --commit --update-version    # Full automated workflow
-/changelog --commit --push              # Update, commit, and push in one command
+/prefix:meta:changelog                              # AI determines version and updates changelog
+/prefix:meta:changelog --commit                     # Update changelog and commit using git commit command
+/prefix:meta:changelog --fast                       # Update changelog, commit, and push in one command
+/prefix:meta:changelog --update-version             # Also update version in package files
+/prefix:meta:changelog --commit --update-version    # Full automated workflow
+/prefix:meta:changelog --commit --push              # Update, commit, and push in one command
 ```
 
 ### Arguments
@@ -47,13 +47,13 @@ Then exit without executing the main command.
 ## Examples
 
 ```
-/changelog                                    # Basic usage - AI analyzes and updates changelog
-/changelog --commit                           # Update and commit with proper message
-/changelog --fast                             # Quick release: update, commit, and push
-/changelog --commit --push                    # Update, commit, and push to remote
-/changelog --commit --update-version          # Full release workflow
-/changelog --fast --update-version            # Fast mode with version update
-/changelog --commit --update-version --push   # Complete release with push
+/prefix:meta:changelog                                    # Basic usage - AI analyzes and updates changelog
+/prefix:meta:changelog --commit                           # Update and commit with proper message
+/prefix:meta:changelog --fast                             # Quick release: update, commit, and push
+/prefix:meta:changelog --commit --push                    # Update, commit, and push to remote
+/prefix:meta:changelog --commit --update-version          # Full release workflow
+/prefix:meta:changelog --fast --update-version            # Fast mode with version update
+/prefix:meta:changelog --commit --update-version --push   # Complete release with push
 ```
 
 ## What This Command Does
@@ -324,7 +324,7 @@ After commits:
 - `feat: implement OAuth2 integration`
 - `fix: resolve login timeout issue`
 
-Running `/changelog --commit` generates:
+Running `/prefix:meta:changelog --commit` generates:
 
 ```markdown
 ## [1.2.0] - 2024-01-26
@@ -347,7 +347,7 @@ After commits:
 - `BREAKING CHANGE: remove deprecated v1 endpoints`
 - `fix: update error handling`
 
-Running `/changelog` (with `--fast` for quick workflow) will:
+Running `/prefix:meta:changelog` (with `--fast` for quick workflow) will:
 
 - Detect version bump: 1.1.0 → 2.0.0 (MAJOR - breaking changes detected)
 - Add these changes:
@@ -363,7 +363,7 @@ After commits:
 - `docs: update API documentation`
 - `chore: update dependencies`
 
-Running `/changelog --commit --update-version`:
+Running `/prefix:meta:changelog --commit --update-version`:
 
 - Determines version: 1.1.1 (patch bump)
 - Updates CHANGELOG.md
@@ -372,7 +372,7 @@ Running `/changelog --commit --update-version`:
 
 ### Example 5: Complete Release with Push
 
-Running `/changelog --commit --update-version --push`:
+Running `/prefix:meta:changelog --commit --update-version --push`:
 
 - Analyzes all changes since last version
 - Determines appropriate version bump
@@ -384,10 +384,10 @@ Running `/changelog --commit --update-version --push`:
 
 ### Example 4: Fast Mode
 
-Running `/changelog --fast` for quick release:
+Running `/prefix:meta:changelog --fast` for quick release:
 
 ```bash
-/changelog --fast
+/prefix:meta:changelog --fast
 ```
 
 This single command will:

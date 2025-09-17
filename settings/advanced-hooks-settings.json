@@ -41,10 +41,6 @@
           },
           {
             "type": "command",
-            "command": "~/.claude/claude-code-toolkit/hooks/command-chain-notification.sh"
-          },
-          {
-            "type": "command",
             "command": "~/.claude/claude-code-toolkit/hooks/system-notification.sh"
           }
         ]

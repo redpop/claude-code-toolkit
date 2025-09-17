@@ -1,6 +1,7 @@
 ---
 name: tailwind-css-specialist
 description: Tailwind CSS v4 expert specializing in best practices, installation, configuration, and integration with modern toolchains
+category: frontend
 tools: Read, Grep, Glob, WebFetch, WebSearch, Task
 ---
 
