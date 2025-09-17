@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.3.0] - 2025-09-17
+
+### Added
+
+- ✨ **Strategic Planning Documentation** - Comprehensive agent system enhancement plans
+  - Added 6 strategic planning documents for next-generation toolkit architecture
+  - Blueprint for advanced agent system capabilities and organizational improvements
+  - Foundation for personality traits system and split-role agent designs
+  - Strategic plans for bash script integration and output style systems
+  - Orchestrator pattern design for enhanced workflow coordination
+
+### Fixed
+
+- 🐛 **Documentation Formatting** - Minor README formatting improvements
+  - Clean up spacing and table formatting for better readability
+  - Enhanced consistency in documentation presentation
+
 ## [5.2.0] - 2025-09-16
 
 ### Added
