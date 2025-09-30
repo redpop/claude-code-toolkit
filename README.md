@@ -99,6 +99,59 @@ This shows detailed descriptions, all options, examples, and related workflows.
 /prefix:understand --help
 ```
 
+## 🛠️ Utility Scripts
+
+The toolkit includes several utility scripts for managing your development environment:
+
+### MCP Server Management
+
+Easily install and manage MCP (Model Context Protocol) servers:
+
+```bash
+# List all available MCP servers
+./scripts/manage-mcp.sh list
+
+# Install a server for current directory (default - local scope)
+./scripts/manage-mcp.sh install playwright
+
+# Install for project workspace (creates .mcp.json)
+./scripts/manage-mcp.sh install playwright --scope project
+
+# Install for all projects (user scope)
+./scripts/manage-mcp.sh install playwright --user
+
+# Interactive installation (select server and scope)
+./scripts/manage-mcp.sh install
+
+# Show server information
+./scripts/manage-mcp.sh info playwright
+
+# Remove a server
+./scripts/manage-mcp.sh remove playwright
+```
+
+**Available MCP Servers:**
+
+- **playwright** - Browser automation and testing
+- **perplexity-ask** - AI-powered web search
+- **context7** - Context management and retrieval
+- **fetch** - HTTP fetch and web scraping
+- **basic-memory** - Simple memory and note-taking
+- **chrome-devtools** - Chrome DevTools integration
+- **shadcn-ui-server** - shadcn/ui component library
+- **figma-dev-mode** - Figma Dev Mode integration
+
+See [MCP Management Guide](docs/guides/MCP-MANAGEMENT.md) for details.
+
+### Other Utility Scripts
+
+- **update-readme.sh** - Auto-generates command documentation
+- **create-agent.sh** - Creates new AI agents
+- **create-command.sh** - Creates new commands
+- **manage-hooks.sh** - Manages Claude Code hooks
+
+See [scripts/CLAUDE.md](scripts/CLAUDE.md) for complete documentation.
+
 <!-- COMMANDS:END -->
 
 ## 🤖 AI Agents

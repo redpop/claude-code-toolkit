@@ -40,6 +40,23 @@ This file provides context for Claude Code when working with utility scripts in 
 - Generates proper frontmatter and structure
 - Includes help system integration
 
+### Management Scripts
+
+**manage-mcp.sh**
+
+- Manages MCP (Model Context Protocol) servers for Claude Code
+- Usage: `./scripts/manage-mcp.sh <command> [options]`
+- Commands: `list`, `install`, `remove`, `info`, `help`
+- Supports project-scoped (default) and global installations
+- Interactive installation with server selection
+- Easy to extend by adding entries to the MCP_SERVERS array
+
+**manage-hooks.sh**
+
+- Manages Claude Code hooks
+- Enables/disables hook scripts
+- Provides hook status and diagnostics
+
 ### Analysis Scripts
 
 **report-history.js**

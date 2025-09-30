@@ -6,6 +6,26 @@ This guide explains how to integrate and use MCP (Model Context Protocol) server
 
 MCP servers extend Claude Code's capabilities by providing access to specialized tools. The Claude Code Toolkit is designed to leverage these tools when available while gracefully falling back to traditional methods when they're not.
 
+## Quick Start: MCP Server Manager
+
+The toolkit includes a convenient script for managing MCP servers:
+
+```bash
+# List all available MCP servers
+./scripts/manage-mcp.sh list
+
+# Install a server (project scope)
+./scripts/manage-mcp.sh install playwright
+
+# Install a server globally
+./scripts/manage-mcp.sh install playwright --global
+
+# Interactive installation
+./scripts/manage-mcp.sh install
+```
+
+For detailed information, see the [MCP Management Guide](MCP-MANAGEMENT.md).
+
 ## Semgrep MCP Integration
 
 ### Installation
