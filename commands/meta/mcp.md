@@ -144,6 +144,12 @@ Display the script output to the user, including:
 - Installation scope confirmation
 - Next steps or usage instructions
 
+**For install and remove operations**, additionally inform the user:
+
+⚠️ **Important**: Changes to MCP server configuration require a **Claude Code restart** to take effect.
+
+Please restart Claude Code to activate the newly installed/removed MCP server.
+
 ## MCP Server Management
 
 This command provides:
