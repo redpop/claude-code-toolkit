@@ -8,12 +8,17 @@ Project and toolkit management commands for Claude Code.
 |---------|---------|
 | [changelog](changelog.md) | AI-powered CHANGELOG.md management with automatic version detection |
 | [handoff](handoff.md) | Documents current problem context for AI assistant handoff |
+| [mcp](mcp.md) | Manage MCP (Model Context Protocol) servers for Claude Code |
 
 ## Usage Pattern
 
 Meta commands manage the development process itself rather than the code:
 
 ```bash
+# MCP server management
+/prefix:meta:mcp list
+/prefix:meta:mcp install context7 --scope project
+
 # Project documentation and handoffs
 /prefix:meta:handoff
 /prefix:meta:handoff --compact
