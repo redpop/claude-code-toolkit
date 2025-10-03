@@ -83,31 +83,34 @@ check_agent_exists() {
 determine_expertise() {
     local name="$1"
     local type="$2"
-    
+
     # Determine expertise based on keywords in name
     case "$name" in
-        *database*|*db*|*sql*)
+        *database* | *db* | *sql*)
             echo "Database Optimization"
             ;;
-        *security*|*auth*|*crypto*)
+        *security* | *auth* | *crypto*)
             echo "Application Security"
             ;;
-        *performance*|*perf*|*optimize*)
+        *performance* | *perf* | *optimize*)
             echo "Performance Optimization"
             ;;
-        *frontend*|*ui*|*ux*)
+        *frontend* | *ui* | *ux*)
             echo "Frontend Development"
             ;;
-        *backend*|*api*|*server*)
+        *backend* | *api* | *server*)
             echo "Backend Development"
             ;;
-        *test*|*qa*|*quality*)
+        *test* | *qa* | *quality*)
             echo "Testing & Quality Assurance"
             ;;
-        *doc*|*documentation*)
+        *documentation*)
             echo "Documentation & Technical Writing"
             ;;
-        *cloud*|*deploy*|*devops*)
+        *doc*)
+            echo "Documentation & Technical Writing"
+            ;;
+        *cloud* | *deploy* | *devops*)
             echo "Cloud & DevOps"
             ;;
         *)
@@ -141,20 +144,20 @@ create_agent() {
     local description="$4"
     local expertise
     expertise=$(determine_expertise "$name" "$type")
-    
+
     # Prepare output file
     local output_file="$AGENTS_DIR/${name}.md"
-    
+
     # Create agents directory if it doesn't exist
     mkdir -p "$AGENTS_DIR"
-    
+
     # Copy template and replace placeholders
     cp "$TEMPLATE_FILE" "$output_file"
-    
+
     # Perform replacements based on agent name and type
     local title
     title=$(echo "$name" | sed 's/-/ /g' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2)}1')
-    
+
     # Platform-specific sed in-place editing
     if [[ "$OSTYPE" == "darwin"* ]]; then
         # macOS
@@ -175,7 +178,7 @@ create_agent() {
         sed -i "s/\[AGENT_TITLE\]/$title Agent/g" "$output_file"
         sed -i "s/\[MCP_TOOLS\]/# Add MCP tools if needed/g" "$output_file"
     fi
-    
+
     echo -e "${GREEN}✓ Agent created successfully at: $output_file${NC}"
     echo ""
     echo "Next steps:"
@@ -195,7 +198,7 @@ main() {
         echo -e "${RED}Error: Template file not found at $TEMPLATE_FILE${NC}"
         exit 1
     fi
-    
+
     # Check arguments
     if [[ $# -lt 4 ]]; then
         show_usage
@@ -211,10 +214,10 @@ main() {
     validate_agent_name "$AGENT_NAME"
     validate_agent_type "$AGENT_TYPE"
     validate_agent_category "$AGENT_CATEGORY"
-    
+
     # Check if agent already exists
     check_agent_exists "$AGENT_NAME"
-    
+
     # Create the agent
     echo -e "${GREEN}Creating agent: $AGENT_NAME${NC}"
     echo "Type: $AGENT_TYPE"

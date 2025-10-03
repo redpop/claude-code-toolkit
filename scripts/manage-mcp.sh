@@ -274,18 +274,18 @@ select_server_interactive() {
 
     if [[ "$selection" == "q" ]] || [[ "$selection" == "Q" ]]; then
         echo "Installation cancelled" >&2
-        echo ""  # Return empty string
+        echo "" # Return empty string
         return 0
     fi
 
     if ! [[ "$selection" =~ ^[0-9]+$ ]] || [ "$selection" -lt 1 ] || [ "$selection" -gt "${#sorted_entries[@]}" ]; then
         print_error "Invalid selection"
-        echo ""  # Return empty string
+        echo "" # Return empty string
         return 1
     fi
 
     # Get the selected entry from sorted array
-    local selected_sorted_entry="${sorted_entries[$((selection-1))]}"
+    local selected_sorted_entry="${sorted_entries[$((selection - 1))]}"
     local selected_entry="${selected_sorted_entry#*|}"
     parse_mcp_entry "$selected_entry" "name"
 }
@@ -308,7 +308,7 @@ select_scope_interactive() {
 
     if [[ "$scope_selection" == "q" ]] || [[ "$scope_selection" == "Q" ]]; then
         echo "Installation cancelled" >&2
-        echo ""  # Return empty string
+        echo "" # Return empty string
         return 0
     fi
 
@@ -324,7 +324,7 @@ select_scope_interactive() {
             ;;
         *)
             print_error "Invalid selection"
-            echo ""  # Return empty string
+            echo "" # Return empty string
             return 1
             ;;
     esac
@@ -472,7 +472,7 @@ main() {
             fi
             install_server "$server_name" "$scope"
             ;;
-        remove|uninstall)
+        remove | uninstall)
             if [[ -z "$server_name" ]]; then
                 print_error "Server name required for removal"
                 echo "Usage: $0 remove <server-name>"
@@ -488,7 +488,7 @@ main() {
             fi
             show_server_info "$server_name"
             ;;
-        help|-h|--help)
+        help | -h | --help)
             usage
             ;;
         "")
@@ -506,4 +506,3 @@ main() {
 
 # Run main function
 main "$@"
-

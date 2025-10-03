@@ -28,8 +28,8 @@ capitalize_first() {
 }
 
 # Get script directory
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-PROJECT_ROOT="$( cd "$SCRIPT_DIR/.." && pwd )"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 COMMANDS_DIR="$PROJECT_ROOT/commands"
 README_FILE="$PROJECT_ROOT/README.md"
 
@@ -40,7 +40,7 @@ TEMP_FILE=$(mktemp)
 extract_frontmatter() {
     local file=$1
     local key=$2
-    
+
     # Extract the value between --- markers
     awk -v key="$key" '
         /^---$/ { if (in_fm) exit; in_fm = 1; next }
@@ -65,7 +65,7 @@ has_help_support() {
 # Function to extract first paragraph after frontmatter as fallback description
 extract_first_paragraph() {
     local file=$1
-    
+
     awk '
         /^---$/ { if (in_fm) { in_fm = 0; found_end = 1 } else { in_fm = 1 }; next }
         found_end && NF > 0 && !found_para { 
@@ -160,24 +160,24 @@ for category_dir in "$COMMANDS_DIR"/*; do
         category_name=$(basename "$category_dir")
         category_title=$(capitalize_first "$category_name")
         category_has_commands=false
-        
+
         # Temporary storage for this category
         category_content=""
-        
+
         # Process each command file in the category
         for cmd_file in "$category_dir"/*.md; do
             if [ -f "$cmd_file" ]; then
                 cmd_name=$(basename "$cmd_file" .md)
-                
+
                 # Extract metadata
                 description=$(extract_frontmatter "$cmd_file" "description")
                 if [ -z "$description" ]; then
                     # Fallback to first paragraph
                     description=$(extract_first_paragraph "$cmd_file")
                 fi
-                
+
                 argument_hint=$(extract_frontmatter "$cmd_file" "argument-hint")
-                
+
                 # Track help system usage
                 if has_help_support "$cmd_file"; then
                     has_help_system=true
@@ -186,7 +186,7 @@ for category_dir in "$COMMANDS_DIR"/*; do
                     fi
                     help_commands_list+="/prefix:${category_name}:${cmd_name}"
                 fi
-                
+
                 # Build command entry
                 if [ "$category_has_commands" = false ]; then
                     category_content+="\n### ${category_title} Commands\n\n"
@@ -195,7 +195,7 @@ for category_dir in "$COMMANDS_DIR"/*; do
                     category_has_commands=true
                     has_commands=true
                 fi
-                
+
                 # Format options from argument-hint
                 options=""
                 if [ -n "$argument_hint" ]; then
@@ -216,13 +216,13 @@ for category_dir in "$COMMANDS_DIR"/*; do
                         }')
                     fi
                 fi
-                
+
                 # Add command row with link to documentation
                 category_content+="
 | [\`/prefix:${category_name}:${cmd_name}\`](docs/commands/${category_name}/${cmd_name}.md) | ${description:-No description} | ${options:--} |"
             fi
         done
-        
+
         # Add category to output if it has commands
         if [ "$category_has_commands" = true ]; then
             echo -e "$category_content" >> "$TEMP_FILE"

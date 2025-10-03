@@ -16,7 +16,6 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 BOLD='\033[1m'
 NC='\033[0m' # No Color
@@ -108,9 +107,12 @@ list_hooks() {
     echo "────────────────────────────────────────────────────────────────────────────────"
 
     for hook_name in "${!HOOKS[@]}"; do
-        local info=$(get_hook_info "$hook_name")
-        local description=$(echo "$info" | cut -d'|' -f1)
-        local status=$(check_hook_status "$hook_name")
+        local info
+        info=$(get_hook_info "$hook_name")
+        local description
+        description=$(echo "$info" | cut -d'|' -f1)
+        local status
+        status=$(check_hook_status "$hook_name")
 
         case "$status" in
             "enabled")
@@ -137,11 +139,16 @@ list_hooks() {
 # Show detailed hook information
 show_hook_info() {
     local hook_name="$1"
-    local info=$(get_hook_info "$hook_name")
-    local description=$(echo "$info" | cut -d'|' -f1)
-    local hook_type=$(echo "$info" | cut -d'|' -f2)
-    local dependencies=$(echo "$info" | cut -d'|' -f3)
-    local status=$(check_hook_status "$hook_name")
+    local info
+    info=$(get_hook_info "$hook_name")
+    local description
+    description=$(echo "$info" | cut -d'|' -f1)
+    local hook_type
+    hook_type=$(echo "$info" | cut -d'|' -f2)
+    local dependencies
+    dependencies=$(echo "$info" | cut -d'|' -f3)
+    local status
+    status=$(check_hook_status "$hook_name")
     local hook_file="$HOOKS_DIR/${hook_name}.sh"
 
     print_header
@@ -166,8 +173,10 @@ show_hook_info() {
     echo -e "${BOLD}📁 File Path:${NC} $hook_file"
 
     if [ -f "$hook_file" ]; then
-        local file_size=$(du -h "$hook_file" | cut -f1)
-        local mod_time=$(stat -f "%Sm" -t "%Y-%m-%d %H:%M" "$hook_file")
+        local file_size
+        file_size=$(du -h "$hook_file" | cut -f1)
+        local mod_time
+        mod_time=$(stat -f "%Sm" -t "%Y-%m-%d %H:%M" "$hook_file")
         echo -e "${BOLD}📊 File Size:${NC} $file_size"
         echo -e "${BOLD}⏰ Modified:${NC} $mod_time"
     fi
@@ -221,8 +230,10 @@ enable_hook() {
     echo -e "${GREEN}✅ Hook '$hook_name' enabled successfully!${NC}"
 
     # Check dependencies
-    local info=$(get_hook_info "$hook_name")
-    local dependencies=$(echo "$info" | cut -d'|' -f3)
+    local info
+    info=$(get_hook_info "$hook_name")
+    local dependencies
+    dependencies=$(echo "$info" | cut -d'|' -f3)
 
     echo ""
     echo -e "${BOLD}🔍 Checking dependencies...${NC}"
@@ -288,7 +299,8 @@ run_doctor() {
     echo -e "${BOLD}🎣 Hook Files Check:${NC}"
     for hook_name in "${!HOOKS[@]}"; do
         local hook_file="$HOOKS_DIR/${hook_name}.sh"
-        local status=$(check_hook_status "$hook_name")
+        local status
+        status=$(check_hook_status "$hook_name")
 
         case "$status" in
             "enabled")
@@ -359,7 +371,7 @@ show_stats() {
     local stats_file="$STATS_DIR/command-stats.json"
     if [ -f "$stats_file" ] && command -v jq &> /dev/null; then
         echo -e "${BOLD}🎯 Command Usage (Today):${NC}"
-        jq -r '.daily | to_entries | sort_by(.value.count) | reverse | limit(5;.[]) | "   • \(.key): \(.value.count)x"' "$stats_file" 2>/dev/null || echo "   No command data available"
+        jq -r '.daily | to_entries | sort_by(.value.count) | reverse | limit(5;.[]) | "   • \(.key): \(.value.count)x"' "$stats_file" 2> /dev/null || echo "   No command data available"
     else
         echo -e "${BOLD}🎯 Command Usage:${NC}"
         echo "   Statistics not available (enable enhanced-command-logger hook)"
@@ -371,11 +383,13 @@ show_stats() {
         echo -e "${BOLD}📋 Log Files:${NC}"
         for log_file in "$LOG_DIR"/*.{log,txt,json}; do
             if [ -f "$log_file" ]; then
-                local size=$(du -h "$log_file" | cut -f1)
-                local name=$(basename "$log_file")
+                local size
+                size=$(du -h "$log_file" | cut -f1)
+                local name
+                name=$(basename "$log_file")
                 echo "   • $name: $size"
             fi
-        done 2>/dev/null
+        done 2> /dev/null
     fi
     echo ""
 }
@@ -412,10 +426,13 @@ create_hook() {
         2) hook_type="Stop" ;;
         3) hook_type="SessionStart" ;;
         4) hook_type="SessionStop" ;;
-        *) echo "Invalid choice. Using PostToolUse."; hook_type="PostToolUse" ;;
+        *)
+            echo "Invalid choice. Using PostToolUse."
+            hook_type="PostToolUse"
+            ;;
     esac
 
-    read -p "Hook description: " hook_description
+    read -rp "Hook description: " hook_description
 
     # Create hook file
     cat > "$hook_file" << EOF
@@ -469,7 +486,7 @@ main() {
     local command="$1"
 
     case "$command" in
-        "list"|"ls")
+        "list" | "ls")
             list_hooks
             ;;
         "enable")
@@ -493,20 +510,20 @@ main() {
             fi
             show_hook_info "$2"
             ;;
-        "doctor"|"check")
+        "doctor" | "check")
             run_doctor
             ;;
-        "stats"|"statistics")
+        "stats" | "statistics")
             show_stats
             ;;
-        "create"|"new")
+        "create" | "new")
             if [ $# -ne 2 ]; then
                 echo -e "${RED}❌ Usage: $0 create <hook_name>${NC}"
                 return 1
             fi
             create_hook "$2"
             ;;
-        "help"|"-h"|"--help")
+        "help" | "-h" | "--help")
             print_usage
             ;;
         *)

@@ -46,7 +46,7 @@ for report in "$@"; do
         coverage=$(jq -r '.metrics.test_coverage // 0' "$report")
         issues=$(jq -r '.summary.total_issues // 0' "$report")
         date=$(jq -r '.metadata.timestamp // "unknown"' "$report" | cut -d'T' -f1)
-        
+
         # Store in arrays
         health_scores+=("$health")
         security_scores+=("$security")
@@ -61,16 +61,16 @@ done
 calc_trend() {
     local -a values=("$@")
     local len=${#values[@]}
-    
+
     if [ "$len" -lt 2 ]; then
         echo "N/A"
         return
     fi
-    
+
     local first=${values[0]}
-    local last=${values[$((len-1))]}
+    local last=${values[$((len - 1))]}
     local diff=$((last - first))
-    
+
     if [ "$diff" -gt 0 ]; then
         echo -e "${GREEN}+$diff ↑${NC}"
     elif [ "$diff" -lt 0 ]; then
@@ -108,7 +108,7 @@ calc_trend "${test_coverages[@]}"
 echo -n "Total Issues:     "
 echo -n "${issue_counts[0]} → ${issue_counts[-1]} "
 # Reverse color logic for issues (less is better)
-diff=$((${issue_counts[-1]} - ${issue_counts[0]}))
+diff=$((issue_counts[-1] - issue_counts[0]))
 if [ "$diff" -gt 0 ]; then
     echo -e "${RED}+$diff ↑${NC}"
 elif [ "$diff" -lt 0 ]; then
@@ -122,15 +122,15 @@ echo -e "\n${BLUE}⚡ Quick Wins Analysis${NC}"
 echo "------------------------"
 
 # Analyze latest report for quick wins
-latest_report="${@: -1}"
+latest_report="${*: -1}"
 if [ -f "$latest_report" ]; then
     quick_wins=$(jq -r '
         .findings[] | 
         select(.estimated_effort | 
             test("hour|minutes|Hours|Minutes")) | 
         "\(.severity): \(.title) (\(.estimated_effort))"
-    ' "$latest_report" 2>/dev/null | head -5)
-    
+    ' "$latest_report" 2> /dev/null | head -5)
+
     if [ -n "$quick_wins" ]; then
         echo "$quick_wins"
     else
@@ -144,17 +144,17 @@ echo "--------------------"
 
 if [ "${#health_scores[@]}" -ge 2 ]; then
     # Calculate average improvement per report
-    total_improvement=$((${health_scores[-1]} - ${health_scores[0]}))
+    total_improvement=$((health_scores[-1] - health_scores[0]))
     reports_count=$((${#health_scores[@]} - 1))
-    
+
     if [ "$reports_count" -gt 0 ]; then
         avg_improvement=$(echo "scale=2; $total_improvement / $reports_count" | bc)
         echo "Average improvement per analysis: ${avg_improvement} points"
-        
+
         # Estimate time to reach target
         current=${health_scores[-1]}
         target=80
-        
+
         if [ "$current" -lt "$target" ] && [ "${avg_improvement%.*}" -gt 0 ]; then
             remaining=$((target - current))
             analyses_needed=$(echo "scale=0; $remaining / $avg_improvement" | bc)
@@ -198,5 +198,9 @@ echo -e "\n${BLUE}💾 Export Options${NC}"
 echo "-----------------"
 echo "To analyze in detail, run:"
 echo "  /analyze-report $latest_report --quick-wins"
-echo "  /analyze-report ${@: -2:1} --compare=$latest_report"
+# Get second-to-last argument
+if [ "$#" -ge 2 ]; then
+    second_last="${*: -2:1}"
+    echo "  /analyze-report $second_last --compare=$latest_report"
+fi
 echo "  /analyze-report $* --trends --export-md=trend-analysis.md"

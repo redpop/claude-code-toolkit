@@ -469,7 +469,7 @@ fi
 if [ "$INSTALL_HOOKS" = true ] && [ -d "$SCRIPT_DIR/hooks" ]; then
     print_info "Installing hooks to $CLAUDE_TOOLKIT_DIR/hooks..."
     mkdir -p "$CLAUDE_TOOLKIT_DIR"
-    
+
     # Check if hooks already exist
     if [ -d "$CLAUDE_TOOLKIT_DIR/hooks" ]; then
         if [ "$FORCE_INSTALL" = true ]; then
@@ -480,7 +480,7 @@ if [ "$INSTALL_HOOKS" = true ] && [ -d "$SCRIPT_DIR/hooks" ]; then
             mv "$CLAUDE_TOOLKIT_DIR/hooks" "$CLAUDE_TOOLKIT_DIR/hooks.backup.$(date +%Y%m%d_%H%M%S)"
         fi
     fi
-    
+
     # Create hooks directory and subdirectories
     mkdir -p "$CLAUDE_TOOLKIT_DIR/hooks"
     mkdir -p "$CLAUDE_TOOLKIT_DIR/hooks/config"
@@ -503,6 +503,34 @@ if [ "$INSTALL_HOOKS" = true ] && [ -d "$SCRIPT_DIR/hooks" ]; then
     # Ensure scripts are executable
     chmod +x "$CLAUDE_TOOLKIT_DIR/hooks"/*.sh 2>/dev/null || true
     print_success "Hooks installed to $CLAUDE_TOOLKIT_DIR/hooks"
+fi
+
+# Install scripts to claude-code-toolkit directory (always, not just with hooks)
+if [ -d "$SCRIPT_DIR/scripts" ]; then
+    print_info "Installing utility scripts to $CLAUDE_TOOLKIT_DIR/scripts..."
+    mkdir -p "$CLAUDE_TOOLKIT_DIR/scripts"
+
+    # Check if scripts already exist
+    if [ -d "$CLAUDE_TOOLKIT_DIR/scripts" ] && [ "$(ls -A "$CLAUDE_TOOLKIT_DIR/scripts" 2>/dev/null)" ]; then
+        if [ "$FORCE_INSTALL" = true ]; then
+            print_info "Force mode: Overwriting existing scripts..."
+            rm -rf "$CLAUDE_TOOLKIT_DIR/scripts"
+            mkdir -p "$CLAUDE_TOOLKIT_DIR/scripts"
+        else
+            print_info "Backing up existing scripts..."
+            mv "$CLAUDE_TOOLKIT_DIR/scripts" "$CLAUDE_TOOLKIT_DIR/scripts.backup.$(date +%Y%m%d_%H%M%S)"
+            mkdir -p "$CLAUDE_TOOLKIT_DIR/scripts"
+        fi
+    fi
+
+    # Copy utility scripts (only specific ones needed by commands)
+    if [ -f "$SCRIPT_DIR/scripts/manage-mcp.sh" ]; then
+        cp "$SCRIPT_DIR/scripts/manage-mcp.sh" "$CLAUDE_TOOLKIT_DIR/scripts/"
+        chmod +x "$CLAUDE_TOOLKIT_DIR/scripts/manage-mcp.sh"
+        print_info "Installed MCP management script"
+    fi
+
+    print_success "Utility scripts installed to $CLAUDE_TOOLKIT_DIR/scripts"
 fi
 
 # Install global settings if requested

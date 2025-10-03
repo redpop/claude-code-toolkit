@@ -84,7 +84,8 @@ validate_command_name() {
 # Function to get command directory based on type
 get_command_dir() {
     local type="$1"
-    local repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+    local repo_root
+    repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
     case "$type" in
         core)
@@ -383,23 +384,23 @@ EOF
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
-        -n|--name)
+        -n | --name)
             COMMAND_NAME="$2"
             shift 2
             ;;
-        -t|--type)
+        -t | --type)
             COMMAND_TYPE="$2"
             shift 2
             ;;
-        -d|--description)
+        -d | --description)
             DESCRIPTION="$2"
             shift 2
             ;;
-        -f|--force)
+        -f | --force)
             FORCE=true
             shift
             ;;
-        -h|--help)
+        -h | --help)
             usage
             exit 0
             ;;
@@ -428,8 +429,7 @@ fi
 
 # Validate command type
 case "$COMMAND_TYPE" in
-    core|typo3|meta)
-        ;;
+    core | typo3 | meta) ;;
     *)
         echo -e "${RED}Error: Invalid command type: $COMMAND_TYPE${NC}"
         echo -e "${YELLOW}Valid types: core, typo3, meta${NC}"
@@ -438,8 +438,7 @@ case "$COMMAND_TYPE" in
 esac
 
 # Get target directory
-TARGET_DIR=$(get_command_dir "$COMMAND_TYPE")
-if [[ $? -ne 0 ]]; then
+if ! TARGET_DIR=$(get_command_dir "$COMMAND_TYPE"); then
     exit 1
 fi
 

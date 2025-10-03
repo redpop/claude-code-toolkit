@@ -10,7 +10,7 @@ DOCS_DIR="$ROOT_DIR/docs/agents"
 TEMP_FILE=$(mktemp)
 
 # Clean up on exit
-trap "rm -f $TEMP_FILE" EXIT
+trap 'rm -f "$TEMP_FILE"' EXIT
 
 echo "=== Dynamic Agent Documentation Generator ==="
 echo ""
@@ -23,7 +23,7 @@ extract_field() {
 
     # Extract content between --- markers (frontmatter)
     local frontmatter
-    frontmatter=$(sed -n '/^---$/,/^---$/p' "$file" 2>/dev/null | sed '1d;$d')
+    frontmatter=$(sed -n '/^---$/,/^---$/p' "$file" 2> /dev/null | sed '1d;$d')
 
     if [[ -n "$frontmatter" ]]; then
         # Try to extract the field value
@@ -101,7 +101,7 @@ truncate_text() {
     local max_length="${2:-100}"
 
     if [[ ${#text} -gt $max_length ]]; then
-        echo "${text:0:$((max_length-3))}..."
+        echo "${text:0:$((max_length - 3))}..."
     else
         echo "$text"
     fi
@@ -113,7 +113,7 @@ clean_tools() {
 
     if [[ "$tools" != "-" && -n "$tools" ]]; then
         # Remove spaces after commas for consistency and truncate if too long
-        tools=$(echo "$tools" | sed 's/, */,/g')
+        tools="${tools//, /,}"
         tools=$(truncate_text "$tools" 50)
     fi
 
@@ -169,7 +169,8 @@ done
     echo ""
 
     # Sort categories
-    sorted_categories=($(printf '%s\n' "${!agents_by_category[@]}" | sort))
+    sorted_categories=()
+    mapfile -t sorted_categories < <(printf '%s\n' "${!agents_by_category[@]}" | sort)
 
     # Generate table for each category
     for category in "${sorted_categories[@]}"; do
@@ -182,7 +183,8 @@ done
 
         # Sort agents within category
         IFS='|' read -ra agent_list <<< "${agents_by_category[$category]}"
-        sorted_agents=($(printf '%s\n' "${agent_list[@]}" | sort))
+        sorted_agents=()
+        mapfile -t sorted_agents < <(printf '%s\n' "${agent_list[@]}" | sort)
 
         for agent_name in "${sorted_agents[@]}"; do
             agent_link=$(generate_doc_link "$agent_name" "$category")
