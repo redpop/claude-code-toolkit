@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.4.1] - 2025-10-03
+
+### Changed
+
+- 🔄 **Enhanced MCP Management UX** - Improved user experience for MCP server management
+  - Added restart notification to `/prefix:meta:mcp` command
+  - Users now informed that Claude Code restart is required after installing/removing MCP servers
+  - Prevents confusion when servers don't appear immediately after installation
+  - Clearer workflow guidance for MCP server configuration changes
+
 ## [5.4.0] - 2025-09-30
 
 ### Added
