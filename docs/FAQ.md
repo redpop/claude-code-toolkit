@@ -55,15 +55,16 @@ The recommended workflow is:
 /global:git --smart-commit
 ```
 
-### Q: What's the PRP methodology?
+### Q: How do I use the research and planning agents?
 
-PRP (Project Requirements Proposal) is a blueprint-driven development approach. Use it with:
+The toolkit includes specialized agents for research and planning:
 
-```bash
-/global:understand . --prp --requirements="OAuth2 authentication"
-/global:create . --prp --from-analysis
-/global:ship . --prp --quality-gates
-```
+- **blueprint-architect** - Create implementation blueprints
+- **requirements-analyst** - Validate requirements
+- **codebase-research-specialist** - Discover patterns
+- **external-research-specialist** - Research best practices
+
+These agents work through the core commands automatically.
 
 ## Troubleshooting
 
@@ -162,14 +163,7 @@ The toolkit supports several workflows:
    /global:ship . --readiness-check
    ```
 
-2. **PRP Methodology** (Blueprint-driven):
-
-   ```bash
-   /global:understand . --prp
-   /global:create . --prp --from-analysis
-   ```
-
-3. **Quick Development**:
+2. **Quick Development**:
 
    ```bash
    /global:understand . --quick

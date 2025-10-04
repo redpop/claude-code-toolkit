@@ -38,7 +38,7 @@ By participating in this project, you agree to abide by our code of conduct:
 3. **Add upstream remote**:
 
    ```bash
-   git remote add upstream https://github.com/anthropics/claude-code-toolkit.git
+   git remote add upstream https://github.com/redpop/claude-code-toolkit.git
    ```
 
 4. **Create a feature branch**:

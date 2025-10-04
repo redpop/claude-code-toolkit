@@ -13,21 +13,17 @@ cd claude-code-toolkit
 /myprefix:understand --comprehensive      # Deep analysis (. is default)
 /myprefix:improve --apply-insights        # Fix issues
 /myprefix:secure --audit                  # Security scan
-
-# PRP Blueprint-Driven Development
-/myprefix:understand --prp --requirements="OAuth2 auth"
-/myprefix:create --prp --from-analysis
-/myprefix:ship --prp --quality-gates
+/myprefix:ship --readiness-check          # Deployment validation
 ```
 
 ## ✨ Features
 
 - **5 Core Commands**: understand, improve, create, secure, ship
-- **20+ AI Agents**: Security, performance, architecture specialists + PRP agents
-- **PRP Methodology**: Blueprint-driven development with pattern learning
+- **25+ AI Agents**: Security, performance, architecture, research and planning specialists
 - **Sound Notifications**: Audio feedback for command completion
 - **TYPO3 Integration**: Specialized CMS development tools
 - **MCP Compatible**: Enhanced with optional MCP servers
+- **Knowledge-Driven**: Pattern learning and intelligent workflow optimization
 
 ## 📦 Installation
 
@@ -53,11 +49,11 @@ The toolkit uses the **5-Command Architecture** for core operations, plus specia
 
 | Command | Description | Options |
 |---------|-------------|---------|
-| [`/prefix:create`](docs/commands/create.md) | Code and content generation with intelligent templating and pattern learning | `type`, `target`, `--format`, `--prp`, `--from-analysis`, `--template`, `--help` |
+| [`/prefix:create`](docs/commands/create.md) | Code and content generation with intelligent templating and pattern learning | `type`, `target`, `--format`, `--from-analysis`, `--template`, `--help` |
 | [`/prefix:improve`](docs/commands/improve.md) | Code improvement with intelligent routing and learning persistence | `type`, `target`, `--dry-run`, `--severity`, `--apply-insights`, `--from-analysis`, `--export-json`, `--export-md`, `--help` |
 | [`/prefix:secure`](docs/commands/secure.md) | Security analysis and vulnerability detection with threat intelligence learning | `type`, `target`, `--standard`, `--help` |
-| [`/prefix:ship`](docs/commands/ship.md) | Deployment readiness and quality gates with release pattern learning | `type`, `target`, `--check`, `--prp`, `--readiness-check`, `--quality-gates`, `--help` |
-| [`/prefix:understand`](docs/commands/understand.md) | Code analysis and comprehension with intelligent problem routing | `type`, `target`, `--prp`, `--comprehensive`, `--quick`, `--export-json`, `--export-md`, `--help` |
+| [`/prefix:ship`](docs/commands/ship.md) | Deployment readiness and quality gates with release pattern learning | `type`, `target`, `--check`, `--readiness-check`, `--quality-gates`, `--help` |
+| [`/prefix:understand`](docs/commands/understand.md) | Code analysis and comprehension with intelligent problem routing | `type`, `target`, `--comprehensive`, `--quick`, `--export-json`, `--export-md`, `--help` |
 
 ### Git Commands
 

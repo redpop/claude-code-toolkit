@@ -20,10 +20,6 @@ Deployment readiness and quality gates with release pattern learning.
 | Option | Description |
 |--------|-------------|
 | `--check=type` | Specific check: tests, build, security, performance |
-| `--prp` | Activate PRP blueprint execution methodology |
-| `--prp=fast` | Fast-track execution for tested patterns |
-| `--prp=quality` | Enhanced quality validation during execution |
-| `--prp=monitor` | Real-time execution monitoring with progress tracking |
 | `--readiness-check` | Comprehensive deployment readiness assessment |
 | `--quality-gates` | Apply quality gates before deployment |
 | `--help` | Show detailed help information |
@@ -42,12 +38,6 @@ Deployment readiness and quality gates with release pattern learning.
 
 # Test-specific validation
 /prefix:ship . --check=tests
-
-# PRP execution with monitoring
-/prefix:ship . --prp=monitor
-
-# Fast deployment for tested patterns
-/prefix:ship components/ --prp=fast
 
 # Security validation
 /prefix:ship . --check=security
@@ -72,15 +62,6 @@ Deployment readiness and quality gates with release pattern learning.
 | `security` | Security compliance |
 | `performance` | Performance benchmarks |
 
-## PRP Integration
-
-The `--prp` flag activates blueprint execution:
-
-- **Full Execution**: `--prp` alone executes with comprehensive quality gates
-- **Fast Track**: `--prp=fast` for well-tested patterns
-- **Quality Focus**: `--prp=quality` with enhanced validation
-- **Monitoring**: `--prp=monitor` with real-time progress tracking
-
 ## Workflows
 
 **Complete Deployment Workflow**:
@@ -97,7 +78,7 @@ The `--prp` flag activates blueprint execution:
 ```bash
 /prefix:ship . --check=tests           # Verify tests
 /prefix:ship . --check=security        # Security check
-/prefix:ship . --prp=fast             # Fast deployment
+/prefix:ship . --readiness-check       # Final validation
 ```
 
 ## See Also

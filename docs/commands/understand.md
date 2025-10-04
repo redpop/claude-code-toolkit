@@ -19,10 +19,6 @@ Analyze and comprehend code structure, patterns, and issues with intelligent pro
 
 | Option | Description |
 |--------|-------------|
-| `--prp` | Activate Project Requirements Proposal methodology |
-| `--prp=research` | Focus on external research and best practices |
-| `--prp=patterns` | Focus on internal codebase pattern discovery |
-| `--prp=requirements` | Focus on requirements analysis and gap identification |
 | `--comprehensive` | Deep analysis with full context |
 | `--quick` | Fast analysis for immediate insights |
 | `--export-json` | Generate timestamped JSON report |
@@ -41,24 +37,12 @@ Analyze and comprehend code structure, patterns, and issues with intelligent pro
 # Security-focused analysis of auth module
 /prefix:understand security src/auth
 
-# PRP analysis for OAuth2 implementation
-/prefix:understand --prp --requirements="OAuth2 authentication"
-
-# Performance analysis with external research
-/prefix:understand performance --prp=research
+# Performance analysis
+/prefix:understand performance --comprehensive
 
 # Quick documentation analysis
 /prefix:understand docs --quick
 ```
-
-## PRP Integration
-
-The `--prp` flag activates Project Requirements Proposal methodology:
-
-- **Full PRP**: `--prp` alone performs comprehensive analysis
-- **Research Focus**: `--prp=research` includes external best practices
-- **Pattern Discovery**: `--prp=patterns` focuses on internal codebase patterns
-- **Requirements**: `--prp=requirements` validates and identifies gaps
 
 ## Workflows
 
@@ -74,8 +58,8 @@ The `--prp` flag activates Project Requirements Proposal methodology:
 
 ```bash
 /prefix:understand . --comprehensive --export-json
-/prefix:understand performance --prp=research
-/prefix:create . --prp --from-analysis
+/prefix:improve . --from-analysis
+/prefix:ship . --readiness-check
 ```
 
 ## See Also

@@ -10,7 +10,6 @@ The Claude Code Toolkit is a comprehensive collection of commands, agents, and t
 - **Agents**: Specialized AI agents for code analysis and operations
 - **Tools**: Utilities and scripts for enhanced productivity
 - **Knowledge Base**: Domain-specific patterns and references
-- **PRP System**: Project Requirements Proposal methodology for blueprint-driven development
 
 Designed to be installed into `~/.claude/` with a custom prefix, making all toolkit capabilities available for use in any project.
 
@@ -24,14 +23,6 @@ Designed to be installed into `~/.claude/` with a custom prefix, making all tool
 /prefix:understand . --comprehensive
 /prefix:improve . --apply-insights
 /prefix:ship . --readiness-check
-```
-
-**PRP Methodology - Blueprint-Driven Development**:
-
-```bash
-/prefix:understand . --prp --requirements="OAuth2 authentication"
-/prefix:create . --prp --from-analysis
-/prefix:ship . --prp --quality-gates
 ```
 
 **Quick Development Workflow**:
@@ -87,7 +78,6 @@ Specialized AI agents provide domain expertise:
 - Located in `/agents/` directory
 - Each agent has specific focus area
 - Invoked through commands or Task Tool
-- **PRP Agents**: codebase-research-specialist, external-research-specialist, requirements-analyst, blueprint-architect
 
 See **[agents/CLAUDE.md](agents/CLAUDE.md)** for agent details.
 
@@ -108,13 +98,6 @@ Use Task tool with subagent_type="security-specialist":
 /prefix:create docs --update-all
 ```
 
-**PRP Parameters**:
-
-- `--prp` → Activate Project Requirements Proposal methodology
-- `--prp=research` → Focus on external research and best practices
-- `--prp=patterns` → Focus on internal codebase pattern discovery
-- `--prp=template` → Create from existing template patterns
-
 **Export Parameters**:
 
 - `--export-json` → Auto-generates timestamped JSON
@@ -127,7 +110,7 @@ Use Task tool with subagent_type="security-specialist":
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/claude-code-toolkit.git
+git clone https://github.com/redpop/claude-code-toolkit.git
 cd claude-code-toolkit
 
 # Install with custom prefix
@@ -139,7 +122,6 @@ This installs:
 - Commands to `~/.claude/commands/myproject/`
 - Agents to `~/.claude/agents/`
 - Hooks to `~/.claude/claude-code-toolkit/hooks/`
-- PRP System to `~/.claude/claude-code-toolkit/prp/`
 - Creates backup if updating existing installation
 
 For sound notifications:
@@ -177,7 +159,6 @@ See [docs/guides/MCP-INTEGRATION.md](docs/guides/MCP-INTEGRATION.md) for details
 ## Resources
 
 - **Documentation**: [docs/README.md](docs/README.md)
-- **PRP Methodology**: [docs/guides/PRP-METHODOLOGY.md](docs/guides/PRP-METHODOLOGY.md)
 - **Project Planning**: [docs/guides/PROJECT-PLANNING-GUIDE.md](docs/guides/PROJECT-PLANNING-GUIDE.md)
 - **Security Guide**: [docs/guides/SECURITY-GUIDE.md](docs/guides/SECURITY-GUIDE.md)
 - **Enhanced Hooks**: [docs/guides/ENHANCED-HOOKS.md](docs/guides/ENHANCED-HOOKS.md)

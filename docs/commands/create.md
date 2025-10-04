@@ -20,10 +20,6 @@ Generate code and content with intelligent templating and pattern learning.
 | Option | Description |
 |--------|-------------|
 | `--format=type` | Output format (json, yaml, markdown, html, etc.) |
-| `--prp` | Activate Project Requirements Proposal methodology |
-| `--prp=template` | Create from existing template patterns |
-| `--prp=validation` | Validate blueprint against codebase patterns |
-| `--prp=fast` | Quick blueprint generation for simple features |
 | `--from-analysis` | Use insights from previous understand analysis |
 | `--template=name` | Use specific template for generation |
 | `--help` | Show detailed help information |
@@ -43,8 +39,8 @@ Generate code and content with intelligent templating and pattern learning.
 # Create configuration files
 /prefix:create config database --format=yaml
 
-# PRP blueprint creation
-/prefix:create . --prp --from-analysis
+# Generate from analysis
+/prefix:create . --from-analysis
 
 # Generate mock data
 /prefix:create mock users --format=json
@@ -66,22 +62,13 @@ Generate code and content with intelligent templating and pattern learning.
 | `mock` | Mock data generation | json, yaml, csv |
 | `schema` | Schema definitions | json-schema, graphql |
 
-## PRP Integration
-
-The `--prp` flag activates blueprint-driven creation:
-
-- **Full Blueprint**: `--prp` alone generates comprehensive implementation
-- **Template-Based**: `--prp=template` creates from existing patterns
-- **Validation**: `--prp=validation` validates against codebase patterns
-- **Fast Track**: `--prp=fast` for simple feature generation
-
 ## Workflows
 
 **Component Creation Workflow**:
 
 ```bash
 /prefix:understand components/ --quick   # Analyze existing patterns
-/prefix:create component Button --prp    # Generate with blueprint
+/prefix:create component Button          # Generate component
 /prefix:improve component --style        # Apply style improvements
 ```
 

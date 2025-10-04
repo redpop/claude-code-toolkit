@@ -8,11 +8,11 @@ The toolkit's primary workflow is built around 5 core commands that work togethe
 
 | Command | Purpose | Key Features |
 |---------|---------|--------------|
-| **[understand](understand.md)** | Code analysis and comprehension | PRP methodology, comprehensive analysis, export capabilities |
+| **[understand](understand.md)** | Code analysis and comprehension | Comprehensive analysis, export capabilities, intelligent routing |
 | **[improve](improve.md)** | Code quality improvements | Intelligent routing, severity filtering, learning persistence |
-| **[create](create.md)** | Content and code generation | Template-driven, PRP integration, multiple formats |
+| **[create](create.md)** | Content and code generation | Template-driven, multiple formats, pattern-based |
 | **[secure](secure.md)** | Security analysis | OWASP compliance, threat intelligence, standards support |
-| **[ship](ship.md)** | Deployment readiness | Quality gates, PRP execution, monitoring |
+| **[ship](ship.md)** | Deployment readiness | Quality gates, deployment validation, monitoring |
 
 ## Specialized Commands
 
@@ -46,14 +46,6 @@ These commands are designed to work together in development workflows:
 /prefix:git:operations commit --smart --pattern-learn
 ```
 
-### PRP Blueprint-Driven Development
-
-```bash
-/prefix:understand . --prp --requirements="Feature description"
-/prefix:create . --prp --from-analysis
-/prefix:ship . --prp --quality-gates
-```
-
 ## Command Patterns
 
 ### Common Options
@@ -61,10 +53,6 @@ These commands are designed to work together in development workflows:
 - `--help` - Available on all commands for detailed help
 - `--dry-run` - Preview mode (where applicable)
 - `--export-json/md` - Export analysis results
-
-### PRP Integration
-
-- `--prp` - Activate Project Requirements Proposal methodology
 - `--from-analysis` - Use previous analysis results
 - `--apply-insights` - Apply discovered insights
 
@@ -115,5 +103,4 @@ Each command documentation includes:
 
 - [Installation Guide](../INSTALLATION-GUIDE.md)
 - [Usage Guide](../USAGE.md)
-- [PRP Methodology](../guides/PRP-METHODOLOGY.md)
 - [Command Development](../../commands/CLAUDE.md)
