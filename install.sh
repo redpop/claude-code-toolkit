@@ -3,7 +3,7 @@
 # Claude Code Toolkit Installation Script
 # Usage: ./install.sh <prefix>
 # Example: ./install.sh mytools
-# 
+#
 # This script MUST be run from the cloned repository directory
 
 set -e
@@ -234,35 +234,35 @@ if [ "$LOCAL_INSTALL" = true ]; then
         exit 1
     fi
     LOCAL_DIR="$(cd "$LOCAL_PROJECT_DIR" && pwd)/.claude"
-    
+
     # Check if it's a git project
     if [ ! -d "$LOCAL_PROJECT_DIR/.git" ]; then
         print_info "Warning: $LOCAL_PROJECT_DIR is not a git repository. Installing anyway."
     fi
-    
+
     CLAUDE_COMMANDS_DIR="$LOCAL_DIR/commands"
     CLAUDE_AGENTS_DIR="$LOCAL_DIR/agents"
     CLAUDE_TOOLKIT_DIR="$LOCAL_DIR/claude-code-toolkit"
-    
+
     print_info "Installing locally in: $LOCAL_DIR"
 fi
 
 # Check for updates if already installed
 if [ -f "$CLAUDE_TOOLKIT_DIR/.installed-version" ]; then
     print_info "Checking for updates..."
-    
+
     # Read the old commit hash
     OLD_HASH=$(grep "^COMMIT_HASH=" "$CLAUDE_TOOLKIT_DIR/.installed-version" 2>/dev/null | cut -d= -f2)
     OLD_DATE=$(grep "^INSTALLED_AT=" "$CLAUDE_TOOLKIT_DIR/.installed-version" 2>/dev/null | cut -d= -f2-)
-    
+
     if [ -n "$OLD_HASH" ] && [ "$OLD_HASH" != "unknown" ]; then
         # Get current hash
         CURRENT_HASH=$(cd "$SCRIPT_DIR" && git rev-parse HEAD 2>/dev/null || echo "unknown")
-        
+
         if [ "$CURRENT_HASH" != "unknown" ] && [ "$OLD_HASH" != "$CURRENT_HASH" ]; then
             # Count new commits
             NEW_COMMITS=$(cd "$SCRIPT_DIR" && git rev-list "$OLD_HASH"..HEAD --count 2>/dev/null || echo "0")
-            
+
             if [ "$NEW_COMMITS" -gt 0 ]; then
                 echo
                 echo -e "${GREEN}📦 Found $NEW_COMMITS new commits since last installation (installed: $OLD_DATE)${NC}"
@@ -321,7 +321,7 @@ if [ "$INSTALL_COMMANDS" = true ]; then
     if [ "$INSTALL_COMMANDS" = true ]; then
         print_info "Installing commands to $COMMANDS_INSTALL_PATH..."
         mkdir -p "$COMMANDS_INSTALL_PATH"
-        
+
         # Copy the entire commands directory structure (excluding CLAUDE.md files)
         # This preserves the directory hierarchy properly
         cd "$SCRIPT_DIR/commands"
@@ -408,42 +408,10 @@ if [ -d "$SCRIPT_DIR/knowledge-base" ]; then
     print_success "Knowledge-base installed to $CLAUDE_TOOLKIT_DIR/knowledge-base"
 fi
 
-# Install PRP system to claude-code-toolkit directory
-if [ -d "$SCRIPT_DIR/templates/prp" ]; then
-    print_info "Installing PRP system to $CLAUDE_TOOLKIT_DIR..."
-    mkdir -p "$CLAUDE_TOOLKIT_DIR"
-
-    # Check if PRP directory already exists
-    if [ -d "$CLAUDE_TOOLKIT_DIR/prp" ]; then
-        if [ "$FORCE_INSTALL" = true ]; then
-            print_info "Force mode: Overwriting existing PRP system..."
-            rm -rf "$CLAUDE_TOOLKIT_DIR/prp"
-        else
-            print_info "Backing up existing PRP system..."
-            mv "$CLAUDE_TOOLKIT_DIR/prp" "$CLAUDE_TOOLKIT_DIR/prp.backup.$(date +%Y%m%d_%H%M%S)"
-        fi
-    fi
-
-    # Create PRP directory structure
-    mkdir -p "$CLAUDE_TOOLKIT_DIR/prp"/{analysis,blueprints,patterns,research,execution}/{templates,library}
-
-    # Copy PRP templates
-    cp -r "$SCRIPT_DIR/templates/prp/"* "$CLAUDE_TOOLKIT_DIR/prp/" 2>/dev/null || true
-
-    # Install PRP configuration
-    if [ -f "$SCRIPT_DIR/templates/prp/prp-config-template.yaml" ]; then
-        cp "$SCRIPT_DIR/templates/prp/prp-config-template.yaml" "$CLAUDE_TOOLKIT_DIR/prp/config.yaml"
-        print_info "PRP configuration template installed"
-    fi
-
-    print_success "PRP system installed to $CLAUDE_TOOLKIT_DIR/prp"
-    print_info "Use /prefix:understand . --prp to get started with PRP workflow"
-fi
-
 # Install markdown config to claude-code-toolkit directory
 if [ -d "$SCRIPT_DIR/markdown" ]; then
     print_info "Installing markdown config to $CLAUDE_TOOLKIT_DIR..."
-    
+
     # Check if markdown directory already exists
     if [ -d "$CLAUDE_TOOLKIT_DIR/markdown" ]; then
         if [ "$FORCE_INSTALL" = true ]; then
@@ -454,7 +422,7 @@ if [ -d "$SCRIPT_DIR/markdown" ]; then
             mv "$CLAUDE_TOOLKIT_DIR/markdown" "$CLAUDE_TOOLKIT_DIR/markdown.backup.$(date +%Y%m%d_%H%M%S)"
         fi
     fi
-    
+
     # Create markdown directory and copy config
     mkdir -p "$CLAUDE_TOOLKIT_DIR/markdown"
     # Use find to copy files, handling case where directory might be empty or have hidden files
@@ -550,19 +518,19 @@ if [ "$INSTALL_SETTINGS" = true ]; then
             PROFILE_DESC="basic (stop notification only)"
             ;;
     esac
-    
+
     if [ ! -f "$SETTINGS_SOURCE" ]; then
         print_error "Settings file not found: $SETTINGS_SOURCE"
         exit 1
     fi
-    
+
     print_info "Installing $PROFILE_DESC hooks settings..."
-    
+
     # Check if settings.json already exists
     if [ -f "$CLAUDE_SETTINGS_FILE" ]; then
         if [ "$FORCE_INSTALL" = true ]; then
             print_info "Force mode: Installing $PROFILE_DESC settings without backup..."
-            
+
             # Use Python to merge if available, preserving non-hook settings
             if command -v python3 &> /dev/null; then
                 python3 -c "
@@ -607,7 +575,7 @@ print('\033[0;32m✓ Settings merged successfully\033[0m')
                 print_info "Backing up existing settings..."
                 cp "$CLAUDE_SETTINGS_FILE" "${CLAUDE_SETTINGS_FILE}.backup.$(date +%Y%m%d_%H%M%S)"
                 print_info "Old settings backed up"
-                
+
                 # Use Python to merge if available, preserving non-hook settings
                 if command -v python3 &> /dev/null; then
                     python3 -c "
@@ -732,7 +700,7 @@ if [ "$INSTALL_HOOKS" = true ]; then
     echo "  - command-chain-notification.sh (chain progress tracking)"
     echo "  - session-logger.sh (session metrics and logging)"
     echo
-    
+
     # Check for markdownlint-cli2 installation
     if ! command -v markdownlint-cli2 &> /dev/null; then
         echo -e "${YELLOW}Note: markdownlint-cli2 is not installed${NC}"

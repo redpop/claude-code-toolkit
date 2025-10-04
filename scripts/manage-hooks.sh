@@ -70,7 +70,7 @@ print_usage() {
     echo "  $HOOKS_DIR"
     echo ""
     echo -e "${BOLD}DOCUMENTATION:${NC}"
-    echo "  https://github.com/yourusername/claude-code-toolkit/docs/hooks.md"
+    echo "  https://github.com/redpop/claude-code-toolkit/blob/main/docs/guides/ENHANCED-HOOKS.md"
 }
 
 # Check if hook exists and is executable

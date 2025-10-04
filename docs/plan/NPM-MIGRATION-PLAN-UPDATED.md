@@ -1,5 +1,7 @@
 # NPM-Migration Plan: Claude Code Toolkit (Aktualisiert)
 
+> **⚠️ VERALTET**: Dieses Dokument beschreibt eine geplante NPM-Migration die PRP-Methodologie enthält, welche nicht mehr Teil des Toolkits ist. Das Dokument wird als historische Referenz beibehalten.
+
 ## Überblick
 
 Das bestehende Bash-basierte Installationssystem (`install.sh`) wird zu einem vollständigen NPM-Paket mit interaktivem Installationswizard umgebaut. Dies ermöglicht sowohl globale (`npm install -g`) als auch lokale Installationen mit einem benutzerfreundlichen Setup-Prozess.
@@ -12,7 +14,7 @@ Das bestehende Bash-basierte Installationssystem (`install.sh`) wird zu einem vo
 - **Komplexe Logik**: Backup-Management, Komponenten-Auswahl, Hook-Profile
 - **Interaktive Abfragen**: Y/N Prompts bei Konflikten
 - **6-Command Architecture**: Neue streamlined Architektur
-- **PRP Integration**: Project Requirements Proposal System
+- **25+ AI Agents**: Research, planning, and specialized development agents
 
 ### Aktuelle Repo-Struktur
 
@@ -27,8 +29,7 @@ claude-code-toolkit/
 │   ├── minimal-hooks-settings.json
 │   └── advanced-hooks-settings.json
 ├── knowledge-base/               # Domain-spezifisches Wissen
-├── templates/                    # PRP Templates
-│   └── prp/                     # PRP System Templates
+├── templates/                    # Command and Agent Templates
 ├── markdown/                     # Markdown Konfiguration
 ├── scripts/                      # Utility Scripts
 └── docs/                        # Neue streamlined Dokumentation
@@ -58,7 +59,6 @@ claude-code-toolkit/
 │   ├── installer.js                  # Core Installation Logic
 │   ├── config-manager.js             # Configuration Management
 │   ├── file-operations.js            # File System Operations
-│   ├── prp-installer.js              # PRP System Installation
 │   └── utils.js                      # Helper Functions
 ├── commands/                         # 6-Command Architecture
 │   ├── understand.md
@@ -86,7 +86,6 @@ claude-code-toolkit/
 │   └── advanced-hooks-settings.json
 ├── knowledge-base/                   # Domain Knowledge
 ├── templates/                        # Template System
-│   └── prp/                         # PRP Templates & Config
 ├── markdown/                         # Markdown Configuration
 └── scripts/                          # Utility Scripts
 ```
@@ -99,7 +98,7 @@ claude-code-toolkit/
 {
   "name": "@redpop/claude-code-toolkit",
   "version": "5.0.0",
-  "description": "Revolutionary toolkit for extending Claude Code with 6-command architecture, PRP methodology, and smart AI agents",
+  "description": "Revolutionary toolkit for extending Claude Code with 6-command architecture, 25+ AI agents, and intelligent automation",
   "main": "lib/index.js",
   "bin": {
     "claude-code-toolkit": "bin/claude-code-toolkit",
@@ -142,8 +141,8 @@ claude-code-toolkit/
     "automation",
     "commands",
     "6-command-architecture",
-    "prp-methodology",
-    "ai-agents"
+    "ai-agents",
+    "automation"
   ],
   "engines": {
     "node": ">=16.0.0"
@@ -171,7 +170,7 @@ program
   .description('Run interactive setup wizard')
   .option('-f, --force', 'Force installation without prompts')
   .option('--prefix <prefix>', 'Set prefix without wizard')
-  .option('--prp', 'Install PRP methodology system')
+  .option('--hooks <profile>', 'Hook profile: basic, minimal, advanced')
   .option('--6-command', 'Install 6-command architecture (default)')
   .action(async (options) => {
     try {

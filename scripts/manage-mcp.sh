@@ -15,17 +15,18 @@ readonly CYAN='\033[0;36m'
 readonly NC='\033[0m' # No Color
 
 # MCP Server Definitions
-# Format: "name|command|description|transport"
-# transport is optional, defaults to "stdio"
+# Format: "name|command|description|url"
+# url is optional, provides documentation link
 declare -a MCP_SERVERS=(
-    "playwright|npx @playwright/mcp@latest|Browser automation and testing with Playwright|stdio"
-    "perplexity-ask|npx server-perplexity-ask|AI-powered web search and research|stdio"
-    "context7|npx @upstash/context7-mcp@latest|Context management and retrieval|stdio"
-    "fetch|npx @kazuph/mcp-fetch|HTTP fetch and web scraping|stdio"
-    "basic-memory|uvx basic-memory mcp|Simple memory and note-taking|stdio"
-    "chrome-devtools|npx chrome-devtools-mcp@latest|Chrome DevTools integration|stdio"
-    "shadcn-ui-server|npx @heilgar/shadcn-ui-mcp-server|shadcn/ui component library|stdio"
-    "figma-dev-mode|--transport sse http://127.0.0.1:3845/sse|Figma Dev Mode integration|sse"
+    "basic-memory|uvx basic-memory mcp|Simple memory and note-taking|https://github.com/modelcontextprotocol/servers/tree/main/src/memory"
+    "chrome-devtools|npx chrome-devtools-mcp@latest|Chrome DevTools integration|https://github.com/snaggle-ai/chrome-devtools-mcp"
+    "context7|npx @upstash/context7-mcp@latest|Context management and retrieval|https://github.com/upstash/context7-mcp"
+    "fetch|npx @kazuph/mcp-fetch|HTTP fetch and web scraping|https://github.com/kazuph/mcp-fetch"
+    "figma-dev-mode|--transport sse http://127.0.0.1:3845/sse|Figma Dev Mode integration (SSE transport)|https://www.figma.com/developers/mcp"
+    "netlify|npx @netlify/mcp|Netlify deployment and project management|https://docs.netlify.com/build/build-with-ai/netlify-mcp-server/"
+    "perplexity-ask|npx server-perplexity-ask|AI-powered web search and research|https://github.com/fatwang2/perplexity-mcp"
+    "playwright|npx @playwright/mcp@latest|Browser automation and testing with Playwright|https://github.com/microsoft/playwright-mcp"
+    "shadcn-ui-server|npx @heilgar/shadcn-ui-mcp-server|shadcn/ui component library|https://github.com/Heilgar/shadcn-ui-mcp-server"
 )
 
 # Default scope
@@ -158,13 +159,13 @@ parse_mcp_entry() {
     local entry="$1"
     local field="$2"
 
-    IFS='|' read -r name command description transport <<< "$entry"
+    IFS='|' read -r name command description url <<< "$entry"
 
     case "$field" in
         name) echo "$name" ;;
         command) echo "$command" ;;
         description) echo "$description" ;;
-        transport) echo "${transport:-stdio}" ;;
+        url) echo "$url" ;;
         *) echo "" ;;
     esac
 }
@@ -204,19 +205,21 @@ show_server_info() {
     local server_name="$1"
 
     for entry in "${MCP_SERVERS[@]}"; do
-        local name command description transport
+        local name command description url
         name=$(parse_mcp_entry "$entry" "name")
 
         if [[ "$name" == "$server_name" ]]; then
             command=$(parse_mcp_entry "$entry" "command")
             description=$(parse_mcp_entry "$entry" "description")
-            transport=$(parse_mcp_entry "$entry" "transport")
+            url=$(parse_mcp_entry "$entry" "url")
 
             print_header "MCP Server: $name"
             echo -e "${YELLOW}Name:${NC}        $name"
             echo -e "${YELLOW}Description:${NC} $description"
             echo -e "${YELLOW}Command:${NC}     $command"
-            echo -e "${YELLOW}Transport:${NC}   $transport"
+            if [[ -n "$url" ]]; then
+                echo -e "${YELLOW}Documentation:${NC} $url"
+            fi
             echo
             return 0
         fi
