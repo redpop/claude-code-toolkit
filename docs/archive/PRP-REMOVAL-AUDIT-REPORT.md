@@ -70,6 +70,7 @@ Die folgenden archivierten Dokumente enthalten PRP-Referenzen, sind aber **korre
 **Status:** ✅ **Korrekt gekennzeichnet**
 
 **Warnung am Anfang:**
+
 ```markdown
 > **⚠️ VERALTET**: Dieses Dokument beschreibt eine geplante NPM-Migration 
 > die PRP-Methodologie enthält, welche nicht mehr Teil des Toolkits ist. 
@@ -77,6 +78,7 @@ Die folgenden archivierten Dokumente enthalten PRP-Referenzen, sind aber **korre
 ```
 
 **PRP-Referenzen:**
+
 - Zeilen 227, 241, 309-319, 374-376, 429, 531, 607-608
 - Kontext: NPM-Installationswizard mit PRP-Optionen
 
@@ -91,6 +93,7 @@ Die folgenden archivierten Dokumente enthalten PRP-Referenzen, sind aber **korre
 **Inhalt:** Diese Datei scheint ein Git-Commit-Diff zu sein, nicht eine normale Markdown-Datei
 
 **PRP-Referenz:**
+
 - Zeile 689: `| Overhead durch PRPs | Mittel | Mittel | Templates und Automation |`
 
 **Empfehlung:** ⚠️ Prüfen, ob diese Datei ein Diff-Artefakt ist und ggf. bereinigen
@@ -135,6 +138,7 @@ Das Toolkit verwendet jetzt durchgängig die **5-Command Architecture**:
 5. `ship` - Deployment-Readiness
 
 Plus spezialisierte Erweiterungen:
+
 - `git:*` - Git-Operationen
 - `meta:*` - Meta-Befehle
 - `typo3:*` - TYPO3-spezifische Befehle
@@ -194,6 +198,7 @@ Die folgenden Dateien wurden aktualisiert, um die korrekte GitHub-URL zu verwend
 3. ✅ `scripts/manage-hooks.sh` - Dokumentations-URL aktualisiert und korrigiert
 
 **Vorher:**
+
 ```bash
 git clone https://github.com/yourusername/claude-code-toolkit.git
 git remote add upstream https://github.com/anthropics/claude-code-toolkit.git
@@ -201,6 +206,7 @@ https://github.com/yourusername/claude-code-toolkit/docs/hooks.md
 ```
 
 **Nachher:**
+
 ```bash
 git clone https://github.com/redpop/claude-code-toolkit.git
 git remote add upstream https://github.com/redpop/claude-code-toolkit.git
@@ -316,4 +322,3 @@ Alle PRP-bezogenen Inhalte wurden vollständig und korrekt entfernt. Die verblei
 ---
 
 *Dieser Bericht kann nach Review archiviert oder gelöscht werden.*
-

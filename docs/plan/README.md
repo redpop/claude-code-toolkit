@@ -27,6 +27,7 @@ Die hier beschriebenen Features und Konzepte sind:
 **Verwenden Sie diese Dokumente NICHT als Anleitung für die aktuelle Nutzung des Toolkits!**
 
 Für die aktuelle Funktionalität siehe:
+
 - [USAGE.md](../USAGE.md) - Aktuelle Features und Befehle
 - [README.md](../../README.md) - Projekt-Übersicht
 - [DEVELOPMENT.md](../DEVELOPMENT.md) - Entwickler-Dokumentation
@@ -118,6 +119,7 @@ Diese Dokumente können hilfreich sein, wenn Sie:
 **Nicht empfohlen!** Diese Dokumente beschreiben Features, die noch nicht existieren.
 
 Nutzen Sie stattdessen:
+
 - [USAGE.md](../USAGE.md) - Aktuelle Funktionalität
 - [FAQ.md](../FAQ.md) - Häufige Fragen
 - [INSTALLATION-GUIDE.md](../INSTALLATION-GUIDE.md) - Setup-Anleitung
@@ -142,11 +144,10 @@ Für die **aktuelle und gültige Dokumentation** siehe:
 
 ## Fragen?
 
-- **GitHub Issues:** https://github.com/redpop/claude-code-toolkit/issues
-- **Diskussionen:** https://github.com/redpop/claude-code-toolkit/discussions
+- **GitHub Issues:** <https://github.com/redpop/claude-code-toolkit/issues>
+- **Diskussionen:** <https://github.com/redpop/claude-code-toolkit/discussions>
 - **Dokumentation:** [docs/README.md](../README.md)
 
 ---
 
 *Letzte Aktualisierung: 2025-10-04*
-

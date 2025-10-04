@@ -5,6 +5,72 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.0.0] - 2025-10-04
+
+### Removed
+
+- 🗑️ **PRP Methodology Removal** - Complete removal of PRP (Project Requirements Proposal) methodology system
+  - Removed all PRP templates (8 YAML templates from templates/prp/)
+  - Removed PRP methodology guide and integration documentation
+  - Removed `--prp` flags from core commands (understand, create, ship)
+  - Archived historical PRP documentation to docs/archive/
+  - Agents rebranded from "PRP Methodology" to "Research & Planning" specialists
+  - Simplified toolkit focus on core 6-command architecture without PRP overhead
+
+### Changed
+
+- 🔄 **Agent Category Rebrand** - Research and planning agents restructured
+  - blueprint-architect, codebase-research-specialist, external-research-specialist, requirements-analyst now categorized as "Research & Planning"
+  - Removed PRP-specific terminology and workflow references
+  - Updated agent integration patterns to use "blueprint-driven development"
+  - Simplified agent usage without PRP methodology constraints
+
+- 🔄 **Documentation Cleanup** - Simplified core documentation
+  - Updated CLAUDE.md, README.md, and CONTRIBUTING.md to remove PRP references
+  - Fixed repository URLs from placeholder to actual GitHub URL
+  - Streamlined command documentation (create.md, ship.md, understand.md)
+  - Enhanced FAQ and core documentation with clearer, simpler workflows
+
+- 🔄 **Infrastructure Updates** - Installation and migration documentation
+  - Updated install.sh to remove PRP system installation steps
+  - Cleaned migration plan documentation
+  - Removed PRP references from hook management scripts
+  - Simplified project structure and configuration
+
+### Added
+
+- ✨ **Archive System** - Proper preservation of removed PRP documentation
+  - Created docs/archive/ directory with comprehensive README
+  - Added PRP removal audit report for historical reference
+  - Created docs/plan/ directory for future strategic planning
+  - Clear warnings about archived content and deprecation status
+
+### Breaking Changes
+
+- **BREAKING**: PRP methodology system completely removed
+- **BREAKING**: `--prp` flags no longer available in understand, create, ship commands
+- **BREAKING**: PRP template system (templates/prp/) removed
+- **BREAKING**: PRP-specific workflows and documentation eliminated
+
+### Migration Guide
+
+**Old PRP Workflow** → **New Simplified Workflow**:
+
+- `/prefix:understand . --prp --requirements="OAuth2 auth"` → `/prefix:understand . --comprehensive`
+- `/prefix:create . --prp --from-analysis` → `/prefix:create . --from-analysis`
+- `/prefix:ship . --prp --quality-gates` → `/prefix:ship . --quality-gates`
+
+**Research & Planning Agents** (still available, now simplified):
+
+- Use `blueprint-architect` for implementation planning
+- Use `codebase-research-specialist` for pattern discovery
+- Use `external-research-specialist` for best practices research
+- Use `requirements-analyst` for requirements validation
+
+**Why This Change?**
+
+The PRP methodology added significant complexity without proportional benefits for most users. The toolkit now focuses on the core 6-command architecture with optional blueprint-driven development through research agents, providing the same capabilities with less overhead and clearer workflows.
+
 ## [5.4.1] - 2025-10-03
 
 ### Changed
