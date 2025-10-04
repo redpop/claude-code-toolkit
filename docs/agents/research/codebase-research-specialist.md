@@ -26,8 +26,8 @@ Use Task tool with subagent_type="codebase-research-specialist":
 ### Through Core Commands
 
 ```bash
-/prefix:understand . --prp --patterns
 /prefix:understand . --comprehensive
+/prefix:improve . --from-analysis
 ```
 
 ## Output Format
@@ -129,7 +129,7 @@ Use Task tool with subagent_type="codebase-research-specialist":
 ### Command Integration
 
 - **understand command**: Primary integration for comprehensive codebase analysis
-- **PRP methodology**: Foundation research for Project Requirements Proposal workflow
+- **Pattern discovery**: Foundation research for development planning workflow
 - **improve command**: Provides insights for targeted improvement strategies
 
 ### Agent Collaboration

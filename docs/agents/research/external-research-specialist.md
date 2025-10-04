@@ -26,8 +26,8 @@ Use Task tool with subagent_type="external-research-specialist":
 ### Through Core Commands
 
 ```bash
-/prefix:understand . --prp --research
-/prefix:create . --research-driven
+/prefix:understand . --comprehensive
+/prefix:create . --from-analysis
 ```
 
 ## Output Format
@@ -123,7 +123,7 @@ Use Task tool with subagent_type="external-research-specialist":
 ### Command Integration
 
 - **understand command**: Provide external context for requirements analysis
-- **PRP methodology**: Research component for Project Requirements Proposal workflow
+- **Research-driven development**: External research component for development planning
 - **create command**: Research-driven development with industry best practices
 
 ### Agent Collaboration

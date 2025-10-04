@@ -186,10 +186,9 @@ Use Task tool with subagent_type="project-planner":
 ## See Also
 
 - [Code Architect](code-architect.md) - For architectural analysis and design decisions supporting strategic planning
-- [Blueprint Architect](../../research/blueprint-architect.md) - For PRP methodology integration and blueprint-driven development
+- [Blueprint Architect](../../research/blueprint-architect.md) - For implementation blueprint creation and development planning
 - [Requirements Analyst](../../research/requirements-analyst.md) - For detailed requirement analysis feeding into strategic planning
 - [Code Understanding Specialist](../analysis/code-understanding-specialist.md) - For current state analysis informing project planning decisions
 - [Security Specialist](../security/security-specialist.md) - For security planning integration and compliance roadmapping
-- [PRP Methodology Guide](../../guides/PRP-METHODOLOGY.md) - Project Requirements Proposal methodology for blueprint-driven planning
 - [Project Planning Guide](../../guides/PROJECT-PLANNING-GUIDE.md) - Comprehensive project planning methodologies and best practices
 - [Agent Orchestration Guide](../../guides/AGENT-ORCHESTRATION.md) - Best practices for coordinating multiple specialists in complex projects

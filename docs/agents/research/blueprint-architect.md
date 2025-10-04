@@ -26,8 +26,8 @@ Use Task tool with subagent_type="blueprint-architect":
 ### Through Core Commands
 
 ```bash
-/prefix:create . --prp --from-analysis
-/prefix:understand . --prp --requirements="feature-name"
+/prefix:create . --from-analysis
+/prefix:understand . --comprehensive
 ```
 
 ## Output Format
@@ -100,7 +100,7 @@ Use Task tool with subagent_type="blueprint-architect":
 
 - **understand command**: Analyze requirements and provide blueprint recommendations
 - **create command**: Execute blueprint-driven development with template usage
-- **PRP methodology**: Primary integration point for Project Requirements Proposal workflow
+- **Blueprint-driven development**: Primary integration point for implementation planning workflow
 
 ### Agent Collaboration
 

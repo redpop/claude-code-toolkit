@@ -26,8 +26,8 @@ Use Task tool with subagent_type="requirements-analyst":
 ### Through Core Commands
 
 ```bash
-/prefix:understand . --prp --requirements="feature-name"
-/prefix:create . --requirements-driven
+/prefix:understand . --comprehensive
+/prefix:create . --from-analysis
 ```
 
 ## Output Format
@@ -129,7 +129,7 @@ Use Task tool with subagent_type="requirements-analyst":
 ### Command Integration
 
 - **understand command**: Primary integration for requirement analysis
-- **PRP methodology**: Core component of Project Requirements Proposal workflow
+- **Requirement validation**: Core component of development planning workflow
 - **create command**: Requirement-driven development guidance
 
 ### Agent Collaboration
