@@ -49,9 +49,9 @@ model: opus
 
 ### Command Integration
 
-- `/prefix:understand . --prp` - Complete external research as part of analysis
-- `/prefix:understand . --prp=research` - Focus on external research and best practices
-- `/prefix:create . --prp` - Research-informed blueprint creation
+- `/prefix:understand .` - Complete external research as part of analysis
+- `/prefix:understand . --comprehensive` - Deep analysis with external research
+- `/prefix:create .` - Research-informed blueprint creation
 
 ### Workflow Integration
 

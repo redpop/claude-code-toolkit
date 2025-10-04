@@ -53,9 +53,9 @@ tools: Read, Grep, Glob, Task
 
 ### Command Integration
 
-- `/prefix:understand . --prp` - Complete requirements analysis and validation
-- `/prefix:create . --prp` - Blueprint requirements validation
-- `/prefix:ship . --prp` - Acceptance criteria validation during execution
+- `/prefix:understand .` - Complete requirements analysis and validation
+- `/prefix:create .` - Blueprint requirements validation
+- `/prefix:ship . --quality-gates` - Acceptance criteria validation during execution
 
 ### Workflow Integration
 

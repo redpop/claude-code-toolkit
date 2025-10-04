@@ -29,7 +29,7 @@ Sub-Agents are specialized AI agents that provide domain-specific expertise for 
 - **tailwind-css-specialist**: Tailwind CSS optimization expert for utility-first CSS framework optimization
 - **workflow-optimizer**: Developer workflow expert focused on productivity and reducing friction
 
-### PRP Methodology Agents
+### Research & Planning Agents
 
 - **blueprint-architect**: Implementation blueprint creation expert combining requirements, patterns, and research into executable development plans
 - **codebase-research-specialist**: Deep codebase pattern analysis expert specializing in discovering implementation patterns and architectural decisions

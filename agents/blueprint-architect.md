@@ -49,9 +49,9 @@ model: opus
 
 ### Command Integration
 
-- `/prefix:create . --prp` - Generate comprehensive implementation blueprints
-- `/prefix:create . --prp=template` - Create blueprints using established templates
-- `/prefix:ship . --prp` - Execute blueprints with quality validation
+- `/prefix:create .` - Generate comprehensive implementation blueprints
+- `/prefix:create . --template=name` - Create blueprints using established templates
+- `/prefix:ship . --quality-gates` - Execute blueprints with quality validation
 
 ### Workflow Integration
 
@@ -110,7 +110,7 @@ blueprint:
   id: "oauth2-auth-blueprint-2024-001"
   project: "OAuth2 Authentication Implementation"
   created: "2024-01-15T10:00:00Z"
-  based_on_analysis: "auth-prp-2024-001"
+  based_on_analysis: "auth-analysis-2024-001"
 
   overview:
     description: "Complete OAuth2 authentication system with multi-factor authentication"
@@ -392,4 +392,4 @@ template_blueprint:
 - **standard**: Comprehensive testing and security validation
 - **strict**: Enterprise-level quality gates with comprehensive compliance
 
-This agent serves as the central planning hub for PRP methodology, ensuring that all implementations are built on solid architectural foundations with clear execution paths and comprehensive quality assurance.
+This agent serves as the central planning hub for blueprint-driven development, ensuring that all implementations are built on solid architectural foundations with clear execution paths and comprehensive quality assurance.

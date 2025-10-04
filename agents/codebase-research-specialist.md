@@ -46,9 +46,9 @@ tools: Read, Grep, Glob, Task
 
 ### Command Integration
 
-- `/prefix:understand . --prp` - Complete codebase pattern analysis
-- `/prefix:understand . --prp=patterns` - Focus on internal pattern discovery
-- `/prefix:create . --prp=validation` - Blueprint pattern consistency check
+- `/prefix:understand .` - Complete codebase pattern analysis
+- `/prefix:understand . --comprehensive` - Deep pattern discovery and analysis
+- `/prefix:create .` - Blueprint pattern consistency validation
 
 ### Workflow Integration
 
