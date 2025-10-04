@@ -1,6 +1,6 @@
 ---
 description: Code and content generation with intelligent templating and pattern learning
-argument-hint: [type] [target] [--format] [--prp] [--from-analysis] [--template] [--help]
+argument-hint: [type] [target] [--format] [--from-analysis] [--template] [--help]
 allowed-tools: Task, mcp__basic-memory__search_notes, mcp__basic-memory__write_note, mcp__basic-memory__build_context
 ---
 
@@ -17,22 +17,6 @@ Extract type, target, and options:
 - If first argument matches generation types (docs, tests, component, api, config, template, mock, schema), use as type
 - Default: type="docs", target="."
 - Handle --format and other generation options
-
-**PRP Enhancement - Blueprint-Driven Creation:**
-
-If arguments contain "--prp" flag, activate PRP blueprint creation methodology:
-
-- `--prp` alone: Generate comprehensive implementation blueprint
-- `--prp=template`: Create from existing template patterns
-- `--prp=validation`: Validate blueprint against codebase patterns
-- `--prp=fast`: Quick blueprint generation for simple features
-
-**PRP Blueprint Workflow:**
-
-1. **Requirements Integration**: Use requirements from PRP analysis phase
-2. **Pattern Application**: Apply discovered patterns via codebase-research-specialist
-3. **Architecture Planning**: Create detailed implementation blueprint via blueprint-architect
-4. **Quality Gate Definition**: Define comprehensive validation and testing strategies
 
 Route to enhanced generation:
 

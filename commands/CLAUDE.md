@@ -120,14 +120,7 @@ Specialized commands support the core workflow:
 /prefix:understand . --comprehensive --export-json
 /prefix:secure . --audit
 /prefix:improve . --from-analysis
-```
-
-**PRP (Project Requirements Proposal) Workflow**:
-
-```bash
-/prefix:understand . --prp --requirements="OAuth2 authentication"
-/prefix:create . --prp --from-analysis
-/prefix:ship . --prp --quality-gates
+/prefix:ship . --readiness-check
 ```
 
 ## Key Patterns
@@ -148,14 +141,13 @@ This pattern ensures:
 - Predictable behavior
 - Better error handling
 
-### PRP Integration
+### Analysis Integration
 
-Commands support Project Requirements Proposal methodology:
+Commands support analysis-driven workflows:
 
-- `--prp` → Activate PRP methodology
-- `--prp=research` → Focus on external research
-- `--prp=patterns` → Focus on internal patterns
-- `--from-analysis` → Use existing analysis results
+- `--from-analysis` → Use insights from previous analysis
+- `--apply-insights` → Apply discovered improvements
+- `--comprehensive` → Deep analysis with full context
 
 ### Export Capabilities
 
@@ -271,7 +263,6 @@ The documentation includes:
 - All available options with descriptions
 - Practical examples and workflows
 - Integration patterns with other commands
-- PRP methodology integration where applicable
 
 ### Documentation Structure
 

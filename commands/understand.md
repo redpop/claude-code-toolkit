@@ -1,6 +1,6 @@
 ---
 description: Code analysis and comprehension with intelligent problem routing
-argument-hint: [type] [target] [--prp] [--comprehensive] [--quick] [--export-json] [--export-md] [--help]
+argument-hint: [type] [target] [--comprehensive] [--quick] [--export-json] [--export-md] [--help]
 allowed-tools: Task, mcp__basic-memory__search_notes, mcp__basic-memory__write_note, mcp__basic-memory__build_context
 ---
 
@@ -15,13 +15,9 @@ If "$ARGUMENTS" contains "--help" or "-h":
 Display this command's documentation:
 
 - **Description**: Code analysis and comprehension with intelligent problem routing
-- **Usage**: [type] [target] [--prp] [--comprehensive] [--quick] [--export-json] [--export-md]
+- **Usage**: [type] [target] [--comprehensive] [--quick] [--export-json] [--export-md]
 - **Types**: code, performance, security, architecture, debug, flow, dependencies, tests, docs, legacy
 - **Options**:
-  - `--prp`: Activate Project Requirements Proposal methodology
-  - `--prp=research`: Focus on external research and best practices
-  - `--prp=patterns`: Focus on internal codebase pattern discovery
-  - `--prp=requirements`: Focus on requirements analysis and gap identification
   - `--comprehensive`: Deep analysis with full context
   - `--quick`: Fast analysis for immediate insights
   - `--export-json`: Generate timestamped JSON report
@@ -39,22 +35,6 @@ Extract type and target:
 
 - If first argument matches analysis types (code, performance, security, architecture, debug, flow, dependencies, tests, docs, legacy), use as type
 - Default: type="code", target="."
-
-**PRP Enhancement - Project Requirements Proposal Integration:**
-
-If arguments contain "--prp" flag, activate PRP (Project Requirements Proposal) methodology:
-
-- `--prp` alone: Full PRP analysis (requirements + patterns + research)
-- `--prp=research`: Focus on external research and best practices
-- `--prp=patterns`: Focus on internal codebase pattern discovery
-- `--prp=requirements`: Focus on requirements analysis and gap identification
-
-**PRP Workflow:**
-
-1. **Requirements Analysis**: Use requirements-analyst agent for requirement validation
-2. **Pattern Discovery**: Use codebase-research-specialist for pattern identification
-3. **External Research**: Use external-research-specialist for framework guidance
-4. **Synthesis**: Generate comprehensive PRP analysis document
 
 Route to enhanced analysis:
 
