@@ -38,7 +38,7 @@ tools: Read, Grep, Bash(git:*)
 **With Branch Prefix** (feature/TICKET-123-auth):
 
 ```
-TICKET-123: Implement JWT authentication flow
+TICKET-123 Implement JWT authentication flow
 
 Add token-based authentication with refresh capability
 - JWT token validation and refresh logic
@@ -63,23 +63,23 @@ Add token-based authentication with refresh capability
 
 ### Creating Commit 1: Core Implementation
 [EXECUTING] git add src/auth/login.js src/auth/utils.js
-[EXECUTING] git commit -m "TICKET-123: Implement JWT authentication
+[EXECUTING] git commit -m "TICKET-123 Implement JWT authentication
 
 Core authentication logic with secure token handling
 - Token validation and refresh mechanisms
 - Session management and timeout handling"
 
-✅ Commit created: abc1234 - TICKET-123: Implement JWT authentication
+✅ Commit created: abc1234 - TICKET-123 Implement JWT authentication
 
 ### Creating Commit 2: Test Coverage
 [EXECUTING] git add tests/auth/
-[EXECUTING] git commit -m "TICKET-123: Add authentication tests
+[EXECUTING] git commit -m "TICKET-123 Add authentication tests
 
 Comprehensive test coverage for JWT flow
 - Token validation scenarios
 - Error handling edge cases"
 
-✅ Commit created: def5678 - TICKET-123: Add authentication tests
+✅ Commit created: def5678 - TICKET-123 Add authentication tests
 
 ## Summary: 2 intelligent commits created successfully
 ```
@@ -97,9 +97,9 @@ Comprehensive test coverage for JWT flow
 ## Branch Prefix Patterns
 
 ```bash
-feature/TICKET-123-description  → TICKET-123: Description
-bugfix/ABC-456-fix-auth        → ABC-456: Fix auth issue
-hotfix/PROJ-789-urgent         → PROJ-789: Urgent fix
+feature/TICKET-123-description  → TICKET-123 Description
+bugfix/ABC-456-fix-auth        → ABC-456 Fix auth issue
+hotfix/PROJ-789-urgent         → PROJ-789 Urgent fix
 feature/description            → feat: Description
 bugfix/description             → fix: Description
 ```

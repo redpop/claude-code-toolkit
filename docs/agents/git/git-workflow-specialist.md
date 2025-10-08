@@ -87,7 +87,7 @@ Use Task tool with subagent_type="git-workflow-specialist":
 ### With Branch Prefix (feature/TICKET-123-auth)
 
 ```
-TICKET-123: Implement JWT authentication flow
+TICKET-123 Implement JWT authentication flow
 
 Add token-based authentication with refresh capability
 - JWT token validation and refresh logic
@@ -118,9 +118,9 @@ Add token-based authentication with refresh capability
 ## Branch Prefix Patterns
 
 ```bash
-feature/TICKET-123-description  → TICKET-123: Description
-bugfix/ABC-456-fix-auth        → ABC-456: Fix auth issue
-hotfix/PROJ-789-urgent         → PROJ-789: Urgent fix
+feature/TICKET-123-description  → TICKET-123 Description
+bugfix/ABC-456-fix-auth        → ABC-456 Fix auth issue
+hotfix/PROJ-789-urgent         → PROJ-789 Urgent fix
 feature/description            → feat: Description
 bugfix/description             → fix: Description
 ```
