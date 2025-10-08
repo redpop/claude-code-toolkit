@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.0.1] - 2025-10-08
+
+### Changed
+
+- 🔄 **Git Workflow Specialist Documentation** - Standardized ticket prefix format
+  - Updated branch prefix pattern examples to remove colons (TICKET-123 instead of TICKET-123:)
+  - Improved consistency between ticket prefixes and conventional commit types
+  - Applied changes to both agent definition and documentation files
+
 ## [6.0.0] - 2025-10-04
 
 ### Removed
