@@ -17,7 +17,7 @@ For the full agent specification, see: [documentation-health-specialist.md](docu
 
 ## Knowledge-Enhanced Documentation Intelligence
 
-- **Content Generation**: Create high-quality documentation using proven templates and patterns from Basic Memory
+- **Content Generation**: Create high-quality documentation using proven templates and patterns
 - **Pattern Learning**: Apply successful documentation strategies from accumulated knowledge across projects  
 - **Context-Aware Writing**: Use project-specific documentation standards and previous documentation decisions
 - **Quality Evolution**: Track documentation effectiveness and refine writing approaches over time

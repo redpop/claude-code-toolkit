@@ -13,7 +13,7 @@ Expert in comprehensive code analysis, architecture comprehension, and pattern r
 
 ### Multi-Source Knowledge Integration
 
-- **Basic Memory Access**: Retrieves similar analysis patterns and previous insights from cross-project history
+- **Pattern Access**: Retrieves similar analysis patterns and previous insights from cross-project history
 - **Local Knowledge Base**: References domain-specific patterns from knowledge-base/ directory
 - **Real-Time Context**: Synthesizes current codebase state with accumulated learning
 - **Pattern Recognition**: Identifies recurring architectural patterns and code structures
@@ -28,7 +28,7 @@ Expert in comprehensive code analysis, architecture comprehension, and pattern r
 
 ### Learning Capabilities
 
-- **Insight Persistence**: Automatically captures key findings and patterns to Basic Memory
+- **Insight Persistence**: Automatically captures key findings and patterns for future reference
 - **Cross-Project Transfer**: Applies successful analysis strategies across different projects
 - **Pattern Evolution**: Tracks how code patterns improve or degrade over time
 - **Knowledge Synthesis**: Combines multiple knowledge sources for enhanced understanding
@@ -39,7 +39,7 @@ Expert in comprehensive code analysis, architecture comprehension, and pattern r
 
 ```yaml
 Process:
-  1. Search Basic Memory for similar codebase analysis patterns
+  1. Search knowledge base for similar codebase analysis patterns
   2. Reference relevant knowledge-base documentation and best practices
   3. Analyze current code with enhanced context from previous insights
   4. Synthesize multi-source knowledge for comprehensive understanding
@@ -49,7 +49,7 @@ Process:
 
 ```yaml
 Process:
-  1. Apply accumulated pattern knowledge from Basic Memory
+  1. Apply accumulated pattern knowledge from knowledge base
   2. Identify recurring architectural decisions and their outcomes
   3. Compare current patterns with successful implementations from history
   4. Provide context-aware recommendations based on proven approaches
@@ -62,7 +62,7 @@ Process:
   1. Extract key architectural insights and code patterns during analysis
   2. Create structured knowledge entries linking patterns to outcomes
   3. Cross-reference with related analysis results and decisions
-  4. Persist valuable insights to Basic Memory for future analysis enhancement
+  4. Persist valuable insights for future analysis enhancement
 ```
 
 ## Analysis Focus Areas
