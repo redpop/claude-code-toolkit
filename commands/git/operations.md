@@ -1,7 +1,7 @@
 ---
 description: Smart Git operations with project context and commit pattern learning
 argument-hint: [operation] [--push] [--no-verify] [--smart] [--pattern-learn] [--interactive] [--dry-run] [--help]
-allowed-tools: Task, Bash(git:*), mcp__basic-memory__search_notes, mcp__basic-memory__write_note
+allowed-tools: Task, Bash(git:*), mcp____search_notes, mcp____write_note
 ---
 
 # Git
@@ -18,12 +18,12 @@ Display this command's documentation:
 - **Usage**: [operation] [--push] [--no-verify] [--smart] [--pattern-learn]
 - **Operations**: commit, review, resolve, smart-commit, conflict-resolver
 - **Options**:
-  - `--push`: Push changes to remote repository after committing
-  - `--no-verify`: Skip pre-commit hooks and verification steps
-  - `--smart`: Use intelligent commit message generation
-  - `--pattern-learn`: Learn from project commit patterns for better messages
-  - `--interactive`: Interactive mode for complex Git operations
-  - `--dry-run`: Show proposed Git operations without executing them
+- `--push`: Push changes to remote repository after committing
+- `--no-verify`: Skip pre-commit hooks and verification steps
+- `--smart`: Use intelligent commit message generation
+- `--pattern-learn`: Learn from project commit patterns for better messages
+- `--interactive`: Interactive mode for complex Git operations
+- `--dry-run`: Show proposed Git operations without executing them
 
 Then exit without executing the main command.
 
@@ -46,12 +46,12 @@ Use Task tool with subagent_type="git-workflow-specialist":
 
 **IMPORTANT**: NEVER include Claude Code signature or Co-Authored-By lines in commit messages. This command creates commits without automation signatures.
 
-**Enhanced Workflow (when Basic Memory MCP available):**
+**Enhanced Workflow (when MCP services available):**
 
-1. **Context Retrieval**: Search Basic Memory for project-specific commit patterns and conventions
+1. **Context Retrieval**: Search for project-specific commit patterns and conventions
 2. **Pattern Application**: Apply successful commit strategies and messaging patterns from project history
 3. **Smart Analysis**: Analyze changes with understanding of project architecture and recent decisions
-4. **Pattern Learning**: Capture successful Git workflows and commit patterns to Basic Memory
+4. **Pattern Learning**: Capture successful Git workflows and commit patterns
 
 **Standard Workflow (always available - no MCP required):**
 

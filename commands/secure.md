@@ -1,7 +1,7 @@
 ---
 description: Security analysis and vulnerability detection with threat intelligence learning
 argument-hint: [type] [target] [--standard] [--help]
-allowed-tools: Task, mcp__basic-memory__search_notes, mcp__basic-memory__write_note, mcp__basic-memory__build_context
+allowed-tools: Task, mcp____search_notes, mcp____write_note, mcp____build_context
 ---
 
 # Secure
@@ -23,12 +23,12 @@ Route to knowledge-enhanced security analysis:
 Use Task tool with subagent_type="security-specialist":
 "Perform comprehensive security analysis of '$target' with '$type' focus using Knowledge-Enhanced approach with graceful fallback:
 
-**Enhanced Workflow (when Basic Memory MCP available):**
+**Enhanced Workflow (when MCP services available):**
 
-1. **Threat Intelligence**: Search Basic Memory for similar security issues and vulnerability patterns
+1. **Threat Intelligence**: Search for similar security issues and vulnerability patterns
 2. **Security Knowledge**: Apply knowledge-base security patterns and compliance requirements
 3. **Context-Aware Analysis**: Use project security context and previous security decisions
-4. **Learning Persistence**: Capture new security insights and threat patterns to Basic Memory
+4. **Learning Persistence**: Capture new security insights and threat patterns
 
 **Standard Workflow (always available - no MCP required):**
 

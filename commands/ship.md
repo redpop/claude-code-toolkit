@@ -1,7 +1,7 @@
 ---
 description: Deployment readiness and quality gates with release pattern learning
 argument-hint: [type] [target] [--check] [--readiness-check] [--quality-gates] [--help]
-allowed-tools: Task, mcp__basic-memory__search_notes, mcp__basic-memory__write_note, mcp__basic-memory__build_context
+allowed-tools: Task, mcp____search_notes, mcp____write_note, mcp____build_context
 ---
 
 # Ship
@@ -18,9 +18,9 @@ Display this command's documentation:
 - **Usage**: [type] [target] [--check] [--readiness-check] [--quality-gates]
 - **Types**: readiness, deploy, release, validate, monitor, quality, health, checklist
 - **Options**:
-  - `--check=type`        Specific check: tests, build, security, performance
-  - `--readiness-check`   Comprehensive deployment readiness assessment
-  - `--quality-gates`     Apply quality gates before deployment
+- `--check=type`    Specific check: tests, build, security, performance
+- `--readiness-check`  Comprehensive deployment readiness assessment
+- `--quality-gates`   Apply quality gates before deployment
 
 **Examples:**
 
@@ -49,12 +49,12 @@ Route to enhanced deployment analysis:
 Use Task tool with subagent_type="deployment-specialist":
 "Assess deployment readiness of '$target' with '$type' focus using Knowledge-Enhanced approach with graceful fallback:
 
-**Enhanced Workflow (when Basic Memory MCP available):**
+**Enhanced Workflow (when MCP services available):**
 
-1. **Release Patterns**: Search Basic Memory for successful deployment patterns and release strategies
+1. **Release Patterns**: Search for successful deployment patterns and release strategies
 2. **Quality Gates**: Apply knowledge-base quality standards and deployment best practices
 3. **Context-Aware Assessment**: Use project deployment history and previous release decisions
-4. **Pattern Learning**: Capture successful deployment patterns and release strategies to Basic Memory
+4. **Pattern Learning**: Capture successful deployment patterns and release strategies
 
 **Standard Workflow (always available - no MCP required):**
 

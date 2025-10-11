@@ -1,7 +1,7 @@
 ---
 description: Code and content generation with intelligent templating and pattern learning
 argument-hint: [type] [target] [--format] [--from-analysis] [--template] [--help]
-allowed-tools: Task, mcp__basic-memory__search_notes, mcp__basic-memory__write_note, mcp__basic-memory__build_context
+allowed-tools: Task, mcp____search_notes, mcp____write_note, mcp____build_context
 ---
 
 # Create
@@ -23,12 +23,12 @@ Route to enhanced generation:
 Use Task tool with subagent_type="documentation-specialist" (for docs) or "test-engineer" (for tests) or "frontend-specialist" (for components):
 "Generate '$target' with '$type' focus using Knowledge-Enhanced approach with graceful fallback:
 
-**Enhanced Workflow (when Basic Memory MCP available):**
+**Enhanced Workflow (when MCP services available):**
 
-1. **Pattern Retrieval**: Search Basic Memory for successful generation patterns and templates
+1. **Pattern Retrieval**: Search for successful generation patterns and templates
 2. **Template Application**: Apply knowledge-base templates for technology-specific generation
 3. **Context-Aware Creation**: Use project context and existing patterns for consistent generation
-4. **Pattern Learning**: Persist successful generation patterns and templates to Basic Memory
+4. **Pattern Learning**: Persist successful generation patterns and templates
 
 **Standard Workflow (always available - no MCP required):**
 

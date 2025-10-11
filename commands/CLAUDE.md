@@ -59,40 +59,41 @@ Each command is a Markdown file containing:
 
 1. **Frontmatter** (YAML format) with Claude Code-compatible fields:
 
-   ```yaml
-   ---
-   description: Brief command description
-   argument-hint: Expected arguments for auto-completion
-   allowed-tools: List of allowed tools for this command
-   mcp-enhanced: Optional MCP tools that enhance this command
-   ---
-   ```
+  ```yaml
+  ---
+  description: Brief command description
+  argument-hint: Expected arguments for auto-completion
+  allowed-tools: List of allowed tools for this command
+  mcp-enhanced: Optional MCP tools that enhance this command
+  ---
+  ```
 
 2. **Command Content Structure**:
-   - Command description and purpose
-   - Usage instructions with examples
-   - Detailed workflow steps
-   - Best practices and guidelines
-   - Examples of expected output
+
+- Command description and purpose
+- Usage instructions with examples
+- Detailed workflow steps
+- Best practices and guidelines
+- Examples of expected output
 
 ## 5-Command Architecture
 
 The core workflow provides transparency and developer control:
 
 ```bash
-/prefix:understand . --comprehensive    # Analysis phase
-/prefix:improve . --apply-insights     # Improvement phase
-/prefix:create docs --update-all       # Creation phase
-/prefix:secure . --audit               # Security phase
-/prefix:ship . --readiness-check       # Deployment phase
+/prefix:understand . --comprehensive  # Analysis phase
+/prefix:improve . --apply-insights   # Improvement phase
+/prefix:create docs --update-all    # Creation phase
+/prefix:secure . --audit        # Security phase
+/prefix:ship . --readiness-check    # Deployment phase
 ```
 
 Specialized commands support the core workflow:
 
 ```bash
-/prefix:git:operations commit --smart   # Version control
-/prefix:meta:changelog --fast          # Project management
-/prefix:typo3:sitepackage mysite       # Domain-specific tools
+/prefix:git:operations commit --smart  # Version control
+/prefix:meta:changelog --fast     # Project management
+/prefix:typo3:sitepackage mysite    # Domain-specific tools
 ```
 
 ### Benefits
@@ -179,21 +180,21 @@ Commands support structured output:
 
 ```
 commands/
-├── understand.md           # Core: /prefix:understand
-├── improve.md             # Core: /prefix:improve
-├── create.md              # Core: /prefix:create
-├── secure.md              # Core: /prefix:secure
-├── ship.md                # Core: /prefix:ship
-├── git.md                 # Core: /prefix:git
+├── understand.md      # Core: /prefix:understand
+├── improve.md       # Core: /prefix:improve
+├── create.md       # Core: /prefix:create
+├── secure.md       # Core: /prefix:secure
+├── ship.md        # Core: /prefix:ship
+├── git.md         # Core: /prefix:git
 ├── meta/
-│   ├── changelog.md       # Meta: /prefix:meta:changelog
-│   └── handoff.md         # Meta: /prefix:meta:handoff
+│  ├── changelog.md    # Meta: /prefix:meta:changelog
+│  └── handoff.md     # Meta: /prefix:meta:handoff
 └── typo3/
-    ├── content-blocks.md  # TYPO3: /prefix:typo3:content-blocks
-    ├── extension-kickstarter.md
-    ├── fluid-components.md
-    ├── make-content-block.md
-    └── sitepackage.md
+  ├── content-blocks.md # TYPO3: /prefix:typo3:content-blocks
+  ├── extension-kickstarter.md
+  ├── fluid-components.md
+  ├── make-content-block.md
+  └── sitepackage.md
 ```
 
 ## MCP Enhancement
@@ -202,7 +203,7 @@ Commands can leverage MCP (Model Context Protocol) tools when available:
 
 ```yaml
 ---
-allowed-tools: Task, mcp__basic-memory__search_notes, mcp__semgrep__security_check
+allowed-tools: Task, mcp____search_notes, mcp__semgrep__security_check
 ---
 ```
 

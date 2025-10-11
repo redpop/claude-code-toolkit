@@ -70,7 +70,7 @@ If "$ARGUMENTS" contains "--help" or "-h":
 - perplexity-ask - AI-powered web search
 - context7 - Documentation context management
 - fetch - HTTP fetch and web scraping
-- basic-memory - Memory and note-taking
+- - Memory and note-taking
 - chrome-devtools - Chrome DevTools integration
 - shadcn-ui-server - shadcn/ui components
 - figma-dev-mode - Figma Dev Mode integration
@@ -114,15 +114,15 @@ Based on the parsed command, execute the appropriate script action:
 
 - If server name provided:
 
-  ```bash
-  ~/.claude/claude-code-toolkit/scripts/manage-mcp.sh install <server-name> [--scope <scope>]
-  ```
+ ```bash
+ ~/.claude/claude-code-toolkit/scripts/manage-mcp.sh install <server-name> [--scope <scope>]
+ ```
 
 - If no server name (interactive):
 
-  ```bash
-  ~/.claude/claude-code-toolkit/scripts/manage-mcp.sh install [--scope <scope>]
-  ```
+ ```bash
+ ~/.claude/claude-code-toolkit/scripts/manage-mcp.sh install [--scope <scope>]
+ ```
 
 **Remove Command**:
 

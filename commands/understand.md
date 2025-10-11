@@ -1,7 +1,7 @@
 ---
 description: Code analysis and comprehension with intelligent problem routing
 argument-hint: [type] [target] [--comprehensive] [--quick] [--export-json] [--export-md] [--help]
-allowed-tools: Task, mcp__basic-memory__search_notes, mcp__basic-memory__write_note, mcp__basic-memory__build_context
+allowed-tools: Task, mcp____search_notes, mcp____write_note, mcp____build_context
 ---
 
 # Understand
@@ -18,10 +18,10 @@ Display this command's documentation:
 - **Usage**: [type] [target] [--comprehensive] [--quick] [--export-json] [--export-md]
 - **Types**: code, performance, security, architecture, debug, flow, dependencies, tests, docs, legacy
 - **Options**:
-  - `--comprehensive`: Deep analysis with full context
-  - `--quick`: Fast analysis for immediate insights
-  - `--export-json`: Generate timestamped JSON report
-  - `--export-md`: Generate timestamped Markdown report
+- `--comprehensive`: Deep analysis with full context
+- `--quick`: Fast analysis for immediate insights
+- `--export-json`: Generate timestamped JSON report
+- `--export-md`: Generate timestamped Markdown report
 
 Then exit without executing the main command.
 
@@ -41,12 +41,12 @@ Route to enhanced analysis:
 Use Task tool with subagent_type="code-understanding-specialist":
 "Perform comprehensive analysis of '$target' with '$type' focus using Knowledge-Enhanced approach with graceful fallback:
 
-**Enhanced Workflow (when Basic Memory MCP available):**
+**Enhanced Workflow (when MCP services available):**
 
-1. **Knowledge Retrieval**: Search Basic Memory for similar analysis patterns and previous insights
-2. **Domain Expertise**: Reference knowledge-base for technology-specific patterns and best practices  
+1. **Knowledge Retrieval**: Search for similar analysis patterns and previous insights
+2. **Domain Expertise**: Reference knowledge-base for technology-specific patterns and best practices
 3. **Cross-Project Learning**: Apply accumulated learning from successful analyses across projects
-4. **Learning Persistence**: Automatically capture key insights and patterns to Basic Memory for future use
+4. **Learning Persistence**: Automatically capture key insights and patterns for future use
 
 **Standard Workflow (always available - no MCP required):**
 
