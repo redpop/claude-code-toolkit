@@ -10,10 +10,10 @@ cd claude-code-toolkit
 ./install.sh myprefix --with-settings
 
 # Use anywhere in your projects
-/myprefix:understand --comprehensive      # Deep analysis (. is default)
-/myprefix:improve --apply-insights        # Fix issues
-/myprefix:secure --audit                  # Security scan
-/myprefix:ship --readiness-check          # Deployment validation
+/myprefix:understand --comprehensive   # Deep analysis (. is default)
+/myprefix:improve --apply-insights    # Fix issues
+/myprefix:secure --audit         # Security scan
+/myprefix:ship --readiness-check     # Deployment validation
 ```
 
 ## ✨ Features
@@ -150,7 +150,7 @@ Specialized AI agents provide domain expertise for various development tasks. Ea
 | Agent | Purpose | Tools |
 |-------|---------|-------|
 | [deployment-specialist](docs/agents/operations/deployment-specialist.md) | CI/CD and deployment expert specializing in automated pipelines, containerization, and production... | Read,Grep,Task |
-| [workflow-optimizer](docs/agents/operations/workflow-optimizer.md) | Developer workflow and productivity expert focused on reducing friction, automating repetitive ta... | Read,Grep,Task,mcp__basic-memory__search_notes,... |
+| [workflow-optimizer](docs/agents/operations/workflow-optimizer.md) | Developer workflow and productivity expert focused on reducing friction, automating repetitive ta... | Read,Grep,Task,mcp____search_notes,... |
 
 #### Research Agents
 
@@ -224,12 +224,12 @@ The toolkit provides intelligent workflow recommendations:
 
 ```bash
 claude-code-toolkit/
-├── commands/         # Core 6-command architecture
-├── agents/          # Specialized AI agents
-├── hooks/           # Automation hooks
-├── knowledge-base/  # Domain expertise
-├── templates/       # Command templates
-└── settings/        # Hook profiles
+├── commands/     # Core 6-command architecture
+├── agents/     # Specialized AI agents
+├── hooks/      # Automation hooks
+├── knowledge-base/ # Domain expertise
+├── templates/    # Command templates
+└── settings/    # Hook profiles
 ```
 
 ## 🍴 Forking & Customization
@@ -241,8 +241,8 @@ cd your-fork
 ./install.sh myteam
 
 # Install multiple versions
-./install.sh global    # Official toolkit
-./install.sh myteam    # Your customizations
+./install.sh global  # Official toolkit
+./install.sh myteam  # Your customizations
 ```
 
 ## 📚 Documentation
