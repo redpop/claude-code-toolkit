@@ -9,7 +9,7 @@ The toolkit uses a **6-Command Core Architecture** with specialized extensions:
 - **Core Commands**: understand, improve, create, secure, ship, git
 - **Extensions**: meta/*(changelog, handoff), typo3/* (content-blocks, etc.)
 - **Agents**: 22+ specialized AI agents for domain expertise
-- **Knowledge Base**: Basic Memory integration with graceful fallback
+- **Knowledge Base**: integration with graceful fallback
 
 ## Adding Commands
 
@@ -99,13 +99,13 @@ Use Task tool with subagent_type="agent-name":
 ```
 
 claude-code-toolkit/
-├── commands/           # Core commands (understand, improve, etc.)
-├── commands/meta/      # Meta commands (changelog, handoff)
-├── commands/typo3/     # TYPO3 commands (content-blocks, etc.)
-├── agents/            # Specialized AI agents
-├── scripts/           # Utility scripts
-├── templates/         # Command/agent templates
-└── docs/             # Essential documentation only
+├── commands/      # Core commands (understand, improve, etc.)
+├── commands/meta/   # Meta commands (changelog, handoff)
+├── commands/typo3/   # TYPO3 commands (content-blocks, etc.)
+├── agents/      # Specialized AI agents
+├── scripts/      # Utility scripts
+├── templates/     # Command/agent templates
+└── docs/       # Essential documentation only
 
 ```
 
@@ -124,7 +124,7 @@ Agents install to `~/.claude/agents/`
 
 ### MCP Integration
 Optional enhancement - toolkit works without MCP but better with it.
-Supported: Semgrep, GitHub, GitLab, Perplexity, Basic Memory
+Supported: Semgrep, GitHub, GitLab, Perplexity, 
 
 ### Hooks
 Place hooks in `~/.claude/claude-code-toolkit/hooks/`
@@ -140,7 +140,7 @@ No complex test infrastructure - focus on practical functionality.
 - **Commands**: 15-30 lines, Claude Code compliant
 - **Agents**: Domain-specific, clear expertise areas
 - **Documentation**: Minimal, essential only
-- **Learning**: Use Basic Memory integration where applicable
+- **Learning**: Use integration where applicable
 - **Fallbacks**: Always provide graceful degradation
 
 ## Contributing

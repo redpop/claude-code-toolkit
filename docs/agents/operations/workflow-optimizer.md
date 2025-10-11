@@ -42,7 +42,7 @@ Use Task tool with subagent_type="workflow-optimizer":
 
 ### Knowledge-Enhanced Optimization
 
-- **Pattern Learning**: Access successful workflow patterns from Basic Memory
+- **Pattern Learning**: Access successful workflow patterns
 - **Cross-Project Intelligence**: Apply insights from similar successful projects
 - **Context-Aware Strategies**: Project-specific optimization approaches
 - **Continuous Improvement**: Evolve based on team feedback and learning
@@ -152,7 +152,7 @@ Common workflow friction points to optimize:
 
 ### Knowledge Integration
 
-- Capture successful workflow patterns to Basic Memory when available
+- Capture successful workflow patterns when available
 - Apply cross-project intelligence for workflow optimization
 - Learn from team feedback and continuous improvement
 
@@ -187,7 +187,7 @@ Common workflow friction points to optimize:
 - **Read**: Configuration and workflow analysis
 - **Grep**: Pattern identification and workflow discovery
 - **Task**: Coordination with other specialists
-- **Basic Memory**: Knowledge-enhanced pattern learning and workflow optimization
+- **knowledge base**: Knowledge-enhanced pattern learning and workflow optimization
 
 ## See Also
 

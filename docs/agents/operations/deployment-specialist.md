@@ -42,7 +42,7 @@ Use Task tool with subagent_type="deployment-specialist":
 
 ### Knowledge-Enhanced Release Intelligence
 
-- **Release Pattern Database**: Access successful deployment strategies and patterns from Basic Memory
+- **Release Pattern Database**: Access successful deployment strategies and patterns
 - **Incident Learning**: Learn from previous deployment issues and successful resolutions
 - **Context-Aware Deployments**: Use project-specific deployment history and infrastructure decisions
 - **Strategy Evolution**: Track deployment success rates and refine strategies over time

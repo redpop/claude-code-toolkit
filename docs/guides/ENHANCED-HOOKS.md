@@ -6,7 +6,7 @@ The Claude Code Toolkit includes an intelligent hook system that transforms your
 
 The Enhanced Hook System provides four key capabilities:
 
-1. **Session-End Summary** - Intelligent session summaries with Basic Memory integration
+1. **Session-End Summary** - Intelligent session summaries with knowledge base integration
 2. **Enhanced Command Statistics** - Detailed usage analytics and pattern recognition
 3. **Hook Management CLI** - User-friendly hook administration
 4. **Context Refresh** - Automatic context preservation and restoration
@@ -34,7 +34,7 @@ Or manually enable specific hooks:
 
 ### Features
 
-- **Basic Memory Integration**: Automatically loads project insights and context
+- **knowledge base Integration**: Automatically loads project insights and context
 - **Session Metrics**: Duration, command count, productivity stats
 - **Git Status**: Uncommitted changes, recent commits, branch info
 - **Smart Suggestions**: Project-specific next session recommendations
@@ -47,39 +47,39 @@ Or manually enable specific hooks:
 📊 SESSION SUMMARY - Claude Code Toolkit
 ═══════════════════════════════════════════════════════════════
 
-⏱️  Duration: 2h 15min
+⏱️ Duration: 2h 15min
 📂 Project: claude-code-toolkit
 📍 Location: /Users/user/Projects/claude-code-toolkit
 
-🧠 BASIC MEMORY INSIGHTS:
+🧠 KNOWLEDGE BASE INSIGHTS:
 ────────────────────────────────────
 💡 PROJECT MEMORY FOUND:
-   Check: memory://claude-code-toolkit/ for context continuation
+  Check: memory://claude-code-toolkit/ for context continuation
 
 🎯 MEMORY SUGGESTIONS:
-   • Save current progress: Use Basic Memory to document key insights
-   • Next session: Review memory://claude-code-toolkit/ for context
+  • Save current progress: Use knowledge base to document key insights
+  • Next session: Review memory://claude-code-toolkit/ for context
 
 📈 SESSION COMMANDS:
 ────────────────────────────────────
 Most used commands today:
-   • /prefix:understand: 12x
-   • /prefix:improve: 8x
-   • bash:git: 15x
+  • /prefix:understand: 12x
+  • /prefix:improve: 8x
+  • bash:git: 15x
 
 📋 GIT STATUS:
 ────────────────────────────────────
-   ✅ Working directory clean
-   📚 Recent commits:
-      954a14d feat: complete Knowledge-Driven Revolution v4.0.0
-      5d63a77 docs: revolutionize documentation structure
+  ✅ Working directory clean
+  📚 Recent commits:
+   954a14d feat: complete Knowledge-Driven Revolution v4.0.0
+   5d63a77 docs: revolutionize documentation structure
 
 🎯 NEXT SESSION SUGGESTIONS:
 ────────────────────────────────────
-   • Use /prefix:understand . --comprehensive for deep analysis
-   • Use /prefix:improve . --apply-insights for optimizations
-   • Save insights to Basic Memory for next session
-   • Review documentation: docs/USAGE.md
+  • Use /prefix:understand . --comprehensive for deep analysis
+  • Use /prefix:improve . --apply-insights for optimizations
+  • Save insights to knowledge base for next session
+  • Review documentation: docs/USAGE.md
 
 ═══════════════════════════════════════════════════════════════
 💡 Tip: Use /prefix:meta:handoff to document context for others
@@ -91,7 +91,7 @@ Most used commands today:
 
 Edit the hook file to customize:
 
-- **Basic Memory Integration**: Modify memory queries and context depth
+- **knowledge base Integration**: Modify memory queries and context depth
 - **Project Detection**: Add custom project type recognition
 - **Suggestions**: Customize recommendations based on project patterns
 - **Output Format**: Adjust summary sections and styling
@@ -112,7 +112,7 @@ Edit the hook file to customize:
 
 ```
 ~/.claude/claude-code-toolkit/stats/
-├── command-stats.json          # Main statistics database
+├── command-stats.json     # Main statistics database
 ├── daily-stats-2025-01-13.json # Daily command breakdown
 └── daily-stats-2025-01-12.json # Previous days...
 ```
@@ -121,34 +121,34 @@ Edit the hook file to customize:
 
 ```json
 {
-  "daily": {
-    "2025-01-13": {
-      "/prefix:understand": {
-        "count": 12,
-        "last_used": "2025-01-13T15:42:00Z",
-        "projects": {
-          "claude-code-toolkit": 8,
-          "my-app": 4
-        }
-      },
-      "bash:git": {
-        "count": 15,
-        "last_used": "2025-01-13T16:20:00Z"
-      }
+ "daily": {
+  "2025-01-13": {
+   "/prefix:understand": {
+    "count": 12,
+    "last_used": "2025-01-13T15:42:00Z",
+    "projects": {
+     "claude-code-toolkit": 8,
+     "my-app": 4
     }
-  },
-  "patterns": {
-    "most_successful_sequences": [
-      "understand-improve-secure",
-      "understand-create-ship"
-    ],
-    "efficiency_metrics": {
-      "2025-01-13": {
-        "commands_per_session": 8.5,
-        "most_used_tool": "/prefix:understand"
-      }
-    }
+   },
+   "bash:git": {
+    "count": 15,
+    "last_used": "2025-01-13T16:20:00Z"
+   }
   }
+ },
+ "patterns": {
+  "most_successful_sequences": [
+   "understand-improve-secure",
+   "understand-create-ship"
+  ],
+  "efficiency_metrics": {
+   "2025-01-13": {
+    "commands_per_session": 8.5,
+    "most_used_tool": "/prefix:understand"
+   }
+  }
+ }
 }
 ```
 
@@ -209,9 +209,9 @@ Command chains use ascending tones to indicate progress:
 ./scripts/manage-hooks.sh enable command-chain-notification
 
 # Example chain that triggers pattern recognition:
-/global:understand . --comprehensive    # Tink.aiff (start)
-/global:improve . --apply-insights      # Pop.aiff (chain building)
-/global:ship . --readiness-check        # Ping.aiff + Glass.aiff (pattern complete!)
+/global:understand . --comprehensive  # Tink.aiff (start)
+/global:improve . --apply-insights   # Pop.aiff (chain building)
+/global:ship . --readiness-check    # Ping.aiff + Glass.aiff (pattern complete!)
 ```
 
 ### Configuration
@@ -257,32 +257,32 @@ $ ./scripts/manage-hooks.sh info session-end-summary
 
 🎣 HOOK: session-end-summary
 ────────────────────────────────────────
-📝 Description: Intelligent session summaries with Basic Memory
+📝 Description: Intelligent session summaries with knowledge base
 🔧 Type: Stop
-📋 Dependencies: jq,Basic Memory MCP
+📋 Dependencies: jq,knowledge base MCP
 ⚡ Status: ✅ ENABLED
 📁 File Path: ~/.claude/claude-code-toolkit/hooks/session-end-summary.sh
 
 🔍 DEPENDENCY CHECK:
 ────────────────────────────────────────
-   ✅ jq - Available
-   ❌ Basic Memory MCP - Not found
+  ✅ jq - Available
+  ❌ knowledge base MCP - Not found
 
 💡 USAGE:
 ────────────────────────────────────────
-   Enable:  ./scripts/manage-hooks.sh enable session-end-summary
-   Disable: ./scripts/manage-hooks.sh disable session-end-summary
+  Enable: ./scripts/manage-hooks.sh enable session-end-summary
+  Disable: ./scripts/manage-hooks.sh disable session-end-summary
 ```
 
 ### Available Hooks
 
 | Hook | Description | Type | Dependencies |
 |------|-------------|------|--------------|
-| `session-end-summary` | Intelligent session summaries with Basic Memory | Stop | jq, Basic Memory MCP |
+| `session-end-summary` | Intelligent session summaries with knowledge base | Stop | jq, knowledge base MCP |
 | `enhanced-command-logger` | Enhanced command statistics tracking | PostToolUse | jq |
 | `command-chain-notification` | Progress tracking for command chains | PostToolUse | jq, afplay |
-| `context-refresh` | Automatic context preservation | PostToolUse | Basic Memory MCP |
-| `session-start-enhanced` | Enhanced session initialization | SessionStart | Basic Memory MCP |
+| `context-refresh` | Automatic context preservation | PostToolUse | knowledge base MCP |
+| `session-start-enhanced` | Enhanced session initialization | SessionStart | knowledge base MCP |
 | `markdown-format` | Auto-format MD files | PostToolUse | markdownlint-cli2 |
 | `stop-notification` | Sound notifications | Stop | afplay |
 | `error-detection` | Error pattern detection | PostToolUse | none |
@@ -300,7 +300,7 @@ $ ./scripts/manage-hooks.sh info session-end-summary
 
 **Features**:
 
-- **Basic Memory Integration**: Loads project-specific context
+- **knowledge base Integration**: Loads project-specific context
 - **Session Focus Tracking**: Maintains current development focus
 - **Smart Refresh**: Only shows full refresh when needed
 - **Lightweight Updates**: Continuous background context preservation
@@ -311,7 +311,7 @@ $ ./scripts/manage-hooks.sh info session-end-summary
 
 **Features**:
 
-- **Previous Context Loading**: Retrieves context from Basic Memory
+- **Previous Context Loading**: Retrieves context from knowledge base
 - **Project Insights**: Analyzes project type and provides relevant information
 - **Starting Suggestions**: Recommends appropriate commands based on project state
 - **Session Tips**: Provides productivity tips and toolkit guidance
@@ -334,62 +334,62 @@ Recent session context for claude-code-toolkit:
 - Added session summaries, command statistics, hook management CLI
 - Working on documentation and integration testing
 
-💡 TIP: Full context available in Basic Memory
-   Use: mcp__basic-memory__search_notes query="claude-code-toolkit"
+💡 TIP: Full context available in knowledge base
+  Use: mcp____search_notes query="claude-code-toolkit"
 
 🔍 PROJECT INSIGHTS:
 ────────────────────────────────────────
-   📁 General project
-   📖 README.md found
-   🤖 Claude Code instructions found
-   🌿 Git branch: feature/knowledge-driven-revolution
-   ⚠️  3 uncommitted files
+  📁 General project
+  📖 README.md found
+  🤖 Claude Code instructions found
+  🌿 Git branch: feature/knowledge-driven-revolution
+  ⚠️ 3 uncommitted files
 
 🎯 SUGGESTED STARTING COMMANDS:
 ────────────────────────────────────────
-   🔍 Analyze & Understand:
-   • /prefix:understand . --comprehensive
-   • /prefix:understand . --quick
+  🔍 Analyze & Understand:
+  • /prefix:understand . --comprehensive
+  • /prefix:understand . --quick
 
-   🛠️  Improve & Develop:
-   • /prefix:improve . --apply-insights
-   • /prefix:create docs --update
+  🛠️ Improve & Develop:
+  • /prefix:improve . --apply-insights
+  • /prefix:create docs --update
 
-   🔒 Security & Quality:
-   • /prefix:secure . --audit
-   • /prefix:ship . --readiness-check
+  🔒 Security & Quality:
+  • /prefix:secure . --audit
+  • /prefix:ship . --readiness-check
 
 💡 SESSION TIPS:
 ────────────────────────────────────────
-   • Use Basic Memory to document insights: mcp__basic-memory__write_note
-   • Get session summary at end: Automatic with session-end-summary hook
-   • Manage hooks: ./scripts/manage-hooks.sh
-   • Create handoff document: /prefix:meta:handoff
+  • Use knowledge base to document insights: mcp____write_note
+  • Get session summary at end: Automatic with session-end-summary hook
+  • Manage hooks: ./scripts/manage-hooks.sh
+  • Create handoff document: /prefix:meta:handoff
 
 ═══════════════════════════════════════════════════════════════
 ✅ Session initialized! Ready for development.
-🧠 Context loaded from Basic Memory where available.
+🧠 Context loaded from knowledge base where available.
 ═══════════════════════════════════════════════════════════════
 ```
 
 ## 💡 Best Practices
 
-### 1. Basic Memory Integration
+### 1. knowledge base Integration
 
 For optimal context preservation:
 
 ```bash
-# Install Basic Memory MCP for enhanced functionality
+# Install knowledge base MCP for enhanced functionality
 # The hooks work without it but provide richer insights with it
 
 # Document insights during sessions
-mcp__basic-memory__write_note \
-  title="session-insights-$(date +%Y%m%d)" \
-  content="Key insights from today's development session" \
-  folder="projects/my-project"
+mcp____write_note \
+ title="session-insights-$(date +%Y%m%d)" \
+ content="Key insights from today's development session" \
+ folder="projects/my-project"
 
 # Search previous context
-mcp__basic-memory__search_notes query="project-name feature-name"
+mcp____search_notes query="project-name feature-name"
 ```
 
 ### 2. Hook Customization
@@ -432,7 +432,7 @@ Regularly maintain your hook system:
 ./scripts/manage-hooks.sh list
 
 # Update hook dependencies
-brew install jq markdownlint-cli2  # macOS
+brew install jq markdownlint-cli2 # macOS
 ```
 
 ## 🔧 Troubleshooting
@@ -459,18 +459,18 @@ echo '{"tool_name": "test"}' | ~/.claude/claude-code-toolkit/hooks/session-end-s
 ./scripts/manage-hooks.sh doctor
 
 # Install missing dependencies
-brew install jq                    # Command statistics
-npm install -g markdownlint-cli2   # Markdown formatting
+brew install jq          # Command statistics
+npm install -g markdownlint-cli2  # Markdown formatting
 ```
 
-**3. Basic Memory Integration Issues**
+**3. knowledge base Integration Issues**
 
 ```bash
-# Verify Basic Memory MCP is installed
-# Hooks provide graceful fallback if Basic Memory unavailable
+# Verify knowledge base MCP is installed
+# Hooks provide graceful fallback if knowledge base unavailable
 
-# Test Basic Memory commands
-mcp__basic-memory__search_notes query="test"
+# Test knowledge base commands
+mcp____search_notes query="test"
 ```
 
 **4. Statistics Not Recording**
@@ -521,7 +521,7 @@ find ~/.claude/claude-code-toolkit/stats/ -name "daily-stats-*.json" -exec jq '.
 ## 📚 Related Documentation
 
 - [Hook System Architecture](../architecture/HOOKS-ARCHITECTURE.md)
-- [Basic Memory Integration](MCP-INTEGRATION.md)
+- [knowledge base Integration](MCP-INTEGRATION.md)
 - [Command Reference](../USAGE.md)
 - [Installation Guide](../INSTALLATION-GUIDE.md)
 

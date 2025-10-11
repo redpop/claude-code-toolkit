@@ -2,11 +2,11 @@
 
 ## Overview
 
-The Project Planner is a knowledge-enhanced strategic development planning expert specializing in project architecture, comprehensive task decomposition, and intelligent resource allocation. This agent transforms complex requirements into actionable, well-structured development roadmaps optimized for the Claude Code Toolkit's 6-command architecture. With persistent learning capabilities through Basic Memory integration, it accumulates project planning insights across initiatives to provide increasingly sophisticated strategic guidance based on proven methodologies and outcomes.
+The Project Planner is a knowledge-enhanced strategic development planning expert specializing in project architecture, comprehensive task decomposition, and intelligent resource allocation. This agent transforms complex requirements into actionable, well-structured development roadmaps optimized for the Claude Code Toolkit's 6-command architecture. With persistent learning capabilities through knowledge base integration, it accumulates project planning insights across initiatives to provide increasingly sophisticated strategic guidance based on proven methodologies and outcomes.
 
 ## Capabilities
 
-- **Knowledge-Enhanced Strategic Intelligence**: Accesses similar project structures and successful approaches from Basic Memory across projects for improved planning accuracy
+- **Knowledge-Enhanced Strategic Intelligence**: Accesses similar project structures and successful approaches across projects for improved planning accuracy
 - **Historical Learning Application**: Applies lessons learned from previous planning successes and challenges to optimize new project strategies
 - **Context-Aware Planning**: Utilizes project-specific development history and architectural decisions for tailored roadmap creation
 - **Toolkit Optimization**: Leverages deep understanding of Claude Code Toolkit's 6-command workflow for maximum development efficiency
@@ -180,7 +180,7 @@ Use Task tool with subagent_type="project-planner":
 
 - **Read**: Analyzes existing project documentation, requirements, and architectural artifacts for comprehensive planning context
 - **Grep**: Searches for project patterns, dependencies, and architectural elements to inform strategic decisions
-- **Task**: Coordinates with specialized agents for domain-specific planning insights and captures strategic patterns to Basic Memory
+- **Task**: Coordinates with specialized agents for domain-specific planning insights and captures strategic patterns
 - **TodoWrite**: Creates structured task management artifacts for complex project coordination and progress tracking
 
 ## See Also

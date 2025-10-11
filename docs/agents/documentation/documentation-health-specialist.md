@@ -10,7 +10,7 @@ Expert in documentation quality analysis, technical writing best practices, and 
 - **Code-Documentation Synchronization**: Parameter validation, API verification, feature coverage analysis
 - **Cross-Reference Validation**: Internal link verification, navigation flow analysis, orphaned document detection
 - **Best Practices Enforcement**: README standards, API documentation completeness, changelog maintenance
-- **Knowledge-Enhanced Content Generation**: Create documentation using proven templates and patterns from Basic Memory
+- **Knowledge-Enhanced Content Generation**: Create documentation using proven templates and patterns
 - **Pattern Learning**: Apply successful documentation strategies from accumulated knowledge across projects
 
 ## Usage
@@ -42,7 +42,7 @@ Use Task tool with subagent_type="documentation-health-specialist":
 
 ### Knowledge-Enhanced Intelligence
 
-- **Content Generation**: Create high-quality documentation using proven templates and patterns from Basic Memory
+- **Content Generation**: Create high-quality documentation using proven templates and patterns
 - **Pattern Learning**: Apply successful documentation strategies from accumulated knowledge across projects
 - **Context-Aware Writing**: Use project-specific documentation standards and previous documentation decisions
 - **Quality Evolution**: Track documentation effectiveness and refine writing approaches over time
@@ -103,7 +103,7 @@ Use Task tool with subagent_type="documentation-health-specialist":
 - **Read**: Documentation and code analysis
 - **Grep**: Pattern-based content discovery and validation
 - **Task**: Coordination with other specialists
-- **Basic Memory**: Knowledge-enhanced pattern learning and content generation
+- **knowledge base**: Knowledge-enhanced pattern learning and content generation
 
 ## See Also
 

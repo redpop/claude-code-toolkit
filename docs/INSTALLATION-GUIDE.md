@@ -37,10 +37,10 @@ All commands are now available as `/global:category:command`
 
 - All standard installation features
 - **Enhanced hook system** with intelligent features:
-  - Session-end summaries with Basic Memory integration
-  - Command statistics tracking and pattern recognition
-  - Context refresh for session continuity
-  - Sound notifications and system alerts
+- Session-end summaries with integration
+- Command statistics tracking and pattern recognition
+- Context refresh for session continuity
+- Sound notifications and system alerts
 - Hook management CLI
 - Advanced productivity features
 
@@ -67,9 +67,9 @@ All commands are now available as `/global:category:command`
 Install with different prefixes for different workflows:
 
 ```bash
-./install.sh global     # Main installation
-./install.sh team       # Team-specific commands  
-./install.sh testing    # Testing environment
+./install.sh global   # Main installation
+./install.sh team    # Team-specific commands 
+./install.sh testing  # Testing environment
 ```
 
 Each installation is completely independent.
@@ -82,7 +82,7 @@ The toolkit includes an intelligent hook system that transforms your development
 
 #### **Intelligence Hooks**
 
-- **session-end-summary**: Smart session summaries with Basic Memory integration
+- **session-end-summary**: Smart session summaries with integration
 - **enhanced-command-logger**: Advanced command statistics and pattern recognition
 - **context-refresh**: Automatic context preservation across sessions
 
@@ -142,10 +142,10 @@ Some enhanced hooks require additional tools:
 
 ```bash
 # Install hook dependencies
-brew install jq                    # Command statistics
-npm install -g markdownlint-cli2   # Markdown formatting
+brew install jq          # Command statistics
+npm install -g markdownlint-cli2  # Markdown formatting
 
-# Optional: Install Basic Memory MCP for enhanced context features
+# Optional: Install MCP services for enhanced context features
 # See MCP Integration guide for details
 ```
 
@@ -181,12 +181,12 @@ After installation, you'll have:
 
 ```
 ~/.claude/
-├── commands/<prefix>/     # Your toolkit commands
-├── agents/               # Shared analysis agents
-└── claude-code-toolkit/  # Toolkit data and hooks
-    ├── settings/         # Hook configuration files
-    ├── hooks/           # Hook scripts
-    └── .installed-version # Version tracking
+├── commands/<prefix>/   # Your toolkit commands
+├── agents/        # Shared analysis agents
+└── claude-code-toolkit/ # Toolkit data and hooks
+  ├── settings/     # Hook configuration files
+  ├── hooks/      # Hook scripts
+  └── .installed-version # Version tracking
 ```
 
 ## Verification
@@ -211,7 +211,7 @@ ls ~/.claude/commands/global/
 ```bash
 cd claude-code-toolkit
 git pull origin main
-./install.sh global  # Reinstall with same prefix
+./install.sh global # Reinstall with same prefix
 ```
 
 ### Update with Settings Preservation
@@ -281,7 +281,7 @@ Then reference your custom hook in the settings JSON.
 ### Prefix Selection
 
 - **global**: General development work
-- **team**: Team-specific workflows  
+- **team**: Team-specific workflows
 - **project**: Project-specific commands
 - **test**: Testing and experimentation
 

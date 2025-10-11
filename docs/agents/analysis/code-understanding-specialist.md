@@ -2,11 +2,11 @@
 
 ## Overview
 
-The Code Understanding Specialist is a knowledge-enhanced expert in comprehensive code analysis, architecture comprehension, and pattern recognition. This agent combines deep code analysis expertise with persistent learning capabilities, utilizing Basic Memory integration to accumulate insights across projects and continuously improve analysis quality through cross-project knowledge transfer.
+The Code Understanding Specialist is a knowledge-enhanced expert in comprehensive code analysis, architecture comprehension, and pattern recognition. This agent combines deep code analysis expertise with persistent learning capabilities, utilizing knowledge base integration to accumulate insights across projects and continuously improve analysis quality through cross-project knowledge transfer.
 
 ## Capabilities
 
-- **Multi-Source Knowledge Integration**: Retrieves similar analysis patterns and insights from cross-project history through Basic Memory
+- **Multi-Source Knowledge Integration**: Retrieves similar analysis patterns and insights from cross-project history through knowledge base
 - **Local Knowledge Base Access**: References domain-specific patterns from the knowledge-base/ directory for enhanced context
 - **Real-Time Context Synthesis**: Combines current codebase state with accumulated learning for deeper understanding
 - **Advanced Pattern Recognition**: Identifies recurring architectural patterns, code structures, and design decisions across codebases
@@ -15,7 +15,7 @@ The Code Understanding Specialist is a knowledge-enhanced expert in comprehensiv
 - **Performance Pattern Recognition**: Bottleneck identification, optimization opportunities, scalability concerns, and resource usage patterns
 - **Security Context Understanding**: Authentication flows, data validation patterns, security boundaries, and vulnerability analysis
 - **Legacy Code Comprehension**: Modernization opportunities, refactoring priorities, risk assessment, and migration strategies
-- **Insight Persistence**: Automatically captures key findings and patterns to Basic Memory for future analysis enhancement
+- **Insight Persistence**: Automatically captures key findings and patterns for future analysis enhancement
 
 ## Usage
 
@@ -59,7 +59,7 @@ The Code Understanding Specialist delivers structured analysis reports with know
 - Recurring architectural decisions and outcomes
 - Design pattern usage and effectiveness
 - Anti-pattern identification and remediation
-- Cross-project pattern comparisons from Basic Memory
+- Cross-project pattern comparisons
 
 ## Knowledge-Enhanced Insights
 - Analysis enriched with historical project learnings
@@ -92,7 +92,7 @@ Use Task tool with subagent_type="code-understanding-specialist":
 "Analyze our legacy monolithic application to understand its structure, identify modernization opportunities, and create a roadmap for gradual transformation to modern architecture patterns."
 ```
 
-**Expected Output**: Comprehensive legacy analysis with modernization strategy, risk assessment, and step-by-step transformation plan based on successful migration patterns from Basic Memory.
+**Expected Output**: Comprehensive legacy analysis with modernization strategy, risk assessment, and step-by-step transformation plan based on successful migration patterns.
 
 ### Example 3: Code Quality Deep Dive
 
@@ -108,7 +108,7 @@ Use Task tool with subagent_type="code-understanding-specialist":
 - **Read**: Analyzes source code files, configuration files, and documentation for comprehensive understanding
 - **Grep**: Searches for patterns, imports, dependencies, and architectural elements across the codebase
 - **Glob**: Discovers file structures, module organization, and architectural boundaries
-- **Task**: Coordinates with other specialists and captures insights to Basic Memory for persistent learning
+- **Task**: Coordinates with other specialists and captures insights for persistent learning
 
 ## See Also
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Refactoring Expert is a knowledge-enhanced specialist in code refactoring, clean code principles, and systematic code improvement. This agent excels at identifying code smells, suggesting refactoring strategies, and guiding safe, incremental code improvements while maintaining functionality. Enhanced with Basic Memory integration, it learns from successful refactoring patterns across projects to provide proven improvement strategies.
+The Refactoring Expert is a knowledge-enhanced specialist in code refactoring, clean code principles, and systematic code improvement. This agent excels at identifying code smells, suggesting refactoring strategies, and guiding safe, incremental code improvements while maintaining functionality. Enhanced with knowledge base integration, it learns from successful refactoring patterns across projects to provide proven improvement strategies.
 
 ## Capabilities
 
@@ -10,7 +10,7 @@ The Refactoring Expert is a knowledge-enhanced specialist in code refactoring, c
 - **Refactoring Techniques Mastery**: Extract method/class/interface, move method/field, inline operations, conditional polymorphism replacement, parameter object introduction, and inheritance-delegation conversion
 - **Clean Code Principles**: Single Responsibility Principle, DRY compliance, KISS methodology, Boy Scout Rule application, meaningful naming conventions, and optimal function sizing
 - **Legacy System Modernization**: Strangler Fig pattern implementation, anti-corruption layer design, branch by abstraction technique, event interception strategies, and incremental migration planning
-- **Pattern Database Access**: Successful refactoring patterns and outcomes from Basic Memory across projects
+- **Pattern Database Access**: Successful refactoring patterns and outcomes across projects
 - **Success Tracking**: Learning from previous refactoring successes and failures to improve recommendations
 - **Context-Aware Improvements**: Project-specific refactoring history and architectural decision context
 - **Evolution Learning**: Tracking code quality improvements over time and refining strategies
@@ -184,7 +184,7 @@ Use Task tool with subagent_type="refactoring-expert":
 
 - **Read**: Analyzes source code for refactoring opportunities, design patterns, and code quality issues
 - **Grep**: Searches for code smell patterns, duplicate code, and refactoring opportunities across the codebase
-- **Task**: Coordinates with other specialists and captures successful refactoring patterns to Basic Memory for continuous learning
+- **Task**: Coordinates with other specialists and captures successful refactoring patterns for continuous learning
 
 ## See Also
 

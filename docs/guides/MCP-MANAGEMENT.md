@@ -95,9 +95,9 @@ The script currently supports the following MCP servers:
 - **Description**: HTTP fetch and web scraping
 - **Use Cases**: API calls, web content retrieval
 
-### 5. Basic Memory
+### 5. knowledge base
 
-- **Command**: `uvx basic-memory mcp`
+- **Command**: `uvx mcp`
 - **Description**: Simple memory and note-taking
 - **Use Cases**: Persistent memory across sessions, note management
 
@@ -184,16 +184,16 @@ Lists all available MCP servers with descriptions and transport types.
 
 ```
 ═══════════════════════════════════════════════════════════════
-   Available MCP Servers
+  Available MCP Servers
 ═══════════════════════════════════════════════════════════════
 
 [1] playwright
-    Description: Browser automation and testing with Playwright
-    Transport: stdio
+  Description: Browser automation and testing with Playwright
+  Transport: stdio
 
 [2] perplexity-ask
-    Description: AI-powered web search and research
-    Transport: stdio
+  Description: AI-powered web search and research
+  Transport: stdio
 ...
 ```
 
@@ -229,7 +229,7 @@ The interactive mode makes it easy to explore available servers and choose the r
 
 ```
 ═══════════════════════════════════════════════════════════════
-   Select MCP Server to Install
+  Select MCP Server to Install
 ═══════════════════════════════════════════════════════════════
 
 [1] playwright - Browser automation and testing with Playwright
@@ -267,13 +267,13 @@ Shows detailed information about a specific MCP server.
 
 ```
 ═══════════════════════════════════════════════════════════════
-   MCP Server: playwright
+  MCP Server: playwright
 ═══════════════════════════════════════════════════════════════
 
-Name:        playwright
+Name:    playwright
 Description: Browser automation and testing with Playwright
-Command:     npx @playwright/mcp@latest
-Transport:   stdio
+Command:   npx @playwright/mcp@latest
+Transport:  stdio
 ```
 
 ### help
@@ -292,10 +292,10 @@ To add a new MCP server to the script, edit the `MCP_SERVERS` array in `scripts/
 
 ```bash
 declare -a MCP_SERVERS=(
-    # Existing servers...
-    
-    # Add new server
-    "server-name|npx package-name|Description of the server|stdio"
+  # Existing servers...
+  
+  # Add new server
+  "server-name|npx package-name|Description of the server|stdio"
 )
 ```
 

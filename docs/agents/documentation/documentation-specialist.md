@@ -6,7 +6,7 @@ Knowledge-Enhanced expert in content generation and technical writing. This agen
 
 ## Capabilities
 
-- **Content Generation**: Create high-quality documentation using proven templates and patterns from Basic Memory
+- **Content Generation**: Create high-quality documentation using proven templates and patterns
 - **Pattern Learning**: Apply successful documentation strategies from accumulated knowledge across projects
 - **Context-Aware Writing**: Use project-specific documentation standards and previous documentation decisions
 - **Quality Assurance**: Documentation review and improvement recommendations
@@ -42,7 +42,7 @@ Use Task tool with subagent_type="documentation-specialist":
 
 ### Knowledge-Enhanced Documentation Intelligence
 
-- **Content Generation**: Create high-quality documentation using proven templates and patterns from Basic Memory
+- **Content Generation**: Create high-quality documentation using proven templates and patterns
 - **Pattern Learning**: Apply successful documentation strategies from accumulated knowledge across projects
 - **Context-Aware Writing**: Use project-specific documentation standards and previous documentation decisions
 - **Quality Evolution**: Track documentation effectiveness and refine writing approaches over time
@@ -103,7 +103,7 @@ Use Task tool with subagent_type="documentation-specialist":
 - **Read**: Content analysis and pattern discovery
 - **Grep**: Template and example identification
 - **Task**: Coordination with documentation-health-specialist
-- **Basic Memory**: Knowledge-enhanced pattern learning and content generation
+- **knowledge base**: Knowledge-enhanced pattern learning and content generation
 
 ## See Also
 

@@ -48,10 +48,10 @@ task_name: "Implement OAuth2 Authentication"
 toolkit_command: "/create"
 agent_assignment: "security-specialist"
 claude_toolkit_workflow: |
-  /prefix:understand . --security-analysis
-  /prefix:secure . --authentication-design
-  /prefix:create auth --oauth2-implementation
-  /prefix:ship . --security-validation
+ /prefix:understand . --security-analysis
+ /prefix:secure . --authentication-design
+ /prefix:create auth --oauth2-implementation
+ /prefix:ship . --security-validation
 ```
 
 ## 📋 Usage Patterns
@@ -128,56 +128,56 @@ The project-planner excels at designing complex agent workflows:
 
 ```yaml
 agent_sequences:
-  - workflow_name: "E-commerce Checkout Implementation"
-    description: "Complete checkout system with payment integration"
-    agents:
-      - agent: "code-architect"
-        role: "System design and database schema"
-        inputs: "Requirements and existing architecture"
-        outputs: "Architecture decisions and database design"
-        handoff_to: "frontend-specialist"
+ - workflow_name: "E-commerce Checkout Implementation"
+  description: "Complete checkout system with payment integration"
+  agents:
+   - agent: "code-architect"
+    role: "System design and database schema"
+    inputs: "Requirements and existing architecture"
+    outputs: "Architecture decisions and database design"
+    handoff_to: "frontend-specialist"
 
-      - agent: "frontend-specialist"
-        role: "UI implementation and user experience"
-        inputs: "Design specifications and API contracts"
-        outputs: "React components and user workflows"
-        handoff_to: "security-specialist"
+   - agent: "frontend-specialist"
+    role: "UI implementation and user experience"
+    inputs: "Design specifications and API contracts"
+    outputs: "React components and user workflows"
+    handoff_to: "security-specialist"
 
-      - agent: "security-specialist"
-        role: "Payment security and PCI compliance"
-        inputs: "Payment flow and security requirements"
-        outputs: "Security implementation and validation"
-        handoff_to: "test-engineer"
+   - agent: "security-specialist"
+    role: "Payment security and PCI compliance"
+    inputs: "Payment flow and security requirements"
+    outputs: "Security implementation and validation"
+    handoff_to: "test-engineer"
 
-      - agent: "test-engineer"
-        role: "Comprehensive testing strategy"
-        inputs: "Complete implementation and security measures"
-        outputs: "Test suites and quality validation"
-        handoff_to: "deployment-specialist"
+   - agent: "test-engineer"
+    role: "Comprehensive testing strategy"
+    inputs: "Complete implementation and security measures"
+    outputs: "Test suites and quality validation"
+    handoff_to: "deployment-specialist"
 
-      - agent: "deployment-specialist"
-        role: "Production deployment and monitoring"
-        inputs: "Tested implementation and deployment requirements"
-        outputs: "Deployment pipeline and monitoring setup"
+   - agent: "deployment-specialist"
+    role: "Production deployment and monitoring"
+    inputs: "Tested implementation and deployment requirements"
+    outputs: "Deployment pipeline and monitoring setup"
 ```
 
 ### Knowledge Transfer Planning
 
 ```yaml
 knowledge_transfer:
-  - checkpoint: "Architecture Decision Review"
-    knowledge_items:
-      - "Database schema rationale"
-      - "API design principles"
-      - "Security architecture decisions"
-    documentation_required: "Architecture Decision Records (ADRs)"
+ - checkpoint: "Architecture Decision Review"
+  knowledge_items:
+   - "Database schema rationale"
+   - "API design principles"
+   - "Security architecture decisions"
+  documentation_required: "Architecture Decision Records (ADRs)"
 
-  - checkpoint: "Implementation Handoff"
-    knowledge_items:
-      - "Component interaction patterns"
-      - "Error handling strategies"
-      - "Performance optimization techniques"
-    documentation_required: "Implementation guides and code comments"
+ - checkpoint: "Implementation Handoff"
+  knowledge_items:
+   - "Component interaction patterns"
+   - "Error handling strategies"
+   - "Performance optimization techniques"
+  documentation_required: "Implementation guides and code comments"
 ```
 
 ## 🎯 Output Formats and Templates
@@ -194,76 +194,76 @@ planner_version: "1.0.0"
 toolkit_optimization: true
 
 executive_summary:
-  overview: |
-    Implementation of comprehensive OAuth2 authentication system
-    with multi-factor authentication and role-based access control
-  key_objectives:
-    - Secure user authentication and authorization
-    - Seamless integration with existing system
-    - Compliance with security standards
-  success_metrics:
-    - metric: "Authentication response time"
-      target: "<200ms"
-      timeline: "End of Phase 2"
-    - metric: "Security compliance score"
-      target: "100% OWASP ASVS Level 2"
-      timeline: "Before production deployment"
+ overview: |
+  Implementation of comprehensive OAuth2 authentication system
+  with multi-factor authentication and role-based access control
+ key_objectives:
+  - Secure user authentication and authorization
+  - Seamless integration with existing system
+  - Compliance with security standards
+ success_metrics:
+  - metric: "Authentication response time"
+   target: "<200ms"
+   timeline: "End of Phase 2"
+  - metric: "Security compliance score"
+   target: "100% OWASP ASVS Level 2"
+   timeline: "Before production deployment"
 
 phases:
-  - phase_name: "Foundation & Security Design"
-    duration: "1 week"
-    goals: "Security architecture and core authentication logic"
-    deliverables:
-      - "OAuth2 provider integration"
-      - "User model and database schema"
-      - "Security policy framework"
+ - phase_name: "Foundation & Security Design"
+  duration: "1 week"
+  goals: "Security architecture and core authentication logic"
+  deliverables:
+   - "OAuth2 provider integration"
+   - "User model and database schema"
+   - "Security policy framework"
 
-    features:
-      - feature_name: "OAuth2 Integration"
-        priority: "high"
-        complexity: "complex"
-        estimated_effort: "3 days"
+  features:
+   - feature_name: "OAuth2 Integration"
+    priority: "high"
+    complexity: "complex"
+    estimated_effort: "3 days"
 
-        tasks:
-          - task_name: "OAuth2 Provider Configuration"
-            toolkit_command: "/create"
-            agent_assignment: "security-specialist"
-            effort_estimate: "8 hours"
-            dependencies: []
-            acceptance_criteria:
-              - "OAuth2 flow successfully authenticates test users"
-              - "Token validation and refresh mechanism works"
-              - "Security headers and CSRF protection implemented"
+    tasks:
+     - task_name: "OAuth2 Provider Configuration"
+      toolkit_command: "/create"
+      agent_assignment: "security-specialist"
+      effort_estimate: "8 hours"
+      dependencies: []
+      acceptance_criteria:
+       - "OAuth2 flow successfully authenticates test users"
+       - "Token validation and refresh mechanism works"
+       - "Security headers and CSRF protection implemented"
 
-            claude_toolkit_workflow: |
-              # Recommended command sequence:
-              /prefix:understand . --security-requirements
-              /prefix:secure . --oauth2-design
-              /prefix:create auth --oauth2-implementation
-              /prefix:ship . --security-validation
+      claude_toolkit_workflow: |
+       # Recommended command sequence:
+       /prefix:understand . --security-requirements
+       /prefix:secure . --oauth2-design
+       /prefix:create auth --oauth2-implementation
+       /prefix:ship . --security-validation
 
-        risks:
-          - risk: "OAuth2 provider service disruption"
-            impact: "high"
-            probability: "low"
-            mitigation: "Implement fallback authentication mechanism"
+    risks:
+     - risk: "OAuth2 provider service disruption"
+      impact: "high"
+      probability: "low"
+      mitigation: "Implement fallback authentication mechanism"
 
 timeline:
-  start_date: "2024-01-15"
-  estimated_completion: "2024-02-05"
+ start_date: "2024-01-15"
+ estimated_completion: "2024-02-05"
 
 milestones:
-  - milestone: "Security Foundation Complete"
-    date: "2024-01-22"
-    deliverables: ["OAuth2 integration", "User authentication flow"]
-    success_criteria: "All security tests pass"
-    review_process: "Security specialist validation"
+ - milestone: "Security Foundation Complete"
+  date: "2024-01-22"
+  deliverables: ["OAuth2 integration", "User authentication flow"]
+  success_criteria: "All security tests pass"
+  review_process: "Security specialist validation"
 
 quality_gates:
-  - phase: "Security Implementation"
-    standards: ["OWASP ASVS Level 2", "OAuth2 RFC compliance"]
-    validation_approach: "Automated security testing + manual review"
-    tools: ["security-specialist agent", "OWASP ZAP", "Custom tests"]
+ - phase: "Security Implementation"
+  standards: ["OWASP ASVS Level 2", "OAuth2 RFC compliance"]
+  validation_approach: "Automated security testing + manual review"
+  tools: ["security-specialist agent", "OWASP ZAP", "Custom tests"]
 ```
 
 ## 📊 Best Practices
@@ -387,7 +387,7 @@ Include gradual migration strategy, data migration, API design, and risk mitigat
 
 ### 1. Knowledge-Enhanced Planning
 
-The project-planner integrates with Basic Memory for historical learning:
+The project-planner integrates with knowledge base for historical learning:
 
 - **Pattern Recognition**: Learns from successful project patterns
 - **Risk Prediction**: Identifies risks based on similar past projects

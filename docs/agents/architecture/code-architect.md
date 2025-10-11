@@ -2,11 +2,11 @@
 
 ## Overview
 
-The Code Architect is a knowledge-enhanced expert in software architecture, system design, and architectural patterns. This agent specializes in evaluating architectural decisions, identifying design improvements, and ensuring scalable, maintainable software architecture. With persistent learning capabilities through Basic Memory integration, it accumulates architectural insights across projects to provide increasingly sophisticated recommendations based on proven patterns and outcomes.
+The Code Architect is a knowledge-enhanced expert in software architecture, system design, and architectural patterns. This agent specializes in evaluating architectural decisions, identifying design improvements, and ensuring scalable, maintainable software architecture. With persistent learning capabilities through knowledge base integration, it accumulates architectural insights across projects to provide increasingly sophisticated recommendations based on proven patterns and outcomes.
 
 ## Capabilities
 
-- **Knowledge-Enhanced Architecture Intelligence**: Accesses architectural decisions and their outcomes from Basic Memory across projects for improved recommendations
+- **Knowledge-Enhanced Architecture Intelligence**: Accesses architectural decisions and their outcomes across projects for improved recommendations
 - **Pattern Evolution Learning**: Learns from architectural successes and failures to continuously improve guidance quality
 - **Context-Aware Design**: Utilizes project-specific architectural history and design decisions for tailored recommendations
 - **Scalability Learning**: Tracks how architectural decisions affect system scalability over time for data-driven insights
@@ -121,7 +121,7 @@ Use Task tool with subagent_type="code-architect":
 
 - **Read**: Analyzes source code files, configuration files, and architectural documentation for comprehensive understanding
 - **Grep**: Searches for architectural patterns, dependencies, design implementations, and structural elements across the codebase
-- **Task**: Coordinates with other specialists for holistic analysis and captures architectural insights to Basic Memory for persistent learning
+- **Task**: Coordinates with other specialists for holistic analysis and captures architectural insights for persistent learning
 
 ## See Also
 

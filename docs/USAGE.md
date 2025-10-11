@@ -176,7 +176,7 @@ The toolkit includes an intelligent hook system for enhanced development experie
 
 ### Key Hooks
 
-- **session-end-summary** - Intelligent session summaries with Basic Memory
+- **session-end-summary** - Intelligent session summaries with
 - **enhanced-command-logger** - Command statistics and pattern tracking
 - **command-chain-notification** - Progress tracking for command chains
 - **context-refresh** - Automatic context preservation
@@ -185,7 +185,7 @@ The toolkit includes an intelligent hook system for enhanced development experie
 
 ### Hook Features
 
-- **Basic Memory Integration** - Context preservation across sessions
+- **Integration** - Context preservation across sessions
 - **Command Statistics** - Usage analytics and efficiency insights
 - **Smart Notifications** - Context-aware alerts and summaries
 - **Smart Suggestions** - Intelligent workflow recommendations based on file modifications

@@ -29,6 +29,6 @@ New testing approach will focus on:
 - 6 core commands validation
 - Agent orchestration tests
 - MCP integration tests
-- Basic Memory integration
+- knowledge base integration
 
 *Archived: 2025-01-29 after Knowledge-Driven Revolution completion*

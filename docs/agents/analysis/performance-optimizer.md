@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Performance Optimizer is a knowledge-enhanced specialist in performance analysis and optimization, focusing on identifying bottlenecks, memory leaks, and algorithmic inefficiencies. This agent provides detailed performance profiling, optimization strategies, and helps achieve optimal application performance through systematic analysis and proven optimization patterns accumulated via Basic Memory integration.
+The Performance Optimizer is a knowledge-enhanced specialist in performance analysis and optimization, focusing on identifying bottlenecks, memory leaks, and algorithmic inefficiencies. This agent provides detailed performance profiling, optimization strategies, and helps achieve optimal application performance through systematic analysis and proven optimization patterns accumulated integration.
 
 ## Capabilities
 
@@ -12,7 +12,7 @@ The Performance Optimizer is a knowledge-enhanced specialist in performance anal
 - **Memory Analysis Expertise**: Memory leak detection, garbage collection pattern analysis, object allocation optimization, circular reference detection, and heap usage monitoring
 - **Database Performance Tuning**: N+1 query problem identification, query execution plan analysis, index optimization, connection pooling evaluation, and caching strategy implementation
 - **Concurrency and Scaling**: Race condition detection, thread contention analysis, lock contention identification, async/await optimization, and parallelization opportunities
-- **Cross-Project Learning**: Apply successful optimization patterns from previous projects via Basic Memory
+- **Cross-Project Learning**: Apply successful optimization patterns from previous projects
 - **Pattern Recognition**: Identify recurring performance issues and proven solutions from accumulated knowledge
 - **Ultra-Intensive Analysis**: When in PERFORMANCE CRISIS mode, uses maximum reasoning depth to uncover subtle bottlenecks and compound performance issues
 
@@ -134,7 +134,7 @@ Use Task tool with subagent_type="performance-optimizer":
 
 - **Read**: Analyzes performance-critical code, configuration files, and profiling data
 - **Grep**: Searches for performance patterns, inefficient algorithms, and resource usage across the codebase
-- **Task**: Coordinates with other specialists for comprehensive performance analysis and captures optimization patterns to Basic Memory
+- **Task**: Coordinates with other specialists for comprehensive performance analysis and captures optimization patterns
 
 ## See Also
 

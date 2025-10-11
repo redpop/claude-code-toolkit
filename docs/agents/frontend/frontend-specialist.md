@@ -42,7 +42,7 @@ Use Task tool with subagent_type="frontend-specialist":
 
 ### Knowledge-Enhanced Frontend Intelligence
 
-- **Component Pattern Database**: Access proven component designs and successful UI patterns from Basic Memory
+- **Component Pattern Database**: Access proven component designs and successful UI patterns
 - **Performance Evolution**: Learn from frontend optimization successes across projects
 - **Context-Aware Components**: Use project-specific component patterns and design system decisions
 - **UX Pattern Learning**: Capture and apply successful user experience patterns and component architectures
@@ -130,7 +130,7 @@ Use Task tool with subagent_type="frontend-specialist":
 - **Read**: Frontend code analysis and pattern discovery
 - **Grep**: Component and pattern identification
 - **Task**: Coordination with other specialists
-- **Basic Memory**: Knowledge-enhanced pattern learning and component optimization
+- **knowledge base**: Knowledge-enhanced pattern learning and component optimization
 
 ## See Also
 

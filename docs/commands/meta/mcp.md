@@ -37,7 +37,7 @@ The MCP management command provides an intuitive interface for installing, remov
 2. **perplexity-ask** - AI-powered web search and research
 3. **context7** - Documentation context management and retrieval
 4. **fetch** - HTTP fetch and web scraping with image support
-5. **basic-memory** - Simple memory and note-taking capabilities
+5. **** - Simple memory and note-taking capabilities
 6. **chrome-devtools** - Chrome DevTools integration
 7. **shadcn-ui-server** - shadcn/ui component library
 8. **figma-dev-mode** - Figma Dev Mode integration (SSE transport)
@@ -113,7 +113,7 @@ Set up commonly used MCP servers globally:
 ```bash
 # Install frequently used servers globally
 /prefix:meta:mcp install perplexity-ask --user
-/prefix:meta:mcp install basic-memory --user
+/prefix:meta:mcp install --user
 ```
 
 ### Experimentation Workflow
@@ -163,7 +163,7 @@ Try out different MCP servers in local scope:
 - **Persistence**: Available in all projects
 
 ```bash
-/prefix:meta:mcp install basic-memory --user
+/prefix:meta:mcp install --user
 ```
 
 ## Behind the Scenes

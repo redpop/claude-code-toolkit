@@ -43,7 +43,7 @@ The documentation reflects the Knowledge-Driven Architecture:
 - **6 Core Commands**: understand, improve, create, secure, ship, git
 - **Extensions**: meta/*, typo3/*
 - **25+ AI Agents**: Specialized domain expertise including research and planning agents
-- **Learning Integration**: Basic Memory with graceful fallback
+- **Learning Integration**: with graceful fallback
 
 ## Maintenance
 
