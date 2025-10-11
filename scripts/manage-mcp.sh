@@ -18,7 +18,6 @@ readonly NC='\033[0m' # No Color
 # Format: "name|command|description|url"
 # url is optional, provides documentation link
 declare -a MCP_SERVERS=(
-    "basic-memory|uvx basic-memory mcp|Simple memory and note-taking|https://github.com/modelcontextprotocol/servers/tree/main/src/memory"
     "chrome-devtools|npx chrome-devtools-mcp@latest|Chrome DevTools integration|https://github.com/snaggle-ai/chrome-devtools-mcp"
     "context7|npx @upstash/context7-mcp@latest|Context management and retrieval|https://github.com/upstash/context7-mcp"
     "fetch|npx @kazuph/mcp-fetch|HTTP fetch and web scraping|https://github.com/kazuph/mcp-fetch"
