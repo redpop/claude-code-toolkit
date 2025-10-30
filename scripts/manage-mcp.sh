@@ -34,10 +34,24 @@ DEFAULT_SCOPE="local"
 # Valid scopes
 declare -a VALID_SCOPES=("local" "project" "user")
 
+# Determine Claude config directory
+# Respects CLAUDE_CONFIG_DIR environment variable for multi-account setups
+CLAUDE_CONFIG_DIR="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
+
 # Find Claude CLI
 find_claude_cli() {
-    # Try common locations
+    # Try config-specific location first if CLAUDE_CONFIG_DIR is set
+    if [[ -n "$CLAUDE_CONFIG_DIR" ]] && [[ "$CLAUDE_CONFIG_DIR" != "$HOME/.claude" ]]; then
+        # For alternative config dirs, try the local CLI first
+        if [[ -x "$CLAUDE_CONFIG_DIR/local/claude" ]]; then
+            echo "$CLAUDE_CONFIG_DIR/local/claude"
+            return 0
+        fi
+    fi
+
+    # Try common locations, respecting CLAUDE_CONFIG_DIR
     local claude_paths=(
+        "$CLAUDE_CONFIG_DIR/local/claude"
         "$HOME/.claude/local/claude"
         "/usr/local/bin/claude"
         "/opt/homebrew/bin/claude"
@@ -67,6 +81,13 @@ if [[ -z "$CLAUDE_CLI" ]]; then
     echo "Please install Claude Code CLI first." >&2
     echo "Visit: https://docs.claude.com/en/docs/claude-code" >&2
     exit 1
+fi
+
+# Show which config directory is being used
+if [[ "$CLAUDE_CONFIG_DIR" != "$HOME/.claude" ]]; then
+    echo -e "${CYAN}Using Claude config directory: $CLAUDE_CONFIG_DIR${NC}" >&2
+    echo -e "${CYAN}Using Claude CLI: $CLAUDE_CLI${NC}" >&2
+    echo >&2
 fi
 
 # Functions
@@ -135,6 +156,19 @@ usage() {
     echo
     echo "    # Show server information"
     echo "    $0 info playwright"
+    echo
+    echo -e "${YELLOW}Multi-Account Setup (using CLAUDE_CONFIG_DIR):${NC}"
+    echo "    # Use default config directory (~/.claude)"
+    echo "    $0 list"
+    echo "    $0 install perplexity-ask"
+    echo
+    echo "    # Use alternative config directory (e.g., ~/.claude-private)"
+    echo "    CLAUDE_CONFIG_DIR=~/.claude-private $0 list"
+    echo "    CLAUDE_CONFIG_DIR=~/.claude-private $0 install perplexity-ask"
+    echo
+    echo "    # Tip: Create a shell alias for easier access"
+    echo "    alias mcp-private='CLAUDE_CONFIG_DIR=~/.claude-private $0'"
+    echo "    # Then use: mcp-private list"
     echo
     echo -e "${YELLOW}Reference:${NC}"
     echo "    https://docs.claude.com/en/docs/claude-code/mcp"
@@ -360,9 +394,13 @@ install_server() {
     echo
 
     # Build claude mcp add command
-    local claude_cmd="$CLAUDE_CLI mcp add $server_name $command --scope $scope"
+    # Pass CLAUDE_CONFIG_DIR to ensure proper config directory is used
+    local claude_cmd="CLAUDE_CONFIG_DIR=\"$CLAUDE_CONFIG_DIR\" $CLAUDE_CLI mcp add $server_name $command --scope $scope"
 
-    print_info "Executing: $claude_cmd"
+    print_info "Executing: claude mcp add $server_name $command --scope $scope"
+    if [[ "$CLAUDE_CONFIG_DIR" != "$HOME/.claude" ]]; then
+        print_info "Using config directory: $CLAUDE_CONFIG_DIR"
+    fi
     echo
 
     if eval "$claude_cmd"; then
@@ -405,10 +443,13 @@ remove_server() {
         fi
     fi
 
-    print_info "Executing: $CLAUDE_CLI mcp remove $server_name"
+    print_info "Executing: claude mcp remove $server_name"
+    if [[ "$CLAUDE_CONFIG_DIR" != "$HOME/.claude" ]]; then
+        print_info "Using config directory: $CLAUDE_CONFIG_DIR"
+    fi
     echo
 
-    if "$CLAUDE_CLI" mcp remove "$server_name"; then
+    if CLAUDE_CONFIG_DIR="$CLAUDE_CONFIG_DIR" "$CLAUDE_CLI" mcp remove "$server_name"; then
         echo
         print_success "Successfully removed '$server_name' MCP server"
     else
