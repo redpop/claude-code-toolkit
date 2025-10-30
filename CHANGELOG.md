@@ -5,22 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [6.0.2] - 2025-10-11
+## [6.0.2] - 2025-10-30
 
 ### Changed
 
+- 🔄 **MCP Manager Multi-Account Support** - Enhanced MCP management script for multiple Claude Code installations
+  - Added `CLAUDE_CONFIG_DIR` environment variable support for managing separate work/personal accounts
+  - Enhanced CLI discovery to prioritize config-specific locations when alternative directory is set
+  - Added transparent feedback displaying active configuration directory
+  - Comprehensive documentation for multi-account workflows with practical examples
+  - Shell alias suggestions for easier account switching between configurations
 - 🔄 **Documentation Standardization** - Comprehensive formatting improvements across entire codebase
-- Standardized CHANGELOG.md formatting (converted nested lists to single-level format)
-- Standardized formatting across 45 files including agents, commands, documentation, hooks, and scripts
-- Improved consistency and readability throughout project documentation
-- Applied consistent markdown formatting patterns for better maintainability
+  - Standardized CHANGELOG.md formatting (converted nested lists to single-level format)
+  - Standardized formatting across 45 files including agents, commands, documentation, hooks, and scripts
+  - Improved consistency and readability throughout project documentation
+  - Applied consistent markdown formatting patterns for better maintainability
 
 ### Removed
 
 - 🗑️ **Deprecated MCP Reference** - Removed basic-memory MCP server from managed list
-- Cleaned up references to unmaintained MCP server in management scripts
-- Simplified MCP server configuration and installation options
-
+  - Cleaned up references to unmaintained MCP server in management scripts
+  - Simplified MCP server configuration and installation options
 ## [6.0.1] - 2025-10-08
 
 ### Changed
