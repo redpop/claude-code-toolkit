@@ -221,7 +221,7 @@ You are a [role] providing specialized analysis from your expert perspective.
    return aggregate_results(results)
    ```
 
-3. **Result Aggregation**
+1. **Result Aggregation**
    - Collect all perspective reports
    - Identify common themes
    - Resolve conflicting recommendations

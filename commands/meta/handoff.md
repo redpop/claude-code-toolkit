@@ -185,7 +185,7 @@ The user is trying to implement real-time notifications using WebSockets in a Re
    ```
 ````
 
-3. **Verified local environment** (Result: Works perfectly)
+1. **Verified local environment** (Result: Works perfectly)
    - No disconnections even after hours
    - Problem only occurs in staging/production
 

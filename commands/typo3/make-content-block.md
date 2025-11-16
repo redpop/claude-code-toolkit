@@ -256,7 +256,7 @@ fields:
 # 3. ./.claude/typo3/content-blocks.yaml
 ```
 
-2. **If no config exists, create one**:
+1. **If no config exists, create one**:
 
 ```yaml
 vendor: {ask-user}
@@ -265,7 +265,7 @@ content-type: content-element
 skeleton-path: .claude/typo3/skeletons
 ```
 
-3. **Show available skeletons**:
+1. **Show available skeletons**:
 
 ```
 Available skeletons:
@@ -278,7 +278,7 @@ Available skeletons:
 Select skeleton [1-5]: 
 ```
 
-4. **Run the make command**:
+1. **Run the make command**:
 
 ```bash
 vendor/bin/typo3 make:content-block \
@@ -302,7 +302,7 @@ Select content type:
 Choice [1-3]: 
 ```
 
-2. **Field Builder**:
+1. **Field Builder**:
 
 ```
 Add fields to your content block:
@@ -320,7 +320,7 @@ Add fields to your content block:
 Choice: 
 ```
 
-3. **Field Configuration**:
+1. **Field Configuration**:
 For each field type, ask relevant questions:
 
 - Field identifier (kebab-case)
@@ -370,7 +370,7 @@ After successful generation:
 vendor/bin/typo3 cache:flush
 ```
 
-2. **Show next steps**:
+1. **Show next steps**:
 
 ```
 ✅ Content Block created successfully!

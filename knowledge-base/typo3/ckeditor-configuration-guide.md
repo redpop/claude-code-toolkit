@@ -88,14 +88,14 @@ editor:
         - numberedList
 ```
 
-2. Register in `ext_localconf.php`:
+1. Register in `ext_localconf.php`:
 
 ```php
 $GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets']['my_preset']
     = 'EXT:my_sitepackage/Configuration/RTE/MyPreset.yaml';
 ```
 
-3. Use in Page TSconfig:
+1. Use in Page TSconfig:
 
 ```typoscript
 RTE.default.preset = my_preset

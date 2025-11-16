@@ -457,7 +457,7 @@ Select extension type:
 Choice [1-5]: 
 ```
 
-2. **Basic Information**:
+1. **Basic Information**:
 
 - Extension key (lowercase, underscores)
 - Vendor name
@@ -465,7 +465,7 @@ Choice [1-5]:
 - Description
 - Author information
 
-3. **Features to Include**:
+1. **Features to Include**:
 
 ```
 Select features to include:
@@ -479,7 +479,7 @@ Select features to include:
 [ ] Functional Tests
 ```
 
-4. **Dependencies**:
+1. **Dependencies**:
 
 ```
 Select TYPO3 components:

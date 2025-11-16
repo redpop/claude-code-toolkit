@@ -483,7 +483,7 @@ EXT:sitepackage/
                 └── Card.html
 ```
 
-2. **ComponentCollection Class**:
+1. **ComponentCollection Class**:
 
 ```php
 <?php
@@ -501,7 +501,7 @@ final class ComponentCollection extends AbstractComponentCollection
 }
 ```
 
-3. **Component Template Example** (Atom/Button.html):
+1. **Component Template Example** (Atom/Button.html):
 
 ```html
 <f:argument name="href" type="string" optional="{true}" />

@@ -872,7 +872,7 @@ Want to explore any of these steps together?
    cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
    ```
 
-2. **XSS Prevention**
+1. **XSS Prevention**
 
    ```html
    <!-- Replace: -->
@@ -881,7 +881,7 @@ Want to explore any of these steps together?
    <div>{{ user.comment|escape }}</div>
    ```
 
-3. **CSRF Protection**
+2. **CSRF Protection**
 
    ```python
    @csrf_protect
@@ -1023,7 +1023,7 @@ const Dashboard = lazy(() => import('./Dashboard'));
 const Profile = lazy(() => import('./Profile'));
 ```
 
-2. **Image Optimization:**
+1. **Image Optimization:**
 
 ```html
 <!-- WebP with fallback -->
@@ -1033,7 +1033,7 @@ const Profile = lazy(() => import('./Profile'));
 </picture>
 ```
 
-3. **CSS Optimization:**
+1. **CSS Optimization:**
 
 ```css
 /* Critical CSS inline, non-critical async loaded */

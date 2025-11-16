@@ -691,13 +691,13 @@ TYPO3 v13 Sitepackage for {vendor-url}
 }
 ```
 
-2. Install via Composer:
+1. Install via Composer:
 
 ```bash
 composer require {vendor}/{package}:@dev
 ```
 
-3. Activate extension:
+1. Activate extension:
 
 ```bash
 vendor/bin/typo3 extension:setup

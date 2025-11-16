@@ -68,7 +68,7 @@ Each command is a Markdown file containing:
   ---
   ```
 
-2. **Command Content Structure**:
+1. **Command Content Structure**:
 
 - Command description and purpose
 - Usage instructions with examples
