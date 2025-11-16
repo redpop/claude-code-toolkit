@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.1.0] - 2025-11-16
+
+### Added
+
+- ✨ **CodeRabbit CLI Integration** - New review command category for automated code review and fixes
+  - Added `/prefix:review:coderabbit` command for executing CodeRabbit CLI reviews and automatically fixing identified issues
+  - Support for review types: uncommitted (default), committed, and all changes
+  - Configurable base branch for comparison (default: main)
+  - Systematic fix implementation with todo tracking for each identified issue
+  - Comprehensive documentation with usage examples and workflows
+  - Integration with CodeRabbit's `--prompt-only` flag for token-efficient AI processing
+
 ## [6.0.2] - 2025-10-30
 
 ### Changed
@@ -26,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 🗑️ **Deprecated MCP Reference** - Removed basic-memory MCP server from managed list
   - Cleaned up references to unmaintained MCP server in management scripts
   - Simplified MCP server configuration and installation options
+
 ## [6.0.1] - 2025-10-08
 
 ### Changed

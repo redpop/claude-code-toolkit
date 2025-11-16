@@ -69,6 +69,12 @@ The toolkit uses the **5-Command Architecture** for core operations, plus specia
 | [`/prefix:meta:handoff`](docs/commands/meta/handoff.md) | Documents current problem context for handoff to another AI assistant | `output-file`, `-c\|--compact\|--brief`, `-t\|--technical`, `--focus`, `topic`, `--skip`, `topic`, `--include`, `topic`, `"instructions"` |
 | [`/prefix:meta:mcp`](docs/commands/meta/mcp.md) | Manage MCP (Model Context Protocol) servers for Claude Code | `install\|remove\|list\|info`, `server-name`, `--scope`, `local\|project\|user` |
 
+### Review Commands
+
+| Command | Description | Options |
+|---------|-------------|---------|
+| [`/prefix:review:coderabbit`](docs/commands/review/coderabbit.md) | CodeRabbit CLI integration for automated code review and fixes | `--type`, `uncommitted\|committed\|all`, `--base`, `branch-name`, `--help` |
+
 ### TYPO3 Commands
 
 | Command | Description | Options |
@@ -150,7 +156,7 @@ Specialized AI agents provide domain expertise for various development tasks. Ea
 | Agent | Purpose | Tools |
 |-------|---------|-------|
 | [deployment-specialist](docs/agents/operations/deployment-specialist.md) | CI/CD and deployment expert specializing in automated pipelines, containerization, and production... | Read,Grep,Task |
-| [workflow-optimizer](docs/agents/operations/workflow-optimizer.md) | Developer workflow and productivity expert focused on reducing friction, automating repetitive ta... | Read,Grep,Task,mcp____search_notes,... |
+| [workflow-optimizer](docs/agents/operations/workflow-optimizer.md) | Developer workflow and productivity expert focused on reducing friction, automating repetitive ta... | Read,Grep,Task |
 
 #### Research Agents
 
