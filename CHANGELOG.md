@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Systematic fix implementation with todo tracking for each identified issue
   - Comprehensive documentation with usage examples and workflows
   - Integration with CodeRabbit's `--prompt-only` flag for token-efficient AI processing
-  - Background execution with smart filtering following CodeRabbit best practices (supports 7-30+ minute reviews, efficient monitoring)
+  - Synchronous execution with 60-minute timeout for reliable completion (compatible with Claude Code hooks and automated workflows)
 
 ## [6.0.2] - 2025-10-30
 

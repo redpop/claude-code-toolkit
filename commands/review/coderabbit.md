@@ -42,46 +42,59 @@ Extract options with defaults:
 
 ### Phase 1: Execute CodeRabbit Review
 
-**IMPORTANT**: CodeRabbit reviews can take 7-30+ minutes. Follow CodeRabbit's best practices for background execution.
+**IMPORTANT**: CodeRabbit reviews take 7-30+ minutes. This command uses synchronous execution to ensure proper completion.
 
-Use Bash tool to run CodeRabbit CLI in background:
+**Critical: Synchronous Execution Required**
+
+Background execution does NOT work reliably with Claude Code hooks and completion detection. Use synchronous execution instead.
+
+Use Bash tool to run CodeRabbit CLI **synchronously** (NOT in background):
 
 ```bash
 coderabbit review --prompt-only --type [type] --base [base]
 ```
 
-**Execution Requirements** (following CodeRabbit best practices):
+**Execution Requirements**:
 
-1. **Start in Background**: Use Bash tool WITH `run_in_background: true`
-2. **No Timeout**: CodeRabbit needs as long as it takes (7-30+ minutes for large reviews)
-3. **User Communication**: Inform user that review is running in background
-4. **Smart Monitoring**: Use BashOutput with filter to wait for completion signal
+1. **Synchronous Execution**: Use Bash tool WITHOUT `run_in_background` parameter
+2. **Extended Timeout**: Set timeout to 3600000ms (60 minutes) to accommodate long reviews
+3. **User Communication**: Inform user upfront that review will take 7-30+ minutes
+4. **Active Waiting**: Claude Code stays active and waits for completion
 
 **Example Bash Tool Usage**:
 
 ```
 Bash tool with parameters:
 - command: "coderabbit review --prompt-only --type uncommitted --base main"
-- run_in_background: true
-- description: "Execute CodeRabbit review in background"
+- timeout: 3600000  # 60 minutes
+- description: "Execute CodeRabbit review (this will take 7-30+ minutes)"
 ```
 
-**Monitoring Strategy**:
+**Why Synchronous, Not Background?**
 
-After starting the background process, use BashOutput with a filter to efficiently wait for completion:
+❌ **Background execution problems:**
+
+- Claude Code thinks task is "complete" immediately
+- Hooks fire prematurely (stop-notification, success-notification)
+- Claude Code stops monitoring the background process
+- Review never gets processed
+
+✅ **Synchronous execution benefits:**
+
+- Claude Code stays active during entire review
+- Hooks fire only when review actually completes
+- Automatic transition to parsing and fixing phases
+- Proper integration with todo tracking
+
+**User Communication**:
+
+Before executing, inform user:
 
 ```
-BashOutput with parameters:
-- bash_id: [id from background Bash execution]
-- filter: "Review completed|============================================================================"
+"Starting CodeRabbit review. This will take 7-30+ minutes depending on changeset size.
+Claude Code will wait and automatically process results when ready.
+Please do not interrupt."
 ```
-
-This filter approach:
-
-- ✅ Follows CodeRabbit's "run in background" recommendation
-- ✅ Allows reviews to take as long as needed (7-30+ minutes)
-- ✅ Reduces BashOutput calls to only meaningful updates
-- ✅ User can continue working while review runs
 
 The `--prompt-only` flag generates token-efficient output specifically designed for AI processing, including:
 

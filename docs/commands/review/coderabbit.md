@@ -80,10 +80,11 @@ This command uses only optional flags (no positional arguments).
 
 ## How It Works
 
-1. **Execute CodeRabbit**: Runs `coderabbit review --prompt-only --type [type] --base [base]` in background
+1. **Execute CodeRabbit**: Runs `coderabbit review --prompt-only --type [type] --base [base]` **synchronously**
    - Reviews take 7-30+ minutes depending on scope
-   - Runs in background so you can continue working
-   - Smart monitoring with filtered output checks
+   - Claude Code waits actively for completion (60-minute timeout)
+   - Proper integration with hooks and automated workflows
+   - User is informed upfront about expected duration
 2. **Parse Results**: Extracts file paths, line numbers, issue types, and fix suggestions
 3. **Create Todos**: Generates a comprehensive todo list for all identified issues
 4. **Systematic Fixes**: Processes each issue individually:
@@ -98,12 +99,22 @@ This command uses only optional flags (no positional arguments).
 
 **Expected Duration**: 7-30+ minutes depending on changeset size
 
-**Background Execution**:
+**Synchronous Execution** (NOT Background):
 
-- Review runs in background (CodeRabbit best practice)
-- You can continue working while review runs
-- Check progress: "Is CodeRabbit finished running?"
-- If stuck: "Let CodeRabbit take as long as it takes"
+- ✅ Claude Code stays active during entire review
+- ✅ Hooks fire only when review actually completes
+- ✅ Automatic transition to parsing and fixing phases
+- ✅ Proper todo tracking integration
+- ⚠️ User should not interrupt during review
+
+**Why Not Background?**
+
+Background execution causes issues with Claude Code hooks:
+
+- Hooks fire prematurely when background task starts
+- Claude Code stops monitoring the process
+- Review results never get processed
+- Manual intervention required
 
 **Reducing Review Time**:
 
