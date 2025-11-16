@@ -80,7 +80,10 @@ This command uses only optional flags (no positional arguments).
 
 ## How It Works
 
-1. **Execute CodeRabbit**: Runs `coderabbit review --prompt-only --type [type] --base [base]`
+1. **Execute CodeRabbit**: Runs `coderabbit review --prompt-only --type [type] --base [base]` in background
+   - Reviews take 7-30+ minutes depending on scope
+   - Runs in background so you can continue working
+   - Smart monitoring with filtered output checks
 2. **Parse Results**: Extracts file paths, line numbers, issue types, and fix suggestions
 3. **Create Todos**: Generates a comprehensive todo list for all identified issues
 4. **Systematic Fixes**: Processes each issue individually:
@@ -90,6 +93,24 @@ This command uses only optional flags (no positional arguments).
    - Verifies the change
    - Marks as completed
 5. **Summary**: Reports total issues found and fixed
+
+### Review Duration Management
+
+**Expected Duration**: 7-30+ minutes depending on changeset size
+
+**Background Execution**:
+
+- Review runs in background (CodeRabbit best practice)
+- You can continue working while review runs
+- Check progress: "Is CodeRabbit finished running?"
+- If stuck: "Let CodeRabbit take as long as it takes"
+
+**Reducing Review Time**:
+
+- Use `--type uncommitted` for only working directory changes
+- Work on smaller feature branches vs large staging branches
+- Break large features into reviewable chunks
+- Configure base branch wisely (`--base develop` vs `--base main`)
 
 ## Prerequisites
 

@@ -42,31 +42,46 @@ Extract options with defaults:
 
 ### Phase 1: Execute CodeRabbit Review
 
-**IMPORTANT**: Execute CodeRabbit CLI synchronously (NOT in background) and wait for complete output before proceeding.
+**IMPORTANT**: CodeRabbit reviews can take 7-30+ minutes. Follow CodeRabbit's best practices for background execution.
 
-Use Bash tool to run CodeRabbit CLI with the following command:
+Use Bash tool to run CodeRabbit CLI in background:
 
 ```bash
 coderabbit review --prompt-only --type [type] --base [base]
 ```
 
-**Execution Requirements**:
+**Execution Requirements** (following CodeRabbit best practices):
 
-- Use Bash tool WITHOUT `run_in_background` parameter (synchronous execution)
-- Set timeout to 300000ms (5 minutes) to allow CodeRabbit time to complete
-- Wait for complete output before parsing results
-- Do NOT poll with BashOutput - wait for the command to finish
+1. **Start in Background**: Use Bash tool WITH `run_in_background: true`
+2. **No Timeout**: CodeRabbit needs as long as it takes (7-30+ minutes for large reviews)
+3. **User Communication**: Inform user that review is running in background
+4. **Smart Monitoring**: Use BashOutput with filter to wait for completion signal
 
 **Example Bash Tool Usage**:
 
 ```
 Bash tool with parameters:
 - command: "coderabbit review --prompt-only --type uncommitted --base main"
-- timeout: 300000
-- description: "Execute CodeRabbit review"
+- run_in_background: true
+- description: "Execute CodeRabbit review in background"
 ```
 
-This ensures a single Bash execution that waits for completion, instead of running in background with repeated BashOutput polling.
+**Monitoring Strategy**:
+
+After starting the background process, use BashOutput with a filter to efficiently wait for completion:
+
+```
+BashOutput with parameters:
+- bash_id: [id from background Bash execution]
+- filter: "Review completed|============================================================================"
+```
+
+This filter approach:
+
+- ✅ Follows CodeRabbit's "run in background" recommendation
+- ✅ Allows reviews to take as long as needed (7-30+ minutes)
+- ✅ Reduces BashOutput calls to only meaningful updates
+- ✅ User can continue working while review runs
 
 The `--prompt-only` flag generates token-efficient output specifically designed for AI processing, including:
 
@@ -113,6 +128,15 @@ After all issues are processed:
 ## Important Notes
 
 - **Authentication Required**: Ensure CodeRabbit CLI is authenticated (`coderabbit auth status`)
+- **Review Duration**: CodeRabbit reviews take 7-30+ minutes depending on scope
+  - User can continue working while review runs in background
+  - Check progress with: "Is CodeRabbit finished running?"
+  - If review seems stuck, remind Claude Code: "Let CodeRabbit take as long as it takes"
+- **Reducing Review Time**: For faster reviews, consider:
+  - Use `--type uncommitted` to review only working directory changes
+  - Work on smaller feature branches instead of large staging branches
+  - Break large features into smaller, reviewable chunks
+  - Configure base branch appropriately (`--base develop` vs `--base main`)
 - **Incremental Fixes**: Each issue is fixed individually and marked complete before moving to the next
 - **Context Preservation**: Read surrounding code to understand the full context before making changes
 - **Safety First**: If an issue is unclear or potentially risky, ask for user confirmation before applying the fix
