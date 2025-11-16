@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Systematic fix implementation with todo tracking for each identified issue
   - Comprehensive documentation with usage examples and workflows
   - Integration with CodeRabbit's `--prompt-only` flag for token-efficient AI processing
+  - Optimized synchronous execution to prevent excessive BashOutput polling (single execution instead of 60+ repeated calls)
 
 ## [6.0.2] - 2025-10-30
 

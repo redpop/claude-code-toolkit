@@ -42,11 +42,31 @@ Extract options with defaults:
 
 ### Phase 1: Execute CodeRabbit Review
 
-Run CodeRabbit CLI with optimized settings for Claude Code integration:
+**IMPORTANT**: Execute CodeRabbit CLI synchronously (NOT in background) and wait for complete output before proceeding.
+
+Use Bash tool to run CodeRabbit CLI with the following command:
 
 ```bash
 coderabbit review --prompt-only --type [type] --base [base]
 ```
+
+**Execution Requirements**:
+
+- Use Bash tool WITHOUT `run_in_background` parameter (synchronous execution)
+- Set timeout to 300000ms (5 minutes) to allow CodeRabbit time to complete
+- Wait for complete output before parsing results
+- Do NOT poll with BashOutput - wait for the command to finish
+
+**Example Bash Tool Usage**:
+
+```
+Bash tool with parameters:
+- command: "coderabbit review --prompt-only --type uncommitted --base main"
+- timeout: 300000
+- description: "Execute CodeRabbit review"
+```
+
+This ensures a single Bash execution that waits for completion, instead of running in background with repeated BashOutput polling.
 
 The `--prompt-only` flag generates token-efficient output specifically designed for AI processing, including:
 
