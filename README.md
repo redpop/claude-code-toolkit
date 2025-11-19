@@ -55,13 +55,11 @@ The toolkit uses the **5-Command Architecture** for core operations, plus specia
 | [`/prefix:ship`](docs/commands/ship.md) | Deployment readiness and quality gates with release pattern learning | `type`, `target`, `--check`, `--readiness-check`, `--quality-gates`, `--help` |
 | [`/prefix:understand`](docs/commands/understand.md) | Code analysis and comprehension with intelligent problem routing | `type`, `target`, `--comprehensive`, `--quick`, `--export-json`, `--export-md`, `--help` |
 
-
 ### Git Commands
 
 | Command | Description | Options |
 |---------|-------------|---------|
 | [`/prefix:git:operations`](docs/commands/git/operations.md) | Smart Git operations with project context and commit pattern learning | `operation`, `--push`, `--no-verify`, `--smart`, `--pattern-learn`, `--interactive`, `--dry-run`, `--help` |
-
 
 ### Meta Commands
 
@@ -71,13 +69,11 @@ The toolkit uses the **5-Command Architecture** for core operations, plus specia
 | [`/prefix:meta:handoff`](docs/commands/meta/handoff.md) | Documents current problem context for handoff to another AI assistant | `output-file`, `-c\|--compact\|--brief`, `-t\|--technical`, `--focus`, `topic`, `--skip`, `topic`, `--include`, `topic`, `"instructions"` |
 | [`/prefix:meta:mcp`](docs/commands/meta/mcp.md) | Manage MCP (Model Context Protocol) servers for Claude Code | `install\|remove\|list\|info`, `server-name`, `--scope`, `local\|project\|user` |
 
-
 ### Review Commands
 
 | Command | Description | Options |
 |---------|-------------|---------|
 | [`/prefix:review:coderabbit`](docs/commands/review/coderabbit.md) | CodeRabbit CLI integration for automated code review and fixes | `--type`, `uncommitted\|committed\|all`, `--base`, `branch-name`, `--help` |
-
 
 ### TYPO3 Commands
 
@@ -88,7 +84,6 @@ The toolkit uses the **5-Command Architecture** for core operations, plus specia
 | [`/prefix:typo3:fluid-components`](docs/commands/typo3/fluid-components.md) | Generate Fluid v4 Components for TYPO3 v13 with Atomic Design patterns and Fluid analysis | `component-name`, `--type=atom\|molecule\|organism`, `--sitepackage=path`, `--analyze` |
 | [`/prefix:typo3:make-content-block`](docs/commands/typo3/make-content-block.md) | Wrapper for TYPO3 make:content-block command with intelligent defaults | `--vendor=...`, `--type=...`, `--skeleton-path=...`, `--config-path=...`, `--create-skeleton`, `--batch=...`, `--migrate-from=...` |
 | [`/prefix:typo3:sitepackage`](docs/commands/typo3/sitepackage.md) | Create a TYPO3 v13.4 SitePackage based on official template with Site Sets | `vendor`, `package-name`, `--include-ddev`, `--include-docker`, `--author=name`, `--email=address` |
-
 
 ## Help System
 
@@ -102,6 +97,7 @@ Most commands provide detailed help information when called with `--help` or `-h
 This shows detailed descriptions, all options, examples, and related workflows.
 
 **Example:**
+
 ```bash
 /prefix:understand --help
 ```
