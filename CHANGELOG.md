@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.2.0] - 2025-11-19
+
+### Added
+
+- ✨ **Intelligent Base Branch Detection** - Enhanced CodeRabbit command with smart base branch determination
+  - Automatically detects unpushed commits and uses `origin/<branch>` as base for comparison
+  - Eliminates "No files found for review" errors when reviewing local commits
+  - Smart defaults: uses `origin/main` when on main with unpushed commits
+  - Explicit `--base` parameter always overrides automatic detection
+  - Works seamlessly with all review types: uncommitted, committed, and all
+
+### Changed
+
+- 🔄 **CodeRabbit Workflow Phases** - Reorganized command workflow with new Phase 1 for base branch detection
+  - Added Phase 1: Intelligent Base Branch Detection with git status checks
+  - Updated subsequent phases (Phase 2-5) for better organization
+  - Enhanced documentation with smart base detection examples
+  - Improved help section with clearer usage examples
+
+### Fixed
+
+- 🐛 **CodeRabbit Review Type** - Fixed `--type committed` failing to find files when using local commits
+  - Resolved issue where reviewing committed changes against same branch returned no results
+  - Command now correctly compares against remote tracking branch when local commits exist
+  - Improved error handling for edge cases with unpushed commits
+
 ## [6.1.0] - 2025-11-16
 
 ### Added
