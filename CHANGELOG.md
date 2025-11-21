@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.3.2] - 2025-11-21
+
+### Added
+
+- ✨ **CodeRabbit Critical Validation Phase** - Enhanced CodeRabbit workflow with comprehensive project consistency validation
+  - New Phase 5: Critical Validation & Project Consistency Check ensures all fixes align with project architecture
+  - Validates architectural patterns (MVC, layered, microservices) after applying CodeRabbit suggestions
+  - Cross-reference analysis searches for similar patterns across codebase using Grep tool
+  - Deep context validation reads related files to verify data flow and component interactions
+  - Automatic issue detection and correction for inconsistencies found during validation
+  - Detailed validation reports with confidence levels (High/Medium/Low) for applied changes
+  - Example scenarios handle cases where CodeRabbit suggestions may not fit project context
+  - Ensures CodeRabbit fixes are adapted to existing naming conventions, code style, and dependencies
+
+### Changed
+
+- 🔄 **CodeRabbit Command Enhancement** - Restructured workflow with validation phase
+  - Updated command description to highlight validation capabilities
+  - Enhanced help section with complete 6-phase workflow overview
+  - Added validation phase to Important Notes section
+  - Workflow now includes: base detection → review → parse → fix → validate → summary
+
 ## [6.3.1] - 2025-11-21
 
 ### Changed
