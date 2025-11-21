@@ -8,6 +8,8 @@ allowed-tools: Task, Bash(git:*), mcp____search_notes, mcp____write_note
 
 Save changes intelligently: "Git workflow with project context."
 
+**Default Behavior**: When executed without arguments, automatically uses `commit` operation with `--smart` flag for intelligent commit message generation.
+
 ## Help Check
 
 If "$ARGUMENTS" contains "--help" or "-h":
@@ -17,10 +19,11 @@ Display this command's documentation:
 - **Description**: Smart Git operations with project context and commit pattern learning
 - **Usage**: [operation] [--push] [--no-verify] [--smart] [--pattern-learn]
 - **Operations**: commit, review, resolve, smart-commit, conflict-resolver
+- **Default Behavior**: When no arguments provided, uses `commit` operation with `--smart` flag
 - **Options**:
 - `--push`: Push changes to remote repository after committing
 - `--no-verify`: Skip pre-commit hooks and verification steps
-- `--smart`: Use intelligent commit message generation
+- `--smart`: Use intelligent commit message generation (default when no args provided)
 - `--pattern-learn`: Learn from project commit patterns for better messages
 - `--interactive`: Interactive mode for complex Git operations
 - `--dry-run`: Show proposed Git operations without executing them
@@ -37,7 +40,8 @@ Extract operation and options:
 
 - If first argument matches git operations (commit, review, resolve), use as operation
 - Default: operation="commit"
-- Handle --push and --no-verify flags
+- **If no arguments provided, automatically add --smart flag**
+- Handle --push, --no-verify, --smart, --pattern-learn, --interactive, and --dry-run flags
 
 Route to knowledge-enhanced Git workflow:
 
