@@ -1,12 +1,12 @@
 ---
-description: CodeRabbit CLI integration for automated code review and fixes
+description: CodeRabbit CLI integration for automated code review, fixes, and project consistency validation
 argument-hint: [--type uncommitted|committed|all] [--base branch-name] [--help]
 allowed-tools: Bash(coderabbit:*), Task, Read, Edit, Write, TodoWrite, Grep
 ---
 
 # CodeRabbit Review & Fix
 
-Execute CodeRabbit CLI review and automatically fix identified issues using Claude Code.
+Execute CodeRabbit CLI review, automatically fix identified issues, and perform critical validation to ensure project-wide consistency.
 
 ## Help Check
 
@@ -14,7 +14,7 @@ If "$ARGUMENTS" contains "--help" or "-h":
 
 Display this command's documentation:
 
-- **Description**: CodeRabbit CLI integration for automated code review and fixes
+- **Description**: CodeRabbit CLI integration for automated code review, fixes, and project consistency validation
 - **Usage**: [--type uncommitted|committed|all] [--base branch-name]
 - **Options**:
   - `--type`: Review type - uncommitted (default), committed, or all
@@ -29,6 +29,13 @@ Display this command's documentation:
   - If you have unpushed commits on `main`, base automatically becomes `origin/main`
   - Explicit `--base` always overrides automatic detection
   - Works for any branch with unpushed commits
+- **Workflow**:
+  - Phase 1: Intelligent base branch detection
+  - Phase 2: Execute CodeRabbit review (7-30+ minutes)
+  - Phase 3: Parse review results
+  - Phase 4: Apply fixes systematically
+  - Phase 5: Critical validation & project consistency check
+  - Phase 6: Summary & recommendations
 
 Then exit without executing the main command.
 
@@ -159,14 +166,84 @@ For each issue in the todo list:
 5. **Verify the fix** - Ensure the change addresses the issue without introducing new problems
 6. **Mark as completed** - Update todo status after successful fix
 
-### Phase 5: Summary
+### Phase 5: Critical Validation & Project Consistency Check
 
-After all issues are processed:
+**IMPORTANT**: After all fixes are applied, perform a comprehensive validation to ensure changes are consistent with the entire project.
+
+**Why This Phase Is Critical**:
+
+- CodeRabbit may not have full project context when making suggestions
+- Local fixes might introduce global inconsistencies
+- Architectural patterns and conventions must be maintained
+- Dependencies and interactions between components need verification
+
+**Validation Steps**:
+
+1. **Analyze All Applied Changes**:
+   - Review every file that was modified during the fixing phase
+   - Understand the scope and nature of each change
+   - Identify patterns in the modifications
+
+2. **Project-Wide Consistency Check**:
+   - **Architectural Patterns**: Verify changes follow existing architecture (MVC, layered, microservices, etc.)
+   - **Naming Conventions**: Ensure consistency with project naming standards
+   - **Code Style**: Confirm changes match project code style (formatting, conventions)
+   - **Dependencies**: Check if changes affect or break existing dependencies
+   - **API Contracts**: Verify public interfaces remain compatible
+   - **Error Handling**: Ensure error handling patterns are consistent
+   - **Import/Export Patterns**: Validate module imports follow project conventions
+
+3. **Cross-Reference Analysis**:
+   - Search for similar patterns elsewhere in the codebase using Grep tool
+   - Compare applied fixes with existing implementations
+   - Identify potential conflicts with other components
+   - Check if changes align with established project patterns
+
+4. **Deep Context Validation**:
+   - Read related files that interact with modified code
+   - Verify data flow and component interactions remain intact
+   - Check if changes might break existing functionality
+   - Validate business logic consistency
+
+5. **Issue Detection & Correction**:
+   - If inconsistencies are found, document them clearly
+   - Prioritize issues by severity (breaking vs. style inconsistency)
+   - Apply corrective fixes for critical inconsistencies
+   - Update todo list with any remaining concerns
+
+6. **Validation Report**:
+   - Create detailed report of validation findings
+   - List any corrective actions taken
+   - Highlight areas requiring manual review (if any)
+   - Provide confidence level for applied changes (High/Medium/Low)
+
+**Example Validation Scenarios**:
+
+- **Scenario 1**: CodeRabbit suggests using `async/await`, but project uses Promises consistently
+  - **Action**: Revert to Promise-based pattern for consistency
+- **Scenario 2**: Fix introduces new dependency that conflicts with existing architecture
+  - **Action**: Refactor to use existing project utilities instead
+- **Scenario 3**: Naming change breaks established project convention
+  - **Action**: Adjust to match project naming standards
+
+**Tools to Use**:
+
+- **Grep**: Search for similar patterns across codebase
+- **Read**: Examine related files for context
+- **Edit**: Apply corrective fixes if needed
+- **TodoWrite**: Track validation findings and remaining concerns
+
+### Phase 6: Summary & Recommendations
+
+After validation is complete:
 
 1. Report total number of issues found and fixed
-2. List any issues that could not be automatically fixed (if any)
-3. Suggest running tests or additional validation
-4. Optionally suggest creating a commit with the fixes
+2. Report validation results and any corrective actions taken
+3. List any issues that could not be automatically fixed (if any)
+4. Provide confidence assessment for applied changes
+5. Suggest running tests or additional validation
+6. Recommend manual review areas (if applicable)
+7. Optionally suggest creating a commit with the fixes
 
 ## Important Notes
 
@@ -184,6 +261,12 @@ After all issues are processed:
 - **Context Preservation**: Read surrounding code to understand the full context before making changes
 - **Safety First**: If an issue is unclear or potentially risky, ask for user confirmation before applying the fix
 - **Best Practices**: Apply fixes following the project's existing code style and patterns
+- **Critical Validation Phase**: After all fixes, a comprehensive validation ensures:
+  - Changes are consistent with project architecture and patterns
+  - No global inconsistencies are introduced
+  - Existing functionality remains intact
+  - CodeRabbit suggestions are adapted to fit project context
+  - Final changes have high confidence level for production use
 
 ## Error Handling
 
