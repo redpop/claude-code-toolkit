@@ -5,6 +5,40 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.3.0] - 2025-11-21
+
+### Added
+
+- ✨ **Analysis-Driven Implementation Workflow** - Enhanced improve command with systematic analysis-driven capabilities
+  - New `--from-analysis` flag enables implementation from exported analysis files
+  - Intelligent analysis file discovery using multiple search strategies (`.docs/analysis/`, `docs/analysis/`, workspace root)
+  - Priority-based systematic workflow with comprehensive progress tracking
+  - Complete implementation reporting with verification and next-step recommendations
+  - Added 'refactor' to supported improvement types alongside existing types
+  - Focus on thorough implementation rather than quick-wins approach
+
+- ✨ **Export File Creation System** - Enhanced understand command with robust export functionality
+  - Detailed export file creation using Write tool for reliable file generation
+  - Smart directory discovery with intelligent fallback chain (`.docs/analysis/` → `docs/analysis/` → workspace root)
+  - Automatic filename generation with timestamps and project basename extraction
+  - Comprehensive export file structure with priorities, descriptions, and implementation checkboxes
+  - Export file verification and user feedback for successful creation
+  - Clear integration path from analysis to implementation via `improve --from-analysis`
+
+### Changed
+
+- 🔄 **Improved Command Enhancement** - Restructured workflow for analysis-driven development
+  - Added comprehensive instructions for discovering and reading analysis files
+  - Enhanced file content parsing with priority extraction and task organization
+  - Systematic implementation approach with clear progress indicators
+  - Better completion reporting with implementation summary and verification steps
+
+- 🔄 **Understand Command Enhancement** - Strengthened export capabilities
+  - Added explicit export file generation phase with Write tool usage
+  - Improved directory structure recommendations and creation
+  - Enhanced user guidance for exported analysis file location
+  - Better integration documentation for the analyze-implement workflow
+
 ## [6.2.0] - 2025-11-19
 
 ### Added
