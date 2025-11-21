@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.3.1] - 2025-11-21
+
+### Changed
+
+- 🔄 **Git Operations Command Enhancement** - Improved default behavior documentation
+  - Added explicit documentation for default `--smart` flag behavior
+  - Enhanced help section with clear default behavior notice
+  - Updated argument parsing documentation to reflect automatic smart mode
+  - Users can now run `/prefix:git:operations` without arguments for intelligent commit creation
+  - Clarified that `--smart` is automatically applied when no arguments are provided
+
 ## [6.3.0] - 2025-11-21
 
 ### Added
