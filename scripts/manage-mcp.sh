@@ -29,6 +29,8 @@ declare -a MCP_SERVERS=(
 )
 
 # Default scope
+# Note: "project" creates .mcp.json in project root (recommended for project-specific servers)
+# Note: "local" stores in ~/.claude.json keyed by directory path
 DEFAULT_SCOPE="local"
 
 # Valid scopes
@@ -389,6 +391,7 @@ install_server() {
     command=$(parse_mcp_entry "$entry" "command")
 
     print_header "Installing MCP Server: $server_name"
+    print_info "Working directory: $(pwd)"
     print_info "Scope: $scope"
     print_info "Command: $command"
     echo
@@ -403,7 +406,51 @@ install_server() {
     fi
     echo
 
-    if eval "$claude_cmd"; then
+    # Capture output to check for "already exists" message
+    local output
+    local exit_code=0
+    output=$(eval "$claude_cmd" 2>&1) || exit_code=$?
+
+    # Check if server already exists - try to reinstall for current project
+    if [[ "$output" == *"already exists"* ]]; then
+        echo
+        print_info "'$server_name' exists in config. Reinstalling for current project..."
+        echo
+
+        # Remove existing entry from the same scope we're installing to
+        print_info "Removing existing entry from $scope scope..."
+        CLAUDE_CONFIG_DIR="$CLAUDE_CONFIG_DIR" "$CLAUDE_CLI" mcp remove "$server_name" --scope "$scope" 2>/dev/null || true
+
+        # Try to add again
+        print_info "Adding for current project..."
+        exit_code=0
+        output=$(eval "$claude_cmd" 2>&1) || exit_code=$?
+
+        if [[ $exit_code -eq 0 ]] && [[ "$output" != *"already exists"* ]]; then
+            echo "$output"
+            echo
+            print_success "Successfully reinstalled '$server_name' MCP server"
+            echo
+            print_info "The server is now available in Claude Code"
+            case "$scope" in
+                local)
+                    print_info "Scope: Current directory only ($(pwd))"
+                    ;;
+                project)
+                    print_info "Scope: Current project workspace (creates .mcp.json)"
+                    ;;
+                user)
+                    print_info "Scope: All projects for current user"
+                    ;;
+            esac
+        else
+            echo "$output"
+            echo
+            print_error "Could not reinstall '$server_name'. Try removing manually with: claude mcp remove $server_name"
+            exit 1
+        fi
+    elif [[ $exit_code -eq 0 ]]; then
+        echo "$output"
         echo
         print_success "Successfully installed '$server_name' MCP server"
         echo
@@ -420,6 +467,7 @@ install_server() {
                 ;;
         esac
     else
+        echo "$output"
         echo
         print_error "Failed to install '$server_name' MCP server"
         exit 1
