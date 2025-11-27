@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.4.0] - 2025-11-27
+
+### Added
+
+- ✨ **MCP Smart Reinstall Handling** - Enhanced MCP server installation workflow with automatic reinstallation
+  - Automatic detection when server already exists in scope
+  - Smart removal and reinstallation for project context switching
+  - Enhanced error messages with better output capture and reporting
+  - Clarifying comments for project vs local scope behavior
+  - Working directory display during installation for better context
+
 ## [6.3.2] - 2025-11-21
 
 ### Added
