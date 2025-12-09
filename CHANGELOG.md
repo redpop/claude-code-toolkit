@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.5.0] - 2025-12-09
+
+### Changed
+
+- 🔄 **Git Operations Command Simplification** - Streamlined command interface with always-on intelligent commits
+  - Removed rarely-used flags: `--no-verify`, `--smart`, `--pattern-learn`, `--interactive`, `--dry-run`
+  - Smart commit message generation is now always enabled by default
+  - Simplified argument hints to essential options only: `[operation] [--push] [--help]`
+
+### Added
+
+- ✨ **Scope Detection Phase** - New pre-commit analysis for appropriate workflow selection
+  - Automatic categorization of changes as Small (<3 files), Medium (3-10 files), or Large (10+ files)
+  - Scope-based workflow recommendations for optimal commit strategy
+  - Warning system for large changes that may benefit from atomic commits
+
+- ✨ **Commit Summary Template** - Standardized post-commit reporting format
+  - Scope classification with file count
+  - List of all commits created with short hash and message
+  - Summary of affected files with change types
+  - Context-aware next steps guidance (push, PR creation)
+  - Enhanced output for `--push` flag usage
+
 ## [6.4.0] - 2025-11-27
 
 ### Added
