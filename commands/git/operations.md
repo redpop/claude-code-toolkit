@@ -1,6 +1,6 @@
 ---
 description: Smart Git operations with project context and commit pattern learning
-argument-hint: [operation] [--push] [--no-verify] [--smart] [--pattern-learn] [--interactive] [--dry-run] [--help]
+argument-hint: [operation] [--push] [--help]
 allowed-tools: Task, Bash(git:*), mcp____search_notes, mcp____write_note
 ---
 
@@ -8,7 +8,7 @@ allowed-tools: Task, Bash(git:*), mcp____search_notes, mcp____write_note
 
 Save changes intelligently: "Git workflow with project context."
 
-**Default Behavior**: When executed without arguments, automatically uses `commit` operation with `--smart` flag for intelligent commit message generation.
+**Default Behavior**: Always uses intelligent commit message generation. When executed without arguments, defaults to `commit` operation.
 
 ## Help Check
 
@@ -17,16 +17,11 @@ If "$ARGUMENTS" contains "--help" or "-h":
 Display this command's documentation:
 
 - **Description**: Smart Git operations with project context and commit pattern learning
-- **Usage**: [operation] [--push] [--no-verify] [--smart] [--pattern-learn]
-- **Operations**: commit, review, resolve, smart-commit, conflict-resolver
-- **Default Behavior**: When no arguments provided, uses `commit` operation with `--smart` flag
+- **Usage**: [operation] [--push]
+- **Operations**: commit, review, resolve, conflict-resolver
+- **Default Behavior**: Always uses intelligent commit message generation. Defaults to `commit` operation.
 - **Options**:
-- `--push`: Push changes to remote repository after committing
-- `--no-verify`: Skip pre-commit hooks and verification steps
-- `--smart`: Use intelligent commit message generation (default when no args provided)
-- `--pattern-learn`: Learn from project commit patterns for better messages
-- `--interactive`: Interactive mode for complex Git operations
-- `--dry-run`: Show proposed Git operations without executing them
+  - `--push`: Push changes to remote repository after committing
 
 Then exit without executing the main command.
 
@@ -38,10 +33,41 @@ Parse arguments: `$ARGUMENTS`
 
 Extract operation and options:
 
-- If first argument matches git operations (commit, review, resolve), use as operation
+- If first argument matches git operations (commit, review, resolve, conflict-resolver), use as operation
 - Default: operation="commit"
-- **If no arguments provided, automatically add --smart flag**
-- Handle --push, --no-verify, --smart, --pattern-learn, --interactive, and --dry-run flags
+- **Smart commit message generation is always enabled**
+- Handle --push flag
+
+---
+
+## Scope Detection
+
+Before executing, analyze the scope of changes to determine the appropriate workflow:
+
+**Run scope analysis:**
+
+```bash
+git status --porcelain
+git diff --stat
+```
+
+**Determine scope category:**
+
+| Scope | Criteria | Workflow |
+|-------|----------|----------|
+| **Small** | < 3 files changed, single logical change | Direct commit, simple message |
+| **Medium** | 3-10 files, related changes | Smart commit with detailed analysis |
+| **Large** | 10+ files OR multiple unrelated features | Consider splitting into atomic commits |
+
+**Scope-based behavior:**
+
+- **Small changes**: Quick commit with concise message
+- **Medium changes**: Full analysis, semantic commit message with body
+- **Large changes**: Suggest atomic commits, warn if mixing unrelated changes
+
+---
+
+## Workflow Execution
 
 Route to knowledge-enhanced Git workflow:
 
@@ -81,3 +107,42 @@ Export results with enhanced project context when possible, professional Git wor
 - Generate intelligent recommendations for workflow optimizations and team collaboration improvements
 - Cross-reference Git operations with similar successful projects and workflow outcomes
 - Track commit quality and workflow effectiveness to evolve Git practices based on team learning"
+
+---
+
+## Commit Summary
+
+After completing all Git operations, provide a clear summary:
+
+**Summary Format:**
+
+```
+## Commit Summary
+
+**Scope**: [Small/Medium/Large] ([X] files changed)
+
+**Commits created:**
+- `abc1234` - feat: add user authentication
+- `def5678` - fix: resolve login redirect issue
+
+**Files affected:**
+- src/auth/login.ts (modified)
+- src/components/LoginForm.tsx (added)
+- tests/auth.test.ts (modified)
+
+**Next steps** (if applicable):
+- [ ] Push to remote: `git push`
+- [ ] Create PR: `gh pr create`
+```
+
+**Always include:**
+
+1. Scope classification with file count
+2. List of all commits with short hash and message
+3. Summary of affected files with change type
+4. Suggested next steps based on context (push, PR, etc.)
+
+**If --push flag was used:**
+
+- Confirm push success with remote branch info
+- Include PR creation suggestion if on feature branch
