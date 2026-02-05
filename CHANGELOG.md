@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.6.0] - 2026-02-05
+
+### Changed
+
+- 🔄 **Multi-Tool AI Context Support** - Migrated all CLAUDE.md files to tool-agnostic AGENTS.md convention
+  - Root + 7 subdirectories: content moved from CLAUDE.md to AGENTS.md
+  - CLAUDE.md files converted to symlinks for full backward compatibility
+  - Headers and internal references updated to be tool-agnostic
+  - Supports Claude Code, Warp AI, and other AI coding tools
+
+### Added
+
+- ✨ **Warp AI Support** - Added WARP.md symlink as entry point for Warp AI context
+- ✨ **Task Completion Workflow** - Added standardized validation and review workflow to root AGENTS.md
+
 ## [6.5.0] - 2025-12-09
 
 ### Changed
