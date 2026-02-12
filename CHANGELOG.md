@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.7.0] - 2026-02-12
+
+### Added
+
+- ✨ **Finalize Command** - New `/prefix:finalize` command for automated task completion workflows
+  - Reads task completion workflow from project's AGENTS.md or CLAUDE.md
+  - Executes each validation step sequentially with progress tracking
+  - Supports `--dry-run` to preview steps without execution
+  - Supports `--skip-review` to skip non-essential quality steps for trivial changes
+  - Creates task lists for visual progress tracking during execution
+  - Provides clear summary with per-step success/failure status
+
 ## [6.6.0] - 2026-02-05
 
 ### Changed
