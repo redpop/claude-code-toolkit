@@ -66,6 +66,14 @@ Templates provide consistent starting points for creating new commands, agents, 
 - Deep expertise structure
 - Specialized knowledge areas
 
+### Prompt Templates (`prompts/`)
+
+**create-agents-md.md**
+
+- Reusable prompt for creating AGENTS.md files for any project
+- Defines standard structure, sections, and style guidelines
+- Includes hierarchical placement rules for monorepos
+
 ### Report Templates (`reports/`)
 
 **action-plan-template.md**
