@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.8.0] - 2026-02-13
+
+### Changed
+
+- 🔄 **CodeRabbit Critical Evaluation** - Phase 4 of the CodeRabbit review workflow now requires critical evaluation of each suggestion before implementation
+  - Introduces Apply/Adapt/Skip decision framework instead of blind fix application
+  - Added mandatory assessment criteria: validity, appropriateness, necessity, and potential harm
+  - Includes evaluation guidelines favouring pragmatism over purely stylistic changes
+  - Suggestions that are unclear or risky are flagged for manual review instead of being applied
+
 ## [6.7.0] - 2026-02-12
 
 ### Added
