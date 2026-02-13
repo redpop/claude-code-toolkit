@@ -155,16 +155,35 @@ Create a comprehensive todo list with one item per issue using TodoWrite tool:
 - Todo content: Brief description of issue (file:line)
 - Status: All start as pending
 
-### Phase 4: Systematic Fix Implementation
+### Phase 4: Critical Evaluation & Systematic Fix Implementation
+
+**IMPORTANT**: CodeRabbit suggestions must NOT be applied blindly. Each suggestion must be critically evaluated before implementation. CodeRabbit lacks full project context and may produce suggestions that are incorrect, unnecessary, overly complex, or inconsistent with the project's established patterns.
 
 For each issue in the todo list:
 
 1. **Mark as in_progress** - Update todo status before starting
 2. **Read the file** - Use Read tool to examine the relevant file and surrounding context
-3. **Understand the issue** - Analyze the CodeRabbit prompt and existing code
-4. **Implement the fix** - Use Edit tool to apply the suggested changes
-5. **Verify the fix** - Ensure the change addresses the issue without introducing new problems
-6. **Mark as completed** - Update todo status after successful fix
+3. **Critically evaluate the suggestion** - Before implementing anything, assess:
+   - **Is the issue valid?** Does the problem actually exist, or is it a false positive?
+   - **Is the suggested fix appropriate?** Does it fit the project's architecture, conventions, and coding style?
+   - **Is the fix necessary?** Does it provide genuine value, or is it purely cosmetic / opinionated?
+   - **Could the fix cause harm?** Could it break existing functionality, reduce readability, or introduce unnecessary complexity?
+   - **Is there a better alternative?** Would a different approach be more appropriate for this specific codebase?
+4. **Decide action** - Based on the evaluation, choose one of:
+   - **Apply**: The suggestion is valid and appropriate — implement it
+   - **Adapt**: The core idea is valid, but the suggested implementation needs adjustment to fit the project — implement a modified version
+   - **Skip**: The suggestion is a false positive, unnecessary, or would cause more harm than good — mark as completed with a brief justification in the todo note
+5. **Implement the fix** (if Apply or Adapt) - Use Edit tool to apply the changes
+6. **Verify the fix** - Ensure the change addresses the issue without introducing new problems
+7. **Mark as completed** - Update todo status after successful fix or justified skip
+
+**Evaluation Guidelines**:
+
+- Prefer **skipping** over applying changes that are purely stylistic preferences with no functional benefit
+- Prefer **adapting** over blindly copying CodeRabbit's exact suggestion when project conventions differ
+- Always consider the broader context: how does the surrounding code work, and does the suggestion align with it?
+- When in doubt about a suggestion's validity or impact, **skip it** and flag it for manual review in Phase 6
+- Document the reasoning for skipped or adapted suggestions — this transparency helps the user understand what was done and why
 
 ### Phase 5: Critical Validation & Project Consistency Check
 
