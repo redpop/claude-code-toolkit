@@ -7,6 +7,5 @@
     "url": "https://github.com/redpop"
   },
   "license": "MIT",
-  "keywords": ["workflow", "refactoring", "performance", "hooks", "validation", "notifications"],
-  "hooks": "./hooks/hooks.json"
+  "keywords": ["workflow", "refactoring", "performance", "hooks", "validation", "notifications"]
 }
