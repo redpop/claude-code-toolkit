@@ -106,7 +106,7 @@ Wrapper format: `{"description": "...", "hooks": {...}}`. The `${CLAUDE_PLUGIN_R
 
 - Use conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`
 - Scope by plugin when applicable: `feat(ak-typo3): add content block field type`
-- Keep versions synchronized across `marketplace.json` and all `plugin.json` files (currently `1.1.1`)
+- Keep versions synchronized across `marketplace.json` and all `plugin.json` files (currently `1.1.2`)
 
 ## Task completion workflow
 
