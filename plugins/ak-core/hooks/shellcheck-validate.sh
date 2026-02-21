@@ -17,8 +17,7 @@ case "$FILE_PATH" in *.sh) ;; *) exit 0 ;; esac
 command -v shellcheck > /dev/null 2>&1 || exit 0
 
 # Validate with ShellCheck
-if ! shellcheck "$FILE_PATH" 2>&1; then
-  echo "ShellCheck errors in $FILE_PATH" >&2
+if ! shellcheck "$FILE_PATH"; then
   exit 2
 fi
 

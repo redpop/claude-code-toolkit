@@ -4,7 +4,7 @@ description: Run all project validation checks (markdown, JSON, shell scripts). 
 disable-model-invocation: true
 ---
 
-## Project Validation
+# Project Validation
 
 Run all validation checks for the AgentKit marketplace and report results.
 
@@ -28,11 +28,9 @@ markdownlint-cli2 "plugins/**/*.md"
 Validate all JSON files in the project:
 
 ```bash
-python3 -m json.tool .claude-plugin/marketplace.json > /dev/null
-for plugin in ak-core ak-git ak-meta ak-review ak-typo3; do
-  python3 -m json.tool "plugins/$plugin/.claude-plugin/plugin.json" > /dev/null
+find . -name "*.json" -not -path "*/node_modules/*" | sort | while read -r f; do
+  python3 -m json.tool "$f" > /dev/null || echo "Invalid JSON: $f"
 done
-python3 -m json.tool plugins/ak-core/hooks/hooks.json > /dev/null
 ```
 
 ### 3. Shell Script Linting
@@ -45,7 +43,7 @@ shellcheck plugins/ak-core/hooks/shellcheck-validate.sh
 
 ## Output Format
 
-```
+```markdown
 ## Validation Results
 
 ### Markdown: PASS/FAIL
