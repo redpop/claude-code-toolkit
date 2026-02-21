@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-02-21
+
+### Added
+
+- ✨ JSON syntax validation hook — blocks saving broken JSON files (PostToolUse)
+- ✨ ShellCheck validation hook — lints shell scripts on save (PostToolUse)
+- ✨ Notification hooks — sound on permission prompt, macOS notification on idle
+- ✨ validate-all skill — bundles markdown, JSON, and shell script validation in one command
+- ✨ GitHub MCP server recommended as user-global integration
+
+### Changed
+
+- 🔄 ak-core now provides 2 skills (finalize, validate-all) and 3 file validation hooks
+- 🔄 Skill count updated from 10 to 11 across the marketplace
+
 ## [1.0.1] - 2026-02-21
 
 ### Fixed
