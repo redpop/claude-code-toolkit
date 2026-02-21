@@ -1,7 +1,7 @@
 {
   "name": "ak-core",
   "description": "Core workflow with finalize skill, refactoring and performance agents, and markdown formatting hooks",
-  "version": "7.0.0",
+  "version": "1.0.0",
   "author": {
     "name": "redpop",
     "url": "https://github.com/redpop"
