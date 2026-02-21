@@ -10,7 +10,7 @@
     {
       "name": "ak-core",
       "source": "./plugins/ak-core",
-      "description": "Core workflow with finalize skill, refactoring and performance agents, and markdown formatting hooks",
+      "description": "Core workflow with finalize and validate-all skills, refactoring and performance agents, and file validation hooks with notifications",
       "version": "1.0.0",
       "category": "development",
       "keywords": ["workflow", "refactoring", "performance", "hooks"],
