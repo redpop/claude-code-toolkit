@@ -27,6 +27,8 @@ If arguments are missing, ask interactively for: vendor, package name, extension
 - `${CLAUDE_PLUGIN_ROOT}/knowledge/sitepackage-configuration-guide.md`
 - `${CLAUDE_PLUGIN_ROOT}/knowledge/sitepackage-installation-guide.md`
 - `${CLAUDE_PLUGIN_ROOT}/knowledge/sitepackage-practical-examples.md`
+- `${CLAUDE_PLUGIN_ROOT}/knowledge/ckeditor-configuration-guide.md`
+- `${CLAUDE_PLUGIN_ROOT}/knowledge/references/ckeditor-examples-reference.md`
 
 ## Execution
 

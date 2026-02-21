@@ -4,7 +4,7 @@ This file provides guidance to AI agents (Claude Code, Warp AI, etc.) when worki
 
 ## Project overview
 
-Claude Code plugin marketplace (`ak-marketplace`) with 7 independently installable plugins, 16 skills, 23 agents, and domain knowledge bases. Built on the official Claude Code Plugin Architecture.
+Claude Code plugin marketplace (`ak-marketplace`) with 5 independently installable plugins, 10 skills, 9 agents, and domain knowledge bases. Built on the official Claude Code Plugin Architecture.
 
 ## Dev environment
 
@@ -39,7 +39,6 @@ python3 -m json.tool plugins/ak-core/.claude-plugin/plugin.json > /dev/null
 
 ```bash
 shellcheck plugins/ak-core/hooks/markdown-format.sh
-shellcheck plugins/ak-meta/scripts/manage-mcp.sh
 ```
 
 ## Monorepo structure
@@ -59,13 +58,11 @@ plugins/{plugin-name}/
 
 | Plugin | Skills | Agents | Extras |
 |--------|--------|--------|--------|
-| `ak-core` | understand, improve, create, ship, finalize | 12 | hooks, markdownlint config |
-| `ak-security` | secure | 2 | .mcp.json (Semgrep) |
+| `ak-core` | finalize | 2 | hooks, markdownlint config |
 | `ak-git` | operations | 2 | |
-| `ak-meta` | changelog, handoff, mcp | - | scripts/manage-mcp.sh |
+| `ak-meta` | changelog, handoff | - | |
 | `ak-review` | coderabbit | - | |
-| `ak-frontend` | - | 2 | knowledge/ (Tailwind, Alpine.js) |
-| `ak-typo3` | 5 TYPO3 skills | 5 | knowledge/ (15+ files) |
+| `ak-typo3` | 5 TYPO3 skills | 5 | knowledge/ (14 files) |
 
 ## Code style guidelines
 
@@ -108,7 +105,7 @@ Wrapper format: `{"description": "...", "hooks": {...}}`. The `${CLAUDE_PLUGIN_R
 ## Commit and PR guidelines
 
 - Use conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`
-- Scope by plugin when applicable: `feat(ak-security): add dependency audit skill`
+- Scope by plugin when applicable: `feat(ak-typo3): add content block field type`
 - Keep versions synchronized across `marketplace.json` and all `plugin.json` files (currently `7.0.0`)
 
 ## Task completion workflow
@@ -126,9 +123,8 @@ Skip steps 2-3 for trivial changes (typo fixes, config updates, single-line chan
 
 ## Important conventions
 
-- Agents are read-only — they analyze and recommend but do not modify code
+- Agents can analyze code and implement changes directly (Edit/Write tools enabled)
 - Knowledge files are referenced explicitly in agents via `${CLAUDE_PLUGIN_ROOT}/knowledge/path`
 - The `$ARGUMENTS` placeholder receives user input in skills
 - Documentation is written in English
 - The `markdown-format.sh` hook requires `markdownlint-cli2` (Homebrew preferred, npx fallback)
-- MCP servers are optional per-plugin enhancements (configured via `.mcp.json`, referenced from `plugin.json`)

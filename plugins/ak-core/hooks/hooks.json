@@ -1,5 +1,5 @@
 {
-  "description": "AgentKit core hooks: markdown formatting, smart suggestions, and quality gate",
+  "description": "AgentKit core hooks: markdown formatting, skill suggestions, and quality gate",
   "hooks": {
     "PostToolUse": [
       {
@@ -15,7 +15,7 @@
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "After completing this tool use, briefly consider: Are there any AgentKit skills that would be helpful as a next step? Only suggest if genuinely relevant to what just happened. Do not suggest if the user is mid-workflow or if no skill clearly applies. If suggesting, mention the skill name naturally in your response (e.g., 'You might want to run /ak-security:secure for a security check')."
+            "prompt": "After completing this tool use, briefly consider: Would any installed AgentKit skill be a helpful next step? Only suggest if genuinely relevant to what just happened. Do not suggest if the user is mid-workflow or if no skill clearly applies. If suggesting, mention the skill naturally (e.g., '/finalize to run the completion workflow')."
           }
         ]
       }

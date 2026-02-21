@@ -1,20 +1,19 @@
 # ak-core
 
-Core development plugin for AgentKit. Provides the primary development workflow with code analysis, improvement, generation, deployment readiness, and task completion.
+Core development plugin for AgentKit. Provides task completion workflow, code refactoring and performance optimization agents, and markdown formatting hooks.
 
 ## Skills
 
 | Skill | Description |
 |-------|-------------|
-| `understand` | Code analysis and comprehension with intelligent problem routing |
-| `improve` | Code improvement with analysis-driven recommendations |
-| `create` | Code and content generation with template-driven creation |
-| `ship` | Deployment readiness assessment and quality gates |
 | `finalize` | Project-specific task completion workflow |
 
 ## Agents
 
-12 specialized agents covering code analysis, architecture, performance, refactoring, planning, documentation, testing, and more.
+| Agent | Description |
+|-------|-------------|
+| `refactoring-expert` | Code refactoring with clean code principles and design patterns |
+| `performance-optimizer` | Performance analysis, bottleneck identification, and optimization |
 
 ## Hooks
 
@@ -25,9 +24,7 @@ Core development plugin for AgentKit. Provides the primary development workflow 
 ## Usage
 
 ```bash
-/ak-core:understand . --comprehensive
-/ak-core:improve . --apply-insights
-/ak-core:ship . --readiness-check
+/ak-core:finalize
 ```
 
 ## Installation

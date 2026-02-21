@@ -1,17 +1,15 @@
 # AgentKit
 
-Modular plugin marketplace for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with 16 skills, 23 specialized agents, and domain knowledge bases.
+Modular plugin marketplace for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with 10 skills, 9 specialized agents, and domain knowledge bases.
 
 ## Plugins
 
 | Plugin | Skills | Agents | Description |
 |--------|--------|--------|-------------|
-| **ak-core** | 5 | 12 | Code analysis, improvement, generation, deployment readiness |
-| **ak-security** | 1 | 2 | Security analysis, vulnerability detection, debugging |
+| **ak-core** | 1 | 2 | Task completion workflow, refactoring and performance agents, markdown formatting hooks |
 | **ak-git** | 1 | 2 | Git operations, smart commits, conflict resolution |
-| **ak-meta** | 3 | - | Changelog, handoff, MCP server management |
+| **ak-meta** | 2 | - | Changelog generation, AI context handoff |
 | **ak-review** | 1 | - | CodeRabbit CLI integration |
-| **ak-frontend** | - | 2 | Frontend development, Tailwind CSS |
 | **ak-typo3** | 5 | 5 | TYPO3 v13.4 development (Content Blocks, SitePackage, extensions) |
 
 ## Installation
@@ -28,27 +26,27 @@ claude plugin marketplace add .
 
 ```bash
 claude plugin add ./plugins/ak-core
-claude plugin add ./plugins/ak-security
+claude plugin add ./plugins/ak-git
 # ... add only what you need
 ```
 
 ## Quick Start
 
 ```bash
-# Analyze codebase
-/ak-core:understand . --comprehensive
-
-# Improve code
-/ak-core:improve . --apply-insights
-
-# Security audit
-/ak-security:secure . --audit
-
-# Ship readiness check
-/ak-core:ship . --readiness-check
-
 # Smart git commit
 /ak-git:operations commit --smart
+
+# Run task completion workflow
+/ak-core:finalize
+
+# Code review
+/ak-review:coderabbit
+
+# Generate changelog
+/ak-meta:changelog
+
+# TYPO3 sitepackage
+/ak-typo3:sitepackage my-site
 ```
 
 ## Requirements

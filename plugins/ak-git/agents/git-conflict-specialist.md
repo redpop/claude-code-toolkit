@@ -9,7 +9,7 @@ description: |
   user: "I have conflicts after rebasing, help me resolve them"
   assistant: "Let me analyze the conflicts and suggest resolution strategies."
   </example>
-tools: Read, Grep, Bash(git:*)
+tools: Read, Grep, Edit, Bash(git:*)
 model: sonnet
 color: yellow
 ---
