@@ -33,7 +33,7 @@
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "Evaluate whether Claude should stop. Context: $ARGUMENTS\n\nCheck: (1) Were all user-requested tasks completed? (2) Are there unaddressed errors or lint issues from changes made? (3) Were any TODO/FIXME comments left that need attention?\n\nRespond with JSON: {\"ok\": true} if Claude can stop, or {\"ok\": false, \"reason\": \"explanation of what still needs to be done\"} if work remains."
+            "prompt": "Evaluate whether Claude should stop. Context: $ARGUMENTS\n\nCheck: (1) Were all user-requested tasks completed? (2) Are there unaddressed errors or lint issues from changes made? (3) Were any TODO/FIXME comments left that need attention?\n\nYou MUST respond with ONLY valid JSON and nothing else — no markdown, no explanation, no code fences. Exactly one of:\n{\"ok\": true}\n{\"ok\": false, \"reason\": \"what still needs to be done\"}"
           }
         ]
       }
