@@ -1,0 +1,11 @@
+{
+  "name": "ak-git",
+  "description": "Smart Git operations with intelligent commit messages, change analysis, and conflict resolution",
+  "version": "7.0.0",
+  "author": {
+    "name": "redpop",
+    "url": "https://github.com/redpop"
+  },
+  "license": "MIT",
+  "keywords": ["git", "commits", "workflow", "conflict-resolution"]
+}

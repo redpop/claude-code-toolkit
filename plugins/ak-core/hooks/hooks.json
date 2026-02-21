@@ -1,0 +1,34 @@
+{
+  "description": "AgentKit core hooks: markdown formatting, smart suggestions, and quality gate",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/markdown-format.sh"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "After completing this tool use, briefly consider: Are there any AgentKit skills that would be helpful as a next step? Only suggest if genuinely relevant to what just happened. Do not suggest if the user is mid-workflow or if no skill clearly applies. If suggesting, mention the skill name naturally in your response (e.g., 'You might want to run /ak-security:secure for a security check')."
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Before finishing, perform a quick quality check: (1) Did you complete all requested tasks? (2) Are there failing tests or lint errors from changes you made? (3) Did you leave any TODO/FIXME comments that need attention? If any issues are found, mention them briefly. Do not run additional commands unless critical issues are discovered."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,15 +1,15 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "cct-marketplace",
-  "description": "Claude Code Toolkit - 7 modulare Plugins für Code-Analyse, Security, Git, Projekt-Management, Review, Frontend und TYPO3",
+  "name": "ak-marketplace",
+  "description": "AgentKit - 7 modulare Plugins für Code-Analyse, Security, Git, Projekt-Management, Review, Frontend und TYPO3",
   "owner": {
     "name": "redpop",
     "url": "https://github.com/redpop"
   },
   "plugins": [
     {
-      "name": "cct-core",
-      "source": "./plugins/cct-core",
+      "name": "ak-core",
+      "source": "./plugins/ak-core",
       "description": "Core workflow with understand, improve, create, ship, finalize skills and 12 specialized agents",
       "version": "7.0.0",
       "category": "development",
@@ -17,8 +17,8 @@
       "license": "MIT"
     },
     {
-      "name": "cct-security",
-      "source": "./plugins/cct-security",
+      "name": "ak-security",
+      "source": "./plugins/ak-security",
       "description": "Security analysis and vulnerability detection with OWASP Top 10 coverage",
       "version": "7.0.0",
       "category": "security",
@@ -26,8 +26,8 @@
       "license": "MIT"
     },
     {
-      "name": "cct-git",
-      "source": "./plugins/cct-git",
+      "name": "ak-git",
+      "source": "./plugins/ak-git",
       "description": "Smart Git operations with intelligent commit messages and conflict resolution",
       "version": "7.0.0",
       "category": "productivity",
@@ -35,8 +35,8 @@
       "license": "MIT"
     },
     {
-      "name": "cct-meta",
-      "source": "./plugins/cct-meta",
+      "name": "ak-meta",
+      "source": "./plugins/ak-meta",
       "description": "Project management with changelog generation, context handoff, and MCP server management",
       "version": "7.0.0",
       "category": "productivity",
@@ -44,8 +44,8 @@
       "license": "MIT"
     },
     {
-      "name": "cct-review",
-      "source": "./plugins/cct-review",
+      "name": "ak-review",
+      "source": "./plugins/ak-review",
       "description": "Automated code review via CodeRabbit CLI with critical evaluation workflow",
       "version": "7.0.0",
       "category": "development",
@@ -53,8 +53,8 @@
       "license": "MIT"
     },
     {
-      "name": "cct-frontend",
-      "source": "./plugins/cct-frontend",
+      "name": "ak-frontend",
+      "source": "./plugins/ak-frontend",
       "description": "Frontend development agents and knowledge for Tailwind CSS, Alpine.js, and UI patterns",
       "version": "7.0.0",
       "category": "development",
@@ -62,8 +62,8 @@
       "license": "MIT"
     },
     {
-      "name": "cct-typo3",
-      "source": "./plugins/cct-typo3",
+      "name": "ak-typo3",
+      "source": "./plugins/ak-typo3",
       "description": "TYPO3 CMS development with content blocks, extensions, Fluid templates, and sitepackage skills",
       "version": "7.0.0",
       "category": "cms",
