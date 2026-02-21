@@ -1,7 +1,7 @@
 {
   "name": "ak-review",
   "description": "Automated code review via CodeRabbit CLI with critical evaluation workflow",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": {
     "name": "redpop",
     "url": "https://github.com/redpop"

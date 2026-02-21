@@ -1,7 +1,7 @@
 {
   "name": "ak-typo3",
   "description": "TYPO3 CMS development with content blocks, extension kickstarter, Fluid templates, and sitepackage generation",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": {
     "name": "redpop",
     "url": "https://github.com/redpop"
