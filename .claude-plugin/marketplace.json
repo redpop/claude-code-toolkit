@@ -1,0 +1,74 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "cct-marketplace",
+  "description": "Claude Code Toolkit - 7 modulare Plugins für Code-Analyse, Security, Git, Projekt-Management, Review, Frontend und TYPO3",
+  "owner": {
+    "name": "redpop",
+    "url": "https://github.com/redpop"
+  },
+  "plugins": [
+    {
+      "name": "cct-core",
+      "source": "./plugins/cct-core",
+      "description": "Core workflow with understand, improve, create, ship, finalize skills and 12 specialized agents",
+      "version": "7.0.0",
+      "category": "development",
+      "keywords": ["code-analysis", "workflow", "agents", "productivity"],
+      "license": "MIT"
+    },
+    {
+      "name": "cct-security",
+      "source": "./plugins/cct-security",
+      "description": "Security analysis and vulnerability detection with OWASP Top 10 coverage",
+      "version": "7.0.0",
+      "category": "security",
+      "keywords": ["security", "owasp", "vulnerability", "audit"],
+      "license": "MIT"
+    },
+    {
+      "name": "cct-git",
+      "source": "./plugins/cct-git",
+      "description": "Smart Git operations with intelligent commit messages and conflict resolution",
+      "version": "7.0.0",
+      "category": "productivity",
+      "keywords": ["git", "commits", "workflow", "conflict-resolution"],
+      "license": "MIT"
+    },
+    {
+      "name": "cct-meta",
+      "source": "./plugins/cct-meta",
+      "description": "Project management with changelog generation, context handoff, and MCP server management",
+      "version": "7.0.0",
+      "category": "productivity",
+      "keywords": ["changelog", "handoff", "mcp", "project-management"],
+      "license": "MIT"
+    },
+    {
+      "name": "cct-review",
+      "source": "./plugins/cct-review",
+      "description": "Automated code review via CodeRabbit CLI with critical evaluation workflow",
+      "version": "7.0.0",
+      "category": "development",
+      "keywords": ["code-review", "coderabbit", "quality"],
+      "license": "MIT"
+    },
+    {
+      "name": "cct-frontend",
+      "source": "./plugins/cct-frontend",
+      "description": "Frontend development agents and knowledge for Tailwind CSS, Alpine.js, and UI patterns",
+      "version": "7.0.0",
+      "category": "development",
+      "keywords": ["frontend", "tailwind", "alpine-js", "css"],
+      "license": "MIT"
+    },
+    {
+      "name": "cct-typo3",
+      "source": "./plugins/cct-typo3",
+      "description": "TYPO3 CMS development with content blocks, extensions, Fluid templates, and sitepackage skills",
+      "version": "7.0.0",
+      "category": "cms",
+      "keywords": ["typo3", "cms", "content-blocks", "fluid", "sitepackage"],
+      "license": "MIT"
+    }
+  ]
+}

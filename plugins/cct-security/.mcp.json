@@ -1,0 +1,7 @@
+{
+  "semgrep": {
+    "command": "npx",
+    "args": ["@semgrep/mcp-server@latest"],
+    "env": {}
+  }
+}

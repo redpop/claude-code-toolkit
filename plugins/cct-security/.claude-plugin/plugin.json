@@ -1,0 +1,12 @@
+{
+  "name": "cct-security",
+  "description": "Security analysis and vulnerability detection with OWASP Top 10 coverage and debugging expertise",
+  "version": "7.0.0",
+  "author": {
+    "name": "redpop",
+    "url": "https://github.com/redpop"
+  },
+  "license": "MIT",
+  "keywords": ["security", "owasp", "vulnerability", "debugging"],
+  "mcpServers": "./.mcp.json"
+}
