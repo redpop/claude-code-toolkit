@@ -14,21 +14,45 @@ Modular plugin marketplace for [Claude Code](https://docs.anthropic.com/en/docs/
 
 ## Installation
 
-### Full Marketplace
+Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) v1.0.33 or later.
+
+### Step 1: Add the marketplace
+
+Open Claude Code and run:
+
+```
+/plugin marketplace add redpop/agentkit
+```
+
+### Step 2: Install plugins
+
+Install all plugins:
+
+```
+/plugin install ak-core@ak-marketplace
+/plugin install ak-git@ak-marketplace
+/plugin install ak-meta@ak-marketplace
+/plugin install ak-review@ak-marketplace
+/plugin install ak-typo3@ak-marketplace
+```
+
+Or browse available plugins interactively with `/plugin` and go to the **Discover** tab.
+
+### Install from a local clone
+
+If you prefer to work from a local copy:
 
 ```bash
 git clone https://github.com/redpop/agentkit.git
-cd agentkit
-claude plugin marketplace add .
 ```
 
-### Individual Plugins
+Then in Claude Code:
 
-```bash
-claude plugin add ./plugins/ak-core
-claude plugin add ./plugins/ak-git
-# ... add only what you need
 ```
+/plugin marketplace add /path/to/agentkit
+```
+
+And install plugins as described above.
 
 ## Quick Start
 
@@ -48,10 +72,6 @@ claude plugin add ./plugins/ak-git
 # TYPO3 sitepackage
 /ak-typo3:sitepackage my-site
 ```
-
-## Requirements
-
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI with plugin support
 
 ## Previous Version
 
