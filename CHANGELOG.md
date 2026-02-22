@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-02-22
+
+### Added
+
+- ✨ ak-core: New `/ak-core:agents-md` skill — converts CLAUDE.md files to AGENTS.md with backward-compatible symlinks
+- ✨ Bump-version command now creates git tags after committing
+
+### Changed
+
+- 🔄 Skill count updated from 11 to 12 across the marketplace
+
 ## [1.1.3] - 2026-02-22
 
 ### Fixed
