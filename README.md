@@ -1,6 +1,6 @@
 # AgentKit
 
-Modular plugin marketplace for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with 10 skills, 9 specialized agents, and domain knowledge bases.
+Modular plugin marketplace for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with skills, specialized agents, and domain knowledge bases.
 
 ## Plugins
 

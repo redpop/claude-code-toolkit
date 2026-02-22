@@ -74,3 +74,15 @@ After the summary, invoke the `/ak-meta:changelog` skill to update the CHANGELOG
 ### Step 7: Run git operations
 
 After the changelog is updated, invoke the `/ak-git:operations` skill to create a smart commit.
+
+### Step 8: Create git tag
+
+After the commit is created, tag it with the new version:
+
+```bash
+git tag v<new-version>
+```
+
+For example: `git tag v1.1.3`
+
+Confirm the tag was created by showing the output of `git tag --sort=-v:refname | head -3`.
